@@ -31,6 +31,8 @@ class AppScaffold extends StatelessWidget {
   final bool drawerBarrierDismissible;
   final BoxDecoration? persistentFooterDecoration;
   final String? restorationId;
+  final bool isOnboarding;
+  final int? index;
 
   const AppScaffold({
     super.key,
@@ -61,6 +63,8 @@ class AppScaffold extends StatelessWidget {
     this.drawerBarrierDismissible = true,
     this.persistentFooterDecoration,
     this.restorationId,
+    this.isOnboarding = false,
+    this.index,
   });
 
   @override
@@ -73,7 +77,9 @@ class AppScaffold extends StatelessWidget {
         appBar: appBar,
         body: Stack(
           children: [
-            const _Background(),
+            isOnboarding == true && index != null
+                ?  _OnboardingBackground(index!)
+                : const _MainBackground(),
             if (body != null) Positioned.fill(child: body!),
           ],
         ),
@@ -107,8 +113,8 @@ class AppScaffold extends StatelessWidget {
   }
 }
 
-class _Background extends StatelessWidget {
-  const _Background();
+class _MainBackground extends StatelessWidget {
+  const _MainBackground();
 
   @override
   Widget build(BuildContext context) {
@@ -129,6 +135,52 @@ class _Background extends StatelessWidget {
                 stops: [0, 0.8],
                 colors: [AppColors.bgBlueGradient, AppColors.bgPrimary],
               ),
+            ),
+          ),
+        ),
+
+        Positioned(
+          bottom: -650,
+          left: 50,
+          child: Container(
+            width: 1000.w,
+            height: 1000.w,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                radius: .5,
+                stops: [0, 0.8],
+                colors: [AppColors.bgGreenGradient, AppColors.bgPrimary],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _OnboardingBackground extends StatelessWidget {
+  final int index;
+
+  const _OnboardingBackground(this.index);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Container(color: Colors.white),
+
+        Positioned(
+          top: -60,
+          right: index % 2 == 0 ? 150 : null,
+          left: index % 2 != 0 ? 150: null,
+          child: Container(
+            width: 350.w,
+            height: 350.w,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.brandPrimary,
             ),
           ),
         ),
