@@ -5,9 +5,11 @@ import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
+
     popupMenuTheme: PopupMenuThemeData(color: AppColors.white),
     dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.transparent,
       type: BottomNavigationBarType.fixed,
     ),
     scaffoldBackgroundColor: AppColors.bgPrimary,

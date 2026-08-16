@@ -38,7 +38,7 @@ class AppStyles {
   static TextStyle rubikMedium24(Color color) {
     return GoogleFonts.rubik(
       color: color,
-      fontSize: 14.sp,
+      fontSize: 24.sp,
       fontWeight: FontWeight.w500,
     );
   }
