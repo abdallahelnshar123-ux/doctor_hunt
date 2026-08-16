@@ -1,14 +1,14 @@
 class AppAssets {
   /// images =============================================================
-  static const String onBoardingImage1 = 'assets/images/onboarding1.png';
-  static const String onBoardingImage2 = 'assets/images/onboarding2.png';
-  static const String onBoardingImage3 = 'assets/images/onboarding3.png';
-  static const String appLogoDark = 'assets/icons/logo_dark.svg';
-  static const String appLogoLight = 'assets/icons/logo_light.svg';
+  static const String onBoardingImage1 = 'assets/images/on_boarding1.png';
+  static const String onBoardingImage2 = 'assets/images/on_boarding2.png';
+  static const String onBoardingImage3 = 'assets/images/on_boarding3.png';
+  // static const String appLogoDark = 'assets/icons/logo_dark.svg';
+  // static const String appLogoLight = 'assets/icons/logo_light.svg';
 
 
-  static const String avatarImage1 = 'assets/images/avatar1.png';
-  static const String avatarImage2 = 'assets/images/avatar2.png';
+  // static const String avatarImage1 = 'assets/images/avatar1.png';
+  // static const String avatarImage2 = 'assets/images/avatar2.png';
   // static const String avatarImage3 = 'assets/images/avatar3.png';
   // static const String avatarImage4 = 'assets/images/avatar4.png';
   // static const String avatarImage5 = 'assets/images/avatar5.png';
