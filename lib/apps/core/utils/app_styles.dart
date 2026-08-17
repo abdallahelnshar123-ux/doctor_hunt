@@ -10,6 +10,13 @@ class AppStyles {
       fontWeight: FontWeight.w500,
     );
   }
+  static TextStyle rubikBold25(Color color) {
+    return GoogleFonts.rubik(
+      color: color,
+      fontSize: 25.sp,
+      fontWeight: FontWeight.w700,
+    );
+  }
 
   static TextStyle rubikRegular14(Color color) {
     return GoogleFonts.rubik(
@@ -56,6 +63,32 @@ class AppStyles {
       color: color,
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
+    );
+  }
+
+  /// ==============================  plus jakarta  ======================
+
+  static TextStyle jakartaELight28(Color color) {
+    return GoogleFonts.plusJakartaSans(
+      color: color,
+      fontSize: 28.sp,
+      fontWeight: FontWeight.w200,
+    );
+  }
+
+  static TextStyle jakartaRegular14(Color color) {
+    return GoogleFonts.plusJakartaSans(
+      color: color,
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+    );
+  }
+
+  static TextStyle jakartaSBold20(Color color) {
+    return GoogleFonts.plusJakartaSans(
+      color: color,
+      fontSize: 20.sp,
+      fontWeight: FontWeight.w600,
     );
   }
 }
