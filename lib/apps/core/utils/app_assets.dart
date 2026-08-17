@@ -3,9 +3,7 @@ class AppAssets {
   static const String onBoardingImage1 = 'assets/images/on_boarding1.png';
   static const String onBoardingImage2 = 'assets/images/on_boarding2.png';
   static const String onBoardingImage3 = 'assets/images/on_boarding3.png';
-  // static const String appLogoDark = 'assets/icons/logo_dark.svg';
-  // static const String appLogoLight = 'assets/icons/logo_light.svg';
-
+  static const String appLogo = 'assets/icons/app_logo.svg';
 
   // static const String avatarImage1 = 'assets/images/avatar1.png';
   // static const String avatarImage2 = 'assets/images/avatar2.png';
@@ -20,6 +18,6 @@ class AppAssets {
   /// icons ===================================================================
   static const String facebookIcon = 'assets/icons/facebook_icon.svg';
   static const String googleIcon = 'assets/icons/google_icon.svg';
-
-
+  static const String adminIcon = 'assets/icons/admin_icon.svg';
+  static const String patientIcon = 'assets/icons/patient_icon.svg';
 }
