@@ -32,11 +32,13 @@ class AppColors {
   static const Color textTertiary = Color(0xff333333); //
   static const Color textDark = Color(0xff17202A); //
   static const Color textCaption = Color(0xff7B8490); //
+  static const Color textMuted = Color(0xff858EA9); //
 
   // ----------------------
   // Surface /
   // ----------------------
   static const Color surfaceGreen = Color(0xffE8F0E8); //
+  static const Color badge = Color(0xffFA002F); //
 
   // ----------------------
   // Border /
