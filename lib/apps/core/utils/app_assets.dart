@@ -5,6 +5,7 @@ class AppAssets {
   static const String onBoardingImage3 = 'assets/images/on_boarding3.png';
   static const String appLogo = 'assets/icons/app_logo.svg';
   static const String userAvatar = 'assets/images/user_avatar.png';
+  static const String testImageDoctor = 'assets/images/test_doctor_image.png';
 
   // static const String avatarImage1 = 'assets/images/avatar1.png';
   // static const String avatarImage2 = 'assets/images/avatar2.png';
@@ -25,4 +26,11 @@ class AppAssets {
   static const String bnbFavoriteIcon = 'assets/icons/bnb_favorite_icon.svg';
   static const String bnbBrowseIcon = 'assets/icons/bnb_browse_icon.svg';
   static const String bnbChatIcon = 'assets/icons/bnb_chat_icon.svg';
+  static const String starIconRated = 'assets/icons/star_icon_rated.svg';
+  static const String starIconUnrated = 'assets/icons/star_icon_unrated.svg';
+  static const String sDollarIcon = 'assets/icons/sdollar_icon.svg';
+  static const String categoryIcon1 = 'assets/images/category_image1.png';
+  static const String categoryIcon2 = 'assets/images/category_image2.png';
+  static const String categoryIcon3 = 'assets/images/category_image3.png';
+  static const String categoryIcon4 = 'assets/images/category_image4.png';
 }

@@ -14,6 +14,7 @@ void main() {
     'textPrimary',
     'textSecondary',
     'textSecondary90',
+    'textSecondary80',
     'textTertiary',
     'textDark',
     'textCaption',

@@ -8,7 +8,7 @@ import '../../../../core/widgets/app_scaffold.dart';
 import '../tabs/browse_tab.dart';
 import '../tabs/chat_tab.dart';
 import '../tabs/favorite_tab.dart';
-import '../tabs/home_tab.dart';
+import '../tabs/home_tab/home_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -48,11 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
           data: Theme.of(context).copyWith(
             splashColor: AppColors.transparent,
             highlightColor: AppColors.transparent,
+            canvasColor: AppColors.bgPrimary
           ),
 
           child: BottomNavigationBar(
             elevation: 0,
-            fixedColor: AppColors.transparent,
             unselectedLabelStyle: TextStyle(fontSize: 0),
             selectedLabelStyle: TextStyle(fontSize: 0),
             backgroundColor: AppColors.transparent,

@@ -2,7 +2,10 @@ import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
 import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/features/home_screen/presentation/widget/live_doctors_widget.dart';
+import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/categories_widget.dart';
+import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/feature_doctors_widget.dart';
+import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/live_doctors_widget.dart';
+import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/popular_doctors_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +43,20 @@ class HomeTab extends StatelessWidget {
                 ),
               ],
             ),
-            Expanded(child: Column(children: [const LiveDoctorsWidget()])),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 20,
+                  children: [
+                    const LiveDoctorsWidget(),
+                    const CategoriesWidget(),
+                    const PopularDoctorsWidget(),
+                    const FeatureDoctorsWidget(),
+                    const SizedBox(height: 10),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),

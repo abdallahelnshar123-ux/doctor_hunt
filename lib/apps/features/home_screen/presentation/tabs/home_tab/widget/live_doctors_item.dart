@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
 import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,11 @@ class LiveDoctorsItem extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
-        color: AppColors.black,
+        image: DecorationImage(
+          colorFilter: ColorFilter.mode(AppColors.black.withAlpha(77), .darken),
+          image: AssetImage(AppAssets.testImageDoctor),
+          fit: .cover,
+        ),
       ),
       width: 120.w,
       child: Stack(
