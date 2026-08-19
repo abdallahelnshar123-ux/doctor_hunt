@@ -10,6 +10,8 @@ class CustomElevatedButton extends StatelessWidget {
   final double? borderRadius;
   final void Function()? onPressed;
   final double? elevation;
+  final double? paddingVertical;
+  final double? paddingHorizontal;
 
   const CustomElevatedButton({
     super.key,
@@ -20,6 +22,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.borderSideColor,
     required this.onPressed,
     this.elevation,
+    this.paddingHorizontal,
+    this.paddingVertical,
   });
 
   @override
@@ -35,7 +39,10 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius ?? 15),
         ),
         backgroundColor: backgroundColor,
-        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        padding: EdgeInsets.symmetric(
+          vertical: paddingVertical ?? 15,
+          horizontal: paddingHorizontal ?? 10,
+        ),
       ),
       onPressed: onPressed,
       child: child,

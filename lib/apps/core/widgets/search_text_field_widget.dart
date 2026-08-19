@@ -13,21 +13,35 @@ class SearchTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
-      borderRadius: 6.r,
-      suffixIcon: suffixIcon,
-      onChanged: onChanged,
-      style: context.regular16.textSecondary.rubik,
-      keyboardType: TextInputType.emailAddress,
-      prefixIcon: Icon(
-        Icons.search_rounded,
-        color: AppColors.textSecondary,
-        size: 30,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withAlpha(20),
+            blurRadius: 25,
+            spreadRadius: 0.5,
+            offset: const Offset(0, 0),
+          ),
+        ],
       ),
-      hintText: "search",
-      hintStyle: context.regular16.textSecondary.rubik,
-      filled: true,
-      fillColor: AppColors.bgPrimary,
+      child: CustomTextFormField(
+        borderSideColor: AppColors.transparent,
+        suffixIcon: suffixIcon,
+        onChanged: onChanged,
+        borderRadius: 6.r,
+        style: context.regular16.textSecondary.rubik,
+        keyboardType: TextInputType.emailAddress,
+        prefixIcon: Icon(
+          Icons.search_rounded,
+          color: AppColors.textSecondary,
+          size: 30,
+        ),
+        hintText: "search",
+        hintStyle: context.regular16.textSecondary.rubik,
+        filled: true,
+        fillColor: AppColors.bgPrimary,
+      ),
     );
   }
 }

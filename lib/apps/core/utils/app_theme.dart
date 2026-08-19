@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
@@ -13,14 +14,16 @@ class AppTheme {
     ),
     scaffoldBackgroundColor: AppColors.bgPrimary,
     appBarTheme: AppBarTheme(
+      leadingWidth: 70.w,
       backgroundColor: AppColors.transparent,
       elevation: 0,
       surfaceTintColor: AppColors.transparent,
       centerTitle: false,
       titleTextStyle: TextStyle(
-        fontSize: 16,
+        color: AppColors.textPrimary,
+        fontSize: 18.sp,
         fontWeight: FontWeight.w400,
-        fontFamily: GoogleFonts.roboto().fontFamily,
+        fontFamily: GoogleFonts.rubik().fontFamily,
       ),
     ),
   );
