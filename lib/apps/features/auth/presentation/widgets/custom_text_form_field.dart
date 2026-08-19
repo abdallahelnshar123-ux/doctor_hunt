@@ -67,7 +67,6 @@ class CustomTextFormField extends StatelessWidget {
       style: style,
       cursorColor: AppColors.brandPrimary,
       decoration: InputDecoration(
-
         contentPadding: EdgeInsets.all(17.h),
         filled: filled,
         fillColor: fillColor,
