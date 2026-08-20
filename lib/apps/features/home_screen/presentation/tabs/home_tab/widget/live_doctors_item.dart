@@ -1,5 +1,5 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +15,7 @@ class LiveDoctorsItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
         image: DecorationImage(
           colorFilter: ColorFilter.mode(AppColors.black.withAlpha(77), .darken),
-          image: AssetImage(AppAssets.testImageDoctor),
+          image: AssetImage(AppAssets.images.testDoctorImage.path),
           fit: .cover,
         ),
       ),

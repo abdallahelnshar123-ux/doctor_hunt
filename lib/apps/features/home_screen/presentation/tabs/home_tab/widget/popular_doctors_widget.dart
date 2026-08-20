@@ -1,4 +1,5 @@
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/popular_doctors_item.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +27,21 @@ class PopularDoctorsWidget extends StatelessWidget {
                 style: context.medium18.textTertiary.rubik,
               ),
               Spacer(),
-              Text('See all', style: context.light12.textSecondary.rubik),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 15,
-                color: AppColors.textSecondary,
+              InkWell(
+                onTap: (){
+                  const FindDoctorRoute().push(context);
+                },
+                child: Row(
+                  spacing: 5,
+                  children: [
+                    Text('See all', style: context.light12.textSecondary.rubik),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      size: 15,
+                      color: AppColors.textSecondary,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

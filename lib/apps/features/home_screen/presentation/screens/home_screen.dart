@@ -1,9 +1,9 @@
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/utils/app_assets.dart';
-import '../../../../core/utils/app_colors.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../tabs/browse_tab.dart';
 import '../tabs/chat_tab.dart';
@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
           data: Theme.of(context).copyWith(
             splashColor: AppColors.transparent,
             highlightColor: AppColors.transparent,
-            canvasColor: AppColors.bgPrimary
+            canvasColor: AppColors.bgPrimary,
           ),
 
           child: BottomNavigationBar(
@@ -65,22 +65,22 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             items: [
               builtBottomNavigationBarItem(
-                iconName: AppAssets.bnbHomeIcon,
+                iconName: AppAssets.icons.bnbHomeIcon.path,
                 index: 0,
                 context: context,
               ),
               builtBottomNavigationBarItem(
-                iconName: AppAssets.bnbFavoriteIcon,
+                iconName: AppAssets.icons.bnbFavoriteIcon.path,
                 index: 1,
                 context: context,
               ),
               builtBottomNavigationBarItem(
-                iconName: AppAssets.bnbBrowseIcon,
+                iconName: AppAssets.icons.bnbBrowseIcon.path,
                 index: 2,
                 context: context,
               ),
               builtBottomNavigationBarItem(
-                iconName: AppAssets.bnbChatIcon,
+                iconName: AppAssets.icons.bnbChatIcon.path,
                 index: 3,
                 context: context,
               ),

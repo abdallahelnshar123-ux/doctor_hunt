@@ -1,13 +1,12 @@
-import 'package:doctor_hunt/apps/core/utils/app_routes.dart';
-import 'package:doctor_hunt/apps/core/utils/app_styles.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/auth_password_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/continue_with_facebook_button.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
-import '../../../../core/utils/app_colors.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
@@ -49,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 127.h),
                     Text(
                       'Welcome back',
-                      style: AppStyles.rubikMedium24(AppColors.black),
+                      style: context.medium24.black.rubik,
                       textAlign: TextAlign.center,
                     ),
                     Text(
                       'You can search course, apply course and find scholarship '
                       'for abroad studies',
-                      style: AppStyles.rubikRegular14(AppColors.textSecondary),
+                      style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 70.h),
@@ -103,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
       },
       child: Text(
         "Forgot password",
-        style: AppStyles.rubikRegular14(AppColors.brandPrimary),
+        style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
@@ -115,23 +114,25 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        context.goNamed(AppRoutes.registerRouteName);
+        const RegisterRoute().go(context);
       },
       child: Text(
         "Don’t have an account? Join us",
-        style: AppStyles.rubikRegular14(AppColors.brandPrimary),
+        style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
 
   Widget _builtLoginButton() {
     return CustomElevatedButton(
-      buttonWidth: 1.sw-80.w,
+      buttonWidth: 1.sw - 80.w,
       onPressed: () {
-        if (formKey.currentState!.validate()) {}
+        const ChooseRoleRoute().go(context);
+        // if (formKey.currentState!.validate()) {
+        // }
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text("Login", style: AppStyles.rubikMedium18(AppColors.white)),
+      child: Text("Login", style: context.medium18.white.rubik),
     );
   }
 }

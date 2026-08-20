@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/feature_doctors_item.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';

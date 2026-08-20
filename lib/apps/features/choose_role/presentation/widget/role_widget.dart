@@ -1,7 +1,6 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
-import 'package:doctor_hunt/apps/core/utils/app_styles.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,7 +20,7 @@ class RoleWidget extends StatelessWidget {
     this.role = AppRoles.admin,
     this.roleDescription =
         'Manage doctors, appointments, users, and the platform.',
-    this.roleIcon = AppAssets.adminIcon,
+    required this.roleIcon,
     this.roleTitle = 'Admin',
     required this.selected,
   });
@@ -31,7 +30,7 @@ class RoleWidget extends StatelessWidget {
     this.role = AppRoles.patient,
     this.roleDescription =
         'Find doctors, book appointments, and manage your medical records.',
-    this.roleIcon = AppAssets.patientIcon,
+    required this.roleIcon,
     this.roleTitle = 'Patient',
     required this.selected,
   });
@@ -65,19 +64,28 @@ class RoleWidget extends StatelessWidget {
               selected ? AppColors.brandPrimaryDark : AppColors.textCaption,
               .srcIn,
             ),
-
           ),
           Expanded(
             child: Text.rich(
               textAlign: .start,
               TextSpan(
                 text: '$roleTitle\n',
-                style: AppStyles.jakartaSBold20(AppColors.textDark),
-                children: [TextSpan(text: roleDescription , style: AppStyles.jakartaRegular14(AppColors.textCaption))],
+                style: context.semiBold20.textDark.plusJakartaSans,
+                children: [
+                  TextSpan(
+                    text: roleDescription,
+                    style: context.regular14.textCaption.plusJakartaSans,
+                  ),
+                ],
               ),
             ),
           ),
-          Icon(Icons.check_circle, color:selected ?  AppColors.brandPrimaryDark : AppColors.transparent),
+          Icon(
+            Icons.check_circle,
+            color: selected
+                ? AppColors.brandPrimaryDark
+                : AppColors.transparent,
+          ),
         ],
       ),
     );

@@ -1,7 +1,7 @@
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_styles.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/validators.dart';
 import 'custom_text_form_field.dart';
 
@@ -21,12 +21,12 @@ class _UsernameTextFieldWidgetState extends State<UsernameTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
-      style: AppStyles.rubikLight16(AppColors.textSecondary),
+      style: context.light16.textSecondary.rubik,
       keyboardType: TextInputType.emailAddress,
       validator: (value) => Validators.required(value),
       controller: widget.controller,
       hintText: "username",
-      hintStyle: AppStyles.rubikLight16(AppColors.textSecondary),
+      hintStyle: context.light16.textSecondary.rubik,
       filled: true,
       fillColor: widget.fillColor,
     );

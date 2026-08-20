@@ -1,11 +1,9 @@
-import 'package:doctor_hunt/apps/core/utils/app_routes.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_styles.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../widgets/auth_password_text_field_widget.dart';
 import '../widgets/continue_with_facebook_button.dart';
@@ -52,14 +50,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       fit: .scaleDown,
                       child: Text(
                         'Join us to start searching',
-                        style: AppStyles.rubikMedium24(AppColors.black),
+                        style: context.medium24.black.rubik,
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Text(
                       'You can search course, apply course and find'
                       ' scholarship for abroad studies',
-                      style: AppStyles.rubikRegular14(AppColors.textSecondary),
+                      style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
                     SizedBox(height: 60.h),
@@ -109,11 +107,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        context.goNamed(AppRoutes.loginRouteName);
+        const LoginRoute().go(context);
       },
       child: Text(
         'Have an account? Log in',
-        style: AppStyles.rubikRegular14(AppColors.brandPrimary),
+        style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
@@ -128,7 +126,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             fit: .scaleDown,
             child: Text(
               'I agree with the Terms of Service & Privacy Policy',
-              style: AppStyles.rubikRegular12(AppColors.textSecondary),
+              style: context.regular12.textSecondary.rubik,
               overflow: .ellipsis,
             ),
           ),
@@ -144,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (formKey.currentState!.validate()) {}
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text("Sign up", style: AppStyles.rubikMedium18(AppColors.white)),
+      child: Text("Sign up", style: context.medium18.white.rubik),
     );
   }
 }
