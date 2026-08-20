@@ -6,6 +6,7 @@ class AppAssets {
   static const String appLogo = 'assets/icons/app_logo.svg';
   static const String userAvatar = 'assets/images/user_avatar.png';
   static const String testImageDoctor = 'assets/images/test_doctor_image.png';
+  static const String testImageMap = 'assets/images/test_map_image.png';
 
   // static const String avatarImage1 = 'assets/images/avatar1.png';
   // static const String avatarImage2 = 'assets/images/avatar2.png';

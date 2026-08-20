@@ -40,10 +40,12 @@ class AppColors {
   // ----------------------
   static const Color surfaceGreen = Color(0xffE8F0E8); //
   static const Color badge = Color(0xffFA002F); //
+  static const Color grayMid = Color(0x32cbcbcb); //
 
   // ----------------------
   // Border /
   // ----------------------
   static const Color borderMuted = Color(0xffE6ECEA); //
   static const Color borderDefault = Color(0x28677294); //
+  static const Color borderSubtle = Color(0x19677294); //
 }

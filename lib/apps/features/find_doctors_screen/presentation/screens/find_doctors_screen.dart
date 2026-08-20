@@ -9,30 +9,34 @@ class FindDoctorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      body: Column(
-        children: [
-          MainAppBar(title: 'Find Doctors'),
-          Expanded(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
-                  child: SearchTextFieldWidget(),
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    itemBuilder: (context, index) => DoctorCard(),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
-                    itemCount: 10,
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+    return SafeArea(
+      top: false,
+      bottom: true,
+      child: AppScaffold(
+        body: Column(
+          children: [
+            MainAppBar(title: 'Find Doctors'),
+            Expanded(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
+                    child: SearchTextFieldWidget(),
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) => DoctorCard(),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 10),
+                      itemCount: 10,
+                      padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

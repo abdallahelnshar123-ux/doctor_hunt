@@ -20,6 +20,7 @@ void main() {
     'textCaption',
     'textMuted',
     'surfaceGreen',
+    'grayMid',
     'borderMuted',
     'borderDefault',
   ];
@@ -35,6 +36,7 @@ void main() {
 
   final List<int> fontSizes = [
     8,
+    10,
     11,
     12,
     14,

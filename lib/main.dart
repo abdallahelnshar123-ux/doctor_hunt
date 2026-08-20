@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/utils/app_theme.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/screens/login_screen.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
+import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/screens/home_screen.dart';
 import 'package:doctor_hunt/apps/features/onboarding/presentation/controller/onboarding_controller.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
         themeMode: .light,
         debugShowCheckedModeBanner: false,
         routerConfig: GoRouter(
-          initialLocation: '/${AppRoutes.findDoctorsScreenRouteName}',
+          initialLocation: '/${AppRoutes.doctorDetailsRouteName}',
           routes: [
             GoRoute(
               path: '/${AppRoutes.onboardingRouteName}',
@@ -62,6 +63,11 @@ class MyApp extends StatelessWidget {
               path: '/${AppRoutes.findDoctorsScreenRouteName}',
               name: AppRoutes.findDoctorsScreenRouteName,
               builder: (context, state) => const FindDoctorsScreen(),
+            ),
+            GoRoute(
+              path: '/${AppRoutes.doctorDetailsRouteName}',
+              name: AppRoutes.doctorDetailsRouteName,
+              builder: (context, state) => const DoctorDetailsScreen(),
             ),
           ],
         ),

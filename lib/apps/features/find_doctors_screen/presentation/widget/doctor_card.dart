@@ -5,6 +5,8 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/widgets/favorite_button_widget.dart';
+
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key});
 
@@ -36,14 +38,7 @@ class DoctorCard extends StatelessWidget {
               children: [
                 _doctorImageWidget(context: context),
                 _doctorDetailsWidget(context: context),
-                GestureDetector(
-                  onTap: () {},
-                  child: Icon(
-                    Icons.favorite,
-                    color: AppColors.badge,
-                    size: 20.w,
-                  ),
-                ),
+                FavoriteButtonWidget(),
               ],
             ),
           ),
