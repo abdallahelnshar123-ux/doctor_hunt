@@ -1,9 +1,10 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
-import 'package:doctor_hunt/apps/core/utils/app_styles.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/apps/features/choose_role/presentation/widget/role_widget.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -35,26 +36,28 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                     spacing: 16.h,
                     crossAxisAlignment: .center,
                     children: [
-                      SvgPicture.asset(AppAssets.appLogo, width: 70.w),
+                      SvgPicture.asset(
+                        AppAssets.icons.appLogo.path,
+                        width: 70.w,
+                      ),
                       Text(
                         'Doctor Hunt',
-                        style: AppStyles.rubikBold25(AppColors.textPrimary),
+                        style: context.bold24.textPrimary.rubik,
                         textAlign: .center,
                       ),
                       SizedBox(height: 25.h),
                       Text(
                         'Choose your role',
-                        style: AppStyles.jakartaELight28(AppColors.textDark),
+                        style: context.extraLight28.textDark.plusJakartaSans,
                         textAlign: .center,
                       ),
                       Text(
                         'The selected role determines the experience and '
                         'available features.',
-                        style: AppStyles.jakartaRegular14(
-                          AppColors.textCaption,
-                        ),
+                        style: context.regular14.textCaption.plusJakartaSans,
                         textAlign: .center,
-                      ),SizedBox(height: 16.h,),
+                      ),
+                      SizedBox(height: 16.h),
                       ValueListenableBuilder(
                         valueListenable: selectedRole,
                         builder: (BuildContext context, value, Widget? child) {
@@ -62,23 +65,27 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                             children: [
                               GestureDetector(
                                 onTap: () {
-                                  if (selectedRole.value == AppRoles.admin)
+                                  if (selectedRole.value == AppRoles.admin) {
                                     return;
+                                  }
                                   selectedRole.value = AppRoles.admin;
                                 },
 
                                 child: RoleWidget.admin(
+                                  roleIcon: AppAssets.icons.adminIcon.path,
                                   selected:
                                       selectedRole.value == AppRoles.admin,
                                 ),
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  if (selectedRole.value == AppRoles.patient)
+                                  if (selectedRole.value == AppRoles.patient) {
                                     return;
+                                  }
                                   selectedRole.value = AppRoles.patient;
                                 },
                                 child: RoleWidget.patient(
+                                  roleIcon: AppAssets.icons.patientIcon.path,
                                   selected:
                                       selectedRole.value == AppRoles.patient,
                                 ),
@@ -94,10 +101,12 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               CustomElevatedButton(
                 buttonWidth: double.infinity,
                 backgroundColor: AppColors.brandPrimary,
-                onPressed: () {},
+                onPressed: () {
+                  const HomeRoute().go(context);
+                },
                 child: Text(
                   'Continue',
-                  style: AppStyles.rubikMedium18(AppColors.bgPrimary),
+                  style: context.medium18.bgPrimary.rubik,
                 ),
               ),
             ],

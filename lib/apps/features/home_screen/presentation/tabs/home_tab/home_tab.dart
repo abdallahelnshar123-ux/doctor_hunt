@@ -1,11 +1,11 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/categories_widget.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/feature_doctors_widget.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/live_doctors_widget.dart';
 import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/popular_doctors_widget.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -82,7 +82,7 @@ class HomeTab extends StatelessWidget {
       actionsPadding: EdgeInsets.only(right: 20),
       actions: [
         CircleAvatar(
-          foregroundImage: AssetImage(AppAssets.userAvatar),
+          foregroundImage: AssetImage(AppAssets.images.userAvatar.path),
           radius: 30.r,
         ),
       ],

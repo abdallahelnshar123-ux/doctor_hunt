@@ -1,10 +1,11 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/router/app_routes.dart';
 import '../../../../core/widgets/favorite_button_widget.dart';
 
 class DoctorCard extends StatelessWidget {
@@ -75,7 +76,9 @@ class DoctorCard extends StatelessWidget {
       paddingVertical: 10.w,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
-      onPressed: () {},
+      onPressed: () {
+        const DoctorDetailsRoute().push(context);
+      },
       child: Text('Book now', style: context.medium11.bgPrimary.rubik),
     ),
   );
@@ -135,7 +138,7 @@ class DoctorCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         image: DecorationImage(
-          image: AssetImage(AppAssets.testImageDoctor),
+          image: AssetImage(AppAssets.images.testDoctorImage.path),
           fit: .cover,
         ),
       ),

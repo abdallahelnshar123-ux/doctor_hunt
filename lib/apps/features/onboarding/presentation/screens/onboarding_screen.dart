@@ -1,26 +1,27 @@
-import 'package:doctor_hunt/apps/core/utils/app_styles.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
-import '../../../../core/utils/app_colors.dart';
-import '../../../../core/utils/app_constants.dart';
-import '../../../../core/utils/app_routes.dart';
+import '../../../../core/router/app_routes.dart';
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../auth/presentation/widgets/custom_elevated_button.dart';
 import '../../data/models/on_boarding_page.dart';
-import '../controller/onboarding_controller.dart';
 
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  int currentIndex = 0;
+
+  @override
   Widget build(BuildContext context) {
-    final OnboardingViewModel provider = context.watch<OnboardingViewModel>();
-    final int currentIndex = provider.currentIndex;
-    final List<OnBoardingPage> onboardingDataList =
-        AppConstants.onBoardingPages;
+    // final List<OnBoardingPage> onboardingDataList = onBoardingPages;
 
     return SafeArea(
       top: false,
@@ -34,7 +35,6 @@ class OnboardingScreen extends StatelessWidget {
             spacing: 14.h,
             crossAxisAlignment: .center,
             children: [
-              // SizedBox(height: 80.h),
               Expanded(
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
@@ -42,8 +42,8 @@ class OnboardingScreen extends StatelessWidget {
                     return FadeTransition(opacity: animation, child: child);
                   },
                   child: Image.asset(
-                    key: ValueKey(onboardingDataList[currentIndex].image),
-                    onboardingDataList[currentIndex].image,
+                    key: ValueKey(onBoardingPagesList[currentIndex].image),
+                    onBoardingPagesList[currentIndex].image,
                     width: double.infinity,
                     fit: .cover,
                   ),
@@ -52,45 +52,45 @@ class OnboardingScreen extends StatelessWidget {
               FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(
-                  onboardingDataList[currentIndex].title,
+                  onBoardingPagesList[currentIndex].title,
                   textAlign: TextAlign.center,
-                  style: AppStyles.rubikMedium28(AppColors.textTertiary),
+                  style: context.medium28.textTertiary.rubik,
                 ),
               ),
               Text(
-                onboardingDataList[currentIndex].subtitle,
+                onBoardingPagesList[currentIndex].subtitle,
                 textAlign: TextAlign.center,
-                style: AppStyles.rubikRegular12(AppColors.textSecondary90),
+                style: context.regular12.textSecondary90.rubik,
               ),
               SizedBox(height: 30.h),
               CustomElevatedButton(
                 buttonWidth: 1.sw - 48.w,
                 onPressed: () {
-                  final wasLastPage =
-                      provider.currentIndex ==
-                      provider.onboardingPagesNumber - 1;
-
-                  provider.onFirstButtonClick();
-
-                  if (wasLastPage) {
-                    context.goNamed(AppRoutes.loginRouteName);
+                  if (currentIndex < onBoardingPagesList.length - 1) {
+                    debugPrint(currentIndex.toString());
+                    setState(() {
+                      currentIndex++;
+                    });
+                  } else {
+                    const LoginRoute().go(context);
                   }
                 },
                 backgroundColor: AppColors.brandPrimary,
                 child: Text(
-                  onboardingDataList[currentIndex].firstButton,
-                  style: AppStyles.rubikMedium18(AppColors.bgPrimary),
+                  onBoardingPagesList[currentIndex].firstButton,
+                  style: context.medium18.bgPrimary.rubik,
                 ),
               ),
 
               TextButton(
                 onPressed: () {
-                  provider.onSecondButtonClick();
-                  context.goNamed(AppRoutes.loginRouteName);
+                  setState(() {
+                    const LoginRoute().go(context);
+                  });
                 },
                 child: Text(
-                  onboardingDataList[currentIndex].secondButton,
-                  style: AppStyles.rubikRegular14(AppColors.textSecondary),
+                  onBoardingPagesList[currentIndex].secondButton,
+                  style: context.regular14.textSecondary.rubik,
                 ),
               ),
             ],
@@ -100,3 +100,47 @@ class OnboardingScreen extends StatelessWidget {
     );
   }
 }
+
+final List<OnBoardingPage> onBoardingPagesList = [
+  OnBoardingPage(
+    image: AppAssets.images.onBoarding1.path,
+    subtitle:
+        "Find trusted doctors near you. Get"
+        " the care you need from experienced professionals.",
+    title: "Find Trusted Doctors",
+    firstButton: "Next",
+    secondButton: "Skip",
+    // subtitle: "onboarding_description1",
+    // title: "onboarding_title1",
+    // firstButton: "next",
+    // secondButton: 'skip',
+  ),
+
+  OnBoardingPage(
+    image: AppAssets.images.onBoarding2.path,
+    subtitle:
+        "Explore doctors based on your needs."
+        "Choose the one that’s right for you.",
+    title: "Choose Best Doctors",
+    firstButton: "Next",
+    secondButton: "Skip",
+    // subtitle: "onboarding_description2",
+    // title: "onboarding_title2",
+    // firstButton: "next",
+    // secondButton: "skip",
+  ),
+
+  OnBoardingPage(
+    image: AppAssets.images.onBoarding3.path,
+    subtitle:
+        "Book your appointment in just a few taps."
+        "Choose a time that works best for you.",
+    title: "Easy Appointments",
+    firstButton: "Get Started",
+    secondButton: "Skip",
+    // subtitle: "onboarding_description3",
+    // title: "onboarding_title3",
+    // firstButton: "sign_in",
+    // secondButton: "skip",
+  ),
+];

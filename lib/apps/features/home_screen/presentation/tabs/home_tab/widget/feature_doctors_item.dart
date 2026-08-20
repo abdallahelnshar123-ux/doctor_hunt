@@ -1,5 +1,5 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -30,14 +30,16 @@ class FeatureDoctorsItem extends StatelessWidget {
                 child: Icon(Icons.favorite, color: AppColors.badge, size: 12.w),
               ),
               Spacer(),
-              SvgPicture.asset(AppAssets.starIconRated, width: 10.w),
+              SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 10.w),
               Text('5.0', style: context.medium8.black.rubik),
             ],
           ),
           Expanded(
             child: CircleAvatar(
               maxRadius: double.infinity,
-              foregroundImage: AssetImage(AppAssets.testImageDoctor),
+              foregroundImage: AssetImage(
+                AppAssets.images.testDoctorImage.path,
+              ),
             ),
           ),
           FittedBox(
@@ -52,7 +54,7 @@ class FeatureDoctorsItem extends StatelessWidget {
             spacing: 5,
             mainAxisAlignment: .center,
             children: [
-              SvgPicture.asset(AppAssets.sDollarIcon, width: 8.w),
+              SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 8.w),
               Text('25.00/ hours', style: context.light8.textSecondary.rubik),
             ],
           ),

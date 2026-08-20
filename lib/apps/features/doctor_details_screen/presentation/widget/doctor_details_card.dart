@@ -1,6 +1,6 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +50,7 @@ class DoctorDetailsCard extends StatelessWidget {
                           Expanded(
                             child: _doctorDetailsWidget(context: context),
                           ),
-                          FavoriteButtonWidget()
+                          FavoriteButtonWidget(),
                         ],
                       ),
                       _ratingWidget(context: context),
@@ -87,7 +87,9 @@ class DoctorDetailsCard extends StatelessWidget {
           children: List.generate(
             5,
             (index) => SvgPicture.asset(
-              index != 4 ? AppAssets.starIconRated : AppAssets.starIconUnrated,
+              index != 4
+                  ? AppAssets.icons.starIconRated.path
+                  : AppAssets.icons.starIconUnrated.path,
               width: 12.w,
             ),
           ),
@@ -97,7 +99,7 @@ class DoctorDetailsCard extends StatelessWidget {
           spacing: 5,
           mainAxisAlignment: .end,
           children: [
-            SvgPicture.asset(AppAssets.sDollarIcon, width: 9.w),
+            SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9.w),
             Text('25.00/ hours', style: context.light10.textSecondary.rubik),
           ],
         ),
@@ -132,7 +134,7 @@ class DoctorDetailsCard extends StatelessWidget {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       image: DecorationImage(
-        image: AssetImage(AppAssets.testImageDoctor),
+        image: AssetImage(AppAssets.images.testDoctorImage.path),
         fit: .cover,
       ),
     ),

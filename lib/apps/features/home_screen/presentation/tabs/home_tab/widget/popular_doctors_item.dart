@@ -1,5 +1,5 @@
-import 'package:doctor_hunt/apps/core/utils/app_assets.dart';
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +22,7 @@ class PopularDoctorsItem extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              AppAssets.testImageDoctor,
+              AppAssets.images.testDoctorImage.path,
               fit: .cover,
               width: double.infinity,
             ),
@@ -51,8 +51,8 @@ class PopularDoctorsItem extends StatelessWidget {
                     5,
                     (index) => SvgPicture.asset(
                       index != 4
-                          ? AppAssets.starIconRated
-                          : AppAssets.starIconUnrated,
+                          ? AppAssets.icons.starIconRated.path
+                          : AppAssets.icons.starIconUnrated.path,
                       width: 13.w,
                     ),
                   ),

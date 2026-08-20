@@ -50,6 +50,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  build_runner: ^2.15.1
+  go_router_builder: ^4.4.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -93,3 +95,15 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_assets_generator:
+  output_dir: generated/
+  output_filename: app_assets
+  class_name: AppAssets
+  auto_detection: true
+  # Automatically add missing dependencies (rive, flutter_svg, lottie) default: true
+  auto_add_dependencies: true
+  # Options: robust (default), legacy (old style)
+  style: robust
+  package_parameter_enabled: false
+  named_with_parent: true
+  path_ignore: [ ]

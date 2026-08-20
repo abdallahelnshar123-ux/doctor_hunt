@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/utils/app_colors.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,7 +78,7 @@ class AppScaffold extends StatelessWidget {
         body: Stack(
           children: [
             isOnboarding == true && index != null
-                ?  _OnboardingBackground(index!)
+                ? _OnboardingBackground(index!)
                 : const _MainBackground(),
             if (body != null) Positioned.fill(child: body!),
           ],
@@ -174,7 +174,7 @@ class _OnboardingBackground extends StatelessWidget {
         Positioned(
           top: -60,
           right: index % 2 == 0 ? 150 : null,
-          left: index % 2 != 0 ? 150: null,
+          left: index % 2 != 0 ? 150 : null,
           child: Container(
             width: 350.w,
             height: 350.w,

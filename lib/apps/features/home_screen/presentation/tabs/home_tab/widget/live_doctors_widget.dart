@@ -31,7 +31,7 @@ class LiveDoctorsWidget extends StatelessWidget {
             separatorBuilder: (context, index) => const SizedBox(width: 15),
             itemCount: 10,
             scrollDirection: .horizontal,
-            padding: const EdgeInsets.symmetric(horizontal:  20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
           ),
         ),
       ],

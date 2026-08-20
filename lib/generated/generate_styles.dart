@@ -53,10 +53,7 @@ void main() {
     40,
   ];
 
-  final List<String> fontFamilies = [
-    'plusJakartaSans',
-    'rubik',
-  ];
+  final List<String> fontFamilies = ['plusJakartaSans', 'rubik'];
 
   const String outputPath = 'lib/generated/';
   const String importColorsClass =
@@ -123,11 +120,7 @@ extension WeightAtoms on BuildContext {
 ''');
 }
 
-void generateColors(
-    IOSink sink,
-    List<String> colors,
-    String nameColorsClass,
-    ) {
+void generateColors(IOSink sink, List<String> colors, String nameColorsClass) {
   sink.writeln('extension ColorAtoms on TextStyle {');
 
   for (final String color in colors) {
@@ -139,43 +132,33 @@ void generateColors(
   sink.writeln('}\n');
 }
 
-void generateFontSizes(
-    IOSink sink,
-    List<int> fontSizes,
-    ) {
+void generateFontSizes(IOSink sink, List<int> fontSizes) {
   sink.writeln('extension FontSizeAtoms on TextStyle {');
 
   for (final int size in fontSizes) {
-    sink.writeln(
-      '  TextStyle get px$size => copyWith(fontSize: $size.0.sp);',
-    );
+    sink.writeln('  TextStyle get px$size => copyWith(fontSize: $size.0.sp);');
   }
 
   sink.writeln('}\n');
 }
 
 void generateWeightAndPxMixes(
-    IOSink sink,
-    List<int> fontSizes,
-    List<String> fontWeights,
-    ) {
+  IOSink sink,
+  List<int> fontSizes,
+  List<String> fontWeights,
+) {
   sink.writeln('extension WeightAndPxMixes on BuildContext {');
 
   for (final int size in fontSizes) {
     for (final String weight in fontWeights) {
-      sink.writeln(
-        '  TextStyle get $weight$size => $weight.px$size;',
-      );
+      sink.writeln('  TextStyle get $weight$size => $weight.px$size;');
     }
   }
 
   sink.writeln('}\n');
 }
 
-void generateFontFamilies(
-    IOSink sink,
-    List<String> fontFamilies,
-    ) {
+void generateFontFamilies(IOSink sink, List<String> fontFamilies) {
   sink.writeln('extension FontFamilyAtoms on TextStyle {');
 
   for (final String fontFamily in fontFamilies) {
