@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(360, 690),
       builder: (context, child) => MaterialApp.router(
         theme: AppTheme.lightTheme,
         themeMode: .light,

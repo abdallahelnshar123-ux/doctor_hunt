@@ -15,50 +15,46 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      bottom: true,
-      child: AppScaffold(
-        appBar: _customAppBar(context: context),
-        body: Column(
-          spacing: 20,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 60.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.brandPrimary,
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20.r),
-                      bottomRight: Radius.circular(20.r),
-                    ),
+    return AppScaffold(
+      appBar: _customAppBar(context: context),
+      body: Column(
+        spacing: 20,
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: double.infinity,
+                height: 60.h,
+                decoration: BoxDecoration(
+                  color: AppColors.brandPrimary,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20.r),
+                    bottomRight: Radius.circular(20.r),
                   ),
                 ),
+              ),
 
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: SearchTextFieldWidget(),
-                ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  spacing: 20,
-                  children: [
-                    const LiveDoctorsWidget(),
-                    const CategoriesWidget(),
-                    const PopularDoctorsWidget(),
-                    const FeatureDoctorsWidget(),
-                    const SizedBox(height: 10),
-                  ],
-                ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: SearchTextFieldWidget(),
+              ),
+            ],
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                spacing: 20,
+                children: [
+                  const LiveDoctorsWidget(),
+                  const CategoriesWidget(),
+                  const PopularDoctorsWidget(),
+                  const FeatureDoctorsWidget(),
+                  const SizedBox(height: 10),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

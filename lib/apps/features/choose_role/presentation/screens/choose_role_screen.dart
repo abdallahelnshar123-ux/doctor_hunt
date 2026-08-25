@@ -23,7 +23,6 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      bottom: true,
       child: AppScaffold(
         body: Padding(
           padding: EdgeInsets.fromLTRB(20, 50.h, 20, 32.h),

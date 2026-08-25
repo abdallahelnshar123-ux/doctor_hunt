@@ -71,7 +71,6 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      bottom: true,
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar,

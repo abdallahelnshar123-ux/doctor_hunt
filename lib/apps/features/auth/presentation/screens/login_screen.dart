@@ -128,8 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
       buttonWidth: 1.sw - 80.w,
       onPressed: () {
         const ChooseRoleRoute().go(context);
-        // if (formKey.currentState!.validate()) {
-        // }
       },
       backgroundColor: AppColors.brandPrimary,
       child: Text("Login", style: context.medium18.white.rubik),
