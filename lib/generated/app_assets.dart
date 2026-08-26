@@ -35,6 +35,7 @@ class $AppAssetsIconsGen {
   final SvgGenImage googleIcon = const SvgGenImage(
     'assets/icons/google_icon.svg',
   );
+  final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like_icon.svg');
   final SvgGenImage patientIcon = const SvgGenImage(
     'assets/icons/patient_icon.svg',
   );

@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -23,78 +22,74 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     // final List<OnBoardingPage> onboardingDataList = onBoardingPages;
 
-    return SafeArea(
-      top: false,
-      bottom: true,
-      child: AppScaffold(
-        isOnboarding: true,
-        index: currentIndex,
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(40.w, 0, 40.w, 43.h),
-          child: Column(
-            spacing: 14.h,
-            crossAxisAlignment: .center,
-            children: [
-              Expanded(
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return FadeTransition(opacity: animation, child: child);
-                  },
-                  child: Image.asset(
-                    key: ValueKey(onBoardingPagesList[currentIndex].image),
-                    onBoardingPagesList[currentIndex].image,
-                    width: double.infinity,
-                    fit: .cover,
-                  ),
+    return AppScaffold(
+      isOnboarding: true,
+      index: currentIndex,
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(40, 0, 40, 43),
+        child: Column(
+          spacing: 14,
+          crossAxisAlignment: .center,
+          children: [
+            Expanded(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: Image.asset(
+                  key: ValueKey(onBoardingPagesList[currentIndex].image),
+                  onBoardingPagesList[currentIndex].image,
+                  width: double.infinity,
+                  fit: .cover,
                 ),
               ),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  onBoardingPagesList[currentIndex].title,
-                  textAlign: TextAlign.center,
-                  style: context.medium28.textTertiary.rubik,
-                ),
-              ),
-              Text(
-                onBoardingPagesList[currentIndex].subtitle,
+            ),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                onBoardingPagesList[currentIndex].title,
                 textAlign: TextAlign.center,
-                style: context.regular12.textSecondary90.rubik,
+                style: context.medium28.textTertiary.rubik,
               ),
-              SizedBox(height: 30.h),
-              CustomElevatedButton(
-                buttonWidth: 1.sw - 48.w,
-                onPressed: () {
-                  if (currentIndex < onBoardingPagesList.length - 1) {
-                    debugPrint(currentIndex.toString());
-                    setState(() {
-                      currentIndex++;
-                    });
-                  } else {
-                    const LoginRoute().go(context);
-                  }
-                },
-                backgroundColor: AppColors.brandPrimary,
-                child: Text(
-                  onBoardingPagesList[currentIndex].firstButton,
-                  style: context.medium18.bgPrimary.rubik,
-                ),
-              ),
-
-              TextButton(
-                onPressed: () {
+            ),
+            Text(
+              onBoardingPagesList[currentIndex].subtitle,
+              textAlign: TextAlign.center,
+              style: context.regular12.textSecondary90.rubik,
+            ),
+            SizedBox(height: 30),
+            CustomElevatedButton(
+              buttonWidth: MediaQuery.sizeOf(context).width - 48,
+              onPressed: () {
+                if (currentIndex < onBoardingPagesList.length - 1) {
+                  debugPrint(currentIndex.toString());
                   setState(() {
-                    const LoginRoute().go(context);
+                    currentIndex++;
                   });
-                },
-                child: Text(
-                  onBoardingPagesList[currentIndex].secondButton,
-                  style: context.regular14.textSecondary.rubik,
-                ),
+                } else {
+                  const LoginRoute().go(context);
+                }
+              },
+              backgroundColor: AppColors.brandPrimary,
+              child: Text(
+                onBoardingPagesList[currentIndex].firstButton,
+                style: context.medium18.bgPrimary.rubik,
               ),
-            ],
-          ),
+            ),
+
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  const LoginRoute().go(context);
+                });
+              },
+              child: Text(
+                onBoardingPagesList[currentIndex].secondButton,
+                style: context.regular14.textSecondary.rubik,
+              ),
+            ),
+          ],
         ),
       ),
     );

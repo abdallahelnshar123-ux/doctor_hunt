@@ -3,7 +3,6 @@ import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_eleva
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/router/app_routes.dart';
 import '../../../../core/widgets/favorite_button_widget.dart';
@@ -16,7 +15,7 @@ class DoctorCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15),
       width: double.infinity,
-      height: 200.h,
+      height: 200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
@@ -63,7 +62,7 @@ class DoctorCard extends StatelessWidget {
       mainAxisSize: .min,
       spacing: 3,
       children: [
-        Icon(Icons.circle, color: AppColors.brandPrimary, size: 10.w),
+        Icon(Icons.circle, color: AppColors.brandPrimary, size: 10),
         Text(text, style: context.light8.textSecondary.rubik),
       ],
     );
@@ -73,7 +72,7 @@ class DoctorCard extends StatelessWidget {
     flex: 2,
     child: CustomElevatedButton(
       buttonWidth: double.infinity,
-      paddingVertical: 10.w,
+      paddingVertical: 10,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {

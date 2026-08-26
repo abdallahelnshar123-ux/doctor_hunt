@@ -3,7 +3,6 @@ import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_eleva
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/widgets/favorite_button_widget.dart';
@@ -16,7 +15,7 @@ class DoctorDetailsCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(15),
       width: double.infinity,
-      height: 185.h,
+      height: 185,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
@@ -68,8 +67,8 @@ class DoctorDetailsCard extends StatelessWidget {
 
   Widget _buildBookNowButton({required BuildContext context}) {
     return CustomElevatedButton(
-      buttonWidth: 0.4.sw,
-      paddingVertical: 10.w,
+      buttonWidth: MediaQuery.sizeOf(context).width * 0.4,
+      paddingVertical: 10,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {},
@@ -90,7 +89,7 @@ class DoctorDetailsCard extends StatelessWidget {
               index != 4
                   ? AppAssets.icons.starIconRated.path
                   : AppAssets.icons.starIconUnrated.path,
-              width: 12.w,
+              width: 12,
             ),
           ),
         ),
@@ -99,7 +98,7 @@ class DoctorDetailsCard extends StatelessWidget {
           spacing: 5,
           mainAxisAlignment: .end,
           children: [
-            SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9.w),
+            SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
             Text('25.00/ hours', style: context.light10.textSecondary.rubik),
           ],
         ),

@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppScaffold extends StatelessWidget {
   final Key? scaffoldKey;
@@ -125,8 +124,8 @@ class _MainBackground extends StatelessWidget {
           top: -600,
           right: 50,
           child: Container(
-            width: 1000.w,
-            height: 1000.w,
+            width: 1000,
+            height: 1000,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(
@@ -142,8 +141,8 @@ class _MainBackground extends StatelessWidget {
           bottom: -650,
           left: 50,
           child: Container(
-            width: 1000.w,
-            height: 1000.w,
+            width: 1000,
+            height: 1000,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(
@@ -175,8 +174,8 @@ class _OnboardingBackground extends StatelessWidget {
           right: index % 2 == 0 ? 150 : null,
           left: index % 2 != 0 ? 150 : null,
           child: Container(
-            width: 350.w,
-            height: 350.w,
+            width: 350,
+            height: 350,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.brandPrimary,
@@ -188,8 +187,8 @@ class _OnboardingBackground extends StatelessWidget {
           bottom: -650,
           left: 50,
           child: Container(
-            width: 1000.w,
-            height: 1000.w,
+            width: 1000,
+            height: 1000,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: RadialGradient(

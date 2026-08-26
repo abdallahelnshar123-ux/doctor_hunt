@@ -2,7 +2,6 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class RoleWidget extends StatelessWidget {
@@ -44,18 +43,18 @@ class RoleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16.w),
-      padding: EdgeInsets.all(16.w),
+      margin: EdgeInsets.only(bottom: 16),
+      padding: EdgeInsets.all(16),
       width: .infinity,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.w),
+        borderRadius: BorderRadius.circular(20),
         border: BoxBorder.all(
           color: selected ? AppColors.brandPrimaryDark : AppColors.borderMuted,
           width: selected ? 2 : 1,
         ),
       ),
       child: Row(
-        spacing: 20.w,
+        spacing: 20,
         crossAxisAlignment: .start,
         children: [
           SvgPicture.asset(

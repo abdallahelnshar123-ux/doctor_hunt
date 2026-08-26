@@ -6,7 +6,6 @@ import 'package:doctor_hunt/apps/features/choose_role/presentation/widget/role_w
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ChooseRoleScreen extends StatefulWidget {
@@ -21,95 +20,85 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: AppScaffold(
-        body: Padding(
-          padding: EdgeInsets.fromLTRB(20, 50.h, 20, 32.h),
-          child: Column(
-            crossAxisAlignment: .center,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    spacing: 16.h,
-                    crossAxisAlignment: .center,
-                    children: [
-                      SvgPicture.asset(
-                        AppAssets.icons.appLogo.path,
-                        width: 70.w,
-                      ),
-                      Text(
-                        'Doctor Hunt',
-                        style: context.bold24.textPrimary.rubik,
-                        textAlign: .center,
-                      ),
-                      SizedBox(height: 25.h),
-                      Text(
-                        'Choose your role',
-                        style: context.extraLight28.textDark.plusJakartaSans,
-                        textAlign: .center,
-                      ),
-                      Text(
-                        'The selected role determines the experience and '
-                        'available features.',
-                        style: context.regular14.textCaption.plusJakartaSans,
-                        textAlign: .center,
-                      ),
-                      SizedBox(height: 16.h),
-                      ValueListenableBuilder(
-                        valueListenable: selectedRole,
-                        builder: (BuildContext context, value, Widget? child) {
-                          return Column(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  if (selectedRole.value == AppRoles.admin) {
-                                    return;
-                                  }
-                                  selectedRole.value = AppRoles.admin;
-                                },
+    return AppScaffold(
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(20, 50, 20, 32),
+        child: Column(
+          crossAxisAlignment: .center,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 16,
+                  crossAxisAlignment: .center,
+                  children: [
+                    SvgPicture.asset(AppAssets.icons.appLogo.path, width: 70),
+                    Text(
+                      'Doctor Hunt',
+                      style: context.bold24.textPrimary.rubik,
+                      textAlign: .center,
+                    ),
+                    SizedBox(height: 25),
+                    Text(
+                      'Choose your role',
+                      style: context.extraLight28.textDark.plusJakartaSans,
+                      textAlign: .center,
+                    ),
+                    Text(
+                      'The selected role determines the experience and '
+                      'available features.',
+                      style: context.regular14.textCaption.plusJakartaSans,
+                      textAlign: .center,
+                    ),
+                    SizedBox(height: 16),
+                    ValueListenableBuilder(
+                      valueListenable: selectedRole,
+                      builder: (BuildContext context, value, Widget? child) {
+                        return Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (selectedRole.value == AppRoles.admin) {
+                                  return;
+                                }
+                                selectedRole.value = AppRoles.admin;
+                              },
 
-                                child: RoleWidget.admin(
-                                  roleIcon: AppAssets.icons.adminIcon.path,
-                                  selected:
-                                      selectedRole.value == AppRoles.admin,
-                                ),
+                              child: RoleWidget.admin(
+                                roleIcon: AppAssets.icons.adminIcon.path,
+                                selected: selectedRole.value == AppRoles.admin,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  if (selectedRole.value == AppRoles.patient) {
-                                    return;
-                                  }
-                                  selectedRole.value = AppRoles.patient;
-                                },
-                                child: RoleWidget.patient(
-                                  roleIcon: AppAssets.icons.patientIcon.path,
-                                  selected:
-                                      selectedRole.value == AppRoles.patient,
-                                ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                if (selectedRole.value == AppRoles.patient) {
+                                  return;
+                                }
+                                selectedRole.value = AppRoles.patient;
+                              },
+                              child: RoleWidget.patient(
+                                roleIcon: AppAssets.icons.patientIcon.path,
+                                selected:
+                                    selectedRole.value == AppRoles.patient,
                               ),
-                            ],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ),
-              CustomElevatedButton(
-                buttonWidth: double.infinity,
-                backgroundColor: AppColors.brandPrimary,
-                onPressed: () {
-                  const HomeRoute().go(context);
-                },
-                child: Text(
-                  'Continue',
-                  style: context.medium18.bgPrimary.rubik,
-                ),
-              ),
-            ],
-          ),
+            ),
+            CustomElevatedButton(
+              buttonWidth: double.infinity,
+              backgroundColor: AppColors.brandPrimary,
+              onPressed: () {
+                const MainRoute().go(context);
+              },
+              child: Text('Continue', style: context.medium18.bgPrimary.rubik),
+            ),
+          ],
         ),
       ),
     );

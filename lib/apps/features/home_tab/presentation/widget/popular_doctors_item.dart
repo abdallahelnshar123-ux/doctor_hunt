@@ -1,8 +1,8 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class PopularDoctorsItem extends StatelessWidget {
@@ -10,13 +10,13 @@ class PopularDoctorsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: AppColors.bgPrimary,
       ),
-      width: 190.w,
+      width: 190,
       child: Column(
         crossAxisAlignment: .center,
         children: [
@@ -53,7 +53,7 @@ class PopularDoctorsItem extends StatelessWidget {
                       index != 4
                           ? AppAssets.icons.starIconRated.path
                           : AppAssets.icons.starIconUnrated.path,
-                      width: 13.w,
+                      width: 13,
                     ),
                   ),
                 ),

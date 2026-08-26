@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DoctorStatisticsWidget extends StatelessWidget {
   const DoctorStatisticsWidget({super.key});
@@ -44,7 +43,7 @@ Widget _statisticsWidget({
   return Expanded(
     child: Container(
       padding: EdgeInsets.all(10),
-      height: 84.h,
+      height: 84,
       decoration: BoxDecoration(
         color: AppColors.grayMid,
         borderRadius: BorderRadius.circular(10),

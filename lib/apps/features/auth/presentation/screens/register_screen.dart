@@ -2,7 +2,7 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../widgets/auth_password_text_field_widget.dart';
@@ -38,14 +38,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
                 key: formKey,
                 child: Column(
-                  spacing: 8.h,
+                  spacing: 8,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 150.h),
+                    SizedBox(height: 150),
                     FittedBox(
                       fit: .scaleDown,
                       child: Text(
@@ -60,9 +60,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 60.h),
+                    SizedBox(height: 60),
                     Row(
-                      spacing: 15.w,
+                      spacing: 15,
                       children: [
                         Expanded(
                           child: ContinueWithGoogleButton(onPressed: () {}),
@@ -72,7 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 25.h),
+                    SizedBox(height: 25),
                     UsernameTextFieldWidget(
                       controller: nameController,
                       fillColor: AppColors.bgPrimary,
@@ -84,7 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     AuthPasswordTextFieldWidget(controller: passwordController),
                     _buildAgreeWithTerms(),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 24),
                     _buildRegisterButton(),
                   ],
                 ),
@@ -92,7 +92,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 25.h),
+            padding: EdgeInsets.only(bottom: 25),
             child: _buildHaveAnAccount(),
           ),
         ],
@@ -120,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Row(
       spacing: 10,
       children: [
-        CircleAvatar(backgroundColor: AppColors.textSecondary, radius: 7.r),
+        CircleAvatar(backgroundColor: AppColors.textSecondary, radius: 7),
         Expanded(
           child: FittedBox(
             fit: .scaleDown,
@@ -137,7 +137,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Widget _buildRegisterButton() {
     return CustomElevatedButton(
-      buttonWidth: 1.sw - 80.w,
+      buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
         if (formKey.currentState!.validate()) {}
       },

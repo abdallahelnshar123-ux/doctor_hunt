@@ -4,7 +4,6 @@ import 'package:doctor_hunt/apps/features/auth/presentation/widgets/auth_passwor
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/continue_with_facebook_button.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../widgets/continue_with_google_button.dart';
@@ -38,14 +37,14 @@ class _LoginScreenState extends State<LoginScreen> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
                 key: formKey,
                 child: Column(
-                  spacing: 8.h,
+                  spacing: 8,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 127.h),
+                    SizedBox(height: 127),
                     Text(
                       'Welcome back',
                       style: context.medium24.black.rubik,
@@ -57,9 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 70.h),
+                    SizedBox(height: 70),
                     Row(
-                      spacing: 15.w,
+                      spacing: 15,
                       children: [
                         Expanded(
                           child: ContinueWithGoogleButton(onPressed: () {}),
@@ -69,13 +68,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 30.h),
+                    SizedBox(height: 30),
                     EmailTextFieldWidget(
                       controller: emailController,
                       fillColor: AppColors.bgPrimary,
                     ),
                     AuthPasswordTextFieldWidget(controller: passwordController),
-                    SizedBox(height: 24.h),
+                    SizedBox(height: 24),
                     _builtLoginButton(),
                     _buildForgetPassword(),
                   ],
@@ -84,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 25.h),
+            padding: EdgeInsets.only(bottom: 25),
             child: _buildDoNotHaveAccount(),
           ),
         ],
@@ -125,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _builtLoginButton() {
     return CustomElevatedButton(
-      buttonWidth: 1.sw - 80.w,
+      buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
         const ChooseRoleRoute().go(context);
       },

@@ -50,6 +50,7 @@ void main() {
     30,
     32,
     36,
+    38,
     40,
   ];
 
@@ -57,7 +58,7 @@ void main() {
 
   const String outputPath = 'lib/generated/';
   const String importColorsClass =
-      "import '../apps/core/utils/app_colors.dart';";
+      "import '../apps/core/theme/app_colors.dart';";
 
   const String nameColorsClass = 'AppColors';
 
@@ -76,7 +77,6 @@ void main() {
   sink.writeln('// Run `dart run generate_styles.dart` to update this file.');
   sink.writeln("import 'package:flutter/material.dart';");
   sink.writeln("import 'package:google_fonts/google_fonts.dart';");
-  sink.writeln("import 'package:flutter_screenutil/flutter_screenutil.dart';");
   sink.writeln(importColorsClass);
 
   generateWeightAtoms(sink);
@@ -136,7 +136,7 @@ void generateFontSizes(IOSink sink, List<int> fontSizes) {
   sink.writeln('extension FontSizeAtoms on TextStyle {');
 
   for (final int size in fontSizes) {
-    sink.writeln('  TextStyle get px$size => copyWith(fontSize: $size.0.sp);');
+    sink.writeln('  TextStyle get px$size => copyWith(fontSize: $size.0);');
   }
 
   sink.writeln('}\n');
