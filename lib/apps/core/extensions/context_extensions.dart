@@ -67,7 +67,6 @@
 
 import 'package:flutter/material.dart';
 
-import '../theme/app_colors.dart';
 
 extension ScreenExtentions on BuildContext {
   double get width => MediaQuery.sizeOf(this).width;
