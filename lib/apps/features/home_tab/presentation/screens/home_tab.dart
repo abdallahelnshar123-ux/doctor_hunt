@@ -5,8 +5,8 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 
+import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
-import '../widget/feature_doctors_widget.dart';
 import '../widget/live_doctors_widget.dart';
 import '../widget/popular_doctors_widget.dart';
 

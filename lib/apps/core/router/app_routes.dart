@@ -32,7 +32,7 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   }
 }
 
-@TypedGoRoute<MainRoute>(path: '/main')
+@TypedGoRoute<MainRoute>(path: '/')
 class MainRoute extends GoRouteData with $MainRoute {
   const MainRoute();
 
@@ -81,7 +81,7 @@ class DoctorDetailsRoute extends GoRouteData with $DoctorDetailsRoute {
     return const DoctorDetailsScreen();
   }
 }
-@TypedGoRoute<AppointmentRoute>(path: '/')
+@TypedGoRoute<AppointmentRoute>(path: '/appointment')
 class AppointmentRoute extends GoRouteData with $AppointmentRoute {
   const AppointmentRoute();
 

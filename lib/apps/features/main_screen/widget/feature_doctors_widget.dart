@@ -4,14 +4,12 @@ import 'package:flutter/material.dart';
 
 import 'feature_doctors_item.dart';
 
-
 class FeatureDoctorsWidget extends StatelessWidget {
   const FeatureDoctorsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 20,
       mainAxisSize: .min,
       mainAxisAlignment: .start,
       crossAxisAlignment: .start,
@@ -23,7 +21,7 @@ class FeatureDoctorsWidget extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                'Popular Doctors',
+                'Feature Doctor',
                 style: context.medium18.textTertiary.rubik,
               ),
               Spacer(),
@@ -37,14 +35,14 @@ class FeatureDoctorsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 130,
+          height: 190,
           width: double.infinity,
           child: ListView.separated(
             itemBuilder: (context, index) => const FeatureDoctorsItem(),
             separatorBuilder: (context, index) => const SizedBox(width: 15),
             itemCount: 10,
             scrollDirection: .horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(20),
           ),
         ),
       ],

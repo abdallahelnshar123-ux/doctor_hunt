@@ -70,7 +70,7 @@ mixin $RegisterRoute on GoRouteData {
 }
 
 RouteBase get $mainRoute => GoRouteData.$route(
-  path: '/main',
+  path: '/',
   hasOverriddenOnExit: false,
   factory: $MainRoute._fromState,
 );
@@ -79,7 +79,7 @@ mixin $MainRoute on GoRouteData {
   static MainRoute _fromState(GoRouterState state) => const MainRoute();
 
   @override
-  String get location => GoRouteData.$location('/main');
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -204,7 +204,7 @@ mixin $DoctorDetailsRoute on GoRouteData {
 }
 
 RouteBase get $appointmentRoute => GoRouteData.$route(
-  path: '/',
+  path: '/appointment',
   hasOverriddenOnExit: false,
   factory: $AppointmentRoute._fromState,
 );
@@ -214,7 +214,7 @@ mixin $AppointmentRoute on GoRouteData {
       const AppointmentRoute();
 
   @override
-  String get location => GoRouteData.$location('/');
+  String get location => GoRouteData.$location('/appointment');
 
   @override
   void go(BuildContext context) => context.go(location);

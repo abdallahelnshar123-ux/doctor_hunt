@@ -17,7 +17,7 @@ class FeatureDoctorsItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
         color: AppColors.bgPrimary,
       ),
-      width: 96,
+      width: 105,
       child: Column(
         spacing: 5,
         crossAxisAlignment: .center,
@@ -27,11 +27,11 @@ class FeatureDoctorsItem extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {},
-                child: Icon(Icons.favorite, color: AppColors.badge, size: 12),
+                child: Icon(Icons.favorite, color: AppColors.badge, size: 15),
               ),
               Spacer(),
-              SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 10),
-              Text('5.0', style: context.medium8.black.rubik),
+              SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 15),
+              Text('5.0', style: context.medium10.black.rubik),
             ],
           ),
           Expanded(
@@ -50,13 +50,16 @@ class FeatureDoctorsItem extends StatelessWidget {
             ),
           ),
 
-          Row(
-            spacing: 5,
-            mainAxisAlignment: .center,
-            children: [
-              SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 8),
-              Text('25.00/ hours', style: context.light8.textSecondary.rubik),
-            ],
+          FittedBox(
+            fit: .scaleDown,
+            child: Row(
+              spacing: 5,
+              mainAxisAlignment: .center,
+              children: [
+                SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 8),
+                Text('25.00/ hours', style: context.light8.textSecondary.rubik),
+              ],
+            ),
           ),
         ],
       ),
