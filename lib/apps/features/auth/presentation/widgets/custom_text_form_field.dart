@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/theme/app_colors.dart';
 
@@ -67,7 +66,7 @@ class CustomTextFormField extends StatelessWidget {
       style: style,
       cursorColor: AppColors.brandPrimary,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(17.h),
+        contentPadding: EdgeInsets.all(17),
         filled: filled,
         fillColor: fillColor,
         errorMaxLines: 2,
@@ -86,7 +85,7 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: labelStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        // prefixIconConstraints: BoxConstraints.tight(Size(0.1.w, 0.06.w)),
+        // prefixIconConstraints: BoxConstraints.tight(Size(0.1, 0.06)),
       ),
     );
   }

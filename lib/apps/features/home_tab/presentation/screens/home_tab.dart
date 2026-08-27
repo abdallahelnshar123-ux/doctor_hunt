@@ -1,14 +1,14 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/categories_widget.dart';
-import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/feature_doctors_widget.dart';
-import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/live_doctors_widget.dart';
-import 'package:doctor_hunt/apps/features/home_screen/presentation/tabs/home_tab/widget/popular_doctors_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../widget/categories_widget.dart';
+import '../widget/feature_doctors_widget.dart';
+import '../widget/live_doctors_widget.dart';
+import '../widget/popular_doctors_widget.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -24,12 +24,12 @@ class HomeTab extends StatelessWidget {
             children: [
               Container(
                 width: double.infinity,
-                height: 60.h,
+                height: 60,
                 decoration: BoxDecoration(
                   color: AppColors.brandPrimary,
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20.r),
-                    bottomRight: Radius.circular(20.r),
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
                 ),
               ),
@@ -61,7 +61,7 @@ class HomeTab extends StatelessWidget {
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
     return AppBar(
-      toolbarHeight: 90.h,
+      toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,
       title: Text.rich(
         TextSpan(
@@ -79,7 +79,7 @@ class HomeTab extends StatelessWidget {
       actions: [
         CircleAvatar(
           foregroundImage: AssetImage(AppAssets.images.userAvatar.path),
-          radius: 30.r,
+          radius: 30,
         ),
       ],
     );

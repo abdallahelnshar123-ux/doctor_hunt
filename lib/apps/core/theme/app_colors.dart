@@ -41,6 +41,9 @@ class AppColors {
   static const Color surfaceGreen = Color(0xffE8F0E8); //
   static const Color badge = Color(0xffFA002F); //
   static const Color grayMid = Color(0x32cbcbcb); //
+  static const Color brandPrimary8 = Color(0x140ebe7f); //
+  static const Color brandPrimary20 = Color(0x330ebe7f); //
+
 
   // ----------------------
   // Border /

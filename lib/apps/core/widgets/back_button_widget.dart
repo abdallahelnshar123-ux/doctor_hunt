@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BackButtonWidget extends StatelessWidget {
   final VoidCallback onPressed;
@@ -11,7 +10,7 @@ class BackButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.all(9.w),
+        padding: EdgeInsets.all(9),
         child: AspectRatio(
           aspectRatio: 1,
           child: ElevatedButton(
@@ -27,7 +26,7 @@ class BackButtonWidget extends StatelessWidget {
             ),
             child: Icon(
               Icons.arrow_back_ios,
-              size: 20.w,
+              size: 20,
               color: AppColors.textSecondary,
             ),
           ),

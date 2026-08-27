@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({super.key});
@@ -9,7 +8,7 @@ class CategoriesWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 90.h,
+      height: 90,
       child: ListView.separated(
         itemBuilder: (context, index) => Image.asset(categoriesList[index]),
         separatorBuilder: (context, index) => const SizedBox(width: 15),

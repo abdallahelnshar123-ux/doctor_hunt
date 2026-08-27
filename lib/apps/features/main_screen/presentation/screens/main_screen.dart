@@ -1,23 +1,23 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
-import '../tabs/browse_tab.dart';
-import '../tabs/chat_tab.dart';
-import '../tabs/favorite_tab.dart';
-import '../tabs/home_tab/home_tab.dart';
+import '../../../browse_tab/presentation/screens/browse_tab.dart';
+import '../../../chat_tab/presentation/screens/chat_tab.dart';
+import '../../../favourite_tab/presentation/tabs/favorite_tab.dart';
+import '../../../home_tab/presentation/screens/home_tab.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainScreenState extends State<MainScreen> {
   int selectedIndex = 0;
 
   final List<Widget> _tabsList = const [
@@ -39,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
         decoration: BoxDecoration(
           color: AppColors.bgPrimary,
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20.r),
-            topLeft: Radius.circular(20.r),
+            topRight: Radius.circular(20),
+            topLeft: Radius.circular(20),
           ),
         ),
-        padding: EdgeInsets.symmetric(vertical: 13.h),
+        padding: EdgeInsets.symmetric(vertical: 13),
         child: Theme(
           data: Theme.of(context).copyWith(
             splashColor: AppColors.transparent,
@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return BottomNavigationBarItem(
       label: '',
       icon: Container(
-        padding: EdgeInsets.all(14.r),
+        padding: EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: index == selectedIndex
               ? AppColors.brandPrimary

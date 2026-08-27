@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -25,12 +24,9 @@ class ContinueWithFacebookButton extends StatelessWidget {
           SvgPicture.asset(
             AppAssets.icons.facebookIcon.path,
             fit: BoxFit.fitWidth,
-            width: 28.r,
+            width: 28,
           ),
-          Text(
-            "Facebook",
-            style: context.light16.textSecondary.rubik,
-          ),
+          Text("Facebook", style: context.light16.textSecondary.rubik),
         ],
       ),
     );

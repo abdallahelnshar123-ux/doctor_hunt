@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'live_doctors_item.dart';
 
@@ -23,10 +22,9 @@ class LiveDoctorsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 165.w,
+          height: 165,
           width: double.infinity,
           child: ListView.separated(
-            // physics: NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => const LiveDoctorsItem(),
             separatorBuilder: (context, index) => const SizedBox(width: 15),
             itemCount: 10,
