@@ -1,6 +1,7 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -33,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return AppScaffold(
       body: Column(
         children: [
@@ -49,14 +51,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     FittedBox(
                       fit: .scaleDown,
                       child: Text(
-                        'Join us to start searching',
+                        t.auth.join_us,
                         style: context.medium24.black.rubik,
                         textAlign: TextAlign.center,
                       ),
                     ),
                     Text(
-                      'You can search course, apply course and find'
-                      ' scholarship for abroad studies',
+                      t.auth.auth_subtitle,
                       style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
@@ -101,6 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildHaveAnAccount() {
+    final t = Translations.of(context);
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -110,13 +112,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const LoginRoute().go(context);
       },
       child: Text(
-        'Have an account? Log in',
+        t.auth.have_account,
         style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
 
   Widget _buildAgreeWithTerms() {
+    final t = Translations.of(context);
     return Row(
       spacing: 10,
       children: [
@@ -125,7 +128,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: FittedBox(
             fit: .scaleDown,
             child: Text(
-              'I agree with the Terms of Service & Privacy Policy',
+              t.auth.agree_terms,
               style: context.regular12.textSecondary.rubik,
               overflow: .ellipsis,
             ),
@@ -136,13 +139,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildRegisterButton() {
+    final t = Translations.of(context);
     return CustomElevatedButton(
       buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
         if (formKey.currentState!.validate()) {}
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text("Sign up", style: context.medium18.white.rubik),
+      child: Text(t.auth.sign_up, style: context.medium18.white.rubik),
     );
   }
 }

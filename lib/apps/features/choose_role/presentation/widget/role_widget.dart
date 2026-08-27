@@ -17,20 +17,18 @@ class RoleWidget extends StatelessWidget {
   const RoleWidget.admin({
     super.key,
     this.role = AppRoles.admin,
-    this.roleDescription =
-        'Manage doctors, appointments, users, and the platform.',
+    required this.roleDescription,
     required this.roleIcon,
-    this.roleTitle = 'Admin',
+    required this.roleTitle,
     required this.selected,
   });
 
   const RoleWidget.patient({
     super.key,
     this.role = AppRoles.patient,
-    this.roleDescription =
-        'Find doctors, book appointments, and manage your medical records.',
+    required this.roleDescription,
     required this.roleIcon,
-    this.roleTitle = 'Patient',
+    required this.roleTitle,
     required this.selected,
   });
 

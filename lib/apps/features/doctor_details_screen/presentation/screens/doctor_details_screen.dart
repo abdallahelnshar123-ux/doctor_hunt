@@ -4,6 +4,7 @@ import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/wid
 import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/widget/doctor_statistics_widget.dart';
 import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/widget/services_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -13,10 +14,11 @@ class DoctorDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return AppScaffold(
       body: Column(
         children: [
-          MainAppBar(title: 'Doctor Details'),
+          MainAppBar(title: t.doctor_details.title),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),

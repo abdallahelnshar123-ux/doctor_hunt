@@ -2,38 +2,37 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class FeatureDoctorsItem extends StatelessWidget {
-  const FeatureDoctorsItem({super.key});
+class FavouriteDoctorCard extends StatelessWidget {
+  const FavouriteDoctorCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return AppContainerWithShadow(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(10),
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(6),
         color: AppColors.bgPrimary,
       ),
-      width: 96,
+      width: double.infinity,
+      height: double.infinity,
       child: Column(
         spacing: 5,
         crossAxisAlignment: .center,
         children: [
           Row(
-            spacing: 5,
+            mainAxisAlignment: .end,
             children: [
               GestureDetector(
                 onTap: () {},
-                child: Icon(Icons.favorite, color: AppColors.badge, size: 12),
+                child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
               ),
-              Spacer(),
-              SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 10),
-              Text('5.0', style: context.medium8.black.rubik),
             ],
           ),
+
           Expanded(
             child: CircleAvatar(
               maxRadius: double.infinity,
@@ -45,18 +44,17 @@ class FeatureDoctorsItem extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              'Doctor name',
+              Translations.of(context).doctor_details.doctor_name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
 
-          Row(
-            spacing: 5,
-            mainAxisAlignment: .center,
-            children: [
-              SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 8),
-              Text('25.00/ hours', style: context.light8.textSecondary.rubik),
-            ],
+          FittedBox(
+            fit: .scaleDown,
+            child: Text(
+              Translations.of(context).doctor_details.specialist_cardiology,
+              style: context.regular12.brandPrimary.rubik,
+            ),
           ),
         ],
       ),

@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class LiveDoctorsItem extends StatelessWidget {
@@ -35,7 +36,10 @@ class LiveDoctorsItem extends StatelessWidget {
               spacing: 4,
               children: [
                 CircleAvatar(radius: 3),
-                Text('Live', style: context.medium8.bgPrimary.rubik),
+                Text(
+                  Translations.of(context).home.live,
+                  style: context.medium8.bgPrimary.rubik,
+                ),
               ],
             ),
           ),

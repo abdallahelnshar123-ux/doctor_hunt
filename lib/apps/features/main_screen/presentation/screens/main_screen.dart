@@ -6,9 +6,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../../browse_tab/presentation/screens/browse_tab.dart';
 import '../../../chat_tab/presentation/screens/chat_tab.dart';
-import '../../../favourite_tab/presentation/tabs/favorite_tab.dart';
+import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
