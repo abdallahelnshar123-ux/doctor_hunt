@@ -5,32 +5,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../apps/core/theme/app_colors.dart';
+
 extension WeightAtoms on BuildContext {
   TextStyle get style => Theme.of(this).textTheme.titleMedium!;
 
-  TextStyle get extraLight => style.copyWith(
-        fontWeight: FontWeight.w200,
-      );
-  
-  TextStyle get light => style.copyWith(
-        fontWeight: FontWeight.w300,
-      );
+  TextStyle get extraLight => style.copyWith(fontWeight: FontWeight.w200);
 
-  TextStyle get regular => style.copyWith(
-        fontWeight: FontWeight.normal,
-      );
+  TextStyle get light => style.copyWith(fontWeight: FontWeight.w300);
 
-  TextStyle get medium => style.copyWith(
-        fontWeight: FontWeight.w500,
-      );
+  TextStyle get regular => style.copyWith(fontWeight: FontWeight.normal);
 
-  TextStyle get semiBold => style.copyWith(
-        fontWeight: FontWeight.w600,
-      );
+  TextStyle get medium => style.copyWith(fontWeight: FontWeight.w500);
 
-  TextStyle get bold => style.copyWith(
-        fontWeight: FontWeight.bold,
-      );
+  TextStyle get semiBold => style.copyWith(fontWeight: FontWeight.w600);
+
+  TextStyle get bold => style.copyWith(fontWeight: FontWeight.bold);
 }
 
 extension ColorAtoms on TextStyle {

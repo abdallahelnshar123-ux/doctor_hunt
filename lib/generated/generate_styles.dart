@@ -25,40 +25,14 @@ void main() {
     'borderDefault',
   ];
 
-  final List<String> fontWeights = [
-    'extraLight',
-    'light',
-    'regular',
-    'medium',
-    'semiBold',
-    'bold',
-  ];
+  final List<String> fontWeights = ['extraLight', 'light', 'regular', 'medium', 'semiBold', 'bold'];
 
-  final List<int> fontSizes = [
-    8,
-    10,
-    11,
-    12,
-    14,
-    16,
-    18,
-    20,
-    22,
-    24,
-    26,
-    28,
-    30,
-    32,
-    36,
-    38,
-    40,
-  ];
+  final List<int> fontSizes = [8, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 36, 38, 40];
 
   final List<String> fontFamilies = ['plusJakartaSans', 'rubik'];
 
   const String outputPath = 'lib/generated/';
-  const String importColorsClass =
-      "import '../apps/core/theme/app_colors.dart';";
+  const String importColorsClass = "import '../apps/core/theme/app_colors.dart';";
 
   const String nameColorsClass = 'AppColors';
 
@@ -124,9 +98,7 @@ void generateColors(IOSink sink, List<String> colors, String nameColorsClass) {
   sink.writeln('extension ColorAtoms on TextStyle {');
 
   for (final String color in colors) {
-    sink.writeln(
-      '  TextStyle get $color => copyWith(color: $nameColorsClass.$color);',
-    );
+    sink.writeln('  TextStyle get $color => copyWith(color: $nameColorsClass.$color);');
   }
 
   sink.writeln('}\n');
@@ -142,11 +114,7 @@ void generateFontSizes(IOSink sink, List<int> fontSizes) {
   sink.writeln('}\n');
 }
 
-void generateWeightAndPxMixes(
-  IOSink sink,
-  List<int> fontSizes,
-  List<String> fontWeights,
-) {
+void generateWeightAndPxMixes(IOSink sink, List<int> fontSizes, List<String> fontWeights) {
   sink.writeln('extension WeightAndPxMixes on BuildContext {');
 
   for (final int size in fontSizes) {
@@ -162,9 +130,7 @@ void generateFontFamilies(IOSink sink, List<String> fontFamilies) {
   sink.writeln('extension FontFamilyAtoms on TextStyle {');
 
   for (final String fontFamily in fontFamilies) {
-    sink.writeln(
-      '  TextStyle get $fontFamily => GoogleFonts.$fontFamily(textStyle: this);',
-    );
+    sink.writeln('  TextStyle get $fontFamily => GoogleFonts.$fontFamily(textStyle: this);');
   }
 
   sink.writeln('}');

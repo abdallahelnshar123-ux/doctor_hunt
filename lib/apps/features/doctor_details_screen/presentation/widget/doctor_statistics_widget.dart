@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class DoctorStatisticsWidget extends StatelessWidget {
@@ -7,6 +8,7 @@ class DoctorStatisticsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 20),
       padding: EdgeInsets.all(10),
@@ -26,9 +28,21 @@ class DoctorStatisticsWidget extends StatelessWidget {
         spacing: 10,
         mainAxisAlignment: .center,
         children: [
-          _statisticsWidget(context: context, title: 'Running', number: '100'),
-          _statisticsWidget(context: context, title: 'Ongoing', number: '500'),
-          _statisticsWidget(context: context, title: 'Patient', number: '700'),
+          _statisticsWidget(
+            context: context,
+            title: t.doctor_details.running,
+            number: '100',
+          ),
+          _statisticsWidget(
+            context: context,
+            title: t.doctor_details.ongoing,
+            number: '500',
+          ),
+          _statisticsWidget(
+            context: context,
+            title: t.doctor_details.patient,
+            number: '700',
+          ),
         ],
       ),
     );

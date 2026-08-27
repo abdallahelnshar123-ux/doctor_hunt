@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/validators.dart';
@@ -23,7 +24,7 @@ class _EmailTextFieldWidgetState extends State<EmailTextFieldWidget> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) => Validators.email(value),
       controller: widget.controller,
-      hintText: "email",
+      hintText: Translations.of(context).auth.email,
       hintStyle: context.light16.textSecondary.rubik,
       filled: true,
       fillColor: widget.fillColor,

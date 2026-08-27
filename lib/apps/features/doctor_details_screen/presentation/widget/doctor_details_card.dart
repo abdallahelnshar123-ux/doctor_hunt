@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -72,11 +73,15 @@ class DoctorDetailsCard extends StatelessWidget {
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {},
-      child: Text('Book now', style: context.medium11.bgPrimary.rubik),
+      child: Text(
+        Translations.of(context).doctor_details.book_now,
+        style: context.medium11.bgPrimary.rubik,
+      ),
     );
   }
 
   Widget _ratingWidget({required BuildContext context}) {
+    final t = Translations.of(context);
     return Row(
       mainAxisAlignment: .spaceBetween,
       children: [
@@ -99,7 +104,10 @@ class DoctorDetailsCard extends StatelessWidget {
           mainAxisAlignment: .end,
           children: [
             SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
-            Text('25.00/ hours', style: context.light10.textSecondary.rubik),
+            Text(
+              t.doctor_details.price_per_hour(Price: '25.00'),
+              style: context.light10.textSecondary.rubik,
+            ),
           ],
         ),
       ],
@@ -120,7 +128,7 @@ class DoctorDetailsCard extends StatelessWidget {
       FittedBox(
         fit: .scaleDown,
         child: Text(
-          'Specialist Cardiologist',
+          Translations.of(context).doctor_details.specialist_cardiology,
           style: context.light11.textSecondary.rubik,
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/find_doctors_screen/presentation/widget/doctor_card.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class FindDoctorsScreen extends StatelessWidget {
@@ -12,7 +13,9 @@ class FindDoctorsScreen extends StatelessWidget {
     return AppScaffold(
       body: Column(
         children: [
-          MainAppBar(title: 'Find Doctors'),
+          MainAppBar(
+            title: Translations.of(context).doctor_details.find_doctors,
+          ),
           Expanded(
             child: Column(
               children: [

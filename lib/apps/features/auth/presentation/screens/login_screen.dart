@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/auth_password_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/continue_with_facebook_button.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
@@ -31,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return AppScaffold(
       resizeToAvoidBottomInset: true,
       body: Column(
@@ -46,13 +48,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     SizedBox(height: 127),
                     Text(
-                      'Welcome back',
+                      t.auth.welcome_back,
                       style: context.medium24.black.rubik,
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      'You can search course, apply course and find scholarship '
-                      'for abroad studies',
+                      t.auth.auth_subtitle,
                       style: context.regular14.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
@@ -92,6 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildForgetPassword() {
+    final t = Translations.of(context);
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -100,13 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Text(
-        "Forgot password",
+        t.auth.forgot_password,
         style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
 
   Widget _buildDoNotHaveAccount() {
+    final t = Translations.of(context);
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -116,20 +119,21 @@ class _LoginScreenState extends State<LoginScreen> {
         const RegisterRoute().go(context);
       },
       child: Text(
-        "Don’t have an account? Join us",
+        t.auth.no_account,
         style: context.regular14.brandPrimary.rubik,
       ),
     );
   }
 
   Widget _builtLoginButton() {
+    final t = Translations.of(context);
     return CustomElevatedButton(
       buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
         const ChooseRoleRoute().go(context);
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text("Login", style: context.medium18.white.rubik),
+      child: Text(t.auth.login, style: context.medium18.white.rubik),
     );
   }
 }

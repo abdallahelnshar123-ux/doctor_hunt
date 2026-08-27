@@ -5,6 +5,7 @@ import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_eleva
 import 'package:doctor_hunt/apps/features/choose_role/presentation/widget/role_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -20,6 +21,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return AppScaffold(
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 50, 20, 32),
@@ -34,19 +36,18 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                   children: [
                     SvgPicture.asset(AppAssets.icons.appLogo.path, width: 70),
                     Text(
-                      'Doctor Hunt',
+                      t.choose_role.title,
                       style: context.bold24.textPrimary.rubik,
                       textAlign: .center,
                     ),
                     SizedBox(height: 25),
                     Text(
-                      'Choose your role',
+                      t.choose_role.role_selection,
                       style: context.extraLight28.textDark.plusJakartaSans,
                       textAlign: .center,
                     ),
                     Text(
-                      'The selected role determines the experience and '
-                      'available features.',
+                      t.choose_role.subtitle,
                       style: context.regular14.textCaption.plusJakartaSans,
                       textAlign: .center,
                     ),
@@ -64,9 +65,13 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                                 selectedRole.value = AppRoles.admin;
                               },
 
-                              child: RoleWidget.admin(
+                              child: RoleWidget(
+                                roleTitle: t.choose_role.admin.title,
+                                roleDescription:
+                                    t.choose_role.admin.description,
                                 roleIcon: AppAssets.icons.adminIcon.path,
                                 selected: selectedRole.value == AppRoles.admin,
+                                role: AppRoles.admin,
                               ),
                             ),
                             GestureDetector(
@@ -76,10 +81,14 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                                 }
                                 selectedRole.value = AppRoles.patient;
                               },
-                              child: RoleWidget.patient(
+                              child: RoleWidget(
+                                roleTitle: t.choose_role.patient.title,
+                                roleDescription:
+                                    t.choose_role.patient.description,
                                 roleIcon: AppAssets.icons.patientIcon.path,
                                 selected:
                                     selectedRole.value == AppRoles.patient,
+                                role: AppRoles.patient,
                               ),
                             ),
                           ],
@@ -96,7 +105,10 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
               onPressed: () {
                 const MainRoute().go(context);
               },
-              child: Text('Continue', style: context.medium18.bgPrimary.rubik),
+              child: Text(
+                t.choose_role.kContinue,
+                style: context.medium18.bgPrimary.rubik,
+              ),
             ),
           ],
         ),

@@ -2,8 +2,8 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class FavouriteDoctorCard extends StatelessWidget {
   const FavouriteDoctorCard({super.key});
@@ -11,7 +11,6 @@ class FavouriteDoctorCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppContainerWithShadow(
-
       padding: EdgeInsets.all(10),
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
@@ -24,17 +23,15 @@ class FavouriteDoctorCard extends StatelessWidget {
         spacing: 5,
         crossAxisAlignment: .center,
         children: [
-
-
-           Row(
-             mainAxisAlignment: .end,
-             children: [
-               GestureDetector(
-                  onTap: () {},
-                  child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
-                ),
-             ],
-           ),
+          Row(
+            mainAxisAlignment: .end,
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
+              ),
+            ],
+          ),
 
           Expanded(
             child: CircleAvatar(
@@ -47,13 +44,18 @@ class FavouriteDoctorCard extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              'Doctor name',
+              Translations.of(context).doctor_details.doctor_name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
 
-          FittedBox(            fit: .scaleDown,
-              child: Text('Specalist Cardiology', style: context.regular12.brandPrimary.rubik)),
+          FittedBox(
+            fit: .scaleDown,
+            child: Text(
+              Translations.of(context).doctor_details.specialist_cardiology,
+              style: context.regular12.brandPrimary.rubik,
+            ),
+          ),
         ],
       ),
     );

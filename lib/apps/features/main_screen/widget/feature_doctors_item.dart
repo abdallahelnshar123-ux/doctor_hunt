@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -45,7 +46,7 @@ class FeatureDoctorsItem extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              'Doctor name',
+              Translations.of(context).doctor_details.doctor_name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
@@ -57,7 +58,12 @@ class FeatureDoctorsItem extends StatelessWidget {
               mainAxisAlignment: .center,
               children: [
                 SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 8),
-                Text('25.00/ hours', style: context.light8.textSecondary.rubik),
+                Text(
+                  Translations.of(
+                    context,
+                  ).doctor_details.price_per_hour(Price: '25.00'),
+                  style: context.light8.textSecondary.rubik,
+                ),
               ],
             ),
           ),

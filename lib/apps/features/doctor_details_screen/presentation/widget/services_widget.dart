@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class ServicesWidget extends StatelessWidget {
@@ -7,10 +8,15 @@ class ServicesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    final servicesList = t.doctor_details.services_list;
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text('Services', style: context.medium18.textTertiary.rubik),
+        Text(
+          t.doctor_details.services,
+          style: context.medium18.textTertiary.rubik,
+        ),
         ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
@@ -38,8 +44,4 @@ class ServicesWidget extends StatelessWidget {
   }
 }
 
-const List<String> servicesList = [
-  'Patient care should be the number one priority.',
-  'If you run your practice you know how frustrating.',
-  'That’s why some of appointment reminder system.',
-];
+// Removed static servicesList as it's now in translations

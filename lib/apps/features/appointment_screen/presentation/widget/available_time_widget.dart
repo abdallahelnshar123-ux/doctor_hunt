@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/features/appointment_screen/presentation/widget/time_list_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -13,14 +14,41 @@ class AvailableTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
+    final availableTimeList = [
+      '10:00\n${t.common.am}',
+      '12:00\n${t.common.am}',
+      '02:00\n${t.common.pm}',
+      '03:00\n${t.common.pm}',
+      '04:00\n${t.common.pm}',
+      '06:00\n${t.common.pm}',
+      '07:00\n${t.common.pm}',
+    ];
+
+    final reminderMinuteList = [
+      '30\n${t.common.min}',
+      '40\n${t.common.min}',
+      '25\n${t.common.min}',
+      '10\n${t.common.min}',
+      '35\n${t.common.min}',
+      '45\n${t.common.min}',
+      '50\n${t.common.min}',
+    ];
+
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
-          child: _titleWidget(text: 'Available Time', context: context),
+          child: _titleWidget(
+            text: t.appointment.available_time,
+            context: context,
+          ),
         ),
         SliverToBoxAdapter(child: TimeListWidget(list: availableTimeList)),
         SliverToBoxAdapter(
-          child: _titleWidget(text: 'Reminder Me Before', context: context),
+          child: _titleWidget(
+            text: t.appointment.reminder_me,
+            context: context,
+          ),
         ),
         SliverToBoxAdapter(child: TimeListWidget(list: reminderMinuteList)),
         SliverPadding(
@@ -58,23 +86,25 @@ class AvailableTimeWidget extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Thank You !',
+                          t.appointment.thank_you,
                           style: context.medium38.black.rubik,
                           textAlign: .center,
                         ),
                         FittedBox(
                           fit: .scaleDown,
                           child: Text(
-                            'Your Appointment Successful',
+                            t.appointment.success,
                             style: context.regular20.textSecondary.rubik,
                             textAlign: .center,
                           ),
                         ),
                         SizedBox(height: 30),
                         Text(
-                          'You booked an appointment with '
-                          'Dr.Pediatrician Purpieson on February'
-                          ' 21, at 02:00 PM',
+                          t.appointment.booking_details(
+                            Doctor: 'Pediatrician Purpieson',
+                            Date: 'February 21',
+                            Time: '02:00 ${t.common.pm}',
+                          ),
                           style: context.regular14.textSecondary.rubik,
                           textAlign: .center,
                         ),
@@ -87,14 +117,14 @@ class AvailableTimeWidget extends StatelessWidget {
                             context.pop();
                           },
                           child: Text(
-                            'Done',
+                            t.appointment.done,
                             style: context.medium18.white.rubik,
                           ),
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            'Edit your appointment',
+                            t.appointment.edit,
                             style: context.regular14.textSecondary.rubik,
                           ),
                         ),
@@ -103,7 +133,10 @@ class AvailableTimeWidget extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Confirm', style: context.medium18.white.rubik),
+              child: Text(
+                t.appointment.confirm,
+                style: context.medium18.white.rubik,
+              ),
             ),
           ),
         ),
@@ -113,28 +146,8 @@ class AvailableTimeWidget extends StatelessWidget {
 
   Widget _titleWidget({required String text, required BuildContext context}) {
     return Padding(
-      padding: EdgeInsetsGeometry.all(20),
+      padding: EdgeInsets.all(20),
       child: Text(text, style: context.medium16.textTertiary.rubik),
     );
   }
 }
-
-const List<String> availableTimeList = [
-  '10:00\nAm',
-  '12:00\nAm',
-  '02:00\nPm',
-  '03:00\nPm',
-  '04:00\nPm',
-  '06:00\nPm',
-  '07:00\nPm',
-];
-
-const List<String> reminderMinuteList = [
-  '30\nMin.',
-  '40\nMin.',
-  '25\nMin.',
-  '10\nMin.',
-  '35\nMin.',
-  '45\nMin.',
-  '50\nMin.',
-];

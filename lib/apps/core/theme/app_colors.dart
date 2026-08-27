@@ -44,7 +44,6 @@ class AppColors {
   static const Color brandPrimary8 = Color(0x140ebe7f); //
   static const Color brandPrimary20 = Color(0x330ebe7f); //
 
-
   // ----------------------
   // Border /
   // ----------------------

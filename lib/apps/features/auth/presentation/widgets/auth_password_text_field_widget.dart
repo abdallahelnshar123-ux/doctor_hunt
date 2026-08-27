@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/validators.dart';
@@ -36,7 +37,7 @@ class _AuthPasswordTextFieldWidget extends State<AuthPasswordTextFieldWidget> {
       keyboardType: TextInputType.visiblePassword,
       validator: (value) => Validators.password(value),
       controller: widget.controller,
-      hintText: "Password",
+      hintText: Translations.of(context).auth.password,
       hintStyle: context.light16.textSecondary.rubik,
       filled: true,
       obscureText: isObscure,

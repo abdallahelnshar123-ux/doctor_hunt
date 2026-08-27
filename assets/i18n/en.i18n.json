@@ -1,0 +1,100 @@
+{
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "authSubtitle": "You can search course, apply course and find scholarship for abroad studies",
+    "forgotPassword": "Forgot password",
+    "noAccount": "Don’t have an account? Join us",
+    "login": "Login",
+    "joinUs": "Join us to start searching",
+    "haveAccount": "Have an account? Log in",
+    "agreeTerms": "I agree with the Terms of Service & Privacy Policy",
+    "signUp": "Sign up",
+    "email": "email",
+    "username": "username",
+    "password": "Password",
+    "google": "Google",
+    "facebook": "Facebook"
+  },
+  "onboarding": {
+    "next": "Next",
+    "skip": "Skip",
+    "getStarted": "Get Started",
+    "page1": {
+      "title": "Find Trusted Doctors",
+      "subtitle": "Find trusted doctors near you. Get the care you need from experienced professionals."
+    },
+    "page2": {
+      "title": "Choose Best Doctors",
+      "subtitle": "Explore doctors based on your needs. Choose the one that’s right for you."
+    },
+    "page3": {
+      "title": "Easy Appointments",
+      "subtitle": "Book your appointment in just a few taps. Choose a time that works best for you."
+    }
+  },
+  "chooseRole": {
+    "title": "Doctor Hunt",
+    "roleSelection": "Choose your role",
+    "subtitle": "The selected role determines the experience and available features.",
+    "admin": {
+      "title": "Admin",
+      "description": "Manage doctors, appointments, users, and the platform."
+    },
+    "patient": {
+      "title": "Patient",
+      "description": "Find doctors, book appointments, and manage your medical records."
+    },
+    "continue": "Continue"
+  },
+  "home": {
+    "welcome": "Hi ${name}",
+    "findDoctor": "Find Your Doctor",
+    "liveDoctors": "Live Doctors",
+    "popularDoctors": "Popular Doctors",
+    "favouriteDoctors": "Favourite Doctors",
+    "featureDoctor": "Feature Doctor",
+    "seeAll": "See all",
+    "search": "search",
+    "live": "Live"
+  },
+  "doctorDetails": {
+    "title": "Doctor Details",
+    "findDoctors": "Find Doctors",
+    "bookNow": "Book now",
+    "services": "Services",
+    "servicesList": [
+      "Patient care should be the number one priority.",
+      "If you run your practice you know how frustrating.",
+      "That’s why some of appointment reminder system."
+    ],
+    "running": "Running",
+    "ongoing": "Ongoing",
+    "patient": "Patient",
+    "experience": "${years} Years experience",
+    "patientStories": "${count} Patient Stories",
+    "nextAvailable": "Next Available",
+    "tomorrow": "tomorrow",
+    "pricePerHour": "${price}/ hours",
+    "doctorName": "Doctor name",
+    "specialistCardiology": "Specialist Cardiologist",
+    "toothsDentist": "Tooths Dentist"
+  },
+  "appointment": {
+    "title": "Appointment",
+    "pickDate": "Pick a date to see available time",
+    "availableTime": "Available Time",
+    "reminderMe": "Reminder Me Before",
+    "thankYou": "Thank You !",
+    "success": "Your Appointment Successful",
+    "bookingDetails": "You booked an appointment with ${doctor} on ${date}, at ${time}",
+    "done": "Done",
+    "edit": "Edit your appointment",
+    "confirm": "Confirm"
+  },
+  "common": {
+    "am": "AM",
+    "pm": "PM",
+    "min": "Min.",
+    "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+  }
+}

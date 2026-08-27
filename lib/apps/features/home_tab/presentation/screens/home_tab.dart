@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../main_screen/widget/feature_doctors_widget.dart';
@@ -60,16 +61,17 @@ class HomeTab extends StatelessWidget {
   }
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
+    final t = Translations.of(context);
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,
       title: Text.rich(
         TextSpan(
-          text: 'Hi Handwerker!\n',
+          text: t.home.welcome(Name: 'Abdallah'),
           style: context.light20.bgPrimary.rubik,
           children: [
             TextSpan(
-              text: 'Find Your Doctor',
+              text: '\n${t.home.find_doctor}',
               style: context.bold24.bgPrimary.rubik,
             ),
           ],

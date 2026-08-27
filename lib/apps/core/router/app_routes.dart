@@ -81,6 +81,7 @@ class DoctorDetailsRoute extends GoRouteData with $DoctorDetailsRoute {
     return const DoctorDetailsScreen();
   }
 }
+
 @TypedGoRoute<AppointmentRoute>(path: '/appointment')
 class AppointmentRoute extends GoRouteData with $AppointmentRoute {
   const AppointmentRoute();
@@ -90,6 +91,5 @@ class AppointmentRoute extends GoRouteData with $AppointmentRoute {
     return const AppointmentScreen();
   }
 }
-
 
 final appRouter = GoRouter(routes: $appRoutes);

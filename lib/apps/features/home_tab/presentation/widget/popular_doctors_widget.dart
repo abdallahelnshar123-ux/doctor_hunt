@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/home_tab/presentation/widget/popular_doctors_item.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class PopularDoctorsWidget extends StatelessWidget {
@@ -9,8 +10,8 @@ class PopularDoctorsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = Translations.of(context);
     return Column(
-      spacing: 20,
       mainAxisSize: .min,
       mainAxisAlignment: .start,
       crossAxisAlignment: .start,
@@ -22,7 +23,7 @@ class PopularDoctorsWidget extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                'Popular Doctors',
+                t.home.popular_doctors,
                 style: context.medium18.textTertiary.rubik,
               ),
               Spacer(),
@@ -33,7 +34,10 @@ class PopularDoctorsWidget extends StatelessWidget {
                 child: Row(
                   spacing: 5,
                   children: [
-                    Text('See all', style: context.light12.textSecondary.rubik),
+                    Text(
+                      t.home.see_all,
+                      style: context.light12.textSecondary.rubik,
+                    ),
                     Icon(
                       Icons.arrow_forward_ios_rounded,
                       size: 15,
@@ -46,14 +50,14 @@ class PopularDoctorsWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 290,
+          height: 330,
           width: double.infinity,
           child: ListView.separated(
             itemBuilder: (context, index) => const PopularDoctorsItem(),
             separatorBuilder: (context, index) => const SizedBox(width: 15),
             itemCount: 10,
             scrollDirection: .horizontal,
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(20),
           ),
         ),
       ],

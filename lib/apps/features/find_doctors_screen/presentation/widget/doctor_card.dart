@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/router/app_routes.dart';
@@ -78,56 +79,77 @@ class DoctorCard extends StatelessWidget {
       onPressed: () {
         const DoctorDetailsRoute().push(context);
       },
-      child: Text('Book now', style: context.medium11.bgPrimary.rubik),
-    ),
-  );
-
-  Widget _buildNextAvailableText({required BuildContext context}) => Expanded(
-    flex: 3,
-    child: Text.rich(
-      TextSpan(
-        text: 'Next Available\n',
-        style: context.medium12.brandPrimary.rubik,
-        children: [
-          TextSpan(text: '10:00', style: context.medium12.textSecondary.rubik),
-          TextSpan(
-            text: ' AM tomorrow',
-            style: context.light12.textSecondary.rubik,
-          ),
-        ],
+      child: Text(
+        Translations.of(context).doctor_details.book_now,
+        style: context.medium11.bgPrimary.rubik,
       ),
     ),
   );
 
-  Widget _doctorDetailsWidget({required BuildContext context}) => Expanded(
-    flex: 5,
-    child: Column(
-      mainAxisAlignment: .spaceBetween,
-      crossAxisAlignment: .start,
-      children: [
-        FittedBox(
-          fit: .scaleDown,
-          child: Text(
-            'Dr. Shruti Kedia',
-            style: context.medium16.textTertiary.rubik,
-          ),
-        ),
-        Text('Tooths Dentist', style: context.regular11.brandPrimary.rubik),
-        Text('7 Years experience ', style: context.light11.textSecondary.rubik),
-        SizedBox(height: 5),
-        Wrap(
-          crossAxisAlignment: .start,
-          alignment: .start,
-          direction: .horizontal,
-          spacing: 20,
+  Widget _buildNextAvailableText({required BuildContext context}) {
+    final t = Translations.of(context);
+    return Expanded(
+      flex: 3,
+      child: Text.rich(
+        TextSpan(
+          text: '${t.doctor_details.next_available}\n',
+          style: context.medium12.brandPrimary.rubik,
           children: [
-            _patientStoriesWidget(text: '87%', context: context),
-            _patientStoriesWidget(text: '69 Patient Stories', context: context),
+            TextSpan(
+              text: '10:00',
+              style: context.medium12.textSecondary.rubik,
+            ),
+            TextSpan(
+              text: ' ${t.common.am} ${t.doctor_details.tomorrow}',
+              style: context.light12.textSecondary.rubik,
+            ),
           ],
         ),
-      ],
-    ),
-  );
+      ),
+    );
+  }
+
+  Widget _doctorDetailsWidget({required BuildContext context}) {
+    final t = Translations.of(context);
+    return Expanded(
+      flex: 5,
+      child: Column(
+        mainAxisAlignment: .spaceBetween,
+        crossAxisAlignment: .start,
+        children: [
+          FittedBox(
+            fit: .scaleDown,
+            child: Text(
+              'Dr. Shruti Kedia',
+              style: context.medium16.textTertiary.rubik,
+            ),
+          ),
+          Text(
+            Translations.of(context).doctor_details.tooths_dentist,
+            style: context.regular11.brandPrimary.rubik,
+          ),
+          Text(
+            t.doctor_details.experience(Years: '7'),
+            style: context.light11.textSecondary.rubik,
+          ),
+          SizedBox(height: 5),
+          Wrap(
+            crossAxisAlignment: .start,
+            alignment: .start,
+            direction: .horizontal,
+            spacing: 20,
+            children: [
+              _patientStoriesWidget(text: '87%', context: context),
+              _patientStoriesWidget(
+                text: t.doctor_details.patient_stories(Count: '69'),
+                context: context,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _doctorImageWidget({required BuildContext context}) => Expanded(
     flex: 3,

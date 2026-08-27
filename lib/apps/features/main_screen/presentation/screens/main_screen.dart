@@ -9,7 +9,6 @@ import '../../../chat_tab/presentation/screens/chat_tab.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
 
-
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
 

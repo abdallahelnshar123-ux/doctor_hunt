@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/validators.dart';
@@ -24,7 +25,7 @@ class _UsernameTextFieldWidgetState extends State<UsernameTextFieldWidget> {
       keyboardType: TextInputType.emailAddress,
       validator: (value) => Validators.required(value),
       controller: widget.controller,
-      hintText: "username",
+      hintText: Translations.of(context).auth.username,
       hintStyle: context.light16.textSecondary.rubik,
       filled: true,
       fillColor: widget.fillColor,
