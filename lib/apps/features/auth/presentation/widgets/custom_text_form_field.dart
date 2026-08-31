@@ -85,7 +85,6 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: labelStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        // prefixIconConstraints: BoxConstraints.tight(Size(0.1, 0.06)),
       ),
     );
   }

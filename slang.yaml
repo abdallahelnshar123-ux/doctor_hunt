@@ -1,4 +1,4 @@
-base_locale: en
+base_locale: fr
 fallback_strategy: base_locale
 input_directory: assets/i18n
 input_file_pattern: .i18n.json
@@ -13,12 +13,13 @@ enum_name: AppLocale
 class_name: Translations
 translation_class_visibility: private
 key_case: snake
+key_map_case: camel
 param_case: pascal
 sanitization:
   enabled: true
   prefix: k
   case: camel
-string_interpolation: single_braces
+string_interpolation: double_braces
 flat_map: false
 translation_overrides: false
 timestamp: true
@@ -54,4 +55,4 @@ autodoc:
   enabled: true
   locales:
     - en
-generate_enum: true
+generate_enum: false

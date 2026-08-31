@@ -9,6 +9,7 @@ extension UserMapper on MyUserDto {
       name: name,
       provider: provider,
       image: image,
+      role: role,
     );
   }
 }

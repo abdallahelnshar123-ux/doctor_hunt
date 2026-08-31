@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/controller/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -65,7 +65,7 @@ class HomeTab extends StatelessWidget {
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
     final t = Translations.of(context);
-    var currentUser = context.read<UserBloc>().currentUser;
+    var currentUser = context.read<AuthBloc>().currentUser;
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,

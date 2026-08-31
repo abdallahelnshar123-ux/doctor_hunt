@@ -13,6 +13,7 @@ class FirestoreConstants {
   static const String provider = 'provider';
   static const String passwordVerifier = 'password_verifier';
   static const String image = 'image';
+  static const String role = 'role';
 
   // Platform Account Fields
   static const String platformId = 'platform_id';

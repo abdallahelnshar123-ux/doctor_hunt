@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data/models/user/my_user.dart';
-import 'user_event.dart';
-import 'user_state.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 
 @lazySingleton
-class UserBloc extends Bloc<UserEvent, UserState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
 
-  UserBloc(this._repository) : super(UserInitial()) {
+  AuthBloc(this._repository) : super(UserInitial()) {
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);
@@ -22,7 +22,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onLoginRequested(
     LoginRequested event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     emit(LoginWithEmailPasswordLoadingState());
     final result = await _repository.loginWithEmailAndPassword(
@@ -40,7 +40,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onRegisterRequested(
     RegisterRequested event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     emit(RegisterWithEmailPasswordLoadingState());
     final result = await _repository.registerWithEmailAndPassword(
@@ -62,7 +62,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onContinueWithGoogleRequested(
     ContinueWithGoogleRequested event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     emit(ContinueWithGoogleLoadingState());
     final result = await _repository.continueWithGoogle();
@@ -80,7 +80,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onLogoutRequested(
     LogoutRequested event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     emit(LogoutLoadingState());
 
@@ -93,7 +93,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   Future<void> _onResetPasswordRequested(
     ResetPasswordRequested event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     emit(ResetUSerPasswordLoadingState());
 

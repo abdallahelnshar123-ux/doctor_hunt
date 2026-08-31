@@ -95,6 +95,20 @@
     "am": "AM",
     "pm": "PM",
     "min": "Min.",
-    "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+    "weekdays": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ]
+  },
+  "dialog": {
+    "ok": "Ok",
+    "success": "Success",
+    "error": "Error",
+    "allSetUp": "All set up"
   }
 }

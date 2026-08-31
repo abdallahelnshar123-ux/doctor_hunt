@@ -1,13 +1,13 @@
-abstract class UserEvent {}
+abstract class AuthEvent {}
 
-class LoginRequested extends UserEvent {
+class LoginRequested extends AuthEvent {
   final String email;
   final String password;
 
   LoginRequested({required this.email, required this.password});
 }
 
-class RegisterRequested extends UserEvent {
+class RegisterRequested extends AuthEvent {
   final String name;
   final String email;
   final String password;
@@ -19,11 +19,11 @@ class RegisterRequested extends UserEvent {
   });
 }
 
-class ContinueWithGoogleRequested extends UserEvent {}
+class ContinueWithGoogleRequested extends AuthEvent {}
 
-class LogoutRequested extends UserEvent {}
+class LogoutRequested extends AuthEvent {}
 
-class ResetPasswordRequested extends UserEvent {
+class ResetPasswordRequested extends AuthEvent {
   final String email;
 
   ResetPasswordRequested({required this.email});

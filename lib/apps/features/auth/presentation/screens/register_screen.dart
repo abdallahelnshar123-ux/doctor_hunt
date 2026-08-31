@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/controller/user_event.dart';
+import 'package:doctor_hunt/apps/features/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -9,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/utils/dialog_utils.dart';
 import '../../../../core/widgets/app_scaffold.dart';
-import '../controller/user_bloc.dart';
-import '../controller/user_state.dart';
+import '../controller/auth_bloc.dart';
+import '../controller/auth_state.dart';
 import '../widgets/auth_password_text_field_widget.dart';
 import '../widgets/continue_with_facebook_button.dart';
 import '../widgets/continue_with_google_button.dart';
@@ -42,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     final t = Translations.of(context);
 
-    return BlocListener<UserBloc, UserState>(
+    return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is UserAuthenticatedState) {
           DialogUtils.hideLoading(context: context);
@@ -53,7 +53,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
           Future.delayed(Duration(seconds: 2), () {
             if (context.mounted) {
-              const MainRoute().go(context);
+              state.currentUser!.role == null
+                  ? const ChooseRoleRoute().go(context)
+                  : const MainRoute().go(context);
             }
           });
         }
@@ -114,7 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Expanded(
                             child: ContinueWithGoogleButton(
                               onPressed: () {
-                                context.read<UserBloc>().add(
+                                context.read<AuthBloc>().add(
                                   ContinueWithGoogleRequested(),
                                 );
                               },
@@ -154,71 +156,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
-
-    // return AppScaffold(
-    //   body: Column(
-    //     children: [
-    //       Expanded(
-    //         child: SingleChildScrollView(
-    //           padding: EdgeInsets.symmetric(horizontal: 20),
-    //           child: Form(
-    //             key: formKey,
-    //             child: Column(
-    //               spacing: 8,
-    //               crossAxisAlignment: CrossAxisAlignment.center,
-    //               children: [
-    //                 SizedBox(height: 150),
-    //                 FittedBox(
-    //                   fit: .scaleDown,
-    //                   child: Text(
-    //                     t.auth.join_us,
-    //                     style: context.medium24.black.rubik,
-    //                     textAlign: TextAlign.center,
-    //                   ),
-    //                 ),
-    //                 Text(
-    //                   t.auth.auth_subtitle,
-    //                   style: context.regular14.textSecondary.rubik,
-    //                   textAlign: TextAlign.center,
-    //                 ),
-    //                 SizedBox(height: 60),
-    //                 Row(
-    //                   spacing: 15,
-    //                   children: [
-    //                     Expanded(
-    //                       child: ContinueWithGoogleButton(onPressed: () {}),
-    //                     ),
-    //                     Expanded(
-    //                       child: ContinueWithFacebookButton(onPressed: () {}),
-    //                     ),
-    //                   ],
-    //                 ),
-    //                 SizedBox(height: 25),
-    //                 UsernameTextFieldWidget(
-    //                   controller: nameController,
-    //                   fillColor: AppColors.bgPrimary,
-    //                 ),
-    //                 EmailTextFieldWidget(
-    //                   controller: emailController,
-    //                   fillColor: AppColors.bgPrimary,
-    //                 ),
-    //
-    //                 AuthPasswordTextFieldWidget(controller: passwordController),
-    //                 _buildAgreeWithTerms(),
-    //                 SizedBox(height: 24),
-    //                 _buildRegisterButton(),
-    //               ],
-    //             ),
-    //           ),
-    //         ),
-    //       ),
-    //       Padding(
-    //         padding: EdgeInsets.only(bottom: 25),
-    //         child: _buildHaveAnAccount(),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 
   Widget _buildHaveAnAccount() {
@@ -264,7 +201,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
         if (formKey.currentState!.validate()) {
-          context.read<UserBloc>().add(
+          context.read<AuthBloc>().add(
             RegisterRequested(
               name: nameController.text.trim(),
               email: emailController.text.trim(),

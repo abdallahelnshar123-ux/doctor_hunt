@@ -25,7 +25,10 @@ import '../../features/auth/data/service/firebase_services/firebase_module.dart'
     as _i508;
 import '../../features/auth/data/service/firebase_services/firestore_service.dart'
     as _i555;
-import '../../features/auth/presentation/controller/user_bloc.dart' as _i244;
+import '../../features/auth/presentation/controller/auth_bloc.dart' as _i954;
+import '../../features/choose_role/data/repo/user_repo.dart' as _i386;
+import '../../features/choose_role/presentation/controller/choose_role_bloc.dart'
+    as _i963;
 import '../data_bases/cache/local_storage.dart' as _i1020;
 import '../data_bases/cache/local_storage_module.dart' as _i2;
 import '../data_bases/cache/secure_storage/secure_storage_utils.dart' as _i229;
@@ -96,6 +99,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i502.AuthRemoteDataSource>(
       () => _i90.AuthRemoteDataSourceImpl(gh<_i172.FirebaseAuthService>()),
     );
+    gh.factory<_i386.UserRepo>(
+      () => _i386.UserRepo(
+        gh<_i612.UserRemoteDataSource>(),
+        gh<_i509.UserLocalDataSource>(),
+      ),
+    );
+    gh.factory<_i963.ChooseRoleBloc>(
+      () => _i963.ChooseRoleBloc(gh<_i386.UserRepo>()),
+    );
     gh.factory<_i607.AuthRepository>(
       () => _i607.AuthRepository(
         gh<_i502.AuthRemoteDataSource>(),
@@ -103,8 +115,8 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i509.UserLocalDataSource>(),
       ),
     );
-    gh.lazySingleton<_i244.UserBloc>(
-      () => _i244.UserBloc(gh<_i607.AuthRepository>()),
+    gh.lazySingleton<_i954.AuthBloc>(
+      () => _i954.AuthBloc(gh<_i607.AuthRepository>()),
     );
     return this;
   }
