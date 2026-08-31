@@ -12,7 +12,7 @@ import '../../features/main_screen/presentation/screens/main_screen.dart';
 
 part 'app_routes.g.dart';
 
-@TypedGoRoute<LoginRoute>(path: '/login')
+@TypedGoRoute<LoginRoute>(path: '/')
 class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
 
@@ -32,7 +32,7 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   }
 }
 
-@TypedGoRoute<MainRoute>(path: '/')
+@TypedGoRoute<MainRoute>(path: '/main')
 class MainRoute extends GoRouteData with $MainRoute {
   const MainRoute();
 

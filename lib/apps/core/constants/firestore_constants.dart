@@ -12,8 +12,7 @@ class FirestoreConstants {
   static const String email = 'email';
   static const String provider = 'provider';
   static const String passwordVerifier = 'password_verifier';
-  static const String salt = 'salt';
-  static const String avatar = 'avatar';
+  static const String image = 'image';
 
   // Platform Account Fields
   static const String platformId = 'platform_id';
@@ -25,22 +24,4 @@ class FirestoreConstants {
   static const String twoFactorSecret = 'two_factor_secret';
   static const String notes = 'notes';
   static const String customFields = 'custom_fields';
-
-  // Platform Data Fields
-  static const String icon = 'icon';
-  static const String website = 'website';
-  static const String color = 'color';
-
-  // Login Method Fields
-  // 'id' and 'provider' are reused
-
-  // Custom Field Fields
-  static const String title = 'title';
-  static const String value = 'value';
-  static const String isSensitive = 'is_sensitive';
-
-  // Encrypted Data Fields
-  static const String cipherText = 'cipher_text';
-  static const String nonce = 'nonce';
-  static const String mac = 'mac';
 }

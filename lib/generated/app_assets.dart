@@ -65,6 +65,9 @@ class $AppAssetsImagesGen {
   final AssetGenImage categoryImage4 = const AssetGenImage(
     'assets/images/category_image4.png',
   );
+  final AssetGenImage fallbackUserImage = const AssetGenImage(
+    'assets/images/fallback_user_image.png',
+  );
   final AssetGenImage onBoarding1 = const AssetGenImage(
     'assets/images/on_boarding1.png',
   );

@@ -8,6 +8,7 @@ extension AuthUserDtoMapper on UserCredential {
       id: user?.uid ?? '',
       email: user?.email ?? '',
       name: user?.displayName ?? '',
+      image: user?.photoURL,
     );
   }
 }

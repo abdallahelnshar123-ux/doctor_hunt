@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
+import 'package:doctor_hunt/apps/features/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
@@ -62,12 +65,13 @@ class HomeTab extends StatelessWidget {
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
     final t = Translations.of(context);
+    var currentUser = context.read<UserBloc>().currentUser;
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,
       title: Text.rich(
         TextSpan(
-          text: t.home.welcome(Name: 'Abdallah'),
+          text: t.home.welcome(Name: currentUser?.name ?? ''),
           style: context.light20.bgPrimary.rubik,
           children: [
             TextSpan(
@@ -80,7 +84,10 @@ class HomeTab extends StatelessWidget {
       actionsPadding: EdgeInsets.only(right: 20),
       actions: [
         CircleAvatar(
-          foregroundImage: AssetImage(AppAssets.images.userAvatar.path),
+          foregroundImage:
+              currentUser!.image == null || currentUser.image!.isEmpty
+              ? AssetImage(AppAssets.images.fallbackUserImage.path)
+              : CachedNetworkImageProvider(currentUser.image ?? ''),
           radius: 30,
         ),
       ],

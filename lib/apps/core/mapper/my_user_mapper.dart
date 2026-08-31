@@ -8,9 +8,7 @@ extension UserMapper on MyUserDto {
       email: email,
       name: name,
       provider: provider,
-      salt: salt,
-      passwordVerifier: passwordVerifier,
-      avatar: avatar,
+      image: image,
     );
   }
 }

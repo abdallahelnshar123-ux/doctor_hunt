@@ -5,45 +5,26 @@ class MyUser extends Equatable {
   final String email;
   final String id;
   final String provider;
-  final List<int>? salt;
-  final String? passwordVerifier;
-  final String? avatar;
+  final String? image;
 
   const MyUser({
     required this.id,
     required this.email,
     required this.name,
     required this.provider,
-    this.salt,
-    this.passwordVerifier,
-    this.avatar,
+    this.image,
   });
 
   @override
-  List<Object?> get props => [
-    id,
-    email,
-    name,
-    provider,
-    salt,
-    passwordVerifier,
-    avatar,
-  ];
+  List<Object?> get props => [id, email, name, provider, image];
 
-  MyUser copyWith({
-    String? name,
-    List<int>? salt,
-    String? passwordVerifier,
-    String? avatar,
-  }) {
+  MyUser copyWith({String? name, String? image}) {
     return MyUser(
       id: id,
       name: name ?? this.name,
       email: email,
       provider: provider,
-      salt: salt ?? this.salt,
-      passwordVerifier: passwordVerifier ?? this.passwordVerifier,
-      avatar: avatar ?? this.avatar,
+      image: image ?? this.image,
     );
   }
 }

@@ -7,18 +7,14 @@ class MyUserDto extends Equatable {
   final String email;
   final String id;
   final String provider;
-  final List<int>? salt;
-  final String? passwordVerifier;
-  final String? avatar;
+  final String? image;
 
   const MyUserDto({
     required this.id,
     required this.email,
     required this.name,
     required this.provider,
-    this.passwordVerifier,
-    this.salt,
-    this.avatar,
+    this.image,
   });
 
   factory MyUserDto.fromFireStore(Map<String, dynamic> data) {
@@ -27,11 +23,7 @@ class MyUserDto extends Equatable {
       name: data[FirestoreConstants.name]?.toString() ?? '',
       email: data[FirestoreConstants.email]?.toString() ?? '',
       provider: data[FirestoreConstants.provider]?.toString() ?? '',
-      passwordVerifier: data[FirestoreConstants.passwordVerifier]?.toString(),
-      avatar: data[FirestoreConstants.avatar]?.toString() ?? '',
-      salt: data[FirestoreConstants.salt] != null
-          ? List<int>.from(data[FirestoreConstants.salt])
-          : null,
+      image: data[FirestoreConstants.image]?.toString() ?? '',
     );
   }
 
@@ -41,9 +33,7 @@ class MyUserDto extends Equatable {
       FirestoreConstants.name: name,
       FirestoreConstants.email: email,
       FirestoreConstants.provider: provider,
-      FirestoreConstants.passwordVerifier: passwordVerifier,
-      FirestoreConstants.salt: salt,
-      FirestoreConstants.avatar: avatar,
+      FirestoreConstants.image: image,
     };
   }
 
@@ -52,9 +42,7 @@ class MyUserDto extends Equatable {
     name,
     email,
     id,
-    passwordVerifier,
-    salt,
     provider,
-    avatar,
+    image,
   ];
 }
