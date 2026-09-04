@@ -13,76 +13,34 @@ class AppAssets {
 class $AppAssetsIconsGen {
   const $AppAssetsIconsGen();
 
-  final SvgGenImage adminIcon = const SvgGenImage(
-    'assets/icons/admin_icon.svg',
-  );
+  final SvgGenImage adminIcon = const SvgGenImage('assets/icons/admin_icon.svg');
   final SvgGenImage appLogo = const SvgGenImage('assets/icons/app_logo.svg');
-  final SvgGenImage bnbBrowseIcon = const SvgGenImage(
-    'assets/icons/bnb_browse_icon.svg',
-  );
-  final SvgGenImage bnbChatIcon = const SvgGenImage(
-    'assets/icons/bnb_chat_icon.svg',
-  );
-  final SvgGenImage bnbFavoriteIcon = const SvgGenImage(
-    'assets/icons/bnb_favorite_icon.svg',
-  );
-  final SvgGenImage bnbHomeIcon = const SvgGenImage(
-    'assets/icons/bnb_home_icon.svg',
-  );
-  final SvgGenImage facebookIcon = const SvgGenImage(
-    'assets/icons/facebook_icon.svg',
-  );
-  final SvgGenImage googleIcon = const SvgGenImage(
-    'assets/icons/google_icon.svg',
-  );
+  final SvgGenImage bnbBrowseIcon = const SvgGenImage('assets/icons/bnb_browse_icon.svg');
+  final SvgGenImage bnbChatIcon = const SvgGenImage('assets/icons/bnb_chat_icon.svg');
+  final SvgGenImage bnbFavoriteIcon = const SvgGenImage('assets/icons/bnb_favorite_icon.svg');
+  final SvgGenImage bnbHomeIcon = const SvgGenImage('assets/icons/bnb_home_icon.svg');
+  final SvgGenImage facebookIcon = const SvgGenImage('assets/icons/facebook_icon.svg');
+  final SvgGenImage googleIcon = const SvgGenImage('assets/icons/google_icon.svg');
   final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like_icon.svg');
-  final SvgGenImage patientIcon = const SvgGenImage(
-    'assets/icons/patient_icon.svg',
-  );
-  final SvgGenImage sDollarIcon = const SvgGenImage(
-    'assets/icons/s_dollar_icon.svg',
-  );
-  final SvgGenImage starIconRated = const SvgGenImage(
-    'assets/icons/star_icon_rated.svg',
-  );
-  final SvgGenImage starIconUnrated = const SvgGenImage(
-    'assets/icons/star_icon_unrated.svg',
-  );
+  final SvgGenImage patientIcon = const SvgGenImage('assets/icons/patient_icon.svg');
+  final SvgGenImage sDollarIcon = const SvgGenImage('assets/icons/s_dollar_icon.svg');
+  final SvgGenImage starIconRated = const SvgGenImage('assets/icons/star_icon_rated.svg');
+  final SvgGenImage starIconUnrated = const SvgGenImage('assets/icons/star_icon_unrated.svg');
 }
 
 class $AppAssetsImagesGen {
   const $AppAssetsImagesGen();
 
-  final AssetGenImage categoryImage1 = const AssetGenImage(
-    'assets/images/category_image1.png',
-  );
-  final AssetGenImage categoryImage2 = const AssetGenImage(
-    'assets/images/category_image2.png',
-  );
-  final AssetGenImage categoryImage3 = const AssetGenImage(
-    'assets/images/category_image3.png',
-  );
-  final AssetGenImage categoryImage4 = const AssetGenImage(
-    'assets/images/category_image4.png',
-  );
-  final AssetGenImage onBoarding1 = const AssetGenImage(
-    'assets/images/on_boarding1.png',
-  );
-  final AssetGenImage onBoarding2 = const AssetGenImage(
-    'assets/images/on_boarding2.png',
-  );
-  final AssetGenImage onBoarding3 = const AssetGenImage(
-    'assets/images/on_boarding3.png',
-  );
-  final AssetGenImage testDoctorImage = const AssetGenImage(
-    'assets/images/test_doctor_image.png',
-  );
-  final AssetGenImage testMapImage = const AssetGenImage(
-    'assets/images/test_map_image.png',
-  );
-  final AssetGenImage userAvatar = const AssetGenImage(
-    'assets/images/user_avatar.png',
-  );
+  final AssetGenImage categoryImage1 = const AssetGenImage('assets/images/category_image1.png');
+  final AssetGenImage categoryImage2 = const AssetGenImage('assets/images/category_image2.png');
+  final AssetGenImage categoryImage3 = const AssetGenImage('assets/images/category_image3.png');
+  final AssetGenImage categoryImage4 = const AssetGenImage('assets/images/category_image4.png');
+  final AssetGenImage onBoarding1 = const AssetGenImage('assets/images/on_boarding1.png');
+  final AssetGenImage onBoarding2 = const AssetGenImage('assets/images/on_boarding2.png');
+  final AssetGenImage onBoarding3 = const AssetGenImage('assets/images/on_boarding3.png');
+  final AssetGenImage testDoctorImage = const AssetGenImage('assets/images/test_doctor_image.png');
+  final AssetGenImage testMapImage = const AssetGenImage('assets/images/test_map_image.png');
+  final AssetGenImage userAvatar = const AssetGenImage('assets/images/user_avatar.png');
 }
 
 class AssetGenImage {
@@ -150,14 +108,8 @@ class AssetGenImage {
     return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;
@@ -211,14 +163,8 @@ class SvgGenImage {
     );
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;

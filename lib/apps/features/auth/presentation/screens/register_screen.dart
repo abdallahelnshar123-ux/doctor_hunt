@@ -109,7 +109,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        const LoginRoute().go(context);
+        const ChooseRoleRoute().go(context);
       },
       child: Text(
         t.auth.have_account,
