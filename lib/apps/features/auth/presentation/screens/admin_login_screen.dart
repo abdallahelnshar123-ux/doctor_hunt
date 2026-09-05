@@ -11,7 +11,7 @@ import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
 
 class AdminLoginScreen extends StatefulWidget {
-  const AdminLoginScreen({super.key ,});
+  const AdminLoginScreen({super.key});
 
   @override
   State<AdminLoginScreen> createState() => _AdminLoginScreenState();

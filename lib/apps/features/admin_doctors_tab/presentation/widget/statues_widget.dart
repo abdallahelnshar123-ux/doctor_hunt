@@ -1,8 +1,4 @@
-import 'package:doctor_hunt/generated/style_atoms.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/app_container_with_shadow.dart';
+part of '../screens/admin_doctors_tab.dart';
 
 class StatuesWidget extends StatelessWidget {
   const StatuesWidget({super.key});
@@ -51,7 +47,7 @@ class StatuesWidget extends StatelessWidget {
     required BuildContext context,
   }) {
     return ListTile(
-      titleTextStyle: context.semiBold12.textSecondary.rubik,
+      titleTextStyle: context.semiBold10.textSecondary.rubik,
       subtitleTextStyle: context.semiBold18.brandPrimaryDark.rubik,
       leading: CircleAvatar(
         backgroundColor: AppColors.brandPrimary20,

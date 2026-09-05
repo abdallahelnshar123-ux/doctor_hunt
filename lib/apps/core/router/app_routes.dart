@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/features/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/appointment_screen/presentation/screens/appointment_screen.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/screens/patient_login_screen.dart';
@@ -64,6 +65,16 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
   }
 }
 
+@TypedGoRoute<AddDoctorRoute>(path: '/add_doctor')
+class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
+  const AddDoctorRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AddDoctorScreen();
+  }
+}
+
 @TypedGoRoute<OnboardingRoute>(path: '/onboarding')
 class OnboardingRoute extends GoRouteData with $OnboardingRoute {
   const OnboardingRoute();
@@ -84,7 +95,7 @@ class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   }
 }
 
-@TypedGoRoute<FindDoctorRoute>(path: '/fine_doctor')
+@TypedGoRoute<FindDoctorRoute>(path: '/fined_doctor')
 class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
   const FindDoctorRoute();
 
