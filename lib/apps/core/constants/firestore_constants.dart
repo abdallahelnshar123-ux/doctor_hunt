@@ -1,7 +1,7 @@
 class FirestoreConstants {
   // Collections
   static const String usersCollection = 'users';
-  static const String accountsCollection = 'accounts';
+  static const String adminsCollection = 'admins';
 
   // Common Fields
   static const String id = 'id';

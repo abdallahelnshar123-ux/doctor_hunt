@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_hunt/apps/features/auth/data/models/admin_dto/my_admin_dto.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/constants/firestore_constants.dart';
@@ -10,6 +11,8 @@ class FirestoreService {
 
   FirestoreService(this._firebaseFirestore);
 
+
+  /// ==========================   users     ==============================
   CollectionReference<MyUserDto> getUsersCollection() {
     return _firebaseFirestore
         .collection(FirestoreConstants.usersCollection)
@@ -36,6 +39,23 @@ class FirestoreService {
 
   Future<void> deleteUserFromFirestore(String uId) async {
     await getUsersCollection().doc(uId).delete();
+  }
+
+
+  /// ==============================  admins   =====================================
+
+  CollectionReference<MyAdminDto> getAdminsCollection() {
+    return _firebaseFirestore
+        .collection(FirestoreConstants.adminsCollection)
+        .withConverter<MyAdminDto>(
+      fromFirestore: (snapshot, options) =>
+          MyAdminDto.fromFireStore(snapshot.data()!),
+      toFirestore: (admin, options) => admin.toFireStore(),
+    );
+  }
+  Future<MyAdminDto?> getAdminFromFireStore(String aId) async {
+    var documentSnapshot = await getAdminsCollection().doc(aId).get();
+    return documentSnapshot.data();
   }
 
   /// ===============================   Accounts   =============================

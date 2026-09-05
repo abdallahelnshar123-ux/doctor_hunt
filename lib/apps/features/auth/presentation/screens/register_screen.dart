@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/controller/auth_event.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
+import 'package:doctor_hunt/apps/features/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           );
           Future.delayed(Duration(seconds: 2), () {
             if (context.mounted) {
-              state.currentUser!.role == null
-                  ? const ChooseRoleRoute().go(context)
-                  : const MainRoute().go(context);
+              const MainRoute().go(context);
             }
           });
         }

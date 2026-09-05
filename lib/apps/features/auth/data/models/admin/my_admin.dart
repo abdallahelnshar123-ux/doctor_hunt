@@ -1,34 +1,30 @@
 import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:equatable/equatable.dart';
 
-class MyUser extends Equatable {
+class MyAdmin extends Equatable {
   final String name;
   final String email;
   final String id;
-  final String provider;
-  final String? image;
   final AppRoles? role;
 
-  const MyUser({
+  const MyAdmin({
     required this.id,
     required this.email,
     required this.name,
-    required this.provider,
-    this.image,
     this.role,
   });
 
   @override
-  List<Object?> get props => [id, email, name, provider, image, role];
+  List<Object?> get props => [id, email, name, role];
 
-  MyUser copyWith({String? name, String? image, AppRoles? role}) {
-    return MyUser(
+  MyAdmin copyWith({String? name, AppRoles? role}) {
+    return MyAdmin(
       id: id,
       name: name ?? this.name,
       email: email,
-      provider: provider,
-      image: image ?? this.image,
       role: role ?? this.role,
     );
   }
 }
+
+

@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/features/auth/data/models/user/my_user.dart';
+import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -16,7 +16,7 @@ class RoleWidget extends StatelessWidget {
 
   const RoleWidget.admin({
     super.key,
-    this.role = UserRoles.admin,
+    this.role = AppRoles.admin,
     required this.roleDescription,
     required this.roleIcon,
     required this.roleTitle,
@@ -25,7 +25,7 @@ class RoleWidget extends StatelessWidget {
 
   const RoleWidget.patient({
     super.key,
-    this.role = UserRoles.patient,
+    this.role = AppRoles.patient,
     required this.roleDescription,
     required this.roleIcon,
     required this.roleTitle,
@@ -41,7 +41,7 @@ class RoleWidget extends StatelessWidget {
   //   // required this.selected,
   // });
 
-  final UserRoles role;
+  final AppRoles role;
   final String roleTitle;
   final String roleDescription;
   final String roleIcon;

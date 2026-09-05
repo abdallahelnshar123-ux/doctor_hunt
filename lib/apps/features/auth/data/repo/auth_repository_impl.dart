@@ -40,7 +40,6 @@ class AuthRepository {
           id: authUserDto.id,
           name: authUserDto.name,
           email: authUserDto.email,
-          image: authUserDto.image,
         );
         await _userRemoteDataSource.createUser(newUser);
         await _userLocalDataSource.saveUser(user: newUser);
