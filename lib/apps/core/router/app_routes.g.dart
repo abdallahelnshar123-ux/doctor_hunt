@@ -7,9 +7,12 @@ part of 'app_routes.dart';
 // **************************************************************************
 
 List<RouteBase> get $appRoutes => [
-  $loginRoute,
+  $adminLoginRoute,
+  $patientLoginRoute,
   $registerRoute,
   $mainRoute,
+  $adminMainRoute,
+  $addDoctorRoute,
   $onboardingRoute,
   $chooseRoleRoute,
   $findDoctorRoute,
@@ -17,17 +20,45 @@ List<RouteBase> get $appRoutes => [
   $appointmentRoute,
 ];
 
-RouteBase get $loginRoute => GoRouteData.$route(
-  path: '/',
+RouteBase get $adminLoginRoute => GoRouteData.$route(
+  path: '/admin_login',
   hasOverriddenOnExit: false,
-  factory: $LoginRoute._fromState,
+  factory: $AdminLoginRoute._fromState,
 );
 
-mixin $LoginRoute on GoRouteData {
-  static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
+mixin $AdminLoginRoute on GoRouteData {
+  static AdminLoginRoute _fromState(GoRouterState state) =>
+      const AdminLoginRoute();
 
   @override
-  String get location => GoRouteData.$location('/');
+  String get location => GoRouteData.$location('/admin_login');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $patientLoginRoute => GoRouteData.$route(
+  path: '/patient_login',
+  hasOverriddenOnExit: false,
+  factory: $PatientLoginRoute._fromState,
+);
+
+mixin $PatientLoginRoute on GoRouteData {
+  static PatientLoginRoute _fromState(GoRouterState state) =>
+      const PatientLoginRoute();
+
+  @override
+  String get location => GoRouteData.$location('/patient_login');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -44,7 +75,7 @@ mixin $LoginRoute on GoRouteData {
 }
 
 RouteBase get $registerRoute => GoRouteData.$route(
-  path: '/register',
+  path: '/',
   hasOverriddenOnExit: false,
   factory: $RegisterRoute._fromState,
 );
@@ -53,7 +84,7 @@ mixin $RegisterRoute on GoRouteData {
   static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
 
   @override
-  String get location => GoRouteData.$location('/register');
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -80,6 +111,60 @@ mixin $MainRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/main');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $adminMainRoute => GoRouteData.$route(
+  path: '/admin_main',
+  hasOverriddenOnExit: false,
+  factory: $AdminMainRoute._fromState,
+);
+
+mixin $AdminMainRoute on GoRouteData {
+  static AdminMainRoute _fromState(GoRouterState state) =>
+      const AdminMainRoute();
+
+  @override
+  String get location => GoRouteData.$location('/admin_main');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $addDoctorRoute => GoRouteData.$route(
+  path: '/add_doctor',
+  hasOverriddenOnExit: false,
+  factory: $AddDoctorRoute._fromState,
+);
+
+mixin $AddDoctorRoute on GoRouteData {
+  static AddDoctorRoute _fromState(GoRouterState state) =>
+      const AddDoctorRoute();
+
+  @override
+  String get location => GoRouteData.$location('/add_doctor');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -150,7 +235,7 @@ mixin $ChooseRoleRoute on GoRouteData {
 }
 
 RouteBase get $findDoctorRoute => GoRouteData.$route(
-  path: '/fine_doctor',
+  path: '/fined_doctor',
   hasOverriddenOnExit: false,
   factory: $FindDoctorRoute._fromState,
 );
@@ -160,7 +245,7 @@ mixin $FindDoctorRoute on GoRouteData {
       const FindDoctorRoute();
 
   @override
-  String get location => GoRouteData.$location('/fine_doctor');
+  String get location => GoRouteData.$location('/fined_doctor');
 
   @override
   void go(BuildContext context) => context.go(location);

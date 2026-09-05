@@ -65,6 +65,9 @@ class Translations$auth$en {
   /// en: 'You can search course, apply course and find scholarship for abroad studies'
   String get auth_subtitle => 'You can search course, apply course and find scholarship for abroad studies';
 
+  /// en: 'Login to your admin account'
+  String get admin_subtitle => 'Login to your admin account';
+
   /// en: 'Forgot password'
   String get forgot_password => 'Forgot password';
 
@@ -139,14 +142,9 @@ class Translations$choose_role$en with PageData2 {
   /// en: 'Choose your role'
   String get role_selection => 'Choose your role';
 
-  /// en: 'The selected role determines the experience and available features.'
-  String get subtitle => 'The selected role determines the experience and available features.';
-
-  late final Translations$choose_role$admin$en admin = Translations$choose_role$admin$en.internal(_root);
   late final Translations$choose_role$patient$en patient = Translations$choose_role$patient$en.internal(_root);
-
-  /// en: 'Continue'
-  String get kContinue => 'Continue';
+  late final Translations$choose_role$doctor$en doctor = Translations$choose_role$doctor$en.internal(_root);
+  late final Translations$choose_role$admin$en admin = Translations$choose_role$admin$en.internal(_root);
 }
 
 // Path: home
@@ -355,22 +353,6 @@ class Translations$onboarding$page3$en with PageData2 {
   String get subtitle => 'Book your appointment in just a few taps. Choose a time that works best for you.';
 }
 
-// Path: choose_role.admin
-class Translations$choose_role$admin$en with PageData2 {
-  Translations$choose_role$admin$en.internal(this._root);
-
-  final Translations _root; // ignore: unused_field
-
-  // Translations
-
-  /// en: 'Admin'
-  @override
-  String get title => 'Admin';
-
-  /// en: 'Manage doctors, appointments, users, and the platform.'
-  String get description => 'Manage doctors, appointments, users, and the platform.';
-}
-
 // Path: choose_role.patient
 class Translations$choose_role$patient$en with PageData2 {
   Translations$choose_role$patient$en.internal(this._root);
@@ -383,6 +365,38 @@ class Translations$choose_role$patient$en with PageData2 {
   @override
   String get title => 'Patient';
 
-  /// en: 'Find doctors, book appointments, and manage your medical records.'
-  String get description => 'Find doctors, book appointments, and manage your medical records.';
+  /// en: 'Book appointments and consult with doctors.'
+  String get description => 'Book appointments and consult with doctors.';
+}
+
+// Path: choose_role.doctor
+class Translations$choose_role$doctor$en with PageData2 {
+  Translations$choose_role$doctor$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor'
+  @override
+  String get title => 'Doctor';
+
+  /// en: 'Manage appointments and consult with patients.'
+  String get description => 'Manage appointments and consult with patients.';
+}
+
+// Path: choose_role.admin
+class Translations$choose_role$admin$en with PageData2 {
+  Translations$choose_role$admin$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Admin'
+  @override
+  String get title => 'Admin';
+
+  /// en: 'Manage doctors and app settings.'
+  String get description => 'Manage doctors and app settings.';
 }

@@ -62,6 +62,7 @@ dependencies:
 
 
 
+  dotted_border: ^3.1.0
 
 dev_dependencies:
   flutter_test:

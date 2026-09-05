@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -86,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             SizedBox(height: 30),
             CustomElevatedButton(
-              buttonWidth: MediaQuery.sizeOf(context).width - 48,
+              buttonWidth: context.width - 48,
               onPressed: () {
                 if (currentIndex < onboardingPages.length - 1) {
                   debugPrint(currentIndex.toString());
@@ -94,7 +95,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     currentIndex++;
                   });
                 } else {
-                  const LoginRoute().go(context);
+                  const RegisterRoute().go(context);
                 }
               },
               backgroundColor: AppColors.brandPrimary,
@@ -106,9 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             TextButton(
               onPressed: () {
-                setState(() {
-                  const LoginRoute().go(context);
-                });
+                const RegisterRoute().go(context);
               },
               child: Text(
                 currentPage.secondButton,

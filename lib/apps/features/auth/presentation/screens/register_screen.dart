@@ -1,6 +1,7 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/username_text_field_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -166,7 +167,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        const LoginRoute().go(context);
+        const ChooseRoleRoute().go(context);
       },
       child: Text(
         t.auth.have_account,

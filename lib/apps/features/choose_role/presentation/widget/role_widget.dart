@@ -11,7 +11,7 @@ class RoleWidget extends StatelessWidget {
     required this.roleDescription,
     required this.roleIcon,
     required this.roleTitle,
-    required this.selected,
+    // required this.selected,
   });
 
   const RoleWidget.admin({
@@ -20,7 +20,7 @@ class RoleWidget extends StatelessWidget {
     required this.roleDescription,
     required this.roleIcon,
     required this.roleTitle,
-    required this.selected,
+    // required this.selected,
   });
 
   const RoleWidget.patient({
@@ -29,14 +29,24 @@ class RoleWidget extends StatelessWidget {
     required this.roleDescription,
     required this.roleIcon,
     required this.roleTitle,
-    required this.selected,
+    // required this.selected,
   });
+
+  // const RoleWidget.doctor({
+  //   super.key,
+  //   this.role = AppRoles.doctor,
+  //   required this.roleDescription,
+  //   required this.roleIcon,
+  //   required this.roleTitle,
+  //   // required this.selected,
+  // });
 
   final UserRoles role;
   final String roleTitle;
   final String roleDescription;
   final String roleIcon;
-  final bool selected;
+
+  // final bool selected;
 
   @override
   Widget build(BuildContext context) {
@@ -47,18 +57,19 @@ class RoleWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         border: BoxBorder.all(
-          color: selected ? AppColors.brandPrimaryDark : AppColors.borderMuted,
-          width: selected ? 2 : 1,
+          color: AppColors.borderMuted,
+          // color: selected ? AppColors.brandPrimaryDark : AppColors.borderMuted,
         ),
       ),
       child: Row(
         spacing: 20,
-        crossAxisAlignment: .start,
+        crossAxisAlignment: .center,
         children: [
           SvgPicture.asset(
             roleIcon,
             colorFilter: ColorFilter.mode(
-              selected ? AppColors.brandPrimaryDark : AppColors.textCaption,
+              AppColors.textCaption,
+              // selected ? AppColors.brandPrimaryDark : AppColors.textCaption,
               .srcIn,
             ),
           ),
@@ -78,10 +89,11 @@ class RoleWidget extends StatelessWidget {
             ),
           ),
           Icon(
-            Icons.check_circle,
-            color: selected
-                ? AppColors.brandPrimaryDark
-                : AppColors.transparent,
+            Icons.arrow_forward_ios_rounded,
+            color: AppColors.textMuted,
+            // color: selected
+            //     ? AppColors.brandPrimaryDark
+            //     : AppColors.transparent,
           ),
         ],
       ),
