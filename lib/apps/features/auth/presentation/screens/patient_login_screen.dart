@@ -1,7 +1,9 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
+import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/auth_password_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/continue_with_facebook_button.dart';
+import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +13,14 @@ import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class PatientLoginScreen extends StatefulWidget {
+  const PatientLoginScreen({super.key ,});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<PatientLoginScreen> createState() => _PatientLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _PatientLoginScreenState extends State<PatientLoginScreen> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -37,6 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: true,
       body: Column(
         children: [
+          MainAppBar(),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -46,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   spacing: 8,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 127),
+                    SizedBox(height: 100),
                     Text(
                       t.auth.welcome_back,
                       style: context.medium24.black.rubik,

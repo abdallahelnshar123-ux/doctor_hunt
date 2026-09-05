@@ -9,8 +9,9 @@ import '../../features/auth/presentation/widgets/custom_text_form_field.dart';
 class SearchTextFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
+  final String? hintText;
 
-  const SearchTextFieldWidget({super.key, this.onChanged, this.suffixIcon});
+  const SearchTextFieldWidget({super.key, this.onChanged, this.suffixIcon , this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,8 @@ class SearchTextFieldWidget extends StatelessWidget {
           color: AppColors.textSecondary,
           size: 30,
         ),
-        hintText: t.home.search,
-        hintStyle: context.regular16.textSecondary.rubik,
+        hintText: hintText ?? t.home.search,
+        hintStyle: context.regular14.textSecondary.rubik,
         filled: true,
         fillColor: AppColors.bgPrimary,
       ),

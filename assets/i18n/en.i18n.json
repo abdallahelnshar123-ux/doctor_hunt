@@ -2,6 +2,7 @@
   "auth": {
     "welcomeBack": "Welcome back",
     "authSubtitle": "You can search course, apply course and find scholarship for abroad studies",
+    "adminSubtitle": "Login to your admin account",
     "forgotPassword": "Forgot password",
     "noAccount": "Don’t have an account? Join us",
     "login": "Login",
@@ -35,16 +36,18 @@
   "chooseRole": {
     "title": "Doctor Hunt",
     "roleSelection": "Choose your role",
-    "subtitle": "The selected role determines the experience and available features.",
-    "admin": {
-      "title": "Admin",
-      "description": "Manage doctors, appointments, users, and the platform."
-    },
     "patient": {
       "title": "Patient",
-      "description": "Find doctors, book appointments, and manage your medical records."
+      "description": "Book appointments and consult with doctors."
     },
-    "continue": "Continue"
+    "doctor": {
+      "title": "Doctor",
+      "description": "Manage appointments and consult with patients."
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Manage doctors and app settings."
+    }
   },
   "home": {
     "welcome": "Hi ${name}",

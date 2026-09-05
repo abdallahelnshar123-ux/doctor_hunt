@@ -1,5 +1,7 @@
+import 'package:doctor_hunt/apps/features/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
+import 'package:doctor_hunt/apps/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/appointment_screen/presentation/screens/appointment_screen.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/screens/login_screen.dart';
+import 'package:doctor_hunt/apps/features/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
@@ -8,21 +10,32 @@ import 'package:doctor_hunt/apps/features/onboarding/presentation/screens/onboar
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/main_screen/presentation/screens/main_screen.dart';
 
 part 'app_routes.g.dart';
 
-@TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData with $LoginRoute {
-  const LoginRoute();
+@TypedGoRoute<AdminLoginRoute>(path: '/admin_login')
+class AdminLoginRoute extends GoRouteData with $AdminLoginRoute {
+  const AdminLoginRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const LoginScreen();
+    return AdminLoginScreen();
   }
 }
 
-@TypedGoRoute<RegisterRoute>(path: '/register')
+@TypedGoRoute<PatientLoginRoute>(path: '/patient_login')
+class PatientLoginRoute extends GoRouteData with $PatientLoginRoute {
+  const PatientLoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PatientLoginScreen();
+  }
+}
+
+@TypedGoRoute<RegisterRoute>(path: '/')
 class RegisterRoute extends GoRouteData with $RegisterRoute {
   const RegisterRoute();
 
@@ -32,13 +45,33 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   }
 }
 
-@TypedGoRoute<MainRoute>(path: '/')
+@TypedGoRoute<MainRoute>(path: '/main')
 class MainRoute extends GoRouteData with $MainRoute {
   const MainRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const MainScreen();
+  }
+}
+
+@TypedGoRoute<AdminMainRoute>(path: '/admin_main')
+class AdminMainRoute extends GoRouteData with $AdminMainRoute {
+  const AdminMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AdminMainScreen();
+  }
+}
+
+@TypedGoRoute<AddDoctorRoute>(path: '/add_doctor')
+class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
+  const AddDoctorRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AddDoctorScreen();
   }
 }
 
@@ -62,7 +95,7 @@ class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   }
 }
 
-@TypedGoRoute<FindDoctorRoute>(path: '/fine_doctor')
+@TypedGoRoute<FindDoctorRoute>(path: '/fined_doctor')
 class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
   const FindDoctorRoute();
 
