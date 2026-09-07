@@ -36,17 +36,17 @@ class $AppAssetsIconsGen {
     'assets/icons/google_icon.svg',
   );
   final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like_icon.svg');
-  final SvgGenImage medicalIcon = const SvgGenImage('assets/icons/medical_icon.svg');
-  final SvgGenImage patientIcon = const SvgGenImage('assets/icons/patient_icon.svg');
-  final SvgGenImage sDollarIcon = const SvgGenImage('assets/icons/s_dollar_icon.svg');
-  final SvgGenImage settingsIcon = const SvgGenImage('assets/icons/settings_icon.svg');
-  final SvgGenImage starIconRated = const SvgGenImage('assets/icons/star_icon_rated.svg');
-  final SvgGenImage starIconUnrated = const SvgGenImage('assets/icons/star_icon_unrated.svg');
+  final SvgGenImage medicalIcon = const SvgGenImage(
+    'assets/icons/medical_icon.svg',
+  );
   final SvgGenImage patientIcon = const SvgGenImage(
     'assets/icons/patient_icon.svg',
   );
   final SvgGenImage sDollarIcon = const SvgGenImage(
     'assets/icons/s_dollar_icon.svg',
+  );
+  final SvgGenImage settingsIcon = const SvgGenImage(
+    'assets/icons/settings_icon.svg',
   );
   final SvgGenImage starIconRated = const SvgGenImage(
     'assets/icons/star_icon_rated.svg',
@@ -71,6 +71,9 @@ class $AppAssetsImagesGen {
   final AssetGenImage categoryImage4 = const AssetGenImage(
     'assets/images/category_image4.png',
   );
+  final AssetGenImage noDoctorsFoundImage = const AssetGenImage(
+    'assets/images/no_doctors_found_image.png',
+  );
   final AssetGenImage onBoarding1 = const AssetGenImage(
     'assets/images/on_boarding1.png',
   );
@@ -89,17 +92,6 @@ class $AppAssetsImagesGen {
   final AssetGenImage userAvatar = const AssetGenImage(
     'assets/images/user_avatar.png',
   );
-  final AssetGenImage categoryImage1 = const AssetGenImage('assets/images/category_image1.png');
-  final AssetGenImage categoryImage2 = const AssetGenImage('assets/images/category_image2.png');
-  final AssetGenImage categoryImage3 = const AssetGenImage('assets/images/category_image3.png');
-  final AssetGenImage categoryImage4 = const AssetGenImage('assets/images/category_image4.png');
-  final AssetGenImage noDoctorsFoundImage = const AssetGenImage('assets/images/no_doctors_found_image.png');
-  final AssetGenImage onBoarding1 = const AssetGenImage('assets/images/on_boarding1.png');
-  final AssetGenImage onBoarding2 = const AssetGenImage('assets/images/on_boarding2.png');
-  final AssetGenImage onBoarding3 = const AssetGenImage('assets/images/on_boarding3.png');
-  final AssetGenImage testDoctorImage = const AssetGenImage('assets/images/test_doctor_image.png');
-  final AssetGenImage testMapImage = const AssetGenImage('assets/images/test_map_image.png');
-  final AssetGenImage userAvatar = const AssetGenImage('assets/images/user_avatar.png');
 }
 
 class AssetGenImage {
