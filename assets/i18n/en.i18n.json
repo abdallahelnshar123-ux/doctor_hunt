@@ -113,7 +113,6 @@
     "success": "Success",
     "error": "Error",
     "allSetUp": "All set up"
-    "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
   },
   "admin": {
     "doctors": "Doctors",

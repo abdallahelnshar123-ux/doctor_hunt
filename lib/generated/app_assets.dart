@@ -71,6 +71,9 @@ class $AppAssetsImagesGen {
   final AssetGenImage categoryImage4 = const AssetGenImage(
     'assets/images/category_image4.png',
   );
+  final AssetGenImage fallbackUserImage = const AssetGenImage(
+    'assets/images/fallback_user_image.png',
+  );
   final AssetGenImage noDoctorsFoundImage = const AssetGenImage(
     'assets/images/no_doctors_found_image.png',
   );

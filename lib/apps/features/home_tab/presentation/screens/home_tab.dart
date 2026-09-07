@@ -65,7 +65,9 @@ class HomeTab extends StatelessWidget {
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
     final t = Translations.of(context);
-    var currentUser = context.read<AuthBloc>().currentUser;
+    var currentUser = context
+        .read<AuthBloc>()
+        .currentUser;
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,
@@ -85,7 +87,7 @@ class HomeTab extends StatelessWidget {
       actions: [
         CircleAvatar(
           foregroundImage:
-              currentUser!.image == null || currentUser.image!.isEmpty
+          currentUser!.image == null || currentUser.image!.isEmpty
               ? AssetImage(AppAssets.images.fallbackUserImage.path)
               : CachedNetworkImageProvider(currentUser.image ?? ''),
           radius: 30,
