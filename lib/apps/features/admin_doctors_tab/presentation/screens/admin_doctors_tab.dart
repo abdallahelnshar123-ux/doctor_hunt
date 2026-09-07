@@ -1,14 +1,17 @@
-import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
-import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
+import 'package:doctor_hunt/apps/features/add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
+import 'package:doctor_hunt/apps/features/admin_doctors_tab/presentation/widget/tab_bar_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/extensions/context_extensions.dart';
+import '../../../../core/router/app_routes.dart';
 
+part '../widget/custom_appbar.dart';
 part '../widget/doctor_card.dart';
 part '../widget/statues_widget.dart';
 
@@ -17,35 +20,110 @@ class AdminDoctorsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      resizeToAvoidBottomInset: false,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.brandPrimary,
+    final t = Translations.of(context);
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: CustomAppbar(),
+        resizeToAvoidBottomInset: false,
+        floatingActionButton: TextButton.icon(
+          onPressed: () {
+            const AddDoctorRoute().push(context);
+          },
+          label: Text(t.admin.add_doctor, style: context.regular12.white.rubik),
+          icon: Icon(Icons.add_rounded, fontWeight: .w700),
+          style: TextButton.styleFrom(
+            backgroundColor: AppColors.brandPrimary,
 
-        onPressed: () {
-          const AddDoctorRoute().push(context);
-        },
-        child: Icon(Icons.add, color: AppColors.white),
-      ),
-      body: Column(
-        spacing: 15,
-        children: [
-          AppBar(title: Text('Doctors'), centerTitle: true),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SearchTextFieldWidget(hintText: 'Search doctors'),
+            iconColor: AppColors.white,
+            iconSize: 20,
+            padding: EdgeInsets.all(15),
           ),
-          StatuesWidget(),
-          Expanded(
-            child: ListView.separated(
-              padding: EdgeInsets.all(20),
-              itemBuilder: (context, index) => DoctorCard(),
-              separatorBuilder: (context, index) => SizedBox(height: 10),
-              itemCount: 15,
+        ),
+
+        // FloatingActionButton(
+        //   backgroundColor: AppColors.brandPrimary,
+        //   onPressed: () {
+        // const AddDoctorRoute().push(context);
+        //   },
+        //   child: Icon(Icons.add, color: AppColors.white),
+        // ),
+        body: Column(
+          spacing: 15,
+          children: [
+            StatuesWidget(),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SearchTextFieldWidget(
+                hintText: t.admin.search_doctors,
+                borderRadius: 12,
+              ),
             ),
-          ),
-        ],
+            Visibility(
+              visible: false,
+              child: DefaultTabController(
+                length: Specialties.values.length,
+                child: TabBar(
+                  onTap: (index) {},
+                  tabAlignment: TabAlignment.start,
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  isScrollable: true,
+                  dividerColor: AppColors.transparent,
+                  indicatorColor: AppColors.transparent,
+                  labelPadding: EdgeInsets.symmetric(
+                    horizontal: context.width * 0.01,
+                  ),
+                  tabs: Specialties.values
+                      .map(
+                        (specialty) => TabBarWidget(
+                          isSelected: false,
+                          number: 10,
+                          label: specialty.name,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ),
+            ),
+
+            Expanded(
+              // child: _noDoctorFoundWidget(context: context),
+              child: ListView.separated(
+                padding: EdgeInsets.all(20),
+                itemBuilder: (context, index) => DoctorCard(),
+                separatorBuilder: (context, index) => SizedBox(height: 10),
+                itemCount: 15,
+              ),
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _noDoctorFoundWidget({required BuildContext context}) {
+    final t = Translations.of(context);
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
+      children: [
+        Image.asset(
+          AppAssets.images.noDoctorsFoundImage.path,
+          width: context.width / 4,
+          height: context.width / 4,
+          fit: .fitHeight,
+        ),
+        Text(
+          t.admin.no_doctors_found,
+          style: context.bold16.textPrimary.rubik.copyWith(height: 2),
+          textAlign: .center,
+        ),
+        Text(
+          t.admin.no_doctors_description,
+          style: context.regular12.textSecondary.rubik,
+          textAlign: .center,
+        ),
+      ],
     );
   }
 }

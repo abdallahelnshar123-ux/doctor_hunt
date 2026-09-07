@@ -92,7 +92,7 @@ extension WeightAtoms on BuildContext {
       );
 
   TextStyle get bold => style.copyWith(
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w700,
       );
 }
 ''');

@@ -120,12 +120,12 @@ class DoctorCard extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              'Dr. Shruti Kedia',
+              t.doctor_details.doctor_name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
           Text(
-            Translations.of(context).doctor_details.tooths_dentist,
+            t.doctor_details.tooths_dentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(
