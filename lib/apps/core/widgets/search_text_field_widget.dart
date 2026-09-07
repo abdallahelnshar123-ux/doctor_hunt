@@ -10,8 +10,15 @@ class SearchTextFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final Widget? suffixIcon;
   final String? hintText;
+  final double? borderRadius;
 
-  const SearchTextFieldWidget({super.key, this.onChanged, this.suffixIcon , this.hintText});
+  const SearchTextFieldWidget({
+    super.key,
+    this.onChanged,
+    this.suffixIcon,
+    this.borderRadius,
+    this.hintText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class SearchTextFieldWidget extends StatelessWidget {
         borderSideColor: AppColors.transparent,
         suffixIcon: suffixIcon,
         onChanged: onChanged,
-        borderRadius: 6,
+        borderRadius: borderRadius ?? 6,
         style: context.regular16.textSecondary.rubik,
         keyboardType: TextInputType.emailAddress,
         prefixIcon: Icon(

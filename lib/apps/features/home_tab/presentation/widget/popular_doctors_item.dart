@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -10,6 +11,7 @@ class PopularDoctorsItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var t = Translations.of(context);
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
@@ -36,12 +38,12 @@ class PopularDoctorsItem extends StatelessWidget {
                 FittedBox(
                   fit: .scaleDown,
                   child: Text(
-                    'Doctor name',
+                    t.doctor_details.doctor_name,
                     style: context.medium18.textTertiary.rubik,
                   ),
                 ),
                 Text(
-                  'Medicine Specialist',
+                  t.doctor_details.specialist_cardiology,
                   style: context.light12.textSecondary80.rubik,
                 ),
                 Row(

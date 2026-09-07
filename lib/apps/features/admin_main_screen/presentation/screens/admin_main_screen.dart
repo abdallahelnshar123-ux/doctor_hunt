@@ -1,9 +1,12 @@
 import 'package:doctor_hunt/apps/features/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import 'package:doctor_hunt/apps/features/admin_settings_tab/presentation/screens/admin_settings_tab.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/widgets/app_scaffold.dart';
 
 class AdminMainScreen extends StatefulWidget {
   const AdminMainScreen({super.key});
@@ -19,80 +22,74 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-      resizeToAvoidBottomInset: false,
+    final t = Translations.of(context);
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
       extendBody: true,
       body: _tabsList[selectedIndex],
-      bottomNavigationBar: Container(
-        width: double.infinity,
-        clipBehavior: .antiAlias,
-        decoration: BoxDecoration(
-          color: AppColors.bgPrimary,
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(20),
-            topLeft: Radius.circular(20),
-          ),
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(
+          splashColor: AppColors.transparent,
+          highlightColor: AppColors.transparent,
+          canvasColor: AppColors.bgPrimary,
         ),
-        padding: EdgeInsets.symmetric(vertical: 13),
-        child: Theme(
-          data: Theme.of(context).copyWith(
-            splashColor: AppColors.transparent,
-            highlightColor: AppColors.transparent,
-            canvasColor: AppColors.bgPrimary,
-          ),
 
-          child: BottomNavigationBar(
-            elevation: 0,
-            unselectedLabelStyle: TextStyle(fontSize: 0),
-            selectedLabelStyle: TextStyle(fontSize: 0),
-            backgroundColor: AppColors.transparent,
-            onTap: (index) {
-              setState(() {
-                if (selectedIndex != index) {
-                  selectedIndex = index;
-                }
-              });
-            },
-            items: [
-              builtBottomNavigationBarItem(
-                iconName: Icons.supervisor_account_outlined,
-                index: 0,
-                context: context,
-              ),
-              builtBottomNavigationBarItem(
-                iconName: Icons.settings_outlined,
-                index: 1,
-                context: context,
-              ),
-            ],
-          ),
+        child: BottomNavigationBar(
+          type: .fixed,
+          currentIndex: selectedIndex,
+          elevation: 0,
+          unselectedLabelStyle: context.regular12.textSecondary.rubik,
+          selectedLabelStyle: context.bold12.brandPrimary.rubik,
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          selectedItemColor: AppColors.brandPrimary,
+          unselectedItemColor: AppColors.textSecondary,
+          backgroundColor: AppColors.bgPrimary,
+          onTap: (index) {
+            setState(() {
+              if (selectedIndex != index) {
+                selectedIndex = index;
+              }
+            });
+          },
+          items: [
+            builtBottomNavigationBarItem(
+              iconName: AppAssets.icons.medicalIcon.path,
+              label: t.admin.doctors,
+              index: 0,
+              context: context,
+            ),
+            builtBottomNavigationBarItem(
+              iconName: AppAssets.icons.settingsIcon.path,
+              label: t.admin.settings,
+              index: 1,
+              context: context,
+            ),
+          ],
         ),
       ),
     );
   }
 
   BottomNavigationBarItem builtBottomNavigationBarItem({
-    required IconData iconName,
+    required String iconName,
     required int index,
+    required String label,
     required BuildContext context,
   }) {
     return BottomNavigationBarItem(
-      label: '',
-      icon: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: index == selectedIndex
-              ? AppColors.brandPrimary
-              : AppColors.transparent,
-          shape: .circle,
-        ),
-        child: Icon(
-
+      label: label,
+      icon: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SvgPicture.asset(
           iconName,
-          color: index == selectedIndex
-              ? AppColors.white
-              : AppColors.textSecondary,
-          size: 30,
+          width: 25,
+          colorFilter: ColorFilter.mode(
+            index == selectedIndex
+                ? AppColors.brandPrimary
+                : AppColors.textSecondary,
+            .srcIn,
+          ),
         ),
       ),
     );
