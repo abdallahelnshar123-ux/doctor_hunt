@@ -16,6 +16,7 @@ class AppColors {
   static const Color bgBlueGradient = Color(0xb861ceff); //
   static const Color bgGrayStart = Color(0xff6F7FA1); //
   static const Color bgGrayEnd = Color(0xff536184); //
+  static const Color bgSurfaceLight = Color(0xffEEF6EE); //
 
   // ----------------------
   // Brand /
@@ -50,4 +51,14 @@ class AppColors {
   static const Color borderMuted = Color(0xffE6ECEA); //
   static const Color borderDefault = Color(0x28677294); //
   static const Color borderSubtle = Color(0x19677294); //
+
+  // ----------------------
+  // status /
+  // ----------------------
+  static const Color statusErrorSurface = Color(0xffFFF1F2); //
+  static const Color statusError = Color(0xffBA1A1A); //
+  static const Color statusErrorContainer = Color(0x4dffdad6); //
+
+
+
 }

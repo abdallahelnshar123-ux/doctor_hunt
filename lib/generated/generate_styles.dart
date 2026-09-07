@@ -9,6 +9,7 @@ void main() {
     'bgBlueGradient',
     'bgGrayStart',
     'bgGrayEnd',
+    'bgSurfaceLight',
     'brandPrimary',
     'brandPrimaryDark',
     'textPrimary',
@@ -23,6 +24,9 @@ void main() {
     'grayMid',
     'borderMuted',
     'borderDefault',
+    'statusErrorSurface',
+    'statusError',
+    'statusErrorContainer',
   ];
 
   final List<String> fontWeights = ['extraLight', 'light', 'regular', 'medium', 'semiBold', 'bold'];
