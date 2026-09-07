@@ -49,6 +49,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$doctor_details$en doctor_details = Translations$doctor_details$en.internal(_root);
   late final Translations$appointment$en appointment = Translations$appointment$en.internal(_root);
   late final Translations$common$en common = Translations$common$en.internal(_root);
+  late final Translations$admin$en admin = Translations$admin$en.internal(_root);
 }
 
 // Path: auth
@@ -303,6 +304,54 @@ class Translations$common$en {
   String get min => 'Min.';
 
   List<String> get weekdays => ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+}
+
+// Path: admin
+class Translations$admin$en {
+  Translations$admin$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctors'
+  String get doctors => 'Doctors';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+
+  /// en: 'Add doctor'
+  String get add_doctor => 'Add doctor';
+
+  /// en: 'Search doctors'
+  String get search_doctors => 'Search doctors';
+
+  /// en: 'No Doctors Found'
+  String get no_doctors_found => 'No Doctors Found';
+
+  /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
+  String get no_doctors_description => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+
+  /// en: 'Total doctors'
+  String get total_doctors => 'Total doctors';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Enter doctor name'
+  String get enter_name => 'Enter doctor name';
+
+  /// en: 'Upload doctor image'
+  String get upload_image => 'Upload doctor image';
+
+  /// en: 'Tap to pick an image'
+  String get tap_to_pick => 'Tap to pick an image';
+
+  /// en: 'Create doctor'
+  String get create_doctor => 'Create doctor';
 }
 
 // Path: onboarding.page1

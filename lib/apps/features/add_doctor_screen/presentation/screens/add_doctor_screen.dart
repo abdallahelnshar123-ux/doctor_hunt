@@ -4,6 +4,7 @@ import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 import 'package:doctor_hunt/apps/features/auth/presentation/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,8 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
+    final t = Translations.of(context);
+    return Scaffold(
       body: Column(
         children: [
           MainAppBar(),
@@ -32,19 +34,19 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
               children: [
                 UsernameTextFieldWidget(
                   fillColor: AppColors.bgPrimary,
-                  hintText: 'Enter doctor name',
+                  hintText: t.admin.enter_name,
                 ),
                 SizedBox(height: 20),
                 SpecialtyDropdownWidget(controller: specialtyController),
                 SizedBox(height: 50),
-                buildUploadImage(),
+                buildUploadImage(context),
                 SizedBox(height: 50),
 
                 CustomElevatedButton(
                   backgroundColor: AppColors.brandPrimary,
                   onPressed: () {},
                   child: Text(
-                    'Create doctor',
+                    t.admin.create_doctor,
                     style: context.medium18.white.rubik,
                   ),
                 ),
@@ -56,7 +58,8 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
     );
   }
 
-  Widget buildUploadImage() {
+  Widget buildUploadImage(BuildContext context) {
+    final t = Translations.of(context);
     return GestureDetector(
       onTap: () {},
       child: DottedBorder(
@@ -89,11 +92,11 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
               ),
               SizedBox(height: 5),
               Text(
-                'Upload doctor image',
+                t.admin.upload_image,
                 style: context.medium14.textTertiary.rubik,
               ),
               Text(
-                'Tap to pick an image',
+                t.admin.tap_to_pick,
                 style: context.regular12.textSecondary.rubik,
               ),
             ],

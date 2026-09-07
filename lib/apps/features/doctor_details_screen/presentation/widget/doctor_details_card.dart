@@ -114,14 +114,16 @@ class DoctorDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _doctorDetailsWidget({required BuildContext context}) => Column(
+  Widget _doctorDetailsWidget({required BuildContext context}) {
+
+    return Column(
     mainAxisAlignment: .spaceBetween,
     crossAxisAlignment: .start,
     children: [
       FittedBox(
         fit: .scaleDown,
         child: Text(
-          'Dr. Shruti Kedia',
+          Translations.of(context).doctor_details.doctor_name,
           style: context.medium16.textTertiary.rubik,
         ),
       ),
@@ -133,7 +135,7 @@ class DoctorDetailsCard extends StatelessWidget {
         ),
       ),
     ],
-  );
+  );}
 
   Widget _doctorImageWidget({required BuildContext context}) => Container(
     width: double.infinity,

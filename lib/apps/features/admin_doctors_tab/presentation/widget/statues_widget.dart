@@ -5,38 +5,42 @@ class StatuesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppContainerWithShadow(
-      margin: EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 10),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            Expanded(
+    final t = Translations.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        spacing: 12,
+        children: [
+          Expanded(
+            child: AppContainerWithShadow(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: buildListTile(
-                title: 'Total doctors',
+                title: t.admin.total_doctors,
                 number: '15',
                 context: context,
               ),
             ),
-            VerticalDivider(
-              indent: 10,
-              endIndent: 10,
-              thickness: 1,
-              color: AppColors.textSecondary,
-            ),
-            Expanded(
+          ),
+
+          Expanded(
+            child: AppContainerWithShadow(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: buildListTile(
-                title: 'Active',
+                title: t.admin.active,
                 number: '15',
                 context: context,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -47,12 +51,13 @@ class StatuesWidget extends StatelessWidget {
     required BuildContext context,
   }) {
     return ListTile(
-      titleTextStyle: context.semiBold10.textSecondary.rubik,
-      subtitleTextStyle: context.semiBold18.brandPrimaryDark.rubik,
-      leading: CircleAvatar(
-        backgroundColor: AppColors.brandPrimary20,
-        child: Icon(Icons.person_2_outlined, color: AppColors.brandPrimaryDark),
-      ),
+
+      titleTextStyle: context.regular11.textSecondary.rubik,
+      subtitleTextStyle: context.bold18.textPrimary.rubik.copyWith(height: 2),
+      // leading: CircleAvatar(
+      //   backgroundColor: AppColors.brandPrimary20,
+      //   child: Icon(Icons.person_2_outlined, color: AppColors.brandPrimaryDark),
+      // ),
       title: FittedBox(
         alignment: .centerLeft,
         fit: .scaleDown,
