@@ -126,7 +126,7 @@ flutter_assets_generator:
   output_dir: generated/
   output_filename: app_assets
   class_name: AppAssets
-  auto_detection: true
+  auto_detection: false
   # Automatically add missing dependencies (rive, flutter_svg, lottie) default: true
   auto_add_dependencies: true
   # Options: robust (default), legacy (old style)
