@@ -75,7 +75,7 @@ mixin $PatientLoginRoute on GoRouteData {
 }
 
 RouteBase get $registerRoute => GoRouteData.$route(
-  path: '/',
+  path: '/register',
   hasOverriddenOnExit: false,
   factory: $RegisterRoute._fromState,
 );
@@ -84,7 +84,7 @@ mixin $RegisterRoute on GoRouteData {
   static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
 
   @override
-  String get location => GoRouteData.$location('/');
+  String get location => GoRouteData.$location('/register');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -208,7 +208,7 @@ mixin $OnboardingRoute on GoRouteData {
 }
 
 RouteBase get $chooseRoleRoute => GoRouteData.$route(
-  path: '/choose_role',
+  path: '/',
   hasOverriddenOnExit: false,
   factory: $ChooseRoleRoute._fromState,
 );
@@ -218,7 +218,7 @@ mixin $ChooseRoleRoute on GoRouteData {
       const ChooseRoleRoute();
 
   @override
-  String get location => GoRouteData.$location('/choose_role');
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);

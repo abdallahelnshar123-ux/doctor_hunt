@@ -1,5 +1,5 @@
-import '../../features/auth/data/models/user/my_user.dart';
-import '../../features/auth/data/models/user_dto/my_user_dto.dart';
+import '../../features/common/auth/data/models/user/my_user.dart';
+import '../../features/common/auth/data/models/user_dto/my_user_dto.dart';
 
 extension MyUserDtoMapper on MyUser {
   MyUserDto toMyUserDto() {
@@ -9,7 +9,7 @@ extension MyUserDtoMapper on MyUser {
       name: name,
       provider: provider,
       image: image,
-      role: role
+      role: role,
     );
   }
 }

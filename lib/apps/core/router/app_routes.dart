@@ -1,17 +1,17 @@
-import 'package:doctor_hunt/apps/features/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
-import 'package:doctor_hunt/apps/features/admin_main_screen/presentation/screens/admin_main_screen.dart';
-import 'package:doctor_hunt/apps/features/appointment_screen/presentation/screens/appointment_screen.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/screens/patient_login_screen.dart';
-import 'package:doctor_hunt/apps/features/auth/presentation/screens/register_screen.dart';
-import 'package:doctor_hunt/apps/features/choose_role/presentation/screens/choose_role_screen.dart';
-import 'package:doctor_hunt/apps/features/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
-import 'package:doctor_hunt/apps/features/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
-import 'package:doctor_hunt/apps/features/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
+import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
+import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/appointment_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/auth/presentation/screens/admin_login_screen.dart';
-import '../../features/main_screen/presentation/screens/main_screen.dart';
+import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
+import '../../features/patient/main_screen/presentation/screens/main_screen.dart';
 
 part 'app_routes.g.dart';
 
@@ -35,7 +35,7 @@ class PatientLoginRoute extends GoRouteData with $PatientLoginRoute {
   }
 }
 
-@TypedGoRoute<RegisterRoute>(path: '/')
+@TypedGoRoute<RegisterRoute>(path: '/register')
 class RegisterRoute extends GoRouteData with $RegisterRoute {
   const RegisterRoute();
 
@@ -85,7 +85,7 @@ class OnboardingRoute extends GoRouteData with $OnboardingRoute {
   }
 }
 
-@TypedGoRoute<ChooseRoleRoute>(path: '/choose_role')
+@TypedGoRoute<ChooseRoleRoute>(path: '/')
 class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   const ChooseRoleRoute();
 

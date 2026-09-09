@@ -58,7 +58,4 @@ class AppColors {
   static const Color statusErrorSurface = Color(0xffFFF1F2); //
   static const Color statusError = Color(0xffBA1A1A); //
   static const Color statusErrorContainer = Color(0x4dffdad6); //
-
-
-
 }

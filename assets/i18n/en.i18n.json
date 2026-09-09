@@ -112,7 +112,8 @@
     "ok": "Ok",
     "success": "Success",
     "error": "Error",
-    "allSetUp": "All set up"
+    "allSetUp": "All set up",
+    "registeredSuccessfully" : "Registered Successfully, Please login. "
   },
   "admin": {
     "doctors": "Doctors",

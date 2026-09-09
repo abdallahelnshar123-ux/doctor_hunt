@@ -2,7 +2,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/auth/presentation/widgets/custom_text_form_field.dart';
+import '../../features/common/auth/presentation/widgets/custom_text_form_field.dart';
 import '../utils/validators.dart';
 
 class UsernameTextFieldWidget extends StatelessWidget {
@@ -20,7 +20,6 @@ class UsernameTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = Translations.of(context);
     return CustomTextFormField(
       style: context.light16.textSecondary.rubik,
       keyboardType: TextInputType.emailAddress,
