@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:doctor_hunt/apps/core/data/prefs_keys.dart';
+import 'package:doctor_hunt/apps/core/data/shared_prefs/prefs_keys.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';

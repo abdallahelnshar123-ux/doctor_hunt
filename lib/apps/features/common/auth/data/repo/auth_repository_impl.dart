@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:doctor_hunt/apps/core/data/user_pref.dart';
+import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/mapper/my_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/auth_service.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/firestore_service.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/exceptions/app_exceptions.dart';
@@ -17,7 +17,7 @@ import '../models/user_dto/my_user_dto.dart';
 @injectable
 class AuthRepository {
   final AuthService _authService;
-  final FirestoreService _firestoreService;
+  final UserFirestoreService _firestoreService;
   final UserPrefs _userLocalDataSource;
 
   const AuthRepository(

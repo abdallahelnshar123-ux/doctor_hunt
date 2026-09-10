@@ -12,8 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
 
-  AuthBloc(this._repository, {required this._loginUseCase})
-    : super(UserInitial()) {
+  AuthBloc(this._repository, this._loginUseCase) : super(UserInitial()) {
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);

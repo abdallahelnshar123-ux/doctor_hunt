@@ -1,3 +1,5 @@
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
@@ -8,6 +10,7 @@ import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentatio
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
@@ -71,7 +74,10 @@ class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AddDoctorScreen();
+    return BlocProvider(
+      create: (context) => getIt<DoctorBloc>(),
+      child: AddDoctorScreen(),
+    );
   }
 }
 

@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/validators.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../generated/style_atoms.dart';
@@ -12,6 +13,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenuFormField(
+      validator: (value) => Validators.required(value?.name),
       menuStyle: MenuStyle(
         backgroundColor: WidgetStatePropertyAll(AppColors.bgPrimary),
         maximumSize: WidgetStatePropertyAll(Size.fromWidth(context.width - 40)),

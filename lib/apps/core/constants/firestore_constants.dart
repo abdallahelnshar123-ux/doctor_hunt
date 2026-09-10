@@ -1,6 +1,7 @@
 class FirestoreConstants {
   // Collections
   static const String usersCollection = 'users';
+  static const String doctorsCollection = 'doctors';
   static const String adminsCollection = 'admins';
 
   // Common Fields
@@ -14,6 +15,7 @@ class FirestoreConstants {
   static const String passwordVerifier = 'password_verifier';
   static const String image = 'image';
   static const String role = 'role';
+  static const String adminId = 'admin_id';
 
   // Platform Account Fields
   static const String platformId = 'platform_id';

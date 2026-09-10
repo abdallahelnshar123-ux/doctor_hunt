@@ -94,6 +94,10 @@
     "edit": "Edit your appointment",
     "confirm": "Confirm"
   },
+  "createDoctor": {
+    "title": "Create doctor",
+    "addPhoto": "Add photo"
+  },
   "common": {
     "am": "AM",
     "pm": "PM",
@@ -113,7 +117,7 @@
     "success": "Success",
     "error": "Error",
     "allSetUp": "All set up",
-    "registeredSuccessfully" : "Registered Successfully, Please login. "
+    "registeredSuccessfully": "Registered Successfully, Please login. "
   },
   "admin": {
     "doctors": "Doctors",

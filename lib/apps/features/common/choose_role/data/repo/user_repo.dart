@@ -6,7 +6,7 @@
 // import '../../../../../core/failure/failure.dart';
 // import '../../../../../core/mapper/exception_mapper.dart';
 // import '../../../../../core/mapper/my_user_dto_mapper.dart';
-// import '../../../auth/data/models/user/my_user.dart';
+// import '../../../auth/data/models/user/doctor.dart';
 //
 // @injectable
 // class UserRepo {
