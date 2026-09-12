@@ -10,7 +10,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(t.admin.doctors),
+      title: Text(t.admin.main.doctors),
       leading: Icon(Icons.menu, color: AppColors.brandPrimaryDark),
       actionsPadding: EdgeInsets.symmetric(horizontal: 20),
       centerTitle: true,

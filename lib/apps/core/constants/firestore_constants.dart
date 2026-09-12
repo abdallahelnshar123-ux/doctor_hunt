@@ -12,19 +12,11 @@ class FirestoreConstants {
   static const String name = 'name';
   static const String email = 'email';
   static const String provider = 'provider';
-  static const String passwordVerifier = 'password_verifier';
   static const String image = 'image';
   static const String role = 'role';
   static const String adminId = 'admin_id';
-
-  // Platform Account Fields
-  static const String platformId = 'platform_id';
-  static const String identifier = 'identifier';
-  static const String password = 'password';
+  static const String specialty = 'specialty';
+  // static const String password = 'password';
+  static const String active = 'active';
   static const String loginMethods = 'login_methods';
-  static const String recoveryCodes = 'recovery_codes';
-  static const String passkey = 'passkey';
-  static const String twoFactorSecret = 'two_factor_secret';
-  static const String notes = 'notes';
-  static const String customFields = 'custom_fields';
 }

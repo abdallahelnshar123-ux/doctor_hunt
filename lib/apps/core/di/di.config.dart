@@ -36,7 +36,7 @@ import '../data/image_service/image_service.dart' as _i181;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
 import '../data/shared_prefs/user_pref.dart' as _i708;
 import '../network/cloudinary/cloudinary_config.dart' as _i619;
-import '../network/cloudinary/cloudinary_service_impl.dart' as _i638;
+import '../network/cloudinary/cloudinary_service.dart' as _i638;
 import 'firebase_module.dart' as _i616;
 
 extension GetItInjectableX on _i174.GetIt {

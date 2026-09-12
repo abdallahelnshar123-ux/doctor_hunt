@@ -42,9 +42,9 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
         if (state is UserAuthenticatedState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            title: 'success',
+            title: t.dialog.success,
             context: context,
-            message: 'success',
+            message: t.dialog.success,
           );
 
           Future.delayed(Duration(seconds: 2), () {
@@ -58,8 +58,8 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
           debugPrint(state.message);
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: 'ok',
-            title: 'error',
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
             context: context,
             message: state.message,
           );

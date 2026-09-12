@@ -1,14 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/router/app_routes.dart';
+import '../../../add_doctor_screen/data/models/doctor/doctor.dart';
+import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
 part '../widget/custom_appbar.dart';
@@ -29,7 +34,10 @@ class AdminDoctorsTab extends StatelessWidget {
           onPressed: () {
             const AddDoctorRoute().push(context);
           },
-          label: Text(t.admin.add_doctor, style: context.regular12.white.rubik),
+          label: Text(
+            t.admin.doctors_tab.add_doctor,
+            style: context.regular12.white.rubik,
+          ),
           icon: Icon(Icons.add_rounded, fontWeight: .w700),
           style: TextButton.styleFrom(
             backgroundColor: AppColors.brandPrimary,
@@ -39,14 +47,6 @@ class AdminDoctorsTab extends StatelessWidget {
             padding: EdgeInsets.all(15),
           ),
         ),
-
-        // FloatingActionButton(
-        //   backgroundColor: AppColors.brandPrimary,
-        //   onPressed: () {
-        // const AddDoctorRoute().push(context);
-        //   },
-        //   child: Icon(Icons.add, color: AppColors.white),
-        // ),
         body: Column(
           spacing: 15,
           children: [
@@ -55,45 +55,86 @@ class AdminDoctorsTab extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SearchTextFieldWidget(
-                hintText: t.admin.search_doctors,
+                hintText: t.admin.doctors_tab.search_doctors,
                 borderRadius: 12,
               ),
             ),
-            Visibility(
-              visible: false,
-              child: DefaultTabController(
-                length: Specialties.values.length,
-                child: TabBar(
-                  onTap: (index) {},
-                  tabAlignment: TabAlignment.start,
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  isScrollable: true,
-                  dividerColor: AppColors.transparent,
-                  indicatorColor: AppColors.transparent,
-                  labelPadding: EdgeInsets.symmetric(
-                    horizontal: context.width * 0.01,
-                  ),
-                  tabs: Specialties.values
-                      .map(
-                        (specialty) => TabBarWidget(
-                          isSelected: false,
-                          number: 10,
-                          label: specialty.name,
+            BlocConsumer<DoctorBloc, DoctorState>(
+              buildWhen: (previous, current) =>
+                  current is GetDoctorsSuccessState ||
+                  current is GetDoctorsLoadingState,
+              builder: (context, state) {
+                if (state is GetDoctorsSuccessState) {
+                  if (state.doctors.isEmpty &&
+                      state.selectedSpecialty == t.admin.doctors_tab.all) {
+                    return Expanded(
+                      child: _noDoctorFoundWidget(context: context),
+                    );
+                  }
+                  return Expanded(
+                    child: Column(
+                      mainAxisSize: .min,
+                      children: [
+                        DefaultTabController(
+                          length: state.specialtyCounts.length,
+                          child: TabBar(
+                            overlayColor: WidgetStatePropertyAll(
+                              AppColors.transparent,
+                            ),
+                            onTap: (index) {
+                              final specialty =
+                                  state.specialtyCounts[index].keys.first;
+                              context.read<DoctorBloc>().add(
+                                FilterDoctorsRequested(specialty),
+                              );
+                            },
+                            tabAlignment: TabAlignment.start,
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            isScrollable: true,
+                            dividerColor: AppColors.transparent,
+                            indicatorColor: AppColors.transparent,
+                            labelPadding: EdgeInsets.symmetric(
+                              horizontal: context.width * 0.01,
+                            ),
+                            tabs: state.specialtyCounts.map((map) {
+                              final label = map.keys.first;
+                              final number = map.values.first;
+                              return TabBarWidget(
+                                isSelected: state.selectedSpecialty == label,
+                                number: number,
+                                label: label,
+                              );
+                            }).toList(),
+                          ),
                         ),
-                      )
-                      .toList(),
-                ),
-              ),
-            ),
-
-            Expanded(
-              // child: _noDoctorFoundWidget(context: context),
-              child: ListView.separated(
-                padding: EdgeInsets.all(20),
-                itemBuilder: (context, index) => DoctorCard(),
-                separatorBuilder: (context, index) => SizedBox(height: 10),
-                itemCount: 15,
-              ),
+                        Expanded(
+                          child: state.doctors.isEmpty
+                              ? _noDoctorFoundWidget(context: context)
+                              : ListView.separated(
+                                  padding: EdgeInsets.all(20),
+                                  itemBuilder: (context, index) =>
+                                      DoctorCard(doctor: state.doctors[index]),
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(height: 10),
+                                  itemCount: state.doctors.length,
+                                ),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+                return Expanded(child: AdminDoctorsShimmer());
+              },
+              listenWhen: (previous, current) =>
+                  current is GetDoctorsErrorState,
+              listener: (context, state) {
+                if (state is GetDoctorsErrorState) {
+                  SnackBarUtils.showErrorSnackBar(
+                    context: context,
+                    message: state.message,
+                  );
+                }
+              },
             ),
           ],
         ),
@@ -101,7 +142,6 @@ class AdminDoctorsTab extends StatelessWidget {
     );
   }
 
-  /// do not delete this !!!!!! =====================================
   Widget _noDoctorFoundWidget({required BuildContext context}) {
     return ListView(
       padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
@@ -113,12 +153,12 @@ class AdminDoctorsTab extends StatelessWidget {
           fit: .fitHeight,
         ),
         Text(
-          t.admin.no_doctors_found,
+          t.admin.doctors_tab.no_doctors_found,
           style: context.bold16.textPrimary.rubik.copyWith(height: 2),
           textAlign: .center,
         ),
         Text(
-          t.admin.no_doctors_description,
+          t.admin.doctors_tab.no_doctors_description,
           style: context.regular12.textSecondary.rubik,
           textAlign: .center,
         ),

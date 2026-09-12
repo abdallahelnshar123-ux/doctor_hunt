@@ -32,3 +32,27 @@ final class PickDoctorImageErrorState extends DoctorState {
 
   PickDoctorImageErrorState(this.message);
 }
+
+/// =========================  get doctors states ==========================
+
+final class GetDoctorsLoadingState extends DoctorState {}
+
+final class GetDoctorsSuccessState extends DoctorState {
+  final List<Doctor> doctors;
+  final List<Map<String, int>> specialtyCounts;
+  final int activeDoctorsCount;
+  final String selectedSpecialty;
+
+  GetDoctorsSuccessState(
+    this.doctors,
+    this.specialtyCounts,
+    this.activeDoctorsCount,
+    this.selectedSpecialty,
+  );
+}
+
+final class GetDoctorsErrorState extends DoctorState {
+  final String message;
+
+  GetDoctorsErrorState(this.message);
+}

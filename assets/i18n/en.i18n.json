@@ -96,7 +96,9 @@
   },
   "createDoctor": {
     "title": "Create doctor",
-    "addPhoto": "Add photo"
+    "addPhoto": "Add photo",
+    "doctorAddedSuccessfully": "Doctor was added Successfully",
+    "youMustPickDoctorImage": "You must pick doctor image"
   },
   "common": {
     "am": "AM",
@@ -120,18 +122,25 @@
     "registeredSuccessfully": "Registered Successfully, Please login. "
   },
   "admin": {
-    "doctors": "Doctors",
-    "settings": "Settings",
-    "addDoctor": "Add doctor",
-    "searchDoctors": "Search doctors",
-    "noDoctorsFound": "No Doctors Found",
-    "noDoctorsDescription": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
-    "totalDoctors": "Total doctors",
-    "active": "Active",
-    "inactive": "Inactive",
-    "enterName": "Enter doctor name",
-    "uploadImage": "Upload doctor image",
-    "tapToPick": "Tap to pick an image",
-    "createDoctor": "Create doctor"
+    "main": {
+      "doctors": "Doctors",
+      "settings": "Settings"
+    },
+    "doctorsTab": {
+      "addDoctor": "Add doctor",
+      "searchDoctors": "Search doctors",
+      "noDoctorsFound": "No Doctors Found",
+      "noDoctorsDescription": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
+      "totalDoctors": "Total doctors",
+      "active": "Active",
+      "inactive": "Inactive",
+      "all": "All"
+    },
+    "addDoctorScreen": {
+      "enterName": "Enter doctor name",
+      "uploadImage": "Upload doctor image",
+      "tapToPick": "Tap to pick an image",
+      "createDoctor": "Create doctor"
+    }
   }
 }

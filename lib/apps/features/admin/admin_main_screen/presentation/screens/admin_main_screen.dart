@@ -54,13 +54,13 @@ class _AdminMainScreenState extends State<AdminMainScreen> {
           items: [
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.medicalIcon.path,
-              label: t.admin.doctors,
+              label: t.admin.main.doctors,
               index: 0,
               context: context,
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.settingsIcon.path,
-              label: t.admin.settings,
+              label: t.admin.main.settings,
               index: 1,
               context: context,
             ),

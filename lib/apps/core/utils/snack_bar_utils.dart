@@ -14,7 +14,7 @@ class SnackBarUtils {
         duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(5),
-        content: Text(message, style: context.regular14.brandPrimary.rubik),
+        content: Text(message, style: context.regular14.white.rubik),
         backgroundColor: AppColors.brandPrimary,
       ),
     );
@@ -27,8 +27,8 @@ class SnackBarUtils {
         duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(5),
-        content: Text(message, style: context.regular14.brandPrimary.rubik),
-        backgroundColor: AppColors.brandPrimaryDark,
+        content: Text(message, style: context.regular14.white.rubik),
+        backgroundColor: AppColors.statusError,
       ),
     );
   }
@@ -40,8 +40,8 @@ class SnackBarUtils {
         duration: Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
         margin: EdgeInsets.all(5),
-        content: Text(message, style: context.regular14.brandPrimary.rubik),
-        backgroundColor: AppColors.brandPrimary,
+        content: Text(message, style: context.regular14.textPrimary.rubik),
+        backgroundColor: AppColors.borderMuted,
       ),
     );
   }

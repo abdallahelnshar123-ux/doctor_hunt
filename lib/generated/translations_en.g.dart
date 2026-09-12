@@ -302,6 +302,12 @@ class Translations$create_doctor$en with PageData2 {
 
   /// en: 'Add photo'
   String get add_photo => 'Add photo';
+
+  /// en: 'Doctor was added Successfully'
+  String get doctor_added_successfully => 'Doctor was added Successfully';
+
+  /// en: 'You must pick doctor image'
+  String get you_must_pick_doctor_image => 'You must pick doctor image';
 }
 
 // Path: common
@@ -355,45 +361,9 @@ class Translations$admin$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-
-  /// en: 'Doctors'
-  String get doctors => 'Doctors';
-
-  /// en: 'Settings'
-  String get settings => 'Settings';
-
-  /// en: 'Add doctor'
-  String get add_doctor => 'Add doctor';
-
-  /// en: 'Search doctors'
-  String get search_doctors => 'Search doctors';
-
-  /// en: 'No Doctors Found'
-  String get no_doctors_found => 'No Doctors Found';
-
-  /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
-  String get no_doctors_description => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
-
-  /// en: 'Total doctors'
-  String get total_doctors => 'Total doctors';
-
-  /// en: 'Active'
-  String get active => 'Active';
-
-  /// en: 'Inactive'
-  String get inactive => 'Inactive';
-
-  /// en: 'Enter doctor name'
-  String get enter_name => 'Enter doctor name';
-
-  /// en: 'Upload doctor image'
-  String get upload_image => 'Upload doctor image';
-
-  /// en: 'Tap to pick an image'
-  String get tap_to_pick => 'Tap to pick an image';
-
-  /// en: 'Create doctor'
-  String get create_doctor => 'Create doctor';
+  late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
+  late final Translations$admin$doctors_tab$en doctors_tab = Translations$admin$doctors_tab$en.internal(_root);
+  late final Translations$admin$add_doctor_screen$en add_doctor_screen = Translations$admin$add_doctor_screen$en.internal(_root);
 }
 
 // Path: onboarding.page1
@@ -490,4 +460,73 @@ class Translations$choose_role$admin$en with PageData2 {
 
   /// en: 'Manage doctors and app settings.'
   String get description => 'Manage doctors and app settings.';
+}
+
+// Path: admin.main
+class Translations$admin$main$en {
+  Translations$admin$main$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctors'
+  String get doctors => 'Doctors';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+}
+
+// Path: admin.doctors_tab
+class Translations$admin$doctors_tab$en {
+  Translations$admin$doctors_tab$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Add doctor'
+  String get add_doctor => 'Add doctor';
+
+  /// en: 'Search doctors'
+  String get search_doctors => 'Search doctors';
+
+  /// en: 'No Doctors Found'
+  String get no_doctors_found => 'No Doctors Found';
+
+  /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
+  String get no_doctors_description => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+
+  /// en: 'Total doctors'
+  String get total_doctors => 'Total doctors';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'All'
+  String get all => 'All';
+}
+
+// Path: admin.add_doctor_screen
+class Translations$admin$add_doctor_screen$en {
+  Translations$admin$add_doctor_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Enter doctor name'
+  String get enter_name => 'Enter doctor name';
+
+  /// en: 'Upload doctor image'
+  String get upload_image => 'Upload doctor image';
+
+  /// en: 'Tap to pick an image'
+  String get tap_to_pick => 'Tap to pick an image';
+
+  /// en: 'Create doctor'
+  String get create_doctor => 'Create doctor';
 }

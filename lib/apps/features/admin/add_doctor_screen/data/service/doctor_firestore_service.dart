@@ -37,6 +37,22 @@ class DoctorFirestoreService {
     }
   }
 
+  Stream<List<DoctorDto>> getDoctorsStream() {
+    return _getDoctorsCollection()
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
+        .handleError((error) {
+          switch (error) {
+            case FirebaseException _:
+              throw ServerException(message: error.message ?? 'server_error');
+            case SocketException _:
+              throw NetworkException(message: 'no_internet');
+            default:
+              throw UnexpectedException(message: error.toString());
+          }
+        });
+  }
+
   // Future<MyUserDto?> getUser(String uId) async {
   //   try {
   //     var documentSnapshot = await _getDoctorsCollection().doc(uId).get();

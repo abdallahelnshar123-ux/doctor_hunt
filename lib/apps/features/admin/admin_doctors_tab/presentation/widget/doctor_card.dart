@@ -1,7 +1,9 @@
 part of '../screens/admin_doctors_tab.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  final Doctor doctor;
+
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,10 @@ class DoctorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: .cover,
-                image: AssetImage(AppAssets.images.testDoctorImage.path),
+                image: doctor.imageUrl != null && doctor.imageUrl!.isNotEmpty
+                    ? CachedNetworkImageProvider(doctor.imageUrl!)
+                    : AssetImage(AppAssets.images.testDoctorImage.path)
+                          as ImageProvider,
               ),
             ),
           ),
@@ -30,12 +35,9 @@ class DoctorCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: .start,
               children: [
+                Text(doctor.name, style: context.medium16.textTertiary.rubik),
                 Text(
-                  t.doctor_details.doctor_name,
-                  style: context.medium16.textTertiary.rubik,
-                ),
-                Text(
-                  t.doctor_details.specialist_cardiology,
+                  doctor.specialty.name,
                   style: context.medium12.textSecondary.rubik,
                 ),
                 Chip(
@@ -44,17 +46,24 @@ class DoctorCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                   ),
                   side: BorderSide(width: 0, color: AppColors.transparent),
-                  backgroundColor: AppColors.statusErrorSurface,
+                  backgroundColor: doctor.active
+                      ? AppColors.brandPrimary20
+                      : AppColors.statusErrorSurface,
                   avatarBoxConstraints: .tightFor(width: 15),
                   avatar: Icon(
                     Icons.circle,
                     size: 10,
-                    color: AppColors.statusError,
+                    color: doctor.active
+                        ? AppColors.brandPrimaryDark
+                        : AppColors.statusError,
                   ),
-                  // visualDensity: .compact,
                   label: Text(
-                    t.admin.inactive,
-                    style: context.regular10.statusError.rubik,
+                    doctor.active
+                        ? t.admin.doctors_tab.active
+                        : t.admin.doctors_tab.inactive,
+                    style: doctor.active
+                        ? context.medium10.brandPrimaryDark.rubik
+                        : context.regular10.statusError.rubik,
                   ),
                 ),
 

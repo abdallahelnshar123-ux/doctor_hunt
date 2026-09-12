@@ -25,21 +25,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       (
         title: t.onboarding.page1.title,
         subtitle: t.onboarding.page1.subtitle,
-        image: AppAssets.images.onBoarding1.path,
+        imageUrl: AppAssets.images.onBoarding1.path,
         firstButton: t.onboarding.next,
         secondButton: t.onboarding.skip,
       ),
       (
         title: t.onboarding.page2.title,
         subtitle: t.onboarding.page2.subtitle,
-        image: AppAssets.images.onBoarding2.path,
+        imageUrl: AppAssets.images.onBoarding2.path,
         firstButton: t.onboarding.next,
         secondButton: t.onboarding.skip,
       ),
       (
         title: t.onboarding.page3.title,
         subtitle: t.onboarding.page3.subtitle,
-        image: AppAssets.images.onBoarding3.path,
+        imageUrl: AppAssets.images.onBoarding3.path,
         firstButton: t.onboarding.get_started,
         secondButton: t.onboarding.skip,
       ),
@@ -63,8 +63,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   return FadeTransition(opacity: animation, child: child);
                 },
                 child: Image.asset(
-                  key: ValueKey(currentPage.image),
-                  currentPage.image,
+                  key: ValueKey(currentPage.imageUrl),
+                  currentPage.imageUrl,
                   width: double.infinity,
                   fit: .cover,
                 ),

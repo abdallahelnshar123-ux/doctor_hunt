@@ -64,7 +64,10 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AdminMainScreen();
+    return BlocProvider(
+      create: (context) => getIt<DoctorBloc>()..add(GetDoctorsRequested()),
+      child: const AdminMainScreen(),
+    );
   }
 }
 

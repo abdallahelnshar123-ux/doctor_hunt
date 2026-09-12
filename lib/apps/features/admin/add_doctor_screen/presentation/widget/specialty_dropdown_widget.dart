@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../data/models/doctor/doctor.dart';
 
 class SpecialtyDropdownWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -51,10 +52,4 @@ class SpecialtyDropdownWidget extends StatelessWidget {
   }
 }
 
-enum Specialties {
-  allergists,
-  anesthesiologists,
-  cardiologists,
-  rectalSurgeons,
-  dermatologists,
-}
+

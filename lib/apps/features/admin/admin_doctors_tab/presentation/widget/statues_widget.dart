@@ -17,10 +17,19 @@ class StatuesWidget extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: buildListTile(
-                title: t.admin.total_doctors,
-                number: '15',
-                context: context,
+              child: BlocBuilder<DoctorBloc, DoctorState>(
+                buildWhen: (previous, current) =>
+                    current is GetDoctorsSuccessState ||
+                    current is GetDoctorsLoadingState,
+                builder: (context, state) {
+                  return buildListTile(
+                    title: t.admin.doctors_tab.total_doctors,
+                    number: state is GetDoctorsSuccessState
+                        ? state.doctors.length.toString()
+                        : '-',
+                    context: context,
+                  );
+                },
               ),
             ),
           ),
@@ -32,10 +41,19 @@ class StatuesWidget extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: buildListTile(
-                title: t.admin.active,
-                number: '15',
-                context: context,
+              child: BlocBuilder<DoctorBloc, DoctorState>(
+                buildWhen: (previous, current) =>
+                    current is GetDoctorsSuccessState ||
+                    current is GetDoctorsLoadingState,
+                builder: (context, state) {
+                  return buildListTile(
+                    title: t.admin.doctors_tab.active,
+                    number: state is GetDoctorsSuccessState
+                        ? state.activeDoctorsCount.toString()
+                        : '-',
+                    context: context,
+                  );
+                },
               ),
             ),
           ),
