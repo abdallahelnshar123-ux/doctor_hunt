@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/use_cases/get_doctors_use_case.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,10 +17,11 @@ part 'doctor_state.dart';
 @injectable
 class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   final DoctorRepository _repository;
-  List<Doctor> _allDoctors = [];
+  final GetDoctorsUseCase _getDoctorsUseCase;
+  List<Doctor> allDoctors = [];
   String _selectedSpecialty = '';
 
-  DoctorBloc(this._repository) : super(DoctorInitial()) {
+  DoctorBloc(this._repository, this._getDoctorsUseCase) : super(DoctorInitial()) {
     _selectedSpecialty = t.admin.doctors_tab.all;
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
@@ -32,7 +35,7 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   ) async {
     _selectedSpecialty = event.specialty;
     if (state is GetDoctorsSuccessState) {
-      emit(_buildSuccessState(_allDoctors));
+      emit(_buildSuccessState(allDoctors));
     }
   }
 
@@ -65,11 +68,11 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   ) async {
     emit(GetDoctorsLoadingState());
     await emit.forEach(
-      _repository.getAccounts(),
+      _getDoctorsUseCase(userId: event.userId, role: event.role),
       onData: (result) => result.fold(
         (failure) => GetDoctorsErrorState(failure.message),
         (doctorsList) {
-          _allDoctors = doctorsList;
+          allDoctors = doctorsList;
           return _buildSuccessState(doctorsList);
         },
       ),

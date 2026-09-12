@@ -9,6 +9,8 @@ import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens
 import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/appointment_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -64,8 +66,13 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    final user = context.read<AuthBloc>().currentUser;
     return BlocProvider(
-      create: (context) => getIt<DoctorBloc>()..add(GetDoctorsRequested()),
+      create: (context) => getIt<DoctorBloc>()
+        ..add(GetDoctorsRequested(
+          userId: user?.id ?? '',
+          role: user?.role ?? UserRoles.admin,
+        )),
       child: const AdminMainScreen(),
     );
   }

@@ -17,19 +17,13 @@ class StatuesWidget extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: BlocBuilder<DoctorBloc, DoctorState>(
-                buildWhen: (previous, current) =>
-                    current is GetDoctorsSuccessState ||
-                    current is GetDoctorsLoadingState,
-                builder: (context, state) {
-                  return buildListTile(
-                    title: t.admin.doctors_tab.total_doctors,
-                    number: state is GetDoctorsSuccessState
-                        ? state.doctors.length.toString()
-                        : '-',
-                    context: context,
-                  );
-                },
+              child: buildListTile(
+                title: t.admin.doctors_tab.total_doctors,
+                number:
+                    context.watch<DoctorBloc>().state is GetDoctorsSuccessState
+                    ? context.watch<DoctorBloc>().allDoctors.length.toString()
+                    : '-',
+                context: context,
               ),
             ),
           ),

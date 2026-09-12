@@ -21,7 +21,13 @@ class AddDoctorRequested extends DoctorEvent {
 
 class PickDoctorImageRequested extends DoctorEvent {}
 
-class GetDoctorsRequested extends DoctorEvent {}
+class GetDoctorsRequested extends DoctorEvent {
+  final String userId;
+  final UserRoles role;
+
+  GetDoctorsRequested({required this.userId, required this.role});
+}
+
 
 class FilterDoctorsRequested extends DoctorEvent {
   final String specialty;
