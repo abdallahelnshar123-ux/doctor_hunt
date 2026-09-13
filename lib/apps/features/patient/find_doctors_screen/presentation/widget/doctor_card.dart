@@ -6,8 +6,6 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/router/app_routes.dart';
-
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key});
 
@@ -76,9 +74,7 @@ class DoctorCard extends StatelessWidget {
       paddingVertical: 10,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
-      onPressed: () {
-        const DoctorDetailsRoute().push(context);
-      },
+      onPressed: () {},
       child: Text(
         t.doctor_details.book_now,
         style: context.medium11.bgPrimary.rubik,

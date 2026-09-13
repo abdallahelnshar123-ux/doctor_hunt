@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
@@ -7,8 +8,12 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../../../admin/add_doctor_screen/data/models/doctor/doctor.dart';
+
 class DoctorDetailsCard extends StatelessWidget {
-  const DoctorDetailsCard({super.key});
+  const DoctorDetailsCard({super.key, required this.doctor});
+
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -119,15 +124,12 @@ class DoctorDetailsCard extends StatelessWidget {
       children: [
         FittedBox(
           fit: .scaleDown,
-          child: Text(
-            t.doctor_details.doctor_name,
-            style: context.medium16.textTertiary.rubik,
-          ),
+          child: Text(doctor.name, style: context.medium16.textTertiary.rubik),
         ),
         FittedBox(
           fit: .scaleDown,
           child: Text(
-            t.doctor_details.specialist_cardiology,
+            doctor.specialty.name,
             style: context.light11.textSecondary.rubik,
           ),
         ),
@@ -141,7 +143,7 @@ class DoctorDetailsCard extends StatelessWidget {
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       image: DecorationImage(
-        image: AssetImage(AppAssets.images.testDoctorImage.path),
+        image: CachedNetworkImageProvider(doctor.imageUrl ?? ''),
         fit: .cover,
       ),
     ),

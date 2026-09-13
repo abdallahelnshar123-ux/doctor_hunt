@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
@@ -135,11 +136,12 @@ class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
 
 @TypedGoRoute<DoctorDetailsRoute>(path: '/doctor_details')
 class DoctorDetailsRoute extends GoRouteData with $DoctorDetailsRoute {
-  const DoctorDetailsRoute();
+  const DoctorDetailsRoute(this.$extra);
+  final Doctor $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const DoctorDetailsScreen();
+    return DoctorDetailsScreen(doctor: $extra);
   }
 }
 

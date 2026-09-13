@@ -8,10 +8,11 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../admin/add_doctor_screen/data/models/doctor/doctor.dart';
 
 class DoctorDetailsScreen extends StatelessWidget {
-  const DoctorDetailsScreen({super.key});
-
+  const DoctorDetailsScreen({super.key , required this.doctor});
+  final Doctor doctor;
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -24,7 +25,7 @@ class DoctorDetailsScreen extends StatelessWidget {
               child: Column(
                 spacing: 24,
                 children: [
-                  DoctorDetailsCard(),
+                  DoctorDetailsCard(doctor: doctor,),
                   DoctorStatisticsWidget(),
                   ServicesWidget(),
                   Container(
