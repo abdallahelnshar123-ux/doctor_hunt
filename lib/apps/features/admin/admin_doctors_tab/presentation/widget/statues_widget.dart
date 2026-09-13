@@ -64,10 +64,6 @@ class StatuesWidget extends StatelessWidget {
     return ListTile(
       titleTextStyle: context.regular11.textSecondary.rubik,
       subtitleTextStyle: context.bold18.textPrimary.rubik.copyWith(height: 2),
-      // leading: CircleAvatar(
-      //   backgroundColor: AppColors.brandPrimary20,
-      //   child: Icon(Icons.person_2_outlined, color: AppColors.brandPrimaryDark),
-      // ),
       title: FittedBox(
         alignment: .centerLeft,
         fit: .scaleDown,

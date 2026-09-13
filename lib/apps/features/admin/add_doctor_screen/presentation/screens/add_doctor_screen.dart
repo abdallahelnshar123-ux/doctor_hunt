@@ -88,15 +88,10 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
               SizedBox(height: 20),
               SpecialtyDropdownWidget(controller: specialtyController),
               SizedBox(height: 50),
-              SizedBox(height: 50),
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () {
                   var adminId = context.read<AuthBloc>().currentUser!.id;
-
-                  debugPrint('============================');
-                  debugPrint(adminId);
-                  debugPrint('============================');
                   if (formKey.currentState!.validate()) {
                     if (selectedImage == null) {
                       SnackBarUtils.showInfoSnackBar(

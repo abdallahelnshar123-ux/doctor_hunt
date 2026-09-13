@@ -2,6 +2,8 @@ import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -9,8 +11,6 @@ import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens
 import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/appointment_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -56,7 +56,17 @@ class MainRoute extends GoRouteData with $MainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const MainScreen();
+    final user = context.read<AuthBloc>().currentUser;
+    return BlocProvider(
+      create: (context) => getIt<DoctorBloc>()
+        ..add(
+          GetDoctorsRequested(
+            userId: user?.id ?? '',
+            role: user?.role ?? UserRoles.patient,
+          ),
+        ),
+      child: const MainScreen(),
+    );
   }
 }
 
@@ -69,10 +79,12 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
     final user = context.read<AuthBloc>().currentUser;
     return BlocProvider(
       create: (context) => getIt<DoctorBloc>()
-        ..add(GetDoctorsRequested(
-          userId: user?.id ?? '',
-          role: user?.role ?? UserRoles.admin,
-        )),
+        ..add(
+          GetDoctorsRequested(
+            userId: user?.id ?? '',
+            role: user?.role ?? UserRoles.admin,
+          ),
+        ),
       child: const AdminMainScreen(),
     );
   }

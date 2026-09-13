@@ -5,8 +5,6 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   final double appBarHeight;
 
-  // final String? title;
-
   @override
   Widget build(BuildContext context) {
     return AppBar(

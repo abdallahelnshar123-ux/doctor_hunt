@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -7,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class FeatureDoctorsItem extends StatelessWidget {
-  const FeatureDoctorsItem({super.key});
+  const FeatureDoctorsItem({super.key, required this.doctor});
+
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +42,16 @@ class FeatureDoctorsItem extends StatelessWidget {
           Expanded(
             child: CircleAvatar(
               maxRadius: double.infinity,
-              foregroundImage: AssetImage(
-                AppAssets.images.testDoctorImage.path,
-              ),
+              foregroundImage:
+                  doctor.imageUrl == null || doctor.imageUrl!.isEmpty
+                  ? AssetImage(AppAssets.images.fallbackUserImage.path)
+                  : CachedNetworkImageProvider(doctor.imageUrl ?? ''),
             ),
           ),
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              t.doctor_details.doctor_name,
+              doctor.name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),

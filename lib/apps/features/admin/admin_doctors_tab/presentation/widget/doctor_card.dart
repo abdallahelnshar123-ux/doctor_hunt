@@ -66,27 +66,6 @@ class DoctorCard extends StatelessWidget {
                         : context.regular10.statusError.rubik,
                   ),
                 ),
-
-                /// Do not delete it !!!
-                // Chip(
-                //   padding: EdgeInsets.all(5),
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(30),
-                //   ),
-                //   side: BorderSide(width: 0, color: AppColors.transparent),
-                //   backgroundColor: AppColors.brandPrimary20,
-                //   avatarBoxConstraints: .tightFor(width: 15),
-                //   avatar: Icon(
-                //     Icons.circle,
-                //     size: 10,
-                //     color: AppColors.brandPrimaryDark,
-                //   ),
-                //   // visualDensity: .compact,
-                //   label: Text(
-                //     'Active',
-                //     style: context.medium10.brandPrimaryDark.rubik,
-                //   ),
-                // ),
               ],
             ),
           ),
