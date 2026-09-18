@@ -6,6 +6,7 @@ import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_mapper.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/service/doctor_firestore_service.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/exceptions/app_exceptions.dart';
@@ -35,7 +36,9 @@ class DoctorRepository {
         imageUrl = await _cloudinaryService.uploadImage(file: image);
       } catch (e) {
         return Left(
-          ServerFailure('Error while adding doctor please try again later'),
+          ServerFailure(
+            t.errors.error_while_adding_doctor_please_try_again_later,
+          ),
         );
       }
 

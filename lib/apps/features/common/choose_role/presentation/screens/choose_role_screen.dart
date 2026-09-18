@@ -49,8 +49,8 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<AuthBloc>().selectedRole =
-                            UserRoles.patient;
+                        // context.read<AuthBloc>().selectedRole =
+                        //     UserRoles.patient;
                         const PatientLoginRoute().push(context);
                       },
                       child: RoleWidget(
@@ -62,7 +62,7 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        context.read<AuthBloc>().selectedRole = UserRoles.admin;
+                        // context.read<AuthBloc>().selectedRole = UserRoles.admin;
 
                         const AdminLoginRoute().push(context);
                       },

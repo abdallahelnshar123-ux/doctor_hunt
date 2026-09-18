@@ -69,6 +69,12 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$admin$en admin = Translations$admin$en.internal(
     _root,
   );
+  late final Translations$errors$en errors = Translations$errors$en.internal(
+    _root,
+  );
+  late final Translations$e_codes$en e_codes = Translations$e_codes$en.internal(
+    _root,
+  );
 }
 
 // Path: auth
@@ -268,8 +274,8 @@ class Translations$doctor_details$en with PageData2 {
   /// en: 'Specialist Cardiologist'
   String get specialist_cardiology => 'Specialist Cardiologist';
 
-  /// en: 'Tooths Dentist'
-  String get tooths_dentist => 'Tooths Dentist';
+  /// en: 'Tooth Dentist'
+  String get tooth_dentist => 'Tooth Dentist';
 }
 
 // Path: appointment
@@ -396,6 +402,66 @@ class Translations$admin$en {
       Translations$admin$doctors_tab$en.internal(_root);
   late final Translations$admin$add_doctor_screen$en add_doctor_screen =
       Translations$admin$add_doctor_screen$en.internal(_root);
+}
+
+// Path: errors
+class Translations$errors$en {
+  Translations$errors$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'No account associated with this email'
+  String get no_account_associated => 'No account associated with this email';
+
+  /// en: 'Some thing went wrong'
+  String get some_thing_went_wrong => 'Some thing went wrong';
+
+  /// en: 'Server error'
+  String get server_error => 'Server error';
+
+  /// en: 'No internet'
+  String get no_internet => 'No internet';
+
+  /// en: 'The email or password is incorrect'
+  String get email_or_password_is_incorrect =>
+      'The email or password is incorrect';
+
+  /// en: 'The email address is already in use by another account'
+  String get email_address_already_in_use_by_another_account =>
+      'The email address is already in use by another account';
+
+  /// en: 'User isn't Authenticated'
+  String get user_not_authenticated => 'User isn\'t Authenticated';
+
+  /// en: 'Error while adding doctor please try again later'
+  String get error_while_adding_doctor_please_try_again_later =>
+      'Error while adding doctor please try again later';
+
+  /// en: 'Cancelled by user'
+  String get cancelled_by_user => 'Cancelled by user';
+}
+
+// Path: e_codes
+class Translations$e_codes$en {
+  Translations$e_codes$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'web-user-interaction-failed'
+  String get web_user_interaction_failed => 'web-user-interaction-failed';
+
+  /// en: 'cancelled'
+  String get cancelled => 'cancelled';
+
+  /// en: 'invalid-credential'
+  String get invalid_credential => 'invalid-credential';
+
+  /// en: 'email-already-in-use'
+  String get email_already_in_use => 'email-already-in-use';
 }
 
 // Path: onboarding.page1

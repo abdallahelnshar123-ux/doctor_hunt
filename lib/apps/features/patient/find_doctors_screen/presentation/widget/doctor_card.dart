@@ -119,7 +119,7 @@ class DoctorCard extends StatelessWidget {
             ),
           ),
           Text(
-            t.doctor_details.tooths_dentist,
+            t.doctor_details.tooth_dentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(

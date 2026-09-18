@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor_dto/doctor_dto.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/constants/firestore_constants.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';
 
@@ -13,7 +14,6 @@ class DoctorFirestoreService {
 
   DoctorFirestoreService(this._firebaseFirestore);
 
-  /// ==========================   doctors    ==============================
   CollectionReference<DoctorDto> _getDoctorsCollection() {
     return _firebaseFirestore
         .collection(FirestoreConstants.doctorsCollection)
@@ -29,9 +29,9 @@ class DoctorFirestoreService {
       var doc = _getDoctorsCollection().doc();
       return doc.set(doctor.copyWith(id: doc.id));
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.no_internet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -45,9 +45,11 @@ class DoctorFirestoreService {
         .handleError((error) {
           switch (error) {
             case FirebaseException _:
-              throw ServerException(message: error.message ?? 'server_error');
+              throw ServerException(
+                message: error.message ?? t.errors.server_error,
+              );
             case SocketException _:
-              throw NetworkException(message: 'no_internet');
+              throw NetworkException(message: t.errors.no_internet);
             default:
               throw UnexpectedException(message: error.toString());
           }
@@ -61,9 +63,11 @@ class DoctorFirestoreService {
         .handleError((error) {
           switch (error) {
             case FirebaseException _:
-              throw ServerException(message: error.message ?? 'server_error');
+              throw ServerException(
+                message: error.message ?? t.errors.server_error,
+              );
             case SocketException _:
-              throw NetworkException(message: 'no_internet');
+              throw NetworkException(message: t.errors.no_internet);
             default:
               throw UnexpectedException(message: error.toString());
           }

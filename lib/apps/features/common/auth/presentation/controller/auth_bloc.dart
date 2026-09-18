@@ -21,7 +21,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   MyUser? currentUser;
-  UserRoles? selectedRole;
 
   Future<void> _onLoginRequested(
     LoginRequested event,

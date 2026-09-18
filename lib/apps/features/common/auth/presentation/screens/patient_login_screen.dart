@@ -43,9 +43,9 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
         if (state is UserAuthenticatedState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            title: 'success',
+            title: t.dialog.success,
             context: context,
-            message: 'success',
+            message: t.dialog.success,
           );
 
           Future.delayed(Duration(seconds: 2), () {
@@ -59,18 +59,18 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
           debugPrint(state.message);
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: 'ok',
-            title: 'error',
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
             context: context,
             message: state.message,
           );
         }
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
-          if (state.message != 'Cancelled by user') {
+          if (state.message != t.errors.cancelled_by_user) {
             DialogUtils.showMessage(
-              posActionText: 'ok',
-              title: 'error',
+              posActionText: t.dialog.ok,
+              title: t.dialog.error,
               context: context,
               message: state.message,
             );

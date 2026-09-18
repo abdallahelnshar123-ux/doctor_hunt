@@ -4,6 +4,7 @@ import 'package:doctor_hunt/apps/core/mapper/my_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/auth_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/exceptions/app_exceptions.dart';
@@ -98,7 +99,7 @@ class AuthRepository {
         authUserDto.id,
       );
       if (databaseUser == null) {
-        return Left(UnauthorizedFailure('some thing went wrong'));
+        return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
       }
 
       await _userLocalDataSource.setUser(databaseUser);
@@ -113,8 +114,6 @@ class AuthRepository {
   Future<Either<Failure, Unit>> logout() async {
     try {
       await _authService.logout();
-      // await _userLocalDataSource.deleteUser();
-
       return Right(unit);
     } on AppException catch (e) {
       return Left(e.toFailure());

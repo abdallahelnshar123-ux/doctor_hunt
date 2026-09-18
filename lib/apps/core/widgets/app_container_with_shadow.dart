@@ -67,7 +67,6 @@ class AppContainerWithShadow extends StatelessWidget {
     }
 
     return Container(
-      color: color,
       isAntiAlias: isAntiAlias,
       key: key,
       alignment: alignment,

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:doctor_hunt/apps/core/mapper/auth_user_dto_mapper.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -36,12 +37,13 @@ class AuthService {
       var userCredential = await _firebaseAuth.signInWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'web-user-interaction-failed' || e.code == 'cancelled') {
+      if (e.code == t.e_codes.web_user_interaction_failed ||
+          e.code == t.e_codes.cancelled) {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.no_internet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -58,12 +60,12 @@ class AuthService {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'invalid-credential') {
-        throw ServerException(message: 'the_email_or_password_is_incorrect');
+      if (e.code == t.e_codes.invalid_credential) {
+        throw ServerException(message: t.errors.email_or_password_is_incorrect);
       }
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -80,14 +82,14 @@ class AuthService {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'email-already-in-use') {
+      if (e.code == t.e_codes.email_already_in_use) {
         throw ServerException(
-          message: 'the_email_address_is_already_in_use_by_another_account',
+          message: t.errors.email_address_already_in_use_by_another_account,
         );
       }
-      throw ServerException(message: e.message ?? "Server error");
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -97,9 +99,9 @@ class AuthService {
     try {
       await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.no_internet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -117,9 +119,9 @@ class AuthService {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -129,9 +131,9 @@ class AuthService {
     try {
       await _firebaseAuth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -142,7 +144,7 @@ class AuthService {
       final user = _firebaseAuth.currentUser;
 
       if (user == null) {
-        throw UnauthorizedException(message: 'User not authenticated');
+        throw UnauthorizedException(message: t.errors.user_not_authenticated);
       }
 
       final credential = await _getGoogleCredential();
@@ -150,9 +152,9 @@ class AuthService {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -162,9 +164,9 @@ class AuthService {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? 'server_error');
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
-      throw NetworkException(message: 'no_internet');
+      throw NetworkException(message: t.errors.server_error);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }

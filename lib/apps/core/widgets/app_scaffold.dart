@@ -118,7 +118,7 @@ class _MainBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(color: Colors.white),
+        Container(color: AppColors.white),
 
         Positioned(
           top: -600,
@@ -167,7 +167,7 @@ class _OnboardingBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(color: Colors.white),
+        Container(color: AppColors.white),
 
         Positioned(
           top: -60,

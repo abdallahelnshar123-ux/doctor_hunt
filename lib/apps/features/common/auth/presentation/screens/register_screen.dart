@@ -57,8 +57,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (state is RegisterWithEmailPasswordErrorState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: 'ok',
-            title: 'error',
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
             context: context,
             message: state.message,
           );
@@ -66,8 +66,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: 'ok',
-            title: 'error',
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
             context: context,
             message: state.message,
           );

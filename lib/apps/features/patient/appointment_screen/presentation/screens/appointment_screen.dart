@@ -17,10 +17,6 @@ class AppointmentScreen extends StatefulWidget {
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
-  // final _scaffoldKey = GlobalKey<ScaffoldState>();
-  //
-  // PersistentBottomSheetController? _bottomSheetController;
-
   final ValueNotifier _selectedDate = ValueNotifier(null);
 
   @override

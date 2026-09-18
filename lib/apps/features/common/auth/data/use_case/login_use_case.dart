@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
 import '../repo/auth_repository_impl.dart';
@@ -25,9 +26,7 @@ class LoginUseCase {
       if (r.role == role) {
         return Right(r);
       } else {
-        return Left(
-          UnauthorizedFailure('no account associated with this email'),
-        );
+        return Left(UnauthorizedFailure(t.errors.no_account_associated));
       }
     });
   }

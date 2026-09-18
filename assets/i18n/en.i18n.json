@@ -80,7 +80,7 @@
     "pricePerHour": "${price}/ hours",
     "doctorName": "Doctor name",
     "specialistCardiology": "Specialist Cardiologist",
-    "toothsDentist": "Tooths Dentist"
+    "toothDentist": "Tooth Dentist"
   },
   "appointment": {
     "title": "Appointment",
@@ -142,5 +142,22 @@
       "tapToPick": "Tap to pick an image",
       "createDoctor": "Create doctor"
     }
+  },
+  "errors": {
+    "noAccountAssociated": "No account associated with this email",
+    "someThingWentWrong": "Some thing went wrong",
+    "serverError": "Server error",
+    "noInternet": "No internet",
+    "emailOrPasswordIsIncorrect": "The email or password is incorrect",
+    "emailAddressAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
+    "userNotAuthenticated" : "User isn't Authenticated",
+    "errorWhileAddingDoctorPleaseTryAgainLater" : "Error while adding doctor please try again later",
+    "cancelledByUser" : "Cancelled by user"
+  },
+  "eCodes" : {
+    "webUserInteractionFailed" : "web-user-interaction-failed",
+    "cancelled": "cancelled",
+    "invalidCredential" : "invalid-credential",
+    "emailAlreadyInUse": "email-already-in-use"
   }
 }

@@ -135,7 +135,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
     return CustomElevatedButton(
       buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {
-        if (formKey.currentState?.validate() ?? false) {
+        if (formKey.currentState!.validate()) {
           context.read<AuthBloc>().add(
             LoginRequested(
               role: UserRoles.admin,
