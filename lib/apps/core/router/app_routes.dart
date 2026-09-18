@@ -137,6 +137,7 @@ class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
 @TypedGoRoute<DoctorDetailsRoute>(path: '/doctor_details')
 class DoctorDetailsRoute extends GoRouteData with $DoctorDetailsRoute {
   const DoctorDetailsRoute(this.$extra);
+
   final Doctor $extra;
 
   @override

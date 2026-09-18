@@ -13,7 +13,7 @@ class DoctorFirestoreService {
 
   DoctorFirestoreService(this._firebaseFirestore);
 
-  /// ==========================   users     ==============================
+  /// ==========================   doctors    ==============================
   CollectionReference<DoctorDto> _getDoctorsCollection() {
     return _firebaseFirestore
         .collection(FirestoreConstants.doctorsCollection)
@@ -37,8 +37,9 @@ class DoctorFirestoreService {
     }
   }
 
-  Stream<List<DoctorDto>> getDoctorsStream() {
+  Stream<List<DoctorDto>> getDoctorsStreamForAdmin({required String adminId}) {
     return _getDoctorsCollection()
+        .where(FirestoreConstants.adminId, isEqualTo: adminId)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
         .handleError((error) {
@@ -53,41 +54,19 @@ class DoctorFirestoreService {
         });
   }
 
-  // Future<MyUserDto?> getUser(String uId) async {
-  //   try {
-  //     var documentSnapshot = await _getDoctorsCollection().doc(uId).get();
-  //     return documentSnapshot.data();
-  //   } on FirebaseException catch (e) {
-  //     throw ServerException(message: e.message ?? 'server_error');
-  //   } on SocketException {
-  //     throw NetworkException(message: 'no_internet');
-  //   } catch (e) {
-  //     throw UnexpectedException(message: e.toString());
-  //   }
-  // }
-  //
-  // Future<void> updateUser(MyUserDto user) async {
-  //   try {
-  //     var querySnapshot = _getDoctorsCollection().doc(user.id);
-  //     await querySnapshot.update(user.toFireStore());
-  //   } on FirebaseException catch (e) {
-  //     throw ServerException(message: e.message ?? 'server_error');
-  //   } on SocketException {
-  //     throw NetworkException(message: 'no_internet');
-  //   } catch (e) {
-  //     throw UnexpectedException(message: e.toString());
-  //   }
-  // }
-  //
-  // Future<void> deleteUser(String uId) async {
-  //   try {
-  //     await _getDoctorsCollection().doc(uId).delete();
-  //   } on FirebaseException catch (e) {
-  //     throw ServerException(message: e.message ?? 'server_error');
-  //   } on SocketException {
-  //     throw NetworkException(message: 'no_internet');
-  //   } catch (e) {
-  //     throw UnexpectedException(message: e.toString());
-  //   }
-  // }
+  Stream<List<DoctorDto>> getDoctorsStreamForPatient() {
+    return _getDoctorsCollection()
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
+        .handleError((error) {
+          switch (error) {
+            case FirebaseException _:
+              throw ServerException(message: error.message ?? 'server_error');
+            case SocketException _:
+              throw NetworkException(message: 'no_internet');
+            default:
+              throw UnexpectedException(message: error.toString());
+          }
+        });
+  }
 }

@@ -16,6 +16,7 @@ class FirestoreConstants {
   static const String role = 'role';
   static const String adminId = 'admin_id';
   static const String specialty = 'specialty';
+
   // static const String password = 'password';
   static const String active = 'active';
   static const String loginMethods = 'login_methods';

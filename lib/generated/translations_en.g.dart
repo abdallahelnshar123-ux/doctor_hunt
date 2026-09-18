@@ -14,7 +14,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   ///
   /// Usage:
   /// final t = Translations.of(context);
-  static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+  static Translations of(BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
@@ -23,7 +24,10 @@ class Translations with BaseTranslations<AppLocale, Translations> {
     PluralResolver? cardinalResolver,
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
-  }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
+  }) : assert(
+         overrides == null,
+         'Set "translation_overrides: true" in order to enable this feature.',
+       ),
        $meta =
            meta ??
            TranslationMetadata(
@@ -39,19 +43,32 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   late final Translations _root = this; // ignore: unused_field
 
-  Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+  Translations $copyWith({
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) => Translations(meta: meta ?? this.$meta);
 
   // Translations
   late final Translations$auth$en auth = Translations$auth$en.internal(_root);
-  late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
-  late final Translations$choose_role$en choose_role = Translations$choose_role$en.internal(_root);
+  late final Translations$onboarding$en onboarding =
+      Translations$onboarding$en.internal(_root);
+  late final Translations$choose_role$en choose_role =
+      Translations$choose_role$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
-  late final Translations$doctor_details$en doctor_details = Translations$doctor_details$en.internal(_root);
-  late final Translations$appointment$en appointment = Translations$appointment$en.internal(_root);
-  late final Translations$create_doctor$en create_doctor = Translations$create_doctor$en.internal(_root);
-  late final Translations$common$en common = Translations$common$en.internal(_root);
-  late final Translations$dialog$en dialog = Translations$dialog$en.internal(_root);
-  late final Translations$admin$en admin = Translations$admin$en.internal(_root);
+  late final Translations$doctor_details$en doctor_details =
+      Translations$doctor_details$en.internal(_root);
+  late final Translations$appointment$en appointment =
+      Translations$appointment$en.internal(_root);
+  late final Translations$create_doctor$en create_doctor =
+      Translations$create_doctor$en.internal(_root);
+  late final Translations$common$en common = Translations$common$en.internal(
+    _root,
+  );
+  late final Translations$dialog$en dialog = Translations$dialog$en.internal(
+    _root,
+  );
+  late final Translations$admin$en admin = Translations$admin$en.internal(
+    _root,
+  );
 }
 
 // Path: auth
@@ -66,7 +83,8 @@ class Translations$auth$en {
   String get welcome_back => 'Welcome back';
 
   /// en: 'You can search course, apply course and find scholarship for abroad studies'
-  String get auth_subtitle => 'You can search course, apply course and find scholarship for abroad studies';
+  String get auth_subtitle =>
+      'You can search course, apply course and find scholarship for abroad studies';
 
   /// en: 'Login to your admin account'
   String get admin_subtitle => 'Login to your admin account';
@@ -87,7 +105,8 @@ class Translations$auth$en {
   String get have_account => 'Have an account? Log in';
 
   /// en: 'I agree with the Terms of Service & Privacy Policy'
-  String get agree_terms => 'I agree with the Terms of Service & Privacy Policy';
+  String get agree_terms =>
+      'I agree with the Terms of Service & Privacy Policy';
 
   /// en: 'Sign up'
   String get sign_up => 'Sign up';
@@ -125,9 +144,12 @@ class Translations$onboarding$en {
   /// en: 'Get Started'
   String get get_started => 'Get Started';
 
-  late final Translations$onboarding$page1$en page1 = Translations$onboarding$page1$en.internal(_root);
-  late final Translations$onboarding$page2$en page2 = Translations$onboarding$page2$en.internal(_root);
-  late final Translations$onboarding$page3$en page3 = Translations$onboarding$page3$en.internal(_root);
+  late final Translations$onboarding$page1$en page1 =
+      Translations$onboarding$page1$en.internal(_root);
+  late final Translations$onboarding$page2$en page2 =
+      Translations$onboarding$page2$en.internal(_root);
+  late final Translations$onboarding$page3$en page3 =
+      Translations$onboarding$page3$en.internal(_root);
 }
 
 // Path: choose_role
@@ -145,9 +167,12 @@ class Translations$choose_role$en with PageData2 {
   /// en: 'Choose your role'
   String get role_selection => 'Choose your role';
 
-  late final Translations$choose_role$patient$en patient = Translations$choose_role$patient$en.internal(_root);
-  late final Translations$choose_role$doctor$en doctor = Translations$choose_role$doctor$en.internal(_root);
-  late final Translations$choose_role$admin$en admin = Translations$choose_role$admin$en.internal(_root);
+  late final Translations$choose_role$patient$en patient =
+      Translations$choose_role$patient$en.internal(_root);
+  late final Translations$choose_role$doctor$en doctor =
+      Translations$choose_role$doctor$en.internal(_root);
+  late final Translations$choose_role$admin$en admin =
+      Translations$choose_role$admin$en.internal(_root);
 }
 
 // Path: home
@@ -275,8 +300,11 @@ class Translations$appointment$en with PageData2 {
   String get success => 'Your Appointment Successful';
 
   /// en: 'You booked an appointment with ${doctor} on ${date}, at ${time}'
-  String booking_details({required Object Doctor, required Object Date, required Object Time}) =>
-      'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
+  String booking_details({
+    required Object Doctor,
+    required Object Date,
+    required Object Time,
+  }) => 'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
 
   /// en: 'Done'
   String get done => 'Done';
@@ -351,7 +379,8 @@ class Translations$dialog$en {
   String get all_set_up => 'All set up';
 
   /// en: 'Registered Successfully, Please login. '
-  String get registered_successfully => 'Registered Successfully, Please login. ';
+  String get registered_successfully =>
+      'Registered Successfully, Please login. ';
 }
 
 // Path: admin
@@ -361,9 +390,12 @@ class Translations$admin$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
-  late final Translations$admin$doctors_tab$en doctors_tab = Translations$admin$doctors_tab$en.internal(_root);
-  late final Translations$admin$add_doctor_screen$en add_doctor_screen = Translations$admin$add_doctor_screen$en.internal(_root);
+  late final Translations$admin$main$en main =
+      Translations$admin$main$en.internal(_root);
+  late final Translations$admin$doctors_tab$en doctors_tab =
+      Translations$admin$doctors_tab$en.internal(_root);
+  late final Translations$admin$add_doctor_screen$en add_doctor_screen =
+      Translations$admin$add_doctor_screen$en.internal(_root);
 }
 
 // Path: onboarding.page1
@@ -379,7 +411,8 @@ class Translations$onboarding$page1$en with PageData2 {
   String get title => 'Find Trusted Doctors';
 
   /// en: 'Find trusted doctors near you. Get the care you need from experienced professionals.'
-  String get subtitle => 'Find trusted doctors near you. Get the care you need from experienced professionals.';
+  String get subtitle =>
+      'Find trusted doctors near you. Get the care you need from experienced professionals.';
 }
 
 // Path: onboarding.page2
@@ -395,7 +428,8 @@ class Translations$onboarding$page2$en with PageData2 {
   String get title => 'Choose Best Doctors';
 
   /// en: 'Explore doctors based on your needs. Choose the one that’s right for you.'
-  String get subtitle => 'Explore doctors based on your needs. Choose the one that’s right for you.';
+  String get subtitle =>
+      'Explore doctors based on your needs. Choose the one that’s right for you.';
 }
 
 // Path: onboarding.page3
@@ -411,7 +445,8 @@ class Translations$onboarding$page3$en with PageData2 {
   String get title => 'Easy Appointments';
 
   /// en: 'Book your appointment in just a few taps. Choose a time that works best for you.'
-  String get subtitle => 'Book your appointment in just a few taps. Choose a time that works best for you.';
+  String get subtitle =>
+      'Book your appointment in just a few taps. Choose a time that works best for you.';
 }
 
 // Path: choose_role.patient
@@ -495,7 +530,8 @@ class Translations$admin$doctors_tab$en {
   String get no_doctors_found => 'No Doctors Found';
 
   /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
-  String get no_doctors_description => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+  String get no_doctors_description =>
+      'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
 
   /// en: 'Total doctors'
   String get total_doctors => 'Total doctors';

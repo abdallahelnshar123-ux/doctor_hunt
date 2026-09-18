@@ -50,11 +50,20 @@ class DoctorRepository {
     }
   }
 
-  Stream<Either<Failure, List<Doctor>>> getAccounts() async* {
+  Stream<Either<Failure, List<Doctor>>> getDoctors({String? adminId}) async* {
     try {
-      await for (final accountDto in _firestoreService.getDoctorsStream()) {
-        final accounts = accountDto.map((dto) => dto.toDoctor()).toList();
-        yield Right(accounts);
+      if (adminId == null) {
+        await for (final doctorDto
+            in _firestoreService.getDoctorsStreamForPatient()) {
+          final accounts = doctorDto.map((dto) => dto.toDoctor()).toList();
+          yield Right(accounts);
+        }
+      } else {
+        await for (final accountDto
+            in _firestoreService.getDoctorsStreamForAdmin(adminId: adminId)) {
+          final accounts = accountDto.map((dto) => dto.toDoctor()).toList();
+          yield Right(accounts);
+        }
       }
     } on AppException catch (e) {
       yield Left(e.toFailure());

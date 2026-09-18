@@ -21,8 +21,6 @@ import '../../features/admin/add_doctor_screen/data/repo/doctor_repository.dart'
     as _i932;
 import '../../features/admin/add_doctor_screen/data/service/doctor_firestore_service.dart'
     as _i353;
-import '../../features/admin/add_doctor_screen/data/use_cases/get_doctors_use_case.dart'
-    as _i681;
 import '../../features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart'
     as _i546;
 import '../../features/common/auth/data/repo/auth_repository_impl.dart'
@@ -100,8 +98,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i708.UserPrefs>(),
       ),
     );
-    gh.factory<_i681.GetDoctorsUseCase>(
-      () => _i681.GetDoctorsUseCase(gh<_i932.DoctorRepository>()),
+    gh.factory<_i546.DoctorBloc>(
+      () => _i546.DoctorBloc(
+        gh<_i932.DoctorRepository>(),
+        gh<_i932.DoctorRepository>(),
+      ),
     );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i809.AuthRepository>()),
@@ -109,12 +110,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i669.AuthBloc>(
       () =>
           _i669.AuthBloc(gh<_i809.AuthRepository>(), gh<_i594.LoginUseCase>()),
-    );
-    gh.factory<_i546.DoctorBloc>(
-      () => _i546.DoctorBloc(
-        gh<_i932.DoctorRepository>(),
-        gh<_i681.GetDoctorsUseCase>(),
-      ),
     );
     return this;
   }

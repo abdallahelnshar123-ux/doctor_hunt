@@ -17,7 +17,9 @@ import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
 part '../widget/custom_appbar.dart';
+
 part '../widget/doctor_card.dart';
+
 part '../widget/statues_widget.dart';
 
 class AdminDoctorsTab extends StatelessWidget {

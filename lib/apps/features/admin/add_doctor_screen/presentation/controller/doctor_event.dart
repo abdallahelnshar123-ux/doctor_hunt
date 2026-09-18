@@ -28,7 +28,6 @@ class GetDoctorsRequested extends DoctorEvent {
   GetDoctorsRequested({required this.userId, required this.role});
 }
 
-
 class FilterDoctorsRequested extends DoctorEvent {
   final String specialty;
 

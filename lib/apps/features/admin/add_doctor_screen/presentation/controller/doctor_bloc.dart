@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/use_cases/get_doctors_use_case.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -11,17 +10,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 part 'doctor_event.dart';
-
 part 'doctor_state.dart';
 
 @injectable
 class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   final DoctorRepository _repository;
-  final GetDoctorsUseCase _getDoctorsUseCase;
+  final DoctorRepository _doctorRepository;
   List<Doctor> allDoctors = [];
   String _selectedSpecialty = '';
 
-  DoctorBloc(this._repository, this._getDoctorsUseCase) : super(DoctorInitial()) {
+  DoctorBloc(this._repository, this._doctorRepository)
+    : super(DoctorInitial()) {
     _selectedSpecialty = t.admin.doctors_tab.all;
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
@@ -68,7 +67,9 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   ) async {
     emit(GetDoctorsLoadingState());
     await emit.forEach(
-      _getDoctorsUseCase(userId: event.userId, role: event.role),
+      _doctorRepository.getDoctors(
+        adminId: event.role == UserRoles.admin ? event.userId : null,
+      ),
       onData: (result) => result.fold(
         (failure) => GetDoctorsErrorState(failure.message),
         (doctorsList) {
