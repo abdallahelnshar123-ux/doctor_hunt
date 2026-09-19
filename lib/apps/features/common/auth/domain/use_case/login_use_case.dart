@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
-import '../repo/auth_repository_impl.dart';
+import '../../domain/entity/user/my_user.dart';
+import '../repository/auth_repository.dart';
 
 @injectable
 class LoginUseCase {

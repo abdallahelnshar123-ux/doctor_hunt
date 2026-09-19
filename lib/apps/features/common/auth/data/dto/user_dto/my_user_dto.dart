@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 import '../../../../../../core/constants/firestore_constants.dart';
-import '../user/my_user.dart';
+import '../../../domain/entity/user/my_user.dart';
 
 class MyUserDto extends Equatable {
   final String name;

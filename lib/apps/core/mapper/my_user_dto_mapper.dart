@@ -1,5 +1,5 @@
-import '../../features/common/auth/data/models/user/my_user.dart';
-import '../../features/common/auth/data/models/user_dto/my_user_dto.dart';
+import '../../features/common/auth/data/dto/user_dto/my_user_dto.dart';
+import '../../features/common/auth/domain/entity/user/my_user.dart';
 
 extension MyUserDtoMapper on MyUser {
   MyUserDto toMyUserDto() {

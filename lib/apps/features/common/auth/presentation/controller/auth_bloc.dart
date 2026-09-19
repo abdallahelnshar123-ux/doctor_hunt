@@ -1,9 +1,9 @@
-import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository_impl.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/use_case/login_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/models/user/my_user.dart';
+import '../../domain/entity/user/my_user.dart';
+import '../../domain/repository/auth_repository.dart';
+import '../../domain/use_case/login_use_case.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 

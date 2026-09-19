@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../common/auth/domain/entity/user/my_user.dart';
 
 part 'doctor_event.dart';
 part 'doctor_state.dart';

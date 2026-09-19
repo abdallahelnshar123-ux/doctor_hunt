@@ -1,41 +1,25 @@
 import 'dart:io';
 
-import 'package:doctor_hunt/apps/core/mapper/auth_user_dto_mapper.dart';
-import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../../core/exceptions/app_exceptions.dart';
-import '../../models/user_dto/auth_user_dto.dart';
+import '../../../../../../../../../generated/translations.g.dart';
+import '../../../../../../../../core/exceptions/app_exceptions.dart';
+import '../../../../dto/user_dto/auth_user_dto.dart';
 
-@lazySingleton
-class AuthService {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
+@Injectable(as: AuthRemoteDataSource)
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final FirebaseAuthService _firebaseAuthService;
 
-  AuthService(this._firebaseAuth, this._googleSignIn);
+  AuthRemoteDataSourceImpl(this._firebaseAuthService);
 
-  Future<AuthCredential> _getGoogleCredential() async {
-    await _googleSignIn.initialize(
-      clientId:
-          '881075334135-ov74682hu4g63rqjpq4d17qol1oam6aq.apps.googleusercontent.com',
-    );
-
-    final GoogleSignInAccount googleAccount = await _googleSignIn
-        .authenticate();
-
-    final GoogleSignInAuthentication googleAuth = googleAccount.authentication;
-
-    return GoogleAuthProvider.credential(idToken: googleAuth.idToken);
-  }
-
+  @override
   Future<AuthUserDto> continueWithGoogle() async {
     try {
-      final credential = await _getGoogleCredential();
-
-      var userCredential = await _firebaseAuth.signInWithCredential(credential);
-      return userCredential.toAuthUserDto();
+      var authUserDto = await _firebaseAuthService.continueWithGoogle();
+      return authUserDto;
     } on FirebaseAuthException catch (e) {
       if (e.code == t.e_codes.web_user_interaction_failed ||
           e.code == t.e_codes.cancelled) {
@@ -49,16 +33,17 @@ class AuthService {
     }
   }
 
+  @override
   Future<AuthUserDto> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      var userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+      var authUserDto = await _firebaseAuthService.loginWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.toAuthUserDto();
+      return authUserDto;
     } on FirebaseAuthException catch (e) {
       if (e.code == t.e_codes.invalid_credential) {
         throw ServerException(message: t.errors.email_or_password_is_incorrect);
@@ -71,16 +56,17 @@ class AuthService {
     }
   }
 
+  @override
   Future<AuthUserDto> registerWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      var userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      var authUserDto = await _firebaseAuthService.registerWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return userCredential.toAuthUserDto();
+      return authUserDto;
     } on FirebaseAuthException catch (e) {
       if (e.code == t.e_codes.email_already_in_use) {
         throw ServerException(
@@ -95,9 +81,10 @@ class AuthService {
     }
   }
 
+  @override
   Future<void> logout() async {
     try {
-      await _firebaseAuth.signOut();
+      await _firebaseAuthService.logout();
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
@@ -107,17 +94,14 @@ class AuthService {
     }
   }
 
+  @override
   Future<AuthUserDto> reAuthenticate({required String password}) async {
     try {
-      final user = _firebaseAuth.currentUser;
-
-      final credential = EmailAuthProvider.credential(
-        email: user!.email!,
+      final authUserDto = await _firebaseAuthService.reAuthenticate(
         password: password,
       );
 
-      var userCredential = await user.reauthenticateWithCredential(credential);
-      return userCredential.toAuthUserDto();
+      return authUserDto;
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
@@ -127,9 +111,10 @@ class AuthService {
     }
   }
 
+  @override
   Future<void> deleteAccount() async {
     try {
-      await _firebaseAuth.currentUser!.delete();
+      await _firebaseAuthService.deleteAccount();
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
@@ -139,18 +124,10 @@ class AuthService {
     }
   }
 
+  @override
   Future<AuthUserDto> reAuthenticateWithGoogle() async {
     try {
-      final user = _firebaseAuth.currentUser;
-
-      if (user == null) {
-        throw UnauthorizedException(message: t.errors.user_not_authenticated);
-      }
-
-      final credential = await _getGoogleCredential();
-
-      var userCredential = await user.reauthenticateWithCredential(credential);
-      return userCredential.toAuthUserDto();
+      return await _firebaseAuthService.reAuthenticateWithGoogle();
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
@@ -160,9 +137,10 @@ class AuthService {
     }
   }
 
+  @override
   Future<void> resetPassword({required String email}) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
+      await _firebaseAuthService.resetPassword(email: email);
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {

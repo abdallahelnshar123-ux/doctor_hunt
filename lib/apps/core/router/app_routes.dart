@@ -3,7 +3,6 @@ import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/do
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
@@ -16,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/common/auth/domain/entity/user/my_user.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/patient/main_screen/presentation/screens/main_screen.dart';
 

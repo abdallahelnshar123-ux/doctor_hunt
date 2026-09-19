@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../auth/data/models/user/my_user.dart';
+import '../../../auth/domain/entity/user/my_user.dart';
 
 abstract class ChooseRoleEvent extends Equatable {
   const ChooseRoleEvent();

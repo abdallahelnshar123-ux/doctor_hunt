@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/auth_password_text_field_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -10,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
+import '../../domain/entity/user/my_user.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_event.dart';
 import '../controller/auth_state.dart';

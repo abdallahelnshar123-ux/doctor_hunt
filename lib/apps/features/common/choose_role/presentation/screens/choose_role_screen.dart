@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../auth/data/models/user/my_user.dart';
+import '../../../auth/domain/entity/user/my_user.dart';
 import '../../../auth/presentation/controller/auth_bloc.dart';
 import '../widget/role_widget.dart';
 

@@ -3,7 +3,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../auth/data/models/user/my_user.dart';
+import '../../../auth/domain/entity/user/my_user.dart';
 
 class RoleWidget extends StatelessWidget {
   const RoleWidget({

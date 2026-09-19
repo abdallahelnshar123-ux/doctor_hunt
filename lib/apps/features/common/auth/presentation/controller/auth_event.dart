@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import '../../domain/entity/user/my_user.dart';
 
 abstract class AuthEvent {}
 
