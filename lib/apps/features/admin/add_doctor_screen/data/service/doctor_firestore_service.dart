@@ -73,4 +73,33 @@ class DoctorFirestoreService {
           }
         });
   }
+
+  Future<void> updateDoctorActiveStatus({
+    required String doctorId,
+    required bool active,
+  }) async {
+    try {
+      await _getDoctorsCollection().doc(doctorId).update({
+        FirestoreConstants.active: active,
+      });
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? t.errors.server_error);
+    } on SocketException {
+      throw NetworkException(message: t.errors.no_internet);
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
+
+  Future<void> deleteDoctor({required String doctorId}) async {
+    try {
+      await _getDoctorsCollection().doc(doctorId).delete();
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? t.errors.server_error);
+    } on SocketException {
+      throw NetworkException(message: t.errors.no_internet);
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
 }

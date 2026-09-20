@@ -29,6 +29,13 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
   final TextEditingController specialtyController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  @override
+  void dispose() {
+    nameController.dispose();
+    specialtyController.dispose();
+    super.dispose();
+  }
+
   File? selectedImage;
 
   @override

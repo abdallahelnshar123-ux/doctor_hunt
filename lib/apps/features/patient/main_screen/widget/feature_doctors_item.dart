@@ -18,7 +18,7 @@ class FeatureDoctorsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        DoctorDetailsRoute(doctor).push(context);
+        PatientDoctorDetailsRoute(doctor).push(context);
       },
       child: AppContainerWithShadow(
         padding: EdgeInsets.all(8),

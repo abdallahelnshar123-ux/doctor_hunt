@@ -17,9 +17,7 @@ import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
 part '../widget/custom_appbar.dart';
-
 part '../widget/doctor_card.dart';
-
 part '../widget/statues_widget.dart';
 
 class AdminDoctorsTab extends StatelessWidget {
@@ -115,7 +113,16 @@ class AdminDoctorsTab extends StatelessWidget {
                               : ListView.separated(
                                   padding: EdgeInsets.all(20),
                                   itemBuilder: (context, index) =>
-                                      DoctorCard(doctor: state.doctors[index]),
+                                      GestureDetector(
+                                        onTap: () {
+                                          AdminDoctorDetailsRoute(
+                                            state.doctors[index],
+                                          ).push(context);
+                                        },
+                                        child: DoctorCard(
+                                          doctor: state.doctors[index],
+                                        ),
+                                      ),
                                   separatorBuilder: (context, index) =>
                                       SizedBox(height: 10),
                                   itemCount: state.doctors.length,

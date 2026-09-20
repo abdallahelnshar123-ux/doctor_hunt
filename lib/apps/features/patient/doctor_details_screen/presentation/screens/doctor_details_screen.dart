@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../admin/add_doctor_screen/data/models/doctor/doctor.dart';
 
-class DoctorDetailsScreen extends StatelessWidget {
-  const DoctorDetailsScreen({super.key, required this.doctor});
+class PatientDoctorDetailsScreen extends StatelessWidget {
+  const PatientDoctorDetailsScreen({super.key, required this.doctor});
 
   final Doctor doctor;
 

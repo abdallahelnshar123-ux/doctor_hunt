@@ -16,7 +16,8 @@ List<RouteBase> get $appRoutes => [
   $onboardingRoute,
   $chooseRoleRoute,
   $findDoctorRoute,
-  $doctorDetailsRoute,
+  $patientDoctorDetailsRoute,
+  $adminDoctorDetailsRoute,
   $appointmentRoute,
 ];
 
@@ -261,20 +262,51 @@ mixin $FindDoctorRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $doctorDetailsRoute => GoRouteData.$route(
-  path: '/doctor_details',
+RouteBase get $patientDoctorDetailsRoute => GoRouteData.$route(
+  path: '/patient_doctor_details',
   hasOverriddenOnExit: false,
-  factory: $DoctorDetailsRoute._fromState,
+  factory: $PatientDoctorDetailsRoute._fromState,
 );
 
-mixin $DoctorDetailsRoute on GoRouteData {
-  static DoctorDetailsRoute _fromState(GoRouterState state) =>
-      DoctorDetailsRoute(state.extra as Doctor);
+mixin $PatientDoctorDetailsRoute on GoRouteData {
+  static PatientDoctorDetailsRoute _fromState(GoRouterState state) =>
+      PatientDoctorDetailsRoute(state.extra as Doctor);
 
-  DoctorDetailsRoute get _self => this as DoctorDetailsRoute;
+  PatientDoctorDetailsRoute get _self => this as PatientDoctorDetailsRoute;
 
   @override
-  String get location => GoRouteData.$location('/doctor_details');
+  String get location => GoRouteData.$location('/patient_doctor_details');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $adminDoctorDetailsRoute => GoRouteData.$route(
+  path: '/admin_doctor_details',
+  hasOverriddenOnExit: false,
+  factory: $AdminDoctorDetailsRoute._fromState,
+);
+
+mixin $AdminDoctorDetailsRoute on GoRouteData {
+  static AdminDoctorDetailsRoute _fromState(GoRouterState state) =>
+      AdminDoctorDetailsRoute(state.extra as Doctor);
+
+  AdminDoctorDetailsRoute get _self => this as AdminDoctorDetailsRoute;
+
+  @override
+  String get location => GoRouteData.$location('/admin_doctor_details');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

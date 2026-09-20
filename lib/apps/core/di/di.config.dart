@@ -23,6 +23,8 @@ import '../../features/admin/add_doctor_screen/data/service/doctor_firestore_ser
     as _i353;
 import '../../features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart'
     as _i546;
+import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
+    as _i879;
 import '../../features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart'
     as _i564;
 import '../../features/common/auth/data/data_source/remote/auth/impl/auth_remote_data_source_impl.dart'
@@ -111,6 +113,9 @@ extension GetItInjectableX on _i174.GetIt {
         cloudinaryService: gh<_i417.CloudinaryService>(),
         imageService: gh<_i181.ImageService>(),
       ),
+    );
+    gh.factory<_i879.AdminDoctorActionBloc>(
+      () => _i879.AdminDoctorActionBloc(gh<_i932.DoctorRepository>()),
     );
     gh.factory<_i564.AuthRemoteDataSource>(
       () => _i747.AuthRemoteDataSourceImpl(gh<_i1003.FirebaseAuthService>()),

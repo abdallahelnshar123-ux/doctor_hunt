@@ -85,4 +85,32 @@ class DoctorRepository {
       return Left(UnexpectedFailure(e.toString()));
     }
   }
+
+  Future<Either<Failure, Unit>> updateDoctorActiveStatus({
+    required String doctorId,
+    required bool active,
+  }) async {
+    try {
+      await _firestoreService.updateDoctorActiveStatus(
+        doctorId: doctorId,
+        active: active,
+      );
+      return const Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, Unit>> deleteDoctor({required String doctorId}) async {
+    try {
+      await _firestoreService.deleteDoctor(doctorId: doctorId);
+      return const Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
 }

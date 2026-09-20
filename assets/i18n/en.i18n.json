@@ -141,6 +141,15 @@
       "uploadImage": "Upload doctor image",
       "tapToPick": "Tap to pick an image",
       "createDoctor": "Create doctor"
+    },
+    "doctorDetailsScreen" : {
+      "doctorDetails" : "Doctor details",
+      "specialty" : "Specialty",
+      "accountStatus" : "Account Status",
+      "heartCare" : "Heart Care",
+      "editDoctor" : "Edit Doctor",
+      "deleteDoctor": "Delete Doctor",
+      "doctorDeletedSuccessfully" : "Doctor was deleted successfully"
     }
   },
   "errors": {
