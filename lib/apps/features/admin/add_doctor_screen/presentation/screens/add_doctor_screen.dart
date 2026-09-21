@@ -98,6 +98,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () {
+                  FocusManager.instance.primaryFocus?.unfocus();
                   var adminId = context.read<AuthBloc>().currentUser!.id;
                   if (formKey.currentState!.validate()) {
                     if (selectedImage == null) {

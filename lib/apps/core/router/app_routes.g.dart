@@ -18,6 +18,7 @@ List<RouteBase> get $appRoutes => [
   $findDoctorRoute,
   $patientDoctorDetailsRoute,
   $adminDoctorDetailsRoute,
+  $adminUpdateDoctorDetailsRoute,
   $appointmentRoute,
 ];
 
@@ -307,6 +308,38 @@ mixin $AdminDoctorDetailsRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/admin_doctor_details');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $adminUpdateDoctorDetailsRoute => GoRouteData.$route(
+  path: '/admin_update_doctor_details',
+  hasOverriddenOnExit: false,
+  factory: $AdminUpdateDoctorDetailsRoute._fromState,
+);
+
+mixin $AdminUpdateDoctorDetailsRoute on GoRouteData {
+  static AdminUpdateDoctorDetailsRoute _fromState(GoRouterState state) =>
+      AdminUpdateDoctorDetailsRoute(state.extra as Doctor);
+
+  AdminUpdateDoctorDetailsRoute get _self =>
+      this as AdminUpdateDoctorDetailsRoute;
+
+  @override
+  String get location => GoRouteData.$location('/admin_update_doctor_details');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

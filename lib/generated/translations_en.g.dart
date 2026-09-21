@@ -367,6 +367,7 @@ class Translations$admin$en {
   late final Translations$admin$doctors_tab$en doctors_tab = Translations$admin$doctors_tab$en.internal(_root);
   late final Translations$admin$add_doctor_screen$en add_doctor_screen = Translations$admin$add_doctor_screen$en.internal(_root);
   late final Translations$admin$doctor_details_screen$en doctor_details_screen = Translations$admin$doctor_details_screen$en.internal(_root);
+  late final Translations$admin$update_doctor_details$en update_doctor_details = Translations$admin$update_doctor_details$en.internal(_root);
 }
 
 // Path: errors
@@ -400,6 +401,9 @@ class Translations$errors$en {
 
   /// en: 'Error while adding doctor please try again later'
   String get error_while_adding_doctor_please_try_again_later => 'Error while adding doctor please try again later';
+
+  /// en: 'Error while updating doctor please try again later'
+  String get error_while_updating_doctor_please_try_again_later => 'Error while updating doctor please try again later';
 
   /// en: 'Cancelled by user'
   String get cancelled_by_user => 'Cancelled by user';
@@ -619,4 +623,34 @@ class Translations$admin$doctor_details_screen$en {
 
   /// en: 'Doctor was deleted successfully'
   String get doctor_deleted_successfully => 'Doctor was deleted successfully';
+}
+
+// Path: admin.update_doctor_details
+class Translations$admin$update_doctor_details$en {
+  Translations$admin$update_doctor_details$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor was Updated Successfully'
+  String get doctor_was_updated_successfully => 'Doctor was Updated Successfully';
+
+  /// en: 'Edit doctor'
+  String get edit_doctor => 'Edit doctor';
+
+  /// en: 'Change photo'
+  String get change_photo => 'Change photo';
+
+  /// en: 'Doctor Statues'
+  String get doctor_statues => 'Doctor Statues';
+
+  /// en: 'Active & Available'
+  String get active_and_available => 'Active & Available';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Save Changes'
+  String get save_changes => 'Save Changes';
 }

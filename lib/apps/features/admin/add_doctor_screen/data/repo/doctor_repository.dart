@@ -103,6 +103,35 @@ class DoctorRepository {
     }
   }
 
+  Future<Either<Failure, Unit>> updateDoctorDetails({
+    required Doctor doctor,
+    File? image,
+  }) async {
+    try {
+      String? imageUrl = doctor.imageUrl;
+      if (image != null) {
+        try {
+          imageUrl = await _cloudinaryService.uploadImage(file: image);
+        } catch (e) {
+          return Left(
+            ServerFailure(
+              t.errors.error_while_updating_doctor_please_try_again_later,
+            ),
+          );
+        }
+      }
+
+      final doctorDto = doctor.copyWith(image: imageUrl).toDoctorDto();
+
+      await _firestoreService.updateDoctorDetails(doctorDto);
+      return const Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
   Future<Either<Failure, Unit>> deleteDoctor({required String doctorId}) async {
     try {
       await _firestoreService.deleteDoctor(doctorId: doctorId);

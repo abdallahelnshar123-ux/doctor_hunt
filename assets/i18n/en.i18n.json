@@ -150,6 +150,15 @@
       "editDoctor" : "Edit Doctor",
       "deleteDoctor": "Delete Doctor",
       "doctorDeletedSuccessfully" : "Doctor was deleted successfully"
+    },
+    "updateDoctorDetails" : {
+      "doctorWasUpdatedSuccessfully" : "Doctor was Updated Successfully",
+      "editDoctor" : "Edit doctor",
+      "changePhoto" : "Change photo",
+      "doctorStatues": "Doctor Statues",
+      "activeAndAvailable": "Active & Available",
+      "inactive": "Inactive",
+      "saveChanges": "Save Changes"
     }
   },
   "errors": {
@@ -161,6 +170,7 @@
     "emailAddressAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
     "userNotAuthenticated" : "User isn't Authenticated",
     "errorWhileAddingDoctorPleaseTryAgainLater" : "Error while adding doctor please try again later",
+    "errorWhileUpdatingDoctorPleaseTryAgainLater" : "Error while updating doctor please try again later",
     "cancelledByUser" : "Cancelled by user"
   },
   "eCodes" : {

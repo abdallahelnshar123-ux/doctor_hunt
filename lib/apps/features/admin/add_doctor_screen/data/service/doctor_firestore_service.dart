@@ -91,6 +91,18 @@ class DoctorFirestoreService {
     }
   }
 
+  Future<void> updateDoctorDetails(DoctorDto doctor) async {
+    try {
+      await _getDoctorsCollection().doc(doctor.id).set(doctor);
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? t.errors.server_error);
+    } on SocketException {
+      throw NetworkException(message: t.errors.no_internet);
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
+
   Future<void> deleteDoctor({required String doctorId}) async {
     try {
       await _getDoctorsCollection().doc(doctorId).delete();

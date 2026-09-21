@@ -8,12 +8,18 @@ import '../../data/models/doctor/doctor.dart';
 
 class SpecialtyDropdownWidget extends StatelessWidget {
   final TextEditingController controller;
+  final Specialties? initialSelection;
 
-  const SpecialtyDropdownWidget({super.key, required this.controller});
+  const SpecialtyDropdownWidget({
+    super.key,
+    required this.controller,
+    this.initialSelection,
+  });
 
   @override
   Widget build(BuildContext context) {
     return DropdownMenuFormField(
+      initialSelection: initialSelection,
       validator: (value) => Validators.required(value?.name),
       menuStyle: MenuStyle(
         backgroundColor: WidgetStatePropertyAll(AppColors.bgPrimary),
