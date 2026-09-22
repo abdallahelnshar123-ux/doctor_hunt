@@ -77,7 +77,9 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: builtDecorationBorder(
           borderColor: borderSideColor ?? AppColors.borderDefault,
         ),
+        //CR hardcode color
         errorBorder: builtDecorationBorder(borderColor: Colors.red),
+        //CR hardcode color
         focusedErrorBorder: builtDecorationBorder(borderColor: Colors.red),
         hintText: hintText,
         hintStyle: hintStyle,

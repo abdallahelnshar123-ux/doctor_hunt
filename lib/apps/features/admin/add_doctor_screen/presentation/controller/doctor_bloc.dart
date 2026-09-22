@@ -16,12 +16,14 @@ part 'doctor_state.dart';
 @injectable
 class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   final DoctorRepository _repository;
+  //CR Bad DI: Duplicate injection of DoctorRepository under two separate fields (_repository and _doctorRepository).
   final DoctorRepository _doctorRepository;
   List<Doctor> allDoctors = [];
   String _selectedSpecialty = '';
 
   DoctorBloc(this._repository, this._doctorRepository)
     : super(DoctorInitial()) {
+    //CR Bad Practice: Filtering logic relies on localized string 't.admin.doctors_tab.all' and mutates private field _selectedSpecialty instead of relying strictly on domain state.
     _selectedSpecialty = t.admin.doctors_tab.all;
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
@@ -94,6 +96,7 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
       counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
     }
 
+    //CR use enum: Business logic filtering must use enum types (e.g. Specialties?) instead of localized strings (t.admin.doctors_tab.all) to prevent localization leak into business logic.
     final List<Map<String, int>> specialtyCounts = [
       {t.admin.doctors_tab.all: doctorsList.length},
       ...counts.entries.map((e) => {e.key: e.value}),

@@ -1,3 +1,4 @@
+//CR Typo: Rename 'statues_widget.dart' / 'StatuesWidget' to 'status_widget.dart' / 'DoctorStatusWidget'.
 part of '../screens/admin_doctors_tab.dart';
 
 class StatuesWidget extends StatelessWidget {
@@ -21,6 +22,7 @@ class StatuesWidget extends StatelessWidget {
                 title: t.admin.doctors_tab.total_doctors,
                 number:
                     context.watch<DoctorBloc>().state is GetDoctorsSuccessState
+                    //CR Bad Practice: Accessing mutable public property 'allDoctors' on DoctorBloc instead of reading total count from state.
                     ? context.watch<DoctorBloc>().allDoctors.length.toString()
                     : '-',
                 context: context,

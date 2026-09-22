@@ -7,13 +7,16 @@ class FeatureDoctorsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
+      //CR hardcode color
       baseColor: Colors.grey[300]!,
+      //CR hardcode color
       highlightColor: Colors.grey[100]!,
       child: ListView.separated(
         itemBuilder: (context, index) => Container(
           width: 105,
           height: 170,
           decoration: BoxDecoration(
+            //CR hardcode color
             color: Colors.white,
             borderRadius: BorderRadius.circular(6),
           ),

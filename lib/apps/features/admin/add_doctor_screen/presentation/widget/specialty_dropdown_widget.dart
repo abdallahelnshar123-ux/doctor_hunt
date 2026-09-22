@@ -7,6 +7,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../data/models/doctor/doctor.dart';
 
 class SpecialtyDropdownWidget extends StatelessWidget {
+  //CR use enum: Use strongly typed 'Specialties' enum (e.g. ValueChanged<Specialties?> onSelected or FormField<Specialties>) instead of binding to a loose String TextEditingController and reverse-looking up via firstWhere.
   final TextEditingController controller;
   final Specialties? initialSelection;
 
@@ -41,6 +42,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         hintStyle: context.light14.textSecondary.rubik,
+        //CR hardcode text
         hintText: 'Select specialty',
         enabled: true,
 

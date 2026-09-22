@@ -4,6 +4,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
+//CR Architecture Violation: Core widgets must not import from feature layers. Move CustomTextFormField to core/widgets/.
 import '../../features/common/auth/presentation/widgets/custom_text_form_field.dart';
 
 class SearchTextFieldWidget extends StatelessWidget {
@@ -30,7 +31,7 @@ class SearchTextFieldWidget extends StatelessWidget {
         onChanged: onChanged,
         borderRadius: borderRadius ?? 6,
         style: context.regular16.textSecondary.rubik,
-        keyboardType: TextInputType.emailAddress,
+        keyboardType: TextInputType.text,
         prefixIcon: Icon(
           Icons.search_rounded,
           color: AppColors.textSecondary,

@@ -20,6 +20,7 @@ class CategoriesWidget extends StatelessWidget {
   }
 }
 
+//CR use enum: Define a strongly-typed enum for categories (e.g. DoctorCategory / SpecialtyCategory) with associated image assets and labels instead of loose List<String> of raw asset paths.
 List<String> categoriesList = [
   AppAssets.images.categoryImage1.path,
   AppAssets.images.categoryImage2.path,

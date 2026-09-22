@@ -20,6 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetPasswordRequested>(_onResetPasswordRequested);
   }
 
+  //CR Bad Practice: Mutable state 'MyUser? currentUser;' stored directly on the Bloc class instead of inside immutable AuthState.
   MyUser? currentUser;
 
   Future<void> _onLoginRequested(
@@ -46,6 +47,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(RegisterWithEmailPasswordLoadingState());
+    //CR Inconsistent Architecture: Only login uses a UseCase while register, logout, google, and reset password call the repository directly from the Bloc.
     final result = await _repository.registerWithEmailAndPassword(
       name: event.name,
       password: event.password,

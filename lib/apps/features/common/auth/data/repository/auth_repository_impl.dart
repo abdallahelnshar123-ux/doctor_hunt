@@ -5,6 +5,7 @@ import 'package:doctor_hunt/apps/core/mapper/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/user_firestore_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
+//CR Layer Separation Violation: Repository should not import translations (t.errors.*). Map failures to error keys or handle translation in presentation.
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 

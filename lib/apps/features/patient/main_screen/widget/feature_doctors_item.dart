@@ -41,6 +41,7 @@ class FeatureDoctorsItem extends StatelessWidget {
                 ),
                 Spacer(),
                 SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 15),
+                //CR hardcode text
                 Text('5.0', style: context.medium10.black.rubik),
               ],
             ),

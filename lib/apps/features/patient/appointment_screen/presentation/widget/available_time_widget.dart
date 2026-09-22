@@ -24,6 +24,7 @@ class AvailableTimeWidget extends StatelessWidget {
       '07:00\n${t.common.pm}',
     ];
 
+    //CR use enum: Define a typed enum or domain value objects for reminder intervals (e.g. enum ReminderInterval { tenMinutes, twentyFiveMinutes, ... }) and time slots instead of raw strings.
     final reminderMinuteList = [
       '30\n${t.common.min}',
       '40\n${t.common.min}',
@@ -57,6 +58,7 @@ class AvailableTimeWidget extends StatelessWidget {
               borderRadius: 6,
               backgroundColor: AppColors.brandPrimary,
               onPressed: () {
+                //CR Code Organization: Inline showDialog implementation should be extracted into a dedicated dialog widget or DialogUtils.
                 showDialog(
                   barrierDismissible: false,
                   context: context,
@@ -98,6 +100,7 @@ class AvailableTimeWidget extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 30),
+                        //CR hardcode text
                         Text(
                           t.appointment.booking_details(
                             Doctor: 'Pediatrician Purpieson',

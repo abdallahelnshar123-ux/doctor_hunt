@@ -1,4 +1,4 @@
-﻿// import 'package:hrzz/generated/translations.g.dart';
+// import 'package:hrzz/generated/translations.g.dart';
 // import 'package:intl/intl.dart' show DateFormat;
 
 // extension DateTimeFormat on DateTime {

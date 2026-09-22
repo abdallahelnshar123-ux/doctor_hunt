@@ -82,6 +82,7 @@ class HomeTab extends StatelessWidget {
       ),
       actionsPadding: EdgeInsets.only(right: 20),
       actions: [
+        //CR Runtime Error: Unsafe force unwrap 'currentUser!.image' will crash if user is null. Use safe navigation (currentUser?.image?.isNotEmpty == true).
         CircleAvatar(
           foregroundImage:
               currentUser!.image == null || currentUser.image!.isEmpty

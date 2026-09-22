@@ -107,6 +107,7 @@ class DoctorDetailsCard extends StatelessWidget {
           mainAxisAlignment: .end,
           children: [
             SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
+            //CR hardcode text
             Text(
               t.doctor_details.price_per_hour(Price: '25.00'),
               style: context.light10.textSecondary.rubik,

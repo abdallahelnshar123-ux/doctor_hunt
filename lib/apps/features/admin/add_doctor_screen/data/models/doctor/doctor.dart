@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+//CR Architecture Violation: Core domain entity Doctor and enum Specialties are placed in 'admin/add_doctor_screen/'. Move to a shared domain layer accessible by both admin and patient features.
 class Doctor extends Equatable {
   final String name;
   final String id;

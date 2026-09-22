@@ -1,3 +1,4 @@
+//CR use enum: Convert 'AuthProviders' static string constants into a strongly typed enum (e.g. enum AuthProvider { google, emailPassword, facebook, apple, etc. }) and use it in MyUser / DTOs.
 class AuthProviders {
   static const String google = 'google';
   static const String emailPassword = 'emailPassword';

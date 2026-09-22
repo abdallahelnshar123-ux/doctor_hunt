@@ -90,6 +90,7 @@ class DoctorCard extends StatelessWidget {
           text: '${t.doctor_details.next_available}\n',
           style: context.medium12.brandPrimary.rubik,
           children: [
+            //CR hardcode text
             TextSpan(
               text: '10:00',
               style: context.medium12.textSecondary.rubik,
@@ -122,6 +123,7 @@ class DoctorCard extends StatelessWidget {
             t.doctor_details.tooth_dentist,
             style: context.regular11.brandPrimary.rubik,
           ),
+          //CR hardcode text
           Text(
             t.doctor_details.experience(Years: '7'),
             style: context.light11.textSecondary.rubik,
@@ -133,7 +135,9 @@ class DoctorCard extends StatelessWidget {
             direction: .horizontal,
             spacing: 20,
             children: [
+              //CR hardcode text
               _patientStoriesWidget(text: '87%', context: context),
+              //CR hardcode text
               _patientStoriesWidget(
                 text: t.doctor_details.patient_stories(Count: '69'),
                 context: context,

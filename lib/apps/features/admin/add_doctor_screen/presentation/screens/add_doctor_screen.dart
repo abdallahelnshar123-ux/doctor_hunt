@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -13,7 +12,9 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/utils/dialog_utils.dart';
+import '../../../../../core/utils/validators.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
+import '../../../../common/auth/presentation/widgets/custom_text_form_field.dart';
 import '../../data/models/doctor/doctor.dart';
 import '../widget/specialty_dropdown_widget.dart';
 
@@ -87,10 +88,14 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                 ),
               ),
               SizedBox(height: 40),
-              UsernameTextFieldWidget(
+              CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
+                filled: true,
                 hintText: t.admin.add_doctor_screen.enter_name,
+                hintStyle: context.light16.textSecondary.rubik,
+                style: context.light16.textSecondary.rubik,
+                validator: (value) => Validators.required(value),
               ),
               SizedBox(height: 20),
               SpecialtyDropdownWidget(controller: specialtyController),
@@ -99,6 +104,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
+                  //CR Runtime Error: Unsafe force unwrap 'currentUser!.id' will crash if user is null.
                   var adminId = context.read<AuthBloc>().currentUser!.id;
                   if (formKey.currentState!.validate()) {
                     if (selectedImage == null) {
@@ -111,6 +117,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                     context.read<DoctorBloc>().add(
                       AddDoctorRequested(
                         name: nameController.text.trim(),
+                        //CR Runtime Error: 'firstWhere' without 'orElse' will throw a StateError at runtime if specialty text doesn't match an enum name.
                         specialty: Specialties.values.firstWhere(
                           (element) => element.name == specialtyController.text,
                         ),

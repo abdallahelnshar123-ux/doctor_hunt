@@ -52,7 +52,9 @@ class _MainScreenState extends State<MainScreen> {
 
           child: BottomNavigationBar(
             elevation: 0,
+            //CR hardcode textstyle
             unselectedLabelStyle: TextStyle(fontSize: 0),
+            //CR hardcode textstyle
             selectedLabelStyle: TextStyle(fontSize: 0),
             backgroundColor: AppColors.transparent,
             onTap: (index) {

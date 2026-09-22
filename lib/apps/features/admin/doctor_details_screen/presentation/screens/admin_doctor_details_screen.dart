@@ -188,6 +188,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                       backgroundColor: AppColors.bgSurfaceLight,
                       avatarBoxConstraints: .tightFor(width: 15),
 
+                      //CR Bug: Hardcoded 't.admin.doctor_details_screen.heart_care' displays heart care specialty regardless of the doctor's actual specialty.
                       label: Text(
                         t.admin.doctor_details_screen.heart_care,
                         style: context.medium12.brandPrimary.rubik,
@@ -195,6 +196,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                     ),
                   ),
                   Divider(color: AppColors.textSecondary),
+                  //CR Copy-Paste Defect: Status switch card reuses specialty title and value instead of doctor status strings.
                   _buildInfoCard(
                     context,
                     value: widget.doctor.specialty.name,
@@ -300,6 +302,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
   }
 }
 
+//CR Dead Code: Remove 104 lines of commented-out legacy code.
 // Widget buildUploadImage(BuildContext context) {
 //   return Container(
 //     clipBehavior: .antiAlias,

@@ -1,5 +1,4 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
-import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -8,10 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
+import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_state.dart';
-import '../widgets/auth_password_text_field_widget.dart';
+import '../widgets/custom_text_form_field.dart';
+import '../widgets/custom_text_password.dart';
 import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
@@ -112,16 +113,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         },
                       ),
                       SizedBox(height: 25),
-                      UsernameTextFieldWidget(
+                      CustomTextFormField(
                         controller: nameController,
                         fillColor: AppColors.bgPrimary,
+                        filled: true,
+                        hintText: t.auth.username,
+                        hintStyle: context.light16.textSecondary.rubik,
+                        style: context.light16.textSecondary.rubik,
+                        validator: (value) => Validators.required(value),
                       ),
                       EmailTextFieldWidget(
                         controller: emailController,
                         fillColor: AppColors.bgPrimary,
                       ),
 
-                      AuthPasswordTextFieldWidget(
+                      CustomTextPassword(
                         controller: passwordController,
                       ),
                       _buildAgreeWithTerms(),

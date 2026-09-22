@@ -21,6 +21,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         ),
         CircleAvatar(
           backgroundColor: AppColors.brandPrimary,
+          //CR hardcode text
           child: Text('A', style: context.bold14.white.rubik),
         ),
       ],

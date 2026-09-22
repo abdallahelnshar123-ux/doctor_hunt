@@ -19,6 +19,7 @@ class ChooseRoleScreen extends StatefulWidget {
 }
 
 class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
+  //CR Dead Code: Unused 'currentUser' variable in state.
   late var currentUser = context.read<AuthBloc>().currentUser;
 
   @override

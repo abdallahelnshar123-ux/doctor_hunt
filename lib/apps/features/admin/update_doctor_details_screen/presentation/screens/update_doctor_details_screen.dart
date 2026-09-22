@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/core/widgets/username_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -14,8 +13,10 @@ import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/utils/dialog_utils.dart';
+import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
+import '../../../../common/auth/presentation/widgets/custom_text_form_field.dart';
 import '../../../add_doctor_screen/data/models/doctor/doctor.dart';
 import '../../../add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 
@@ -128,10 +129,14 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
                 ),
               ),
               SizedBox(height: 40),
-              UsernameTextFieldWidget(
+              CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
+                filled: true,
                 hintText: t.admin.add_doctor_screen.enter_name,
+                hintStyle: context.light16.textSecondary.rubik,
+                style: context.light16.textSecondary.rubik,
+                validator: (value) => Validators.required(value),
               ),
               SizedBox(height: 20),
               SpecialtyDropdownWidget(
@@ -139,7 +144,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
                 initialSelection: widget.doctor.specialty,
               ),
               SizedBox(height: 20),
-              _buildStatuesWidget(),
+              _buildStatusWidget(),
               SizedBox(height: 80),
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
@@ -197,7 +202,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  Widget _buildStatuesWidget() {
+  Widget _buildStatusWidget() {
     return ValueListenableBuilder(
       valueListenable: isActive,
       builder: (context, value, child) {
@@ -261,6 +266,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
             id: widget.doctor.id,
             name: nameController.text.trim(),
             adminId: widget.doctor.adminId,
+            //CR Runtime Error: 'firstWhere' without 'orElse' throws StateError if specialtyController text does not match any enum value.
             specialty: Specialties.values.firstWhere(
               (element) => specialtyController.text.trim() == element.name,
             ),

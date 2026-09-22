@@ -39,8 +39,10 @@ final class GetDoctorsLoadingState extends DoctorState {}
 
 final class GetDoctorsSuccessState extends DoctorState {
   final List<Doctor> doctors;
+  //CR use enum: Represent specialties with Map<Specialties, int> or a dedicated enum filter model rather than List<Map<String, int>> with localized strings.
   final List<Map<String, int>> specialtyCounts;
   final int activeDoctorsCount;
+  //CR use enum: Use 'Specialties?' (nullable where null = All) or an enum filter rather than raw String.
   final String selectedSpecialty;
 
   GetDoctorsSuccessState(

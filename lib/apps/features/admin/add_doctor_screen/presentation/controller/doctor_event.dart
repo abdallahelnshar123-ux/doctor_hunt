@@ -28,6 +28,7 @@ class GetDoctorsRequested extends DoctorEvent {
   GetDoctorsRequested({required this.userId, required this.role});
 }
 
+//CR use enum: Use strongly-typed enum or filter type (e.g. SpecialtyFilter / Specialties?) instead of loose String for filtering.
 class FilterDoctorsRequested extends DoctorEvent {
   final String specialty;
 

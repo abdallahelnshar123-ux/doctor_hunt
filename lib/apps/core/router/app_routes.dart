@@ -128,7 +128,7 @@ class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   }
 }
 
-@TypedGoRoute<FindDoctorRoute>(path: '/fined_doctor')
+@TypedGoRoute<FindDoctorRoute>(path: '/find_doctor')
 class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
   const FindDoctorRoute();
 

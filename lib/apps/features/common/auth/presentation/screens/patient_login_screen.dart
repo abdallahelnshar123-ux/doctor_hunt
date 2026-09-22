@@ -1,7 +1,7 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/auth_password_text_field_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +119,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                         controller: emailController,
                         fillColor: AppColors.bgPrimary,
                       ),
-                      AuthPasswordTextFieldWidget(
+                      CustomTextPassword(
                         controller: passwordController,
                       ),
                       SizedBox(height: 24),
