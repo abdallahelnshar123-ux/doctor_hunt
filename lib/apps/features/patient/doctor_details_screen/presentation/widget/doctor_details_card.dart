@@ -8,7 +8,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../admin/add_doctor_screen/data/models/doctor/doctor.dart';
+import '../../../../../core/data/models/doctor/doctor.dart';
 
 class DoctorDetailsCard extends StatelessWidget {
   const DoctorDetailsCard({super.key, required this.doctor});

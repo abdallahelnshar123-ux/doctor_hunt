@@ -9,14 +9,14 @@ import '../../../chat_tab/presentation/screens/chat_tab.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class PatientMainScreen extends StatefulWidget {
+  const PatientMainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<PatientMainScreen> createState() => _PatientMainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _PatientMainScreenState extends State<PatientMainScreen> {
   int selectedIndex = 0;
 
   final List<Widget> _tabsList = const [

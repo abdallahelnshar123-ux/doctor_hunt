@@ -4,7 +4,7 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../../generated/translations.g.dart';
-import 'custom_text_form_field.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class CustomTextPassword extends CustomTextFormField {
   CustomTextPassword({

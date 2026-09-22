@@ -11,7 +11,7 @@ import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_state.dart';
-import '../widgets/custom_text_form_field.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../widgets/custom_text_password.dart';
 import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';

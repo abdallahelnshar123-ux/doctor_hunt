@@ -11,11 +11,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../../../generated/style_atoms.dart';
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
-import '../../../../common/auth/presentation/widgets/custom_text_form_field.dart';
-import '../../data/models/doctor/doctor.dart';
 import '../widget/specialty_dropdown_widget.dart';
 
 class AddDoctorScreen extends StatefulWidget {
@@ -41,6 +43,12 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select<AuthBloc, MyUser?>((bloc) {
+      final authState = bloc.state;
+      return authState is UserAuthenticatedState
+          ? authState.currentUser
+          : null;
+    });
     return BlocListener<DoctorBloc, DoctorState>(
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||
@@ -104,8 +112,8 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-                  //CR Runtime Error: Unsafe force unwrap 'currentUser!.id' will crash if user is null.
-                  var adminId = context.read<AuthBloc>().currentUser!.id;
+
+                  var adminId = user?.id ?? '';
                   if (formKey.currentState!.validate()) {
                     if (selectedImage == null) {
                       SnackBarUtils.showInfoSnackBar(
@@ -118,8 +126,9 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                       AddDoctorRequested(
                         name: nameController.text.trim(),
                         //CR Runtime Error: 'firstWhere' without 'orElse' will throw a StateError at runtime if specialty text doesn't match an enum name.
-                        specialty: Specialties.values.firstWhere(
-                          (element) => element.name == specialtyController.text,
+                        specialty: Specialty.values.firstWhere(
+                          (element) =>
+                              element.name == specialtyController.text.trim(),
                         ),
                         image: selectedImage!,
                         adminId: adminId,

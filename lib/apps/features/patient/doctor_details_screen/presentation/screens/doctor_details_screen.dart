@@ -7,8 +7,8 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../admin/add_doctor_screen/data/models/doctor/doctor.dart';
 
 class PatientDoctorDetailsScreen extends StatelessWidget {
   const PatientDoctorDetailsScreen({super.key, required this.doctor});

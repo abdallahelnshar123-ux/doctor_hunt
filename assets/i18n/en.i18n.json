@@ -134,13 +134,15 @@
       "totalDoctors": "Total doctors",
       "active": "Active",
       "inactive": "Inactive",
-      "all": "All"
+      "all": "All",
+      "dash": "-"
     },
     "addDoctorScreen": {
       "enterName": "Enter doctor name",
       "uploadImage": "Upload doctor image",
       "tapToPick": "Tap to pick an image",
-      "createDoctor": "Create doctor"
+      "createDoctor": "Create doctor",
+      "selectSpecialty" : "Select specialty"
     },
     "doctorDetailsScreen" : {
       "doctorDetails" : "Doctor details",

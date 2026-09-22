@@ -116,6 +116,9 @@ extension GetItInjectableX on _i174.GetIt {
         imageService: gh<_i181.ImageService>(),
       ),
     );
+    gh.factory<_i546.DoctorBloc>(
+      () => _i546.DoctorBloc(gh<_i932.DoctorRepository>()),
+    );
     gh.factory<_i879.AdminDoctorActionBloc>(
       () => _i879.AdminDoctorActionBloc(gh<_i932.DoctorRepository>()),
     );
@@ -124,12 +127,6 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i564.AuthRemoteDataSource>(
       () => _i747.AuthRemoteDataSourceImpl(gh<_i1003.FirebaseAuthService>()),
-    );
-    gh.factory<_i546.DoctorBloc>(
-      () => _i546.DoctorBloc(
-        gh<_i932.DoctorRepository>(),
-        gh<_i932.DoctorRepository>(),
-      ),
     );
     gh.factory<_i748.AuthRepository>(
       () => _i953.AuthRepositoryImpl(

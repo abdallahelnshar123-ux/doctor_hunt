@@ -4,11 +4,9 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../auth/domain/entity/user/my_user.dart';
-import '../../../auth/presentation/controller/auth_bloc.dart';
 import '../widget/role_widget.dart';
 
 class ChooseRoleScreen extends StatefulWidget {
@@ -19,9 +17,6 @@ class ChooseRoleScreen extends StatefulWidget {
 }
 
 class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
-  //CR Dead Code: Unused 'currentUser' variable in state.
-  late var currentUser = context.read<AuthBloc>().currentUser;
-
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
@@ -50,8 +45,6 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // context.read<AuthBloc>().selectedRole =
-                        //     UserRoles.patient;
                         const PatientLoginRoute().push(context);
                       },
                       child: RoleWidget(
@@ -63,8 +56,6 @@ class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        // context.read<AuthBloc>().selectedRole = UserRoles.admin;
-
                         const AdminLoginRoute().push(context);
                       },
                       child: RoleWidget(

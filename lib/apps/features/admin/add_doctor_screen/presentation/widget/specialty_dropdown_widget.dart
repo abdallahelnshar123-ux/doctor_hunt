@@ -1,15 +1,16 @@
 import 'package:doctor_hunt/apps/core/utils/validators.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../generated/style_atoms.dart';
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../data/models/doctor/doctor.dart';
 
 class SpecialtyDropdownWidget extends StatelessWidget {
   //CR use enum: Use strongly typed 'Specialties' enum (e.g. ValueChanged<Specialties?> onSelected or FormField<Specialties>) instead of binding to a loose String TextEditingController and reverse-looking up via firstWhere.
   final TextEditingController controller;
-  final Specialties? initialSelection;
+  final Specialty? initialSelection;
 
   const SpecialtyDropdownWidget({
     super.key,
@@ -28,7 +29,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
       ),
       showTrailingIcon: true,
       selectedTrailingIcon: Icon(Icons.keyboard_arrow_up_rounded),
-      dropdownMenuEntries: Specialties.values
+      dropdownMenuEntries: Specialty.values
           .map(
             (specialty) =>
                 DropdownMenuEntry(value: specialty, label: specialty.name),
@@ -42,8 +43,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         hintStyle: context.light14.textSecondary.rubik,
-        //CR hardcode text
-        hintText: 'Select specialty',
+        hintText: t.admin.add_doctor_screen.select_specialty,
         enabled: true,
 
         enabledBorder: OutlineInputBorder(

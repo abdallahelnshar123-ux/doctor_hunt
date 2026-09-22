@@ -4,8 +4,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
-//CR Architecture Violation: Core widgets must not import from feature layers. Move CustomTextFormField to core/widgets/.
-import '../../features/common/auth/presentation/widgets/custom_text_form_field.dart';
+import 'custom_text_form_field.dart';
 
 class SearchTextFieldWidget extends StatelessWidget {
   final void Function(String)? onChanged;

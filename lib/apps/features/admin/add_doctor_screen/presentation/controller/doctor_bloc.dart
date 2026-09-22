@@ -1,9 +1,8 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
-import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -15,16 +14,9 @@ part 'doctor_state.dart';
 
 @injectable
 class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
-  final DoctorRepository _repository;
-  //CR Bad DI: Duplicate injection of DoctorRepository under two separate fields (_repository and _doctorRepository).
   final DoctorRepository _doctorRepository;
-  List<Doctor> allDoctors = [];
-  String _selectedSpecialty = '';
 
-  DoctorBloc(this._repository, this._doctorRepository)
-    : super(DoctorInitial()) {
-    //CR Bad Practice: Filtering logic relies on localized string 't.admin.doctors_tab.all' and mutates private field _selectedSpecialty instead of relying strictly on domain state.
-    _selectedSpecialty = t.admin.doctors_tab.all;
+  DoctorBloc(this._doctorRepository) : super(DoctorInitial()) {
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
     on<GetDoctorsRequested>(_onGetDoctorsRequested);
@@ -35,9 +27,35 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
     FilterDoctorsRequested event,
     Emitter<DoctorState> emit,
   ) async {
-    _selectedSpecialty = event.specialty;
-    if (state is GetDoctorsSuccessState) {
-      emit(_buildSuccessState(allDoctors));
+    final currentState = state;
+    if (currentState is GetDoctorsSuccessState) {
+      if (event.selectedSpecialty == currentState.selectedSpecialty) return;
+
+      if (event.selectedSpecialty == null) {
+        emit(
+          GetDoctorsSuccessState(
+            allDoctors: currentState.allDoctors,
+            specialtyCounts: currentState.specialtyCounts,
+            activeDoctorsCount: currentState.activeDoctorsCount,
+            selectedSpecialty: null,
+            filteredDoctors: null,
+          ),
+        );
+        return;
+      } else {
+        List<Doctor> filtered = [];
+
+        filtered = currentState.allDoctors
+            .where((d) => d.specialty == event.selectedSpecialty)
+            .toList();
+
+        emit(
+          currentState.copyWith(
+            filteredDoctors: filtered,
+            selectedSpecialty: event.selectedSpecialty,
+          ),
+        );
+      }
     }
   }
 
@@ -47,7 +65,7 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   ) async {
     emit(AddDoctorLoadingState());
 
-    var result = await _repository.addDoctor(
+    var result = await _doctorRepository.addDoctor(
       doctor: Doctor(
         id: '',
         name: event.name,
@@ -76,44 +94,29 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
       onData: (result) => result.fold(
         (failure) => GetDoctorsErrorState(failure.message),
         (doctorsList) {
-          allDoctors = doctorsList;
-          return _buildSuccessState(doctorsList);
+          int activeCount = 0;
+          final Map<Specialty, int> counts = {};
+
+          for (var doctor in doctorsList) {
+            if (doctor.active) {
+              activeCount++;
+            }
+            final specialtyName = doctor.specialty;
+            counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
+          }
+
+          final List<Map<Specialty, int>> specialtyCounts = counts.entries
+              .map((e) => {e.key: e.value})
+              .toList();
+
+          return GetDoctorsSuccessState(
+            allDoctors: doctorsList,
+            specialtyCounts: specialtyCounts,
+            activeDoctorsCount: activeCount,
+          );
         },
       ),
       onError: (error, stackTrace) => GetDoctorsErrorState(error.toString()),
-    );
-  }
-
-  GetDoctorsSuccessState _buildSuccessState(List<Doctor> doctorsList) {
-    int activeCount = 0;
-    final Map<String, int> counts = {};
-
-    for (var doctor in doctorsList) {
-      if (doctor.active) {
-        activeCount++;
-      }
-      final specialtyName = doctor.specialty.name;
-      counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
-    }
-
-    //CR use enum: Business logic filtering must use enum types (e.g. Specialties?) instead of localized strings (t.admin.doctors_tab.all) to prevent localization leak into business logic.
-    final List<Map<String, int>> specialtyCounts = [
-      {t.admin.doctors_tab.all: doctorsList.length},
-      ...counts.entries.map((e) => {e.key: e.value}),
-    ];
-
-    List<Doctor> filtered = doctorsList;
-    if (_selectedSpecialty != t.admin.doctors_tab.all) {
-      filtered = doctorsList
-          .where((d) => d.specialty.name == _selectedSpecialty)
-          .toList();
-    }
-
-    return GetDoctorsSuccessState(
-      filtered,
-      specialtyCounts,
-      activeCount,
-      _selectedSpecialty,
     );
   }
 
@@ -121,7 +124,7 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
     PickDoctorImageRequested event,
     Emitter<DoctorState> emit,
   ) async {
-    final result = await _repository.pickDoctorImage();
+    final result = await _doctorRepository.pickDoctorImage();
     result.fold((failure) {
       if (failure is! CancelledByUserFailure) {
         emit(PickDoctorImageErrorState(failure.message));

@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/mapper/auth_user_dto_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/mappers/auth_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/google_sign_in_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';

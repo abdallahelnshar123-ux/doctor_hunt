@@ -9,6 +9,8 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
 import '../widget/live_doctors_widget.dart';
@@ -64,13 +66,16 @@ class HomeTab extends StatelessWidget {
   }
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
-    var currentUser = context.read<AuthBloc>().currentUser;
+    final user = context.select<AuthBloc, MyUser?>((bloc) {
+      final authState = bloc.state;
+      return authState is UserAuthenticatedState ? authState.currentUser : null;
+    });
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,
       title: Text.rich(
         TextSpan(
-          text: t.home.welcome(Name: currentUser?.name ?? ''),
+          text: t.home.welcome(Name: user?.name ?? ''),
           style: context.light20.bgPrimary.rubik,
           children: [
             TextSpan(
@@ -82,12 +87,10 @@ class HomeTab extends StatelessWidget {
       ),
       actionsPadding: EdgeInsets.only(right: 20),
       actions: [
-        //CR Runtime Error: Unsafe force unwrap 'currentUser!.image' will crash if user is null. Use safe navigation (currentUser?.image?.isNotEmpty == true).
         CircleAvatar(
-          foregroundImage:
-              currentUser!.image == null || currentUser.image!.isEmpty
-              ? AssetImage(AppAssets.images.fallbackUserImage.path)
-              : CachedNetworkImageProvider(currentUser.image ?? ''),
+          foregroundImage: (user?.image?.isNotEmpty ?? false)
+              ? CachedNetworkImageProvider(user!.image!)
+              : AssetImage(AppAssets.images.fallbackUserImage.path),
           radius: 30,
         ),
       ],

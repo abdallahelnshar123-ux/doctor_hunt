@@ -55,7 +55,7 @@ class LogoutErrorState extends AuthState {
 }
 
 class UserAuthenticatedState extends AuthState {
-  final MyUser? currentUser;
+  final MyUser currentUser;
 
   UserAuthenticatedState(this.currentUser);
 

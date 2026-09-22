@@ -5,7 +5,7 @@ sealed class DoctorEvent {}
 
 class AddDoctorRequested extends DoctorEvent {
   final String name;
-  final Specialties specialty;
+  final Specialty specialty;
   final String adminId;
   final File image;
   final bool active;
@@ -28,9 +28,8 @@ class GetDoctorsRequested extends DoctorEvent {
   GetDoctorsRequested({required this.userId, required this.role});
 }
 
-//CR use enum: Use strongly-typed enum or filter type (e.g. SpecialtyFilter / Specialties?) instead of loose String for filtering.
 class FilterDoctorsRequested extends DoctorEvent {
-  final String specialty;
+  final Specialty? selectedSpecialty;
 
-  FilterDoctorsRequested(this.specialty);
+  FilterDoctorsRequested(this.selectedSpecialty);
 }

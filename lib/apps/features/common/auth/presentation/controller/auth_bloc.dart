@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/entity/user/my_user.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/use_case/login_use_case.dart';
 import 'auth_event.dart';
@@ -21,7 +20,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   //CR Bad Practice: Mutable state 'MyUser? currentUser;' stored directly on the Bloc class instead of inside immutable AuthState.
-  MyUser? currentUser;
+  // MyUser? currentUser;
 
   Future<void> _onLoginRequested(
     LoginRequested event,
@@ -36,7 +35,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(LoginWithEmailPasswordErrorState(failure.message)),
       (user) {
-        currentUser = user;
+        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -59,7 +58,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(RegisterWithEmailPasswordErrorState(failure.message));
       },
       (user) {
-        currentUser = user;
+        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -77,7 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ContinueWithGoogleErrorState(failure.message));
       },
       (user) {
-        currentUser = user;
+        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -92,7 +91,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     var result = await _repository.logout();
     result.fold((failure) => emit(LogoutErrorState(failure.message)), (_) {
       emit(UserUnauthenticatedState());
-      currentUser = null;
+      // currentUser = null;
     });
   }
 

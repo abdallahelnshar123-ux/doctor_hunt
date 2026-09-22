@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../../core/constants/firestore_constants.dart';
-import '../doctor/doctor.dart';
+import '../../../../core/constants/firestore_constants.dart';
+import 'doctor.dart';
 
 class DoctorDto extends Equatable {
   final String name;
   final String id;
   final String adminId;
-  final Specialties specialty;
+  final Specialty specialty;
   final bool active;
   final String? imageUrl;
 
@@ -37,9 +37,9 @@ class DoctorDto extends Equatable {
       name: data[FirestoreConstants.name]?.toString() ?? '',
       adminId: data[FirestoreConstants.adminId]?.toString() ?? '',
       active: data[FirestoreConstants.active] ?? false,
-      specialty: Specialties.values.firstWhere(
+      specialty: Specialty.values.firstWhere(
         (e) => e.name == data[FirestoreConstants.specialty],
-        orElse: () => Specialties.allergists,
+        orElse: () => Specialty.allergists,
       ),
       imageUrl: data[FirestoreConstants.image]?.toString() ?? '',
     );

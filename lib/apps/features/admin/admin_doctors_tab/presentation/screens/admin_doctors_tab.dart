@@ -11,8 +11,8 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/router/app_routes.dart';
-import '../../../add_doctor_screen/data/models/doctor/doctor.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
@@ -65,8 +65,8 @@ class AdminDoctorsTab extends StatelessWidget {
                   current is GetDoctorsLoadingState,
               builder: (context, state) {
                 if (state is GetDoctorsSuccessState) {
-                  if (state.doctors.isEmpty &&
-                      state.selectedSpecialty == t.admin.doctors_tab.all) {
+                  if (state.allDoctors.isEmpty ||
+                      (state.filteredDoctors?.isEmpty ?? false)) {
                     return Expanded(
                       child: _noDoctorFoundWidget(context: context),
                     );
@@ -76,17 +76,23 @@ class AdminDoctorsTab extends StatelessWidget {
                       mainAxisSize: .min,
                       children: [
                         DefaultTabController(
-                          length: state.specialtyCounts.length,
+                          length: state.specialtyCounts.length + 1,
                           child: TabBar(
                             overlayColor: WidgetStatePropertyAll(
                               AppColors.transparent,
                             ),
                             onTap: (index) {
-                              final specialty =
-                                  state.specialtyCounts[index].keys.first;
-                              context.read<DoctorBloc>().add(
-                                FilterDoctorsRequested(specialty),
-                              );
+                              if (index == 0) {
+                                context.read<DoctorBloc>().add(
+                                  FilterDoctorsRequested(null),
+                                );
+                              } else {
+                                final specialty =
+                                    state.specialtyCounts[index - 1].keys.first;
+                                context.read<DoctorBloc>().add(
+                                  FilterDoctorsRequested(specialty),
+                                );
+                              }
                             },
                             tabAlignment: TabAlignment.start,
                             padding: EdgeInsets.symmetric(horizontal: 20),
@@ -96,19 +102,29 @@ class AdminDoctorsTab extends StatelessWidget {
                             labelPadding: EdgeInsets.symmetric(
                               horizontal: context.width * 0.01,
                             ),
-                            tabs: state.specialtyCounts.map((map) {
-                              final label = map.keys.first;
-                              final number = map.values.first;
-                              return TabBarWidget(
-                                isSelected: state.selectedSpecialty == label,
-                                number: number,
-                                label: label,
-                              );
-                            }).toList(),
+                            tabs: [
+                              TabBarWidget(
+                                isSelected: state.selectedSpecialty == null,
+                                number: state.allDoctors.length,
+                                label: t.admin.doctors_tab.all,
+                              ),
+                              ...state.specialtyCounts.map((map) {
+                                final label = map.keys.first.name;
+                                final number = map.values.first;
+                                return TabBarWidget(
+                                  isSelected:
+                                      state.selectedSpecialty?.name == label,
+                                  number: number,
+                                  label: label,
+                                );
+                              }),
+                            ],
                           ),
                         ),
                         Expanded(
-                          child: state.doctors.isEmpty
+                          child:
+                              state.allDoctors.isEmpty &&
+                                  (state.filteredDoctors?.isEmpty ?? false)
                               ? _noDoctorFoundWidget(context: context)
                               : ListView.separated(
                                   padding: EdgeInsets.all(20),
@@ -116,16 +132,27 @@ class AdminDoctorsTab extends StatelessWidget {
                                       GestureDetector(
                                         onTap: () {
                                           AdminDoctorDetailsRoute(
-                                            state.doctors[index],
+                                            _buildDoctorsList(
+                                              alldoctors: state.allDoctors,
+                                              filteredDoctors:
+                                                  state.filteredDoctors,
+                                            )[index],
                                           ).push(context);
                                         },
                                         child: DoctorCard(
-                                          doctor: state.doctors[index],
+                                          doctor: _buildDoctorsList(
+                                            alldoctors: state.allDoctors,
+                                            filteredDoctors:
+                                                state.filteredDoctors,
+                                          )[index],
                                         ),
                                       ),
                                   separatorBuilder: (context, index) =>
                                       SizedBox(height: 10),
-                                  itemCount: state.doctors.length,
+                                  itemCount: _buildDoctorsList(
+                                    alldoctors: state.allDoctors,
+                                    filteredDoctors: state.filteredDoctors,
+                                  ).length,
                                 ),
                         ),
                       ],
@@ -173,5 +200,15 @@ class AdminDoctorsTab extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  List<Doctor> _buildDoctorsList({
+    required List<Doctor> alldoctors,
+    required List<Doctor>? filteredDoctors,
+  }) {
+    if (filteredDoctors == null) {
+      return alldoctors;
+    }
+    return filteredDoctors;
   }
 }

@@ -10,10 +10,10 @@ import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/service/d
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';
 import '../../../../../core/mapper/exception_mapper.dart';
 import '../../../../../core/network/cloudinary/cloudinary_service.dart';
-import '../models/doctor/doctor.dart';
 
 @injectable
 class DoctorRepository {

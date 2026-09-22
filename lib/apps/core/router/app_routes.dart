@@ -1,5 +1,5 @@
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
@@ -20,6 +20,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
 import '../../features/common/auth/domain/entity/user/my_user.dart';
+import '../../features/common/auth/presentation/controller/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/patient/main_screen/presentation/screens/main_screen.dart';
 
@@ -55,13 +56,16 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   }
 }
 
-@TypedGoRoute<MainRoute>(path: '/main')
-class MainRoute extends GoRouteData with $MainRoute {
-  const MainRoute();
+@TypedGoRoute<PatientMainRoute>(path: '/patient_main')
+class PatientMainRoute extends GoRouteData with $PatientMainRoute {
+  const PatientMainRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.read<AuthBloc>().currentUser;
+    final user = context.select<AuthBloc, MyUser?>((bloc) {
+      final authState = bloc.state;
+      return authState is UserAuthenticatedState ? authState.currentUser : null;
+    });
     return BlocProvider(
       create: (context) => getIt<DoctorBloc>()
         ..add(
@@ -70,7 +74,7 @@ class MainRoute extends GoRouteData with $MainRoute {
             role: user?.role ?? UserRoles.patient,
           ),
         ),
-      child: const MainScreen(),
+      child: const PatientMainScreen(),
     );
   }
 }
@@ -81,7 +85,10 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.read<AuthBloc>().currentUser;
+    final user = context.select<AuthBloc, MyUser?>((bloc) {
+      final authState = bloc.state;
+      return authState is UserAuthenticatedState ? authState.currentUser : null;
+    });
     return BlocProvider(
       create: (context) => getIt<DoctorBloc>()
         ..add(
@@ -166,7 +173,10 @@ class AdminDoctorDetailsRoute extends GoRouteData
     );
   }
 }
-@TypedGoRoute<AdminUpdateDoctorDetailsRoute>(path: '/admin_update_doctor_details')
+
+@TypedGoRoute<AdminUpdateDoctorDetailsRoute>(
+  path: '/admin_update_doctor_details',
+)
 class AdminUpdateDoctorDetailsRoute extends GoRouteData
     with $AdminUpdateDoctorDetailsRoute {
   const AdminUpdateDoctorDetailsRoute(this.$extra);
@@ -182,7 +192,6 @@ class AdminUpdateDoctorDetailsRoute extends GoRouteData
   }
 }
 
-
 @TypedGoRoute<AppointmentRoute>(path: '/appointment')
 class AppointmentRoute extends GoRouteData with $AppointmentRoute {
   const AppointmentRoute();
@@ -193,4 +202,27 @@ class AppointmentRoute extends GoRouteData with $AppointmentRoute {
   }
 }
 
-final appRouter = GoRouter(routes: $appRoutes);
+final appRouter = GoRouter(
+  routes: $appRoutes,
+  initialLocation: '/',
+  redirect: (context, state) {
+    final authState = context.read<AuthBloc>().state;
+    final isLoggedIn = authState is UserAuthenticatedState;
+
+    final protectedRoutes = ['/patient_main', '/admin_main', '/add_doctor'];
+
+    if (protectedRoutes.contains(state.matchedLocation) && !isLoggedIn) {
+      return '/'; // todo: change this to choose_role later
+    }
+
+    if (isLoggedIn &&
+        (state.matchedLocation == '/' ||
+            state.matchedLocation == '/patient_login' ||
+            state.matchedLocation == '/admin_login')) {
+      final user = authState.currentUser;
+      return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+    }
+
+    return null;
+  },
+);

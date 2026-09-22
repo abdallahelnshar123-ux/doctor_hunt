@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theme/app_colors.dart';
+import '../theme/app_colors.dart';
 
 typedef OnChanged = void Function(String)?;
 typedef OnValidator = String? Function(String?)?;
@@ -77,10 +77,10 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: builtDecorationBorder(
           borderColor: borderSideColor ?? AppColors.borderDefault,
         ),
-        //CR hardcode color
-        errorBorder: builtDecorationBorder(borderColor: Colors.red),
-        //CR hardcode color
-        focusedErrorBorder: builtDecorationBorder(borderColor: Colors.red),
+        errorBorder: builtDecorationBorder(borderColor: AppColors.statusError),
+        focusedErrorBorder: builtDecorationBorder(
+          borderColor: AppColors.statusError,
+        ),
         hintText: hintText,
         hintStyle: hintStyle,
         labelText: labelText,

@@ -12,12 +12,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../generated/style_atoms.dart';
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
-import '../../../../common/auth/presentation/widgets/custom_text_form_field.dart';
-import '../../../add_doctor_screen/data/models/doctor/doctor.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 
 class UpdateDoctorDetailsScreen extends StatefulWidget {
@@ -267,7 +267,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
             name: nameController.text.trim(),
             adminId: widget.doctor.adminId,
             //CR Runtime Error: 'firstWhere' without 'orElse' throws StateError if specialtyController text does not match any enum value.
-            specialty: Specialties.values.firstWhere(
+            specialty: Specialty.values.firstWhere(
               (element) => specialtyController.text.trim() == element.name,
             ),
             active: isActive.value,

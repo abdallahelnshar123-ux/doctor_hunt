@@ -20,11 +20,12 @@ class StatuesWidget extends StatelessWidget {
               ),
               child: buildListTile(
                 title: t.admin.doctors_tab.total_doctors,
-                number:
-                    context.watch<DoctorBloc>().state is GetDoctorsSuccessState
-                    //CR Bad Practice: Accessing mutable public property 'allDoctors' on DoctorBloc instead of reading total count from state.
-                    ? context.watch<DoctorBloc>().allDoctors.length.toString()
-                    : '-',
+                number: context.select<DoctorBloc, String>((bloc) {
+                  final currentState = bloc.state;
+                  return currentState is GetDoctorsSuccessState
+                      ? currentState.allDoctors.length.toString()
+                      : t.admin.doctors_tab.dash;
+                }),
                 context: context,
               ),
             ),

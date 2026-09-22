@@ -572,6 +572,9 @@ class Translations$admin$doctors_tab$en {
 
   /// en: 'All'
   String get all => 'All';
+
+  /// en: '-'
+  String get dash => '-';
 }
 
 // Path: admin.add_doctor_screen
@@ -593,6 +596,9 @@ class Translations$admin$add_doctor_screen$en {
 
   /// en: 'Create doctor'
   String get create_doctor => 'Create doctor';
+
+  /// en: 'Select specialty'
+  String get select_specialty => 'Select specialty';
 }
 
 // Path: admin.doctor_details_screen

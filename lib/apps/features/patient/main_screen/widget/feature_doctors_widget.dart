@@ -59,7 +59,7 @@ class FeatureDoctorsWidget extends StatelessWidget {
 
           builder: (context, state) {
             if (state is GetDoctorsSuccessState) {
-              if (state.doctors.isEmpty) {
+              if (state.allDoctors.isEmpty) {
                 return Container(
                   alignment: .center,
                   height: 190,
@@ -75,10 +75,10 @@ class FeatureDoctorsWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ListView.separated(
                   itemBuilder: (context, index) =>
-                      FeatureDoctorsItem(doctor: state.doctors[index]),
+                      FeatureDoctorsItem(doctor: state.allDoctors[index]),
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 15),
-                  itemCount: state.doctors.length,
+                  itemCount: state.allDoctors.length,
                   scrollDirection: .horizontal,
                   padding: const EdgeInsets.all(20),
                 ),

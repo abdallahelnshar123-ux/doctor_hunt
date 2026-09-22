@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import '../../../add_doctor_screen/data/models/doctor/doctor.dart';
+
+import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../add_doctor_screen/data/repo/doctor_repository.dart';
 
 part 'update_doctor_details_event.dart';
@@ -15,7 +16,7 @@ class UpdateDoctorDetailsBloc
   final DoctorRepository _doctorRepository;
 
   UpdateDoctorDetailsBloc(this._doctorRepository)
-      : super(UpdateDoctorDetailsInitial()) {
+    : super(UpdateDoctorDetailsInitial()) {
     on<UpdateDoctorDetailsRequested>(_onUpdateDoctorDetailsRequested);
     on<DeleteDoctorRequested>(_onDeleteDoctorRequested);
     on<PickDoctorUpdateImageRequested>(_onPickDoctorImageRequested);

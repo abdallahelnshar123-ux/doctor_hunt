@@ -50,7 +50,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
 
           Future.delayed(Duration(seconds: 2), () {
             if (context.mounted) {
-              const MainRoute().go(context);
+              const PatientMainRoute().go(context);
             }
           });
         }

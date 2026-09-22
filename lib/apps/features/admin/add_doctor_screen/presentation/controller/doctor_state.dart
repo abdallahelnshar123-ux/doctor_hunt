@@ -38,19 +38,35 @@ final class PickDoctorImageErrorState extends DoctorState {
 final class GetDoctorsLoadingState extends DoctorState {}
 
 final class GetDoctorsSuccessState extends DoctorState {
-  final List<Doctor> doctors;
-  //CR use enum: Represent specialties with Map<Specialties, int> or a dedicated enum filter model rather than List<Map<String, int>> with localized strings.
-  final List<Map<String, int>> specialtyCounts;
+  final List<Doctor> allDoctors;
+  final List<Map<Specialty, int>> specialtyCounts;
   final int activeDoctorsCount;
-  //CR use enum: Use 'Specialties?' (nullable where null = All) or an enum filter rather than raw String.
-  final String selectedSpecialty;
+  final Specialty? selectedSpecialty;
+  final List<Doctor>? filteredDoctors;
 
-  GetDoctorsSuccessState(
-    this.doctors,
-    this.specialtyCounts,
-    this.activeDoctorsCount,
+  GetDoctorsSuccessState({
+    required this.allDoctors,
+    required this.specialtyCounts,
+    required this.activeDoctorsCount,
     this.selectedSpecialty,
-  );
+    this.filteredDoctors,
+  });
+
+  GetDoctorsSuccessState copyWith({
+    List<Doctor>? allDoctors,
+    List<Map<Specialty, int>>? specialtyCounts,
+    int? activeDoctorsCount,
+    Specialty? selectedSpecialty,
+    List<Doctor>? filteredDoctors,
+  }) {
+    return GetDoctorsSuccessState(
+      allDoctors: allDoctors ?? this.allDoctors,
+      specialtyCounts: specialtyCounts ?? this.specialtyCounts,
+      activeDoctorsCount: activeDoctorsCount ?? this.activeDoctorsCount,
+      selectedSpecialty: selectedSpecialty,
+      filteredDoctors: filteredDoctors,
+    );
+  }
 }
 
 final class GetDoctorsErrorState extends DoctorState {

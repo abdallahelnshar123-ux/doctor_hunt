@@ -3,7 +3,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/validators.dart';
-import 'custom_text_form_field.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class EmailTextFieldWidget extends StatefulWidget {
   final Color? fillColor;
