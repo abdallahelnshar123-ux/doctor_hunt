@@ -2,6 +2,8 @@ import '../../domain/entity/user/my_user.dart';
 
 abstract class AuthEvent {}
 
+class CheckAuthStatusRequested extends AuthEvent {}
+
 class LoginRequested extends AuthEvent {
   final UserRoles role;
   final String email;

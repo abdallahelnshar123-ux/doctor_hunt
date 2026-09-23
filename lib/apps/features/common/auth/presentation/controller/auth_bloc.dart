@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/data/shared_prefs/user_pref.dart';
+import '../../data/mappers/my_user_mapper.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../../domain/use_case/login_use_case.dart';
 import 'auth_event.dart';
@@ -10,13 +12,28 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
+  final UserPrefs _userPrefs;
 
-  AuthBloc(this._repository, this._loginUseCase) : super(UserInitial()) {
+  AuthBloc(this._repository, this._loginUseCase, this._userPrefs)
+      : super(UserInitial()) {
+    on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
+  }
+
+  void _onCheckAuthStatusRequested(
+    CheckAuthStatusRequested event,
+    Emitter<AuthState> emit,
+  ) {
+    final userDto = _userPrefs.getCurrentUser();
+    if (userDto != null) {
+      emit(UserAuthenticatedState(userDto.toUser()));
+    } else {
+      emit(UserUnauthenticatedState());
+    }
   }
 
   Future<void> _onLoginRequested(

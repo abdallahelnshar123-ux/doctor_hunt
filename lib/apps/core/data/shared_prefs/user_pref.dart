@@ -43,8 +43,12 @@ class UserPrefs {
 
   // List<String>? getUserTopic() => _preferences.getStringList('topics');
 
-  bool get isUserLoggedIn =>
-      getUserToken().isNotEmpty && getCurrentUser() != null;
+  bool get isUserLoggedIn => getCurrentUser() != null;
+
+  Future<void> clearUser() async {
+    await _preferences.remove(PrefsKeys.userKey);
+    await _preferences.remove(PrefsKeys.tokenKey);
+  }
 
   MyUserDto? getCurrentUser() {
     final userJson = _preferences.getString(PrefsKeys.userKey);
@@ -60,6 +64,11 @@ class UserPrefs {
     await _preferences.setString('userType', userType);
   }
 
+  bool get onboarding => _preferences.getBool(PrefsKeys.onBoardingKey) ?? false;
+
+  Future<void> setOnboardingDone() async {
+    await _preferences.setBool(PrefsKeys.onBoardingKey, true);
+  }
   // UserTypeEnum getUserType() {
   //   final userTypeString = _preferences.getString('userType') ?? '';
   //   return UserTypeEnum.fromString(userTypeString);

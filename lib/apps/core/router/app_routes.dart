@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
@@ -115,7 +118,7 @@ class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
   }
 }
 
-@TypedGoRoute<OnboardingRoute>(path: '/onboarding')
+@TypedGoRoute<OnboardingRoute>(path: '/')
 class OnboardingRoute extends GoRouteData with $OnboardingRoute {
   const OnboardingRoute();
 
@@ -125,7 +128,7 @@ class OnboardingRoute extends GoRouteData with $OnboardingRoute {
   }
 }
 
-@TypedGoRoute<ChooseRoleRoute>(path: '/')
+@TypedGoRoute<ChooseRoleRoute>(path: '/choose_role')
 class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   const ChooseRoleRoute();
 
@@ -202,23 +205,70 @@ class AppointmentRoute extends GoRouteData with $AppointmentRoute {
   }
 }
 
+class GoRouterRefreshStream extends ChangeNotifier {
+  late final StreamSubscription<dynamic> _subscription;
+
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen((_) => notifyListeners());
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
+
 final appRouter = GoRouter(
   routes: $appRoutes,
   initialLocation: '/',
+  refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
   redirect: (context, state) {
     final authState = context.read<AuthBloc>().state;
     final isLoggedIn = authState is UserAuthenticatedState;
+    final onboardingDone = getIt<UserPrefs>().onboarding;
+    final currentLocation = state.matchedLocation;
 
-    final protectedRoutes = ['/patient_main', '/admin_main', '/add_doctor'];
-
-    if (protectedRoutes.contains(state.matchedLocation) && !isLoggedIn) {
-      return '/'; // todo: change this to choose_role later
+    if (!onboardingDone) {
+      if (currentLocation != '/') {
+        return '/';
+      }
+      return null;
     }
 
-    if (isLoggedIn &&
-        (state.matchedLocation == '/' ||
-            state.matchedLocation == '/patient_login' ||
-            state.matchedLocation == '/admin_login')) {
+    if (currentLocation == '/') {
+      if (isLoggedIn) {
+        final user = authState.currentUser;
+        return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+      } else {
+        return '/choose_role';
+      }
+    }
+
+    final protectedRoutes = [
+      '/patient_main',
+      '/admin_main',
+      '/add_doctor',
+      '/find_doctor',
+      '/patient_doctor_details',
+      '/admin_doctor_details',
+      '/admin_update_doctor_details',
+      '/appointment',
+    ];
+
+    if (protectedRoutes.contains(currentLocation) && !isLoggedIn) {
+      return '/choose_role';
+    }
+
+    final authRoutes = [
+      '/choose_role',
+      '/patient_login',
+      '/admin_login',
+      '/register',
+    ];
+
+    if (isLoggedIn && authRoutes.contains(currentLocation)) {
       final user = authState.currentUser;
       return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
     }

@@ -151,7 +151,7 @@
       "heartCare" : "Heart Care",
       "editDoctor" : "Edit Doctor",
       "deleteDoctor": "Delete Doctor",
-      "doctorDeletedSuccessfully" : "Doctor was deleted successfully",
+      "doctorDeletedSuccessfully" : "Doctor was deleted successfully"
     },
     "updateDoctorDetails" : {
       "doctorWasUpdatedSuccessfully" : "Doctor was Updated Successfully",

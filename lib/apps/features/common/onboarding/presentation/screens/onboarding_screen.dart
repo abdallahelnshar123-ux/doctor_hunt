@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -5,18 +6,22 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
 import '../../../auth/presentation/widgets/custom_elevated_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  const OnboardingScreen({super.key ,});
+
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  final UserPrefs _userPrefs = getIt<UserPrefs>();
+
   int currentIndex = 0;
 
   @override
@@ -93,6 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     currentIndex++;
                   });
                 } else {
+                  _userPrefs.setOnboardingDone();
                   const ChooseRoleRoute().go(context);
                 }
               },
@@ -104,7 +110,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             TextButton(
-              onPressed: () {
+              onPressed: () {_userPrefs.setOnboardingDone();
                 const ChooseRoleRoute().go(context);
               },
               child: Text(

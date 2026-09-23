@@ -20,12 +20,12 @@ import '../dto/user_dto/my_user_dto.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _authRemoteDataSource;
   final UserFirestoreService _firestoreService;
-  final UserPrefs _userLocalDataSource;
+  final UserPrefs _userPrefs;
 
   const AuthRepositoryImpl(
     this._authRemoteDataSource,
     this._firestoreService,
-    this._userLocalDataSource,
+    this._userPrefs,
   );
 
   @override
@@ -46,11 +46,11 @@ class AuthRepositoryImpl implements AuthRepository {
           role: UserRoles.patient,
         );
         await _firestoreService.addUser(newUser);
-        await _userLocalDataSource.setUser(newUser);
+        await _userPrefs.setUser(newUser);
 
         return Right(newUser.toUser());
       }
-      await _userLocalDataSource.setUser(databaseUser);
+      await _userPrefs.setUser(databaseUser);
 
       return Right(databaseUser.toUser());
     } on AppException catch (e) {
@@ -78,7 +78,7 @@ class AuthRepositoryImpl implements AuthRepository {
         role: UserRoles.patient,
       );
       await _firestoreService.addUser(newUser.toMyUserDto());
-      await _userLocalDataSource.setUser(newUser.toMyUserDto());
+      await _userPrefs.setUser(newUser.toMyUserDto());
 
       return Right(newUser);
     } on AppException catch (e) {
@@ -105,7 +105,7 @@ class AuthRepositoryImpl implements AuthRepository {
         return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
       }
 
-      await _userLocalDataSource.setUser(databaseUser);
+      await _userPrefs.setUser(databaseUser);
       return Right(databaseUser.toUser());
     } on AppException catch (e) {
       return Left(e.toFailure());
@@ -118,6 +118,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, Unit>> logout() async {
     try {
       await _authRemoteDataSource.logout();
+      await _userPrefs.clearUser();
       return Right(unit);
     } on AppException catch (e) {
       return Left(e.toFailure());

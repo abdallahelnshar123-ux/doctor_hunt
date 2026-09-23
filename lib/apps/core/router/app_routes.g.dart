@@ -184,7 +184,7 @@ mixin $AddDoctorRoute on GoRouteData {
 }
 
 RouteBase get $onboardingRoute => GoRouteData.$route(
-  path: '/onboarding',
+  path: '/',
   hasOverriddenOnExit: false,
   factory: $OnboardingRoute._fromState,
 );
@@ -194,7 +194,7 @@ mixin $OnboardingRoute on GoRouteData {
       const OnboardingRoute();
 
   @override
-  String get location => GoRouteData.$location('/onboarding');
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -211,7 +211,7 @@ mixin $OnboardingRoute on GoRouteData {
 }
 
 RouteBase get $chooseRoleRoute => GoRouteData.$route(
-  path: '/',
+  path: '/choose_role',
   hasOverriddenOnExit: false,
   factory: $ChooseRoleRoute._fromState,
 );
@@ -221,7 +221,7 @@ mixin $ChooseRoleRoute on GoRouteData {
       const ChooseRoleRoute();
 
   @override
-  String get location => GoRouteData.$location('/');
+  String get location => GoRouteData.$location('/choose_role');
 
   @override
   void go(BuildContext context) => context.go(location);
