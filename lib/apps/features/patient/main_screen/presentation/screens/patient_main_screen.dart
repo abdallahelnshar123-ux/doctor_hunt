@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -29,7 +30,7 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       extendBody: true,
       body: _tabsList[selectedIndex],
       bottomNavigationBar: Container(
@@ -52,10 +53,8 @@ class _PatientMainScreenState extends State<PatientMainScreen> {
 
           child: BottomNavigationBar(
             elevation: 0,
-            //CR hardcode textstyle
-            unselectedLabelStyle: TextStyle(fontSize: 0),
-            //CR hardcode textstyle
-            selectedLabelStyle: TextStyle(fontSize: 0),
+            unselectedLabelStyle: context.semiBold0,
+            selectedLabelStyle: context.semiBold0,
             backgroundColor: AppColors.transparent,
             onTap: (index) {
               setState(() {

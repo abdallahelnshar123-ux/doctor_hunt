@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -8,10 +9,8 @@ class AdminDoctorsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      //CR hardcode color
-      baseColor: Colors.grey[300]!,
-      //CR hardcode color
-      highlightColor: Colors.grey[100]!,
+      baseColor: AppColors.shimmerBaseColor,
+      highlightColor: AppColors.shimmerHighlightColor,
       child: Column(
         spacing: 10,
         children: [
@@ -24,8 +23,7 @@ class AdminDoctorsShimmer extends StatelessWidget {
                 width: 120,
                 height: 30,
                 decoration: BoxDecoration(
-                  //CR hardcode color
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
@@ -42,8 +40,7 @@ class AdminDoctorsShimmer extends StatelessWidget {
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
-                  //CR hardcode color
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
               separatorBuilder: (context, index) => const SizedBox(height: 10),

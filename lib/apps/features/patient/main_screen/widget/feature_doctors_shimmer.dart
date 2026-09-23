@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -7,17 +8,14 @@ class FeatureDoctorsShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      //CR hardcode color
-      baseColor: Colors.grey[300]!,
-      //CR hardcode color
-      highlightColor: Colors.grey[100]!,
+      baseColor: AppColors.shimmerBaseColor,
+      highlightColor: AppColors.shimmerHighlightColor,
       child: ListView.separated(
         itemBuilder: (context, index) => Container(
           width: 105,
           height: 170,
           decoration: BoxDecoration(
-            //CR hardcode color
-            color: Colors.white,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(6),
           ),
         ),

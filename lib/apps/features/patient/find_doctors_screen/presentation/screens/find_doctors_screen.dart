@@ -21,7 +21,6 @@ class FindDoctorsScreen extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 30, 20, 30),
                   child: SearchTextFieldWidget(),
                 ),
-                //CR Incomplete Feature: FindDoctorsScreen uses hardcoded mock list of 10 items instead of integrating with DoctorBloc / repository.
                 Expanded(
                   child: ListView.separated(
                     itemBuilder: (context, index) => DoctorCard(),

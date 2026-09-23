@@ -5,7 +5,6 @@ import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mappe
 import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/user_firestore_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
-//CR Layer Separation Violation: Repository should not import translations (t.errors.*). Map failures to error keys or handle translation in presentation.
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
@@ -40,7 +39,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
       if (databaseUser == null) {
         final newUser = MyUserDto(
-          provider: AuthProviders.google,
+          provider: UserAuthProvider.google,
           id: authUserDto.id,
           name: authUserDto.name,
           email: authUserDto.email,
@@ -72,7 +71,7 @@ class AuthRepositoryImpl implements AuthRepository {
           .registerWithEmailAndPassword(email: email, password: password);
 
       final newUser = MyUser(
-        provider: AuthProviders.emailPassword,
+        provider: UserAuthProvider.emailPassword,
         id: authUserDto.id,
         name: name,
         email: authUserDto.email,

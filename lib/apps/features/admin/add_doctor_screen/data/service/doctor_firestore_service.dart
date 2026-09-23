@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_dto.dart';
 import 'package:injectable/injectable.dart';
 
-//CR Layer Separation Violation: Data service must not import or throw UI translations (t.errors.*). Throw raw AppExceptions and map to localized strings in the presentation layer.
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/constants/firestore_constants.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';

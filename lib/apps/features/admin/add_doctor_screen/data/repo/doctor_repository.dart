@@ -6,7 +6,6 @@ import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_mapper.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/service/doctor_firestore_service.dart';
-//CR Layer Separation Violation: Repository layer should not use presentation localization (t.errors.*). Use typed Failure classes.
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 

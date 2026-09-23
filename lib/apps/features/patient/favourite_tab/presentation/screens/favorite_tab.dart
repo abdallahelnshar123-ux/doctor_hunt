@@ -20,7 +20,6 @@ class FavoriteTab extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
             child: SearchTextFieldWidget(),
           ),
-          //CR Incomplete Feature: FavouriteTab renders 16 static mock cards instead of dynamic doctor data from DoctorBloc / repository.
           SizedBox(
             width: double.infinity,
             height: 450,

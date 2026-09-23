@@ -97,50 +97,8 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
         value: [_selectedDate.value],
         onValueChanged: (dates) {
           _selectedDate.value = dates[0];
-
-          // _availableTimeBottomSheet(context: context);
         },
       ),
     );
   }
-
-  // PersistentBottomSheetController _availableTimeBottomSheet({
-  //   required BuildContext context,
-  // }) {
-  //   return Scaffold.of(context).showBottomSheet((context) {
-  //     return SizedBox(
-  //       height: MediaQuery.sizeOf(context).height * 0.5,
-  //       child: ListView(
-  //         padding: const EdgeInsets.all(16),
-  //         children: [
-  //           CustomElevatedButton(
-  //             borderRadius: 6,
-  //             backgroundColor: AppColors.brandPrimary,
-  //             onPressed: () {},
-  //             child: Text('Confirm', style: context.medium18.white.rubik),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   });
-  // }
-
-  //   context.showBottomSheet(
-  //   backgroundColor: AppColors.bgPrimary,
-  //   isDismissible: false,
-  //
-  //   bottomSheetBody: AppContainerWithShadow(
-  //     constraints: BoxConstraints(maxHeight: 400),
-  //     child: ListView(
-  //       children: [
-  //         CustomElevatedButton(borderRadius: 6,
-  //           backgroundColor: AppColors.brandPrimary,
-  //           onPressed: () {},
-  //           child: Text('Confirm', style: context.medium18.white.rubik),
-  //         ),
-  //       ],
-  //     ),
-  //   ),
-  // );
-  // }
 }

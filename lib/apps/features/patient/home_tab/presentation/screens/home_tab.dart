@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -21,7 +20,7 @@ class HomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
+    return Scaffold(
       appBar: _customAppBar(context: context),
       body: Column(
         spacing: 20,
@@ -47,16 +46,17 @@ class HomeTab extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                spacing: 20,
-                children: [
-                  const LiveDoctorsWidget(),
-                  const CategoriesWidget(),
-                  const PopularDoctorsWidget(),
-                  const FeatureDoctorsWidget(),
-                  const SizedBox(height: 10),
-                ],
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  spacing: 20,
+                  children: [
+                    const LiveDoctorsWidget(),
+                    const CategoriesWidget(),
+                    const PopularDoctorsWidget(),
+                    const FeatureDoctorsWidget(),
+                  ],
+                ),
               ),
             ),
           ),

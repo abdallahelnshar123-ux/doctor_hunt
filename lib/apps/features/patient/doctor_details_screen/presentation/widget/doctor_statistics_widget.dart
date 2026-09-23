@@ -30,19 +30,16 @@ class DoctorStatisticsWidget extends StatelessWidget {
           _statisticsWidget(
             context: context,
             title: t.doctor_details.running,
-            //CR hardcode text
             number: '100',
           ),
           _statisticsWidget(
             context: context,
             title: t.doctor_details.ongoing,
-            //CR hardcode text
             number: '500',
           ),
           _statisticsWidget(
             context: context,
             title: t.doctor_details.patient,
-            //CR hardcode text
             number: '700',
           ),
         ],

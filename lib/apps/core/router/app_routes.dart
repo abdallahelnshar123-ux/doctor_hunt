@@ -22,7 +22,7 @@ import '../../features/admin/update_doctor_details_screen/presentation/screens/u
 import '../../features/common/auth/domain/entity/user/my_user.dart';
 import '../../features/common/auth/presentation/controller/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
-import '../../features/patient/main_screen/presentation/screens/main_screen.dart';
+import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
 
 part 'app_routes.g.dart';
 

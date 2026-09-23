@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-//CR Layer Separation Violation: Domain use case should not import UI translations (t.errors.*). Return typed Failures.
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 

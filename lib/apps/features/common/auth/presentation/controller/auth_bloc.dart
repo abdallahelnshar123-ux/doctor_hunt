@@ -19,9 +19,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetPasswordRequested>(_onResetPasswordRequested);
   }
 
-  //CR Bad Practice: Mutable state 'MyUser? currentUser;' stored directly on the Bloc class instead of inside immutable AuthState.
-  // MyUser? currentUser;
-
   Future<void> _onLoginRequested(
     LoginRequested event,
     Emitter<AuthState> emit,
@@ -35,7 +32,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(LoginWithEmailPasswordErrorState(failure.message)),
       (user) {
-        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -46,7 +42,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(RegisterWithEmailPasswordLoadingState());
-    //CR Inconsistent Architecture: Only login uses a UseCase while register, logout, google, and reset password call the repository directly from the Bloc.
     final result = await _repository.registerWithEmailAndPassword(
       name: event.name,
       password: event.password,
@@ -58,7 +53,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(RegisterWithEmailPasswordErrorState(failure.message));
       },
       (user) {
-        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -76,7 +70,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ContinueWithGoogleErrorState(failure.message));
       },
       (user) {
-        // currentUser = user;
         emit(UserAuthenticatedState(user));
       },
     );
@@ -91,7 +84,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     var result = await _repository.logout();
     result.fold((failure) => emit(LogoutErrorState(failure.message)), (_) {
       emit(UserUnauthenticatedState());
-      // currentUser = null;
     });
   }
 

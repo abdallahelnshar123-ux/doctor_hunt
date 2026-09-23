@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -188,7 +188,6 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                       backgroundColor: AppColors.bgSurfaceLight,
                       avatarBoxConstraints: .tightFor(width: 15),
 
-                      //CR Bug: Hardcoded 't.admin.doctor_details_screen.heart_care' displays heart care specialty regardless of the doctor's actual specialty.
                       label: Text(
                         t.admin.doctor_details_screen.heart_care,
                         style: context.medium12.brandPrimary.rubik,
@@ -196,42 +195,48 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
                     ),
                   ),
                   Divider(color: AppColors.textSecondary),
-                  //CR Copy-Paste Defect: Status switch card reuses specialty title and value instead of doctor status strings.
-                  _buildInfoCard(
-                    context,
-                    value: widget.doctor.specialty.name,
-                    title: t.admin.doctor_details_screen.specialty,
-                    icon: AppAssets.icons.switchIcon.path,
-                    trailing: ValueListenableBuilder(
-                      valueListenable: isActive,
-                      builder: (context, value, child) {
-                        return Switch(
-                          value: value,
+                  ValueListenableBuilder(
+                    valueListenable: isActive,
+                    builder: (context, value, child) {
+                      return _buildInfoCard(
+                        context,
+                        value: value
+                            ? t.admin.doctors_tab.active
+                            : t.admin.doctors_tab.inactive,
+                        title: t.admin.doctor_details_screen.account_status,
+                        icon: AppAssets.icons.switchIcon.path,
+                        trailing: ValueListenableBuilder(
+                          valueListenable: isActive,
+                          builder: (context, value, child) {
+                            return Switch(
+                              value: value,
 
-                          onChanged: (value) {
-                            context.read<AdminDoctorActionBloc>().add(
-                              ToggleDoctorActiveStatusRequested(
-                                doctorId: widget.doctor.id,
-                                active: value,
+                              onChanged: (value) {
+                                context.read<AdminDoctorActionBloc>().add(
+                                  ToggleDoctorActiveStatusRequested(
+                                    doctorId: widget.doctor.id,
+                                    active: value,
+                                  ),
+                                );
+                              },
+                              activeThumbColor: AppColors.white,
+                              activeTrackColor: AppColors.brandPrimary,
+                              thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+                                (Set<WidgetState> states) {
+                                  if (states.contains(WidgetState.selected)) {
+                                    return Icon(
+                                      Icons.check_rounded,
+                                      color: AppColors.brandPrimary,
+                                    );
+                                  }
+                                  return null;
+                                },
                               ),
                             );
                           },
-                          activeThumbColor: AppColors.white,
-                          activeTrackColor: AppColors.brandPrimary,
-                          thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                            Set<WidgetState> states,
-                          ) {
-                            if (states.contains(WidgetState.selected)) {
-                              return Icon(
-                                Icons.check_rounded,
-                                color: AppColors.brandPrimary,
-                              );
-                            }
-                            return null;
-                          }),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -301,109 +306,3 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
     );
   }
 }
-
-//CR Dead Code: Remove 104 lines of commented-out legacy code.
-// Widget buildUploadImage(BuildContext context) {
-//   return Container(
-//     clipBehavior: .antiAlias,
-//     decoration: BoxDecoration(shape: .circle),
-//     width: 120,
-//     height: 120,
-//     alignment: .center,
-//     child: BlocConsumer<DoctorBloc, DoctorState>(
-//       listener: (context, state) {
-//         if (state is PickDoctorImageErrorState) {
-//           SnackBarUtils.showErrorSnackBar(
-//             context: context,
-//             message: state.message,
-//           );
-//         }
-//       },
-//       buildWhen: (previous, current) =>
-//           current is PickDoctorImageSuccessState,
-//       builder: (context, state) {
-//         if (state is PickDoctorImageSuccessState) {
-//           return Image.file(state.image, fit: .fitHeight);
-//         }
-//         return DottedBorder(
-//           options: CircularDottedBorderOptions(
-//             padding: EdgeInsets.all(40),
-//             stackFit: .loose,
-//             strokeCap: .round,
-//             dashPattern: const [10, 5],
-//             color: AppColors.borderMuted,
-//             strokeWidth: 2,
-//           ),
-//
-//           child: Icon(
-//             Icons.image_outlined,
-//             size: 35,
-//             color: AppColors.textSecondary,
-//           ),
-//         );
-//       },
-//     ),
-//   );
-// }
-/*
-GestureDetector(
-                      onTap: () {
-                        FocusManager.instance.primaryFocus?.unfocus();
-                        showAvatarBottomSheet();
-                      },
-                      child: Center(
-                        child: Stack(
-                          alignment: .topRight,
-                          children: [
-                            ValueListenableBuilder<String?>(
-                              valueListenable: avatar,
-                              builder:
-                                  (BuildContext context, value, Widget? child) {
-                                    var avatarPath = userAvatars[value];
-                                    return Container(
-                                      width: context.width * 0.3,
-                                      height: context.width * 0.3,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: context.easyColor(
-                                          lColor: AppColors.primary,
-                                          dColor: AppColors.backgroundLight,
-                                        ),
-                                      ),
-                                      child: avatarPath != null
-                                          ? ClipOval(
-                                              child: SvgPicture.asset(
-                                                avatarPath,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            )
-                                          : Icon(
-                                              Icons.person,
-                                              size: context.width * 0.2,
-                                              color: AppColors.backgroundDark,
-                                            ),
-                                    );
-                                  },
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(5),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.lightGreen,
-                                border: Border.all(
-                                  width: 3,
-                                  color: AppColors.backgroundDark,
-                                ),
-                              ),
-                              child: Icon(
-                                Icons.edit,
-                                color: AppColors.surfaceDark,
-                                size: 20,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
- */

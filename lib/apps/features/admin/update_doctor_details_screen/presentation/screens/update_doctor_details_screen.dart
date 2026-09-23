@@ -16,8 +16,8 @@ import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
-import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 
 class UpdateDoctorDetailsScreen extends StatefulWidget {
@@ -34,21 +34,23 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
   late final TextEditingController nameController = TextEditingController(
     text: widget.doctor.name,
   );
-  late final TextEditingController specialtyController = TextEditingController(
-    text: widget.doctor.specialty.name,
-  );
+
+  // late final TextEditingController specialtyController = TextEditingController(
+  //   text: widget.doctor.specialty.name,
+  // );
   late final ValueNotifier<bool> isActive = ValueNotifier(widget.doctor.active);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     nameController.dispose();
-    specialtyController.dispose();
+    // specialtyController.dispose();
     isActive.dispose();
     super.dispose();
   }
 
   File? selectedImage;
+  late Specialty selectedSpecialty = widget.doctor.specialty;
 
   @override
   Widget build(BuildContext context) {
@@ -140,8 +142,8 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
               ),
               SizedBox(height: 20),
               SpecialtyDropdownWidget(
-                controller: specialtyController,
                 initialSelection: widget.doctor.specialty,
+                selectedSpecialty: (value) => selectedSpecialty = value,
               ),
               SizedBox(height: 20),
               _buildStatusWidget(),
@@ -266,10 +268,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
             id: widget.doctor.id,
             name: nameController.text.trim(),
             adminId: widget.doctor.adminId,
-            //CR Runtime Error: 'firstWhere' without 'orElse' throws StateError if specialtyController text does not match any enum value.
-            specialty: Specialty.values.firstWhere(
-              (element) => specialtyController.text.trim() == element.name,
-            ),
+            specialty: selectedSpecialty,
             active: isActive.value,
             imageUrl: widget.doctor.imageUrl,
           ),

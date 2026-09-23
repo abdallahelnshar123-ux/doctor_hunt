@@ -1,8 +1,7 @@
-//CR Typo: Rename 'statues_widget.dart' / 'StatuesWidget' to 'status_widget.dart' / 'DoctorStatusWidget'.
 part of '../screens/admin_doctors_tab.dart';
 
-class StatuesWidget extends StatelessWidget {
-  const StatuesWidget({super.key});
+class StatusWidget extends StatelessWidget {
+  const StatusWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

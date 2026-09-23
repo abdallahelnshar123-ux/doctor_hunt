@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/features/patient/appointment_screen/data/models/appointment_enums.dart';
 import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/widget/time_list_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -14,26 +15,8 @@ class AvailableTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final availableTimeList = [
-      '10:00\n${t.common.am}',
-      '12:00\n${t.common.am}',
-      '02:00\n${t.common.pm}',
-      '03:00\n${t.common.pm}',
-      '04:00\n${t.common.pm}',
-      '06:00\n${t.common.pm}',
-      '07:00\n${t.common.pm}',
-    ];
-
-    //CR use enum: Define a typed enum or domain value objects for reminder intervals (e.g. enum ReminderInterval { tenMinutes, twentyFiveMinutes, ... }) and time slots instead of raw strings.
-    final reminderMinuteList = [
-      '30\n${t.common.min}',
-      '40\n${t.common.min}',
-      '25\n${t.common.min}',
-      '10\n${t.common.min}',
-      '35\n${t.common.min}',
-      '45\n${t.common.min}',
-      '50\n${t.common.min}',
-    ];
+    final availableTimeList = TimeSlot.values.map((e) => e.localizedLabel).toList();
+    final reminderMinuteList = ReminderInterval.values.map((e) => e.localizedLabel).toList();
 
     return CustomScrollView(
       slivers: [
@@ -58,82 +41,7 @@ class AvailableTimeWidget extends StatelessWidget {
               borderRadius: 6,
               backgroundColor: AppColors.brandPrimary,
               onPressed: () {
-                //CR Code Organization: Inline showDialog implementation should be extracted into a dedicated dialog widget or DialogUtils.
-                showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) => Container(
-                    padding: EdgeInsets.all(25),
-                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 130),
-                    width: double.infinity,
-                    height: double.infinity,
-                    decoration: BoxDecoration(
-                      color: AppColors.bgPrimary,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: ListView(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(40),
-                          width: 150,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            shape: .circle,
-                            color: AppColors.brandPrimary20,
-                          ),
-                          child: SvgPicture.asset(
-                            AppAssets.icons.likeIcon.path,
-                            width: double.infinity,
-                          ),
-                        ),
-                        Text(
-                          t.appointment.thank_you,
-                          style: context.medium38.black.rubik,
-                          textAlign: .center,
-                        ),
-                        FittedBox(
-                          fit: .scaleDown,
-                          child: Text(
-                            t.appointment.success,
-                            style: context.regular20.textSecondary.rubik,
-                            textAlign: .center,
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        //CR hardcode text
-                        Text(
-                          t.appointment.booking_details(
-                            Doctor: 'Pediatrician Purpieson',
-                            Date: 'February 21',
-                            Time: '02:00 ${t.common.pm}',
-                          ),
-                          style: context.regular14.textSecondary.rubik,
-                          textAlign: .center,
-                        ),
-                        SizedBox(height: 30),
-                        CustomElevatedButton(
-                          buttonWidth: double.infinity,
-                          borderRadius: 6,
-                          backgroundColor: AppColors.brandPrimary,
-                          onPressed: () {
-                            context.pop();
-                          },
-                          child: Text(
-                            t.appointment.done,
-                            style: context.medium18.white.rubik,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            t.appointment.edit,
-                            style: context.regular14.textSecondary.rubik,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                _buildSuccessDialog(context);
               },
               child: Text(
                 t.appointment.confirm,
@@ -150,6 +58,83 @@ class AvailableTimeWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(20),
       child: Text(text, style: context.medium16.textTertiary.rubik),
+    );
+  }
+
+  Future<dynamic> _buildSuccessDialog(BuildContext context) {
+    return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (context) => Container(
+        padding: EdgeInsets.all(25),
+        margin: EdgeInsets.symmetric(horizontal: 20, vertical: 130),
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.bgPrimary,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: ListView(
+          children: [
+            Container(
+              padding: EdgeInsets.all(40),
+              width: 150,
+              height: 150,
+              decoration: BoxDecoration(
+                shape: .circle,
+                color: AppColors.brandPrimary20,
+              ),
+              child: SvgPicture.asset(
+                AppAssets.icons.likeIcon.path,
+                width: double.infinity,
+              ),
+            ),
+            Text(
+              t.appointment.thank_you,
+              style: context.medium38.black.rubik,
+              textAlign: .center,
+            ),
+            FittedBox(
+              fit: .scaleDown,
+              child: Text(
+                t.appointment.success,
+                style: context.regular20.textSecondary.rubik,
+                textAlign: .center,
+              ),
+            ),
+            SizedBox(height: 30),
+            Text(
+              t.appointment.booking_details(
+                Doctor: 'Pediatrician Purpieson',
+                Date: 'February 21',
+                Time: '02:00 ${t.common.pm}',
+              ),
+              style: context.regular14.textSecondary.rubik,
+              textAlign: .center,
+            ),
+            SizedBox(height: 30),
+            CustomElevatedButton(
+              buttonWidth: double.infinity,
+              borderRadius: 6,
+              backgroundColor: AppColors.brandPrimary,
+              onPressed: () {
+                context.pop();
+              },
+              child: Text(
+                t.appointment.done,
+                style: context.medium18.white.rubik,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                t.appointment.edit,
+                style: context.regular14.textSecondary.rubik,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

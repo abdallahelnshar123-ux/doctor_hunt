@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../../core/constants/firestore_constants.dart';
@@ -7,7 +8,7 @@ class MyUserDto extends Equatable {
   final String name;
   final String email;
   final String id;
-  final String provider;
+  final UserAuthProvider provider;
   final String? image;
   final UserRoles? role;
 
@@ -25,7 +26,10 @@ class MyUserDto extends Equatable {
       id: data[FirestoreConstants.id]?.toString() ?? '',
       name: data[FirestoreConstants.name]?.toString() ?? '',
       email: data[FirestoreConstants.email]?.toString() ?? '',
-      provider: data[FirestoreConstants.provider]?.toString() ?? '',
+      provider: UserAuthProvider.values.firstWhere(
+        (element) => element.name == data[FirestoreConstants.provider],
+        orElse: () => UserAuthProvider.emailPassword,
+      ),
       image: data[FirestoreConstants.image]?.toString() ?? '',
       role: data[FirestoreConstants.role] != null
           ? UserRoles.values.firstWhere(
@@ -41,7 +45,7 @@ class MyUserDto extends Equatable {
       FirestoreConstants.id: id,
       FirestoreConstants.name: name,
       FirestoreConstants.email: email,
-      FirestoreConstants.provider: provider,
+      FirestoreConstants.provider: provider.name,
       FirestoreConstants.image: image,
       FirestoreConstants.role: role?.name,
     };

@@ -29,25 +29,24 @@ class AddDoctorScreen extends StatefulWidget {
 
 class _AddDoctorScreenState extends State<AddDoctorScreen> {
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController specialtyController = TextEditingController();
+  // final TextEditingController specialtyController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     nameController.dispose();
-    specialtyController.dispose();
+    // specialtyController.dispose();
     super.dispose();
   }
 
   File? selectedImage;
+  Specialty? selectedSpecialty;
 
   @override
   Widget build(BuildContext context) {
     final user = context.select<AuthBloc, MyUser?>((bloc) {
       final authState = bloc.state;
-      return authState is UserAuthenticatedState
-          ? authState.currentUser
-          : null;
+      return authState is UserAuthenticatedState ? authState.currentUser : null;
     });
     return BlocListener<DoctorBloc, DoctorState>(
       listenWhen: (previous, current) =>
@@ -106,7 +105,11 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                 validator: (value) => Validators.required(value),
               ),
               SizedBox(height: 20),
-              SpecialtyDropdownWidget(controller: specialtyController),
+              SpecialtyDropdownWidget(
+                selectedSpecialty: (value) {
+                  selectedSpecialty = value;
+                },
+              ),
               SizedBox(height: 50),
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
@@ -125,11 +128,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                     context.read<DoctorBloc>().add(
                       AddDoctorRequested(
                         name: nameController.text.trim(),
-                        //CR Runtime Error: 'firstWhere' without 'orElse' will throw a StateError at runtime if specialty text doesn't match an enum name.
-                        specialty: Specialty.values.firstWhere(
-                          (element) =>
-                              element.name == specialtyController.text.trim(),
-                        ),
+                        specialty: selectedSpecialty!,
                         image: selectedImage!,
                         adminId: adminId,
                       ),

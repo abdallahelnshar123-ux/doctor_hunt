@@ -13,12 +13,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/router/app_routes.dart';
+import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/presentation/controller/auth_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
 part '../widget/custom_appbar.dart';
 part '../widget/doctor_card.dart';
-part '../widget/statues_widget.dart';
+part '../widget/status_widget.dart';
 
 class AdminDoctorsTab extends StatelessWidget {
   const AdminDoctorsTab({super.key});
@@ -50,7 +53,7 @@ class AdminDoctorsTab extends StatelessWidget {
         body: Column(
           spacing: 15,
           children: [
-            StatuesWidget(),
+            StatusWidget(),
 
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -133,7 +136,7 @@ class AdminDoctorsTab extends StatelessWidget {
                                         onTap: () {
                                           AdminDoctorDetailsRoute(
                                             _buildDoctorsList(
-                                              alldoctors: state.allDoctors,
+                                              allDoctors: state.allDoctors,
                                               filteredDoctors:
                                                   state.filteredDoctors,
                                             )[index],
@@ -141,7 +144,7 @@ class AdminDoctorsTab extends StatelessWidget {
                                         },
                                         child: DoctorCard(
                                           doctor: _buildDoctorsList(
-                                            alldoctors: state.allDoctors,
+                                            allDoctors: state.allDoctors,
                                             filteredDoctors:
                                                 state.filteredDoctors,
                                           )[index],
@@ -150,7 +153,7 @@ class AdminDoctorsTab extends StatelessWidget {
                                   separatorBuilder: (context, index) =>
                                       SizedBox(height: 10),
                                   itemCount: _buildDoctorsList(
-                                    alldoctors: state.allDoctors,
+                                    allDoctors: state.allDoctors,
                                     filteredDoctors: state.filteredDoctors,
                                   ).length,
                                 ),
@@ -203,11 +206,11 @@ class AdminDoctorsTab extends StatelessWidget {
   }
 
   List<Doctor> _buildDoctorsList({
-    required List<Doctor> alldoctors,
+    required List<Doctor> allDoctors,
     required List<Doctor>? filteredDoctors,
   }) {
     if (filteredDoctors == null) {
-      return alldoctors;
+      return allDoctors;
     }
     return filteredDoctors;
   }
