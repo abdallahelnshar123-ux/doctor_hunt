@@ -114,11 +114,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
     );
     gh.lazySingleton<_i669.AuthBloc>(
-      () => _i669.AuthBloc(
-        gh<_i959.AuthRepository>(),
-        gh<_i594.LoginUseCase>(),
-        gh<_i708.UserPrefs>(),
-      ),
+      () =>
+          _i669.AuthBloc(gh<_i959.AuthRepository>(), gh<_i594.LoginUseCase>()),
     );
     return this;
   }

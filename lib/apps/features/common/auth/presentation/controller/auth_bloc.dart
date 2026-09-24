@@ -1,8 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/data/shared_prefs/user_pref.dart';
-import '../../data/mappers/my_user_mapper.dart';
 import '../../data/repo/auth_repository.dart';
 import '../../data/use_case/login_use_case.dart';
 import 'auth_event.dart';
@@ -12,10 +10,8 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
-  final UserPrefs _userPrefs;
 
-  AuthBloc(this._repository, this._loginUseCase, this._userPrefs)
-    : super(UserInitial()) {
+  AuthBloc(this._repository, this._loginUseCase) : super(UserInitial()) {
     on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
@@ -28,12 +24,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     CheckAuthStatusRequested event,
     Emitter<AuthState> emit,
   ) {
-    final userDto = _userPrefs.getCurrentUser();
-    if (userDto != null) {
-      emit(UserAuthenticatedState(userDto.toUser()));
-    } else {
-      emit(UserUnauthenticatedState());
-    }
+    final result = _repository.getCurrentUser();
+    result.fold(
+      (failure) => emit(UserUnauthenticatedState()),
+      (user) => emit(UserAuthenticatedState(user)),
+    );
   }
 
   Future<void> _onLoginRequested(

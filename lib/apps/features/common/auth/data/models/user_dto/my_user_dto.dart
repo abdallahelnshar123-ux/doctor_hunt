@@ -30,7 +30,7 @@ class MyUserDto extends Equatable {
         (element) => element.name == data[FirestoreConstants.provider],
         orElse: () => UserAuthProvider.emailPassword,
       ),
-      image: data[FirestoreConstants.image]?.toString() ?? '',
+      image: data[FirestoreConstants.image]?.toString(),
       role: data[FirestoreConstants.role] != null
           ? UserRoles.values.firstWhere(
               (e) => e.name == data[FirestoreConstants.role],

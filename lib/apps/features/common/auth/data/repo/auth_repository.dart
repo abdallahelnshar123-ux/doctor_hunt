@@ -27,6 +27,19 @@ class AuthRepository {
     this._userPrefs,
   );
 
+  Either<Failure, MyUser> getCurrentUser() {
+    try {
+      final userDto = _userPrefs.getCurrentUser();
+      if (userDto != null) {
+        return Right(userDto.toUser());
+      } else {
+        return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
+      }
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
   Future<Either<Failure, MyUser>> continueWithGoogle() async {
     try {
       final AuthUserDto authUserDto = await _authService.continueWithGoogle();
