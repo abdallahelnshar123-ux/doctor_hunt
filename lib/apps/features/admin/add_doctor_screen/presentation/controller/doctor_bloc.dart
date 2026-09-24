@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/data/models/user/my_user.dart';
 
 part 'doctor_event.dart';
 part 'doctor_state.dart';

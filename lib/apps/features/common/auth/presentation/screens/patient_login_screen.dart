@@ -10,7 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/widgets/main_app_bar.dart';
-import '../../domain/entity/user/my_user.dart';
+import '../../data/models/user/my_user.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_state.dart';
 import '../widgets/continue_with_google_button.dart';

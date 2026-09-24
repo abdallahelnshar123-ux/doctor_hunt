@@ -4,7 +4,7 @@ import 'package:doctor_hunt/apps/core/data/shared_prefs/prefs_keys.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../features/common/auth/data/dto/user_dto/my_user_dto.dart';
+import '../../../features/common/auth/data/models/user_dto/my_user_dto.dart';
 
 @lazySingleton
 class UserPrefs {

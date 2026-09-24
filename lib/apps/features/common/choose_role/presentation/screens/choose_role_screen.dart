@@ -6,7 +6,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../auth/domain/entity/user/my_user.dart';
+import '../../../auth/data/models/user/my_user.dart';
 import '../widget/role_widget.dart';
 
 class ChooseRoleScreen extends StatefulWidget {

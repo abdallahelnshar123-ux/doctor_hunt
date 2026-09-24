@@ -9,12 +9,12 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
+import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_state.dart';
-import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../widgets/custom_text_password.dart';
 import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
+import '../widgets/custom_text_password.dart';
 import '../widgets/email_text_field_widget.dart';
 
 class RegisterScreen extends StatefulWidget {

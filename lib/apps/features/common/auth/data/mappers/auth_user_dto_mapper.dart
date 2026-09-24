@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../dto/user_dto/auth_user_dto.dart';
+import '../models/user_dto/auth_user_dto.dart';
 
 extension AuthUserDtoMapper on UserCredential {
   AuthUserDto toAuthUserDto() {

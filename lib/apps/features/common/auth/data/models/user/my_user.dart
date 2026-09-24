@@ -1,5 +1,6 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:equatable/equatable.dart';
+
+import 'auth_providers.dart';
 
 class MyUser extends Equatable {
   final String name;

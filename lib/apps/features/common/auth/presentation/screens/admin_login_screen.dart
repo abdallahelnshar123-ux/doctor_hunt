@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
-import '../../domain/entity/user/my_user.dart';
+import '../../data/models/user/my_user.dart';
 import '../controller/auth_bloc.dart';
 import '../controller/auth_event.dart';
 import '../controller/auth_state.dart';

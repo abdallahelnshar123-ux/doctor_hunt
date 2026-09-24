@@ -1,38 +1,35 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/service/user_firestore_service.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/auth_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/exceptions/app_exceptions.dart';
 import '../../../../../core/failure/failure.dart';
 import '../../../../../core/mapper/exception_mapper.dart';
-import '../../domain/entity/user/auth_providers.dart';
-import '../../domain/entity/user/my_user.dart';
-import '../dto/user_dto/auth_user_dto.dart';
-import '../dto/user_dto/my_user_dto.dart';
+import '../models/user/auth_providers.dart';
+import '../models/user/my_user.dart';
+import '../models/user_dto/auth_user_dto.dart';
+import '../models/user_dto/my_user_dto.dart';
+import '../service/firebase_services/user_firestore_service.dart';
 
-@Injectable(as: AuthRepository)
-class AuthRepositoryImpl implements AuthRepository {
-  final AuthRemoteDataSource _authRemoteDataSource;
+@injectable
+class AuthRepository {
+  final AuthService _authService;
   final UserFirestoreService _firestoreService;
   final UserPrefs _userPrefs;
 
-  const AuthRepositoryImpl(
-    this._authRemoteDataSource,
+  const AuthRepository(
+    this._authService,
     this._firestoreService,
     this._userPrefs,
   );
 
-  @override
   Future<Either<Failure, MyUser>> continueWithGoogle() async {
     try {
-      final AuthUserDto authUserDto = await _authRemoteDataSource
-          .continueWithGoogle();
+      final AuthUserDto authUserDto = await _authService.continueWithGoogle();
       final MyUserDto? databaseUser = await _firestoreService.getUser(
         authUserDto.id,
       );
@@ -60,15 +57,16 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, MyUser>> registerWithEmailAndPassword({
     required String email,
     required String password,
     required String name,
   }) async {
     try {
-      final authUserDto = await _authRemoteDataSource
-          .registerWithEmailAndPassword(email: email, password: password);
+      final authUserDto = await _authService.registerWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
 
       final newUser = MyUser(
         provider: UserAuthProvider.emailPassword,
@@ -88,13 +86,12 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, MyUser>> loginWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
     try {
-      final authUserDto = await _authRemoteDataSource.loginWithEmailAndPassword(
+      final authUserDto = await _authService.loginWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -114,10 +111,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Unit>> logout() async {
     try {
-      await _authRemoteDataSource.logout();
+      await _authService.logout();
       await _userPrefs.clearUser();
       return Right(unit);
     } on AppException catch (e) {
@@ -127,10 +123,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Unit>> deleteAuthUser() async {
     try {
-      await _authRemoteDataSource.deleteAccount();
+      await _authService.deleteAccount();
 
       return Right(unit);
     } on AppException catch (e) {
@@ -140,14 +135,11 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, String>> reAuthenticateWithEmailAndPassword(
     String password,
   ) async {
     try {
-      var authUserDto = await _authRemoteDataSource.reAuthenticate(
-        password: password,
-      );
+      var authUserDto = await _authService.reAuthenticate(password: password);
 
       return Right(authUserDto.id);
     } on AppException catch (e) {
@@ -157,11 +149,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, String>> reAuthenticateWithGoogle() async {
     try {
-      final authUserDto = await _authRemoteDataSource
-          .reAuthenticateWithGoogle();
+      final authUserDto = await _authService.reAuthenticateWithGoogle();
 
       return Right(authUserDto.id);
     } on AppException catch (e) {
@@ -171,10 +161,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
   Future<Either<Failure, Unit>> resetPassword({required String email}) async {
     try {
-      await _authRemoteDataSource.resetPassword(email: email);
+      await _authService.resetPassword(email: email);
       return Right(unit);
     } on AppException catch (e) {
       return Left(e.toFailure());

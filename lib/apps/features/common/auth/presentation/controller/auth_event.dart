@@ -1,4 +1,4 @@
-import '../../domain/entity/user/my_user.dart';
+import '../../data/models/user/my_user.dart';
 
 abstract class AuthEvent {}
 

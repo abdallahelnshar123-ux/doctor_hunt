@@ -3,8 +3,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../core/data/shared_prefs/user_pref.dart';
 import '../../data/mappers/my_user_mapper.dart';
-import '../../domain/repository/auth_repository.dart';
-import '../../domain/use_case/login_use_case.dart';
+import '../../data/repo/auth_repository.dart';
+import '../../data/use_case/login_use_case.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 

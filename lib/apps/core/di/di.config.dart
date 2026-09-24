@@ -27,26 +27,12 @@ import '../../features/admin/doctor_details_screen/presentation/controller/admin
     as _i879;
 import '../../features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart'
     as _i514;
-import '../../features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart'
-    as _i564;
-import '../../features/common/auth/data/data_source/remote/auth/impl/auth_remote_data_source_impl.dart'
-    as _i747;
-import '../../features/common/auth/data/data_source/remote/user/impl/user_remote_data_source_impl.dart'
-    as _i30;
-import '../../features/common/auth/data/data_source/remote/user/user_remote_data_source.dart'
-    as _i27;
-import '../../features/common/auth/data/repository/auth_repository_impl.dart'
-    as _i953;
-import '../../features/common/auth/data/service/firebase_auth_service.dart'
-    as _i1003;
-import '../../features/common/auth/data/service/google_sign_in_service.dart'
-    as _i281;
-import '../../features/common/auth/data/service/user_firestore_service.dart'
-    as _i941;
-import '../../features/common/auth/domain/repository/auth_repository.dart'
-    as _i748;
-import '../../features/common/auth/domain/use_case/login_use_case.dart'
-    as _i743;
+import '../../features/common/auth/data/repo/auth_repository.dart' as _i959;
+import '../../features/common/auth/data/service/firebase_services/auth_service.dart'
+    as _i114;
+import '../../features/common/auth/data/service/firebase_services/user_firestore_service.dart'
+    as _i749;
+import '../../features/common/auth/data/use_case/login_use_case.dart' as _i594;
 import '../../features/common/auth/presentation/controller/auth_bloc.dart'
     as _i669;
 import '../data/image_service/image_service.dart' as _i181;
@@ -74,9 +60,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
     gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
-    gh.lazySingleton<_i281.GoogleSignInService>(
-      () => _i281.GoogleSignInService(gh<_i116.GoogleSignIn>()),
-    );
     gh.factory<String>(
       () => cloudinaryConfig.uploadPreset,
       instanceName: 'upload_preset',
@@ -84,8 +67,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i353.DoctorFirestoreService>(
       () => _i353.DoctorFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
-    gh.lazySingleton<_i941.UserFirestoreService>(
-      () => _i941.UserFirestoreService(gh<_i974.FirebaseFirestore>()),
+    gh.lazySingleton<_i749.UserFirestoreService>(
+      () => _i749.UserFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
     gh.factory<String>(
       () => cloudinaryConfig.cloudName,
@@ -94,20 +77,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i708.UserPrefs>(
       () => _i708.UserPrefs(gh<_i460.SharedPreferences>()),
     );
-    gh.lazySingleton<_i1003.FirebaseAuthService>(
-      () => _i1003.FirebaseAuthService(
-        gh<_i59.FirebaseAuth>(),
-        gh<_i281.GoogleSignInService>(),
-      ),
+    gh.lazySingleton<_i114.AuthService>(
+      () =>
+          _i114.AuthService(gh<_i59.FirebaseAuth>(), gh<_i116.GoogleSignIn>()),
     );
     gh.factory<_i417.CloudinaryService>(
       () => _i417.CloudinaryService(
         cloudName: gh<String>(instanceName: 'cloud_name'),
         uploadPreset: gh<String>(instanceName: 'upload_preset'),
       ),
-    );
-    gh.factory<_i27.UserRemoteDataSource>(
-      () => _i30.UserRemoteDataSourceImpl(gh<_i941.UserFirestoreService>()),
     );
     gh.factory<_i932.DoctorRepository>(
       () => _i932.DoctorRepository(
@@ -125,23 +103,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i514.UpdateDoctorDetailsBloc>(
       () => _i514.UpdateDoctorDetailsBloc(gh<_i932.DoctorRepository>()),
     );
-    gh.factory<_i564.AuthRemoteDataSource>(
-      () => _i747.AuthRemoteDataSourceImpl(gh<_i1003.FirebaseAuthService>()),
-    );
-    gh.factory<_i748.AuthRepository>(
-      () => _i953.AuthRepositoryImpl(
-        gh<_i564.AuthRemoteDataSource>(),
-        gh<_i941.UserFirestoreService>(),
+    gh.factory<_i959.AuthRepository>(
+      () => _i959.AuthRepository(
+        gh<_i114.AuthService>(),
+        gh<_i749.UserFirestoreService>(),
         gh<_i708.UserPrefs>(),
       ),
     );
-    gh.factory<_i743.LoginUseCase>(
-      () => _i743.LoginUseCase(gh<_i748.AuthRepository>()),
+    gh.factory<_i594.LoginUseCase>(
+      () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
     );
     gh.lazySingleton<_i669.AuthBloc>(
       () => _i669.AuthBloc(
-        gh<_i748.AuthRepository>(),
-        gh<_i743.LoginUseCase>(),
+        gh<_i959.AuthRepository>(),
+        gh<_i594.LoginUseCase>(),
         gh<_i708.UserPrefs>(),
       ),
     );

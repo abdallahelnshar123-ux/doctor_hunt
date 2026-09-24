@@ -1,8 +1,8 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../../core/constants/firestore_constants.dart';
-import '../../../domain/entity/user/my_user.dart';
+import '../user/auth_providers.dart';
+import '../user/my_user.dart';
 
 class MyUserDto extends Equatable {
   final String name;

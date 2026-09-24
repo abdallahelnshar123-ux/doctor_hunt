@@ -15,7 +15,7 @@ import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/data/models/user/my_user.dart';
 import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../widget/specialty_dropdown_widget.dart';

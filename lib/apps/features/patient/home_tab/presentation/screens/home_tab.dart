@@ -8,7 +8,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../common/auth/domain/entity/user/my_user.dart';
+import '../../../../common/auth/data/models/user/my_user.dart';
 import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
