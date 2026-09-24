@@ -15,8 +15,12 @@ class AvailableTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final availableTimeList = TimeSlot.values.map((e) => e.localizedLabel).toList();
-    final reminderMinuteList = ReminderInterval.values.map((e) => e.localizedLabel).toList();
+    final availableTimeList = TimeSlot.values
+        .map((e) => e.localizedLabel)
+        .toList();
+    final reminderMinuteList = ReminderInterval.values
+        .map((e) => e.localizedLabel)
+        .toList();
 
     return CustomScrollView(
       slivers: [

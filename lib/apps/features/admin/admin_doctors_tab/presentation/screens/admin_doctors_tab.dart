@@ -15,6 +15,7 @@ import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../common/auth/domain/entity/user/my_user.dart';
 import '../../../../common/auth/presentation/controller/auth_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';

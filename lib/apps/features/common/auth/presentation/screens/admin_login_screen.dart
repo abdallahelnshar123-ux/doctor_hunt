@@ -99,9 +99,7 @@ class _AdminLoginScreenState extends State<AdminLoginScreen> {
                         controller: emailController,
                         fillColor: AppColors.bgPrimary,
                       ),
-                      CustomTextPassword(
-                        controller: passwordController,
-                      ),
+                      CustomTextPassword(controller: passwordController),
                       SizedBox(height: 24),
                       _builtLoginButton(),
                       _buildForgetPassword(),

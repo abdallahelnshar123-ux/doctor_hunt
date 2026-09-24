@@ -127,9 +127,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         fillColor: AppColors.bgPrimary,
                       ),
 
-                      CustomTextPassword(
-                        controller: passwordController,
-                      ),
+                      CustomTextPassword(controller: passwordController),
                       _buildAgreeWithTerms(),
                       SizedBox(height: 24),
                       _buildRegisterButton(),

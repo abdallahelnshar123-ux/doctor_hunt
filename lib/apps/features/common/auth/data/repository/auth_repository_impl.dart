@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/data_source/remote/auth/auth_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/user_firestore_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';

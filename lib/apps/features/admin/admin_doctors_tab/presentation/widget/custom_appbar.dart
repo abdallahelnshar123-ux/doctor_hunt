@@ -17,18 +17,24 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       actionsPadding: EdgeInsets.symmetric(horizontal: 20),
       centerTitle: true,
       actions: [
-        IconButton(
-          style: IconButton.styleFrom(),
-          onPressed: () {},
-          icon: Icon(Icons.notifications_none),
-          color: AppColors.textSecondary,
-        ),
+        // IconButton(
+        //   style: IconButton.styleFrom(),
+        //   onPressed: () {},
+        //   icon: Icon(Icons.notifications_none),
+        //   color: AppColors.textSecondary,
+        // ),
         CircleAvatar(
           backgroundColor: AppColors.brandPrimary,
           child: Text(
             user?.name[0].toUpperCase() ?? '',
             style: context.bold16.white.rubik,
           ),
+        ),
+        IconButton(
+          onPressed: () {
+            context.read<AuthBloc>().add(LogoutRequested());
+          },
+          icon: Icon(Icons.logout, color: AppColors.statusError),
         ),
       ],
     );

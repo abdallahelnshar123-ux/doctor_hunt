@@ -1,5 +1,5 @@
-import '../dto/user_dto/my_user_dto.dart';
 import '../../domain/entity/user/my_user.dart';
+import '../dto/user_dto/my_user_dto.dart';
 
 extension UserMapper on MyUserDto {
   MyUser toUser() {

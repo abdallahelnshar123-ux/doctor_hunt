@@ -29,6 +29,7 @@ class AddDoctorScreen extends StatefulWidget {
 
 class _AddDoctorScreenState extends State<AddDoctorScreen> {
   final TextEditingController nameController = TextEditingController();
+
   // final TextEditingController specialtyController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 

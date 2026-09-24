@@ -74,8 +74,15 @@ class FeatureDoctorsWidget extends StatelessWidget {
                 height: 190,
                 width: double.infinity,
                 child: ListView.separated(
-                  itemBuilder: (context, index) =>
-                      FeatureDoctorsItem(doctor: state.allDoctors[index]),
+                  itemBuilder: (context, index) {
+                    var doctor = state.allDoctors[index];
+                    return GestureDetector(
+                      onTap: () {
+                        PatientDoctorDetailsRoute(doctor).push(context);
+                      },
+                      child: FeatureDoctorsItem(doctor: doctor),
+                    );
+                  },
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 15),
                   itemCount: state.allDoctors.length,

@@ -47,7 +47,7 @@ class UserPrefs {
 
   Future<void> clearUser() async {
     await _preferences.remove(PrefsKeys.userKey);
-    await _preferences.remove(PrefsKeys.tokenKey);
+    // await _preferences.remove(PrefsKeys.tokenKey);
   }
 
   MyUserDto? getCurrentUser() {

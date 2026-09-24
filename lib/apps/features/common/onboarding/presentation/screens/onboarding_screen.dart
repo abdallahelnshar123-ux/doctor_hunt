@@ -12,8 +12,7 @@ import '../../../../../core/widgets/app_scaffold.dart';
 import '../../../auth/presentation/widgets/custom_elevated_button.dart';
 
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key ,});
-
+  const OnboardingScreen({super.key});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -110,7 +109,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
 
             TextButton(
-              onPressed: () {_userPrefs.setOnboardingDone();
+              onPressed: () {
+                _userPrefs.setOnboardingDone();
                 const ChooseRoleRoute().go(context);
               },
               child: Text(
