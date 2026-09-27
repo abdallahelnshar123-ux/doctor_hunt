@@ -14,7 +14,7 @@
     "username": "username",
     "password": "Password",
     "google": "Google",
-    "facebook": "Facebook"
+    "youMustAgreeToTerms": "you must agree with the Terms of Service & Privacy Policy"
   },
   "onboarding": {
     "next": "Next",
@@ -142,21 +142,21 @@
       "uploadImage": "Upload doctor image",
       "tapToPick": "Tap to pick an image",
       "createDoctor": "Create doctor",
-      "selectSpecialty" : "Select specialty"
+      "selectSpecialty": "Select specialty"
     },
-    "doctorDetailsScreen" : {
-      "doctorDetails" : "Doctor details",
-      "specialty" : "Specialty",
-      "accountStatus" : "Account Status",
-      "heartCare" : "Heart Care",
-      "editDoctor" : "Edit Doctor",
+    "doctorDetailsScreen": {
+      "doctorDetails": "Doctor details",
+      "specialty": "Specialty",
+      "accountStatus": "Account Status",
+      "heartCare": "Heart Care",
+      "editDoctor": "Edit Doctor",
       "deleteDoctor": "Delete Doctor",
-      "doctorDeletedSuccessfully" : "Doctor was deleted successfully"
+      "doctorDeletedSuccessfully": "Doctor was deleted successfully"
     },
-    "updateDoctorDetails" : {
-      "doctorWasUpdatedSuccessfully" : "Doctor was Updated Successfully",
-      "editDoctor" : "Edit doctor",
-      "changePhoto" : "Change photo",
+    "updateDoctorDetails": {
+      "doctorWasUpdatedSuccessfully": "Doctor was Updated Successfully",
+      "editDoctor": "Edit doctor",
+      "changePhoto": "Change photo",
       "doctorStatues": "Doctor Statues",
       "activeAndAvailable": "Active & Available",
       "inactive": "Inactive",
@@ -170,15 +170,15 @@
     "noInternet": "No internet",
     "emailOrPasswordIsIncorrect": "The email or password is incorrect",
     "emailAddressAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
-    "userNotAuthenticated" : "User isn't Authenticated",
-    "errorWhileAddingDoctorPleaseTryAgainLater" : "Error while adding doctor please try again later",
-    "errorWhileUpdatingDoctorPleaseTryAgainLater" : "Error while updating doctor please try again later",
-    "cancelledByUser" : "Cancelled by user"
+    "userNotAuthenticated": "User isn't Authenticated",
+    "errorWhileAddingDoctorPleaseTryAgainLater": "Error while adding doctor please try again later",
+    "errorWhileUpdatingDoctorPleaseTryAgainLater": "Error while updating doctor please try again later",
+    "cancelledByUser": "Cancelled by user"
   },
-  "eCodes" : {
-    "webUserInteractionFailed" : "web-user-interaction-failed",
+  "eCodes": {
+    "webUserInteractionFailed": "web-user-interaction-failed",
     "cancelled": "cancelled",
-    "invalidCredential" : "invalid-credential",
+    "invalidCredential": "invalid-credential",
     "emailAlreadyInUse": "email-already-in-use"
   }
 }

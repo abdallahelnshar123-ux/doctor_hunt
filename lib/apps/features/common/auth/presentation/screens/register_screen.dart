@@ -1,10 +1,12 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
@@ -29,12 +31,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController nameController = TextEditingController();
+  final ValueNotifier<bool> isAgreedToTerms = ValueNotifier<bool>(false);
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     nameController.dispose();
+    isAgreedToTerms.dispose();
     super.dispose();
   }
 
@@ -163,29 +167,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   Widget _buildAgreeWithTerms() {
-    return Row(
-      spacing: 10,
-      children: [
-        Icon(Icons.circle, color: AppColors.textSecondary, size: 15),
-        Expanded(
-          child: FittedBox(
-            fit: .scaleDown,
-            child: Text(
-              t.auth.agree_terms,
-              style: context.regular12.textSecondary.rubik,
-              overflow: .ellipsis,
+    return ValueListenableBuilder<bool>(
+      valueListenable: isAgreedToTerms,
+      builder: (context, value, child) {
+        return TextButton.icon(
+          icon: Icon(value ? Icons.circle : Icons.circle_outlined),
+          style: ButtonStyle(
+            padding: WidgetStatePropertyAll(EdgeInsets.zero),
+            iconColor: WidgetStatePropertyAll(AppColors.textSecondary),
+            iconSize: WidgetStatePropertyAll(25),
+            textStyle: WidgetStatePropertyAll(
+              context.regular12.textSecondary.rubik,
             ),
+            foregroundColor: WidgetStatePropertyAll(AppColors.textSecondary),
           ),
-        ),
-      ],
+          onPressed: () {
+            isAgreedToTerms.value = !isAgreedToTerms.value;
+          },
+          label: Text(t.auth.agree_terms),
+        );
+      },
     );
   }
 
   Widget _buildRegisterButton() {
     return CustomElevatedButton(
-      buttonWidth: MediaQuery.sizeOf(context).width - 80,
+      buttonWidth: context.width - 80,
       onPressed: () {
+        FocusManager.instance.primaryFocus?.unfocus();
         if (formKey.currentState!.validate()) {
+          if (!isAgreedToTerms.value) {
+            SnackBarUtils.showErrorSnackBar(
+              context: context,
+              message: t.auth.you_must_agree_to_terms,
+            );
+            return;
+          }
           context.read<AuthBloc>().add(
             RegisterRequested(
               name: nameController.text.trim(),

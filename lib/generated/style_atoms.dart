@@ -68,13 +68,11 @@ extension ColorAtoms on TextStyle {
 
   TextStyle get borderDefault => copyWith(color: AppColors.borderDefault);
 
-  TextStyle get statusErrorSurface =>
-      copyWith(color: AppColors.statusErrorSurface);
+  TextStyle get statusErrorSurface => copyWith(color: AppColors.statusErrorSurface);
 
   TextStyle get statusError => copyWith(color: AppColors.statusError);
 
-  TextStyle get statusErrorContainer =>
-      copyWith(color: AppColors.statusErrorContainer);
+  TextStyle get statusErrorContainer => copyWith(color: AppColors.statusErrorContainer);
 }
 
 extension FontSizeAtoms on TextStyle {
