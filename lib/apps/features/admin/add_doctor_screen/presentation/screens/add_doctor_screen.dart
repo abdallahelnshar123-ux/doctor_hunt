@@ -30,13 +30,11 @@ class AddDoctorScreen extends StatefulWidget {
 class _AddDoctorScreenState extends State<AddDoctorScreen> {
   final TextEditingController nameController = TextEditingController();
 
-  // final TextEditingController specialtyController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     nameController.dispose();
-    // specialtyController.dispose();
     super.dispose();
   }
 
@@ -53,7 +51,8 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||
           current is AddDoctorErrorState ||
-          current is AddDoctorSuccessState,
+          current is AddDoctorSuccessState ||
+          current is PickDoctorImageErrorState,
       listener: (context, state) {
         if (state is AddDoctorSuccessState) {
           DialogUtils.hideLoading(context: context);
@@ -75,6 +74,12 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
         }
         if (state is AddDoctorLoadingState) {
           DialogUtils.showLoading(context: context);
+        }
+        if (state is PickDoctorImageErrorState) {
+          SnackBarUtils.showErrorSnackBar(
+            context: context,
+            message: state.message,
+          );
         }
       },
 
@@ -116,7 +121,6 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () {
                   FocusManager.instance.primaryFocus?.unfocus();
-
                   var adminId = user?.id ?? '';
                   if (formKey.currentState!.validate()) {
                     if (selectedImage == null) {
@@ -126,6 +130,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                       );
                       return;
                     }
+
                     context.read<DoctorBloc>().add(
                       AddDoctorRequested(
                         name: nameController.text.trim(),
@@ -155,15 +160,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
       width: 120,
       height: 120,
       alignment: .center,
-      child: BlocConsumer<DoctorBloc, DoctorState>(
-        listener: (context, state) {
-          if (state is PickDoctorImageErrorState) {
-            SnackBarUtils.showErrorSnackBar(
-              context: context,
-              message: state.message,
-            );
-          }
-        },
+      child: BlocBuilder<DoctorBloc, DoctorState>(
         buildWhen: (previous, current) =>
             current is PickDoctorImageSuccessState,
         builder: (context, state) {

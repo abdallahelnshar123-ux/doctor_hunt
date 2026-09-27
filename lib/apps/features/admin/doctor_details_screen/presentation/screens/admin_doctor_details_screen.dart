@@ -17,6 +17,8 @@ import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/snack_bar_utils.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 
+part '../widget/details_widget.dart';
+
 class AdminDoctorDetailsScreen extends StatefulWidget {
   const AdminDoctorDetailsScreen({super.key, required this.doctor});
 
@@ -86,42 +88,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
         body: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            Center(
-              child: Stack(
-                alignment: .bottomRight,
-                children: [
-                  Container(
-                    width: context.width * 0.3,
-                    height: context.width * 0.3,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.brandPrimary20,
-                      image: DecorationImage(
-                        image: widget.doctor.imageUrl != null
-                            ? CachedNetworkImageProvider(
-                                widget.doctor.imageUrl!,
-                              )
-                            : AssetImage(
-                                AppAssets.images.fallbackUserImage.path,
-                              ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(7),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColors.brandPrimary,
-                    ),
-                    child: Icon(
-                      Icons.verified,
-                      color: AppColors.white,
-                      size: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildDoctorImageWidget(),
             SizedBox(height: 10),
             Text(
               widget.doctor.name,
@@ -133,114 +100,9 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
               style: context.medium14.textSecondary.rubik,
               textAlign: .center,
             ),
-            ValueListenableBuilder(
-              valueListenable: isActive,
-              builder: (context, value, child) {
-                return Chip(
-                  padding: EdgeInsets.all(5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  side: BorderSide(width: 0, color: AppColors.transparent),
-                  backgroundColor: value
-                      ? AppColors.bgSurfaceLight
-                      : AppColors.statusErrorSurface,
-                  avatarBoxConstraints: .tightFor(width: 15),
-                  avatar: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: value
-                        ? AppColors.brandPrimaryDark
-                        : AppColors.statusError,
-                  ),
-                  label: Text(
-                    value
-                        ? t.admin.doctors_tab.active
-                        : t.admin.doctors_tab.inactive,
-                    style: value
-                        ? context.medium10.brandPrimaryDark.rubik
-                        : context.regular10.statusError.rubik,
-                  ),
-                );
-              },
-            ),
+            _buildActiveChip(),
             SizedBox(height: 40),
-
-            AppContainerWithShadow(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Column(
-                children: [
-                  _buildInfoCard(
-                    context,
-                    value: widget.doctor.specialty.name,
-                    title: t.admin.doctor_details_screen.specialty,
-                    icon: AppAssets.icons.medicalIcon.path,
-                    trailing: Chip(
-                      padding: EdgeInsets.all(5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      side: BorderSide(width: 0, color: AppColors.transparent),
-                      backgroundColor: AppColors.bgSurfaceLight,
-                      avatarBoxConstraints: .tightFor(width: 15),
-
-                      label: Text(
-                        t.admin.doctor_details_screen.heart_care,
-                        style: context.medium12.brandPrimary.rubik,
-                      ),
-                    ),
-                  ),
-                  Divider(color: AppColors.textSecondary),
-                  ValueListenableBuilder(
-                    valueListenable: isActive,
-                    builder: (context, value, child) {
-                      return _buildInfoCard(
-                        context,
-                        value: value
-                            ? t.admin.doctors_tab.active
-                            : t.admin.doctors_tab.inactive,
-                        title: t.admin.doctor_details_screen.account_status,
-                        icon: AppAssets.icons.switchIcon.path,
-                        trailing: ValueListenableBuilder(
-                          valueListenable: isActive,
-                          builder: (context, value, child) {
-                            return Switch(
-                              value: value,
-
-                              onChanged: (value) {
-                                context.read<AdminDoctorActionBloc>().add(
-                                  ToggleDoctorActiveStatusRequested(
-                                    doctorId: widget.doctor.id,
-                                    active: value,
-                                  ),
-                                );
-                              },
-                              activeThumbColor: AppColors.white,
-                              activeTrackColor: AppColors.brandPrimary,
-                              thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
-                                (Set<WidgetState> states) {
-                                  if (states.contains(WidgetState.selected)) {
-                                    return Icon(
-                                      Icons.check_rounded,
-                                      color: AppColors.brandPrimary,
-                                    );
-                                  }
-                                  return null;
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
+            DetailsWidget(doctor: widget.doctor, isActive: isActive),
             SizedBox(height: 50),
             CustomElevatedButton(
               backgroundColor: AppColors.brandPrimary,
@@ -260,49 +122,90 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
               ),
             ),
             SizedBox(height: 10),
-            TextButton.icon(
-              icon: Icon(Icons.delete_outline_rounded),
-              style: ButtonStyle(
-                iconColor: WidgetStatePropertyAll(AppColors.statusError),
-                iconSize: WidgetStatePropertyAll(20),
-                textStyle: WidgetStatePropertyAll(
-                  context.semiBold14.statusError.rubik,
-                ),
-                foregroundColor: WidgetStatePropertyAll(AppColors.statusError),
-              ),
-
-              onPressed: () {
-                context.read<AdminDoctorActionBloc>().add(
-                  DeleteDoctorRequested(doctorId: widget.doctor.id),
-                );
-              },
-              label: Text(t.admin.doctor_details_screen.delete_doctor),
-            ),
+            _buildDeleteDoctorButton(),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildInfoCard(
-    BuildContext context, {
-    required String value,
-    required String title,
-    required String icon,
-    required Widget trailing,
-  }) {
-    return ListTile(
-      leading: SvgPicture.asset(
-        icon,
-        fit: BoxFit.scaleDown,
-        colorFilter: ColorFilter.mode(AppColors.brandPrimary, BlendMode.srcIn),
+  Widget _buildDeleteDoctorButton() {
+    return TextButton.icon(
+      icon: Icon(Icons.delete_outline_rounded),
+      style: ButtonStyle(
+        iconColor: WidgetStatePropertyAll(AppColors.statusError),
+        iconSize: WidgetStatePropertyAll(20),
+        textStyle: WidgetStatePropertyAll(context.semiBold14.statusError.rubik),
+        foregroundColor: WidgetStatePropertyAll(AppColors.statusError),
       ),
-      title: Text(title),
-      titleTextStyle: context.regular12.textSecondary.rubik,
-      subtitle: Text(value),
-      subtitleTextStyle: context.semiBold14.textPrimary.rubik,
-      trailing: trailing,
-      contentPadding: EdgeInsets.all(0),
+
+      onPressed: () {
+        context.read<AdminDoctorActionBloc>().add(
+          DeleteDoctorRequested(doctorId: widget.doctor.id),
+        );
+      },
+      label: Text(t.admin.doctor_details_screen.delete_doctor),
+    );
+  }
+
+  Widget _buildActiveChip() {
+    return ValueListenableBuilder(
+      valueListenable: isActive,
+      builder: (context, value, child) {
+        return Chip(
+          padding: EdgeInsets.all(5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          side: BorderSide(width: 0, color: AppColors.transparent),
+          backgroundColor: value
+              ? AppColors.bgSurfaceLight
+              : AppColors.statusErrorSurface,
+          avatarBoxConstraints: .tightFor(width: 15),
+          avatar: Icon(
+            Icons.circle,
+            size: 10,
+            color: value ? AppColors.brandPrimaryDark : AppColors.statusError,
+          ),
+          label: Text(
+            value ? t.admin.doctors_tab.active : t.admin.doctors_tab.inactive,
+            style: value
+                ? context.medium10.brandPrimaryDark.rubik
+                : context.regular10.statusError.rubik,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildDoctorImageWidget() {
+    return Center(
+      child: Stack(
+        alignment: .bottomRight,
+        children: [
+          Container(
+            width: context.width * 0.3,
+            height: context.width * 0.3,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.brandPrimary20,
+              image: DecorationImage(
+                image: widget.doctor.imageUrl != null
+                    ? CachedNetworkImageProvider(widget.doctor.imageUrl!)
+                    : AssetImage(AppAssets.images.fallbackUserImage.path),
+              ),
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(7),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.brandPrimary,
+            ),
+            child: Icon(Icons.verified, color: AppColors.white, size: 20),
+          ),
+        ],
+      ),
     );
   }
 }

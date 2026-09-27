@@ -34,17 +34,12 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
   late final TextEditingController nameController = TextEditingController(
     text: widget.doctor.name,
   );
-
-  // late final TextEditingController specialtyController = TextEditingController(
-  //   text: widget.doctor.specialty.name,
-  // );
   late final ValueNotifier<bool> isActive = ValueNotifier(widget.doctor.active);
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     nameController.dispose();
-    // specialtyController.dispose();
     isActive.dispose();
     super.dispose();
   }
@@ -118,18 +113,8 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
           child: ListView(
             padding: EdgeInsets.all(20),
             children: [
-              buildUploadImage(context),
-              TextButton(
-                onPressed: () {
-                  context.read<UpdateDoctorDetailsBloc>().add(
-                    PickDoctorUpdateImageRequested(),
-                  );
-                },
-                child: Text(
-                  t.admin.update_doctor_details.change_photo,
-                  style: context.medium12.brandPrimary.rubik,
-                ),
-              ),
+              buildChangeImage(context),
+              _buildChangePhotoButton(),
               SizedBox(height: 40),
               CustomTextFormField(
                 controller: nameController,
@@ -172,7 +157,21 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  Widget buildUploadImage(BuildContext context) {
+  Widget _buildChangePhotoButton() {
+    return TextButton(
+      onPressed: () {
+        context.read<UpdateDoctorDetailsBloc>().add(
+          PickDoctorUpdateImageRequested(),
+        );
+      },
+      child: Text(
+        t.admin.update_doctor_details.change_photo,
+        style: context.medium12.brandPrimary.rubik,
+      ),
+    );
+  }
+
+  Widget buildChangeImage(BuildContext context) {
     return Container(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(shape: .circle),
