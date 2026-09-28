@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
@@ -8,7 +9,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/data/models/doctor/doctor.dart';
@@ -20,29 +21,15 @@ import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../widget/specialty_dropdown_widget.dart';
 
-class AddDoctorScreen extends StatefulWidget {
+class AddDoctorScreen extends HookWidget {
   const AddDoctorScreen({super.key});
 
   @override
-  State<AddDoctorScreen> createState() => _AddDoctorScreenState();
-}
-
-class _AddDoctorScreenState extends State<AddDoctorScreen> {
-  final TextEditingController nameController = TextEditingController();
-
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    super.dispose();
-  }
-
-  File? selectedImage;
-  Specialty? selectedSpecialty;
-
-  @override
   Widget build(BuildContext context) {
+    final nameController = useTextEditingController();
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final selectedImage = useRef<File?>(null);
+    final selectedSpecialty = useRef<Specialty?>(null);
     final user = context.select<AuthBloc, MyUser?>((bloc) {
       final authState = bloc.state;
       return authState is UserAuthenticatedState ? authState.currentUser : null;
@@ -52,15 +39,19 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
           current is AddDoctorLoadingState ||
           current is AddDoctorErrorState ||
           current is AddDoctorSuccessState ||
-          current is PickDoctorImageErrorState,
+          current is PickDoctorImageErrorState ||
+          current is PickDoctorImageSuccessState,
       listener: (context, state) {
+        if (state is PickDoctorImageSuccessState) {
+          selectedImage.value = state.image;
+        }
         if (state is AddDoctorSuccessState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
             message: t.create_doctor.doctor_added_successfully,
           );
-          context.pop();
+          const AdminMainRoute().go(context);
         }
         if (state is AddDoctorErrorState) {
           debugPrint(state.message);
@@ -113,7 +104,7 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
               SizedBox(height: 20),
               SpecialtyDropdownWidget(
                 selectedSpecialty: (value) {
-                  selectedSpecialty = value;
+                  selectedSpecialty.value = value;
                 },
               ),
               SizedBox(height: 50),
@@ -123,19 +114,18 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
                   FocusManager.instance.primaryFocus?.unfocus();
                   var adminId = user?.id ?? '';
                   if (formKey.currentState!.validate()) {
-                    if (selectedImage == null) {
+                    if (selectedImage.value == null) {
                       SnackBarUtils.showInfoSnackBar(
                         context: context,
                         message: t.create_doctor.you_must_pick_doctor_image,
                       );
                       return;
                     }
-
                     context.read<DoctorBloc>().add(
                       AddDoctorRequested(
                         name: nameController.text.trim(),
-                        specialty: selectedSpecialty!,
-                        image: selectedImage!,
+                        specialty: selectedSpecialty.value!,
+                        image: selectedImage.value!,
                         adminId: adminId,
                       ),
                     );
@@ -165,7 +155,6 @@ class _AddDoctorScreenState extends State<AddDoctorScreen> {
             current is PickDoctorImageSuccessState,
         builder: (context, state) {
           if (state is PickDoctorImageSuccessState) {
-            selectedImage = state.image;
             return Image.file(state.image, fit: .fitHeight);
           }
           return DottedBorder(
