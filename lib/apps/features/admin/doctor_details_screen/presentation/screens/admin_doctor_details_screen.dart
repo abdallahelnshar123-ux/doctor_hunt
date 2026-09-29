@@ -6,6 +6,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,27 +20,15 @@ import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart
 
 part '../widget/details_widget.dart';
 
-class AdminDoctorDetailsScreen extends StatefulWidget {
+class AdminDoctorDetailsScreen extends HookWidget {
   const AdminDoctorDetailsScreen({super.key, required this.doctor});
 
   final Doctor doctor;
 
   @override
-  State<AdminDoctorDetailsScreen> createState() =>
-      _AdminDoctorDetailsScreenState();
-}
-
-class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
-  late final ValueNotifier<bool> isActive = ValueNotifier(widget.doctor.active);
-
-  @override
-  void dispose() {
-    isActive.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isActive = useValueNotifier(doctor.active);
+
     return BlocListener<AdminDoctorActionBloc, AdminDoctorActionState>(
       listenWhen: (previous, current) =>
           current is DeleteDoctorSuccess ||
@@ -88,26 +77,26 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
         body: ListView(
           padding: EdgeInsets.all(20),
           children: [
-            _buildDoctorImageWidget(),
+            _buildDoctorImageWidget(context),
             SizedBox(height: 10),
             Text(
-              widget.doctor.name,
+              doctor.name,
               style: context.bold24.textPrimary.rubik,
               textAlign: .center,
             ),
             Text(
-              widget.doctor.specialty.name,
+              doctor.specialty.name,
               style: context.medium14.textSecondary.rubik,
               textAlign: .center,
             ),
-            _buildActiveChip(),
+            _buildActiveChip(context, isActive),
             SizedBox(height: 40),
-            DetailsWidget(doctor: widget.doctor, isActive: isActive),
+            DetailsWidget(doctor: doctor, isActive: isActive),
             SizedBox(height: 50),
             CustomElevatedButton(
               backgroundColor: AppColors.brandPrimary,
               onPressed: () {
-                AdminUpdateDoctorDetailsRoute(widget.doctor).push(context);
+                AdminUpdateDoctorDetailsRoute(doctor).push(context);
               },
               child: Row(
                 spacing: 8,
@@ -122,14 +111,14 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
               ),
             ),
             SizedBox(height: 10),
-            _buildDeleteDoctorButton(),
+            _buildDeleteDoctorButton(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildDeleteDoctorButton() {
+  Widget _buildDeleteDoctorButton(BuildContext context) {
     return TextButton.icon(
       icon: Icon(Icons.delete_outline_rounded),
       style: ButtonStyle(
@@ -141,14 +130,14 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
 
       onPressed: () {
         context.read<AdminDoctorActionBloc>().add(
-          DeleteDoctorRequested(doctorId: widget.doctor.id),
+          DeleteDoctorRequested(doctorId: doctor.id),
         );
       },
       label: Text(t.admin.doctor_details_screen.delete_doctor),
     );
   }
 
-  Widget _buildActiveChip() {
+  Widget _buildActiveChip(BuildContext context, ValueNotifier<bool> isActive) {
     return ValueListenableBuilder(
       valueListenable: isActive,
       builder: (context, value, child) {
@@ -178,7 +167,7 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
     );
   }
 
-  Widget _buildDoctorImageWidget() {
+  Widget _buildDoctorImageWidget(BuildContext context) {
     return Center(
       child: Stack(
         alignment: .bottomRight,
@@ -190,8 +179,8 @@ class _AdminDoctorDetailsScreenState extends State<AdminDoctorDetailsScreen> {
               shape: BoxShape.circle,
               color: AppColors.brandPrimary20,
               image: DecorationImage(
-                image: widget.doctor.imageUrl != null
-                    ? CachedNetworkImageProvider(widget.doctor.imageUrl!)
+                image: doctor.imageUrl != null
+                    ? CachedNetworkImageProvider(doctor.imageUrl!)
                     : AssetImage(AppAssets.images.fallbackUserImage.path),
               ),
             ),

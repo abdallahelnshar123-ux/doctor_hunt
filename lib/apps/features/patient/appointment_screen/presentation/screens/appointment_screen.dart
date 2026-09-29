@@ -6,30 +6,25 @@ import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../widget/available_time_widget.dart';
 
-class AppointmentScreen extends StatefulWidget {
+class AppointmentScreen extends HookWidget {
   const AppointmentScreen({super.key});
 
   @override
-  State<AppointmentScreen> createState() => _AppointmentScreenState();
-}
-
-class _AppointmentScreenState extends State<AppointmentScreen> {
-  final ValueNotifier _selectedDate = ValueNotifier(null);
-
-  @override
   Widget build(BuildContext context) {
+    final selectedDate = useValueNotifier<DateTime?>(null);
     return AppScaffold(
       body: Column(
         children: [
           MainAppBar(title: t.appointment.title),
-          _buildCalender(context: context),
+          _buildCalender(context: context, selectedDate: selectedDate),
           SizedBox(height: 25),
           Expanded(
             child: ValueListenableBuilder(
-              valueListenable: _selectedDate,
+              valueListenable: selectedDate,
               builder: (context, value, child) {
                 return AppContainerWithShadow(
                   width: double.infinity,
@@ -59,7 +54,10 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     );
   }
 
-  Widget _buildCalender({required BuildContext context}) {
+  Widget _buildCalender({
+    required BuildContext context,
+    required ValueNotifier<DateTime?> selectedDate,
+  }) {
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       margin: EdgeInsets.all(16),
@@ -94,9 +92,9 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
           weekdayLabels: t.common.weekdays,
           calendarType: CalendarDatePicker2Type.single,
         ),
-        value: [_selectedDate.value],
+        value: [selectedDate.value],
         onValueChanged: (dates) {
-          _selectedDate.value = dates[0];
+          selectedDate.value = dates[0];
         },
       ),
     );

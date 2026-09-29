@@ -5,26 +5,21 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
 import '../../../auth/presentation/widgets/custom_elevated_button.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends HookWidget {
   const OnboardingScreen({super.key});
 
   @override
-  State<OnboardingScreen> createState() => _OnboardingScreenState();
-}
-
-class _OnboardingScreenState extends State<OnboardingScreen> {
-  final UserPrefs _userPrefs = getIt<UserPrefs>();
-
-  int currentIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
+    final userPrefs = useMemoized(() => getIt<UserPrefs>());
+    final currentIndex = useState(0);
+
     final onboardingPages = [
       (
         title: t.onboarding.page1.title,
@@ -49,11 +44,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
     ];
 
-    final currentPage = onboardingPages[currentIndex];
+    final currentPage = onboardingPages[currentIndex.value];
 
     return AppScaffold(
       isOnboarding: true,
-      index: currentIndex,
+      index: currentIndex.value,
       body: Padding(
         padding: EdgeInsets.fromLTRB(40, 0, 40, 43),
         child: Column(
@@ -91,13 +86,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             CustomElevatedButton(
               buttonWidth: context.width - 48,
               onPressed: () {
-                if (currentIndex < onboardingPages.length - 1) {
-                  debugPrint(currentIndex.toString());
-                  setState(() {
-                    currentIndex++;
-                  });
+                if (currentIndex.value < onboardingPages.length - 1) {
+                  debugPrint(currentIndex.value.toString());
+                  currentIndex.value++;
                 } else {
-                  _userPrefs.setOnboardingDone();
+                  userPrefs.setOnboardingDone();
                   const ChooseRoleRoute().go(context);
                 }
               },
@@ -110,7 +103,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
             TextButton(
               onPressed: () {
-                _userPrefs.setOnboardingDone();
+                userPrefs.setOnboardingDone();
                 const ChooseRoleRoute().go(context);
               },
               child: Text(

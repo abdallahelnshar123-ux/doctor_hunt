@@ -6,6 +6,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
@@ -17,27 +18,15 @@ import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
 
-class PatientLoginScreen extends StatefulWidget {
+class PatientLoginScreen extends HookWidget {
   const PatientLoginScreen({super.key});
 
   @override
-  State<PatientLoginScreen> createState() => _PatientLoginScreenState();
-}
-
-class _PatientLoginScreenState extends State<PatientLoginScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is UserAuthenticatedState) {
@@ -121,8 +110,13 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                       ),
                       CustomTextPassword(controller: passwordController),
                       SizedBox(height: 24),
-                      _builtLoginButton(),
-                      _buildForgetPassword(),
+                      _builtLoginButton(
+                        context,
+                        formKey,
+                        emailController,
+                        passwordController,
+                      ),
+                      _buildForgetPassword(context),
                     ],
                   ),
                 ),
@@ -130,7 +124,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 25),
-              child: _buildDoNotHaveAccount(),
+              child: _buildDoNotHaveAccount(context),
             ),
           ],
         ),
@@ -138,7 +132,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
     );
   }
 
-  Widget _buildForgetPassword() {
+  Widget _buildForgetPassword(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -153,7 +147,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
     );
   }
 
-  Widget _buildDoNotHaveAccount() {
+  Widget _buildDoNotHaveAccount(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -169,7 +163,12 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
     );
   }
 
-  Widget _builtLoginButton() {
+  Widget _builtLoginButton(
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) {
     return CustomElevatedButton(
       buttonWidth: MediaQuery.sizeOf(context).width - 80,
       onPressed: () {

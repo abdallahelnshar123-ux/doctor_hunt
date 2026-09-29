@@ -9,6 +9,7 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../../generated/style_atoms.dart';
@@ -20,35 +21,19 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 
-class UpdateDoctorDetailsScreen extends StatefulWidget {
+class UpdateDoctorDetailsScreen extends HookWidget {
   const UpdateDoctorDetailsScreen({super.key, required this.doctor});
 
   final Doctor doctor;
 
   @override
-  State<UpdateDoctorDetailsScreen> createState() =>
-      _UpdateDoctorDetailsScreenState();
-}
-
-class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
-  late final TextEditingController nameController = TextEditingController(
-    text: widget.doctor.name,
-  );
-  late final ValueNotifier<bool> isActive = ValueNotifier(widget.doctor.active);
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    nameController.dispose();
-    isActive.dispose();
-    super.dispose();
-  }
-
-  File? selectedImage;
-  late Specialty selectedSpecialty = widget.doctor.specialty;
-
-  @override
   Widget build(BuildContext context) {
+    final nameController = useTextEditingController(text: doctor.name);
+    final isActive = useValueNotifier(doctor.active);
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final selectedImage = useRef<File?>(null);
+    final selectedSpecialty = useRef<Specialty>(doctor.specialty);
+
     return BlocListener<UpdateDoctorDetailsBloc, UpdateDoctorDetailsState>(
       listenWhen: (previous, current) =>
           current is UpdateDoctorDetailsSuccess ||
@@ -113,8 +98,8 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
           child: ListView(
             padding: EdgeInsets.all(20),
             children: [
-              buildChangeImage(context),
-              _buildChangePhotoButton(),
+              buildChangeImage(context, selectedImage),
+              _buildChangePhotoButton(context),
               SizedBox(height: 40),
               CustomTextFormField(
                 controller: nameController,
@@ -127,15 +112,22 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
               ),
               SizedBox(height: 20),
               SpecialtyDropdownWidget(
-                initialSelection: widget.doctor.specialty,
-                selectedSpecialty: (value) => selectedSpecialty = value,
+                initialSelection: doctor.specialty,
+                selectedSpecialty: (value) => selectedSpecialty.value = value,
               ),
               SizedBox(height: 20),
-              _buildStatusWidget(),
+              _buildStatusWidget(context, isActive),
               SizedBox(height: 80),
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
-                onPressed: _onUpdateDetailsPressed,
+                onPressed: () => _onUpdateDetailsPressed(
+                  context,
+                  formKey,
+                  nameController,
+                  selectedImage,
+                  selectedSpecialty,
+                  isActive,
+                ),
                 child: Row(
                   spacing: 8,
                   mainAxisAlignment: .center,
@@ -149,7 +141,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
                 ),
               ),
               SizedBox(height: 10),
-              _buildDeleteButton(),
+              _buildDeleteButton(context),
             ],
           ),
         ),
@@ -157,7 +149,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  Widget _buildChangePhotoButton() {
+  Widget _buildChangePhotoButton(BuildContext context) {
     return TextButton(
       onPressed: () {
         context.read<UpdateDoctorDetailsBloc>().add(
@@ -171,7 +163,10 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  Widget buildChangeImage(BuildContext context) {
+  Widget buildChangeImage(
+    BuildContext context,
+    ObjectRef<File?> selectedImage,
+  ) {
     return Container(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(shape: .circle),
@@ -191,11 +186,11 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
             current is PickDoctorUpdateImageSuccessState,
         builder: (context, state) {
           if (state is PickDoctorUpdateImageSuccessState) {
-            selectedImage = state.image;
+            selectedImage.value = state.image;
             return Image.file(state.image, fit: .fitHeight);
           }
           return CachedNetworkImage(
-            imageUrl: widget.doctor.imageUrl ?? '',
+            imageUrl: doctor.imageUrl ?? '',
             fit: .fitHeight,
           );
         },
@@ -203,7 +198,10 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  Widget _buildStatusWidget() {
+  Widget _buildStatusWidget(
+    BuildContext context,
+    ValueNotifier<bool> isActive,
+  ) {
     return ValueListenableBuilder(
       valueListenable: isActive,
       builder: (context, value, child) {
@@ -233,8 +231,8 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
             trailing: Switch(
               value: value,
 
-              onChanged: (value) {
-                isActive.value = value;
+              onChanged: (val) {
+                isActive.value = val;
               },
               activeThumbColor: AppColors.white,
               activeTrackColor: AppColors.brandPrimary,
@@ -257,26 +255,33 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
     );
   }
 
-  void _onUpdateDetailsPressed() {
+  void _onUpdateDetailsPressed(
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    TextEditingController nameController,
+    ObjectRef<File?> selectedImage,
+    ObjectRef<Specialty> selectedSpecialty,
+    ValueNotifier<bool> isActive,
+  ) {
     FocusManager.instance.primaryFocus?.unfocus();
     if (formKey.currentState!.validate()) {
       context.read<UpdateDoctorDetailsBloc>().add(
         UpdateDoctorDetailsRequested(
-          image: selectedImage,
+          image: selectedImage.value,
           doctor: Doctor(
-            id: widget.doctor.id,
+            id: doctor.id,
             name: nameController.text.trim(),
-            adminId: widget.doctor.adminId,
-            specialty: selectedSpecialty,
+            adminId: doctor.adminId,
+            specialty: selectedSpecialty.value,
             active: isActive.value,
-            imageUrl: widget.doctor.imageUrl,
+            imageUrl: doctor.imageUrl,
           ),
         ),
       );
     }
   }
 
-  Widget _buildDeleteButton() {
+  Widget _buildDeleteButton(BuildContext context) {
     return TextButton.icon(
       icon: Icon(Icons.delete_outline_rounded),
       style: ButtonStyle(
@@ -288,7 +293,7 @@ class _UpdateDoctorDetailsScreenState extends State<UpdateDoctorDetailsScreen> {
 
       onPressed: () {
         context.read<UpdateDoctorDetailsBloc>().add(
-          DeleteDoctorRequested(doctorId: widget.doctor.id),
+          DeleteDoctorRequested(doctorId: doctor.id),
         );
       },
       label: Text(t.admin.doctor_details_screen.delete_doctor),

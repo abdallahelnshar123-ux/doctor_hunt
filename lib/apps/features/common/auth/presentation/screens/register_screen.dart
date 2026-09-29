@@ -5,6 +5,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
@@ -19,31 +20,17 @@ import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_text_password.dart';
 import '../widgets/email_text_field_widget.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends HookWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  final ValueNotifier<bool> isAgreedToTerms = ValueNotifier<bool>(false);
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    nameController.dispose();
-    isAgreedToTerms.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+    final nameController = useTextEditingController();
+    final isAgreedToTerms = useValueNotifier<bool>(false);
+
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is UserAuthenticatedState) {
@@ -132,9 +119,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
 
                       CustomTextPassword(controller: passwordController),
-                      _buildAgreeWithTerms(),
+                      _buildAgreeWithTerms(context, isAgreedToTerms),
                       SizedBox(height: 24),
-                      _buildRegisterButton(),
+                      _buildRegisterButton(
+                        context,
+                        formKey,
+                        isAgreedToTerms,
+                        nameController,
+                        emailController,
+                        passwordController,
+                      ),
                     ],
                   ),
                 ),
@@ -142,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 25),
-              child: _buildHaveAnAccount(),
+              child: _buildHaveAnAccount(context),
             ),
           ],
         ),
@@ -150,7 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildHaveAnAccount() {
+  Widget _buildHaveAnAccount(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -166,7 +160,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildAgreeWithTerms() {
+  Widget _buildAgreeWithTerms(
+    BuildContext context,
+    ValueNotifier<bool> isAgreedToTerms,
+  ) {
     return ValueListenableBuilder<bool>(
       valueListenable: isAgreedToTerms,
       builder: (context, value, child) {
@@ -190,7 +187,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  Widget _buildRegisterButton() {
+  Widget _buildRegisterButton(
+    BuildContext context,
+    GlobalKey<FormState> formKey,
+    ValueNotifier<bool> isAgreedToTerms,
+    TextEditingController nameController,
+    TextEditingController emailController,
+    TextEditingController passwordController,
+  ) {
     return CustomElevatedButton(
       buttonWidth: context.width - 80,
       onPressed: () {

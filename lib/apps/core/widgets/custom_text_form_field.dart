@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../generated/style_atoms.dart';
 import '../theme/app_colors.dart';
 
 typedef OnChanged = void Function(String)?;
@@ -82,7 +83,7 @@ class CustomTextFormField extends StatelessWidget {
           borderColor: AppColors.statusError,
         ),
         hintText: hintText,
-        hintStyle: hintStyle,
+        hintStyle: hintStyle ?? context.light16.textSecondary.rubik,
         labelText: labelText,
         labelStyle: labelStyle,
         prefixIcon: prefixIcon,

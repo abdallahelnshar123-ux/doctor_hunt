@@ -9,14 +9,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../auth/data/models/user/my_user.dart';
 import '../widget/role_widget.dart';
 
-class ChooseRoleScreen extends StatefulWidget {
+class ChooseRoleScreen extends StatelessWidget {
   const ChooseRoleScreen({super.key});
 
-  @override
-  State<ChooseRoleScreen> createState() => _ChooseRoleScreenState();
-}
-
-class _ChooseRoleScreenState extends State<ChooseRoleScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
