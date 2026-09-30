@@ -151,7 +151,7 @@ class RegisterScreen extends HookWidget {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        const ChooseRoleRoute().go(context);
+        const PatientLoginRoute().go(context);
       },
       child: Text(
         t.auth.have_account,

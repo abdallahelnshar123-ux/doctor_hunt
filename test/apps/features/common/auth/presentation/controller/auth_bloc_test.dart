@@ -45,7 +45,7 @@ void main() {
   });
 
   test('should have initial state as UserInitial', () {
-    expect(authBloc.state, equals(UserInitial()));
+    expect(authBloc.state, equals(AuthInitial()));
   });
 
   group('CheckAuthStatusRequested', () {

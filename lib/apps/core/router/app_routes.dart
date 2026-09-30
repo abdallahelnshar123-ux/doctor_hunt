@@ -220,59 +220,68 @@ class GoRouterRefreshStream extends ChangeNotifier {
   }
 }
 
-final appRouter = GoRouter(
-  routes: $appRoutes,
-  initialLocation: '/',
-  refreshListenable: GoRouterRefreshStream(getIt<AuthBloc>().stream),
-  redirect: (context, state) {
-    final authState = context.read<AuthBloc>().state;
-    final isLoggedIn = authState is UserAuthenticatedState;
-    final onboardingDone = getIt<UserPrefs>().onboarding;
-    final currentLocation = state.matchedLocation;
+GoRouter createRouter({
+  required AuthBloc authBloc,
+  required UserPrefs userPrefs,
+  String initialLocation = '/',
+}) {
+  return GoRouter(
+    routes: $appRoutes,
+    initialLocation: initialLocation,
+    refreshListenable: GoRouterRefreshStream(authBloc.stream),
+    redirect: (context, state) {
+      final authState = authBloc.state;
+      final isLoggedIn = authState is UserAuthenticatedState;
+      final onboardingDone = userPrefs.onboarding;
+      final currentLocation = state.matchedLocation;
 
-    if (!onboardingDone) {
-      if (currentLocation != '/') {
-        return '/';
+      if (!onboardingDone) {
+        if (currentLocation != '/') {
+          return '/';
+        }
+        return null;
       }
-      return null;
-    }
 
-    if (currentLocation == '/') {
-      if (isLoggedIn) {
-        final user = authState.currentUser;
-        return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
-      } else {
+      if (currentLocation == '/') {
+        if (isLoggedIn) {
+          final user = authState.currentUser;
+          return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+        } else {
+          return '/choose_role';
+        }
+      }
+
+      final protectedRoutes = [
+        '/patient_main',
+        '/admin_main',
+        '/add_doctor',
+        '/find_doctor',
+        '/patient_doctor_details',
+        '/admin_doctor_details',
+        '/admin_update_doctor_details',
+        '/appointment',
+      ];
+
+      if (protectedRoutes.contains(currentLocation) && !isLoggedIn) {
         return '/choose_role';
       }
-    }
 
-    final protectedRoutes = [
-      '/patient_main',
-      '/admin_main',
-      '/add_doctor',
-      '/find_doctor',
-      '/patient_doctor_details',
-      '/admin_doctor_details',
-      '/admin_update_doctor_details',
-      '/appointment',
-    ];
+      final authRoutes = [
+        '/choose_role',
+        '/patient_login',
+        '/admin_login',
+        '/register',
+      ];
 
-    if (protectedRoutes.contains(currentLocation) && !isLoggedIn) {
-      return '/choose_role';
-    }
+      if (isLoggedIn && authRoutes.contains(currentLocation)) {
+        final user = authState.currentUser;
+        return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+      }
 
-    final authRoutes = [
-      '/choose_role',
-      '/patient_login',
-      '/admin_login',
-      '/register',
-    ];
+      return null;
+    },
+  );
+}
 
-    if (isLoggedIn && authRoutes.contains(currentLocation)) {
-      final user = authState.currentUser;
-      return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
-    }
-
-    return null;
-  },
-);
+GoRouter get appRouter =>
+    createRouter(authBloc: getIt<AuthBloc>(), userPrefs: getIt<UserPrefs>());

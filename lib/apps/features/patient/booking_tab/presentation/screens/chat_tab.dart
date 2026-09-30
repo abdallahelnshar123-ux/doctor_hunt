@@ -4,8 +4,8 @@ import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/au
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatTab extends StatelessWidget {
-  const ChatTab({super.key});
+class BookingTab extends StatelessWidget {
+  const BookingTab({super.key});
 
   @override
   Widget build(BuildContext context) {

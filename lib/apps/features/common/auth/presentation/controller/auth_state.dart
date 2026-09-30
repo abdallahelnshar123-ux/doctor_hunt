@@ -7,7 +7,7 @@ abstract class AuthState extends Equatable {
   List<Object?> get props => [];
 }
 
-class UserInitial extends AuthState {}
+class AuthInitial extends AuthState {}
 
 /// ===================  Auth States  =======================
 class LoginWithEmailPasswordLoadingState extends AuthState {}
@@ -27,6 +27,20 @@ class RegisterWithEmailPasswordErrorState extends AuthState {
   final String message;
 
   RegisterWithEmailPasswordErrorState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+/// ===================  Register States  =======================
+class RegisterLoadingState extends AuthState {}
+
+class RegisterSuccessState extends AuthState {}
+
+class RegisterErrorState extends AuthState {
+  final String message;
+
+  RegisterErrorState(this.message);
 
   @override
   List<Object?> get props => [message];
@@ -65,25 +79,25 @@ class UserAuthenticatedState extends AuthState {
 
 class UserUnauthenticatedState extends AuthState {}
 
-// /// ======================   update states   ======================
-// class UserDetailsUpdateLoadingState extends AuthState {
-//   @override
-//   List<Object?> get props => [];
-// }
-//
-// class UserDetailsUpdateSuccessState extends AuthState {
-//   @override
-//   List<Object?> get props => [];
-// }
-//
-// class UserDetailsUpdateErrorState extends AuthState {
-//   final String message;
-//
-//   UserDetailsUpdateErrorState(this.message);
-//
-//   @override
-//   List<Object?> get props => [message];
-// }
+/// ======================   update states   ======================
+class UserDetailsUpdateLoadingState extends AuthState {
+  @override
+  List<Object?> get props => [];
+}
+
+class UserDetailsUpdateSuccessState extends AuthState {
+  @override
+  List<Object?> get props => [];
+}
+
+class UserDetailsUpdateErrorState extends AuthState {
+  final String message;
+
+  UserDetailsUpdateErrorState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
 
 /// ====================   delete states   =========================
 

@@ -5,7 +5,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'apps/core/data/shared_prefs/user_pref.dart';
 import 'apps/core/di/di.dart';
 import 'apps/core/router/app_routes.dart';
 import 'firebase_options.dart';
@@ -30,11 +30,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final router = createRouter(
+      authBloc: getIt<AuthBloc>(),
+      userPrefs: getIt<UserPrefs>(),
+    );
+
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
-      themeMode: .light,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      routerConfig: appRouter,
+      routerConfig: router,
     );
   }
 }
