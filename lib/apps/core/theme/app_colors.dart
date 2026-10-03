@@ -44,6 +44,10 @@ class AppColors {
   static const Color grayMid = Color(0x32cbcbcb);
   static const Color brandPrimary8 = Color(0x140ebe7f);
   static const Color brandPrimary20 = Color(0x330ebe7f);
+  static const Color settingsGreen = Color(0xff219653);
+  static const Color settingsRed = Color(0xffEB5757);
+  static const Color settingsOrange = Color(0xffF2994A);
+  static const Color profileBlack = Color(0xCC677294);
 
   // ----------------------
   // Border /

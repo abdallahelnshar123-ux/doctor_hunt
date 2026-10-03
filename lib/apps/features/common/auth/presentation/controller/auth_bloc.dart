@@ -11,7 +11,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
 
-  AuthBloc(this._repository, this._loginUseCase) : super(AuthInitial()) {
+  AuthBloc(this._repository, this._loginUseCase)
+      : super(_repository.getCurrentUser().fold(
+          (failure) => UserUnauthenticatedState(),
+          (user) => UserAuthenticatedState(user),
+        )) {
     on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);

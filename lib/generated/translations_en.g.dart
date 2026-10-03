@@ -46,6 +46,9 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
   late final Translations$choose_role$en choose_role = Translations$choose_role$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
+  late final Translations$settings$en settings = Translations$settings$en.internal(_root);
+  late final Translations$profile$en profile = Translations$profile$en.internal(_root);
+  late final Translations$privacy_policy$en privacy_policy = Translations$privacy_policy$en.internal(_root);
   late final Translations$doctor_details$en doctor_details = Translations$doctor_details$en.internal(_root);
   late final Translations$appointment$en appointment = Translations$appointment$en.internal(_root);
   late final Translations$create_doctor$en create_doctor = Translations$create_doctor$en.internal(_root);
@@ -186,6 +189,96 @@ class Translations$home$en {
 
   /// en: 'Live'
   String get live => 'Live';
+}
+
+// Path: settings
+class Translations$settings$en with PageData2 {
+  Translations$settings$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Settings'
+  @override
+  String get title => 'Settings';
+
+  /// en: 'Logout'
+  String get logout => 'Logout';
+
+  /// en: 'Account Settings'
+  String get account_settings => 'Account Settings';
+
+  /// en: 'Change Password'
+  String get change_password => 'Change Password';
+
+  /// en: 'Notifications'
+  String get notifications => 'Notifications';
+
+  /// en: 'Privacy Policy'
+  String get privacy_policy => 'Privacy Policy';
+
+  /// en: 'More Options'
+  String get more_options => 'More Options';
+
+  /// en: 'Language'
+  String get language => 'Language';
+
+  /// en: 'Build Version'
+  String get build_version => 'Build Version';
+
+  /// en: 'English'
+  String get english => 'English';
+
+  /// en: 'v1.0.0'
+  String get v1_0_0 => 'v1.0.0';
+}
+
+// Path: profile
+class Translations$profile$en with PageData2 {
+  Translations$profile$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Profile'
+  @override
+  String get title => 'Profile';
+
+  /// en: 'Personal information'
+  String get personal_information => 'Personal information';
+
+  /// en: 'Name'
+  String get name => 'Name';
+
+  /// en: 'Phone'
+  String get phone => 'Phone';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
+}
+
+// Path: privacy_policy
+class Translations$privacy_policy$en with PageData2 {
+  Translations$privacy_policy$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Privacy Policy'
+  @override
+  String get title => 'Privacy Policy';
+
+  /// en: 'Last updated: October 2026'
+  String get last_updated => 'Last updated: October 2026';
+
+  /// en: 'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.'
+  String get introduction =>
+      'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.';
+
+  late final Translations$privacy_policy$sections$en sections = Translations$privacy_policy$sections$en.internal(_root);
 }
 
 // Path: doctor_details
@@ -526,6 +619,26 @@ class Translations$choose_role$admin$en with PageData2 {
   String get description => 'Manage doctors and app settings.';
 }
 
+// Path: privacy_policy.sections
+class Translations$privacy_policy$sections$en {
+  Translations$privacy_policy$sections$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final Translations$privacy_policy$sections$information_we_collect$en information_we_collect =
+      Translations$privacy_policy$sections$information_we_collect$en.internal(_root);
+  late final Translations$privacy_policy$sections$how_we_use_information$en how_we_use_information =
+      Translations$privacy_policy$sections$how_we_use_information$en.internal(_root);
+  late final Translations$privacy_policy$sections$data_security$en data_security = Translations$privacy_policy$sections$data_security$en.internal(
+    _root,
+  );
+  late final Translations$privacy_policy$sections$third_party_services$en third_party_services =
+      Translations$privacy_policy$sections$third_party_services$en.internal(_root);
+  late final Translations$privacy_policy$sections$your_rights$en your_rights = Translations$privacy_policy$sections$your_rights$en.internal(_root);
+  late final Translations$privacy_policy$sections$contact_us$en contact_us = Translations$privacy_policy$sections$contact_us$en.internal(_root);
+}
+
 // Path: admin.main
 class Translations$admin$main$en {
   Translations$admin$main$en.internal(this._root);
@@ -659,4 +772,133 @@ class Translations$admin$update_doctor_details$en {
 
   /// en: 'Save Changes'
   String get save_changes => 'Save Changes';
+}
+
+// Path: privacy_policy.sections.information_we_collect
+class Translations$privacy_policy$sections$information_we_collect$en with PageData2 {
+  Translations$privacy_policy$sections$information_we_collect$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '1. Information We Collect'
+  @override
+  String get title => '1. Information We Collect';
+
+  /// en: 'We collect information required to provide doctor booking and healthcare management services:'
+  String get description => 'We collect information required to provide doctor booking and healthcare management services:';
+
+  List<String> get bullets => [
+    'Personal Identification: Name, email address, and phone number.',
+    'Appointment Data: Selected doctors, appointment dates, times, and booking status.',
+    'Medical Details: Basic consultation preferences and patient notes shared for appointments.',
+    'Account & Technical Data: User role (Patient, Doctor, Admin) and system log data.',
+  ];
+}
+
+// Path: privacy_policy.sections.how_we_use_information
+class Translations$privacy_policy$sections$how_we_use_information$en with PageData2 {
+  Translations$privacy_policy$sections$how_we_use_information$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '2. How We Use Your Information'
+  @override
+  String get title => '2. How We Use Your Information';
+
+  /// en: 'Your information is used strictly to deliver and improve our healthcare services:'
+  String get description => 'Your information is used strictly to deliver and improve our healthcare services:';
+
+  List<String> get bullets => [
+    'Facilitating doctor searches, appointment scheduling, and management.',
+    'Sending appointment reminders and account updates.',
+    'Ensuring secure login and authentication.',
+    'Enhancing app performance and customer support experience.',
+  ];
+}
+
+// Path: privacy_policy.sections.data_security
+class Translations$privacy_policy$sections$data_security$en with PageData2 {
+  Translations$privacy_policy$sections$data_security$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '3. Data Security & Storage'
+  @override
+  String get title => '3. Data Security & Storage';
+
+  /// en: 'We take the security of your health and personal data seriously:'
+  String get description => 'We take the security of your health and personal data seriously:';
+
+  List<String> get bullets => [
+    'Data is stored securely using encrypted cloud database infrastructure.',
+    'Access controls restrict administrative and medical data to authorized users only.',
+    'We regularly update our security practices to protect against unauthorized access.',
+  ];
+}
+
+// Path: privacy_policy.sections.third_party_services
+class Translations$privacy_policy$sections$third_party_services$en with PageData2 {
+  Translations$privacy_policy$sections$third_party_services$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '4. Third-Party Services'
+  @override
+  String get title => '4. Third-Party Services';
+
+  /// en: 'We integrate trusted third-party services to ensure optimal performance:'
+  String get description => 'We integrate trusted third-party services to ensure optimal performance:';
+
+  List<String> get bullets => [
+    'Firebase: Used for secure user authentication and cloud database management.',
+    'Cloudinary: Used for secure storage and delivery of profile and doctor images.',
+    'We never sell, trade, or rent your personal data to third parties for marketing purposes.',
+  ];
+}
+
+// Path: privacy_policy.sections.your_rights
+class Translations$privacy_policy$sections$your_rights$en with PageData2 {
+  Translations$privacy_policy$sections$your_rights$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '5. Your Rights & Control'
+  @override
+  String get title => '5. Your Rights & Control';
+
+  /// en: 'You have full control over your personal data within Doctor Hunt:'
+  String get description => 'You have full control over your personal data within Doctor Hunt:';
+
+  List<String> get bullets => [
+    'View and update your personal profile information at any time.',
+    'Manage notification settings and reminders.',
+    'Request account deletion or data erasure by contacting support.',
+  ];
+}
+
+// Path: privacy_policy.sections.contact_us
+class Translations$privacy_policy$sections$contact_us$en with PageData2 {
+  Translations$privacy_policy$sections$contact_us$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '6. Contact Us'
+  @override
+  String get title => '6. Contact Us';
+
+  /// en: 'If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com.'
+  String get description =>
+      'If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com.';
 }

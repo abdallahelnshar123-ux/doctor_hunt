@@ -10,6 +10,7 @@ extension MyUserDtoMapper on MyUser {
       provider: provider,
       image: image,
       role: role,
+      phone: phone,
     );
   }
 }

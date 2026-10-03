@@ -11,6 +11,7 @@ class MyUserDto extends Equatable {
   final UserAuthProvider provider;
   final String? image;
   final UserRoles? role;
+  final String? phone;
 
   const MyUserDto({
     required this.id,
@@ -19,6 +20,7 @@ class MyUserDto extends Equatable {
     required this.provider,
     this.image,
     this.role,
+    this.phone,
   });
 
   factory MyUserDto.fromFireStore(Map<String, dynamic> data) {
@@ -37,6 +39,7 @@ class MyUserDto extends Equatable {
               orElse: () => UserRoles.patient,
             )
           : null,
+      phone: data[FirestoreConstants.phone]?.toString(),
     );
   }
 
@@ -48,6 +51,7 @@ class MyUserDto extends Equatable {
       FirestoreConstants.provider: provider.name,
       FirestoreConstants.image: image,
       FirestoreConstants.role: role?.name,
+      FirestoreConstants.phone: phone,
     };
   }
 
@@ -60,5 +64,5 @@ class MyUserDto extends Equatable {
   }
 
   @override
-  List<Object?> get props => [name, email, id, provider, image, role];
+  List<Object?> get props => [name, email, id, provider, image, role, phone];
 }

@@ -28,6 +28,12 @@ class CustomTextFormField extends StatelessWidget {
   final String obscuringCharacter;
   final bool obscureText;
   final double borderRadius;
+  final EdgeInsetsGeometry? contentPadding;
+  final FocusNode? focusNode;
+  final bool enabled;
+  final bool readOnly;
+
+
 
   const CustomTextFormField({
     super.key,
@@ -51,11 +57,18 @@ class CustomTextFormField extends StatelessWidget {
     this.errorStyle,
     this.onFieldSubmitted,
     this.borderRadius = 16,
+    this.contentPadding,
+    this.focusNode,
+    this.enabled = true,
+    this.readOnly = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled,
+      readOnly:readOnly ,
+      focusNode:focusNode ,
       onFieldSubmitted: onFieldSubmitted,
       maxLines: maxLines ?? 1,
       controller: controller,
@@ -67,7 +80,7 @@ class CustomTextFormField extends StatelessWidget {
       style: style,
       cursorColor: AppColors.brandPrimary,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(17),
+        contentPadding: contentPadding ?? EdgeInsets.all(17),
         filled: filled,
         fillColor: fillColor,
         errorMaxLines: 2,
@@ -81,6 +94,9 @@ class CustomTextFormField extends StatelessWidget {
         errorBorder: builtDecorationBorder(borderColor: AppColors.statusError),
         focusedErrorBorder: builtDecorationBorder(
           borderColor: AppColors.statusError,
+        ),
+        disabledBorder: builtDecorationBorder(
+          borderColor: borderSideColor ?? AppColors.borderDefault,
         ),
         hintText: hintText,
         hintStyle: hintStyle ?? context.light16.textSecondary.rubik,

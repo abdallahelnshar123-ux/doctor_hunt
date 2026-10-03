@@ -4,11 +4,39 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
 class DialogUtils {
-  static void showLoading({required BuildContext context}) {
-    showDialog(
-      barrierDismissible: false,
+  /// Shared helper method to present non-dismissible dialogs wrapped in [PopScope].
+  static Future<T?> _showAppDialog<T>({
+    required BuildContext context,
+    required Widget child,
+    bool barrierDismissible = false,
+    bool canPop = false,
+  }) {
+    return showDialog<T>(
       context: context,
-      builder: (context) => AlertDialog(
+      barrierDismissible: barrierDismissible,
+      builder: (context) => PopScope(canPop: canPop, child: child),
+    );
+  }
+
+  /// Shared helper method to build styled action buttons for dialogs.
+  static Widget _buildActionButton({
+    required BuildContext context,
+    required String text,
+    VoidCallback? onPressed,
+  }) {
+    return TextButton(
+      onPressed: () {
+        Navigator.pop(context);
+        onPressed?.call();
+      },
+      child: Text(text, style: context.regular16.brandPrimary.rubik),
+    );
+  }
+
+  static void showLoading({required BuildContext context}) {
+    _showAppDialog(
+      context: context,
+      child: const AlertDialog(
         backgroundColor: AppColors.transparent,
         contentPadding: EdgeInsets.all(20),
         content: Center(
@@ -31,45 +59,36 @@ class DialogUtils {
     String? negActionText,
     VoidCallback? negAction,
   }) {
-    List<Widget> actions = [];
+    final List<Widget> actions = [];
     if (posActionText != null) {
       actions.add(
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-            posAction?.call();
-          },
-          child: Text(
-            posActionText,
-            style: context.regular16.brandPrimary.rubik,
-          ),
+        _buildActionButton(
+          context: context,
+          text: posActionText,
+          onPressed: posAction,
         ),
       );
     }
     if (negActionText != null) {
       actions.add(
-        TextButton(
-          onPressed: () {
-            Navigator.pop(context);
-            negAction?.call();
-          },
-          child: Text(
-            negActionText,
-            style: context.regular16.brandPrimary.rubik,
-          ),
+        _buildActionButton(
+          context: context,
+          text: negActionText,
+          onPressed: negAction,
         ),
       );
     }
-    showDialog(
-      barrierDismissible: false,
+
+    _showAppDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        contentPadding: EdgeInsets.all(20),
-        content: Text(message, style: context.regular14.brandPrimary.rubik),
+      child: AlertDialog(
+        contentPadding: const EdgeInsets.all(20),
         title: Text(title, style: context.regular16.brandPrimary.rubik),
+        content: Text(message, style: context.regular14.brandPrimary.rubik),
         actions: actions,
       ),
     );
+
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
@@ -80,50 +99,39 @@ class DialogUtils {
     String confirmText = 'Confirm',
     String cancelText = 'Cancel',
   }) {
-    TextEditingController passwordController = TextEditingController();
-    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController passwordController = TextEditingController();
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-    return showDialog<String>(
+    return _showAppDialog<String>(
       context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.all(20),
-          title: Text(title, style: context.regular16.brandPrimary.rubik),
-          content: Form(
-            key: formKey,
-            child: Column(
-              spacing: 15,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(message, style: context.regular14.brandPrimary.rubik),
-              ],
+      child: AlertDialog(
+        contentPadding: const EdgeInsets.all(20),
+        title: Text(title, style: context.regular16.brandPrimary.rubik),
+        content: Form(
+          key: formKey,
+          child: Column(
+            spacing: 15,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(message, style: context.regular14.brandPrimary.rubik),
+            ],
+          ),
+        ),
+        actions: [
+          _buildActionButton(context: context, text: cancelText),
+          TextButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                Navigator.pop(context, passwordController.text.trim());
+              }
+            },
+            child: Text(
+              confirmText,
+              style: context.regular16.brandPrimary.rubik,
             ),
           ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                cancelText,
-                style: context.regular16.brandPrimary.rubik,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                if (formKey.currentState!.validate()) {
-                  Navigator.pop(context, passwordController.text.trim());
-                }
-              },
-              child: Text(
-                confirmText,
-                style: context.regular16.brandPrimary.rubik,
-              ),
-            ),
-          ],
-        );
-      },
+        ],
+      ),
     );
   }
 }

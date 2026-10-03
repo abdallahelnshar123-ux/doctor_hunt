@@ -9,6 +9,7 @@ class MyUser extends Equatable {
   final UserAuthProvider provider;
   final String? image;
   final UserRoles? role;
+  final String? phone;
 
   const MyUser({
     required this.id,
@@ -17,12 +18,18 @@ class MyUser extends Equatable {
     required this.provider,
     this.image,
     this.role,
+    this.phone,
   });
 
   @override
-  List<Object?> get props => [id, email, name, provider, image, role];
+  List<Object?> get props => [id, email, name, provider, image, role, phone];
 
-  MyUser copyWith({String? name, String? image, UserRoles? role}) {
+  MyUser copyWith({
+    String? name,
+    String? image,
+    UserRoles? role,
+    String? phone,
+  }) {
     return MyUser(
       id: id,
       name: name ?? this.name,
@@ -30,6 +37,7 @@ class MyUser extends Equatable {
       provider: provider,
       image: image ?? this.image,
       role: role ?? this.role,
+      phone: phone ?? this.phone,
     );
   }
 }

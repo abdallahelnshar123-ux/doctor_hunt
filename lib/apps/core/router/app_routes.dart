@@ -16,6 +16,9 @@ import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens
 import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/appointment_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
+import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/screens/patient_profile_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/privacy_policy_screen/presentation/screens/privacy_policy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -158,6 +161,31 @@ class PatientDoctorDetailsRoute extends GoRouteData
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return PatientDoctorDetailsScreen(doctor: $extra);
+  }
+}
+
+@TypedGoRoute<PatientProfileRoute>(path: '/patient_profile')
+class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
+  const PatientProfileRoute(this.$extra);
+
+  final MyUser $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<PatientProfileBloc>(),
+      child: PatientProfileScreen(user: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<PrivacyPolicyRoute>(path: '/privacy_policy')
+class PrivacyPolicyRoute extends GoRouteData with $PrivacyPolicyRoute {
+  const PrivacyPolicyRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PrivacyPolicyScreen();
   }
 }
 

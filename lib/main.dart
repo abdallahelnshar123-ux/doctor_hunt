@@ -1,10 +1,10 @@
 import 'package:doctor_hunt/apps/core/theme/app_theme.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'apps/core/data/shared_prefs/user_pref.dart';
 import 'apps/core/di/di.dart';
 import 'apps/core/router/app_routes.dart';
@@ -17,8 +17,8 @@ void main() async {
   runApp(
     TranslationProvider(
       child: BlocProvider(
-        create: (BuildContext context) =>
-            getIt<AuthBloc>()..add(CheckAuthStatusRequested()),
+        // lazy: false,
+        create: (context) => getIt<AuthBloc>(),
         child: const MyApp(),
       ),
     ),

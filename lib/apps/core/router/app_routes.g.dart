@@ -17,6 +17,8 @@ List<RouteBase> get $appRoutes => [
   $chooseRoleRoute,
   $findDoctorRoute,
   $patientDoctorDetailsRoute,
+  $patientProfileRoute,
+  $privacyPolicyRoute,
   $adminDoctorDetailsRoute,
   $adminUpdateDoctorDetailsRoute,
   $appointmentRoute,
@@ -293,6 +295,64 @@ mixin $PatientDoctorDetailsRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $patientProfileRoute => GoRouteData.$route(
+  path: '/patient_profile',
+  hasOverriddenOnExit: false,
+  factory: $PatientProfileRoute._fromState,
+);
+
+mixin $PatientProfileRoute on GoRouteData {
+  static PatientProfileRoute _fromState(GoRouterState state) =>
+      PatientProfileRoute(state.extra as MyUser);
+
+  PatientProfileRoute get _self => this as PatientProfileRoute;
+
+  @override
+  String get location => GoRouteData.$location('/patient_profile');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $privacyPolicyRoute => GoRouteData.$route(
+  path: '/privacy_policy',
+  hasOverriddenOnExit: false,
+  factory: $PrivacyPolicyRoute._fromState,
+);
+
+mixin $PrivacyPolicyRoute on GoRouteData {
+  static PrivacyPolicyRoute _fromState(GoRouterState state) =>
+      const PrivacyPolicyRoute();
+
+  @override
+  String get location => GoRouteData.$location('/privacy_policy');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $adminDoctorDetailsRoute => GoRouteData.$route(

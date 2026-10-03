@@ -60,6 +60,84 @@
     "search": "search",
     "live": "Live"
   },
+  "settings": {
+    "title": "Settings",
+    "logout": "Logout",
+    "accountSettings": "Account Settings",
+    "changePassword": "Change Password",
+    "notifications": "Notifications",
+    "privacyPolicy": "Privacy Policy",
+    "moreOptions": "More Options",
+    "language": "Language",
+    "buildVersion": "Build Version",
+    "english": "English",
+    "v1.0.0": "v1.0.0"
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInformation": "Personal information",
+    "name": "Name",
+    "phone": "Phone",
+    "dataWasUpdatedSuccessfully": "Data was updated successfully"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: October 2026",
+    "introduction": "Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Information We Collect",
+        "description": "We collect information required to provide doctor booking and healthcare management services:",
+        "bullets": [
+          "Personal Identification: Name, email address, and phone number.",
+          "Appointment Data: Selected doctors, appointment dates, times, and booking status.",
+          "Medical Details: Basic consultation preferences and patient notes shared for appointments.",
+          "Account & Technical Data: User role (Patient, Doctor, Admin) and system log data."
+        ]
+      },
+      "howWeUseInformation": {
+        "title": "2. How We Use Your Information",
+        "description": "Your information is used strictly to deliver and improve our healthcare services:",
+        "bullets": [
+          "Facilitating doctor searches, appointment scheduling, and management.",
+          "Sending appointment reminders and account updates.",
+          "Ensuring secure login and authentication.",
+          "Enhancing app performance and customer support experience."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Data Security & Storage",
+        "description": "We take the security of your health and personal data seriously:",
+        "bullets": [
+          "Data is stored securely using encrypted cloud database infrastructure.",
+          "Access controls restrict administrative and medical data to authorized users only.",
+          "We regularly update our security practices to protect against unauthorized access."
+        ]
+      },
+      "thirdPartyServices": {
+        "title": "4. Third-Party Services",
+        "description": "We integrate trusted third-party services to ensure optimal performance:",
+        "bullets": [
+          "Firebase: Used for secure user authentication and cloud database management.",
+          "Cloudinary: Used for secure storage and delivery of profile and doctor images.",
+          "We never sell, trade, or rent your personal data to third parties for marketing purposes."
+        ]
+      },
+      "yourRights": {
+        "title": "5. Your Rights & Control",
+        "description": "You have full control over your personal data within Doctor Hunt:",
+        "bullets": [
+          "View and update your personal profile information at any time.",
+          "Manage notification settings and reminders.",
+          "Request account deletion or data erasure by contacting support."
+        ]
+      },
+      "contactUs": {
+        "title": "6. Contact Us",
+        "description": "If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com."
+      }
+    }
+  },
   "doctorDetails": {
     "title": "Doctor Details",
     "findDoctors": "Find Doctors",

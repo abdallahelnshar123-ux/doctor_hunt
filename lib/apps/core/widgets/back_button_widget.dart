@@ -1,10 +1,11 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BackButtonWidget extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
-  const BackButtonWidget({super.key, required this.onPressed});
+  const BackButtonWidget({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,11 @@ class BackButtonWidget extends StatelessWidget {
         child: AspectRatio(
           aspectRatio: 1,
           child: ElevatedButton(
-            onPressed: onPressed,
+            onPressed:
+                onPressed ??
+                () {
+                  context.pop();
+                },
             style: ElevatedButton.styleFrom(
               padding: EdgeInsetsDirectional.fromSTEB(9, 0, 0, 0),
               elevation: 0,

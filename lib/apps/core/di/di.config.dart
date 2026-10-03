@@ -35,6 +35,10 @@ import '../../features/common/auth/data/service/firebase_services/user_firestore
 import '../../features/common/auth/data/use_case/login_use_case.dart' as _i594;
 import '../../features/common/auth/presentation/controller/auth_bloc.dart'
     as _i669;
+import '../../features/patient/patient_profile_screen/data/repo/patient_profile_repository.dart'
+    as _i150;
+import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
+    as _i495;
 import '../data/image_service/image_service.dart' as _i181;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
 import '../data/shared_prefs/user_pref.dart' as _i708;
@@ -109,6 +113,17 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i749.UserFirestoreService>(),
         gh<_i708.UserPrefs>(),
       ),
+    );
+    gh.factory<_i150.PatientProfileRepository>(
+      () => _i150.PatientProfileRepository(
+        gh<_i749.UserFirestoreService>(),
+        gh<_i417.CloudinaryService>(),
+        gh<_i181.ImageService>(),
+        gh<_i708.UserPrefs>(),
+      ),
+    );
+    gh.factory<_i495.PatientProfileBloc>(
+      () => _i495.PatientProfileBloc(gh<_i150.PatientProfileRepository>()),
     );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
