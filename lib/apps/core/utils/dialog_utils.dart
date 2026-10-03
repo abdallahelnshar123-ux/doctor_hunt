@@ -29,7 +29,7 @@ class DialogUtils {
         Navigator.pop(context);
         onPressed?.call();
       },
-      child: Text(text, style: context.regular16.brandPrimary.rubik),
+      child: Text(text, style: context.medium16.brandPrimary.rubik),
     );
   }
 
@@ -60,15 +60,6 @@ class DialogUtils {
     VoidCallback? negAction,
   }) {
     final List<Widget> actions = [];
-    if (posActionText != null) {
-      actions.add(
-        _buildActionButton(
-          context: context,
-          text: posActionText,
-          onPressed: posAction,
-        ),
-      );
-    }
     if (negActionText != null) {
       actions.add(
         _buildActionButton(
@@ -78,13 +69,22 @@ class DialogUtils {
         ),
       );
     }
+    if (posActionText != null) {
+      actions.add(
+        _buildActionButton(
+          context: context,
+          text: posActionText,
+          onPressed: posAction,
+        ),
+      );
+    }
 
     _showAppDialog(
       context: context,
       child: AlertDialog(
         contentPadding: const EdgeInsets.all(20),
-        title: Text(title, style: context.regular16.brandPrimary.rubik),
-        content: Text(message, style: context.regular14.brandPrimary.rubik),
+        title: Text(title, style: context.medium26.textTertiary.rubik),
+        content: Text(message, style: context.regular16.textSecondary.rubik),
         actions: actions,
       ),
     );

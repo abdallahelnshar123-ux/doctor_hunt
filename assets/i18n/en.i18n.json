@@ -71,7 +71,8 @@
     "language": "Language",
     "buildVersion": "Build Version",
     "english": "English",
-    "v1.0.0": "v1.0.0"
+    "v1.0.0": "v1.0.0",
+    "logoutConfirmation": "Are you sure you want to logout?"
   },
   "profile": {
     "title": "Profile",
@@ -197,7 +198,8 @@
     "success": "Success",
     "error": "Error",
     "allSetUp": "All set up",
-    "registeredSuccessfully": "Registered Successfully, Please login. "
+    "registeredSuccessfully": "Registered Successfully, Please login.",
+    "cancel": "Cancel"
   },
   "admin": {
     "main": {

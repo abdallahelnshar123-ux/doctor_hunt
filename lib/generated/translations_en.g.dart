@@ -232,6 +232,9 @@ class Translations$settings$en with PageData2 {
 
   /// en: 'v1.0.0'
   String get v1_0_0 => 'v1.0.0';
+
+  /// en: 'Are you sure you want to logout?'
+  String get logout_confirmation => 'Are you sure you want to logout?';
 }
 
 // Path: profile
@@ -445,8 +448,11 @@ class Translations$dialog$en {
   /// en: 'All set up'
   String get all_set_up => 'All set up';
 
-  /// en: 'Registered Successfully, Please login. '
-  String get registered_successfully => 'Registered Successfully, Please login. ';
+  /// en: 'Registered Successfully, Please login.'
+  String get registered_successfully => 'Registered Successfully, Please login.';
+
+  /// en: 'Cancel'
+  String get cancel => 'Cancel';
 }
 
 // Path: admin

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
@@ -25,47 +26,71 @@ class SettingsTab extends StatelessWidget {
       final authState = bloc.state;
       return authState is UserAuthenticatedState ? authState.currentUser : null;
     });
-    return AppScaffold(
-      body: Column(
-        children: [
-          AppBar(title: Text(t.settings.title)),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.all(20),
-              children: [
-                AppContainerWithShadow(
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: ListTile(
-                    contentPadding: EdgeInsets.all(16),
-                    onTap: () {
-                      if (user == null) return;
-                      PatientProfileRoute(user).push(context);
-                    },
-                    leading: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: CachedNetworkImageProvider(
-                        user?.image ?? '',
+    return BlocListener<AuthBloc, AuthState>(
+      listenWhen: (previous, current) =>
+          current is LogoutLoadingState ||
+          current is LogoutErrorState ||
+          current is UserUnauthenticatedState,
+      listener: (context, state) {
+        if (state is LogoutLoadingState) {
+          DialogUtils.showLoading(context: context);
+        } else if (state is LogoutErrorState) {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
+            context: context,
+            message: state.message,
+          );
+        }
+      },
+      child: AppScaffold(
+        body: Column(
+          children: [
+            AppBar(title: Text(t.settings.title)),
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.all(20),
+                children: [
+                  AppContainerWithShadow(
+                    clipBehavior: .antiAlias,
+                    decoration: BoxDecoration(
+                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: ListTile(
+                        contentPadding: EdgeInsets.all(16),
+                        onTap: () {
+                          if (user == null) return;
+                          PatientProfileRoute(user).push(context);
+                        },
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: CachedNetworkImageProvider(
+                            user?.image ?? '',
+                          ),
+                        ),
+                        titleTextStyle: context.bold16.textPrimary.rubik,
+                        subtitleTextStyle:
+                            context.regular12.textSecondary.rubik,
+                        title: Text(user?.name ?? '-', textAlign: .start),
+                        subtitle: Text(user?.email ?? '-'),
                       ),
                     ),
-                    titleTextStyle: context.bold16.textPrimary.rubik,
-                    subtitleTextStyle: context.regular12.textSecondary.rubik,
-                    title: Text(user?.name ?? '-', textAlign: .start),
-                    subtitle: Text(user?.email ?? '-'),
                   ),
-                ),
-                SizedBox(height: 15),
-                AccountSettingsWidget(),
-                SizedBox(height: 15),
-                MoreOptionWidget(),
-                SizedBox(height: 40),
-                _buildLogoutButton(context),
-              ],
+                  SizedBox(height: 15),
+                  AccountSettingsWidget(),
+                  SizedBox(height: 15),
+                  MoreOptionWidget(),
+                  SizedBox(height: 40),
+                  _buildLogoutButton(context),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -86,7 +111,16 @@ class SettingsTab extends StatelessWidget {
       ),
 
       onPressed: () {
-        context.read<AuthBloc>().add(LogoutRequested());
+        DialogUtils.showMessage(
+          context: context,
+          message: t.settings.logout_confirmation,
+          title: t.settings.logout,
+          posActionText: t.dialog.ok,
+          posAction: () {
+            context.read<AuthBloc>().add(LogoutRequested());
+          },
+          negActionText: t.dialog.cancel,
+        );
       },
       label: Text(t.settings.logout),
     );
