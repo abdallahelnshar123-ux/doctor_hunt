@@ -35,6 +35,8 @@ import '../../features/common/auth/data/service/firebase_services/user_firestore
 import '../../features/common/auth/data/use_case/login_use_case.dart' as _i594;
 import '../../features/common/auth/presentation/controller/auth_bloc.dart'
     as _i669;
+import '../../features/common/auth/presentation/controller/user_bloc.dart'
+    as _i366;
 import '../../features/patient/patient_profile_screen/data/repo/patient_profile_repository.dart'
     as _i150;
 import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
@@ -107,12 +109,15 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i514.UpdateDoctorDetailsBloc>(
       () => _i514.UpdateDoctorDetailsBloc(gh<_i932.DoctorRepository>()),
     );
-    gh.factory<_i959.AuthRepository>(
+    gh.lazySingleton<_i959.AuthRepository>(
       () => _i959.AuthRepository(
         gh<_i114.AuthService>(),
         gh<_i749.UserFirestoreService>(),
         gh<_i708.UserPrefs>(),
       ),
+    );
+    gh.lazySingleton<_i366.UserBloc>(
+      () => _i366.UserBloc(gh<_i959.AuthRepository>()),
     );
     gh.factory<_i150.PatientProfileRepository>(
       () => _i150.PatientProfileRepository(

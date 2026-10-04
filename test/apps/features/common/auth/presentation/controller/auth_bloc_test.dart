@@ -37,6 +37,8 @@ void main() {
   setUp(() {
     mockAuthRepository = MockAuthRepository();
     mockLoginUseCase = MockLoginUseCase();
+    when(() => mockAuthRepository.getCurrentUser())
+        .thenReturn(const Left(ServerFailure('Unauthenticated')));
     authBloc = AuthBloc(mockAuthRepository, mockLoginUseCase);
   });
 
@@ -44,8 +46,8 @@ void main() {
     authBloc.close();
   });
 
-  test('should have initial state as UserInitial', () {
-    expect(authBloc.state, equals(AuthInitial()));
+  test('should have initial state as UserUnauthenticatedState', () {
+    expect(authBloc.state, equals(UserUnauthenticatedState()));
   });
 
   group('CheckAuthStatusRequested', () {

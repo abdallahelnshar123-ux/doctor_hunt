@@ -1,15 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/common/auth/presentation/controller/user_bloc.dart';
+import '../../features/common/auth/presentation/controller/user_event.dart';
+import '../../features/common/auth/presentation/controller/user_state.dart';
 import '../theme/app_colors.dart';
+import '../utils/snack_bar_utils.dart';
 
 class FavoriteButtonWidget extends StatelessWidget {
-  const FavoriteButtonWidget({super.key});
+  final String doctorId;
+  final double size;
+
+  const FavoriteButtonWidget({
+    super.key,
+    required this.doctorId,
+    this.size = 20,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
+    return BlocListener<UserBloc, UserState>(
+      listenWhen: (previous, current) =>
+          previous.favoriteError != current.favoriteError &&
+          current.favoriteError != null,
+      listener: (context, state) {
+        if (state.favoriteError != null) {
+          SnackBarUtils.showErrorSnackBar(
+            context: context,
+            message: state.favoriteError!,
+          );
+        }
+      },
+      child: BlocBuilder<UserBloc, UserState>(
+        buildWhen: (previous, current) {
+          final prevFavs = previous.user?.patientInfo?.favDoctors ?? [];
+          final currFavs = current.user?.patientInfo?.favDoctors ?? [];
+          return prevFavs.contains(doctorId) != currFavs.contains(doctorId);
+        },
+        builder: (context, state) {
+          final isFavorite =
+              state.user?.patientInfo?.favDoctors.contains(doctorId) ?? false;
+
+          return GestureDetector(
+            onTap: () {
+              context
+                  .read<UserBloc>()
+                  .add(ToggleFavoriteDoctorEvent(doctorId));
+            },
+            child: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? AppColors.badge : AppColors.textMuted,
+              size: size,
+            ),
+          );
+        },
+      ),
     );
   }
 }

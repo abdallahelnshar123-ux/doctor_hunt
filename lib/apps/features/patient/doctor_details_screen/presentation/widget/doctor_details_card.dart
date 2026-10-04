@@ -54,7 +54,7 @@ class DoctorDetailsCard extends StatelessWidget {
                           Expanded(
                             child: _doctorDetailsWidget(context: context),
                           ),
-                          FavoriteButtonWidget(),
+                          FavoriteButtonWidget(doctorId: doctor.id),
                         ],
                       ),
                       _ratingWidget(context: context),

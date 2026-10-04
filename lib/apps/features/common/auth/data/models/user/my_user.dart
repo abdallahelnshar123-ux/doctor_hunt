@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 
+import 'admin_info.dart';
 import 'auth_providers.dart';
+import 'patient_info.dart';
 
 class MyUser extends Equatable {
   final String name;
@@ -10,6 +12,8 @@ class MyUser extends Equatable {
   final String? image;
   final UserRoles? role;
   final String? phone;
+  final PatientInfo? patientInfo;
+  final AdminInfo? adminInfo;
 
   const MyUser({
     required this.id,
@@ -19,16 +23,30 @@ class MyUser extends Equatable {
     this.image,
     this.role,
     this.phone,
+    this.patientInfo,
+    this.adminInfo,
   });
 
   @override
-  List<Object?> get props => [id, email, name, provider, image, role, phone];
+  List<Object?> get props => [
+        id,
+        email,
+        name,
+        provider,
+        image,
+        role,
+        phone,
+        patientInfo,
+        adminInfo,
+      ];
 
   MyUser copyWith({
     String? name,
     String? image,
     UserRoles? role,
     String? phone,
+    PatientInfo? patientInfo,
+    AdminInfo? adminInfo,
   }) {
     return MyUser(
       id: id,
@@ -38,6 +56,8 @@ class MyUser extends Equatable {
       image: image ?? this.image,
       role: role ?? this.role,
       phone: phone ?? this.phone,
+      patientInfo: patientInfo ?? this.patientInfo,
+      adminInfo: adminInfo ?? this.adminInfo,
     );
   }
 }

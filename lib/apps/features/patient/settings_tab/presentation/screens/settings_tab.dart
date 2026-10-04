@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +23,7 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<AuthBloc, MyUser?>((bloc) {
-      final authState = bloc.state;
-      return authState is UserAuthenticatedState ? authState.currentUser : null;
-    });
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
           current is LogoutLoadingState ||
@@ -43,6 +41,9 @@ class SettingsTab extends StatelessWidget {
             message: state.message,
           );
         }
+        // else if (state is UserUnauthenticatedState) {
+        //   DialogUtils.hideLoading(context: context);
+        // }
       },
       child: AppScaffold(
         body: Column(

@@ -4,20 +4,19 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../widget/specialty_dropdown_widget.dart';
 
@@ -30,10 +29,7 @@ class AddDoctorScreen extends HookWidget {
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
     final selectedSpecialty = useRef<Specialty?>(null);
-    final user = context.select<AuthBloc, MyUser?>((bloc) {
-      final authState = bloc.state;
-      return authState is UserAuthenticatedState ? authState.currentUser : null;
-    });
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocListener<DoctorBloc, DoctorState>(
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||

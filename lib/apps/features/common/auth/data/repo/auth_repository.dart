@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
@@ -11,32 +13,56 @@ import '../../../../../core/failure/failure.dart';
 import '../../../../../core/mapper/exception_mapper.dart';
 import '../models/user/auth_providers.dart';
 import '../models/user/my_user.dart';
+import '../models/user/patient_info.dart';
 import '../models/user_dto/auth_user_dto.dart';
 import '../models/user_dto/my_user_dto.dart';
 import '../service/firebase_services/user_firestore_service.dart';
 
-@injectable
+@lazySingleton
 class AuthRepository {
   final AuthService _authService;
   final UserFirestoreService _firestoreService;
   final UserPrefs _userPrefs;
 
-  const AuthRepository(
-    this._authService,
-    this._firestoreService,
-    this._userPrefs,
-  );
+  final StreamController<MyUser?> _userStreamController =
+      StreamController<MyUser?>.broadcast();
 
-  Either<Failure, MyUser> getCurrentUser() {
+  MyUser? _currentUser;
+
+  AuthRepository(this._authService, this._firestoreService, this._userPrefs);
+
+  MyUser? get currentUser => _currentUser;
+
+  Stream<MyUser?> get userStream async* {
+    yield _currentUser;
+    yield* _userStreamController.stream;
+  }
+
+  void updateCurrentUser(MyUser? user) {
+    _currentUser = user;
+    if (user != null) {
+      _userPrefs.setUser(user.toMyUserDto());
+    } else {
+      _userPrefs.clearUser();
+    }
+    _userStreamController.add(_currentUser);
+  }
+
+  Option<MyUser> getCurrentUser() {
     try {
+      if (_currentUser != null) {
+        return Some(_currentUser!);
+      }
       final userDto = _userPrefs.getCurrentUser();
       if (userDto != null) {
-        return Right(userDto.toUser());
+        final user = userDto.toUser();
+        _currentUser = user;
+        return Some(user);
       } else {
-        return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
+        return none();
       }
     } catch (e) {
-      return Left(UnexpectedFailure(e.toString()));
+      return none();
     }
   }
 
@@ -56,13 +82,15 @@ class AuthRepository {
           role: UserRoles.patient,
         );
         await _firestoreService.addUser(newUser);
-        await _userPrefs.setUser(newUser);
+        final user = newUser.toUser();
+        updateCurrentUser(user);
 
-        return Right(newUser.toUser());
+        return Right(user);
       }
-      await _userPrefs.setUser(databaseUser);
+      final user = databaseUser.toUser();
+      updateCurrentUser(user);
 
-      return Right(databaseUser.toUser());
+      return Right(user);
     } on AppException catch (e) {
       return Left(e.toFailure());
     } catch (e) {
@@ -89,7 +117,7 @@ class AuthRepository {
         role: UserRoles.patient,
       );
       await _firestoreService.addUser(newUser.toMyUserDto());
-      await _userPrefs.setUser(newUser.toMyUserDto());
+      updateCurrentUser(newUser);
 
       return Right(newUser);
     } on AppException catch (e) {
@@ -115,8 +143,9 @@ class AuthRepository {
         return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
       }
 
-      await _userPrefs.setUser(databaseUser);
-      return Right(databaseUser.toUser());
+      final user = databaseUser.toUser();
+      updateCurrentUser(user);
+      return Right(user);
     } on AppException catch (e) {
       return Left(e.toFailure());
     } catch (e) {
@@ -127,8 +156,37 @@ class AuthRepository {
   Future<Either<Failure, Unit>> logout() async {
     try {
       await _authService.logout();
-      await _userPrefs.clearUser();
+      updateCurrentUser(null);
       return Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, MyUser>> toggleFavoriteDoctor(String doctorId) async {
+    final current = _currentUser;
+    if (current == null) {
+      return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
+    }
+
+    final currentFavs = current.patientInfo?.favDoctors ?? [];
+    final updatedFavs = List<String>.from(currentFavs);
+    if (updatedFavs.contains(doctorId)) {
+      updatedFavs.remove(doctorId);
+    } else {
+      updatedFavs.add(doctorId);
+    }
+
+    final updatedPatientInfo = (current.patientInfo ?? const PatientInfo())
+        .copyWith(favDoctors: updatedFavs);
+    final updatedUser = current.copyWith(patientInfo: updatedPatientInfo);
+
+    try {
+      await _firestoreService.updateUser(updatedUser.toMyUserDto());
+      updateCurrentUser(updatedUser);
+      return Right(updatedUser);
     } on AppException catch (e) {
       return Left(e.toFailure());
     } catch (e) {

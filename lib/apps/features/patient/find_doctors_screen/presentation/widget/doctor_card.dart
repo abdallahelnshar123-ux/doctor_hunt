@@ -6,8 +6,12 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../core/data/models/doctor/doctor.dart';
+
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  const DoctorCard({super.key, this.doctor});
+
+  final Doctor? doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +41,7 @@ class DoctorCard extends StatelessWidget {
               children: [
                 _doctorImageWidget(context: context),
                 _doctorDetailsWidget(context: context),
-                FavoriteButtonWidget(),
+                FavoriteButtonWidget(doctorId: doctor?.id ?? ''),
               ],
             ),
           ),
@@ -114,12 +118,12 @@ class DoctorCard extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              t.doctor_details.doctor_name,
+              doctor?.name ?? t.doctor_details.doctor_name,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
           Text(
-            t.doctor_details.tooth_dentist,
+            doctor?.specialty.name ?? t.doctor_details.tooth_dentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(

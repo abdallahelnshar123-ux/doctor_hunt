@@ -21,6 +21,9 @@ void main() {
     FirestoreConstants.provider: 'google',
     FirestoreConstants.image: 'https://example.com/photo.jpg',
     FirestoreConstants.role: 'patient',
+    FirestoreConstants.phone: null,
+    'patient_info': null,
+    'admin_info': null,
   };
 
   group('MyUserDto', () {
@@ -119,6 +122,7 @@ void main() {
 
         expect(result, equals(tMap));
       });
+
       test('should serialize null image and role correctly', () {
         const dto = MyUserDto(
           id: '1',
@@ -134,6 +138,9 @@ void main() {
           FirestoreConstants.provider: 'emailPassword',
           FirestoreConstants.image: null,
           FirestoreConstants.role: null,
+          FirestoreConstants.phone: null,
+          'patient_info': null,
+          'admin_info': null,
         });
       });
     });

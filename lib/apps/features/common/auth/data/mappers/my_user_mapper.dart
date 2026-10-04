@@ -11,6 +11,8 @@ extension UserMapper on MyUserDto {
       image: image,
       role: role,
       phone: phone,
+      patientInfo: patientInfo?.toDomain(),
+      adminInfo: adminInfo?.toDomain(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_theme.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,11 @@ void main() async {
   configureDependencies();
   runApp(
     TranslationProvider(
-      child: BlocProvider(
-        // lazy: false,
-        create: (context) => getIt<AuthBloc>(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => getIt<AuthBloc>()),
+          BlocProvider(create: (context) => getIt<UserBloc>()),
+        ],
         child: const MyApp(),
       ),
     ),
@@ -30,16 +33,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final router = createRouter(
-      authBloc: getIt<AuthBloc>(),
-      userPrefs: getIt<UserPrefs>(),
-    );
-
     return MaterialApp.router(
       theme: AppTheme.lightTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      routerConfig: router,
+      routerConfig: appRouter,
     );
   }
 }

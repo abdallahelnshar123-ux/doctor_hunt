@@ -13,10 +13,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc(this._repository, this._loginUseCase)
       : super(_repository.getCurrentUser().fold(
-          (failure) => UserUnauthenticatedState(),
+          () => UserUnauthenticatedState(),
           (user) => UserAuthenticatedState(user),
         )) {
-    on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
+    // on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);
@@ -24,16 +24,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<ResetPasswordRequested>(_onResetPasswordRequested);
   }
 
-  void _onCheckAuthStatusRequested(
-    CheckAuthStatusRequested event,
-    Emitter<AuthState> emit,
-  ) {
-    final result = _repository.getCurrentUser();
-    result.fold(
-      (failure) => emit(UserUnauthenticatedState()),
-      (user) => emit(UserAuthenticatedState(user)),
-    );
-  }
+  // void _onCheckAuthStatusRequested(
+  //   CheckAuthStatusRequested event,
+  //   Emitter<AuthState> emit,
+  // ) {
+  //   final result = _repository.getCurrentUser();
+  //   result.fold(
+  //     (failure) => emit(UserUnauthenticatedState()),
+  //     (user) => emit(UserAuthenticatedState(user)),
+  //   );
+  // }
 
   Future<void> _onLoginRequested(
     LoginRequested event,

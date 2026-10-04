@@ -7,10 +7,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<AuthBloc, MyUser?>((bloc) {
-      final authState = bloc.state;
-      return authState is UserAuthenticatedState ? authState.currentUser : null;
-    });
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return AppBar(
       title: Text(t.admin.main.doctors),
       leading: Icon(Icons.menu, color: AppColors.brandPrimaryDark),
@@ -26,7 +23,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
         CircleAvatar(
           backgroundColor: AppColors.brandPrimary,
           child: Text(
-            user?.name[0].toUpperCase() ?? '',
+            user?.name.isNotEmpty ?? false ? user!.name[0].toUpperCase() : '',
             style: context.bold16.white.rubik,
           ),
         ),

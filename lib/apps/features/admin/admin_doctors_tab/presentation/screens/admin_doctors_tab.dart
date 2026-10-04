@@ -5,6 +5,7 @@ import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -16,7 +17,6 @@ import '../../../../../core/router/app_routes.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
 import '../../../../common/auth/presentation/controller/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth_event.dart';
-import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 

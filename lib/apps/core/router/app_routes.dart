@@ -9,6 +9,7 @@ import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/s
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -68,10 +69,7 @@ class PatientMainRoute extends GoRouteData with $PatientMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.select<AuthBloc, MyUser?>((bloc) {
-      final authState = bloc.state;
-      return authState is UserAuthenticatedState ? authState.currentUser : null;
-    });
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocProvider(
       create: (context) => getIt<DoctorBloc>()
         ..add(
@@ -91,10 +89,7 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.select<AuthBloc, MyUser?>((bloc) {
-      final authState = bloc.state;
-      return authState is UserAuthenticatedState ? authState.currentUser : null;
-    });
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocProvider(
       create: (context) => getIt<DoctorBloc>()
         ..add(
@@ -249,17 +244,22 @@ class GoRouterRefreshStream extends ChangeNotifier {
 }
 
 GoRouter createRouter({
-  required AuthBloc authBloc,
+  AuthBloc? authBloc,
   required UserPrefs userPrefs,
   String initialLocation = '/',
 }) {
+  final refreshStream = authBloc?.stream ?? const Stream.empty();
+
   return GoRouter(
     routes: $appRoutes,
     initialLocation: initialLocation,
-    refreshListenable: GoRouterRefreshStream(authBloc.stream),
+    refreshListenable: GoRouterRefreshStream(refreshStream),
     redirect: (context, state) {
-      final authState = authBloc.state;
+      final authState = authBloc?.state;
       final isLoggedIn = authState is UserAuthenticatedState;
+      final user = authState is UserAuthenticatedState
+          ? authState.currentUser
+          : null;
       final onboardingDone = userPrefs.onboarding;
       final currentLocation = state.matchedLocation;
 
@@ -272,8 +272,9 @@ GoRouter createRouter({
 
       if (currentLocation == '/') {
         if (isLoggedIn) {
-          final user = authState.currentUser;
-          return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+          return user?.role == UserRoles.admin
+              ? '/admin_main'
+              : '/patient_main';
         } else {
           return '/choose_role';
         }
@@ -302,8 +303,7 @@ GoRouter createRouter({
       ];
 
       if (isLoggedIn && authRoutes.contains(currentLocation)) {
-        final user = authState.currentUser;
-        return user.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+        return user?.role == UserRoles.admin ? '/admin_main' : '/patient_main';
       }
 
       return null;
@@ -311,5 +311,7 @@ GoRouter createRouter({
   );
 }
 
-GoRouter get appRouter =>
-    createRouter(authBloc: getIt<AuthBloc>(), userPrefs: getIt<UserPrefs>());
+final appRouter = createRouter(
+  authBloc: getIt<AuthBloc>(),
+  userPrefs: getIt<UserPrefs>(),
+);
