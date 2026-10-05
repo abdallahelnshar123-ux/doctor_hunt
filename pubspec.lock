@@ -910,6 +910,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.12.0"
+  kf_drawer:
+    dependency: "direct main"
+    description:
+      name: kf_drawer
+      sha256: "9efbf101823221f5f9484700731b99032e06dd7f4f718e1ac622dc5b170b062b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   leak_tracker:
     dependency: transitive
     description:

@@ -27,8 +27,8 @@ class SettingsTab extends StatelessWidget {
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
           current is LogoutLoadingState ||
-          current is LogoutErrorState ||
-          current is UserUnauthenticatedState,
+          current is LogoutErrorState ,
+
       listener: (context, state) {
         if (state is LogoutLoadingState) {
           DialogUtils.showLoading(context: context);
@@ -41,11 +41,9 @@ class SettingsTab extends StatelessWidget {
             message: state.message,
           );
         }
-        // else if (state is UserUnauthenticatedState) {
-        //   DialogUtils.hideLoading(context: context);
-        // }
       },
       child: AppScaffold(
+        bottomSafeArea: false,
         body: Column(
           children: [
             AppBar(title: Text(t.settings.title)),

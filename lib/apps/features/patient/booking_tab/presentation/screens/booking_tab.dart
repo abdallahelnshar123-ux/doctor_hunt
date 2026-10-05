@@ -6,8 +6,6 @@ class BookingTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffold(
-
-    );
+    return AppScaffold(bottomSafeArea: false);
   }
 }

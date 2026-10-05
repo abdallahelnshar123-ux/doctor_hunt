@@ -45,6 +45,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$auth$en auth = Translations$auth$en.internal(_root);
   late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
   late final Translations$choose_role$en choose_role = Translations$choose_role$en.internal(_root);
+  late final Translations$patient_main$en patient_main = Translations$patient_main$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
   late final Translations$settings$en settings = Translations$settings$en.internal(_root);
   late final Translations$profile$en profile = Translations$profile$en.internal(_root);
@@ -153,6 +154,27 @@ class Translations$choose_role$en with PageData2 {
   late final Translations$choose_role$patient$en patient = Translations$choose_role$patient$en.internal(_root);
   late final Translations$choose_role$doctor$en doctor = Translations$choose_role$doctor$en.internal(_root);
   late final Translations$choose_role$admin$en admin = Translations$choose_role$admin$en.internal(_root);
+}
+
+// Path: patient_main
+class Translations$patient_main$en {
+  Translations$patient_main$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Home'
+  String get home => 'Home';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+
+  /// en: 'Appointment'
+  String get appointment => 'Appointment';
+
+  /// en: 'Favourite'
+  String get favourite => 'Favourite';
 }
 
 // Path: home

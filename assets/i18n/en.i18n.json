@@ -49,6 +49,12 @@
       "description": "Manage doctors and app settings."
     }
   },
+  "patientMain": {
+    "home": "Home",
+    "settings": "Settings",
+    "appointment": "Appointment",
+    "favourite": "Favourite"
+  },
   "home": {
     "welcome": "Hi ${name}",
     "findDoctor": "Find Your Doctor",

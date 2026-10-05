@@ -65,6 +65,7 @@ dependencies:
   shimmer: ^4.0.0
   flutter_native_splash: ^2.4.8
   flutter_hooks: ^0.21.3+1
+  kf_drawer: ^2.1.0
 
 dev_dependencies:
   flutter_test:

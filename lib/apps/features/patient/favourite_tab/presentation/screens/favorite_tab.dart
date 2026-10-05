@@ -13,6 +13,7 @@ class FavoriteTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      bottomSafeArea: false,
       body: ListView(
         children: [
           MainAppBar(title: t.home.favourite_doctors),

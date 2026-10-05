@@ -91,7 +91,28 @@ metadata:
   * `useTabController()`
   * `useScrollController()`
 
-## Decision Matrix
+## Anti-Patterns
+
+### Use `useMemoized` and `useEffect` for Custom/External Controllers
+When dealing with controllers from third-party packages (e.g., `KFDrawerController`, `VideoPlayerController`, etc.) that require manual disposal, **do not** wrap them in a `useValueNotifier`. The `ValueNotifier` will dispose of itself, but it will **not** call `dispose()` on the external controller, leading to memory leaks.
+
+Instead, create the controller using `useMemoized` to ensure it's only instantiated once, and use `useEffect` to manage its lifecycle and guarantee it gets disposed of properly when the widget is unmounted.
+
+**Example: Managing an external controller**
+```dart
+// ❌ BAD: Memory Leak! ValueNotifier disposes itself, but not the KFDrawerController.
+final drawerController = useValueNotifier(KFDrawerController(...));
+
+// ✅ GOOD: Instantiated once, and properly disposed.
+final drawerController = useMemoized(() => KFDrawerController(...));
+
+useEffect(() {
+  // This cleanup function runs when the widget is disposed.
+  return () => drawerController.dispose();
+}, [drawerController]); // Pass the controller as a dependency
+```
+
+If you find yourself using a specific external controller frequently across multiple screens, consider creating a Custom Hook for it to encapsulate the setup and teardown logic.
 
 | Scenario | Widget / Hook Selection | Reason |
 | :--- | :--- | :--- |

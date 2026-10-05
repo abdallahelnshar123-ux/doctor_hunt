@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
 import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
-import '../widget/live_doctors_widget.dart';
 import '../widget/popular_doctors_widget.dart';
 
 class HomeTab extends StatelessWidget {
@@ -20,6 +19,7 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: _customAppBar(context: context),
       body: Column(
         spacing: 20,
@@ -50,7 +50,6 @@ class HomeTab extends StatelessWidget {
                 child: Column(
                   spacing: 20,
                   children: [
-                    const LiveDoctorsWidget(),
                     const CategoriesWidget(),
                     const PopularDoctorsWidget(),
                     const FeatureDoctorsWidget(),

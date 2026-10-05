@@ -6,7 +6,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'apps/core/data/shared_prefs/user_pref.dart';
 import 'apps/core/di/di.dart';
 import 'apps/core/router/app_routes.dart';
 import 'firebase_options.dart';

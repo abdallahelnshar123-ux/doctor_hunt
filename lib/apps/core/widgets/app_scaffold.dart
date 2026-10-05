@@ -32,6 +32,7 @@ class AppScaffold extends StatelessWidget {
   final String? restorationId;
   final bool isOnboarding;
   final int? index;
+  final bool bottomSafeArea;
 
   const AppScaffold({
     super.key,
@@ -64,12 +65,14 @@ class AppScaffold extends StatelessWidget {
     this.restorationId,
     this.isOnboarding = false,
     this.index,
+    this.bottomSafeArea = true,
   });
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
+      bottom: bottomSafeArea,
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar,
