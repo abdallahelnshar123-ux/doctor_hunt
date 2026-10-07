@@ -1,12 +1,15 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 class FavouriteDoctorCard extends StatelessWidget {
-  const FavouriteDoctorCard({super.key});
+  const FavouriteDoctorCard({super.key, required this.doctorId});
+
+  final String doctorId;
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +26,19 @@ class FavouriteDoctorCard extends StatelessWidget {
         spacing: 5,
         crossAxisAlignment: .center,
         children: [
-          Row(
-            mainAxisAlignment: .end,
-            children: [
-              GestureDetector(
-                onTap: () {},
-                child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
-              ),
-            ],
+          // Row(
+          //   mainAxisAlignment: .end,
+          //   children: [
+          //     GestureDetector(
+          //       onTap: () {},
+          //       child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
+          //     ),
+          //   ],
+          // ),
+          Align(
+            alignment: .topRight,
+            child: FavoriteButtonWidget(doctorId: doctorId,size: 25,),
           ),
-
           Expanded(
             child: CircleAvatar(
               maxRadius: double.infinity,
@@ -56,6 +62,7 @@ class FavouriteDoctorCard extends StatelessWidget {
               style: context.regular12.brandPrimary.rubik,
             ),
           ),
+          SizedBox(height: 20),
         ],
       ),
     );

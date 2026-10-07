@@ -16,7 +16,7 @@ import '../../../../common/auth/presentation/controller/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth_state.dart';
 import '../../../../common/auth/presentation/controller/user_bloc.dart';
-import '../../../booking_tab/presentation/screens/booking_tab.dart';
+import '../../../appointments_tab/presentation/screens/appointments_tab.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
 
@@ -33,7 +33,7 @@ class PatientMainScreen extends HookWidget {
     final tabsList = useRef([
       HomeTab(),
       FavoriteTab(),
-      BookingTab(),
+      PatientAppointmentsTab(),
       SettingsTab(),
     ]);
 

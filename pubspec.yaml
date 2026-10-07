@@ -66,6 +66,9 @@ dependencies:
   flutter_native_splash: ^2.4.8
   flutter_hooks: ^0.21.3+1
   kf_drawer: ^2.1.0
+  buttons_tabbar:
+    git:
+      url: https://github.com/abdallahelnshar123-ux/buttons_tabbar.git
 
 dev_dependencies:
   flutter_test:

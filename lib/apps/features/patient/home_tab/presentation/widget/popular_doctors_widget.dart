@@ -28,7 +28,7 @@ class PopularDoctorsWidget extends StatelessWidget {
               Spacer(),
               InkWell(
                 onTap: () {
-                  const FindDoctorRoute().push(context);
+                  const PopularDoctorsRoute().push(context);
                 },
                 child: Row(
                   spacing: 5,

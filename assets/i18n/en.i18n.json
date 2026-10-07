@@ -55,15 +55,31 @@
     "appointment": "Appointment",
     "favourite": "Favourite"
   },
+  "patientAppointments": {
+    "title": "Appointments",
+    "upcoming": "Upcoming",
+    "completed": "Completed",
+    "Canceled": "Canceled",
+    "viewDetails": "View Details",
+    "CancelAppointment": "Cancel Appointment",
+    "RateDoctor": "Rate Doctor",
+    "appointmentDate": "Appointment date",
+    "consultationFee": "Consultation fee",
+    "appointmentTime": "Appointment time"
+  },
+  "selectTime": {
+    "title": "Select Time",
+    "noSlotsAvailable": "No slots available"
+  },
   "home": {
     "welcome": "Hi ${name}",
     "findDoctor": "Find Your Doctor",
     "liveDoctors": "Live Doctors",
     "popularDoctors": "Popular Doctors",
     "favouriteDoctors": "Favourite Doctors",
-    "featureDoctor": "Feature Doctor",
+    "topRatedDoctors": "Top Rated Doctors",
     "seeAll": "See all",
-    "search": "search",
+    "search": "search....",
     "live": "Live"
   },
   "settings": {

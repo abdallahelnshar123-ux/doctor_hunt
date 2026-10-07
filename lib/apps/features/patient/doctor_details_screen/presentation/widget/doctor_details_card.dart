@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
@@ -54,7 +55,7 @@ class DoctorDetailsCard extends StatelessWidget {
                           Expanded(
                             child: _doctorDetailsWidget(context: context),
                           ),
-                          FavoriteButtonWidget(doctorId: doctor.id),
+                          FavoriteButtonWidget(doctorId: doctor.id, size: 25),
                         ],
                       ),
                       _ratingWidget(context: context),
@@ -76,7 +77,9 @@ class DoctorDetailsCard extends StatelessWidget {
       paddingVertical: 10,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,
-      onPressed: () {},
+      onPressed: () {
+        SelectTimeRoute(doctor).push(context);
+      },
       child: Text(
         t.doctor_details.book_now,
         style: context.medium11.bgPrimary.rubik,

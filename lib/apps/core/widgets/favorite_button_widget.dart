@@ -10,11 +10,13 @@ import '../utils/snack_bar_utils.dart';
 class FavoriteButtonWidget extends StatelessWidget {
   final String doctorId;
   final double size;
+  final bool readOnly ;
 
   const FavoriteButtonWidget({
     super.key,
     required this.doctorId,
     this.size = 20,
+    this.readOnly = false,
   });
 
   @override
@@ -42,11 +44,13 @@ class FavoriteButtonWidget extends StatelessWidget {
               state.user?.patientInfo?.favDoctors.contains(doctorId) ?? false;
 
           return GestureDetector(
-            onTap: () {
-              context
-                  .read<UserBloc>()
-                  .add(ToggleFavoriteDoctorEvent(doctorId));
-            },
+            onTap: readOnly == true
+                ? null
+                : () {
+                    context.read<UserBloc>().add(
+                      ToggleFavoriteDoctorEvent(doctorId),
+                    );
+                  },
             child: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
               color: isFavorite ? AppColors.badge : AppColors.textMuted,

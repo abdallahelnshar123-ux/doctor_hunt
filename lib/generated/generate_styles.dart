@@ -31,7 +31,7 @@ void main() {
 
   final List<String> fontWeights = ['extraLight', 'light', 'regular', 'medium', 'semiBold', 'bold'];
 
-  final List<int> fontSizes = [0, 8, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 36, 38, 40];
+  final List<int> fontSizes = [0, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 36, 38, 40];
 
   final List<String> fontFamilies = ['plusJakartaSans', 'rubik'];
 

@@ -2,8 +2,8 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class FeatureDoctorsShimmer extends StatelessWidget {
-  const FeatureDoctorsShimmer({super.key});
+class TopRatedDoctorsShimmer extends StatelessWidget {
+  const TopRatedDoctorsShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {

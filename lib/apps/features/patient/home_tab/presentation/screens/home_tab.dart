@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -8,10 +9,11 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/router/app_routes.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../main_screen/widget/feature_doctors_widget.dart';
 import '../widget/categories_widget.dart';
 import '../widget/popular_doctors_widget.dart';
+import '../widget/top_rated_doctors_widget.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -19,7 +21,6 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: _customAppBar(context: context),
       body: Column(
         spacing: 20,
@@ -37,11 +38,7 @@ class HomeTab extends StatelessWidget {
                   ),
                 ),
               ),
-
-              Padding(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: SearchTextFieldWidget(),
-              ),
+              _buildSearchButton(context: context),
             ],
           ),
           Expanded(
@@ -52,13 +49,42 @@ class HomeTab extends StatelessWidget {
                   children: [
                     const CategoriesWidget(),
                     const PopularDoctorsWidget(),
-                    const FeatureDoctorsWidget(),
+                    const TopRatedDoctorsWidget(),
                   ],
                 ),
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSearchButton({required BuildContext context}) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: AppContainerWithShadow(
+        child: TextButton.icon(
+          icon: Icon(Icons.search),
+          style: ButtonStyle(
+            alignment: .centerLeft,
+            fixedSize: WidgetStatePropertyAll(Size(context.width - 40, 65)),
+            shape: WidgetStatePropertyAll(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+            ),
+            padding: WidgetStatePropertyAll(EdgeInsets.all(16)),
+            backgroundColor: WidgetStatePropertyAll(AppColors.white),
+            iconColor: WidgetStatePropertyAll(AppColors.textSecondary),
+            iconSize: WidgetStatePropertyAll(20),
+            textStyle: WidgetStatePropertyAll(context.regular14.rubik),
+            foregroundColor: WidgetStatePropertyAll(AppColors.textSecondary),
+          ),
+
+          onPressed: () {
+            const FindDoctorsRoute().push(context);
+          },
+          label: Text(t.home.search),
+        ),
       ),
     );
   }

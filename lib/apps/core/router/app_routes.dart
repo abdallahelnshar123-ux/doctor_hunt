@@ -14,11 +14,12 @@ import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patie
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/appointment_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/select_time_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/screens/patient_profile_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/popular_doctor_screen/presentation/screens/popular_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/privacy_policy_screen/presentation/screens/privacy_policy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -136,9 +137,19 @@ class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
   }
 }
 
-@TypedGoRoute<FindDoctorRoute>(path: '/find_doctor')
-class FindDoctorRoute extends GoRouteData with $FindDoctorRoute {
-  const FindDoctorRoute();
+@TypedGoRoute<PopularDoctorsRoute>(path: '/popular_doctors')
+class PopularDoctorsRoute extends GoRouteData with $PopularDoctorsRoute {
+  const PopularDoctorsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PopularDoctorScreen();
+  }
+}
+
+@TypedGoRoute<FindDoctorsRoute>(path: '/find_doctors')
+class FindDoctorsRoute extends GoRouteData with $FindDoctorsRoute {
+  const FindDoctorsRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -218,13 +229,14 @@ class AdminUpdateDoctorDetailsRoute extends GoRouteData
   }
 }
 
-@TypedGoRoute<AppointmentRoute>(path: '/appointment')
-class AppointmentRoute extends GoRouteData with $AppointmentRoute {
-  const AppointmentRoute();
+@TypedGoRoute<SelectTimeRoute>(path: '/select_time')
+class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
+  const SelectTimeRoute(this.$extra);
+  final Doctor $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const AppointmentScreen();
+    return  SelectTimeScreen(doctor: $extra,);
   }
 }
 

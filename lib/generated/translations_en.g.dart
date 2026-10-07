@@ -46,6 +46,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
   late final Translations$choose_role$en choose_role = Translations$choose_role$en.internal(_root);
   late final Translations$patient_main$en patient_main = Translations$patient_main$en.internal(_root);
+  late final Translations$patient_appointments$en patient_appointments = Translations$patient_appointments$en.internal(_root);
+  late final Translations$select_time$en select_time = Translations$select_time$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
   late final Translations$settings$en settings = Translations$settings$en.internal(_root);
   late final Translations$profile$en profile = Translations$profile$en.internal(_root);
@@ -177,6 +179,62 @@ class Translations$patient_main$en {
   String get favourite => 'Favourite';
 }
 
+// Path: patient_appointments
+class Translations$patient_appointments$en with PageData2 {
+  Translations$patient_appointments$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointments'
+  @override
+  String get title => 'Appointments';
+
+  /// en: 'Upcoming'
+  String get upcoming => 'Upcoming';
+
+  /// en: 'Completed'
+  String get completed => 'Completed';
+
+  /// en: 'Canceled'
+  String get canceled => 'Canceled';
+
+  /// en: 'View Details'
+  String get view_details => 'View Details';
+
+  /// en: 'Cancel Appointment'
+  String get cancel_appointment => 'Cancel Appointment';
+
+  /// en: 'Rate Doctor'
+  String get rate_doctor => 'Rate Doctor';
+
+  /// en: 'Appointment date'
+  String get appointment_date => 'Appointment date';
+
+  /// en: 'Consultation fee'
+  String get consultation_fee => 'Consultation fee';
+
+  /// en: 'Appointment time'
+  String get appointment_time => 'Appointment time';
+}
+
+// Path: select_time
+class Translations$select_time$en with PageData2 {
+  Translations$select_time$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Select Time'
+  @override
+  String get title => 'Select Time';
+
+  /// en: 'No slots available'
+  String get no_slots_available => 'No slots available';
+}
+
 // Path: home
 class Translations$home$en {
   Translations$home$en.internal(this._root);
@@ -200,14 +258,14 @@ class Translations$home$en {
   /// en: 'Favourite Doctors'
   String get favourite_doctors => 'Favourite Doctors';
 
-  /// en: 'Feature Doctor'
-  String get feature_doctor => 'Feature Doctor';
+  /// en: 'Top Rated Doctors'
+  String get top_rated_doctors => 'Top Rated Doctors';
 
   /// en: 'See all'
   String get see_all => 'See all';
 
-  /// en: 'search'
-  String get search => 'search';
+  /// en: 'search....'
+  String get search => 'search....';
 
   /// en: 'Live'
   String get live => 'Live';

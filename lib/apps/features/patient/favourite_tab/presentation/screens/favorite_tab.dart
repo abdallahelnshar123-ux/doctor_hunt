@@ -1,11 +1,9 @@
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctor_card.dart';
-import 'package:doctor_hunt/apps/features/patient/main_screen/widget/feature_doctors_widget.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/app_scaffold.dart';
-import '../../../../../core/widgets/main_app_bar.dart';
 
 class FavoriteTab extends StatelessWidget {
   const FavoriteTab({super.key});
@@ -14,31 +12,39 @@ class FavoriteTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       bottomSafeArea: false,
-      body: ListView(
+      body: Column(
+        spacing: 10,
         children: [
-          MainAppBar(title: t.home.favourite_doctors),
+          AppBar(title: Text(t.home.favourite_doctors)),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: SearchTextFieldWidget(),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 450,
-            child: GridView.builder(
-              padding: EdgeInsets.all(20),
-              scrollDirection: .horizontal,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 160 / 180,
-                mainAxisExtent: 160,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 15,
-                crossAxisCount: 2,
+          Expanded(
+            child: SafeArea(
+              top: false,
+              child: GridView.builder(
+                padding: EdgeInsets.all(20),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 180 / 160,
+                  mainAxisExtent: 280,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 15,
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) =>
+                    const FavouriteDoctorCard(doctorId: '1'),
+                itemCount: 16,
               ),
-              itemBuilder: (context, index) => const FavouriteDoctorCard(),
-              itemCount: 16,
             ),
           ),
-          FeatureDoctorsWidget(),
+          // SizedBox(height: 20,)
+          // SizedBox(
+          //   width: double.infinity,
+          //   height: 450,
+          //   child:
+          // ),
+          // TopRatedDoctorsWidget(),
         ],
       ),
     );

@@ -15,13 +15,14 @@ List<RouteBase> get $appRoutes => [
   $addDoctorRoute,
   $onboardingRoute,
   $chooseRoleRoute,
-  $findDoctorRoute,
+  $popularDoctorsRoute,
+  $findDoctorsRoute,
   $patientDoctorDetailsRoute,
   $patientProfileRoute,
   $privacyPolicyRoute,
   $adminDoctorDetailsRoute,
   $adminUpdateDoctorDetailsRoute,
-  $appointmentRoute,
+  $selectTimeRoute,
 ];
 
 RouteBase get $adminLoginRoute => GoRouteData.$route(
@@ -239,18 +240,45 @@ mixin $ChooseRoleRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $findDoctorRoute => GoRouteData.$route(
-  path: '/find_doctor',
+RouteBase get $popularDoctorsRoute => GoRouteData.$route(
+  path: '/popular_doctors',
   hasOverriddenOnExit: false,
-  factory: $FindDoctorRoute._fromState,
+  factory: $PopularDoctorsRoute._fromState,
 );
 
-mixin $FindDoctorRoute on GoRouteData {
-  static FindDoctorRoute _fromState(GoRouterState state) =>
-      const FindDoctorRoute();
+mixin $PopularDoctorsRoute on GoRouteData {
+  static PopularDoctorsRoute _fromState(GoRouterState state) =>
+      const PopularDoctorsRoute();
 
   @override
-  String get location => GoRouteData.$location('/find_doctor');
+  String get location => GoRouteData.$location('/popular_doctors');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $findDoctorsRoute => GoRouteData.$route(
+  path: '/find_doctors',
+  hasOverriddenOnExit: false,
+  factory: $FindDoctorsRoute._fromState,
+);
+
+mixin $FindDoctorsRoute on GoRouteData {
+  static FindDoctorsRoute _fromState(GoRouterState state) =>
+      const FindDoctorsRoute();
+
+  @override
+  String get location => GoRouteData.$location('/find_doctors');
 
   @override
   void go(BuildContext context) => context.go(location);
@@ -418,29 +446,33 @@ mixin $AdminUpdateDoctorDetailsRoute on GoRouteData {
       context.replace(location, extra: _self.$extra);
 }
 
-RouteBase get $appointmentRoute => GoRouteData.$route(
-  path: '/appointment',
+RouteBase get $selectTimeRoute => GoRouteData.$route(
+  path: '/select_time',
   hasOverriddenOnExit: false,
-  factory: $AppointmentRoute._fromState,
+  factory: $SelectTimeRoute._fromState,
 );
 
-mixin $AppointmentRoute on GoRouteData {
-  static AppointmentRoute _fromState(GoRouterState state) =>
-      const AppointmentRoute();
+mixin $SelectTimeRoute on GoRouteData {
+  static SelectTimeRoute _fromState(GoRouterState state) =>
+      SelectTimeRoute(state.extra as Doctor);
+
+  SelectTimeRoute get _self => this as SelectTimeRoute;
 
   @override
-  String get location => GoRouteData.$location('/appointment');
+  String get location => GoRouteData.$location('/select_time');
 
   @override
-  void go(BuildContext context) => context.go(location);
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
 
   @override
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
 
   @override
   void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+      context.pushReplacement(location, extra: _self.$extra);
 
   @override
-  void replace(BuildContext context) => context.replace(location);
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
 }
