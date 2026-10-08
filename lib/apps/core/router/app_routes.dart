@@ -8,8 +8,8 @@ import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/s
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -28,7 +28,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
 import '../../features/common/auth/data/models/user/my_user.dart';
-import '../../features/common/auth/presentation/controller/auth_state.dart';
+import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
 
@@ -232,11 +232,12 @@ class AdminUpdateDoctorDetailsRoute extends GoRouteData
 @TypedGoRoute<SelectTimeRoute>(path: '/select_time')
 class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
   const SelectTimeRoute(this.$extra);
+
   final Doctor $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  SelectTimeScreen(doctor: $extra,);
+    return SelectTimeScreen(doctor: $extra);
   }
 }
 

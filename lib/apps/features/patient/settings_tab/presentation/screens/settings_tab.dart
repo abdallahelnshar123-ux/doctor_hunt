@@ -1,9 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,9 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/widgets/custom_cached_network_image.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../../common/auth/presentation/controller/auth_bloc.dart';
-import '../../../../common/auth/presentation/controller/auth_state.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
 part '../widget/more_option_widget.dart';
@@ -26,8 +26,7 @@ class SettingsTab extends StatelessWidget {
     final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
-          current is LogoutLoadingState ||
-          current is LogoutErrorState ,
+          current is LogoutLoadingState || current is LogoutErrorState,
 
       listener: (context, state) {
         if (state is LogoutLoadingState) {
@@ -67,8 +66,9 @@ class SettingsTab extends StatelessWidget {
                         },
                         leading: CircleAvatar(
                           radius: 30,
-                          backgroundImage: CachedNetworkImageProvider(
-                            user?.image ?? '',
+                          backgroundColor: AppColors.shimmerBaseColor,
+                          backgroundImage: CustomCachedNetworkImage.getProvider(
+                            user?.image,
                           ),
                         ),
                         titleTextStyle: context.bold16.textPrimary.rubik,

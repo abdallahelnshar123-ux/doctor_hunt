@@ -1,11 +1,19 @@
 import 'dart:async';
 
+import 'package:bloc_test/bloc_test.dart';
+import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_state.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/admin_login_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_state.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_event.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/email_text_field_widget.dart';
@@ -13,10 +21,16 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAuthBloc extends Mock implements AuthBloc {}
+class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+
+class MockUserPrefs extends Mock implements UserPrefs {}
+
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
+class MockDoctorBloc extends MockBloc<DoctorEvent, DoctorState>
+    implements DoctorBloc {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}
 
@@ -26,6 +40,9 @@ void main() {
   });
 
   late MockAuthBloc authBloc;
+  late MockUserPrefs mockUserPrefs;
+  late MockUserBloc mockUserBloc;
+  late MockDoctorBloc mockDoctorBloc;
 
   final tUser = MyUser(
     id: '1',
@@ -37,38 +54,64 @@ void main() {
 
   setUp(() {
     authBloc = MockAuthBloc();
+    mockUserPrefs = MockUserPrefs();
+    mockUserBloc = MockUserBloc();
+    mockDoctorBloc = MockDoctorBloc();
 
-    when(() => authBloc.state).thenReturn(AuthInitial());
+    when(() => mockUserPrefs.onboarding).thenReturn(true);
+    when(() => mockUserBloc.currentUser).thenReturn(tUser);
 
-    when(
-      () => authBloc.stream,
-    ).thenAnswer((_) => const Stream<AuthState>.empty());
+    when(() => mockUserBloc.state).thenReturn(const UserState());
+    whenListen(
+      mockUserBloc,
+      const Stream<UserState>.empty(),
+      initialState: const UserState(),
+    );
+    final initialDoctorState = GetDoctorsSuccessState(
+      allDoctors: const [],
+      specialtyCounts: const [],
+      activeDoctorsCount: 0,
+    );
 
-    when(() => authBloc.close()).thenAnswer((_) async {});
+    when(() => mockDoctorBloc.state).thenReturn(initialDoctorState);
+    whenListen(
+      mockDoctorBloc,
+      const Stream<DoctorState>.empty(),
+      initialState: initialDoctorState,
+    );
+
+    getIt.registerFactory<DoctorBloc>(() => mockDoctorBloc);
+  });
+
+  tearDown(() {
+    getIt.reset();
   });
 
   Widget createWidgetUnderTest() {
-    final router = GoRouter(
-      initialLocation: '/',
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (_, _) => BlocProvider<AuthBloc>(
-            create: (context) => authBloc,
-            child: const AdminLoginScreen(),
-          ),
-        ),
-        GoRoute(
-          path: '/admin_main',
-          builder: (_, _) => const Scaffold(body: Text('Admin Main')),
-        ),
-      ],
+    final router = createRouter(
+      authBloc: authBloc,
+      userPrefs: mockUserPrefs,
+      initialLocation: '/admin_login',
     );
-    return TranslationProvider(child: MaterialApp.router(routerConfig: router));
+    return TranslationProvider(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(create: (context) => authBloc),
+          BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+        ],
+        child: MaterialApp.router(routerConfig: router),
+      ),
+    );
   }
 
   group('AdminLoginScreen', () {
     testWidgets('renders all required widgets', (tester) async {
+      whenListen(
+        authBloc,
+        const Stream<AuthState>.empty(),
+        initialState: AuthInitial(),
+      );
+
       await tester.pumpWidget(createWidgetUnderTest());
 
       expect(find.text(t.auth.welcome_back), findsOneWidget);
@@ -79,21 +122,37 @@ void main() {
       expect(find.byType(EmailTextFieldWidget), findsOneWidget);
       expect(find.byType(CustomTextPassword), findsOneWidget);
       expect(find.byType(CustomElevatedButton), findsOneWidget);
+      expect(find.byType(MainAppBar), findsOneWidget);
     });
 
-    testWidgets('login button does not add event when form is invalid', (
-      tester,
-    ) async {
-      await tester.pumpWidget(createWidgetUnderTest());
+    testWidgets(
+      'login button does not add event and shows validation error when form is invalid',
+      (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
 
-      await tester.tap(find.text(t.auth.login));
+        await tester.pumpWidget(createWidgetUnderTest());
 
-      verifyNever(() => authBloc.add(any()));
-    });
+        await tester.tap(find.text(t.auth.login));
+        await tester.pump();
+
+        verifyNever(() => authBloc.add(any()));
+        expect(find.text('email_is_required'), findsOneWidget);
+      },
+    );
 
     testWidgets(
       'login button adds LoginRequested with admin role when form is valid',
       (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
+
         await tester.pumpWidget(createWidgetUnderTest());
 
         final emailField = find.bySemanticsLabel(t.auth.email);
@@ -118,6 +177,12 @@ void main() {
     );
 
     testWidgets('forgot password button removes focus', (tester) async {
+      whenListen(
+        authBloc,
+        const Stream<AuthState>.empty(),
+        initialState: AuthInitial(),
+      );
+
       await tester.pumpWidget(createWidgetUnderTest());
 
       final emailField = find.bySemanticsLabel(t.auth.email);
@@ -140,8 +205,7 @@ void main() {
       'shows loading dialog when LoginWithEmailPasswordLoadingState is emitted',
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
-
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -159,8 +223,7 @@ void main() {
       'shows error dialog when LoginWithEmailPasswordErrorState is emitted',
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
-
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -179,35 +242,11 @@ void main() {
       },
     );
 
-    testWidgets('shows success dialog when UserAuthenticatedState is emitted', (
-      tester,
-    ) async {
-      final controller = StreamController<AuthState>.broadcast();
-
-      when(() => authBloc.stream).thenAnswer((_) => controller.stream);
-
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      controller.add(LoginWithEmailPasswordLoadingState());
-      await tester.pump();
-
-      controller.add(UserAuthenticatedState(tUser));
-
-      await tester.pump();
-
-      expect(find.text(t.dialog.success), findsNWidgets(2));
-
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
-      await controller.close();
-    });
-
     testWidgets('navigates to AdminMainRoute after successful authentication', (
       tester,
     ) async {
       final controller = StreamController<AuthState>.broadcast();
-
-      when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+      whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
       await tester.pumpWidget(createWidgetUnderTest());
 
@@ -218,7 +257,10 @@ void main() {
 
       await tester.pumpAndSettle(const Duration(seconds: 2));
 
-      expect(find.text('Admin Main'), findsOneWidget);
+      expect(
+        find.text(t.admin.main.doctors),
+        findsWidgets,
+      ); // Found in bottom navigation of admin main screen and possibly the tab itself
 
       await controller.close();
     });

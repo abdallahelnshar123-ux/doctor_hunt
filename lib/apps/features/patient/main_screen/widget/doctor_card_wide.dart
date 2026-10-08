@@ -13,12 +13,12 @@ class DoctorCardWide extends StatelessWidget {
   final Doctor doctor;
   final EdgeInsetsGeometry? margin;
 
-  const DoctorCardWide({super.key, required this.doctor , this.margin});
+  const DoctorCardWide({super.key, required this.doctor, this.margin});
 
   @override
   Widget build(BuildContext context) {
     return AppContainerWithShadow(
-      margin:margin ,
+      margin: margin,
       width: double.infinity,
       height: 120,
       padding: EdgeInsets.all(15),

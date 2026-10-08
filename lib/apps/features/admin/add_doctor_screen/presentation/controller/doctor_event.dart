@@ -1,7 +1,7 @@
 part of 'doctor_bloc.dart';
 
 @immutable
-sealed class DoctorEvent {}
+abstract class DoctorEvent {}
 
 class AddDoctorRequested extends DoctorEvent {
   final String name;

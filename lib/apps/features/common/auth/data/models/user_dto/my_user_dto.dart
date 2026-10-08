@@ -46,14 +46,14 @@ class MyUserDto extends Equatable {
             )
           : null,
       phone: data[FirestoreConstants.phone]?.toString(),
-      patientInfo: data['patient_info'] != null
+      patientInfo: data[FirestoreConstants.patientInfo] != null
           ? PatientInfoDto.fromFireStore(
-              data['patient_info'] as Map<String, dynamic>,
+              data[FirestoreConstants.patientInfo] as Map<String, dynamic>,
             )
           : null,
-      adminInfo: data['admin_info'] != null
+      adminInfo: data[FirestoreConstants.adminInfo] != null
           ? AdminInfoDto.fromFireStore(
-              data['admin_info'] as Map<String, dynamic>,
+              data[FirestoreConstants.adminInfo] as Map<String, dynamic>,
             )
           : null,
     );
@@ -68,8 +68,8 @@ class MyUserDto extends Equatable {
       FirestoreConstants.image: image,
       FirestoreConstants.role: role?.name,
       FirestoreConstants.phone: phone,
-      'patient_info': patientInfo?.toFireStore(),
-      'admin_info': adminInfo?.toFireStore(),
+      FirestoreConstants.patientInfo: patientInfo?.toFireStore(),
+      FirestoreConstants.adminInfo: adminInfo?.toFireStore(),
     };
   }
 
@@ -83,14 +83,14 @@ class MyUserDto extends Equatable {
 
   @override
   List<Object?> get props => [
-        name,
-        email,
-        id,
-        provider,
-        image,
-        role,
-        phone,
-        patientInfo,
-        adminInfo,
-      ];
+    name,
+    email,
+    id,
+    provider,
+    image,
+    role,
+    phone,
+    patientInfo,
+    adminInfo,
+  ];
 }

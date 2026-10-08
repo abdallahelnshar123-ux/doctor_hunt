@@ -19,7 +19,7 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
   DoctorBloc(this._doctorRepository) : super(DoctorInitial()) {
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
-    on<GetDoctorsRequested>(_onGetDoctorsRequested);  
+    on<GetDoctorsRequested>(_onGetDoctorsRequested);
     on<FilterDoctorsRequested>(_onFilterDoctorsRequested);
   }
 

@@ -1,6 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_theme.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

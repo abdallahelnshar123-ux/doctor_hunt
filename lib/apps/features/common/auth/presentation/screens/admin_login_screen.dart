@@ -1,4 +1,3 @@
-import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
@@ -11,9 +10,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../data/models/user/my_user.dart';
-import '../controller/auth_bloc.dart';
-import '../controller/auth_event.dart';
-import '../controller/auth_state.dart';
+import '../controller/auth/auth_bloc.dart';
+import '../controller/auth/auth_event.dart';
+import '../controller/auth/auth_state.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/email_text_field_widget.dart';
 
@@ -28,20 +27,20 @@ class AdminLoginScreen extends HookWidget {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is UserAuthenticatedState) {
-          DialogUtils.hideLoading(context: context);
-          DialogUtils.showMessage(
-            title: t.dialog.success,
-            context: context,
-            message: t.dialog.success,
-          );
-
-          Future.delayed(Duration(seconds: 2), () {
-            if (context.mounted) {
-              const AdminMainRoute().go(context);
-            }
-          });
-        }
+        // if (state is UserAuthenticatedState) {
+        //   DialogUtils.hideLoading(context: context);
+        //   DialogUtils.showMessage(
+        //     title: t.dialog.success,
+        //     context: context,
+        //     message: t.dialog.success,
+        //   );
+        //
+        //   Future.delayed(Duration(seconds: 2), () {
+        //     if (context.mounted) {
+        //       const AdminMainRoute().go(context);
+        //     }
+        //   });
+        // }
 
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);

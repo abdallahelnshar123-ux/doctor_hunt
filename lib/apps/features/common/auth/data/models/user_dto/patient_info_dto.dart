@@ -1,18 +1,18 @@
 import 'package:equatable/equatable.dart';
 
+import '../../../../../../core/constants/firestore_constants.dart';
 import '../user/patient_info.dart';
 
 class PatientInfoDto extends Equatable {
   final List<String> favDoctors;
 
-  const PatientInfoDto({
-    this.favDoctors = const [],
-  });
+  const PatientInfoDto({this.favDoctors = const []});
 
   factory PatientInfoDto.fromFireStore(Map<String, dynamic>? data) {
     if (data == null) return const PatientInfoDto();
     return PatientInfoDto(
-      favDoctors: (data['fav_doctors'] as List<dynamic>?)
+      favDoctors:
+          (data[FirestoreConstants.favDoctors] as List<dynamic>?)
               ?.map((e) => e.toString())
               .toList() ??
           const [],
@@ -20,9 +20,7 @@ class PatientInfoDto extends Equatable {
   }
 
   Map<String, dynamic> toFireStore() {
-    return {
-      'fav_doctors': favDoctors,
-    };
+    return {FirestoreConstants.favDoctors: favDoctors};
   }
 
   PatientInfo toDomain() => PatientInfo(favDoctors: favDoctors);

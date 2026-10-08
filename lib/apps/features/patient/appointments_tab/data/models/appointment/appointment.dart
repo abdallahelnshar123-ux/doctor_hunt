@@ -2,11 +2,7 @@ import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:equatable/equatable.dart';
 
-enum AppointmentStatus {
-  upcoming,
-  completed,
-  cancelled,
-}
+enum AppointmentStatus { upcoming, completed, cancelled }
 
 class Appointment extends Equatable {
   final String id;
@@ -48,13 +44,5 @@ class Appointment extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-        id,
-        patient,
-        doctor,
-        date,
-        time,
-        fee,
-        status,
-      ];
+  List<Object?> get props => [id, patient, doctor, date, time, fee, status];
 }

@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/repo/auth_repository.dart';
-import '../../data/use_case/login_use_case.dart';
+import '../../../data/repo/auth_repository.dart';
+import '../../../data/use_case/login_use_case.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
@@ -11,24 +11,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
 
-  AuthBloc(this._repository, this._loginUseCase)
-      : super(
-
-      // _repository.getCurrentUser().fold(
-      //     () => UserUnauthenticatedState(),
-      //     (user) => UserAuthenticatedState(user),
-      //   )
-    AuthInitial(),
-
-  ) {
+  AuthBloc(this._repository, this._loginUseCase) : super(AuthInitial()) {
     on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
-    this.add(CheckAuthStatusRequested());
-
+    add(CheckAuthStatusRequested());
   }
 
   void _onCheckAuthStatusRequested(
@@ -76,7 +66,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(RegisterWithEmailPasswordErrorState(failure.message));
       },
       (user) {
-        emit(UserAuthenticatedState(user));
+        emit(RegisterWithEmailPasswordSuccessState());
       },
     );
   }

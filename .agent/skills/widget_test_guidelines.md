@@ -28,44 +28,54 @@ Ensure the testing environment is properly configured before authoring widget te
 The following are strict rules that must be followed by the agent when writing or modifying widget tests in this project:
 
 ### 1. Routing with GoRouter in Tests
-*   When a widget requires navigation or depends on router context, wrap the widget under test in `MaterialApp.router` and provide a mock `GoRouter` configuration.
-*   Setup initial locations and provide required `BlocProvider` wrappers directly inside the `GoRoute` builder.
+*   When a widget requires navigation or depends on router context, you **MUST** use the project's actual router creation function (e.g., `createRouter` from `app_routes.dart`) if it exists, rather than mocking a fake `GoRouter` manually. This ensures tests run against the real routing logic.
     ```dart
-    final router = GoRouter(
-      initialLocation: '/',
-      routes: [
-        GoRoute(
-          path: '/',
-          builder: (_, _) => BlocProvider<AuthBloc>(
-            create: (context) => authBloc,
-            child: const AdminLoginScreen(),
-          ),
-        ),
-      ],
+    final router = createRouter(
+      authBloc: authBloc, // Pass required mocked dependencies here
+      initialLocation: '/my_route',
     );
     return MaterialApp.router(routerConfig: router);
     ```
 
-### 2. Finding Widgets
+### 2. Providing Blocs in Tests (BlocProvider)
+*   When injecting a mocked Bloc into the widget tree, use the standard `BlocProvider` with the `create` callback, **NOT** `BlocProvider.value`.
+*   **CRITICAL:** You must explicitly define the Bloc's generic type (e.g., `BlocProvider<AuthBloc>`) so that the provider correctly matches the exact type expected by `BlocListener` or `BlocBuilder` in the widget tree. Failing to do so when using mocks will cause a `ProviderNotFoundException`.
+    ```dart
+    BlocProvider<AuthBloc>(
+      create: (context) => authBloc, // authBloc is the mocked instance
+      child: MaterialApp.router(routerConfig: router),
+    )
+    ```
+
+### 3. Mocking Blocs & Streams (bloc_test)
+*   When mocking a Bloc, **always** use `MockBloc` or `MockCubit` from the `bloc_test` package. Do not use generic `Mock` and manually override methods or properties like `stream` or `close`.
+    ```dart
+    class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
+    ```
+*   To stub the stream of states, always use `whenListen` from `bloc_test` to ensure the current state and stream stay perfectly in sync.
+    ```dart
+    whenListen(authBloc, controller.stream, initialState: AuthInitial());
+    ```
+
+### 4. Finding Widgets
 *   **Unique Identifiers:** Find widgets by uniquely identifying them. When multiple similar widgets exist, rely on specific identifiers (like `find.bySemanticsLabel` using translated hint texts) rather than generic type matchers.
 *   **Exact Counts:** When you expect more than one widget of the same type or text, and you know the exact expected number, use `findsNWidgets(exact_count)` instead of `findsWidgets`.
 *   **Reusable & Nested Widgets:** When verifying widget counts, you must consider the internal composition of reusable widgets imported from other files. For example, if a `ContinueWithGoogleButton` internally uses a `CustomElevatedButton`, expecting `findsOneWidget` for `CustomElevatedButton` might fail if there's another one on the screen. Always be aware of the widget tree composition and adjust the expected count using `findsNWidgets(exact_count)` accordingly.
 
-### 3. Using `pump` vs `pumpAndSettle`
+### 5. Using `pump` vs `pumpAndSettle`
 *   **No UI Change = No Pump:** Do not call `await tester.pump()` if you are not verifying a UI change. For example, if you interact with a button and only want to verify that a Bloc event was added, pumping is unnecessary.
 *   **Verifying UI Changes:** It is the perfect use for `await tester.pump()` when verifying a UI change (e.g., a state emission that shows a `CircularProgressIndicator` or opens a dialog).
 *   **Dialogs Without Animation:** Use `await tester.pump()` instead of `tester.pumpAndSettle()` when showing simple dialogs without animations. Calling `pumpAndSettle` is inappropriate if there is no animation to wait for.
 *   **Redundant PumpAndSettle:** Do not use `await tester.pumpAndSettle()` twice consecutively. A single call, optionally with a `Duration` (e.g., `await tester.pumpAndSettle(const Duration(seconds: 2))`), is enough.
 
-### 4. Mocking & Verifying Events
+### 6. Mocking & Verifying Events
 *   **Event Types:** When verifying that an event was added to a Bloc using `captureAny()`, you **must** verify the exact type of the captured event using `isA<MyEvent>()`.
     ```dart
-final captured = verify(() => myBloc.add(captureAny())).captured;
+    final captured = verify(() => myBloc.add(captureAny())).captured;
     expect(captured.first, isA<LoginRequested>());
     ```
-    ```
 
-### 5. Resource Management
+### 7. Resource Management
 *   **Close Controllers:** Always make sure to close `StreamController`s at the end of your widget tests.
     ```dart
     await controller.close();

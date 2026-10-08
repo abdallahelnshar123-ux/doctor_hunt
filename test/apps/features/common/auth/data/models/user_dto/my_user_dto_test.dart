@@ -1,7 +1,9 @@
 import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/admin_info_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/patient_info_dto.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -22,8 +24,33 @@ void main() {
     FirestoreConstants.image: 'https://example.com/photo.jpg',
     FirestoreConstants.role: 'patient',
     FirestoreConstants.phone: null,
-    'patient_info': null,
-    'admin_info': null,
+    FirestoreConstants.patientInfo: null,
+    FirestoreConstants.adminInfo: null,
+  };
+
+  const tMyUserDtoWithInfo = MyUserDto(
+    id: 'user_123',
+    email: 'john@example.com',
+    name: 'John Doe',
+    provider: UserAuthProvider.google,
+    image: 'https://example.com/photo.jpg',
+    role: UserRoles.patient,
+    patientInfo: PatientInfoDto(favDoctors: ['doc1', 'doc2']),
+    adminInfo: AdminInfoDto(),
+  );
+
+  final tMapWithInfo = <String, dynamic>{
+    FirestoreConstants.id: 'user_123',
+    FirestoreConstants.name: 'John Doe',
+    FirestoreConstants.email: 'john@example.com',
+    FirestoreConstants.provider: 'google',
+    FirestoreConstants.image: 'https://example.com/photo.jpg',
+    FirestoreConstants.role: 'patient',
+    FirestoreConstants.phone: null,
+    FirestoreConstants.patientInfo: {
+      'fav_doctors': ['doc1', 'doc2']
+    },
+    FirestoreConstants.adminInfo: <String, dynamic>{},
   };
 
   group('MyUserDto', () {
@@ -51,6 +78,18 @@ void main() {
           final result = MyUserDto.fromFireStore(tMap);
 
           expect(result, equals(tMyUserDto));
+        },
+      );
+
+      test(
+        'should parse patientInfo and adminInfo properly if provided',
+        () {
+          final result = MyUserDto.fromFireStore(tMapWithInfo);
+
+          expect(result, equals(tMyUserDtoWithInfo));
+          expect(result.patientInfo, isNotNull);
+          expect(result.adminInfo, isNotNull);
+          expect(result.patientInfo!.favDoctors, equals(['doc1', 'doc2']));
         },
       );
 
@@ -117,6 +156,12 @@ void main() {
         expect(result, equals(tMap));
       });
 
+      test('should serialize patientInfo and adminInfo correctly if present', () {
+        final result = tMyUserDtoWithInfo.toFireStore();
+
+        expect(result, equals(tMapWithInfo));
+      });
+
       test('should return a Map containing correct data via toJson alias', () {
         final result = tMyUserDto.toJson();
 
@@ -139,8 +184,8 @@ void main() {
           FirestoreConstants.image: null,
           FirestoreConstants.role: null,
           FirestoreConstants.phone: null,
-          'patient_info': null,
-          'admin_info': null,
+          FirestoreConstants.patientInfo: null,
+          FirestoreConstants.adminInfo: null,
         });
       });
     });

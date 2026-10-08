@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/user/my_user.dart';
+import '../../../data/models/user/my_user.dart';
 
 abstract class AuthState extends Equatable {
   @override
@@ -20,8 +20,10 @@ class LoginWithEmailPasswordErrorState extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+/// ===================  Register States  =======================
 
 class RegisterWithEmailPasswordLoadingState extends AuthState {}
+class RegisterWithEmailPasswordSuccessState extends AuthState {}
 
 class RegisterWithEmailPasswordErrorState extends AuthState {
   final String message;
@@ -32,19 +34,18 @@ class RegisterWithEmailPasswordErrorState extends AuthState {
   List<Object?> get props => [message];
 }
 
-/// ===================  Register States  =======================
-class RegisterLoadingState extends AuthState {}
-
-class RegisterSuccessState extends AuthState {}
-
-class RegisterErrorState extends AuthState {
-  final String message;
-
-  RegisterErrorState(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
+// class RegisterLoadingState extends AuthState {}
+//
+// class RegisterSuccessState extends AuthState {}
+//
+// class RegisterErrorState extends AuthState {
+//   final String message;
+//
+//   RegisterErrorState(this.message);
+//
+//   @override
+//   List<Object?> get props => [message];
+// }
 
 class ContinueWithGoogleLoadingState extends AuthState {}
 

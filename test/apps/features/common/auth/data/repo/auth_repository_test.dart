@@ -8,6 +8,7 @@ import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_prov
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/auth_user_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/patient_info_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/auth_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
@@ -65,8 +66,23 @@ void main() {
     );
   });
 
+  group('userStream & updateCurrentUser', () {
+    test('updateCurrentUser should update userPrefs and current user', () async {
+      when(() => mockUserPrefs.setUser(any())).thenAnswer((_) async {});
+      when(() => mockUserPrefs.clearUser()).thenAnswer((_) async {});
+
+      repository.updateCurrentUser(tMyUser);
+      expect(repository.currentUser, equals(tMyUser));
+      verify(() => mockUserPrefs.setUser(tMyUserDto)).called(1);
+
+      repository.updateCurrentUser(null);
+      expect(repository.currentUser, isNull);
+      verify(() => mockUserPrefs.clearUser()).called(1);
+    });
+  });
+
   group('getCurrentUser', () {
-    test('should return MyUser when user exists in UserPrefs', () {
+    test('should return Some(MyUser) when user exists in UserPrefs', () {
       // Arrange
       when(() => mockUserPrefs.getCurrentUser()).thenReturn(tMyUserDto);
 
@@ -74,14 +90,14 @@ void main() {
       final result = repository.getCurrentUser();
 
       // Assert
-      expect(result, Right(tMyUser));
+      expect(result, Some(tMyUser));
       verify(() => mockUserPrefs.getCurrentUser()).called(1);
       verifyNoMoreInteractions(mockUserPrefs);
       verifyZeroInteractions(mockAuthService);
       verifyZeroInteractions(mockFirestoreService);
     });
 
-    test('should return UnauthorizedFailure when user does not exist in UserPrefs', () {
+    test('should return None when user does not exist in UserPrefs', () {
       // Arrange
       when(() => mockUserPrefs.getCurrentUser()).thenReturn(null);
 
@@ -89,17 +105,14 @@ void main() {
       final result = repository.getCurrentUser();
 
       // Assert
-      expect(
-        result,
-        Left(UnauthorizedFailure(t.errors.some_thing_went_wrong)),
-      );
+      expect(result, none());
       verify(() => mockUserPrefs.getCurrentUser()).called(1);
       verifyNoMoreInteractions(mockUserPrefs);
       verifyZeroInteractions(mockAuthService);
       verifyZeroInteractions(mockFirestoreService);
     });
 
-    test('should return UnexpectedFailure when an unexpected error occurs', () {
+    test('should return None when an unexpected error occurs', () {
       // Arrange
       final tException = Exception('Failed to read prefs');
       when(() => mockUserPrefs.getCurrentUser()).thenThrow(tException);
@@ -108,7 +121,7 @@ void main() {
       final result = repository.getCurrentUser();
 
       // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
+      expect(result, none());
       verify(() => mockUserPrefs.getCurrentUser()).called(1);
       verifyNoMoreInteractions(mockUserPrefs);
       verifyZeroInteractions(mockAuthService);
@@ -622,6 +635,105 @@ void main() {
       verifyNoMoreInteractions(mockAuthService);
       verifyZeroInteractions(mockFirestoreService);
       verifyZeroInteractions(mockUserPrefs);
+    });
+  });
+
+  group('toggleFavoriteDoctor', () {
+    const tDoctorId = 'doc_123';
+
+    test('should return UnauthorizedFailure if currentUser is null', () async {
+      // Act
+      final result = await repository.toggleFavoriteDoctor(tDoctorId);
+
+      // Assert
+      expect(
+        result,
+        Left(UnauthorizedFailure(t.errors.some_thing_went_wrong)),
+      );
+      verifyZeroInteractions(mockFirestoreService);
+    });
+
+    test('should add doctorId to favorites if it is not present', () async {
+      // Arrange
+      when(() => mockUserPrefs.setUser(any())).thenAnswer((_) async {});
+      when(() => mockUserPrefs.getCurrentUser()).thenReturn(tMyUserDto);
+      repository.getCurrentUser(); // set _currentUser
+      when(() => mockFirestoreService.updateUser(any()))
+          .thenAnswer((_) async {});
+
+      // Act
+      final result = await repository.toggleFavoriteDoctor(tDoctorId);
+
+      // Assert
+      expect(result.isRight(), isTrue);
+      result.fold(
+        (l) => fail('Should not be left'),
+        (r) {
+          expect(r.patientInfo?.favDoctors, contains(tDoctorId));
+        },
+      );
+      verify(() => mockFirestoreService.updateUser(any())).called(1);
+    });
+
+    test('should remove doctorId from favorites if it is already present', () async {
+      // Arrange
+      const userWithFav = MyUserDto(
+        id: 'user_123',
+        email: 'test@example.com',
+        name: 'Test User',
+        provider: UserAuthProvider.google,
+        role: UserRoles.patient,
+        patientInfo: PatientInfoDto(favDoctors: [tDoctorId]),
+      );
+      when(() => mockUserPrefs.setUser(any())).thenAnswer((_) async {});
+      when(() => mockUserPrefs.getCurrentUser()).thenReturn(userWithFav);
+      repository.getCurrentUser(); // set _currentUser with fav
+      when(() => mockFirestoreService.updateUser(any()))
+          .thenAnswer((_) async {});
+
+      // Act
+      final result = await repository.toggleFavoriteDoctor(tDoctorId);
+
+      // Assert
+      expect(result.isRight(), isTrue);
+      result.fold(
+        (l) => fail('Should not be left'),
+        (r) {
+          expect(r.patientInfo?.favDoctors, isNot(contains(tDoctorId)));
+        },
+      );
+      verify(() => mockFirestoreService.updateUser(any())).called(1);
+    });
+
+    test('should return Failure when updateUser throws AppException', () async {
+      // Arrange
+      when(() => mockUserPrefs.setUser(any())).thenAnswer((_) async {});
+      when(() => mockUserPrefs.getCurrentUser()).thenReturn(tMyUserDto);
+      repository.getCurrentUser(); // set _currentUser
+      when(() => mockFirestoreService.updateUser(any()))
+          .thenThrow(const ServerException(message: 'Update failed'));
+
+      // Act
+      final result = await repository.toggleFavoriteDoctor(tDoctorId);
+
+      // Assert
+      expect(result, const Left(ServerFailure('Update failed')));
+    });
+
+    test('should return UnexpectedFailure when updateUser throws generic Exception', () async {
+      // Arrange
+      when(() => mockUserPrefs.setUser(any())).thenAnswer((_) async {});
+      when(() => mockUserPrefs.getCurrentUser()).thenReturn(tMyUserDto);
+      repository.getCurrentUser(); // set _currentUser
+      final tException = Exception('Generic error');
+      when(() => mockFirestoreService.updateUser(any()))
+          .thenThrow(tException);
+
+      // Act
+      final result = await repository.toggleFavoriteDoctor(tDoctorId);
+
+      // Assert
+      expect(result, Left(UnexpectedFailure(tException.toString())));
     });
   });
 

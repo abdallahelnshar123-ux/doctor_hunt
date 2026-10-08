@@ -27,10 +27,7 @@ class ContinueWithGoogleButton extends StatelessWidget {
             fit: BoxFit.fitWidth,
             width: 28,
           ),
-          Text(
-            t.auth.google,
-            style: context.light16.textSecondary.rubik,
-          ),
+          Text(t.auth.google, style: context.light16.textSecondary.rubik),
         ],
       ),
     );

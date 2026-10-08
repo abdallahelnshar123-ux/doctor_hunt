@@ -1,8 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -48,10 +48,10 @@ class TopRatedDoctorsItem extends StatelessWidget {
             Expanded(
               child: CircleAvatar(
                 maxRadius: double.infinity,
-                foregroundImage:
-                    doctor.imageUrl == null || doctor.imageUrl!.isEmpty
-                    ? AssetImage(AppAssets.images.fallbackUserImage.path)
-                    : CachedNetworkImageProvider(doctor.imageUrl ?? ''),
+                backgroundColor: AppColors.shimmerBaseColor,
+                foregroundImage: CustomCachedNetworkImage.getProvider(
+                  doctor.imageUrl,
+                ),
               ),
             ),
             Text(

@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +12,9 @@ import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../controller/auth_bloc.dart';
-import '../controller/auth_state.dart';
+import '../controller/auth/auth_bloc.dart';
+import '../controller/auth/auth_event.dart';
+import '../controller/auth/auth_state.dart';
 import '../widgets/continue_with_google_button.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_text_password.dart';
@@ -33,7 +33,16 @@ class RegisterScreen extends HookWidget {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is UserAuthenticatedState) {
+        if (state is RegisterWithEmailPasswordErrorState) {
+          DialogUtils.hideLoading(context: context);
+          DialogUtils.showMessage(
+            posActionText: t.dialog.ok,
+            title: t.dialog.error,
+            context: context,
+            message: state.message,
+          );
+        }
+        if (state is RegisterWithEmailPasswordSuccessState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             title: t.dialog.success,
@@ -43,16 +52,6 @@ class RegisterScreen extends HookWidget {
               const PatientLoginRoute().go(context);
             },
             posActionText: t.dialog.ok,
-          );
-        }
-
-        if (state is RegisterWithEmailPasswordErrorState) {
-          DialogUtils.hideLoading(context: context);
-          DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
-            context: context,
-            message: state.message,
           );
         }
         if (state is ContinueWithGoogleErrorState) {
@@ -118,7 +117,10 @@ class RegisterScreen extends HookWidget {
                         fillColor: AppColors.bgPrimary,
                       ),
 
-                      CustomTextPassword(controller: passwordController),
+                      CustomTextPassword(
+                        controller: passwordController,
+                        validator: (value) => Validators.password(value),
+                      ),
                       _buildAgreeWithTerms(context, isAgreedToTerms),
                       SizedBox(height: 24),
                       _buildRegisterButton(

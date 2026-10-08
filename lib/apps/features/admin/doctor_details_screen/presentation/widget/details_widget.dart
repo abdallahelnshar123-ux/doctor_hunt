@@ -1,7 +1,12 @@
 part of '../screens/admin_doctor_details_screen.dart';
 
 class DetailsWidget extends StatelessWidget {
-  const DetailsWidget({super.key , required this.doctor , required this.isActive});
+  const DetailsWidget({
+    super.key,
+    required this.doctor,
+    required this.isActive,
+  });
+
   final Doctor doctor;
   final ValueNotifier<bool> isActive;
 
@@ -85,12 +90,12 @@ class DetailsWidget extends StatelessWidget {
   }
 
   Widget _buildInfoCard(
-      BuildContext context, {
-        required String value,
-        required String title,
-        required String icon,
-        required Widget trailing,
-      }) {
+    BuildContext context, {
+    required String value,
+    required String title,
+    required String icon,
+    required Widget trailing,
+  }) {
     return ListTile(
       leading: SvgPicture.asset(
         icon,

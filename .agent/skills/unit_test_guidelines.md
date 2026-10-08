@@ -110,6 +110,10 @@ Utilize `package:test` as the standard testing library for Dart applications.
 
 ### BLoC/Cubit (bloc_test)
 Use `package:bloc_test` for verifying state emissions.
+* **Mocking Blocs/Cubits**: When you need to mock a Bloc or Cubit in unit tests (or widget tests), you **must** use `bloc_test`'s `MockBloc` or `MockCubit` (which are built on top of `mocktail`). 
+  * Do NOT use a basic `Mock implements MyBloc` and attempt to override methods like `stream` or `close` manually.
+  * *Example*: `class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}`
+  * When you need to stub the stream of states to simulate the Bloc emitting values over time, **always use `whenListen`** from the `bloc_test` package. This ensures the `.state` property remains synchronized with the stream automatically.
 * **State Matching**: Use `isA<T>().having(...)` in the `expect` block to verify state properties.
 * **Internal Logic**: For methods that don't emit states (e.g., `getInitialRoute`), use standard `test()` functions.
 * **Strict Mock Verification**: Perform `verifyNoMoreInteractions` and `verifyZeroInteractions` inside the `verify` callback of `blocTest`.

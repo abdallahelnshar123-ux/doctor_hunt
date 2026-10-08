@@ -5,7 +5,8 @@ import '../theme/app_colors.dart';
 
 class SnackBarUtils {
   /// Shared helper method to display a styled [SnackBar].
-  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _showSnackBar({
+  static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
+  _showSnackBar({
     required BuildContext context,
     required String message,
     required Color backgroundColor,
@@ -38,10 +39,7 @@ class SnackBarUtils {
   }
 
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
-  showErrorSnackBar({
-    required BuildContext context,
-    required String message,
-  }) {
+  showErrorSnackBar({required BuildContext context, required String message}) {
     return _showSnackBar(
       context: context,
       message: message,
@@ -51,10 +49,7 @@ class SnackBarUtils {
   }
 
   static ScaffoldFeatureController<SnackBar, SnackBarClosedReason>
-  showInfoSnackBar({
-    required BuildContext context,
-    required String message,
-  }) {
+  showInfoSnackBar({required BuildContext context, required String message}) {
     return _showSnackBar(
       context: context,
       message: message,

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/common/auth/presentation/controller/user_bloc.dart';
-import '../../features/common/auth/presentation/controller/user_event.dart';
-import '../../features/common/auth/presentation/controller/user_state.dart';
+import '../../features/common/auth/presentation/controller/user/user_bloc.dart';
+import '../../features/common/auth/presentation/controller/user/user_event.dart';
+import '../../features/common/auth/presentation/controller/user/user_state.dart';
 import '../theme/app_colors.dart';
 import '../utils/snack_bar_utils.dart';
 
 class FavoriteButtonWidget extends StatelessWidget {
   final String doctorId;
   final double size;
-  final bool readOnly ;
+  final bool readOnly;
 
   const FavoriteButtonWidget({
     super.key,

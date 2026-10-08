@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/features/patient/settings_tab/presentation/screens/settings_tab.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -12,10 +12,10 @@ import 'package:kf_drawer/kf_drawer.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../../common/auth/presentation/controller/auth_bloc.dart';
-import '../../../../common/auth/presentation/controller/auth_event.dart';
-import '../../../../common/auth/presentation/controller/auth_state.dart';
-import '../../../../common/auth/presentation/controller/user_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
+import '../../../../common/auth/presentation/controller/user/user_bloc.dart';
 import '../../../appointments_tab/presentation/screens/appointments_tab.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
@@ -151,7 +151,8 @@ class PatientMainScreen extends HookWidget {
       contentPadding: EdgeInsets.all(16),
       leading: CircleAvatar(
         radius: 30,
-        backgroundImage: CachedNetworkImageProvider(user?.image ?? ''),
+        backgroundColor: AppColors.shimmerBaseColor,
+        backgroundImage: CustomCachedNetworkImage.getProvider(user?.image),
       ),
       titleTextStyle: context.medium16.white.rubik,
       subtitleTextStyle: context.regular12.white.rubik,

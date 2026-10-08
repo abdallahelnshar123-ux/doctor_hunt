@@ -33,9 +33,9 @@ import '../../features/common/auth/data/service/firebase_services/auth_service.d
 import '../../features/common/auth/data/service/firebase_services/user_firestore_service.dart'
     as _i749;
 import '../../features/common/auth/data/use_case/login_use_case.dart' as _i594;
-import '../../features/common/auth/presentation/controller/auth_bloc.dart'
+import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i669;
-import '../../features/common/auth/presentation/controller/user_bloc.dart'
+import '../../features/common/auth/presentation/controller/user/user_bloc.dart'
     as _i366;
 import '../../features/patient/patient_profile_screen/data/repo/patient_profile_repository.dart'
     as _i150;

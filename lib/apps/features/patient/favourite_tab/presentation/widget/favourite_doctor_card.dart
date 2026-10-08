@@ -37,7 +37,7 @@ class FavouriteDoctorCard extends StatelessWidget {
           // ),
           Align(
             alignment: .topRight,
-            child: FavoriteButtonWidget(doctorId: doctorId,size: 25,),
+            child: FavoriteButtonWidget(doctorId: doctorId, size: 25),
           ),
           Expanded(
             child: CircleAvatar(

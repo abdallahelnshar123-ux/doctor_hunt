@@ -1,13 +1,13 @@
 import 'dart:async';
 
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_event.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../data/models/user/my_user.dart';
-import '../../data/models/user/patient_info.dart';
-import '../../data/repo/auth_repository.dart';
-import 'user_event.dart';
-import 'user_state.dart';
+import '../../../data/models/user/my_user.dart';
+import '../../../data/models/user/patient_info.dart';
+import '../../../data/repo/auth_repository.dart';
 
 @lazySingleton
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -15,7 +15,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   StreamSubscription<MyUser?>? _userSubscription;
 
   UserBloc(this._authRepository)
-      : super(UserState(user: _authRepository.currentUser)) {
+    : super(UserState(user: _authRepository.currentUser)) {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
 
@@ -52,11 +52,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       updatedFavs.add(event.doctorId);
     }
 
-    final updatedPatientInfo =
-        (currentUser.patientInfo ?? const PatientInfo())
-            .copyWith(favDoctors: updatedFavs);
-    final optimisticUser =
-        currentUser.copyWith(patientInfo: updatedPatientInfo);
+    final updatedPatientInfo = (currentUser.patientInfo ?? const PatientInfo())
+        .copyWith(favDoctors: updatedFavs);
+    final optimisticUser = currentUser.copyWith(
+      patientInfo: updatedPatientInfo,
+    );
 
     // Emit optimistic state immediately
     emit(state.copyWith(user: optimisticUser, clearError: true));

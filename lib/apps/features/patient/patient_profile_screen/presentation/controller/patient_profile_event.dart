@@ -11,10 +11,7 @@ class PatientProfileUpdateRequested extends PatientProfileEvent {
   final MyUser user;
   final File? image;
 
-  const PatientProfileUpdateRequested({
-    required this.user,
-    this.image,
-  });
+  const PatientProfileUpdateRequested({required this.user, this.image});
 
   @override
   List<Object?> get props => [user, image];

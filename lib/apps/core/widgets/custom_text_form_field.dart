@@ -33,8 +33,6 @@ class CustomTextFormField extends StatelessWidget {
   final bool enabled;
   final bool readOnly;
 
-
-
   const CustomTextFormField({
     super.key,
     this.style,
@@ -67,8 +65,8 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       enabled: enabled,
-      readOnly:readOnly ,
-      focusNode:focusNode ,
+      readOnly: readOnly,
+      focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       maxLines: maxLines ?? 1,
       controller: controller,

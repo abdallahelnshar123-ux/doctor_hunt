@@ -1,6 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -145,8 +145,9 @@ class DoctorDetailsCard extends StatelessWidget {
     height: double.infinity,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(8),
+      color: AppColors.shimmerBaseColor,
       image: DecorationImage(
-        image: CachedNetworkImageProvider(doctor.imageUrl ?? ''),
+        image: CustomCachedNetworkImage.getProvider(doctor.imageUrl),
         fit: .cover,
       ),
     ),

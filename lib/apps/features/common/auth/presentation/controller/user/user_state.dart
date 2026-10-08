@@ -1,15 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-import '../../data/models/user/my_user.dart';
+import '../../../data/models/user/my_user.dart';
 
 class UserState extends Equatable {
   final MyUser? user;
   final String? favoriteError;
 
-  const UserState({
-    this.user,
-    this.favoriteError,
-  });
+  const UserState({this.user, this.favoriteError});
 
   bool get isAuthenticated => user != null;
 

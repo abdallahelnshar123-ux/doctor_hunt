@@ -1,13 +1,12 @@
 import 'dart:async';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_event.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth_state.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_state.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/continue_with_google_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
@@ -19,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockAuthBloc extends Mock implements AuthBloc {}
+class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MockUserPrefs extends Mock implements UserPrefs {}
 
@@ -33,32 +32,18 @@ void main() {
   late MockAuthBloc authBloc;
   late MockUserPrefs mockUserPrefs;
 
-  final tUser = MyUser(
-    id: '1',
-    email: 'test@example.com',
-    role: UserRoles.patient,
-    name: 'testUser',
-    provider: UserAuthProvider.emailPassword,
-  );
-
   setUp(() {
     authBloc = MockAuthBloc();
     mockUserPrefs = MockUserPrefs();
 
     when(() => authBloc.state).thenReturn(AuthInitial());
-
-    when(
-      () => authBloc.stream,
-    ).thenAnswer((_) => const Stream<AuthState>.empty());
-
-    when(() => authBloc.close()).thenAnswer((_) async {});
     when(() => mockUserPrefs.onboarding).thenReturn(true);
   });
 
   Widget createWidgetUnderTest() {
     final router = createRouter(
-      authBloc: authBloc,
       userPrefs: mockUserPrefs,
+      authBloc: authBloc,
       initialLocation: '/register',
     );
     return TranslationProvider(
@@ -104,6 +89,12 @@ void main() {
       );
 
       await tester.tap(find.text(t.auth.sign_up));
+      await tester.pumpAndSettle();
+
+      expect(find.text('this_field_is_required'), findsOneWidget);
+      expect(find.text('email_is_required'), findsOneWidget);
+      expect(find.text('password_is_required'), findsOneWidget);
+
       verifyNever(() => authBloc.add(any()));
     });
 
@@ -226,7 +217,7 @@ void main() {
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
 
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -245,7 +236,7 @@ void main() {
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
 
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -264,7 +255,7 @@ void main() {
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
 
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -290,7 +281,7 @@ void main() {
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
 
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
@@ -309,42 +300,43 @@ void main() {
       },
     );
 
-    testWidgets('shows success dialog when UserAuthenticatedState is emitted', (
-      tester,
-    ) async {
-      final controller = StreamController<AuthState>.broadcast();
-
-      when(() => authBloc.stream).thenAnswer((_) => controller.stream);
-
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      controller.add(RegisterWithEmailPasswordLoadingState());
-      await tester.pump();
-
-      controller.add(UserAuthenticatedState(tUser));
-
-      await tester.pump();
-
-      expect(find.text(t.dialog.success), findsOneWidget);
-      expect(find.text(t.dialog.registered_successfully), findsOneWidget);
-      expect(find.text(t.dialog.ok), findsOneWidget);
-
-      await controller.close();
-    });
-
     testWidgets(
-      'navigates to PatientLoginRoute after successful registration and clicking OK',
+      'shows success dialog when RegisterWithEmailPasswordSuccessState is emitted',
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
 
-        when(() => authBloc.stream).thenAnswer((_) => controller.stream);
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
 
         await tester.pumpWidget(createWidgetUnderTest());
 
         controller.add(RegisterWithEmailPasswordLoadingState());
         await tester.pump();
 
-        controller.add(UserAuthenticatedState(tUser));
+        controller.add(RegisterWithEmailPasswordSuccessState());
+
+        await tester.pump();
+
+        expect(find.text(t.dialog.success), findsOneWidget);
+        expect(find.text(t.dialog.registered_successfully), findsOneWidget);
+        expect(find.text(t.dialog.ok), findsOneWidget);
+
+        await controller.close();
+      },
+    );
+
+    testWidgets(
+      'navigates to PatientLoginRoute after successful registration and clicking OK',
+      (tester) async {
+        final controller = StreamController<AuthState>.broadcast();
+
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        controller.add(RegisterWithEmailPasswordLoadingState());
+        await tester.pump();
+
+        controller.add(RegisterWithEmailPasswordSuccessState());
         await tester.pump();
 
         expect(find.text(t.dialog.registered_successfully), findsOneWidget);

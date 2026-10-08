@@ -13,10 +13,10 @@ extension MyUserDtoMapper on MyUser {
       image: image,
       role: role,
       phone: phone,
-      patientInfo:
-          patientInfo != null ? PatientInfoDto.fromDomain(patientInfo!) : null,
-      adminInfo:
-          adminInfo != null ? AdminInfoDto.fromDomain(adminInfo!) : null,
+      patientInfo: patientInfo != null
+          ? PatientInfoDto.fromDomain(patientInfo!)
+          : null,
+      adminInfo: adminInfo != null ? AdminInfoDto.fromDomain(adminInfo!) : null,
     );
   }
 }

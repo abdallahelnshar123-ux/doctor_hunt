@@ -7,7 +7,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.appBarHeight = 80,
     this.title,
     this.backgroundColor,
-    this.titleStyle
+    this.titleStyle,
   });
 
   final double appBarHeight;
@@ -18,7 +18,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title ?? '',style: titleStyle,),
+      title: Text(title ?? '', style: titleStyle),
       leading: BackButtonWidget(),
       backgroundColor: backgroundColor,
     );
