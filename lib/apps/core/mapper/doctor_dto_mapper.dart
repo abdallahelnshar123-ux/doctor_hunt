@@ -1,7 +1,8 @@
 import '../../core/data/models/doctor/doctor.dart';
 import '../../core/data/models/doctor/doctor_dto.dart';
+import 'rating_dto_mapper.dart';
 
-extension DoctorMapper on Doctor {
+extension DoctorDtoMapper on Doctor {
   DoctorDto toDoctorDto() {
     return DoctorDto(
       id: id,
@@ -10,6 +11,8 @@ extension DoctorMapper on Doctor {
       imageUrl: imageUrl,
       specialty: specialty,
       active: active,
+      consultationFee: consultationFee,
+      rating: rating.toDto(),
     );
   }
 }

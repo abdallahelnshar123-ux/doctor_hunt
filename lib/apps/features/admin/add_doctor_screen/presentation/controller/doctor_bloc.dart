@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,8 @@ class DoctorBloc extends Bloc<DoctorEvent, DoctorState> {
         adminId: event.adminId,
         specialty: event.specialty,
         active: event.active,
+        consultationFee: event.consultationFee,
+        rating: const Rating(rating: 0.0, reviews: []),
       ),
       image: event.image,
     );

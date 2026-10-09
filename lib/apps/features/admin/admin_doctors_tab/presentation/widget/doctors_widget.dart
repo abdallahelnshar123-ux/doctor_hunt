@@ -68,7 +68,7 @@ class DoctorsWidget extends StatelessWidget {
                           (state.filteredDoctors?.isEmpty ?? false)
                       ? _noDoctorFoundWidget(context: context)
                       : SafeArea(
-                        child: ListView.separated(
+                          child: ListView.separated(
                             padding: EdgeInsets.all(20),
                             itemBuilder: (context, index) => GestureDetector(
                               onTap: () {
@@ -93,7 +93,7 @@ class DoctorsWidget extends StatelessWidget {
                               filteredDoctors: state.filteredDoctors,
                             ).length,
                           ),
-                      ),
+                        ),
                 ),
               ],
             ),

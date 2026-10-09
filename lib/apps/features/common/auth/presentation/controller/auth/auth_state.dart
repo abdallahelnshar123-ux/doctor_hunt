@@ -20,9 +20,11 @@ class LoginWithEmailPasswordErrorState extends AuthState {
   @override
   List<Object?> get props => [message];
 }
+
 /// ===================  Register States  =======================
 
 class RegisterWithEmailPasswordLoadingState extends AuthState {}
+
 class RegisterWithEmailPasswordSuccessState extends AuthState {}
 
 class RegisterWithEmailPasswordErrorState extends AuthState {

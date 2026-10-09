@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/features/patient/main_screen/widget/doctor_card_wide.dart';
@@ -24,6 +25,8 @@ class PopularDoctorScreen extends StatelessWidget {
                   adminId: 'kkid',
                   specialty: Specialty.allergists,
                   active: true,
+                  consultationFee: 0.0,
+                  rating: const Rating(rating: 0.0, reviews: []),
                 ),
               ),
               separatorBuilder: (context, index) => const SizedBox(height: 15),

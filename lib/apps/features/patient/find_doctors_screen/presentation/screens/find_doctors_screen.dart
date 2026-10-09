@@ -6,6 +6,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../../core/data/models/doctor/rating.dart';
 
 class FindDoctorsScreen extends StatelessWidget {
   const FindDoctorsScreen({super.key});
@@ -32,6 +33,8 @@ class FindDoctorsScreen extends StatelessWidget {
                         adminId: 'kkid',
                         specialty: Specialty.allergists,
                         active: true,
+                        consultationFee: 0.0,
+                        rating: const Rating(rating: 0.0, reviews: []),
                       ),
                     ),
                     separatorBuilder: (context, index) =>

@@ -205,7 +205,10 @@ class AdminProfileScreen extends HookWidget {
             const SizedBox(height: 10),
             CustomTextFormField(
               controller: nameController,
-              prefixIcon: Icon(Icons.person_2_outlined,color: AppColors.textSecondary),
+              prefixIcon: Icon(
+                Icons.person_2_outlined,
+                color: AppColors.textSecondary,
+              ),
               hintText: t.admin.profile_screen.full_name,
               hintStyle: context.regular12.textSecondary.rubik,
             ),
@@ -233,7 +236,10 @@ class AdminProfileScreen extends HookWidget {
             const SizedBox(height: 10),
             CustomTextFormField(
               initialValue: user.email,
-              prefixIcon: Icon(Icons.email_outlined,color: AppColors.textSecondary,),
+              prefixIcon: Icon(
+                Icons.email_outlined,
+                color: AppColors.textSecondary,
+              ),
               readOnly: true,
               style: context.regular16.textSecondary.rubik,
               filled: true,

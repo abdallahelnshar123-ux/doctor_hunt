@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/constants/firestore_constants.dart';
 import 'doctor.dart';
+import 'rating_dto.dart';
 
 class DoctorDto extends Equatable {
   final String name;
@@ -10,6 +11,8 @@ class DoctorDto extends Equatable {
   final Specialty specialty;
   final bool active;
   final String? imageUrl;
+  final double consultationFee;
+  final RatingDto rating;
 
   const DoctorDto({
     required this.id,
@@ -17,17 +20,27 @@ class DoctorDto extends Equatable {
     required this.adminId,
     required this.specialty,
     required this.active,
+    required this.consultationFee,
+    required this.rating,
     this.imageUrl,
   });
 
-  DoctorDto copyWith({String? id, bool? active}) {
+  DoctorDto copyWith({
+    String? id,
+    bool? active,
+    String? image,
+    double? consultationFee,
+    RatingDto? rating,
+  }) {
     return DoctorDto(
       id: id ?? this.id,
       name: name,
       adminId: adminId,
       specialty: specialty,
       active: active ?? this.active,
-      imageUrl: imageUrl,
+      consultationFee: consultationFee ?? this.consultationFee,
+      rating: rating ?? this.rating,
+      imageUrl: image ?? imageUrl,
     );
   }
 
@@ -42,6 +55,11 @@ class DoctorDto extends Equatable {
         orElse: () => Specialty.allergists,
       ),
       imageUrl: data[FirestoreConstants.image]?.toString() ?? '',
+      consultationFee:
+          (data[FirestoreConstants.consultationFee] as num?)?.toDouble() ?? 0.0,
+      rating: RatingDto.fromFireStore(
+        Map<String, dynamic>.from(data[FirestoreConstants.rating] ?? {}),
+      ),
     );
   }
 
@@ -53,6 +71,8 @@ class DoctorDto extends Equatable {
       FirestoreConstants.specialty: specialty.name,
       FirestoreConstants.adminId: adminId,
       FirestoreConstants.active: active,
+      FirestoreConstants.consultationFee: consultationFee,
+      FirestoreConstants.rating: rating.toFireStore(),
     };
   }
 
@@ -65,5 +85,14 @@ class DoctorDto extends Equatable {
   }
 
   @override
-  List<Object?> get props => [name, id, adminId, specialty, active, imageUrl];
+  List<Object?> get props => [
+        name,
+        id,
+        adminId,
+        specialty,
+        active,
+        imageUrl,
+        consultationFee,
+        rating,
+      ];
 }

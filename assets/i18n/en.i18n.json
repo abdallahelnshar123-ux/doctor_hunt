@@ -258,10 +258,16 @@
     },
     "addDoctorScreen": {
       "enterName": "Enter doctor name",
+      "enterFee": "Enter consultation fee",
       "uploadImage": "Upload doctor image",
       "tapToPick": "Tap to pick an image",
       "createDoctor": "Create doctor",
-      "selectSpecialty": "Select specialty"
+      "selectSpecialty": "Select specialty",
+      "doctorName": "Doctor name",
+      "specialty": "Specialty",
+      "consultationFee": "Consultation fee",
+      "nameExample" : "e.g. Dr. Ahmed Ali",
+      "feeExample" : "e.g. $ 28.00"
     },
     "doctorDetailsScreen": {
       "doctorDetails": "Doctor details",
@@ -269,8 +275,11 @@
       "accountStatus": "Account Status",
       "heartCare": "Heart Care",
       "editDoctor": "Edit Doctor",
-      "deleteDoctor": "Delete Doctor",
-      "doctorDeletedSuccessfully": "Doctor was deleted successfully"
+      "manageAvailability": "Manage Availability",
+      "doctorDeletedSuccessfully": "Doctor was deleted successfully",
+      "rating": "Rating",
+      "Consultation Fee": "Consultation Fee",
+      "fee": "$ ${price}"
     },
     "updateDoctorDetails": {
       "doctorWasUpdatedSuccessfully": "Doctor was Updated Successfully",
@@ -279,6 +288,7 @@
       "doctorStatues": "Doctor Statues",
       "activeAndAvailable": "Active & Available",
       "inactive": "Inactive",
+      "deleteDoctor": "Delete Doctor",
       "saveChanges": "Save Changes"
     },
     "ProfileScreen": {
@@ -286,11 +296,8 @@
       "fullName": "Full Name",
       "EmailAddress": "Email Address",
       "dataWasUpdatedSuccessfully": "Data was updated successfully"
-
     }
-
-    },
-
+  },
   "errors": {
     "noAccountAssociated": "No account associated with this email",
     "someThingWentWrong": "Some thing went wrong",

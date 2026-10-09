@@ -29,6 +29,9 @@ class UpdateDoctorDetailsScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController(text: doctor.name);
+    final feeController = useTextEditingController(
+      text: doctor.consultationFee.toString(),
+    );
     final isActive = useValueNotifier(doctor.active);
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
@@ -100,30 +103,52 @@ class UpdateDoctorDetailsScreen extends HookWidget {
             children: [
               buildChangeImage(context, selectedImage),
               _buildChangePhotoButton(context),
-              SizedBox(height: 40),
+              SizedBox(height: 20),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.doctor_name,
+              ),
               CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.add_doctor_screen.enter_name,
+                hintText: t.admin.add_doctor_screen.name_example,
                 hintStyle: context.light16.textSecondary.rubik,
-                style: context.light16.textSecondary.rubik,
+                style: context.medium16.textTertiary.rubik,
                 validator: (value) => Validators.required(value),
               ),
-              SizedBox(height: 20),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.specialty,
+              ),
               SpecialtyDropdownWidget(
                 initialSelection: doctor.specialty,
                 selectedSpecialty: (value) => selectedSpecialty.value = value,
               ),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.consultation_fee,
+              ),
+              CustomTextFormField(
+                controller: feeController,
+                fillColor: AppColors.bgPrimary,
+                filled: true,
+                keyboardType: TextInputType.number,
+                hintText: t.admin.add_doctor_screen.fee_example,
+                hintStyle: context.light16.textSecondary.rubik,
+                style: context.medium16.textTertiary.rubik,
+                validator: (value) => Validators.required(value),
+              ),
               SizedBox(height: 20),
               _buildStatusWidget(context, isActive),
-              SizedBox(height: 80),
+              SizedBox(height: 60),
               CustomElevatedButton(
                 backgroundColor: AppColors.brandPrimary,
                 onPressed: () => _onUpdateDetailsPressed(
                   context,
                   formKey,
                   nameController,
+                  feeController,
                   selectedImage,
                   selectedSpecialty,
                   isActive,
@@ -142,6 +167,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
               ),
               SizedBox(height: 10),
               _buildDeleteButton(context),
+              SizedBox(height: 10),
             ],
           ),
         ),
@@ -259,6 +285,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
     BuildContext context,
     GlobalKey<FormState> formKey,
     TextEditingController nameController,
+    TextEditingController feeController,
     ObjectRef<File?> selectedImage,
     ObjectRef<Specialty> selectedSpecialty,
     ValueNotifier<bool> isActive,
@@ -275,10 +302,21 @@ class UpdateDoctorDetailsScreen extends HookWidget {
             specialty: selectedSpecialty.value,
             active: isActive.value,
             imageUrl: doctor.imageUrl,
+            consultationFee:
+                double.tryParse(feeController.text.trim()) ??
+                doctor.consultationFee,
+            rating: doctor.rating,
           ),
         ),
       );
     }
+  }
+
+  Widget _buildText({required BuildContext context, required String text}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: Text(text, style: context.semiBold14.textTertiary.rubik),
+    );
   }
 
   Widget _buildDeleteButton(BuildContext context) {
@@ -296,7 +334,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
           DeleteDoctorRequested(doctorId: doctor.id),
         );
       },
-      label: Text(t.admin.doctor_details_screen.delete_doctor),
+      label: Text(t.admin.update_doctor_details.delete_doctor),
     );
   }
 }

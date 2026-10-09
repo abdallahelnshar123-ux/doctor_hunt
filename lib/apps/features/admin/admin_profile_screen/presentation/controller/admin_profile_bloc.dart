@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../core/data/session/user_session_manager.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
 
 part 'admin_profile_event.dart';
@@ -14,8 +15,10 @@ part 'admin_profile_state.dart';
 @injectable
 class AdminProfileBloc extends Bloc<AdminProfileEvent, AdminProfileState> {
   final UserRepository _repository;
+  final UserSessionManager _userSessionManager;
 
-  AdminProfileBloc(this._repository) : super(AdminProfileInitial()) {
+  AdminProfileBloc(this._repository, this._userSessionManager)
+    : super(AdminProfileInitial()) {
     on<AdminProfileUpdateRequested>(_onUpdateProfileRequested);
     on<PickAdminProfileImageRequested>(_onPickImageRequested);
   }
@@ -31,10 +34,12 @@ class AdminProfileBloc extends Bloc<AdminProfileEvent, AdminProfileState> {
       image: event.image,
     );
 
-    result.fold(
-      (failure) => emit(AdminProfileUpdateError(failure.message)),
-      (updatedUser) => emit(AdminProfileUpdateSuccess(updatedUser)),
-    );
+    result.fold((failure) => emit(AdminProfileUpdateError(failure.message)), (
+      updatedUser,
+    ) {
+      _userSessionManager.updateUser(updatedUser);
+      emit(AdminProfileUpdateSuccess(updatedUser));
+    });
   }
 
   Future<void> _onPickImageRequested(

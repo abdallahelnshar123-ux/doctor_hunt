@@ -30,6 +30,13 @@ class FirestoreConstants {
   static const String fee = 'fee';
   static const String status = 'status';
 
+  // Doctor Fields
+  static const String consultationFee = 'consultation_fee';
+  static const String rating = 'rating';
+  static const String reviews = 'reviews';
+  static const String reviewer = 'reviewer';
+  static const String comment = 'comment';
+
   // static const String password = 'password';
   static const String active = 'active';
   static const String loginMethods = 'login_methods';

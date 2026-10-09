@@ -18,6 +18,7 @@ class $AppAssetsIconsGen {
   final SvgGenImage appointmentsIcon = const SvgGenImage('assets/icons/appointments_icon.svg');
   final SvgGenImage facebookIcon = const SvgGenImage('assets/icons/facebook_icon.svg');
   final SvgGenImage favouriteIcon = const SvgGenImage('assets/icons/favourite_icon.svg');
+  final SvgGenImage feeIcon = const SvgGenImage('assets/icons/fee_icon.svg');
   final SvgGenImage googleIcon = const SvgGenImage('assets/icons/google_icon.svg');
   final SvgGenImage homeIcon = const SvgGenImage('assets/icons/home_icon.svg');
   final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like_icon.svg');
@@ -25,6 +26,7 @@ class $AppAssetsIconsGen {
   final SvgGenImage patientIcon = const SvgGenImage('assets/icons/patient_icon.svg');
   final SvgGenImage sDollarIcon = const SvgGenImage('assets/icons/s_dollar_icon.svg');
   final SvgGenImage settingsIcon = const SvgGenImage('assets/icons/settings_icon.svg');
+  final SvgGenImage starIcon = const SvgGenImage('assets/icons/star_icon.svg');
   final SvgGenImage starIconRated = const SvgGenImage('assets/icons/star_icon_rated.svg');
   final SvgGenImage starIconUnrated = const SvgGenImage('assets/icons/star_icon_unrated.svg');
   final SvgGenImage switchIcon = const SvgGenImage('assets/icons/switch_icon.svg');

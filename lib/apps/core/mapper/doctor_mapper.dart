@@ -1,5 +1,6 @@
 import '../../core/data/models/doctor/doctor.dart';
 import '../../core/data/models/doctor/doctor_dto.dart';
+import 'rating_mapper.dart';
 
 extension DoctorMapper on DoctorDto {
   Doctor toDoctor() {
@@ -10,6 +11,8 @@ extension DoctorMapper on DoctorDto {
       imageUrl: imageUrl,
       specialty: specialty,
       active: active,
+      consultationFee: consultationFee,
+      rating: rating.toDomain(),
     );
   }
 }

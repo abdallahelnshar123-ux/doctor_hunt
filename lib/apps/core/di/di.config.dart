@@ -44,9 +44,9 @@ import '../../features/patient/patient_profile_screen/data/repo/user_repository.
 import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
     as _i495;
 import '../data/image_service/image_service.dart' as _i181;
+import '../data/session/user_session_manager.dart' as _i583;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
 import '../data/shared_prefs/user_pref.dart' as _i708;
-import '../data/session/user_session_manager.dart' as _i624;
 import '../network/cloudinary/cloudinary_config.dart' as _i619;
 import '../network/cloudinary/cloudinary_service.dart' as _i417;
 import 'firebase_module.dart' as _i616;
@@ -103,8 +103,8 @@ extension GetItInjectableX on _i174.GetIt {
         imageService: gh<_i181.ImageService>(),
       ),
     );
-    gh.lazySingleton<_i624.UserSessionManager>(
-      () => _i624.UserSessionManager(gh<_i708.UserPrefs>()),
+    gh.lazySingleton<_i583.UserSessionManager>(
+      () => _i583.UserSessionManager(gh<_i708.UserPrefs>()),
     );
     gh.factory<_i546.DoctorBloc>(
       () => _i546.DoctorBloc(gh<_i932.DoctorRepository>()),
@@ -129,30 +129,33 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i708.UserPrefs>(),
       ),
     );
+    gh.factory<_i594.LoginUseCase>(
+      () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
+    );
+    gh.factory<_i90.AdminProfileBloc>(
+      () => _i90.AdminProfileBloc(
+        gh<_i96.UserRepository>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
     gh.factory<_i495.PatientProfileBloc>(
       () => _i495.PatientProfileBloc(
         gh<_i96.UserRepository>(),
-        gh<_i624.UserSessionManager>(),
+        gh<_i583.UserSessionManager>(),
       ),
-    );
-    gh.factory<_i594.LoginUseCase>(
-      () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
     );
     gh.lazySingleton<_i15.UserBloc>(
       () => _i15.UserBloc(
         gh<_i959.AuthRepository>(),
-        gh<_i624.UserSessionManager>(),
+        gh<_i583.UserSessionManager>(),
       ),
     );
     gh.lazySingleton<_i613.AuthBloc>(
       () => _i613.AuthBloc(
         gh<_i959.AuthRepository>(),
         gh<_i594.LoginUseCase>(),
-        gh<_i624.UserSessionManager>(),
+        gh<_i583.UserSessionManager>(),
       ),
-    );
-    gh.factory<_i90.AdminProfileBloc>(
-      () => _i90.AdminProfileBloc(gh<_i96.UserRepository>()),
     );
     return this;
   }

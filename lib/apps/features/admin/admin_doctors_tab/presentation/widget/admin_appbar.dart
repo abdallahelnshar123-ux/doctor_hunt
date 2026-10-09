@@ -1,7 +1,7 @@
 part of '../screens/admin_doctors_tab.dart';
 
 class AdminAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const AdminAppbar({super.key, this.appBarHeight = 80 , required this.title});
+  const AdminAppbar({super.key, this.appBarHeight = 80, required this.title});
 
   final double appBarHeight;
   final String title;

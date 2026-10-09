@@ -26,6 +26,7 @@ class AddDoctorScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
+    final feeController = useTextEditingController();
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
     final selectedSpecialty = useRef<Specialty?>(null);
@@ -87,54 +88,135 @@ class AddDoctorScreen extends HookWidget {
                   style: context.medium12.brandPrimary.rubik,
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 20),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.doctor_name,
+              ),
               CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.add_doctor_screen.enter_name,
-                hintStyle: context.light16.textSecondary.rubik,
+                hintText: t.admin.add_doctor_screen.name_example,
+                hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
               ),
-              SizedBox(height: 20),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.specialty,
+              ),
               SpecialtyDropdownWidget(
                 selectedSpecialty: (value) {
                   selectedSpecialty.value = value;
                 },
               ),
-              SizedBox(height: 50),
-              CustomElevatedButton(
-                backgroundColor: AppColors.brandPrimary,
-                onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  var adminId = user?.id ?? '';
-                  if (formKey.currentState!.validate()) {
-                    if (selectedImage.value == null) {
-                      SnackBarUtils.showInfoSnackBar(
-                        context: context,
-                        message: t.create_doctor.you_must_pick_doctor_image,
-                      );
-                      return;
-                    }
-                    context.read<DoctorBloc>().add(
-                      AddDoctorRequested(
-                        name: nameController.text.trim(),
-                        specialty: selectedSpecialty.value!,
-                        image: selectedImage.value!,
-                        adminId: adminId,
-                      ),
-                    );
-                  }
-                },
-                child: Text(
-                  t.admin.add_doctor_screen.create_doctor,
-                  style: context.medium18.white.rubik,
-                ),
+              _buildText(
+                context: context,
+                text: t.admin.add_doctor_screen.consultation_fee,
               ),
+              CustomTextFormField(
+                controller: feeController,
+                fillColor: AppColors.bgPrimary,
+                filled: true,
+                keyboardType: TextInputType.number,
+                hintText: t.admin.add_doctor_screen.fee_example,
+                hintStyle: context.light14.textSecondary.rubik,
+                style: context.light16.textSecondary.rubik,
+                validator: (value) => Validators.required(value),
+              ),
+
+              SizedBox(height: 40),
+              _buildCreateDoctorButton(
+                context: context,
+                formKey: formKey,
+                nameController: nameController,
+                feeController: feeController,
+                selectedImage: selectedImage,
+                selectedSpecialty: selectedSpecialty,
+                user: user,
+              ),
+              // CustomElevatedButton(
+              //   backgroundColor: AppColors.brandPrimary,
+              //   onPressed: () {
+              //     FocusManager.instance.primaryFocus?.unfocus();
+              //     var adminId = user?.id ?? '';
+              //     if (formKey.currentState!.validate()) {
+              //       if (selectedImage.value == null) {
+              //         SnackBarUtils.showInfoSnackBar(
+              //           context: context,
+              //           message: t.create_doctor.you_must_pick_doctor_image,
+              //         );
+              //         return;
+              //       }
+              //       context.read<DoctorBloc>().add(
+              //         AddDoctorRequested(
+              //           name: nameController.text.trim(),
+              //           specialty: selectedSpecialty.value!,
+              //           image: selectedImage.value!,
+              //           adminId: adminId,
+              //           consultationFee:
+              //               double.tryParse(feeController.text.trim()) ?? 0.0,
+              //         ),
+              //       );
+              //     }
+              //   },
+              //   child: Text(
+              //     t.admin.add_doctor_screen.create_doctor,
+              //     style: context.medium18.white.rubik,
+              //   ),
+              // ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildText({required BuildContext context, required String text}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: Text(text, style: context.semiBold14.textTertiary.rubik),
+    );
+  }
+
+  Widget _buildCreateDoctorButton({
+    required BuildContext context,
+    required GlobalKey<FormState> formKey,
+    required TextEditingController nameController,
+    required TextEditingController feeController,
+    required ObjectRef<File?> selectedImage,
+    required ObjectRef<Specialty?> selectedSpecialty,
+    required MyUser? user,
+  }) {
+    return CustomElevatedButton(
+      backgroundColor: AppColors.brandPrimary,
+      onPressed: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+        var adminId = user?.id ?? '';
+        if (formKey.currentState!.validate()) {
+          if (selectedImage.value == null) {
+            SnackBarUtils.showInfoSnackBar(
+              context: context,
+              message: t.create_doctor.you_must_pick_doctor_image,
+            );
+            return;
+          }
+          context.read<DoctorBloc>().add(
+            AddDoctorRequested(
+              name: nameController.text.trim(),
+              specialty: selectedSpecialty.value!,
+              image: selectedImage.value!,
+              adminId: adminId,
+              consultationFee:
+                  double.tryParse(feeController.text.trim()) ?? 0.0,
+            ),
+          );
+        }
+      },
+      child: Text(
+        t.admin.add_doctor_screen.create_doctor,
+        style: context.medium18.white.rubik,
       ),
     );
   }

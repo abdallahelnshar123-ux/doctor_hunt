@@ -848,6 +848,9 @@ class Translations$admin$add_doctor_screen$en {
   /// en: 'Enter doctor name'
   String get enter_name => 'Enter doctor name';
 
+  /// en: 'Enter consultation fee'
+  String get enter_fee => 'Enter consultation fee';
+
   /// en: 'Upload doctor image'
   String get upload_image => 'Upload doctor image';
 
@@ -859,6 +862,21 @@ class Translations$admin$add_doctor_screen$en {
 
   /// en: 'Select specialty'
   String get select_specialty => 'Select specialty';
+
+  /// en: 'Doctor name'
+  String get doctor_name => 'Doctor name';
+
+  /// en: 'Specialty'
+  String get specialty => 'Specialty';
+
+  /// en: 'Consultation fee'
+  String get consultation_fee => 'Consultation fee';
+
+  /// en: 'e.g. Dr. Ahmed Ali'
+  String get name_example => 'e.g. Dr. Ahmed Ali';
+
+  /// en: 'e.g. $ 28.00'
+  String get fee_example => 'e.g. \$ 28.00';
 }
 
 // Path: admin.doctor_details_screen
@@ -884,11 +902,20 @@ class Translations$admin$doctor_details_screen$en {
   /// en: 'Edit Doctor'
   String get edit_doctor => 'Edit Doctor';
 
-  /// en: 'Delete Doctor'
-  String get delete_doctor => 'Delete Doctor';
+  /// en: 'Manage Availability'
+  String get manage_availability => 'Manage Availability';
 
   /// en: 'Doctor was deleted successfully'
   String get doctor_deleted_successfully => 'Doctor was deleted successfully';
+
+  /// en: 'Rating'
+  String get rating => 'Rating';
+
+  /// en: 'Consultation Fee'
+  String get consultation_fee => 'Consultation Fee';
+
+  /// en: '$ ${price}'
+  String fee({required Object Price}) => '\$ ${Price}';
 }
 
 // Path: admin.update_doctor_details
@@ -916,6 +943,9 @@ class Translations$admin$update_doctor_details$en {
 
   /// en: 'Inactive'
   String get inactive => 'Inactive';
+
+  /// en: 'Delete Doctor'
+  String get delete_doctor => 'Delete Doctor';
 
   /// en: 'Save Changes'
   String get save_changes => 'Save Changes';

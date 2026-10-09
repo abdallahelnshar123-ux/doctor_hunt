@@ -17,7 +17,8 @@ class PatientProfileBloc
   final UserRepository _repository;
   final UserSessionManager _userSessionManager;
 
-  PatientProfileBloc(this._repository, this._userSessionManager) : super(PatientProfileInitial()) {
+  PatientProfileBloc(this._repository, this._userSessionManager)
+    : super(PatientProfileInitial()) {
     on<PatientProfileUpdateRequested>(_onUpdateProfileRequested);
     on<PickPatientProfileImageRequested>(_onPickImageRequested);
   }
@@ -33,13 +34,12 @@ class PatientProfileBloc
       image: event.image,
     );
 
-    result.fold(
-      (failure) => emit(PatientProfileUpdateError(failure.message)),
-      (updatedUser) {
-        _userSessionManager.updateUser(updatedUser);
-        emit(PatientProfileUpdateSuccess(updatedUser));
-      },
-    );
+    result.fold((failure) => emit(PatientProfileUpdateError(failure.message)), (
+      updatedUser,
+    ) {
+      _userSessionManager.updateUser(updatedUser);
+      emit(PatientProfileUpdateSuccess(updatedUser));
+    });
   }
 
   Future<void> _onPickImageRequested(

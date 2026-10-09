@@ -32,7 +32,7 @@ class CustomTextFormField extends StatelessWidget {
   final FocusNode? focusNode;
   final bool enabled;
   final bool readOnly;
-    final String? initialValue;
+  final String? initialValue;
 
   const CustomTextFormField({
     super.key,
@@ -66,7 +66,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: initialValue ,
+      initialValue: initialValue,
       enabled: enabled,
       readOnly: readOnly,
       focusNode: focusNode,

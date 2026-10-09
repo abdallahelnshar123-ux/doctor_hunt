@@ -11,7 +11,7 @@ import '../shared_prefs/user_pref.dart';
 @lazySingleton
 class UserSessionManager {
   final UserPrefs _userPrefs;
-  
+
   final StreamController<MyUser?> _userStreamController =
       StreamController<MyUser?>.broadcast();
 

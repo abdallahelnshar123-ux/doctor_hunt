@@ -118,7 +118,10 @@ class AuthRepository {
     }
   }
 
-  Future<Either<Failure, MyUser>> toggleFavoriteDoctor(String doctorId, MyUser current) async {
+  Future<Either<Failure, MyUser>> toggleFavoriteDoctor(
+    String doctorId,
+    MyUser current,
+  ) async {
     final currentFavs = current.patientInfo?.favDoctors ?? [];
     final updatedFavs = List<String>.from(currentFavs);
     if (updatedFavs.contains(doctorId)) {

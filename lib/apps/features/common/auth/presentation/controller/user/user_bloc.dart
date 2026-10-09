@@ -66,7 +66,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     _userSessionManager.updateUser(optimisticUser);
 
     // Call repository to sync with Firestore
-    final result = await _authRepository.toggleFavoriteDoctor(event.doctorId, previousUser);
+    final result = await _authRepository.toggleFavoriteDoctor(
+      event.doctorId,
+      previousUser,
+    );
 
     result.fold(
       (failure) {

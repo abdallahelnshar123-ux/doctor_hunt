@@ -9,12 +9,14 @@ class AddDoctorRequested extends DoctorEvent {
   final String adminId;
   final File image;
   final bool active;
+  final double consultationFee;
 
   AddDoctorRequested({
     required this.name,
     required this.specialty,
     required this.image,
     required this.adminId,
+    required this.consultationFee,
     this.active = true,
   });
 }

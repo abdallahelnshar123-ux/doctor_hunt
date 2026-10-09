@@ -21,6 +21,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownMenuFormField(
+      textStyle: context.medium16.textTertiary.rubik,
       onSelected: (value) => selectedSpecialty(value!),
       initialSelection: initialSelection,
       validator: (value) => Validators.required(value?.name),
@@ -38,14 +39,12 @@ class SpecialtyDropdownWidget extends StatelessWidget {
           .toList(),
       width: double.infinity,
       trailingIcon: Icon(Icons.keyboard_arrow_down_rounded),
-
       enableSearch: true,
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         hintStyle: context.light14.textSecondary.rubik,
         hintText: t.admin.add_doctor_screen.select_specialty,
         enabled: true,
-
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppColors.borderDefault, width: 2),
