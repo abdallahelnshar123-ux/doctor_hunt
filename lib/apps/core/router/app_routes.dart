@@ -6,6 +6,7 @@ import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
@@ -14,7 +15,6 @@ import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patie
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
-import 'package:doctor_hunt/apps/features/patient/appointment_screen/presentation/screens/select_time_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
@@ -25,11 +25,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
 import '../../features/common/auth/data/models/user/my_user.dart';
 import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
+import '../../features/patient/appointment_screen/presentation/screens/select_time_screen.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
 
 part 'app_routes.g.dart';
@@ -181,6 +183,21 @@ class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
     return BlocProvider(
       create: (context) => getIt<PatientProfileBloc>(),
       child: PatientProfileScreen(user: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<AdminProfileRoute>(path: '/admin_profile')
+class AdminProfileRoute extends GoRouteData with $AdminProfileRoute {
+  const AdminProfileRoute(this.$extra);
+
+  final MyUser $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<AdminProfileBloc>(),
+      child: AdminProfileScreen(user: $extra),
     );
   }
 }

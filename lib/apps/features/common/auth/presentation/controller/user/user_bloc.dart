@@ -5,6 +5,7 @@ import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/us
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../core/data/session/user_session_manager.dart';
 import '../../../data/models/user/my_user.dart';
 import '../../../data/models/user/patient_info.dart';
 import '../../../data/repo/auth_repository.dart';
@@ -12,14 +13,15 @@ import '../../../data/repo/auth_repository.dart';
 @lazySingleton
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthRepository _authRepository;
+  final UserSessionManager _userSessionManager;
   StreamSubscription<MyUser?>? _userSubscription;
 
-  UserBloc(this._authRepository)
-    : super(UserState(user: _authRepository.currentUser)) {
+  UserBloc(this._authRepository, this._userSessionManager)
+    : super(UserState(user: _userSessionManager.currentUser)) {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
 
-    _userSubscription = _authRepository.userStream.listen((user) {
+    _userSubscription = _userSessionManager.userStream.listen((user) {
       add(UserStreamUpdatedEvent(user));
     });
   }
@@ -60,9 +62,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     // Emit optimistic state immediately
     emit(state.copyWith(user: optimisticUser, clearError: true));
+    // also update session manager for optimistic update
+    _userSessionManager.updateUser(optimisticUser);
 
     // Call repository to sync with Firestore
-    final result = await _authRepository.toggleFavoriteDoctor(event.doctorId);
+    final result = await _authRepository.toggleFavoriteDoctor(event.doctorId, previousUser);
 
     result.fold(
       (failure) {
@@ -70,9 +74,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(
           state.copyWith(user: previousUser, favoriteError: failure.message),
         );
+        _userSessionManager.updateUser(previousUser);
       },
       (serverUser) {
         // Updated state already handled via repository stream/emit
+        _userSessionManager.updateUser(serverUser);
       },
     );
   }

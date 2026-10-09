@@ -49,7 +49,7 @@ description: Guidelines for building UI components in the Flutter project. Follo
 * **Reference Example (`admin_doctors_tab.dart`)**:
   ```dart
   // Example of extracting large parts of the UI into smaller part files/widgets
-  part '../widget/custom_appbar.dart';
+  part '../widget/admin_appbar.dart';
   part '../widget/doctors_widget.dart';
   part '../widget/status_widget.dart';
 

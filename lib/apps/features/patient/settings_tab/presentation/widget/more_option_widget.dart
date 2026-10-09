@@ -8,10 +8,11 @@ class MoreOptionWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: .start,
       children: [
-        Text(t.settings.language, style: context.medium16.textSecondary.rubik),
+        Text(t.settings.more_options, style: context.medium16.textSecondary.rubik),
+        SizedBox(height: 5),
         _buildSettingsCard(
           context,
-          title: t.settings.change_password,
+          title: t.settings.language,
           trailing: Row(
             mainAxisSize: .min,
             children: [

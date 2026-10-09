@@ -13,6 +13,7 @@ class AccountSettingsWidget extends StatelessWidget {
           t.settings.account_settings,
           style: context.medium16.textSecondary.rubik,
         ),
+        SizedBox(height: 5),
         _buildSettingsCard(
           context,
           title: t.settings.change_password,

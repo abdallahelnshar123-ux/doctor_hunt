@@ -14,8 +14,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   ///
   /// Usage:
   /// final t = Translations.of(context);
-  static Translations of(BuildContext context) =>
-      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+  static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
@@ -24,10 +23,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
     PluralResolver? cardinalResolver,
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
-  }) : assert(
-         overrides == null,
-         'Set "translation_overrides: true" in order to enable this feature.',
-       ),
+  }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
        $meta =
            meta ??
            TranslationMetadata(
@@ -43,51 +39,27 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   late final Translations _root = this; // ignore: unused_field
 
-  Translations $copyWith({
-    TranslationMetadata<AppLocale, Translations>? meta,
-  }) => Translations(meta: meta ?? this.$meta);
+  Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
   // Translations
   late final Translations$auth$en auth = Translations$auth$en.internal(_root);
-  late final Translations$onboarding$en onboarding =
-      Translations$onboarding$en.internal(_root);
-  late final Translations$choose_role$en choose_role =
-      Translations$choose_role$en.internal(_root);
-  late final Translations$patient_main$en patient_main =
-      Translations$patient_main$en.internal(_root);
-  late final Translations$patient_appointments$en patient_appointments =
-      Translations$patient_appointments$en.internal(_root);
-  late final Translations$select_time$en select_time =
-      Translations$select_time$en.internal(_root);
+  late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
+  late final Translations$choose_role$en choose_role = Translations$choose_role$en.internal(_root);
+  late final Translations$patient_main$en patient_main = Translations$patient_main$en.internal(_root);
+  late final Translations$patient_appointments$en patient_appointments = Translations$patient_appointments$en.internal(_root);
+  late final Translations$select_time$en select_time = Translations$select_time$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
-  late final Translations$settings$en settings =
-      Translations$settings$en.internal(_root);
-  late final Translations$profile$en profile = Translations$profile$en.internal(
-    _root,
-  );
-  late final Translations$privacy_policy$en privacy_policy =
-      Translations$privacy_policy$en.internal(_root);
-  late final Translations$doctor_details$en doctor_details =
-      Translations$doctor_details$en.internal(_root);
-  late final Translations$appointment$en appointment =
-      Translations$appointment$en.internal(_root);
-  late final Translations$create_doctor$en create_doctor =
-      Translations$create_doctor$en.internal(_root);
-  late final Translations$common$en common = Translations$common$en.internal(
-    _root,
-  );
-  late final Translations$dialog$en dialog = Translations$dialog$en.internal(
-    _root,
-  );
-  late final Translations$admin$en admin = Translations$admin$en.internal(
-    _root,
-  );
-  late final Translations$errors$en errors = Translations$errors$en.internal(
-    _root,
-  );
-  late final Translations$e_codes$en e_codes = Translations$e_codes$en.internal(
-    _root,
-  );
+  late final Translations$settings$en settings = Translations$settings$en.internal(_root);
+  late final Translations$profile$en profile = Translations$profile$en.internal(_root);
+  late final Translations$privacy_policy$en privacy_policy = Translations$privacy_policy$en.internal(_root);
+  late final Translations$doctor_details$en doctor_details = Translations$doctor_details$en.internal(_root);
+  late final Translations$appointment$en appointment = Translations$appointment$en.internal(_root);
+  late final Translations$create_doctor$en create_doctor = Translations$create_doctor$en.internal(_root);
+  late final Translations$common$en common = Translations$common$en.internal(_root);
+  late final Translations$dialog$en dialog = Translations$dialog$en.internal(_root);
+  late final Translations$admin$en admin = Translations$admin$en.internal(_root);
+  late final Translations$errors$en errors = Translations$errors$en.internal(_root);
+  late final Translations$e_codes$en e_codes = Translations$e_codes$en.internal(_root);
 }
 
 // Path: auth
@@ -102,8 +74,7 @@ class Translations$auth$en {
   String get welcome_back => 'Welcome back';
 
   /// en: 'You can search course, apply course and find scholarship for abroad studies'
-  String get auth_subtitle =>
-      'You can search course, apply course and find scholarship for abroad studies';
+  String get auth_subtitle => 'You can search course, apply course and find scholarship for abroad studies';
 
   /// en: 'Login to your admin account'
   String get admin_subtitle => 'Login to your admin account';
@@ -124,8 +95,7 @@ class Translations$auth$en {
   String get have_account => 'Have an account? Log in';
 
   /// en: 'I agree with the Terms of Service & Privacy Policy'
-  String get agree_terms =>
-      'I agree with the Terms of Service & Privacy Policy';
+  String get agree_terms => 'I agree with the Terms of Service & Privacy Policy';
 
   /// en: 'Sign up'
   String get sign_up => 'Sign up';
@@ -143,8 +113,7 @@ class Translations$auth$en {
   String get google => 'Google';
 
   /// en: 'you must agree with the Terms of Service & Privacy Policy'
-  String get you_must_agree_to_terms =>
-      'you must agree with the Terms of Service & Privacy Policy';
+  String get you_must_agree_to_terms => 'you must agree with the Terms of Service & Privacy Policy';
 }
 
 // Path: onboarding
@@ -164,12 +133,9 @@ class Translations$onboarding$en {
   /// en: 'Get Started'
   String get get_started => 'Get Started';
 
-  late final Translations$onboarding$page1$en page1 =
-      Translations$onboarding$page1$en.internal(_root);
-  late final Translations$onboarding$page2$en page2 =
-      Translations$onboarding$page2$en.internal(_root);
-  late final Translations$onboarding$page3$en page3 =
-      Translations$onboarding$page3$en.internal(_root);
+  late final Translations$onboarding$page1$en page1 = Translations$onboarding$page1$en.internal(_root);
+  late final Translations$onboarding$page2$en page2 = Translations$onboarding$page2$en.internal(_root);
+  late final Translations$onboarding$page3$en page3 = Translations$onboarding$page3$en.internal(_root);
 }
 
 // Path: choose_role
@@ -187,12 +153,9 @@ class Translations$choose_role$en with PageData2 {
   /// en: 'Choose your role'
   String get role_selection => 'Choose your role';
 
-  late final Translations$choose_role$patient$en patient =
-      Translations$choose_role$patient$en.internal(_root);
-  late final Translations$choose_role$doctor$en doctor =
-      Translations$choose_role$doctor$en.internal(_root);
-  late final Translations$choose_role$admin$en admin =
-      Translations$choose_role$admin$en.internal(_root);
+  late final Translations$choose_role$patient$en patient = Translations$choose_role$patient$en.internal(_root);
+  late final Translations$choose_role$doctor$en doctor = Translations$choose_role$doctor$en.internal(_root);
+  late final Translations$choose_role$admin$en admin = Translations$choose_role$admin$en.internal(_root);
 }
 
 // Path: patient_main
@@ -398,8 +361,7 @@ class Translations$privacy_policy$en with PageData2 {
   String get introduction =>
       'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.';
 
-  late final Translations$privacy_policy$sections$en sections =
-      Translations$privacy_policy$sections$en.internal(_root);
+  late final Translations$privacy_policy$sections$en sections = Translations$privacy_policy$sections$en.internal(_root);
 }
 
 // Path: doctor_details
@@ -491,11 +453,8 @@ class Translations$appointment$en with PageData2 {
   String get success => 'Your Appointment Successful';
 
   /// en: 'You booked an appointment with ${doctor} on ${date}, at ${time}'
-  String booking_details({
-    required Object Doctor,
-    required Object Date,
-    required Object Time,
-  }) => 'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
+  String booking_details({required Object Doctor, required Object Date, required Object Time}) =>
+      'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
 
   /// en: 'Done'
   String get done => 'Done';
@@ -570,8 +529,7 @@ class Translations$dialog$en {
   String get all_set_up => 'All set up';
 
   /// en: 'Registered Successfully, Please login.'
-  String get registered_successfully =>
-      'Registered Successfully, Please login.';
+  String get registered_successfully => 'Registered Successfully, Please login.';
 
   /// en: 'Cancel'
   String get cancel => 'Cancel';
@@ -584,16 +542,14 @@ class Translations$admin$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$admin$main$en main =
-      Translations$admin$main$en.internal(_root);
-  late final Translations$admin$doctors_tab$en doctors_tab =
-      Translations$admin$doctors_tab$en.internal(_root);
-  late final Translations$admin$add_doctor_screen$en add_doctor_screen =
-      Translations$admin$add_doctor_screen$en.internal(_root);
-  late final Translations$admin$doctor_details_screen$en doctor_details_screen =
-      Translations$admin$doctor_details_screen$en.internal(_root);
-  late final Translations$admin$update_doctor_details$en update_doctor_details =
-      Translations$admin$update_doctor_details$en.internal(_root);
+  late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
+  late final Translations$admin$doctors_tab$en doctors_tab = Translations$admin$doctors_tab$en.internal(_root);
+  late final Translations$admin$appointments_tab$en appointments_tab = Translations$admin$appointments_tab$en.internal(_root);
+  late final Translations$admin$settings$en settings = Translations$admin$settings$en.internal(_root);
+  late final Translations$admin$add_doctor_screen$en add_doctor_screen = Translations$admin$add_doctor_screen$en.internal(_root);
+  late final Translations$admin$doctor_details_screen$en doctor_details_screen = Translations$admin$doctor_details_screen$en.internal(_root);
+  late final Translations$admin$update_doctor_details$en update_doctor_details = Translations$admin$update_doctor_details$en.internal(_root);
+  late final Translations$admin$profile_screen$en profile_screen = Translations$admin$profile_screen$en.internal(_root);
 }
 
 // Path: errors
@@ -617,23 +573,19 @@ class Translations$errors$en {
   String get no_internet => 'No internet';
 
   /// en: 'The email or password is incorrect'
-  String get email_or_password_is_incorrect =>
-      'The email or password is incorrect';
+  String get email_or_password_is_incorrect => 'The email or password is incorrect';
 
   /// en: 'The email address is already in use by another account'
-  String get email_address_already_in_use_by_another_account =>
-      'The email address is already in use by another account';
+  String get email_address_already_in_use_by_another_account => 'The email address is already in use by another account';
 
   /// en: 'User isn't Authenticated'
   String get user_not_authenticated => 'User isn\'t Authenticated';
 
   /// en: 'Error while adding doctor please try again later'
-  String get error_while_adding_doctor_please_try_again_later =>
-      'Error while adding doctor please try again later';
+  String get error_while_adding_doctor_please_try_again_later => 'Error while adding doctor please try again later';
 
   /// en: 'Error while updating doctor please try again later'
-  String get error_while_updating_doctor_please_try_again_later =>
-      'Error while updating doctor please try again later';
+  String get error_while_updating_doctor_please_try_again_later => 'Error while updating doctor please try again later';
 
   /// en: 'Cancelled by user'
   String get cancelled_by_user => 'Cancelled by user';
@@ -673,8 +625,7 @@ class Translations$onboarding$page1$en with PageData2 {
   String get title => 'Find Trusted Doctors';
 
   /// en: 'Find trusted doctors near you. Get the care you need from experienced professionals.'
-  String get subtitle =>
-      'Find trusted doctors near you. Get the care you need from experienced professionals.';
+  String get subtitle => 'Find trusted doctors near you. Get the care you need from experienced professionals.';
 }
 
 // Path: onboarding.page2
@@ -690,8 +641,7 @@ class Translations$onboarding$page2$en with PageData2 {
   String get title => 'Choose Best Doctors';
 
   /// en: 'Explore doctors based on your needs. Choose the one that’s right for you.'
-  String get subtitle =>
-      'Explore doctors based on your needs. Choose the one that’s right for you.';
+  String get subtitle => 'Explore doctors based on your needs. Choose the one that’s right for you.';
 }
 
 // Path: onboarding.page3
@@ -707,8 +657,7 @@ class Translations$onboarding$page3$en with PageData2 {
   String get title => 'Easy Appointments';
 
   /// en: 'Book your appointment in just a few taps. Choose a time that works best for you.'
-  String get subtitle =>
-      'Book your appointment in just a few taps. Choose a time that works best for you.';
+  String get subtitle => 'Book your appointment in just a few taps. Choose a time that works best for you.';
 }
 
 // Path: choose_role.patient
@@ -766,28 +715,17 @@ class Translations$privacy_policy$sections$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$privacy_policy$sections$information_we_collect$en
-  information_we_collect =
-      Translations$privacy_policy$sections$information_we_collect$en.internal(
-        _root,
-      );
-  late final Translations$privacy_policy$sections$how_we_use_information$en
-  how_we_use_information =
-      Translations$privacy_policy$sections$how_we_use_information$en.internal(
-        _root,
-      );
-  late final Translations$privacy_policy$sections$data_security$en
-  data_security =
-      Translations$privacy_policy$sections$data_security$en.internal(_root);
-  late final Translations$privacy_policy$sections$third_party_services$en
-  third_party_services =
-      Translations$privacy_policy$sections$third_party_services$en.internal(
-        _root,
-      );
-  late final Translations$privacy_policy$sections$your_rights$en your_rights =
-      Translations$privacy_policy$sections$your_rights$en.internal(_root);
-  late final Translations$privacy_policy$sections$contact_us$en contact_us =
-      Translations$privacy_policy$sections$contact_us$en.internal(_root);
+  late final Translations$privacy_policy$sections$information_we_collect$en information_we_collect =
+      Translations$privacy_policy$sections$information_we_collect$en.internal(_root);
+  late final Translations$privacy_policy$sections$how_we_use_information$en how_we_use_information =
+      Translations$privacy_policy$sections$how_we_use_information$en.internal(_root);
+  late final Translations$privacy_policy$sections$data_security$en data_security = Translations$privacy_policy$sections$data_security$en.internal(
+    _root,
+  );
+  late final Translations$privacy_policy$sections$third_party_services$en third_party_services =
+      Translations$privacy_policy$sections$third_party_services$en.internal(_root);
+  late final Translations$privacy_policy$sections$your_rights$en your_rights = Translations$privacy_policy$sections$your_rights$en.internal(_root);
+  late final Translations$privacy_policy$sections$contact_us$en contact_us = Translations$privacy_policy$sections$contact_us$en.internal(_root);
 }
 
 // Path: admin.main
@@ -823,8 +761,7 @@ class Translations$admin$doctors_tab$en {
   String get no_doctors_found => 'No Doctors Found';
 
   /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
-  String get no_doctors_description =>
-      'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+  String get no_doctors_description => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
 
   /// en: 'Total doctors'
   String get total_doctors => 'Total doctors';
@@ -840,6 +777,64 @@ class Translations$admin$doctors_tab$en {
 
   /// en: '-'
   String get dash => '-';
+}
+
+// Path: admin.appointments_tab
+class Translations$admin$appointments_tab$en with PageData2 {
+  Translations$admin$appointments_tab$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointments'
+  @override
+  String get title => 'Appointments';
+
+  /// en: 'Upcoming'
+  String get upcoming => 'Upcoming';
+
+  /// en: 'Completed'
+  String get completed => 'Completed';
+
+  /// en: 'Canceled'
+  String get canceled => 'Canceled';
+}
+
+// Path: admin.settings
+class Translations$admin$settings$en {
+  Translations$admin$settings$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Admin Profile'
+  String get admin_profile => 'Admin Profile';
+
+  /// en: 'Change Password'
+  String get change_password => 'Change Password';
+
+  /// en: 'App Information'
+  String get app_information => 'App Information';
+
+  /// en: 'Edit super admin details & permissions'
+  String get edit_super_admin_details_permissions => 'Edit super admin details & permissions';
+
+  /// en: 'Update master security credentials'
+  String get update_master_security_credentials => 'Update master security credentials';
+
+  /// en: 'Build version'
+  String get build_version => 'Build version';
+
+  /// en: 'v1.0.0'
+  String get v1_0_0 => 'v1.0.0';
+
+  /// en: 'Are you sure you want to logout?'
+  String get logout_confirmation => 'Are you sure you want to logout?';
+
+  /// en: 'Logout'
+  String get logout => 'Logout';
 }
 
 // Path: admin.add_doctor_screen
@@ -905,8 +900,7 @@ class Translations$admin$update_doctor_details$en {
   // Translations
 
   /// en: 'Doctor was Updated Successfully'
-  String get doctor_was_updated_successfully =>
-      'Doctor was Updated Successfully';
+  String get doctor_was_updated_successfully => 'Doctor was Updated Successfully';
 
   /// en: 'Edit doctor'
   String get edit_doctor => 'Edit doctor';
@@ -927,12 +921,31 @@ class Translations$admin$update_doctor_details$en {
   String get save_changes => 'Save Changes';
 }
 
+// Path: admin.profile_screen
+class Translations$admin$profile_screen$en with PageData2 {
+  Translations$admin$profile_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Profile'
+  @override
+  String get title => 'Profile';
+
+  /// en: 'Full Name'
+  String get full_name => 'Full Name';
+
+  /// en: 'Email Address'
+  String get email_address => 'Email Address';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
+}
+
 // Path: privacy_policy.sections.information_we_collect
-class Translations$privacy_policy$sections$information_we_collect$en
-    with PageData2 {
-  Translations$privacy_policy$sections$information_we_collect$en.internal(
-    this._root,
-  );
+class Translations$privacy_policy$sections$information_we_collect$en with PageData2 {
+  Translations$privacy_policy$sections$information_we_collect$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -943,8 +956,7 @@ class Translations$privacy_policy$sections$information_we_collect$en
   String get title => '1. Information We Collect';
 
   /// en: 'We collect information required to provide doctor booking and healthcare management services:'
-  String get description =>
-      'We collect information required to provide doctor booking and healthcare management services:';
+  String get description => 'We collect information required to provide doctor booking and healthcare management services:';
 
   List<String> get bullets => [
     'Personal Identification: Name, email address, and phone number.',
@@ -955,11 +967,8 @@ class Translations$privacy_policy$sections$information_we_collect$en
 }
 
 // Path: privacy_policy.sections.how_we_use_information
-class Translations$privacy_policy$sections$how_we_use_information$en
-    with PageData2 {
-  Translations$privacy_policy$sections$how_we_use_information$en.internal(
-    this._root,
-  );
+class Translations$privacy_policy$sections$how_we_use_information$en with PageData2 {
+  Translations$privacy_policy$sections$how_we_use_information$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -970,8 +979,7 @@ class Translations$privacy_policy$sections$how_we_use_information$en
   String get title => '2. How We Use Your Information';
 
   /// en: 'Your information is used strictly to deliver and improve our healthcare services:'
-  String get description =>
-      'Your information is used strictly to deliver and improve our healthcare services:';
+  String get description => 'Your information is used strictly to deliver and improve our healthcare services:';
 
   List<String> get bullets => [
     'Facilitating doctor searches, appointment scheduling, and management.',
@@ -994,8 +1002,7 @@ class Translations$privacy_policy$sections$data_security$en with PageData2 {
   String get title => '3. Data Security & Storage';
 
   /// en: 'We take the security of your health and personal data seriously:'
-  String get description =>
-      'We take the security of your health and personal data seriously:';
+  String get description => 'We take the security of your health and personal data seriously:';
 
   List<String> get bullets => [
     'Data is stored securely using encrypted cloud database infrastructure.',
@@ -1005,11 +1012,8 @@ class Translations$privacy_policy$sections$data_security$en with PageData2 {
 }
 
 // Path: privacy_policy.sections.third_party_services
-class Translations$privacy_policy$sections$third_party_services$en
-    with PageData2 {
-  Translations$privacy_policy$sections$third_party_services$en.internal(
-    this._root,
-  );
+class Translations$privacy_policy$sections$third_party_services$en with PageData2 {
+  Translations$privacy_policy$sections$third_party_services$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
@@ -1020,8 +1024,7 @@ class Translations$privacy_policy$sections$third_party_services$en
   String get title => '4. Third-Party Services';
 
   /// en: 'We integrate trusted third-party services to ensure optimal performance:'
-  String get description =>
-      'We integrate trusted third-party services to ensure optimal performance:';
+  String get description => 'We integrate trusted third-party services to ensure optimal performance:';
 
   List<String> get bullets => [
     'Firebase: Used for secure user authentication and cloud database management.',
@@ -1043,8 +1046,7 @@ class Translations$privacy_policy$sections$your_rights$en with PageData2 {
   String get title => '5. Your Rights & Control';
 
   /// en: 'You have full control over your personal data within Doctor Hunt:'
-  String get description =>
-      'You have full control over your personal data within Doctor Hunt:';
+  String get description => 'You have full control over your personal data within Doctor Hunt:';
 
   List<String> get bullets => [
     'View and update your personal profile information at any time.',

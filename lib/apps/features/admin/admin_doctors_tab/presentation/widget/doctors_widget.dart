@@ -67,31 +67,33 @@ class DoctorsWidget extends StatelessWidget {
                       state.allDoctors.isEmpty &&
                           (state.filteredDoctors?.isEmpty ?? false)
                       ? _noDoctorFoundWidget(context: context)
-                      : ListView.separated(
-                          padding: EdgeInsets.all(20),
-                          itemBuilder: (context, index) => GestureDetector(
-                            onTap: () {
-                              AdminDoctorDetailsRoute(
-                                _buildDoctorsList(
+                      : SafeArea(
+                        child: ListView.separated(
+                            padding: EdgeInsets.all(20),
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                AdminDoctorDetailsRoute(
+                                  _buildDoctorsList(
+                                    allDoctors: state.allDoctors,
+                                    filteredDoctors: state.filteredDoctors,
+                                  )[index],
+                                ).push(context);
+                              },
+                              child: DoctorCard(
+                                doctor: _buildDoctorsList(
                                   allDoctors: state.allDoctors,
                                   filteredDoctors: state.filteredDoctors,
                                 )[index],
-                              ).push(context);
-                            },
-                            child: DoctorCard(
-                              doctor: _buildDoctorsList(
-                                allDoctors: state.allDoctors,
-                                filteredDoctors: state.filteredDoctors,
-                              )[index],
+                              ),
                             ),
+                            separatorBuilder: (context, index) =>
+                                SizedBox(height: 10),
+                            itemCount: _buildDoctorsList(
+                              allDoctors: state.allDoctors,
+                              filteredDoctors: state.filteredDoctors,
+                            ).length,
                           ),
-                          separatorBuilder: (context, index) =>
-                              SizedBox(height: 10),
-                          itemCount: _buildDoctorsList(
-                            allDoctors: state.allDoctors,
-                            filteredDoctors: state.filteredDoctors,
-                          ).length,
-                        ),
+                      ),
                 ),
               ],
             ),

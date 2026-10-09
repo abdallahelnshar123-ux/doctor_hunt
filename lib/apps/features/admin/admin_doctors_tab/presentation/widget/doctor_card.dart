@@ -7,7 +7,6 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var t = Translations.of(context);
     return AppContainerWithShadow(
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -35,38 +34,55 @@ class DoctorCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(doctor.name, style: context.medium16.textTertiary.rubik),
+                Text(
+                  doctor.name,
+                  style: context.medium16.textTertiary.rubik,
+                  overflow: .ellipsis,
+                ),
                 Text(
                   doctor.specialty.name,
                   style: context.medium12.textSecondary.rubik,
+                  overflow: .ellipsis,
                 ),
-                Chip(
-                  padding: EdgeInsets.all(5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  side: BorderSide(width: 0, color: AppColors.transparent),
-                  backgroundColor: doctor.active
-                      ? AppColors.brandPrimary20
-                      : AppColors.statusErrorSurface,
-                  avatarBoxConstraints: .tightFor(width: 15),
-                  avatar: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: doctor.active
-                        ? AppColors.brandPrimaryDark
-                        : AppColors.statusError,
-                  ),
-                  label: Text(
-                    doctor.active
-                        ? t.admin.doctors_tab.active
-                        : t.admin.doctors_tab.inactive,
-                    style: doctor.active
-                        ? context.medium10.brandPrimaryDark.rubik
-                        : context.regular10.statusError.rubik,
+                SizedBox(height: 15),
+                Row(
+                  spacing: 6,
+                  crossAxisAlignment: .center,
+                  children: List.generate(
+                    5,
+                    (index) => SvgPicture.asset(
+                      AppAssets.icons.starIconRated.path,
+                      width: 15,
+                    ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Chip(
+            padding: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            side: BorderSide(width: 0, color: AppColors.transparent),
+            backgroundColor: doctor.active
+                ? AppColors.brandPrimary20
+                : AppColors.statusErrorSurface,
+            avatarBoxConstraints: .tightFor(width: 15),
+            avatar: Icon(
+              Icons.circle,
+              size: 10,
+              color: doctor.active
+                  ? AppColors.brandPrimaryDark
+                  : AppColors.statusError,
+            ),
+            label: Text(
+              doctor.active
+                  ? t.admin.doctors_tab.active
+                  : t.admin.doctors_tab.inactive,
+              style: doctor.active
+                  ? context.medium10.brandPrimaryDark.rubik
+                  : context.regular10.statusError.rubik,
             ),
           ),
         ],

@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/screens/admin_appointments_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_settings_tab/presentation/screens/admin_settings_tab.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -12,7 +13,11 @@ import '../../../../../core/theme/app_colors.dart';
 class AdminMainScreen extends HookWidget {
   const AdminMainScreen({super.key});
 
-  static const List<Widget> _tabsList = [AdminDoctorsTab(), AdminSettingsTab()];
+  static const List<Widget> _tabsList = [
+    AdminDoctorsTab(),
+    AdminAppointmentsTab(),
+    AdminSettingsTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +59,16 @@ class AdminMainScreen extends HookWidget {
               context: context,
             ),
             builtBottomNavigationBarItem(
+              iconName: AppAssets.icons.appointmentsIcon.path,
+              label: t.admin.appointments_tab.title,
+              index: 1,
+              selectedIndex: selectedIndex.value,
+              context: context,
+            ),
+            builtBottomNavigationBarItem(
               iconName: AppAssets.icons.settingsIcon.path,
               label: t.admin.main.settings,
-              index: 1,
+              index: 2,
               selectedIndex: selectedIndex.value,
               context: context,
             ),

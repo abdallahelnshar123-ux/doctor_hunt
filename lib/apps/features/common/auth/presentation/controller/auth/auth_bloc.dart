@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../../../core/data/session/user_session_manager.dart';
 import '../../../data/repo/auth_repository.dart';
 import '../../../data/use_case/login_use_case.dart';
 import 'auth_event.dart';
@@ -10,8 +11,10 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
   final LoginUseCase _loginUseCase;
+  final UserSessionManager _userSessionManager;
 
-  AuthBloc(this._repository, this._loginUseCase) : super(AuthInitial()) {
+  AuthBloc(this._repository, this._loginUseCase, this._userSessionManager)
+    : super(AuthInitial()) {
     on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
@@ -25,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     CheckAuthStatusRequested event,
     Emitter<AuthState> emit,
   ) {
-    final result = _repository.getCurrentUser();
+    final result = _userSessionManager.getCurrentUser();
     result.fold(
       () => emit(UserUnauthenticatedState()),
       (user) => emit(UserAuthenticatedState(user)),
@@ -45,6 +48,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     result.fold(
       (failure) => emit(LoginWithEmailPasswordErrorState(failure.message)),
       (user) {
+        _userSessionManager.updateUser(user);
         emit(UserAuthenticatedState(user));
       },
     );
@@ -66,6 +70,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(RegisterWithEmailPasswordErrorState(failure.message));
       },
       (user) {
+        _userSessionManager.updateUser(user);
         emit(RegisterWithEmailPasswordSuccessState());
       },
     );
@@ -83,6 +88,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ContinueWithGoogleErrorState(failure.message));
       },
       (user) {
+        _userSessionManager.updateUser(user);
         emit(UserAuthenticatedState(user));
       },
     );
@@ -96,6 +102,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     var result = await _repository.logout();
     result.fold((failure) => emit(LogoutErrorState(failure.message)), (_) {
+      _userSessionManager.clearSession();
       emit(UserUnauthenticatedState());
     });
   }
@@ -116,5 +123,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(ResetUserPasswordSuccessState());
       },
     );
+  }
+
+  @override
+  Future<void> close() {
+    _userSessionManager.dispose();
+    return super.close();
   }
 }

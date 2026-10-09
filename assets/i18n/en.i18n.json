@@ -239,6 +239,23 @@
       "all": "All",
       "dash": "-"
     },
+    "appointmentsTab": {
+      "title": "Appointments",
+      "upcoming": "Upcoming",
+      "completed": "Completed",
+      "Canceled": "Canceled"
+    },
+    "settings": {
+      "adminProfile": "Admin Profile",
+      "changePassword": "Change Password",
+      "appInformation": "App Information",
+      "editSuperAdminDetailsPermissions": "Edit super admin details & permissions",
+      "updateMasterSecurityCredentials": "Update master security credentials",
+      "buildVersion": "Build version",
+      "v1.0.0": "v1.0.0",
+      "logoutConfirmation": "Are you sure you want to logout?",
+      "logout": "Logout"
+    },
     "addDoctorScreen": {
       "enterName": "Enter doctor name",
       "uploadImage": "Upload doctor image",
@@ -263,8 +280,17 @@
       "activeAndAvailable": "Active & Available",
       "inactive": "Inactive",
       "saveChanges": "Save Changes"
+    },
+    "ProfileScreen": {
+      "title": "Profile",
+      "fullName": "Full Name",
+      "EmailAddress": "Email Address",
+      "dataWasUpdatedSuccessfully": "Data was updated successfully"
+
     }
-  },
+
+    },
+
   "errors": {
     "noAccountAssociated": "No account associated with this email",
     "someThingWentWrong": "Some thing went wrong",

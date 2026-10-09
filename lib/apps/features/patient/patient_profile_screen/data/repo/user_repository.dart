@@ -14,20 +14,20 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class PatientProfileRepository {
+class UserRepository {
   final UserFirestoreService _firestoreService;
   final CloudinaryService _cloudinaryService;
   final ImageService _imageService;
   final UserPrefs _userPrefs;
 
-  PatientProfileRepository(
+  UserRepository(
     this._firestoreService,
     this._cloudinaryService,
     this._imageService,
     this._userPrefs,
   );
 
-  Future<Either<Failure, File>> pickPatientImage() async {
+  Future<Either<Failure, File>> pickUserImage() async {
     try {
       final result = await _imageService.pickImage();
       return Right(result);
@@ -38,7 +38,7 @@ class PatientProfileRepository {
     }
   }
 
-  Future<Either<Failure, MyUser>> updatePatientProfile({
+  Future<Either<Failure, MyUser>> updateUserProfile({
     required MyUser user,
     File? image,
   }) async {

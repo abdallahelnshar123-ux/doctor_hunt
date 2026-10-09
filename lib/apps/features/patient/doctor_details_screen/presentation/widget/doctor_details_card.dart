@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../../core/extensions/context_extensions.dart';
 
 class DoctorDetailsCard extends StatelessWidget {
   const DoctorDetailsCard({super.key, required this.doctor});
@@ -73,7 +74,7 @@ class DoctorDetailsCard extends StatelessWidget {
 
   Widget _buildBookNowButton({required BuildContext context}) {
     return CustomElevatedButton(
-      buttonWidth: MediaQuery.sizeOf(context).width * 0.4,
+      buttonWidth: context.width * 0.4,
       paddingVertical: 10,
       borderRadius: 6,
       backgroundColor: AppColors.brandPrimary,

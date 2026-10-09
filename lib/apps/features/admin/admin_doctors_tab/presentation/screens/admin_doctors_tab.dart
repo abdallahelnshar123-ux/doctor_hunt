@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
@@ -11,16 +12,15 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
-import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
-part '../widget/custom_appbar.dart';
+part '../widget/admin_appbar.dart';
 part '../widget/doctor_card.dart';
 part '../widget/doctors_widget.dart';
 part '../widget/status_widget.dart';
@@ -33,7 +33,7 @@ class AdminDoctorsTab extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Scaffold(
-        appBar: CustomAppbar(),
+        appBar: AdminAppbar(title: t.admin.main.doctors),
         resizeToAvoidBottomInset: false,
         floatingActionButton: _buildFloatingActionButton(context),
         body: Column(

@@ -23,6 +23,8 @@ import '../../features/admin/add_doctor_screen/data/service/doctor_firestore_ser
     as _i353;
 import '../../features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart'
     as _i546;
+import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
+    as _i90;
 import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
     as _i879;
 import '../../features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart'
@@ -34,16 +36,17 @@ import '../../features/common/auth/data/service/firebase_services/user_firestore
     as _i749;
 import '../../features/common/auth/data/use_case/login_use_case.dart' as _i594;
 import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
-    as _i669;
+    as _i613;
 import '../../features/common/auth/presentation/controller/user/user_bloc.dart'
-    as _i366;
-import '../../features/patient/patient_profile_screen/data/repo/patient_profile_repository.dart'
-    as _i150;
+    as _i15;
+import '../../features/patient/patient_profile_screen/data/repo/user_repository.dart'
+    as _i96;
 import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
     as _i495;
 import '../data/image_service/image_service.dart' as _i181;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
 import '../data/shared_prefs/user_pref.dart' as _i708;
+import '../data/session/user_session_manager.dart' as _i624;
 import '../network/cloudinary/cloudinary_config.dart' as _i619;
 import '../network/cloudinary/cloudinary_service.dart' as _i417;
 import 'firebase_module.dart' as _i616;
@@ -100,6 +103,9 @@ extension GetItInjectableX on _i174.GetIt {
         imageService: gh<_i181.ImageService>(),
       ),
     );
+    gh.lazySingleton<_i624.UserSessionManager>(
+      () => _i624.UserSessionManager(gh<_i708.UserPrefs>()),
+    );
     gh.factory<_i546.DoctorBloc>(
       () => _i546.DoctorBloc(gh<_i932.DoctorRepository>()),
     );
@@ -113,14 +119,10 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i959.AuthRepository(
         gh<_i114.AuthService>(),
         gh<_i749.UserFirestoreService>(),
-        gh<_i708.UserPrefs>(),
       ),
     );
-    gh.lazySingleton<_i366.UserBloc>(
-      () => _i366.UserBloc(gh<_i959.AuthRepository>()),
-    );
-    gh.factory<_i150.PatientProfileRepository>(
-      () => _i150.PatientProfileRepository(
+    gh.factory<_i96.UserRepository>(
+      () => _i96.UserRepository(
         gh<_i749.UserFirestoreService>(),
         gh<_i417.CloudinaryService>(),
         gh<_i181.ImageService>(),
@@ -128,14 +130,29 @@ extension GetItInjectableX on _i174.GetIt {
       ),
     );
     gh.factory<_i495.PatientProfileBloc>(
-      () => _i495.PatientProfileBloc(gh<_i150.PatientProfileRepository>()),
+      () => _i495.PatientProfileBloc(
+        gh<_i96.UserRepository>(),
+        gh<_i624.UserSessionManager>(),
+      ),
     );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i959.AuthRepository>()),
     );
-    gh.lazySingleton<_i669.AuthBloc>(
-      () =>
-          _i669.AuthBloc(gh<_i959.AuthRepository>(), gh<_i594.LoginUseCase>()),
+    gh.lazySingleton<_i15.UserBloc>(
+      () => _i15.UserBloc(
+        gh<_i959.AuthRepository>(),
+        gh<_i624.UserSessionManager>(),
+      ),
+    );
+    gh.lazySingleton<_i613.AuthBloc>(
+      () => _i613.AuthBloc(
+        gh<_i959.AuthRepository>(),
+        gh<_i594.LoginUseCase>(),
+        gh<_i624.UserSessionManager>(),
+      ),
+    );
+    gh.factory<_i90.AdminProfileBloc>(
+      () => _i90.AdminProfileBloc(gh<_i96.UserRepository>()),
     );
     return this;
   }
