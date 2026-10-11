@@ -44,17 +44,11 @@ class DoctorCard extends StatelessWidget {
                   style: context.medium12.textSecondary.rubik,
                   overflow: .ellipsis,
                 ),
-                SizedBox(height: 15),
-                Row(
-                  spacing: 6,
-                  crossAxisAlignment: .center,
-                  children: List.generate(
-                    5,
-                    (index) => SvgPicture.asset(
-                      AppAssets.icons.starIconRated.path,
-                      width: 15,
-                    ),
-                  ),
+                SizedBox(height: 10),
+                RatingWidget(
+                  rating: doctor.rating.rating,
+                  starSize: 15,
+                  showRating: false,
                 ),
               ],
             ),

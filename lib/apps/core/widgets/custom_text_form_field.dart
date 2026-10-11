@@ -33,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool enabled;
   final bool readOnly;
   final String? initialValue;
+  final void Function(PointerDownEvent)? onTapOutside;
 
   const CustomTextFormField({
     super.key,
@@ -61,11 +62,13 @@ class CustomTextFormField extends StatelessWidget {
     this.enabled = true,
     this.readOnly = false,
     this.initialValue,
+    this.onTapOutside,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTapOutside: onTapOutside,
       initialValue: initialValue,
       enabled: enabled,
       readOnly: readOnly,

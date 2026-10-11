@@ -5,34 +5,36 @@ class DoctorsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<DoctorBloc, DoctorState>(
+    return BlocConsumer<AdminDoctorsBloc, AdminDoctorsState>(
       buildWhen: (previous, current) =>
-          current is GetDoctorsSuccessState ||
-          current is GetDoctorsLoadingState,
+          current is AdminDoctorsSuccess ||
+          current is AdminDoctorsLoading,
       builder: (context, state) {
-        if (state is GetDoctorsSuccessState) {
-          if (state.allDoctors.isEmpty ||
-              (state.filteredDoctors?.isEmpty ?? false)) {
+        if (state is AdminDoctorsSuccess) {
+          if (state.allDoctors.isEmpty ) {
             return Expanded(child: _noDoctorFoundWidget(context: context));
           }
+           var doctorList = state.selectedSpecialty != null ? state.filteredDoctors : state.allDoctors;
+
           return Expanded(
             child: Column(
               mainAxisSize: .min,
               children: [
                 DefaultTabController(
+
                   length: state.specialtyCounts.length + 1,
                   child: TabBar(
                     overlayColor: WidgetStatePropertyAll(AppColors.transparent),
                     onTap: (index) {
                       if (index == 0) {
-                        context.read<DoctorBloc>().add(
-                          FilterDoctorsRequested(null),
+                        context.read<AdminDoctorsBloc>().add(
+                          const AdminFilterDoctorsRequested(null),
                         );
                       } else {
                         final specialty =
                             state.specialtyCounts[index - 1].keys.first;
-                        context.read<DoctorBloc>().add(
-                          FilterDoctorsRequested(specialty),
+                        context.read<AdminDoctorsBloc>().add(
+                          AdminFilterDoctorsRequested(specialty),
                         );
                       }
                     },
@@ -64,34 +66,22 @@ class DoctorsWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child:
-                      state.allDoctors.isEmpty &&
-                          (state.filteredDoctors?.isEmpty ?? false)
-                      ? _noDoctorFoundWidget(context: context)
-                      : SafeArea(
+                     SafeArea(
                           child: ListView.separated(
                             padding: EdgeInsets.all(20),
                             itemBuilder: (context, index) => GestureDetector(
                               onTap: () {
                                 AdminDoctorDetailsRoute(
-                                  _buildDoctorsList(
-                                    allDoctors: state.allDoctors,
-                                    filteredDoctors: state.filteredDoctors,
-                                  )[index],
+                                 doctorList[index]
                                 ).push(context);
                               },
                               child: DoctorCard(
-                                doctor: _buildDoctorsList(
-                                  allDoctors: state.allDoctors,
-                                  filteredDoctors: state.filteredDoctors,
-                                )[index],
+                                doctor: doctorList[index],
                               ),
                             ),
                             separatorBuilder: (context, index) =>
                                 SizedBox(height: 10),
-                            itemCount: _buildDoctorsList(
-                              allDoctors: state.allDoctors,
-                              filteredDoctors: state.filteredDoctors,
-                            ).length,
+                            itemCount: doctorList.length,
                           ),
                         ),
                 ),
@@ -101,9 +91,9 @@ class DoctorsWidget extends StatelessWidget {
         }
         return Expanded(child: AdminDoctorsShimmer());
       },
-      listenWhen: (previous, current) => current is GetDoctorsErrorState,
+      listenWhen: (previous, current) => current is AdminDoctorsError,
       listener: (context, state) {
-        if (state is GetDoctorsErrorState) {
+        if (state is AdminDoctorsError) {
           SnackBarUtils.showErrorSnackBar(
             context: context,
             message: state.message,
@@ -137,13 +127,13 @@ class DoctorsWidget extends StatelessWidget {
     );
   }
 
-  List<Doctor> _buildDoctorsList({
-    required List<Doctor> allDoctors,
-    required List<Doctor>? filteredDoctors,
-  }) {
-    if (filteredDoctors == null) {
-      return allDoctors;
-    }
-    return filteredDoctors;
-  }
+  // List<Doctor> _buildDoctorsList({
+  //   required List<Doctor> allDoctors,
+  //   required List<Doctor>? filteredDoctors,
+  // }) {
+  //   if (filteredDoctors == null) {
+  //     return allDoctors;
+  //   }
+  //   return filteredDoctors;
+  // }
 }

@@ -81,7 +81,9 @@ class AdminDoctorDetailsScreen extends HookWidget {
         foregroundColor: WidgetStatePropertyAll(AppColors.brandPrimary),
       ),
 
-      onPressed: () {},
+      onPressed: () {
+        DoctorAvailabilityRoute(doctor).push(context);
+      },
       label: Text(t.admin.doctor_details_screen.manage_availability),
     );
   }

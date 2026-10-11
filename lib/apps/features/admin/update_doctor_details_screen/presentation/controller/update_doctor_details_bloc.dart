@@ -8,6 +8,7 @@ import '../../../../../core/data/models/doctor/doctor.dart';
 import '../../../add_doctor_screen/data/repo/doctor_repository.dart';
 
 part 'update_doctor_details_event.dart';
+
 part 'update_doctor_details_state.dart';
 
 @injectable

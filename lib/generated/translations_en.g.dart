@@ -548,6 +548,9 @@ class Translations$admin$en {
   late final Translations$admin$settings$en settings = Translations$admin$settings$en.internal(_root);
   late final Translations$admin$add_doctor_screen$en add_doctor_screen = Translations$admin$add_doctor_screen$en.internal(_root);
   late final Translations$admin$doctor_details_screen$en doctor_details_screen = Translations$admin$doctor_details_screen$en.internal(_root);
+  late final Translations$admin$doctor_availability_screen$en doctor_availability_screen = Translations$admin$doctor_availability_screen$en.internal(
+    _root,
+  );
   late final Translations$admin$update_doctor_details$en update_doctor_details = Translations$admin$update_doctor_details$en.internal(_root);
   late final Translations$admin$profile_screen$en profile_screen = Translations$admin$profile_screen$en.internal(_root);
 }
@@ -777,6 +780,9 @@ class Translations$admin$doctors_tab$en {
 
   /// en: '-'
   String get dash => '-';
+
+  /// en: 'No doctor name or specialty match search'
+  String get no_doctor_name_or_specialty_match_search => 'No doctor name or specialty match search';
 }
 
 // Path: admin.appointments_tab
@@ -916,6 +922,48 @@ class Translations$admin$doctor_details_screen$en {
 
   /// en: '$ ${price}'
   String fee({required Object Price}) => '\$ ${Price}';
+}
+
+// Path: admin.doctor_availability_screen
+class Translations$admin$doctor_availability_screen$en {
+  Translations$admin$doctor_availability_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Availability'
+  String get doctor_availability => 'Doctor Availability';
+
+  /// en: 'Working Days'
+  String get working_days => 'Working Days';
+
+  /// en: 'Working Hours'
+  String get working_hours => 'Working Hours';
+
+  /// en: 'Start Time'
+  String get start_time => 'Start Time';
+
+  /// en: 'End Time'
+  String get end_time => 'End Time';
+
+  /// en: 'Slot Duration'
+  String get slot_duration => 'Slot Duration';
+
+  /// en: 'Save Availability'
+  String get save_availability => 'Save Availability';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Start time and end time must be different'
+  String get start_time_and_endtime_must_be_different => 'Start time and end time must be different';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
 }
 
 // Path: admin.update_doctor_details

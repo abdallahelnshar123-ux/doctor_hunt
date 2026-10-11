@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
@@ -17,6 +18,7 @@ import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screen
 import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/screens/patient_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/popular_doctor_screen/presentation/screens/popular_doctor_screen.dart';
@@ -26,6 +28,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
+import '../../features/admin/doctor_availability_screen/presentation/controller/doctor_availability_bloc.dart';
+import '../../features/admin/doctor_availability_screen/presentation/screens/doctor_availability_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
 import '../../features/common/auth/data/models/user/my_user.dart';
@@ -72,15 +76,9 @@ class PatientMainRoute extends GoRouteData with $PatientMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocProvider(
-      create: (context) => getIt<DoctorBloc>()
-        ..add(
-          GetDoctorsRequested(
-            userId: user?.id ?? '',
-            role: user?.role ?? UserRoles.patient,
-          ),
-        ),
+      create: (context) =>
+          getIt<PatientDoctorsBloc>()..add(const PatientDoctorsRequested()),
       child: const PatientMainScreen(),
     );
   }
@@ -94,13 +92,9 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
   Widget build(BuildContext context, GoRouterState state) {
     final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return BlocProvider(
-      create: (context) => getIt<DoctorBloc>()
-        ..add(
-          GetDoctorsRequested(
-            userId: user?.id ?? '',
-            role: user?.role ?? UserRoles.admin,
-          ),
-        ),
+      create: (context) =>
+          getIt<AdminDoctorsBloc>()
+            ..add(AdminGetDoctorsRequested(user?.id ?? '')),
       child: const AdminMainScreen(),
     );
   }
@@ -113,7 +107,7 @@ class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => getIt<DoctorBloc>(),
+      create: (context) => getIt<AddDoctorsBloc>(),
       child: AddDoctorScreen(),
     );
   }
@@ -242,6 +236,22 @@ class AdminUpdateDoctorDetailsRoute extends GoRouteData
     return BlocProvider(
       create: (context) => getIt<UpdateDoctorDetailsBloc>(),
       child: UpdateDoctorDetailsScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<DoctorAvailabilityRoute>(path: '/doctor_availability')
+class DoctorAvailabilityRoute extends GoRouteData
+    with $DoctorAvailabilityRoute {
+  const DoctorAvailabilityRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<DoctorAvailabilityBloc>(),
+      child: DoctorAvailabilityScreen(doctor: $extra),
     );
   }
 }

@@ -237,7 +237,8 @@
       "active": "Active",
       "inactive": "Inactive",
       "all": "All",
-      "dash": "-"
+      "dash": "-",
+      "noDoctorNameOrSpecialtyMatchSearch": "No doctor name or specialty match search"
     },
     "appointmentsTab": {
       "title": "Appointments",
@@ -266,8 +267,8 @@
       "doctorName": "Doctor name",
       "specialty": "Specialty",
       "consultationFee": "Consultation fee",
-      "nameExample" : "e.g. Dr. Ahmed Ali",
-      "feeExample" : "e.g. $ 28.00"
+      "nameExample": "e.g. Dr. Ahmed Ali",
+      "feeExample": "e.g. $ 28.00"
     },
     "doctorDetailsScreen": {
       "doctorDetails": "Doctor details",
@@ -280,6 +281,19 @@
       "rating": "Rating",
       "Consultation Fee": "Consultation Fee",
       "fee": "$ ${price}"
+    },
+    "doctorAvailabilityScreen": {
+      "doctorAvailability": "Doctor Availability",
+      "workingDays": "Working Days",
+      "workingHours": "Working Hours",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "slotDuration": "Slot Duration",
+      "saveAvailability": "Save Availability",
+      "active": "Active",
+      "inactive": "Inactive",
+      "startTimeAndEndtimeMustBeDifferent": "Start time and end time must be different",
+      "dataWasUpdatedSuccessfully": "Data was updated successfully"
     },
     "updateDoctorDetails": {
       "doctorWasUpdatedSuccessfully": "Doctor was Updated Successfully",

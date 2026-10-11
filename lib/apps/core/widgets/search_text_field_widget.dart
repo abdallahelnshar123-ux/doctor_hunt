@@ -11,6 +11,9 @@ class SearchTextFieldWidget extends StatelessWidget {
   final Widget? suffixIcon;
   final String? hintText;
   final double? borderRadius;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final void Function(PointerDownEvent)? onTapOutside;
 
   const SearchTextFieldWidget({
     super.key,
@@ -18,6 +21,9 @@ class SearchTextFieldWidget extends StatelessWidget {
     this.suffixIcon,
     this.borderRadius,
     this.hintText,
+    this.focusNode,
+    this.controller,
+    this.onTapOutside,
   });
 
   @override
@@ -25,6 +31,9 @@ class SearchTextFieldWidget extends StatelessWidget {
     return AppContainerWithShadow(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
       child: CustomTextFormField(
+        onTapOutside: onTapOutside,
+        focusNode: focusNode,
+        controller: controller,
         borderSideColor: AppColors.transparent,
         suffixIcon: suffixIcon,
         onChanged: onChanged,

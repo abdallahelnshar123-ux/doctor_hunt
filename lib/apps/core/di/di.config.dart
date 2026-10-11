@@ -21,10 +21,14 @@ import '../../features/admin/add_doctor_screen/data/repo/doctor_repository.dart'
     as _i932;
 import '../../features/admin/add_doctor_screen/data/service/doctor_firestore_service.dart'
     as _i353;
-import '../../features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart'
-    as _i546;
+import '../../features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart'
+    as _i233;
+import '../../features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart'
+    as _i900;
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
     as _i90;
+import '../../features/admin/doctor_availability_screen/presentation/controller/doctor_availability_bloc.dart'
+    as _i821;
 import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
     as _i879;
 import '../../features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart'
@@ -39,6 +43,10 @@ import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i613;
 import '../../features/common/auth/presentation/controller/user/user_bloc.dart'
     as _i15;
+import '../../features/patient/appointment_screen/data/use_case/generate_doctor_slots_use_case.dart'
+    as _i161;
+import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
+    as _i485;
 import '../../features/patient/patient_profile_screen/data/repo/user_repository.dart'
     as _i96;
 import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
@@ -65,6 +73,9 @@ extension GetItInjectableX on _i174.GetIt {
     await gh.factoryAsync<_i460.SharedPreferences>(
       () => localStorageModule.sharedPreferences,
       preResolve: true,
+    );
+    gh.factory<_i161.GenerateDoctorSlotsUseCase>(
+      () => _i161.GenerateDoctorSlotsUseCase(),
     );
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
@@ -106,14 +117,23 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i583.UserSessionManager>(
       () => _i583.UserSessionManager(gh<_i708.UserPrefs>()),
     );
-    gh.factory<_i546.DoctorBloc>(
-      () => _i546.DoctorBloc(gh<_i932.DoctorRepository>()),
+    gh.factory<_i233.AddDoctorsBloc>(
+      () => _i233.AddDoctorsBloc(gh<_i932.DoctorRepository>()),
+    );
+    gh.factory<_i900.AdminDoctorsBloc>(
+      () => _i900.AdminDoctorsBloc(gh<_i932.DoctorRepository>()),
+    );
+    gh.factory<_i821.DoctorAvailabilityBloc>(
+      () => _i821.DoctorAvailabilityBloc(gh<_i932.DoctorRepository>()),
     );
     gh.factory<_i879.AdminDoctorActionBloc>(
       () => _i879.AdminDoctorActionBloc(gh<_i932.DoctorRepository>()),
     );
     gh.factory<_i514.UpdateDoctorDetailsBloc>(
       () => _i514.UpdateDoctorDetailsBloc(gh<_i932.DoctorRepository>()),
+    );
+    gh.factory<_i485.PatientDoctorsBloc>(
+      () => _i485.PatientDoctorsBloc(gh<_i932.DoctorRepository>()),
     );
     gh.lazySingleton<_i959.AuthRepository>(
       () => _i959.AuthRepository(

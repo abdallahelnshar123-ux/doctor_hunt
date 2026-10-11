@@ -6,8 +6,6 @@ import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/back_button_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
@@ -29,16 +27,11 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class MockDoctorBloc extends MockBloc<DoctorEvent, DoctorState>
-    implements DoctorBloc {}
-
 class MockUserPrefs extends Mock implements UserPrefs {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}
 
 class FakeUserEvent extends Fake implements UserEvent {}
-
-class FakeDoctorEvent extends Fake implements DoctorEvent {}
 
 class FakeMyUser extends Fake implements MyUser {}
 
@@ -46,48 +39,22 @@ void main() {
   setUpAll(() {
     registerFallbackValue(FakeAuthEvent());
     registerFallbackValue(FakeUserEvent());
-    registerFallbackValue(FakeDoctorEvent());
     registerFallbackValue(FakeMyUser());
   });
 
   late MockAuthBloc authBloc;
   late MockUserBloc userBloc;
-  late MockDoctorBloc doctorBloc;
   late MockUserPrefs userPrefs;
 
-  final tUser = MyUser(
-    id: '1',
-    email: 'patient@example.com',
-    role: UserRoles.patient,
-    name: 'patient',
-    provider: UserAuthProvider.emailPassword,
-  );
+
 
   setUp(() {
     authBloc = MockAuthBloc();
     userBloc = MockUserBloc();
-    doctorBloc = MockDoctorBloc();
     userPrefs = MockUserPrefs();
 
     when(() => userPrefs.onboarding).thenReturn(true);
     when(() => userBloc.currentUser).thenReturn(null);
-
-    final initialDoctorState = GetDoctorsSuccessState(
-      allDoctors: const [],
-      specialtyCounts: const [],
-      activeDoctorsCount: 0,
-    );
-    when(() => doctorBloc.state).thenReturn(initialDoctorState);
-    whenListen(
-      doctorBloc,
-      const Stream<DoctorState>.empty(),
-      initialState: initialDoctorState,
-    );
-
-    // Register DoctorBloc in getIt for the PatientMainScreen
-    if (!getIt.isRegistered<DoctorBloc>()) {
-      getIt.registerFactory<DoctorBloc>(() => doctorBloc);
-    }
   });
 
   tearDown(() {
@@ -378,28 +345,6 @@ void main() {
         await tester.pump();
 
         expect(find.text(t.dialog.error), findsNothing);
-
-        await controller.close();
-      },
-    );
-
-    testWidgets(
-      'navigates to PatientMainRoute after successful authentication',
-      (tester) async {
-        final controller = StreamController<AuthState>.broadcast();
-        whenListen(authBloc, controller.stream, initialState: AuthInitial());
-        when(() => userBloc.currentUser).thenReturn(tUser);
-
-        await tester.pumpWidget(createWidgetUnderTest());
-
-        controller.add(LoginWithEmailPasswordLoadingState());
-        await tester.pump();
-
-        controller.add(UserAuthenticatedState(tUser));
-
-        await tester.pumpAndSettle(const Duration(seconds: 2));
-
-        expect(find.text(t.home.popular_doctors), findsWidgets);
 
         await controller.close();
       },

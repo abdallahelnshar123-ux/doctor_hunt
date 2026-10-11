@@ -44,27 +44,23 @@ class AdminAppointmentsTab extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     ListView.separated(
-                      
-                      itemBuilder: (context, index) =>
-                          PatientAppointmentCard(),
+                      itemBuilder: (context, index) => PatientAppointmentCard(),
                       separatorBuilder: (context, index) =>
-                      const SizedBox(height: 15),
+                          const SizedBox(height: 15),
                       itemCount: 10,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                     ),
                     ListView.separated(
-                      itemBuilder: (context, index) =>
-                          PatientAppointmentCard(),
+                      itemBuilder: (context, index) => PatientAppointmentCard(),
                       separatorBuilder: (context, index) =>
-                      const SizedBox(height: 15),
+                          const SizedBox(height: 15),
                       itemCount: 10,
                       padding: const EdgeInsets.all(20),
                     ),
                     ListView.separated(
-                      itemBuilder: (context, index) =>
-                          PatientAppointmentCard(),
+                      itemBuilder: (context, index) => PatientAppointmentCard(),
                       separatorBuilder: (context, index) =>
-                      const SizedBox(height: 15),
+                          const SizedBox(height: 15),
                       itemCount: 10,
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                     ),

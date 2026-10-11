@@ -8,11 +8,7 @@ class ReviewDto extends Equatable {
   final int rating;
   final String? comment;
 
-  const ReviewDto({
-    required this.reviewer,
-    required this.rating,
-    this.comment,
-  });
+  const ReviewDto({required this.reviewer, required this.rating, this.comment});
 
   factory ReviewDto.fromFireStore(Map<String, dynamic> data) {
     return ReviewDto(

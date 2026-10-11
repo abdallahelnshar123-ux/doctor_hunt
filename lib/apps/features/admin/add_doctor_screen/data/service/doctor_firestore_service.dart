@@ -74,6 +74,35 @@ class DoctorFirestoreService {
         });
   }
 
+  // Future<List<DoctorDto>> searchDoctors({
+  //   required String adminId,
+  //   required String query,
+  // }) async {
+  //   try {
+  //     final snapshot = await _getDoctorsCollection()
+  //         .where(FirestoreConstants.adminId, isEqualTo: adminId)
+  //         .where(FirestoreConstants.name, arrayContains: query)
+  //         .where(FirestoreConstants.specialty, arrayContains: query).get();
+  //     final allDoctors = snapshot.docs.map((doc) => doc.data()).toList();
+  //     return allDoctors;
+  //     // return allDoctors.where((doctor) {
+  //     //   final nameMatches = doctor.name.toLowerCase().contains(
+  //     //     query.toLowerCase(),
+  //     //   );
+  //     //   final specialtyMatches = doctor.specialty.name.toLowerCase().contains(
+  //     //     query.toLowerCase(),
+  //     //   );
+  //     //   return nameMatches || specialtyMatches;
+  //     // }).toList();
+  //   } on FirebaseException catch (e) {
+  //     throw ServerException(message: e.message ?? t.errors.server_error);
+  //   } on SocketException {
+  //     throw NetworkException(message: t.errors.no_internet);
+  //   } catch (e) {
+  //     throw UnexpectedException(message: e.toString());
+  //   }
+  // }
+
   Future<void> updateDoctorActiveStatus({
     required String doctorId,
     required bool active,

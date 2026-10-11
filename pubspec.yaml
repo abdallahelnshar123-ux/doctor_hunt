@@ -69,6 +69,8 @@ dependencies:
   buttons_tabbar:
     git:
       url: https://github.com/abdallahelnshar123-ux/buttons_tabbar.git
+  stream_transform: ^2.1.2
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:

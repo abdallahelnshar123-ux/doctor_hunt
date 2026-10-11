@@ -36,6 +36,11 @@ class FirestoreConstants {
   static const String reviews = 'reviews';
   static const String reviewer = 'reviewer';
   static const String comment = 'comment';
+  static const String availability = 'availability';
+  static const String workingDays = 'working_days';
+  static const String startTime = 'start_time';
+  static const String endTime = 'end_time';
+  static const String slotDuration = 'slot_duration';
 
   // static const String password = 'password';
   static const String active = 'active';

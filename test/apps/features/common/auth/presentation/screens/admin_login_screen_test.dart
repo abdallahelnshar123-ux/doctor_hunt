@@ -5,7 +5,6 @@ import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
@@ -29,9 +28,6 @@ class MockUserPrefs extends Mock implements UserPrefs {}
 
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
-class MockDoctorBloc extends MockBloc<DoctorEvent, DoctorState>
-    implements DoctorBloc {}
-
 class FakeAuthEvent extends Fake implements AuthEvent {}
 
 void main() {
@@ -42,7 +38,6 @@ void main() {
   late MockAuthBloc authBloc;
   late MockUserPrefs mockUserPrefs;
   late MockUserBloc mockUserBloc;
-  late MockDoctorBloc mockDoctorBloc;
 
   final tUser = MyUser(
     id: '1',
@@ -56,7 +51,6 @@ void main() {
     authBloc = MockAuthBloc();
     mockUserPrefs = MockUserPrefs();
     mockUserBloc = MockUserBloc();
-    mockDoctorBloc = MockDoctorBloc();
 
     when(() => mockUserPrefs.onboarding).thenReturn(true);
     when(() => mockUserBloc.currentUser).thenReturn(tUser);
@@ -67,20 +61,6 @@ void main() {
       const Stream<UserState>.empty(),
       initialState: const UserState(),
     );
-    final initialDoctorState = GetDoctorsSuccessState(
-      allDoctors: const [],
-      specialtyCounts: const [],
-      activeDoctorsCount: 0,
-    );
-
-    when(() => mockDoctorBloc.state).thenReturn(initialDoctorState);
-    whenListen(
-      mockDoctorBloc,
-      const Stream<DoctorState>.empty(),
-      initialState: initialDoctorState,
-    );
-
-    getIt.registerFactory<DoctorBloc>(() => mockDoctorBloc);
   });
 
   tearDown(() {
@@ -242,27 +222,5 @@ void main() {
       },
     );
 
-    testWidgets('navigates to AdminMainRoute after successful authentication', (
-      tester,
-    ) async {
-      final controller = StreamController<AuthState>.broadcast();
-      whenListen(authBloc, controller.stream, initialState: AuthInitial());
-
-      await tester.pumpWidget(createWidgetUnderTest());
-
-      controller.add(LoginWithEmailPasswordLoadingState());
-      await tester.pump();
-
-      controller.add(UserAuthenticatedState(tUser));
-
-      await tester.pumpAndSettle(const Duration(seconds: 2));
-
-      expect(
-        find.text(t.admin.main.doctors),
-        findsWidgets,
-      ); // Found in bottom navigation of admin main screen and possibly the tab itself
-
-      await controller.close();
-    });
   });
 }

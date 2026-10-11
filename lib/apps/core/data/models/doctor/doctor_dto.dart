@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/constants/firestore_constants.dart';
 import 'doctor.dart';
+import 'doctor_availability_dto.dart';
 import 'rating_dto.dart';
 
 class DoctorDto extends Equatable {
@@ -13,6 +14,7 @@ class DoctorDto extends Equatable {
   final String? imageUrl;
   final double consultationFee;
   final RatingDto rating;
+  final DoctorAvailabilityDto? availability;
 
   const DoctorDto({
     required this.id,
@@ -22,6 +24,7 @@ class DoctorDto extends Equatable {
     required this.active,
     required this.consultationFee,
     required this.rating,
+    this.availability,
     this.imageUrl,
   });
 
@@ -31,6 +34,7 @@ class DoctorDto extends Equatable {
     String? image,
     double? consultationFee,
     RatingDto? rating,
+    DoctorAvailabilityDto? availability,
   }) {
     return DoctorDto(
       id: id ?? this.id,
@@ -41,6 +45,7 @@ class DoctorDto extends Equatable {
       consultationFee: consultationFee ?? this.consultationFee,
       rating: rating ?? this.rating,
       imageUrl: image ?? imageUrl,
+      availability: availability ?? this.availability,
     );
   }
 
@@ -60,6 +65,11 @@ class DoctorDto extends Equatable {
       rating: RatingDto.fromFireStore(
         Map<String, dynamic>.from(data[FirestoreConstants.rating] ?? {}),
       ),
+      availability: data[FirestoreConstants.availability] != null
+          ? DoctorAvailabilityDto.fromFireStore(
+              Map<String, dynamic>.from(data[FirestoreConstants.availability]),
+            )
+          : null,
     );
   }
 
@@ -73,6 +83,8 @@ class DoctorDto extends Equatable {
       FirestoreConstants.active: active,
       FirestoreConstants.consultationFee: consultationFee,
       FirestoreConstants.rating: rating.toFireStore(),
+      if (availability != null)
+        FirestoreConstants.availability: availability!.toFireStore(),
     };
   }
 
@@ -86,13 +98,14 @@ class DoctorDto extends Equatable {
 
   @override
   List<Object?> get props => [
-        name,
-        id,
-        adminId,
-        specialty,
-        active,
-        imageUrl,
-        consultationFee,
-        rating,
-      ];
+    name,
+    id,
+    adminId,
+    specialty,
+    active,
+    imageUrl,
+    consultationFee,
+    rating,
+    availability,
+  ];
 }

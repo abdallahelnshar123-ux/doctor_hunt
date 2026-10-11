@@ -19,9 +19,9 @@ class StatusWidget extends StatelessWidget {
               ),
               child: buildListTile(
                 title: t.admin.doctors_tab.total_doctors,
-                number: context.select<DoctorBloc, String>((bloc) {
+                number: context.select<AdminDoctorsBloc, String>((bloc) {
                   final currentState = bloc.state;
-                  return currentState is GetDoctorsSuccessState
+                  return currentState is AdminDoctorsSuccess
                       ? currentState.allDoctors.length.toString()
                       : t.admin.doctors_tab.dash;
                 }),
@@ -37,14 +37,14 @@ class StatusWidget extends StatelessWidget {
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: BlocBuilder<DoctorBloc, DoctorState>(
+              child: BlocBuilder<AdminDoctorsBloc, AdminDoctorsState>(
                 buildWhen: (previous, current) =>
-                    current is GetDoctorsSuccessState ||
-                    current is GetDoctorsLoadingState,
+                    current is AdminDoctorsSuccess ||
+                    current is AdminDoctorsLoading,
                 builder: (context, state) {
                   return buildListTile(
                     title: t.admin.doctors_tab.active,
-                    number: state is GetDoctorsSuccessState
+                    number: state is AdminDoctorsSuccess
                         ? state.activeDoctorsCount.toString()
                         : '-',
                     context: context,

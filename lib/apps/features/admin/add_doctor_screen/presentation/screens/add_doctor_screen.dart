@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -31,7 +31,7 @@ class AddDoctorScreen extends HookWidget {
     final selectedImage = useRef<File?>(null);
     final selectedSpecialty = useRef<Specialty?>(null);
     final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
-    return BlocListener<DoctorBloc, DoctorState>(
+    return BlocListener<AddDoctorsBloc, AddDoctorsState>(
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||
           current is AddDoctorErrorState ||
@@ -81,7 +81,7 @@ class AddDoctorScreen extends HookWidget {
               buildUploadImage(context),
               TextButton(
                 onPressed: () {
-                  context.read<DoctorBloc>().add(PickDoctorImageRequested());
+                  context.read<AddDoctorsBloc>().add(PickDoctorImageRequested());
                 },
                 child: Text(
                   t.create_doctor.add_photo,
@@ -202,7 +202,7 @@ class AddDoctorScreen extends HookWidget {
             );
             return;
           }
-          context.read<DoctorBloc>().add(
+          context.read<AddDoctorsBloc>().add(
             AddDoctorRequested(
               name: nameController.text.trim(),
               specialty: selectedSpecialty.value!,
@@ -228,7 +228,7 @@ class AddDoctorScreen extends HookWidget {
       width: 120,
       height: 120,
       alignment: .center,
-      child: BlocBuilder<DoctorBloc, DoctorState>(
+      child: BlocBuilder<AddDoctorsBloc, AddDoctorsState>(
         buildWhen: (previous, current) =>
             current is PickDoctorImageSuccessState,
         builder: (context, state) {

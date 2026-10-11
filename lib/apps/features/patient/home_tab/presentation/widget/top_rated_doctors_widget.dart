@@ -5,7 +5,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../admin/add_doctor_screen/presentation/controller/doctor_bloc.dart';
+import '../controller/patient_doctors_bloc.dart';
 import 'top_rated_doctors_item.dart';
 
 class TopRatedDoctorsWidget extends StatelessWidget {
@@ -25,14 +25,14 @@ class TopRatedDoctorsWidget extends StatelessWidget {
             style: context.medium18.textTertiary.rubik,
           ),
         ),
-        BlocBuilder<DoctorBloc, DoctorState>(
+        BlocBuilder<PatientDoctorsBloc, PatientDoctorsState>(
           buildWhen: (previous, current) =>
-              current is GetDoctorsSuccessState ||
-              current is GetDoctorsLoadingState,
+              current is PatientDoctorsSuccess ||
+              current is PatientDoctorsLoading,
 
           builder: (context, state) {
-            if (state is GetDoctorsSuccessState) {
-              if (state.allDoctors.isEmpty) {
+            if (state is PatientDoctorsSuccess) {
+              if (state.doctors.isEmpty) {
                 return Container(
                   alignment: .center,
                   height: 190,
@@ -48,7 +48,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ListView.separated(
                   itemBuilder: (context, index) {
-                    var doctor = state.allDoctors[index];
+                    var doctor = state.doctors[index];
                     return GestureDetector(
                       onTap: () {
                         PatientDoctorDetailsRoute(doctor).push(context);
@@ -58,7 +58,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
                   },
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 15),
-                  itemCount: state.allDoctors.length,
+                  itemCount: state.doctors.length,
                   scrollDirection: .horizontal,
                   padding: const EdgeInsets.all(20),
                 ),
