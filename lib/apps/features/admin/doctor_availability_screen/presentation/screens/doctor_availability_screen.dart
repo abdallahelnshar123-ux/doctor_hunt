@@ -161,7 +161,8 @@ class DoctorAvailabilityScreen extends HookWidget {
               Expanded(
                 child: TimeDropDown(
                   initialSelection: startTime.value,
-                  onSelected: (value) => startTime.value = WorkingHour.values
+                  onSelected: (value) =>
+                  startTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
                   title: t.admin.doctor_availability_screen.start_time,
                 ),
@@ -169,7 +170,8 @@ class DoctorAvailabilityScreen extends HookWidget {
               Expanded(
                 child: TimeDropDown(
                   initialSelection: endTime.value,
-                  onSelected: (value) => endTime.value = WorkingHour.values
+                  onSelected: (value) =>
+                  endTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
                   title: t.admin.doctor_availability_screen.end_time,
                 ),
@@ -178,7 +180,8 @@ class DoctorAvailabilityScreen extends HookWidget {
           ),
           SlotDurationDropDown(
             initialSelection: slotDuration.value,
-            onSelected: (value) => slotDuration.value = SlotDuration.values
+            onSelected: (value) =>
+            slotDuration.value = SlotDuration.values
                 .firstWhere((element) => element.name == value),
             title: t.admin.doctor_availability_screen.slot_duration,
           ),
@@ -207,7 +210,8 @@ class DoctorAvailabilityScreen extends HookWidget {
         itemBuilder: (context, index) {
           var workingDaysList = WorkingDay.values
               .map(
-                (day) => ValueListenableBuilder(
+                (day) =>
+                ValueListenableBuilder(
                   valueListenable: workingDays,
                   builder: (context, workingDaysValue, child) {
                     bool isActive = workingDaysValue.contains(day);
@@ -249,7 +253,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                     );
                   },
                 ),
-              )
+          )
               .toList();
           return workingDaysList[index];
         },
@@ -287,61 +291,61 @@ class DoctorAvailabilityScreen extends HookWidget {
           ),
           Expanded(
             child: Column(
-              mainAxisAlignment: .spaceBetween,
               crossAxisAlignment: .start,
               children: [
-                Row(
-                  crossAxisAlignment: .center,
-                  mainAxisAlignment: .spaceBetween,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        text: '${doctor.name}\n',
-                        style: context.medium18.textTertiary.rubik,
-                        children: [
-                          TextSpan(
-                            text: doctor.specialty.name,
-                            style: context.light14.textSecondary.rubik,
-                          ),
-                        ],
-                      ),
-                      overflow: .ellipsis,
-                    ),
-                    Chip(
-                      padding: EdgeInsets.all(5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      side: BorderSide(width: 0, color: AppColors.transparent),
-                      backgroundColor:
-                          // AppColors.black,
-                          doctor.active
-                          ? AppColors.brandPrimary20
-                          : AppColors.statusErrorSurface,
-                      avatarBoxConstraints: .tightFor(width: 15),
-                      avatar: Icon(
-                        Icons.circle,
-                        size: 10,
-                        color:
-                            // AppColors.black,
-                            doctor.active
-                            ? AppColors.brandPrimaryDark
-                            : AppColors.statusError,
-                      ),
-                      label: Text(
-                        doctor.active
-                            ? t.admin.doctor_availability_screen.active
-                            : t.admin.doctor_availability_screen.inactive,
-                        style:
-                            // context.regular10.statusError.rubik,
-                            doctor.active
-                            ? context.medium10.brandPrimaryDark.rubik
-                            : context.regular10.statusError.rubik,
-                      ),
-                    ),
-                  ],
-                ),
+                Text(doctor.name,
+                  style: context.medium16.textPrimary.rubik,
+                  overflow: .ellipsis,),
+                Text(doctor.specialty.name,
+                  style: context.light14.textSecondary.rubik,
+                  overflow: .ellipsis,),
               ],
+            ),
+          ) ,
+          // Text.rich(
+          //   TextSpan(
+          //     text: '${doctor.name}\n',
+          //     style: context.medium16.textTertiary.rubik,
+          //     children: [
+          //       TextSpan(
+          //         text: doctor.specialty.name,
+          //         style: context.light14.textSecondary.rubik,
+          //       ),
+          //     ],
+          //   ),
+          //   overflow: .ellipsis,
+          //   softWrap: true,
+          // ),
+          Chip(
+            padding: EdgeInsets.all(5),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            side: BorderSide(width: 0, color: AppColors.transparent),
+            backgroundColor:
+            // AppColors.black,
+            doctor.active
+                ? AppColors.brandPrimary20
+                : AppColors.statusErrorSurface,
+            avatarBoxConstraints: .tightFor(width: 15),
+            avatar: Icon(
+              Icons.circle,
+              size: 10,
+              color:
+              // AppColors.black,
+              doctor.active
+                  ? AppColors.brandPrimaryDark
+                  : AppColors.statusError,
+            ),
+            label: Text(
+              doctor.active
+                  ? t.admin.doctor_availability_screen.active
+                  : t.admin.doctor_availability_screen.inactive,
+              style:
+              // context.regular10.statusError.rubik,
+              doctor.active
+                  ? context.medium10.brandPrimaryDark.rubik
+                  : context.regular10.statusError.rubik,
             ),
           ),
         ],

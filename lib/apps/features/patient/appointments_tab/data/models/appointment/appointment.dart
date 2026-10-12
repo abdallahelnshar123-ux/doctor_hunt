@@ -8,8 +8,8 @@ class Appointment extends Equatable {
   final String id;
   final MyUser patient;
   final Doctor doctor;
-  final String date;
-  final String time;
+  final DateTime sessionTime;
+  final DateTime createdAt;
   final double fee;
   final AppointmentStatus status;
 
@@ -17,8 +17,8 @@ class Appointment extends Equatable {
     required this.id,
     required this.patient,
     required this.doctor,
-    required this.date,
-    required this.time,
+    required this.sessionTime,
+    required this.createdAt,
     required this.fee,
     required this.status,
   });
@@ -27,8 +27,8 @@ class Appointment extends Equatable {
     String? id,
     MyUser? patient,
     Doctor? doctor,
-    String? date,
-    String? time,
+    DateTime? sessionTime,
+    DateTime? createdAt,
     double? fee,
     AppointmentStatus? status,
   }) {
@@ -36,13 +36,21 @@ class Appointment extends Equatable {
       id: id ?? this.id,
       patient: patient ?? this.patient,
       doctor: doctor ?? this.doctor,
-      date: date ?? this.date,
-      time: time ?? this.time,
+      sessionTime: sessionTime ?? this.sessionTime,
+      createdAt: createdAt ?? this.createdAt,
       fee: fee ?? this.fee,
       status: status ?? this.status,
     );
   }
 
   @override
-  List<Object?> get props => [id, patient, doctor, date, time, fee, status];
+  List<Object?> get props => [
+        id,
+        patient,
+        doctor,
+        sessionTime,
+        createdAt,
+        fee,
+        status,
+      ];
 }

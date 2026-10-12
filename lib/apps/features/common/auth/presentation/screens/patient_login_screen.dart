@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/widgets/main_app_bar.dart';
@@ -170,7 +171,7 @@ class PatientLoginScreen extends HookWidget {
     TextEditingController passwordController,
   ) {
     return CustomElevatedButton(
-      buttonWidth: MediaQuery.sizeOf(context).width - 80,
+      buttonWidth: context.width - 80,
       onPressed: () {
         if (formKey.currentState?.validate() ?? false) {
           context.read<AuthBloc>().add(

@@ -105,6 +105,29 @@ class AdminDoctorsTab extends HookWidget {
             //     ? state.allDoctors
             //     : (state.filteredDoctors ?? state.allDoctors);
 
+            if (state.allDoctors.isEmpty) {
+              return ListView(
+                padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
+                children: [
+                  // Image.asset(
+                  //   AppAssets.images.noDoctorsFoundImage.path,
+                  //   width: context.width / 4,
+                  //   height: context.width / 4,
+                  //   fit: BoxFit.fitHeight,
+                  // ),
+                  Text(
+                    t.admin.doctors_tab.no_doctors,
+                    style: context.bold16.textPrimary.rubik.copyWith(height: 2),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    t.admin.doctors_tab.no_doctors_to_search_add_some,
+                    style: context.regular12.textSecondary.rubik,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              );
+            }
             if (state.searchDoctors.isEmpty) {
               return ListView(
                 padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),

@@ -233,6 +233,24 @@ class Translations$select_time$en with PageData2 {
 
   /// en: 'No slots available'
   String get no_slots_available => 'No slots available';
+
+  /// en: '${number} Slot available'
+  String slot_available({required Object Number}) => '${Number} Slot available';
+
+  /// en: 'Morning ${number} Slots'
+  String morning_slots({required Object Number}) => 'Morning ${Number} Slots';
+
+  /// en: 'Afternoon ${number} Slots'
+  String afternoon_slots({required Object Number}) => 'Afternoon ${Number} Slots';
+
+  /// en: 'Evening ${number} Slots'
+  String evening_slots({required Object Number}) => 'Evening ${Number} Slots';
+
+  /// en: 'Confirm'
+  String get confirm => 'Confirm';
+
+  /// en: 'You must select appointment time'
+  String get you_must_select_appointment_time => 'You must select appointment time';
 }
 
 // Path: home
@@ -592,6 +610,15 @@ class Translations$errors$en {
 
   /// en: 'Cancelled by user'
   String get cancelled_by_user => 'Cancelled by user';
+
+  /// en: 'Failed to fetch appointments ${e}'
+  String failed_to_fetch_appointments({required Object E}) => 'Failed to fetch appointments ${E}';
+
+  /// en: 'Failed to book appointment ${e}'
+  String failed_to_book_appointment({required Object E}) => 'Failed to book appointment ${E}';
+
+  /// en: 'User not logged in'
+  String get user_not_logged_in => 'User not logged in';
 }
 
 // Path: e_codes
@@ -783,6 +810,12 @@ class Translations$admin$doctors_tab$en {
 
   /// en: 'No doctor name or specialty match search'
   String get no_doctor_name_or_specialty_match_search => 'No doctor name or specialty match search';
+
+  /// en: 'No doctors'
+  String get no_doctors => 'No doctors';
+
+  /// en: 'No doctors to search add some'
+  String get no_doctors_to_search_add_some => 'No doctors to search add some';
 }
 
 // Path: admin.appointments_tab

@@ -11,8 +11,8 @@ extension AppointmentMapper on AppointmentDto {
       id: id,
       patient: patient.toUser(),
       doctor: doctor.toDoctor(),
-      date: date,
-      time: time,
+      sessionTime: sessionTime,
+      createdAt: createdAt,
       fee: fee,
       status: status,
     );
@@ -25,8 +25,8 @@ extension AppointmentDtoMapper on Appointment {
       id: id,
       patient: patient.toMyUserDto(),
       doctor: doctor.toDoctorDto(),
-      date: date,
-      time: time,
+      sessionTime: sessionTime,
+      createdAt: createdAt,
       fee: fee,
       status: status,
     );

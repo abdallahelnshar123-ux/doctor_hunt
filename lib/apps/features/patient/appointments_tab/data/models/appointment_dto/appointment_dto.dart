@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_dto.dart';
@@ -11,8 +12,8 @@ class AppointmentDto extends Equatable {
   final String id;
   final MyUserDto patient;
   final DoctorDto doctor;
-  final String date;
-  final String time;
+  final DateTime sessionTime;
+  final DateTime createdAt;
   final double fee;
   final AppointmentStatus status;
 
@@ -20,8 +21,8 @@ class AppointmentDto extends Equatable {
     required this.id,
     required this.patient,
     required this.doctor,
-    required this.date,
-    required this.time,
+    required this.sessionTime,
+    required this.createdAt,
     required this.fee,
     required this.status,
   });
@@ -52,8 +53,12 @@ class AppointmentDto extends Equatable {
               consultationFee: 0.0,
               rating: RatingDto(rating: 0.0, reviews: []),
             ),
-      date: data[FirestoreConstants.date]?.toString() ?? '',
-      time: data[FirestoreConstants.time]?.toString() ?? '',
+      sessionTime: data[FirestoreConstants.sessionTime] is Timestamp
+          ? (data[FirestoreConstants.sessionTime] as Timestamp).toDate()
+          : DateTime.now(),
+      createdAt: data[FirestoreConstants.createdAt] is Timestamp
+          ? (data[FirestoreConstants.createdAt] as Timestamp).toDate()
+          : DateTime.now(),
       fee: (data[FirestoreConstants.fee] as num?)?.toDouble() ?? 0.0,
       status: data[FirestoreConstants.status] != null
           ? AppointmentStatus.values.firstWhere(
@@ -69,8 +74,8 @@ class AppointmentDto extends Equatable {
       FirestoreConstants.id: id,
       FirestoreConstants.patient: patient.toFireStore(),
       FirestoreConstants.doctor: doctor.toFireStore(),
-      FirestoreConstants.date: date,
-      FirestoreConstants.time: time,
+      FirestoreConstants.sessionTime: Timestamp.fromDate(sessionTime),
+      FirestoreConstants.createdAt: Timestamp.fromDate(createdAt),
       FirestoreConstants.fee: fee,
       FirestoreConstants.status: status.name,
     };
@@ -88,8 +93,8 @@ class AppointmentDto extends Equatable {
     String? id,
     MyUserDto? patient,
     DoctorDto? doctor,
-    String? date,
-    String? time,
+    DateTime? sessionTime,
+    DateTime? createdAt,
     double? fee,
     AppointmentStatus? status,
   }) {
@@ -97,13 +102,21 @@ class AppointmentDto extends Equatable {
       id: id ?? this.id,
       patient: patient ?? this.patient,
       doctor: doctor ?? this.doctor,
-      date: date ?? this.date,
-      time: time ?? this.time,
+      sessionTime: sessionTime ?? this.sessionTime,
+      createdAt: createdAt ?? this.createdAt,
       fee: fee ?? this.fee,
       status: status ?? this.status,
     );
   }
 
   @override
-  List<Object?> get props => [id, patient, doctor, date, time, fee, status];
+  List<Object?> get props => [
+        id,
+        patient,
+        doctor,
+        sessionTime,
+        createdAt,
+        fee,
+        status,
+      ];
 }

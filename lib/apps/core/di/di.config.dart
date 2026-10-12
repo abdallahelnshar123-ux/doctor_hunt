@@ -43,14 +43,22 @@ import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i613;
 import '../../features/common/auth/presentation/controller/user/user_bloc.dart'
     as _i15;
-import '../../features/patient/appointment_screen/data/use_case/generate_doctor_slots_use_case.dart'
-    as _i161;
 import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
-    as _i485;
+    as _i486;
 import '../../features/patient/patient_profile_screen/data/repo/user_repository.dart'
     as _i96;
 import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
     as _i495;
+import '../../features/patient/select_time_screen/data/repo/appointment_repository.dart'
+    as _i707;
+import '../../features/patient/select_time_screen/data/service/appointment_firestore_service.dart'
+    as _i772;
+import '../../features/patient/select_time_screen/data/use_case/generate_doctor_slots_use_case.dart'
+    as _i485;
+import '../../features/patient/select_time_screen/data/use_case/get_available_slots_use_case.dart'
+    as _i921;
+import '../../features/patient/select_time_screen/presentation/controller/select_time_bloc.dart'
+    as _i137;
 import '../data/image_service/image_service.dart' as _i181;
 import '../data/session/user_session_manager.dart' as _i583;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
@@ -74,8 +82,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => localStorageModule.sharedPreferences,
       preResolve: true,
     );
-    gh.factory<_i161.GenerateDoctorSlotsUseCase>(
-      () => _i161.GenerateDoctorSlotsUseCase(),
+    gh.factory<_i485.GenerateDoctorSlotsUseCase>(
+      () => _i485.GenerateDoctorSlotsUseCase(),
     );
     gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.singleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
@@ -101,11 +109,18 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i114.AuthService(gh<_i59.FirebaseAuth>(), gh<_i116.GoogleSignIn>()),
     );
+    gh.factory<_i772.AppointmentFirestoreService>(
+      () => _i772.AppointmentFirestoreService(gh<_i974.FirebaseFirestore>()),
+    );
     gh.factory<_i417.CloudinaryService>(
       () => _i417.CloudinaryService(
         cloudName: gh<String>(instanceName: 'cloud_name'),
         uploadPreset: gh<String>(instanceName: 'upload_preset'),
       ),
+    );
+    gh.factory<_i707.AppointmentRepository>(
+      () =>
+          _i707.AppointmentRepository(gh<_i772.AppointmentFirestoreService>()),
     );
     gh.factory<_i932.DoctorRepository>(
       () => _i932.DoctorRepository(
@@ -132,8 +147,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i514.UpdateDoctorDetailsBloc>(
       () => _i514.UpdateDoctorDetailsBloc(gh<_i932.DoctorRepository>()),
     );
-    gh.factory<_i485.PatientDoctorsBloc>(
-      () => _i485.PatientDoctorsBloc(gh<_i932.DoctorRepository>()),
+    gh.factory<_i486.PatientDoctorsBloc>(
+      () => _i486.PatientDoctorsBloc(gh<_i932.DoctorRepository>()),
     );
     gh.lazySingleton<_i959.AuthRepository>(
       () => _i959.AuthRepository(
@@ -147,6 +162,12 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i417.CloudinaryService>(),
         gh<_i181.ImageService>(),
         gh<_i708.UserPrefs>(),
+      ),
+    );
+    gh.factory<_i921.GetAvailableSlotsUseCase>(
+      () => _i921.GetAvailableSlotsUseCase(
+        gh<_i707.AppointmentRepository>(),
+        gh<_i485.GenerateDoctorSlotsUseCase>(),
       ),
     );
     gh.factory<_i594.LoginUseCase>(
@@ -174,6 +195,13 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i613.AuthBloc(
         gh<_i959.AuthRepository>(),
         gh<_i594.LoginUseCase>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
+    gh.factory<_i137.SelectTimeBloc>(
+      () => _i137.SelectTimeBloc(
+        gh<_i921.GetAvailableSlotsUseCase>(),
+        gh<_i707.AppointmentRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
     );

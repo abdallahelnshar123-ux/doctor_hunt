@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,6 +28,7 @@ class DoctorCardWide extends StatelessWidget {
         color: AppColors.white,
       ),
       child: Row(
+        crossAxisAlignment: .start,
         spacing: 15,
         children: [
           LayoutBuilder(
@@ -45,45 +47,52 @@ class DoctorCardWide extends StatelessWidget {
               ),
             ),
           ),
+
           Expanded(
             child: Column(
-              mainAxisAlignment: .spaceBetween,
               crossAxisAlignment: .start,
               children: [
-                Row(
-                  crossAxisAlignment: .start,
-                  mainAxisAlignment: .spaceBetween,
-                  children: [
-                    Text.rich(
-                      TextSpan(
-                        text: '${doctor.name}\n',
-                        style: context.medium18.textTertiary.rubik,
-                        children: [
-                          TextSpan(
-                            text: doctor.specialty.name,
-                            style: context.light14.textSecondary.rubik,
-                          ),
-                        ],
-                      ),
-                      overflow: .ellipsis,
-                    ),
-                    FavoriteButtonWidget(doctorId: doctor.id, size: 25),
-                  ],
+                Text(
+                  doctor.name,
+                  style: context.medium18.textTertiary.rubik,
+                  overflow: .ellipsis,
                 ),
-                Row(
-                  spacing: 6,
-                  crossAxisAlignment: .center,
-                  children: List.generate(
-                    5,
-                    (index) => SvgPicture.asset(
-                      AppAssets.icons.starIconRated.path,
-                      width: 15,
-                    ),
-                  ),
+                Text(
+                  doctor.specialty.name,
+                  style: context.light14.textSecondary.rubik,
+                  overflow: .ellipsis,
                 ),
+                // Text.rich(
+                //   TextSpan(
+                //     text: '${doctor.name}\n',
+                //     style: context.medium18.textTertiary.rubik,
+                //     children: [
+                //       TextSpan(
+                //         text: doctor.specialty.name,
+                //         style: context.light14.textSecondary.rubik,
+                //       ),
+                //     ],
+                //   ),
+                //   overflow: .ellipsis,
+                // ),
+                Spacer(),
+                // Row(
+                //   spacing: 6,
+                //   crossAxisAlignment: .center,
+                //   children: List.generate(
+                //     5,
+                //     (index) => SvgPicture.asset(
+                //       AppAssets.icons.starIconRated.path,
+                //       width: 15,
+                //     ),
+                //   ),
+                // ),
+                RatingWidget(rating: doctor.rating.rating , showRating: false, starSize: 17,),
+
               ],
             ),
           ),
+          FavoriteButtonWidget(doctorId: doctor.id, size: 25),
         ],
       ),
     );

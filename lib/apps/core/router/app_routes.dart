@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
-import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
@@ -35,8 +35,11 @@ import '../../features/admin/update_doctor_details_screen/presentation/screens/u
 import '../../features/common/auth/data/models/user/my_user.dart';
 import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
-import '../../features/patient/appointment_screen/presentation/screens/select_time_screen.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
+import '../../features/patient/select_time_screen/presentation/controller/select_time_bloc.dart';
+import '../../features/patient/select_time_screen/presentation/controller/select_time_event.dart';
+import '../../features/patient/select_time_screen/presentation/screens/select_time_screen.dart';
+import '../data/models/doctor/doctor_availability.dart';
 
 part 'app_routes.g.dart';
 
@@ -264,7 +267,18 @@ class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SelectTimeScreen(doctor: $extra);
+    final Doctor doctor = state.extra as Doctor;
+    return BlocProvider(
+      create: (context) => getIt<SelectTimeBloc>()
+        ..add(
+          GetDoctorSlotsEvent(
+            availability: doctor.availability ?? DoctorAvailability.initial(),
+            doctorId: doctor.id,
+            startDate: DateTime.now(),
+          ),
+        ),
+      child: SelectTimeScreen(doctor: $extra),
+    );
   }
 }
 

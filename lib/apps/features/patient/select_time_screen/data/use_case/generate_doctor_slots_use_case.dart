@@ -116,7 +116,9 @@ class GenerateDoctorSlotsUseCase {
             bookedTime.minute == currentSlotTime.minute;
       });
 
-      slots.add(TimeSlot(time: currentSlotTime, isAvailable: !isBooked));
+      if (!isBooked) {
+        slots.add(TimeSlot(time: currentSlotTime, isAvailable: true));
+      }
 
       // Move to the next slot
       currentSlotTime = slotEndTime;

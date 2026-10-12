@@ -17,6 +17,23 @@ class DoctorAvailability extends Equatable {
     required this.slotDuration,
   });
 
+  const DoctorAvailability.initial()
+      : workingDays = const [
+          WorkingDay.monday,
+          WorkingDay.tuesday,
+          WorkingDay.wednesday,
+          WorkingDay.thursday,
+          WorkingDay.friday,
+          WorkingDay.saturday,
+          WorkingDay.sunday,
+        ],
+        startTime = WorkingHour.am9,
+        endTime = WorkingHour.pm5,
+        slotDuration = SlotDuration.min30;
+
+
+
+
   @override
   List<Object?> get props => [workingDays, startTime, endTime, slotDuration];
 }

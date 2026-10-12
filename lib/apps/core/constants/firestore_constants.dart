@@ -25,8 +25,7 @@ class FirestoreConstants {
   // Appointment Fields
   static const String patient = 'patient';
   static const String doctor = 'doctor';
-  static const String date = 'date';
-  static const String time = 'time';
+  static const String sessionTime = 'session_time';
   static const String fee = 'fee';
   static const String status = 'status';
 

@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -59,7 +60,26 @@ class DoctorDetailsCard extends StatelessWidget {
                           FavoriteButtonWidget(doctorId: doctor.id, size: 25),
                         ],
                       ),
-                      _ratingWidget(context: context),
+                      // _ratingWidget(context: context),
+                      Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          RatingWidget(rating: doctor.rating.rating , showRating: false ,starSize: 13,),
+                          Row(
+                            crossAxisAlignment: .center,
+                            spacing: 5,
+                            mainAxisAlignment: .end,
+                            children: [
+                              SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
+                              Text(
+                                t.doctor_details.price_per_hour(Price: doctor.consultationFee.toString()),
+                                style: context.light10.textSecondary.rubik,
+                              ),
+                            ],
+                          ),
+
+                        ],
+                      )
                     ],
                   ),
                 ),

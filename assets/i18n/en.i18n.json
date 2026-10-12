@@ -69,7 +69,14 @@
   },
   "selectTime": {
     "title": "Select Time",
-    "noSlotsAvailable": "No slots available"
+    "noSlotsAvailable": "No slots available",
+    "slotAvailable": "${number} Slot available",
+    "morningSlots": "Morning ${number} Slots",
+    "afternoonSlots": "Afternoon ${number} Slots",
+    "eveningSlots": "Evening ${number} Slots",
+    "confirm": "Confirm",
+    "youMustSelectAppointmentTime" : "You must select appointment time"
+
   },
   "home": {
     "welcome": "Hi ${name}",
@@ -238,7 +245,9 @@
       "inactive": "Inactive",
       "all": "All",
       "dash": "-",
-      "noDoctorNameOrSpecialtyMatchSearch": "No doctor name or specialty match search"
+      "noDoctorNameOrSpecialtyMatchSearch": "No doctor name or specialty match search",
+      "noDoctors": "No doctors",
+      "noDoctorsToSearchAddSome": "No doctors to search add some"
     },
     "appointmentsTab": {
       "title": "Appointments",
@@ -322,7 +331,10 @@
     "userNotAuthenticated": "User isn't Authenticated",
     "errorWhileAddingDoctorPleaseTryAgainLater": "Error while adding doctor please try again later",
     "errorWhileUpdatingDoctorPleaseTryAgainLater": "Error while updating doctor please try again later",
-    "cancelledByUser": "Cancelled by user"
+    "cancelledByUser": "Cancelled by user",
+    "failedToFetchAppointments": "Failed to fetch appointments ${e}",
+    "failedToBookAppointment": "Failed to book appointment ${e}",
+    "userNotLoggedIn": "User not logged in"
   },
   "eCodes": {
     "webUserInteractionFailed": "web-user-interaction-failed",
