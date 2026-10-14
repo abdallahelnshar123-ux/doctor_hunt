@@ -23,6 +23,8 @@ import '../../features/admin/add_doctor_screen/data/service/doctor_firestore_ser
     as _i353;
 import '../../features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart'
     as _i233;
+import '../../features/admin/admin_appointments_tab/presentation/controller/admin_appointments_bloc.dart'
+    as _i995;
 import '../../features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart'
     as _i900;
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
@@ -43,6 +45,10 @@ import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i613;
 import '../../features/common/auth/presentation/controller/user/user_bloc.dart'
     as _i15;
+import '../../features/patient/appointments_tab/data/service/review_batch_firestore_service.dart'
+    as _i129;
+import '../../features/patient/appointments_tab/presentation/controller/appointments_bloc.dart'
+    as _i365;
 import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
     as _i486;
 import '../../features/patient/patient_profile_screen/data/repo/user_repository.dart'
@@ -109,6 +115,9 @@ extension GetItInjectableX on _i174.GetIt {
       () =>
           _i114.AuthService(gh<_i59.FirebaseAuth>(), gh<_i116.GoogleSignIn>()),
     );
+    gh.factory<_i129.ReviewBatchFirestoreService>(
+      () => _i129.ReviewBatchFirestoreService(gh<_i974.FirebaseFirestore>()),
+    );
     gh.factory<_i772.AppointmentFirestoreService>(
       () => _i772.AppointmentFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
@@ -117,10 +126,6 @@ extension GetItInjectableX on _i174.GetIt {
         cloudName: gh<String>(instanceName: 'cloud_name'),
         uploadPreset: gh<String>(instanceName: 'upload_preset'),
       ),
-    );
-    gh.factory<_i707.AppointmentRepository>(
-      () =>
-          _i707.AppointmentRepository(gh<_i772.AppointmentFirestoreService>()),
     );
     gh.factory<_i932.DoctorRepository>(
       () => _i932.DoctorRepository(
@@ -150,10 +155,28 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i486.PatientDoctorsBloc>(
       () => _i486.PatientDoctorsBloc(gh<_i932.DoctorRepository>()),
     );
+    gh.factory<_i707.AppointmentRepository>(
+      () => _i707.AppointmentRepository(
+        gh<_i772.AppointmentFirestoreService>(),
+        gh<_i129.ReviewBatchFirestoreService>(),
+      ),
+    );
+    gh.factory<_i365.AppointmentsBloc>(
+      () => _i365.AppointmentsBloc(
+        gh<_i707.AppointmentRepository>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
     gh.lazySingleton<_i959.AuthRepository>(
       () => _i959.AuthRepository(
         gh<_i114.AuthService>(),
         gh<_i749.UserFirestoreService>(),
+      ),
+    );
+    gh.factory<_i995.AdminAppointmentsBloc>(
+      () => _i995.AdminAppointmentsBloc(
+        gh<_i707.AppointmentRepository>(),
+        gh<_i583.UserSessionManager>(),
       ),
     );
     gh.factory<_i96.UserRepository>(

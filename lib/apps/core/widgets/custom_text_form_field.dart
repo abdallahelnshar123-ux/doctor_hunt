@@ -68,6 +68,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+
       onTapOutside: onTapOutside,
       initialValue: initialValue,
       enabled: enabled,
@@ -108,6 +109,7 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: labelStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+
       ),
     );
   }

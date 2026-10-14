@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:equatable/equatable.dart';
 
@@ -12,6 +13,7 @@ class Appointment extends Equatable {
   final DateTime createdAt;
   final double fee;
   final AppointmentStatus status;
+  final Review? review;
 
   const Appointment({
     required this.id,
@@ -21,6 +23,7 @@ class Appointment extends Equatable {
     required this.createdAt,
     required this.fee,
     required this.status,
+    this.review,
   });
 
   Appointment copyWith({
@@ -31,6 +34,7 @@ class Appointment extends Equatable {
     DateTime? createdAt,
     double? fee,
     AppointmentStatus? status,
+    Review? review,
   }) {
     return Appointment(
       id: id ?? this.id,
@@ -40,6 +44,7 @@ class Appointment extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       fee: fee ?? this.fee,
       status: status ?? this.status,
+      review: review ?? this.review,
     );
   }
 
@@ -52,5 +57,6 @@ class Appointment extends Equatable {
         createdAt,
         fee,
         status,
+        review,
       ];
 }

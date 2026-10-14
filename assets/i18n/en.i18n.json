@@ -65,7 +65,11 @@
     "RateDoctor": "Rate Doctor",
     "appointmentDate": "Appointment date",
     "consultationFee": "Consultation fee",
-    "appointmentTime": "Appointment time"
+    "appointmentTime": "Appointment time",
+    "feeValue": "$ ${fee}",
+    "noAppointmentsFound": "No Appointments Found",
+    "tabToWriteReview": "Tab to write a review",
+    "youMustSelectAtLeastOneStar": "You must select at least one star"
   },
   "selectTime": {
     "title": "Select Time",
@@ -75,8 +79,7 @@
     "afternoonSlots": "Afternoon ${number} Slots",
     "eveningSlots": "Evening ${number} Slots",
     "confirm": "Confirm",
-    "youMustSelectAppointmentTime" : "You must select appointment time"
-
+    "youMustSelectAppointmentTime": "You must select appointment time"
   },
   "home": {
     "welcome": "Hi ${name}",
@@ -253,7 +256,14 @@
       "title": "Appointments",
       "upcoming": "Upcoming",
       "completed": "Completed",
-      "Canceled": "Canceled"
+      "Canceled": "Canceled",
+      "appointmentWasCancelledSuccessfully": "Appointment was cancelled successfully",
+      "appointmentWasMarkedAsCompletedSuccessfully": "Appointment was marked as completed successfully",
+      "time": "Time",
+      "date": "Date",
+      "fee": "Fee",
+      "markAsCompleted": "Mark as completed"
+
     },
     "settings": {
       "adminProfile": "Admin Profile",
@@ -288,7 +298,7 @@
       "manageAvailability": "Manage Availability",
       "doctorDeletedSuccessfully": "Doctor was deleted successfully",
       "rating": "Rating",
-      "Consultation Fee": "Consultation Fee",
+      "consultationFee": "Consultation Fee",
       "fee": "$ ${price}"
     },
     "doctorAvailabilityScreen": {
@@ -332,9 +342,10 @@
     "errorWhileAddingDoctorPleaseTryAgainLater": "Error while adding doctor please try again later",
     "errorWhileUpdatingDoctorPleaseTryAgainLater": "Error while updating doctor please try again later",
     "cancelledByUser": "Cancelled by user",
-    "failedToFetchAppointments": "Failed to fetch appointments ${e}",
-    "failedToBookAppointment": "Failed to book appointment ${e}",
-    "userNotLoggedIn": "User not logged in"
+    "failed_to_fetch_appointments": "Failed to fetch appointments ${E}",
+    "failed_to_book_appointment": "Failed to book appointment ${E}",
+    "userNotLoggedIn": "User not logged in",
+    "failed_to_update_appointment_status": "Failed to update appointment status ${E}"
   },
   "eCodes": {
     "webUserInteractionFailed": "web-user-interaction-failed",

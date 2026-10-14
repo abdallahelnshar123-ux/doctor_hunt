@@ -4,6 +4,8 @@ import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_m
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
+import 'package:doctor_hunt/apps/core/mapper/review_mapper.dart';
+import 'package:doctor_hunt/apps/core/mapper/review_dto_mapper.dart';
 
 extension AppointmentMapper on AppointmentDto {
   Appointment toAppointment() {
@@ -15,6 +17,7 @@ extension AppointmentMapper on AppointmentDto {
       createdAt: createdAt,
       fee: fee,
       status: status,
+      review: review?.toDomain(),
     );
   }
 }
@@ -29,6 +32,7 @@ extension AppointmentDtoMapper on Appointment {
       createdAt: createdAt,
       fee: fee,
       status: status,
+      review: review?.toDto(),
     );
   }
 }

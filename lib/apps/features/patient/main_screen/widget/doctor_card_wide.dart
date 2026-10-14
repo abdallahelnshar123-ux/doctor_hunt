@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../generated/app_assets.dart';
 import '../../../../../generated/style_atoms.dart';

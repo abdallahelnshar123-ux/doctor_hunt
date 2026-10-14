@@ -53,6 +53,27 @@ class AppointmentFirestoreService {
     }
   }
 
+  Future<List<AppointmentDto>> getPatientAppointments(String patientId) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(FirestoreConstants.appointmentsCollection)
+          .where(
+            '${FirestoreConstants.patient}.${FirestoreConstants.id}',
+            isEqualTo: patientId,
+          )
+          .orderBy(FirestoreConstants.sessionTime, descending: true)
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => AppointmentDto.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      throw ServerException(
+        message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+      );
+    }
+  }
+
   Future<void> bookAppointment(AppointmentDto appointmentDto) async {
     try {
       final collectionRef = _firestore.collection(
@@ -80,6 +101,40 @@ class AppointmentFirestoreService {
     } catch (e) {
       throw ServerException(
         message: t.errors.failed_to_book_appointment(E: e.toString()),
+      );
+    }
+  }
+
+  Future<List<AppointmentDto>> getAdminAppointments(String adminId) async {
+    try {
+      final querySnapshot = await _firestore
+          .collection(FirestoreConstants.appointmentsCollection)
+          .where(
+            '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
+            isEqualTo: adminId,
+          )
+          .orderBy(FirestoreConstants.sessionTime, descending: true)
+          .get();
+
+      return querySnapshot.docs
+          .map((doc) => AppointmentDto.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      throw ServerException(
+        message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+      );
+    }
+  }
+
+  Future<void> updateAppointmentStatus(String appointmentId, AppointmentStatus status) async {
+    try {
+      await _firestore
+          .collection(FirestoreConstants.appointmentsCollection)
+          .doc(appointmentId)
+          .update({FirestoreConstants.status: status.name});
+    } catch (e) {
+      throw ServerException(
+        message:t.errors.failed_to_update_appointment_status(E: e.toString()),
       );
     }
   }

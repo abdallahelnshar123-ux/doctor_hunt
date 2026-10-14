@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_dto.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating_dto.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/review_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
@@ -16,6 +17,7 @@ class AppointmentDto extends Equatable {
   final DateTime createdAt;
   final double fee;
   final AppointmentStatus status;
+  final ReviewDto? review;
 
   const AppointmentDto({
     required this.id,
@@ -25,6 +27,7 @@ class AppointmentDto extends Equatable {
     required this.createdAt,
     required this.fee,
     required this.status,
+    this.review,
   });
 
   factory AppointmentDto.fromFireStore(Map<String, dynamic> data) {
@@ -66,6 +69,11 @@ class AppointmentDto extends Equatable {
               orElse: () => AppointmentStatus.upcoming,
             )
           : AppointmentStatus.upcoming,
+      review: data[FirestoreConstants.review] != null
+          ? ReviewDto.fromFireStore(
+              Map<String, dynamic>.from(data[FirestoreConstants.review] as Map),
+            )
+          : null,
     );
   }
 
@@ -78,6 +86,7 @@ class AppointmentDto extends Equatable {
       FirestoreConstants.createdAt: Timestamp.fromDate(createdAt),
       FirestoreConstants.fee: fee,
       FirestoreConstants.status: status.name,
+      if (review != null) FirestoreConstants.review: review!.toFireStore(),
     };
   }
 
@@ -97,6 +106,7 @@ class AppointmentDto extends Equatable {
     DateTime? createdAt,
     double? fee,
     AppointmentStatus? status,
+    ReviewDto? review,
   }) {
     return AppointmentDto(
       id: id ?? this.id,
@@ -106,6 +116,7 @@ class AppointmentDto extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       fee: fee ?? this.fee,
       status: status ?? this.status,
+      review: review ?? this.review,
     );
   }
 
@@ -118,5 +129,6 @@ class AppointmentDto extends Equatable {
         createdAt,
         fee,
         status,
+        review,
       ];
 }

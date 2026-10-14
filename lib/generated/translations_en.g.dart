@@ -217,6 +217,18 @@ class Translations$patient_appointments$en with PageData2 {
 
   /// en: 'Appointment time'
   String get appointment_time => 'Appointment time';
+
+  /// en: '$ ${fee}'
+  String fee_value({required Object Fee}) => '\$ ${Fee}';
+
+  /// en: 'No Appointments Found'
+  String get no_appointments_found => 'No Appointments Found';
+
+  /// en: 'Tab to write a review'
+  String get tab_to_write_review => 'Tab to write a review';
+
+  /// en: 'You must select at least one star'
+  String get you_must_select_at_least_one_star => 'You must select at least one star';
 }
 
 // Path: select_time
@@ -611,14 +623,17 @@ class Translations$errors$en {
   /// en: 'Cancelled by user'
   String get cancelled_by_user => 'Cancelled by user';
 
-  /// en: 'Failed to fetch appointments ${e}'
+  /// en: 'Failed to fetch appointments ${E}'
   String failed_to_fetch_appointments({required Object E}) => 'Failed to fetch appointments ${E}';
 
-  /// en: 'Failed to book appointment ${e}'
+  /// en: 'Failed to book appointment ${E}'
   String failed_to_book_appointment({required Object E}) => 'Failed to book appointment ${E}';
 
   /// en: 'User not logged in'
   String get user_not_logged_in => 'User not logged in';
+
+  /// en: 'Failed to update appointment status ${E}'
+  String failed_to_update_appointment_status({required Object E}) => 'Failed to update appointment status ${E}';
 }
 
 // Path: e_codes
@@ -838,6 +853,24 @@ class Translations$admin$appointments_tab$en with PageData2 {
 
   /// en: 'Canceled'
   String get canceled => 'Canceled';
+
+  /// en: 'Appointment was cancelled successfully'
+  String get appointment_was_cancelled_successfully => 'Appointment was cancelled successfully';
+
+  /// en: 'Appointment was marked as completed successfully'
+  String get appointment_was_marked_as_completed_successfully => 'Appointment was marked as completed successfully';
+
+  /// en: 'Time'
+  String get time => 'Time';
+
+  /// en: 'Date'
+  String get date => 'Date';
+
+  /// en: 'Fee'
+  String get fee => 'Fee';
+
+  /// en: 'Mark as completed'
+  String get mark_as_completed => 'Mark as completed';
 }
 
 // Path: admin.settings

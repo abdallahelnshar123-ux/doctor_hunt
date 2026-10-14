@@ -22,13 +22,17 @@ class GetAvailableSlotsUseCase {
     required DoctorAvailability availability,
     required DateTime startDate,
   }) async {
+    // Normalize startDate to the beginning of the day (00:00:00)
+    final startOfDate = DateTime(startDate.year, startDate.month, startDate.day);
+    
     // We want to fetch slots for 7 days including the startDate
-    final endDate = startDate.add(const Duration(days: 6));
+    // So the end date should be the end of the 6th day after startDate (23:59:59)
+    final endDate = startOfDate.add(const Duration(days: 6, hours: 23, minutes: 59, seconds: 59));
 
     // 1. Fetch booked appointments for the next 7 days
     final result = await _appointmentRepository.getBookedAppointmentsInRange(
       doctorId: doctorId,
-      startDate: startDate,
+      startDate: startOfDate,
       endDate: endDate,
     );
 
@@ -37,18 +41,19 @@ class GetAvailableSlotsUseCase {
       final List<DailyAvailability> weeklyAvailability = [];
 
       for (int i = 0; i < 7; i++) {
-        final currentDate = startDate.add(Duration(days: i));
+        final currentDate = startOfDate.add(Duration(days: i));
 
         // Filter appointments that match the currentDate
         final appointmentsForCurrentDate = appointments.where((appt) {
-          return appt.sessionTime.year == currentDate.year &&
-              appt.sessionTime.month == currentDate.month &&
-              appt.sessionTime.day == currentDate.day;
+          final localSessionTime = appt.sessionTime.toLocal();
+          return localSessionTime.year == currentDate.year &&
+              localSessionTime.month == currentDate.month &&
+              localSessionTime.day == currentDate.day;
         }).toList();
 
         // Extract times from appointments to construct DateTime objects
         final bookedTimes = appointmentsForCurrentDate.map((appt) {
-          return appt.sessionTime;
+          return appt.sessionTime.toLocal();
         }).toList();
 
         // 3. Generate slots considering the booked times for this specific day

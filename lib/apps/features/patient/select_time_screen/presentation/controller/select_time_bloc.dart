@@ -1,11 +1,9 @@
 import 'package:doctor_hunt/apps/features/patient/select_time_screen/data/repo/appointment_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:intl/intl.dart';
 
 import 'package:doctor_hunt/generated/translations.g.dart';
 import '../../../../../core/data/session/user_session_manager.dart';
-import '../../../../../core/utils/date_formatter_utils.dart';
 import '../../../appointments_tab/data/models/appointment/appointment.dart';
 import '../../data/use_case/get_available_slots_use_case.dart';
 import 'select_time_event.dart';

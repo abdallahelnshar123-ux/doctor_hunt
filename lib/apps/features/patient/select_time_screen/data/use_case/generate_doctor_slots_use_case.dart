@@ -109,15 +109,19 @@ class GenerateDoctorSlotsUseCase {
 
       // 5. Check if the slot is already booked
       final isBooked = bookedAppointments.any((bookedTime) {
-        return bookedTime.year == currentSlotTime.year &&
-            bookedTime.month == currentSlotTime.month &&
-            bookedTime.day == currentSlotTime.day &&
-            bookedTime.hour == currentSlotTime.hour &&
-            bookedTime.minute == currentSlotTime.minute;
+        final localBookedTime = bookedTime.toLocal();
+        return localBookedTime.year == currentSlotTime.year &&
+            localBookedTime.month == currentSlotTime.month &&
+            localBookedTime.day == currentSlotTime.day &&
+            localBookedTime.hour == currentSlotTime.hour &&
+            localBookedTime.minute == currentSlotTime.minute;
       });
 
       if (!isBooked) {
-        slots.add(TimeSlot(time: currentSlotTime, isAvailable: true));
+        final now = DateTime.now();
+        if (currentSlotTime.isAfter(now)) {
+          slots.add(TimeSlot(time: currentSlotTime, isAvailable: true));
+        }
       }
 
       // Move to the next slot

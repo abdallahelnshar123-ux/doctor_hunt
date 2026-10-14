@@ -108,38 +108,38 @@ class DoctorDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _ratingWidget({required BuildContext context}) {
-    return Row(
-      mainAxisAlignment: .spaceBetween,
-      children: [
-        Row(
-          spacing: 4,
-          mainAxisAlignment: .center,
-          children: List.generate(
-            5,
-            (index) => SvgPicture.asset(
-              index != 4
-                  ? AppAssets.icons.starIconRated.path
-                  : AppAssets.icons.starIconUnrated.path,
-              width: 12,
-            ),
-          ),
-        ),
-        Row(
-          crossAxisAlignment: .center,
-          spacing: 5,
-          mainAxisAlignment: .end,
-          children: [
-            SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
-            Text(
-              t.doctor_details.price_per_hour(Price: '25.00'),
-              style: context.light10.textSecondary.rubik,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _ratingWidget({required BuildContext context}) {
+  //   return Row(
+  //     mainAxisAlignment: .spaceBetween,
+  //     children: [
+  //       Row(
+  //         spacing: 4,
+  //         mainAxisAlignment: .center,
+  //         children: List.generate(
+  //           5,
+  //           (index) => SvgPicture.asset(
+  //             index != 4
+  //                 ? AppAssets.icons.starIconRated.path
+  //                 : AppAssets.icons.starIconUnrated.path,
+  //             width: 12,
+  //           ),
+  //         ),
+  //       ),
+  //       Row(
+  //         crossAxisAlignment: .center,
+  //         spacing: 5,
+  //         mainAxisAlignment: .end,
+  //         children: [
+  //           SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
+  //           Text(
+  //             t.doctor_details.price_per_hour(Price: '25.00'),
+  //             style: context.light10.textSecondary.rubik,
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _doctorDetailsWidget({required BuildContext context}) {
     return Column(

@@ -28,6 +28,7 @@ class FirestoreConstants {
   static const String sessionTime = 'session_time';
   static const String fee = 'fee';
   static const String status = 'status';
+  static const String review = 'review';
 
   // Doctor Fields
   static const String consultationFee = 'consultation_fee';
