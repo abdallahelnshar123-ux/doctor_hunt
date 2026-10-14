@@ -53,25 +53,47 @@ class AppointmentFirestoreService {
     }
   }
 
-  Future<List<AppointmentDto>> getPatientAppointments(String patientId) async {
-    try {
-      final querySnapshot = await _firestore
-          .collection(FirestoreConstants.appointmentsCollection)
-          .where(
-            '${FirestoreConstants.patient}.${FirestoreConstants.id}',
-            isEqualTo: patientId,
-          )
-          .orderBy(FirestoreConstants.sessionTime, descending: true)
-          .get();
+  // Future<List<AppointmentDto>> getPatientAppointments(String patientId) async {
+  //   try {
+  //     final querySnapshot = await _firestore
+  //         .collection(FirestoreConstants.appointmentsCollection)
+  //         .where(
+  //           '${FirestoreConstants.patient}.${FirestoreConstants.id}',
+  //           isEqualTo: patientId,
+  //         )
+  //         .orderBy(FirestoreConstants.sessionTime, descending: true)
+  //         .get();
+  //
+  //     return querySnapshot.docs
+  //         .map((doc) => AppointmentDto.fromJson(doc.data()))
+  //         .toList();
+  //   } catch (e) {
+  //     throw ServerException(
+  //       message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+  //     );
+  //   }
+  // }
 
-      return querySnapshot.docs
+  Stream<List<AppointmentDto>> getPatientAppointmentsStream(
+      String patientId) {
+    return _firestore
+        .collection(FirestoreConstants.appointmentsCollection)
+        .where(
+          '${FirestoreConstants.patient}.${FirestoreConstants.id}',
+          isEqualTo: patientId,
+        )
+        .snapshots()
+        .map((snapshot) {
+      final appointments = snapshot.docs
           .map((doc) => AppointmentDto.fromJson(doc.data()))
           .toList();
-    } catch (e) {
+      appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
+      return appointments;
+    }).handleError((e) {
       throw ServerException(
         message: t.errors.failed_to_fetch_appointments(E: e.toString()),
       );
-    }
+    });
   }
 
   Future<void> bookAppointment(AppointmentDto appointmentDto) async {
@@ -105,25 +127,46 @@ class AppointmentFirestoreService {
     }
   }
 
-  Future<List<AppointmentDto>> getAdminAppointments(String adminId) async {
-    try {
-      final querySnapshot = await _firestore
-          .collection(FirestoreConstants.appointmentsCollection)
-          .where(
-            '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
-            isEqualTo: adminId,
-          )
-          .orderBy(FirestoreConstants.sessionTime, descending: true)
-          .get();
+  // Future<List<AppointmentDto>> getAdminAppointments(String adminId) async {
+  //   try {
+  //     final querySnapshot = await _firestore
+  //         .collection(FirestoreConstants.appointmentsCollection)
+  //         .where(
+  //           '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
+  //           isEqualTo: adminId,
+  //         )
+  //         .orderBy(FirestoreConstants.sessionTime, descending: true)
+  //         .get();
+  //
+  //     return querySnapshot.docs
+  //         .map((doc) => AppointmentDto.fromJson(doc.data()))
+  //         .toList();
+  //   } catch (e) {
+  //     throw ServerException(
+  //       message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+  //     );
+  //   }
+  // }
 
-      return querySnapshot.docs
+  Stream<List<AppointmentDto>> getAdminAppointmentsStream(String adminId) {
+    return _firestore
+        .collection(FirestoreConstants.appointmentsCollection)
+        .where(
+          '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
+          isEqualTo: adminId,
+        )
+        .snapshots()
+        .map((snapshot) {
+      final appointments = snapshot.docs
           .map((doc) => AppointmentDto.fromJson(doc.data()))
           .toList();
-    } catch (e) {
+      appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
+      return appointments;
+    }).handleError((e) {
       throw ServerException(
         message: t.errors.failed_to_fetch_appointments(E: e.toString()),
       );
-    }
+    });
   }
 
   Future<void> updateAppointmentStatus(String appointmentId, AppointmentStatus status) async {

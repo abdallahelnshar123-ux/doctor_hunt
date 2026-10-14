@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
+import 'package:doctor_hunt/apps/core/widgets/appointments_list_shimmer_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_empty_list_widget.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
@@ -24,7 +25,7 @@ class PatientAppointmentsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          getIt<AppointmentsBloc>()..add(FetchPatientAppointments()),
+          getIt<AppointmentsBloc>(),
       child: AppScaffold(
         bottomSafeArea: false,
         body: Column(
@@ -92,9 +93,7 @@ class PatientAppointmentsTab extends StatelessWidget {
                               ),
                             );
                           }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return const AppointmentsListShimmerWidget();
                         },
                       ),
                     ),

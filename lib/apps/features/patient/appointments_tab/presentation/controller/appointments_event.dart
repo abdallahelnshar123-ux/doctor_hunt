@@ -20,3 +20,12 @@ class AddAppointmentReviewEvent extends AppointmentsEvent {
   @override
   List<Object> get props => [appointment, review];
 }
+
+class CancelAppointmentEvent extends AppointmentsEvent {
+  final String appointmentId;
+
+  const CancelAppointmentEvent(this.appointmentId);
+
+  @override
+  List<Object> get props => [appointmentId];
+}

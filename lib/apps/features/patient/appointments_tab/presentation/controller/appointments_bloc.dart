@@ -1,5 +1,7 @@
+import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -17,12 +19,12 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
   final AppointmentRepository _appointmentRepository;
   final UserSessionManager _userSessionManager;
 
-  AppointmentsBloc(
-    this._appointmentRepository,
-    this._userSessionManager,
-  ) : super(AppointmentsInitial()) {
+  AppointmentsBloc(this._appointmentRepository, this._userSessionManager)
+    : super(AppointmentsInitial()) {
     on<FetchPatientAppointments>(_onFetchPatientAppointments);
     on<AddAppointmentReviewEvent>(_onAddAppointmentReview);
+    on<CancelAppointmentEvent>(_onCancelAppointment);
+    add(const FetchPatientAppointments());
   }
 
   Future<void> _onFetchPatientAppointments(
@@ -39,11 +41,13 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
 
     final user = userOption.fold(() => null, (user) => user)!;
 
-    final result = await _appointmentRepository.getPatientAppointments(user.id);
-
-    result.fold(
-      (failure) => emit(AppointmentsError(failure.message)),
-      (appointments) => emit(AppointmentsSuccess(appointments)),
+    await emit.forEach<Either<Failure, List<Appointment>>>(
+      _appointmentRepository.getPatientAppointmentsStream(user.id),
+      onData: (result) => result.fold(
+        (failure) => AppointmentsError(failure.message),
+        (appointments) => AppointmentsSuccess(appointments),
+      ),
+      onError: (error, stackTrace) => AppointmentsError(error.toString()),
     );
   }
 
@@ -56,9 +60,12 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
 
     final doctor = event.appointment.doctor;
     final oldRating = doctor.rating;
-    
+
     final newReviews = List<Review>.from(oldRating.reviews)..add(event.review);
-    final newTotalRating = newReviews.fold(0, (sum, review) => sum + review.rating);
+    final newTotalRating = newReviews.fold(
+      0,
+      (sum, review) => sum + review.rating,
+    );
     final newAverage = newTotalRating / newReviews.length;
 
     final updatedRating = Rating(rating: newAverage, reviews: newReviews);
@@ -83,6 +90,27 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
       (_) {
         emit(AddReviewSuccess(event.appointment.id));
         // add(const FetchPatientAppointments());
+      },
+    );
+  }
+
+  Future<void> _onCancelAppointment(
+    CancelAppointmentEvent event,
+    Emitter<AppointmentsState> emit,
+  ) async {
+    emit(CancelAppointmentLoading(event.appointmentId));
+
+    final result = await _appointmentRepository.updateAppointmentStatus(
+      event.appointmentId,
+      AppointmentStatus.cancelled,
+    );
+
+    result.fold(
+      (failure) {
+        emit(CancelAppointmentError(failure.message, event.appointmentId));
+      },
+      (_) {
+        emit(CancelAppointmentSuccess(event.appointmentId));
       },
     );
   }

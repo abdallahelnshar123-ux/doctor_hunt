@@ -236,7 +236,9 @@ class PatientAppointmentCard extends HookWidget {
       paddingVertical: 10,
       borderRadius: 8,
       backgroundColor: AppColors.statusErrorSurface,
-      onPressed: () {},
+      onPressed: () {
+         context.read<AppointmentsBloc>().add( CancelAppointmentEvent(appointment.id) );
+      },
       borderSideColor: AppColors.statusError,
       child: FittedBox(
         fit: .scaleDown,

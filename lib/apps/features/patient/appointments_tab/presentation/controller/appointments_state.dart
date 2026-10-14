@@ -56,3 +56,31 @@ final class AddReviewError extends AppointmentsState {
   @override
   List<Object> get props => [message, appointmentId];
 }
+
+final class CancelAppointmentLoading extends AppointmentsState {
+  final String appointmentId;
+
+  const CancelAppointmentLoading(this.appointmentId);
+
+  @override
+  List<Object> get props => [appointmentId];
+}
+
+final class CancelAppointmentSuccess extends AppointmentsState {
+  final String appointmentId;
+
+  const CancelAppointmentSuccess(this.appointmentId);
+
+  @override
+  List<Object> get props => [appointmentId];
+}
+
+final class CancelAppointmentError extends AppointmentsState {
+  final String message;
+  final String appointmentId;
+
+  const CancelAppointmentError(this.message, this.appointmentId);
+
+  @override
+  List<Object> get props => [message, appointmentId];
+}

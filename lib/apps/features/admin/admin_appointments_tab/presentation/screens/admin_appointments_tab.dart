@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/widgets/appointments_list_shimmer_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/controller/admin_appointments_event.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -96,9 +97,7 @@ class AdminAppointmentsTab extends StatelessWidget {
                               ),
                             );
                           }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                          return const AppointmentsListShimmerWidget();
                         },
                       ),
 

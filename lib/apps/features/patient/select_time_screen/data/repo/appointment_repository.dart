@@ -41,20 +41,35 @@ class AppointmentRepository {
     }
   }
 
-  Future<Either<Failure, List<Appointment>>> getPatientAppointments(
-      String patientId) async {
+  // Future<Either<Failure, List<Appointment>>> getPatientAppointments(
+  //     String patientId) async {
+  //   try {
+  //     final appointmentDtos =
+  //         await _firestoreService.getPatientAppointments(patientId);
+  //
+  //     final appointments =
+  //         appointmentDtos.map((dto) => dto.toAppointment()).toList();
+  //
+  //     return Right(appointments);
+  //   } on AppException catch (e) {
+  //     return Left(e.toFailure());
+  //   } catch (e) {
+  //     return Left(UnexpectedFailure(e.toString()));
+  //   }
+  // }
+
+  Stream<Either<Failure, List<Appointment>>> getPatientAppointmentsStream(
+      String patientId) async* {
     try {
-      final appointmentDtos =
-          await _firestoreService.getPatientAppointments(patientId);
-
-      final appointments =
-          appointmentDtos.map((dto) => dto.toAppointment()).toList();
-
-      return Right(appointments);
+      await for (final dtos
+          in _firestoreService.getPatientAppointmentsStream(patientId)) {
+        final appointments = dtos.map((dto) => dto.toAppointment()).toList();
+        yield Right(appointments);
+      }
     } on AppException catch (e) {
-      return Left(e.toFailure());
+      yield Left(e.toFailure());
     } catch (e) {
-      return Left(UnexpectedFailure(e.toString()));
+      yield Left(UnexpectedFailure(e.toString()));
     }
   }
 
@@ -86,20 +101,35 @@ class AppointmentRepository {
     }
   }
 
-  Future<Either<Failure, List<Appointment>>> getAdminAppointments(
-      String adminId) async {
+  // Future<Either<Failure, List<Appointment>>> getAdminAppointments(
+  //     String adminId) async {
+  //   try {
+  //     final appointmentDtos =
+  //         await _firestoreService.getAdminAppointments(adminId);
+  //
+  //     final appointments =
+  //         appointmentDtos.map((dto) => dto.toAppointment()).toList();
+  //
+  //     return Right(appointments);
+  //   } on AppException catch (e) {
+  //     return Left(e.toFailure());
+  //   } catch (e) {
+  //     return Left(UnexpectedFailure(e.toString()));
+  //   }
+  // }
+
+  Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream(
+      String adminId) async* {
     try {
-      final appointmentDtos =
-          await _firestoreService.getAdminAppointments(adminId);
-
-      final appointments =
-          appointmentDtos.map((dto) => dto.toAppointment()).toList();
-
-      return Right(appointments);
+      await for (final dtos
+          in _firestoreService.getAdminAppointmentsStream(adminId)) {
+        final appointments = dtos.map((dto) => dto.toAppointment()).toList();
+        yield Right(appointments);
+      }
     } on AppException catch (e) {
-      return Left(e.toFailure());
+      yield Left(e.toFailure());
     } catch (e) {
-      return Left(UnexpectedFailure(e.toString()));
+      yield Left(UnexpectedFailure(e.toString()));
     }
   }
 
