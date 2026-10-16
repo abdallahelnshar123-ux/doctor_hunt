@@ -9,7 +9,7 @@ Welcome to **Doctor Hunt**! This document serves as the comprehensive system ins
 **Doctor Hunt** is a mobile application built with Flutter for doctor booking, appointment management, and medical search. It supports two user roles: **Patient** and **Admin**.
 
 * **Language & SDK**: Dart `^3.12.2`, Flutter SDK
-* **Architecture**: Feature-First Domain-Driven Clean Architecture
+* **Architecture**: Feature-First Layered Architecture (Pragmatic approach, no strict independent Domain layer)
 * **State Management**: `flutter_bloc` (^9.1.1) combined with `flutter_hooks` (^0.21.3)
 * **Dependency Injection**: `get_it` (^9.2.1) + `injectable` (^3.0.0)
 * **Routing**: `go_router` (^17.5.0) + `go_router_builder` (^4.4.0) using type-safe routes (`@TypedGoRoute`)

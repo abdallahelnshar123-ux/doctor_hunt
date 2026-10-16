@@ -596,6 +596,7 @@ class Translations$admin$en {
 
   // Translations
   late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
+  late final Translations$admin$appointment_details$en appointment_details = Translations$admin$appointment_details$en.internal(_root);
   late final Translations$admin$doctors_tab$en doctors_tab = Translations$admin$doctors_tab$en.internal(_root);
   late final Translations$admin$appointments_tab$en appointments_tab = Translations$admin$appointments_tab$en.internal(_root);
   late final Translations$admin$settings$en settings = Translations$admin$settings$en.internal(_root);
@@ -845,6 +846,28 @@ class Translations$admin$main$en {
 
   /// en: 'Settings'
   String get settings => 'Settings';
+}
+
+// Path: admin.appointment_details
+class Translations$admin$appointment_details$en with PageData2 {
+  Translations$admin$appointment_details$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointment Details'
+  @override
+  String get title => 'Appointment Details';
+
+  /// en: 'Patient'
+  String get patient => 'Patient';
+
+  /// en: 'Doctor'
+  String get doctor => 'Doctor';
+
+  /// en: 'Appointment'
+  String get appointment => 'Appointment';
 }
 
 // Path: admin.doctors_tab

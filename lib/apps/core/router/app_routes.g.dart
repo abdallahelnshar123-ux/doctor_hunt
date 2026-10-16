@@ -12,6 +12,8 @@ List<RouteBase> get $appRoutes => [
   $registerRoute,
   $patientMainRoute,
   $adminMainRoute,
+  $adminAppointmentDetailsRoute,
+  $patientAppointmentDetailsRoute,
   $addDoctorRoute,
   $onboardingRoute,
   $chooseRoleRoute,
@@ -159,6 +161,70 @@ mixin $AdminMainRoute on GoRouteData {
 
   @override
   void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $adminAppointmentDetailsRoute => GoRouteData.$route(
+  path: '/admin_appointment_details',
+  hasOverriddenOnExit: false,
+  factory: $AdminAppointmentDetailsRoute._fromState,
+);
+
+mixin $AdminAppointmentDetailsRoute on GoRouteData {
+  static AdminAppointmentDetailsRoute _fromState(GoRouterState state) =>
+      AdminAppointmentDetailsRoute(state.extra as Appointment);
+
+  AdminAppointmentDetailsRoute get _self =>
+      this as AdminAppointmentDetailsRoute;
+
+  @override
+  String get location => GoRouteData.$location('/admin_appointment_details');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $patientAppointmentDetailsRoute => GoRouteData.$route(
+  path: '/patient_appointment_details',
+  hasOverriddenOnExit: false,
+  factory: $PatientAppointmentDetailsRoute._fromState,
+);
+
+mixin $PatientAppointmentDetailsRoute on GoRouteData {
+  static PatientAppointmentDetailsRoute _fromState(GoRouterState state) =>
+      PatientAppointmentDetailsRoute(state.extra as Appointment);
+
+  PatientAppointmentDetailsRoute get _self =>
+      this as PatientAppointmentDetailsRoute;
+
+  @override
+  String get location => GoRouteData.$location('/patient_appointment_details');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
 }
 
 RouteBase get $addDoctorRoute => GoRouteData.$route(

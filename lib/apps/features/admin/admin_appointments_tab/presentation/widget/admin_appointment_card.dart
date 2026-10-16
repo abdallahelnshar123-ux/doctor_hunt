@@ -232,7 +232,9 @@ class AdminAppointmentCard extends HookWidget {
             paddingVertical: 10,
             borderRadius: 8,
             backgroundColor: AppColors.white,
-            onPressed: () {},
+            onPressed: () {
+              AdminAppointmentDetailsRoute(appointment).push(context);
+            },
             borderSideColor: AppColors.brandPrimary,
             child: FittedBox(
               fit: .scaleDown,

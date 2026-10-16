@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/widgets/appointments_list_shimmer_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/controller/admin_appointments_event.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';

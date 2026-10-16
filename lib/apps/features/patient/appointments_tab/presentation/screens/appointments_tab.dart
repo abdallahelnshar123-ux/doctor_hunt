@@ -37,6 +37,7 @@ class PatientAppointmentsTab extends StatelessWidget {
                 initialIndex: 0,
                 length: 3,
                 child: Column(
+                  spacing: 10,
                   children: [
                     TabBar(
                       overlayColor: WidgetStatePropertyAll(

@@ -342,7 +342,6 @@ class DoctorAvailabilityScreen extends HookWidget {
                   ? t.admin.doctor_availability_screen.active
                   : t.admin.doctor_availability_screen.inactive,
               style:
-              // context.regular10.statusError.rubik,
               doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,

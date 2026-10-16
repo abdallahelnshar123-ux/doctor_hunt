@@ -244,6 +244,12 @@
       "doctors": "Doctors",
       "settings": "Settings"
     },
+    "appointmentDetails": {
+      "title" : "Appointment Details",
+      "patient" : "Patient",
+      "doctor" : "Doctor",
+      "appointment" : "Appointment"
+    },
     "doctorsTab": {
       "addDoctor": "Add doctor",
       "searchDoctors": "Search doctors",

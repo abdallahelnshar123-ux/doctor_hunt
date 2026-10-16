@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
@@ -300,7 +301,10 @@ class PatientAppointmentCard extends HookWidget {
         paddingVertical: 10,
         borderRadius: 8,
         backgroundColor: AppColors.white,
-        onPressed: () {},
+        onPressed: () {
+               PatientAppointmentDetailsRoute(appointment).push(context);
+
+        },
         borderSideColor: AppColors.brandPrimary,
         child: FittedBox(
           fit: .scaleDown,

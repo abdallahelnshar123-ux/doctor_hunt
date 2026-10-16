@@ -28,6 +28,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
+import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
 import '../../features/admin/doctor_availability_screen/presentation/controller/doctor_availability_bloc.dart';
 import '../../features/admin/doctor_availability_screen/presentation/screens/doctor_availability_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
@@ -35,6 +36,8 @@ import '../../features/admin/update_doctor_details_screen/presentation/screens/u
 import '../../features/common/auth/data/models/user/my_user.dart';
 import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
+import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
+import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
 import '../../features/patient/select_time_screen/presentation/controller/select_time_bloc.dart';
 import '../../features/patient/select_time_screen/presentation/controller/select_time_event.dart';
@@ -99,6 +102,25 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
             ..add(AdminGetDoctorsRequested(user?.id ?? '')),
       child: const AdminMainScreen(),
     );
+  }
+}
+@TypedGoRoute<AdminAppointmentDetailsRoute>(path: '/admin_appointment_details')
+class AdminAppointmentDetailsRoute extends GoRouteData with $AdminAppointmentDetailsRoute {
+  const AdminAppointmentDetailsRoute( this.$extra );
+ final Appointment $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  AdminAppointmentDetailsScreen(appointment: $extra);
+  }
+}
+
+@TypedGoRoute<PatientAppointmentDetailsRoute>(path: '/patient_appointment_details')
+class PatientAppointmentDetailsRoute extends GoRouteData with $PatientAppointmentDetailsRoute {
+  const PatientAppointmentDetailsRoute( this.$extra );
+  final Appointment $extra;
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return  PatientAppointmentDetailsScreen(appointment: $extra);
   }
 }
 

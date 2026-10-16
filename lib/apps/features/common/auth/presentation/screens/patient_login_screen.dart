@@ -30,21 +30,6 @@ class PatientLoginScreen extends HookWidget {
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        // if (state is UserAuthenticatedState) {
-        //   DialogUtils.hideLoading(context: context);
-        //   DialogUtils.showMessage(
-        //     title: t.dialog.success,
-        //     context: context,
-        //     message: t.dialog.success,
-        //   );
-        //
-        //   Future.delayed(Duration(seconds: 2), () {
-        //     if (context.mounted) {
-        //       const PatientMainRoute().go(context);
-        //     }
-        //   });
-        // }
-
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);
           DialogUtils.hideLoading(context: context);
