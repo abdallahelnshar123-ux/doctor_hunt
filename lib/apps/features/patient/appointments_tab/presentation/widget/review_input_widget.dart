@@ -15,6 +15,7 @@ class ReviewInputWidget extends StatefulWidget {
 }
 
 class _ReviewInputWidgetState extends State<ReviewInputWidget> {
+  // CR: According to project guidelines, widgets with state/controllers should extend HookWidget and use hooks (useTextEditingController, useState) instead of StatefulWidget.
   final TextEditingController _controller = TextEditingController();
   final FocusNode _focusNode = FocusNode();
 

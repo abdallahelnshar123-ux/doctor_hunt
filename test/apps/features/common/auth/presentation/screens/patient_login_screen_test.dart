@@ -132,7 +132,7 @@ void main() {
         await tester.pump();
 
         verifyNever(() => authBloc.add(any()));
-        expect(find.text('email_is_required'), findsOneWidget);
+        expect(find.text(t.validators.email_is_required), findsOneWidget);
       },
     );
 

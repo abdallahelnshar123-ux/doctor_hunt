@@ -10,3 +10,12 @@ abstract class PatientDoctorsEvent extends Equatable {
 class PatientDoctorsRequested extends PatientDoctorsEvent {
   const PatientDoctorsRequested();
 }
+
+class SearchPatientDoctorsRequested extends PatientDoctorsEvent {
+  final String query;
+
+  const SearchPatientDoctorsRequested(this.query);
+
+  @override
+  List<Object?> get props => [query];
+}

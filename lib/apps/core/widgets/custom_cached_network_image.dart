@@ -50,7 +50,7 @@ class CustomCachedNetworkImage extends StatelessWidget {
           child: Container(
             width: width ?? 50,
             height: height ?? 50,
-            color: Colors.white,
+            color: AppColors.white,
           ),
         ),
         errorWidget: (context, url, error) => AppAssets.images.fallbackUserImage

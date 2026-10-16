@@ -1,17 +1,20 @@
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
-import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../../core/widgets/rating_widget.dart';
 
 class PopularDoctorsItem extends StatelessWidget {
-  const PopularDoctorsItem({super.key});
+  final Doctor doctor;
+
+  const PopularDoctorsItem({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
-    var t = Translations.of(context);
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
@@ -23,14 +26,20 @@ class PopularDoctorsItem extends StatelessWidget {
         crossAxisAlignment: .center,
         children: [
           Expanded(
-            child: Image.asset(
-              AppAssets.images.testDoctorImage.path,
-              fit: .cover,
-              width: double.infinity,
-            ),
+            child: doctor.imageUrl != null && doctor.imageUrl!.isNotEmpty
+                ? CustomCachedNetworkImage(
+                    imgUrl: doctor.imageUrl!,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  )
+                : Image.asset(
+                    AppAssets.images.testDoctorImage.path,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
           ),
           Padding(
-            padding: const EdgeInsetsGeometry.all(10),
+            padding: const EdgeInsets.all(10),
             child: Column(
               spacing: 5,
               crossAxisAlignment: .center,
@@ -38,27 +47,32 @@ class PopularDoctorsItem extends StatelessWidget {
                 FittedBox(
                   fit: .scaleDown,
                   child: Text(
-                    t.doctor_details.doctor_name,
+                    doctor.name,
                     style: context.medium18.textTertiary.rubik,
                   ),
                 ),
                 Text(
-                  t.doctor_details.specialist_cardiology,
+                  doctor.specialty.name,
                   style: context.light12.textSecondary80.rubik,
                 ),
-                Row(
-                  spacing: 5,
-                  mainAxisAlignment: .center,
-                  children: List.generate(
-                    5,
-                    (index) => SvgPicture.asset(
-                      index != 4
-                          ? AppAssets.icons.starIconRated.path
-                          : AppAssets.icons.starIconUnrated.path,
-                      width: 13,
-                    ),
-                  ),
+                RatingWidget(
+                  rating: doctor.rating.rating,
+                  starSize: 13,
+                  showRating: false,
                 ),
+                // Row(
+                //   spacing: 5,
+                //   mainAxisAlignment: .center,
+                //   children: List.generate(
+                //     5,
+                //     (index) => SvgPicture.asset(
+                //       index < doctor.rating.rating.floor()
+                //           ? AppAssets.icons.starIconRated.path
+                //           : AppAssets.icons.starIconUnrated.path,
+                //       width: 13,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

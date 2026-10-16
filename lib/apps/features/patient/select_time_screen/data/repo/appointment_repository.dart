@@ -12,6 +12,7 @@ import '../../../appointments_tab/data/mappers/appointment_mapper.dart';
 import '../service/appointment_firestore_service.dart';
 
 @injectable
+// CR: According to the project guidelines, you should define an abstract Repository interface and a concrete implementation, then annotate with @Injectable(as: RepoInterface).
 class AppointmentRepository {
   final AppointmentFirestoreService _firestoreService;
   final ReviewBatchFirestoreService _reviewBatchService;

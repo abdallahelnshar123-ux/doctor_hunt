@@ -80,8 +80,7 @@ class PatientMainRoute extends GoRouteData with $PatientMainRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) =>
-          getIt<PatientDoctorsBloc>()..add(const PatientDoctorsRequested()),
+      create: (context) => getIt<PatientDoctorsBloc>(),
       child: const PatientMainScreen(),
     );
   }
@@ -152,7 +151,10 @@ class FindDoctorsRoute extends GoRouteData with $FindDoctorsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const FindDoctorsScreen();
+    return BlocProvider(
+      create: (context) => getIt<PatientDoctorsBloc>(),
+      child: const FindDoctorsScreen(),
+    );
   }
 }
 

@@ -74,6 +74,50 @@ class DoctorFirestoreService {
         });
   }
 
+  // Future<List<DoctorDto>> getFavouriteDoctors(List<String> doctorIds) async {
+  //   try {
+  //     if (doctorIds.isEmpty) return [];
+  //
+  //     // 1. جلب الدكاترة من الفايرستور
+  //     final snapshot = await _getDoctorsCollection().get();
+  //     final allDoctors = snapshot.docs.map((doc) => doc.data()).toList();
+  //
+  //     // 2. فلترة الدكاترة اللي الـ ID بتاعهم موجود في قائمة المفضلين
+  //     return allDoctors.where((doc) => doctorIds.contains(doc.id)).toList();
+  //   } on FirebaseException catch (e) {
+  //     throw ServerException(message: e.message ?? t.errors.server_error);
+  //   } on SocketException {
+  //     throw NetworkException(message: t.errors.no_internet);
+  //   } catch (e) {
+  //     throw UnexpectedException(message: e.toString());
+  //   }
+  // }
+
+  // Future<List<DoctorDto>> getFavouriteDoctors(List<String> doctorIds) async {
+  //   try {
+  //     if (doctorIds.isEmpty) return [];
+  //
+  //     final List<DoctorDto> doctors = [];
+  //     for (var i = 0; i < doctorIds.length; i += 30) {
+  //       final chunk = doctorIds.sublist(
+  //         i,
+  //         i + 30 > doctorIds.length ? doctorIds.length : i + 30,
+  //       );
+  //       final snapshot = await _getDoctorsCollection()
+  //           .where(FieldPath.documentId, whereIn: chunk)
+  //           .get();
+  //       doctors.addAll(snapshot.docs.map((doc) => doc.data()));
+  //     }
+  //     return doctors;
+  //   } on FirebaseException catch (e) {
+  //     throw ServerException(message: e.message ?? t.errors.server_error);
+  //   } on SocketException {
+  //     throw NetworkException(message: t.errors.no_internet);
+  //   } catch (e) {
+  //     throw UnexpectedException(message: e.toString());
+  //   }
+  // }
+
   // Future<List<DoctorDto>> searchDoctors({
   //   required String adminId,
   //   required String query,

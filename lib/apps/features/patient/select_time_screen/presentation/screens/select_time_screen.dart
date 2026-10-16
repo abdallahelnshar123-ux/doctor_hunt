@@ -71,10 +71,10 @@ class SelectTimeScreen extends HookWidget {
                           contentCenter: true,
                           subtitleStyle: context.light10.white.rubik,
                           unselectedSubtitleStyle:
-                          context.light10.textSecondary.rubik,
+                              context.light10.textSecondary.rubik,
                           labelStyle: context.medium16.white.rubik,
                           unselectedLabelStyle:
-                          context.medium16.textTertiary.rubik,
+                              context.medium16.textTertiary.rubik,
                           buttonMargin: EdgeInsets.all(20),
                           borderColor: AppColors.brandPrimary,
                           unselectedBorderColor: AppColors.borderMuted,
@@ -83,22 +83,22 @@ class SelectTimeScreen extends HookWidget {
                           tabs: List.generate(7, (index) {
                             final date = state.weeklyAvailability[index].date;
                             final tabText =
-                            DateFormatterUtils.formatToRelativeDayAndDate(
-                              date,
-                            );
+                                DateFormatterUtils.formatToRelativeDayAndDate(
+                                  date,
+                                );
                             return ButtonsTab(
                               subtitle:
-                              state
-                                  .weeklyAvailability[index]
-                                  .availableSlots
-                                  .isEmpty
+                                  state
+                                      .weeklyAvailability[index]
+                                      .availableSlots
+                                      .isEmpty
                                   ? t.select_time.no_slots_available
                                   : t.select_time.slot_available(
-                                Number: state
-                                    .weeklyAvailability[index]
-                                    .availableSlots
-                                    .length,
-                              ),
+                                      Number: state
+                                          .weeklyAvailability[index]
+                                          .availableSlots
+                                          .length,
+                                    ),
                               text: tabText,
                             );
                           }),
@@ -112,25 +112,8 @@ class SelectTimeScreen extends HookWidget {
                                   .availableSlots
                                   .isEmpty) {
                                 return MainEmptyListWidget(
-                                    title: t.select_time.no_slots_available,
-                                    );
-                                // return Center(
-                                //   child: Column(
-                                //     children: [
-                                //       Lottie.asset(
-                                //         AppAssets.lottie.emptyState.path,
-                                //         width: context.width - 100,
-                                //       ),
-                                //       Text(
-                                //         t.select_time.no_slots_available,
-                                //         style: context
-                                //             .regular14
-                                //             .textSecondary
-                                //             .rubik,
-                                //       ),
-                                //     ],
-                                //   ),
-                                // );
+                                  title: t.select_time.no_slots_available,
+                                );
                               }
                               return SlotsTab(
                                 index: index,
@@ -166,85 +149,89 @@ class SelectTimeScreen extends HookWidget {
     );
   }
 
-  Future<dynamic> _buildSuccessDialog(BuildContext context,
-      DateTime selectedTime,
-      Doctor doctor,) {
+  Future<dynamic> _buildSuccessDialog(
+    BuildContext context,
+    DateTime selectedTime,
+    Doctor doctor,
+  ) {
     return showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) =>
-          Container(
-            padding: EdgeInsets.all(25),
-            margin: EdgeInsets.symmetric(horizontal: 20, vertical: 130),
-            width: double.infinity,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: AppColors.bgPrimary,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: ListView(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(40),
-                  width: 150,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    shape: .circle,
-                    color: AppColors.brandPrimary20,
-                  ),
-                  child: SvgPicture.asset(
-                    AppAssets.icons.likeIcon.path,
-                    width: double.infinity,
-                  ),
-                ),
-                Text(
-                  t.appointment.thank_you,
-                  style: context.medium38.black.rubik,
-                  textAlign: .center,
-                ),
-                FittedBox(
-                  fit: .scaleDown,
-                  child: Text(
-                    t.appointment.success,
-                    style: context.regular20.textSecondary.rubik,
-                    textAlign: .center,
-                  ),
-                ),
-                SizedBox(height: 30),
-                Text(
-                  t.appointment.booking_details(
-                    Doctor: doctor.name,
-                    Date: DateFormat('MMMM d').format(selectedTime),
-                    Time: DateFormat('hh:mm a').format(selectedTime),
-                  ),
-                  style: context.regular14.textSecondary.rubik,
-                  textAlign: .center,
-                ),
-                SizedBox(height: 30),
-                CustomElevatedButton(
-                  buttonWidth: double.infinity,
-                  borderRadius: 6,
-                  backgroundColor: AppColors.brandPrimary,
-                  onPressed: () {
-                    const PatientMainRoute().go(context);
-                  },
-                  child: Text(
-                    t.appointment.done,
-                    style: context.medium18.white.rubik,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    const PatientMainRoute().go(context);
-                  },
-                  child: Text(
-                    t.appointment.edit,
-                    style: context.regular14.textSecondary.rubik,
-                  ),
-                ),
-              ],
-            ),
+      builder: (context) => PopScope(
+        canPop: false,
+        child: Container(
+          padding: EdgeInsets.all(25),
+          margin: EdgeInsets.symmetric(horizontal: 20, vertical: 130),
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            color: AppColors.bgPrimary,
+            borderRadius: BorderRadius.circular(16),
           ),
+          child: ListView(
+            children: [
+              Container(
+                padding: EdgeInsets.all(40),
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: .circle,
+                  color: AppColors.brandPrimary20,
+                ),
+                child: SvgPicture.asset(
+                  AppAssets.icons.likeIcon.path,
+                  width: double.infinity,
+                ),
+              ),
+              Text(
+                t.appointment.thank_you,
+                style: context.medium38.black.rubik,
+                textAlign: .center,
+              ),
+              FittedBox(
+                fit: .scaleDown,
+                child: Text(
+                  t.appointment.success,
+                  style: context.regular20.textSecondary.rubik,
+                  textAlign: .center,
+                ),
+              ),
+              SizedBox(height: 30),
+              Text(
+                t.appointment.booking_details(
+                  Doctor: doctor.name,
+                  Date: DateFormat('MMMM d').format(selectedTime),
+                  Time: DateFormat('hh:mm a').format(selectedTime),
+                ),
+                style: context.regular14.textSecondary.rubik,
+                textAlign: .center,
+              ),
+              SizedBox(height: 30),
+              CustomElevatedButton(
+                buttonWidth: double.infinity,
+                borderRadius: 6,
+                backgroundColor: AppColors.brandPrimary,
+                onPressed: () {
+                  const PatientMainRoute().go(context);
+                },
+                child: Text(
+                  t.appointment.done,
+                  style: context.medium18.white.rubik,
+                ),
+              ),
+              // TextButton(
+              //   onPressed: () {
+              //     const PatientMainRoute().go(context);
+              //   },
+              //   child: Text(
+              //     t.appointment.edit,
+              //     style: context.regular14.textSecondary.rubik,
+              //   ),
+              // ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -91,9 +91,9 @@ void main() {
       await tester.tap(find.text(t.auth.sign_up));
       await tester.pumpAndSettle();
 
-      expect(find.text('this_field_is_required'), findsOneWidget);
-      expect(find.text('email_is_required'), findsOneWidget);
-      expect(find.text('password_is_required'), findsOneWidget);
+      expect(find.text(t.validators.this_field_is_required), findsOneWidget);
+      expect(find.text(t.validators.email_is_required), findsOneWidget);
+      expect(find.text(t.validators.password_is_required), findsOneWidget);
 
       verifyNever(() => authBloc.add(any()));
     });

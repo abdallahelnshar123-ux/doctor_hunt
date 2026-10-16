@@ -7,135 +7,188 @@ class AdminAppointmentCard extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppContainerWithShadow(
-      padding: EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        spacing: 10,
-        crossAxisAlignment: .start,
-        children: [
-          ///doctor details
-          Row(
-            spacing: 15,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
+    final isLoading = useValueNotifier<bool>(false);
+
+    return BlocListener<AdminAppointmentsBloc, AdminAppointmentsState>(
+      listenWhen: (previous, current) {
+        if (current is AdminUpdateAppointmentLoadingState &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+        if (current is AdminUpdateAppointmentSuccessState &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+        if (current is AdminUpdateAppointmentErrorState &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+
+        return false;
+      },
+      listener: (context, state) {
+        if (state is AdminUpdateAppointmentLoadingState) {
+          isLoading.value = true;
+        } else if (state is AdminUpdateAppointmentSuccessState) {
+          isLoading.value = false;
+        } else if (state is AdminUpdateAppointmentErrorState) {
+          isLoading.value = false;
+          SnackBarUtils.showErrorSnackBar(
+            context: context,
+            message: state.message,
+          );
+        }
+      },
+      child: ValueListenableBuilder(
+        valueListenable: isLoading,
+        builder: (context, isLoading, child) {
+          return IgnorePointer(
+            ignoring: isLoading,
+            child: Opacity(
+              opacity: isLoading ? .5 : 1.0,
+              child: AppContainerWithShadow(
+                padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    fit: .cover,
-                    image: CustomCachedNetworkImage.getProvider(
-                      appointment.patient.image,
-                    ),
-                  ),
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              ),
-              Expanded(
                 child: Column(
-                  mainAxisAlignment: .spaceBetween,
+                  spacing: 10,
                   crossAxisAlignment: .start,
                   children: [
-                    Text(
-                      appointment.patient.name,
-                      style: context.medium14.textTertiary.rubik,
-                      overflow: .ellipsis,
+                    ///doctor details
+                    Row(
+                      spacing: 15,
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              fit: .cover,
+                              image: CustomCachedNetworkImage.getProvider(
+                                appointment.patient.image,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: .spaceBetween,
+                            crossAxisAlignment: .start,
+                            children: [
+                              Text(
+                                appointment.patient.name,
+                                style: context.medium14.textTertiary.rubik,
+                                overflow: .ellipsis,
+                              ),
+                              Text(
+                                appointment.doctor.name,
+                                style: context.regular12.textCaption.rubik,
+                                overflow: .ellipsis,
+                              ),
+                              Text(
+                                appointment.doctor.specialty.name,
+                                style: context.light10.textSecondary.rubik,
+                                overflow: .ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Chip(
+                          padding: EdgeInsets.all(5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          side: BorderSide(
+                            width: 0,
+                            color: AppColors.transparent,
+                          ),
+                          backgroundColor:
+                              appointment.status != AppointmentStatus.cancelled
+                              ? AppColors.brandPrimary20
+                              : AppColors.statusErrorSurface,
+                          avatarBoxConstraints: .tightFor(width: 15),
+                          avatar: Icon(
+                            Icons.circle,
+                            size: 10,
+                            color:
+                                appointment.status !=
+                                    AppointmentStatus.cancelled
+                                ? AppColors.brandPrimaryDark
+                                : AppColors.statusError,
+                          ),
+                          label: Text(
+                            appointment.status.name,
+                            style:
+                                appointment.status !=
+                                    AppointmentStatus.cancelled
+                                ? context.medium9.brandPrimaryDark.rubik
+                                : context.regular9.statusError.rubik,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      appointment.doctor.name,
-                      style: context.regular12.textCaption.rubik,
-                      overflow: .ellipsis,
+                    Divider(color: AppColors.textSecondary, thickness: 0.2),
+
+                    /// appointment details
+                    Wrap(
+                      spacing: 30,
+                      runSpacing: 15,
+                      children: [
+                        _buildListTile(
+                          icon: Icons.calendar_month_outlined,
+                          title: t.admin.appointments_tab.date,
+                          subtitle: DateFormat(
+                            'dd MMM yyyy',
+                          ).format(appointment.sessionTime),
+                          context: context,
+                        ),
+                        _buildListTile(
+                          icon: Icons.access_time,
+                          title: t.admin.appointments_tab.time,
+                          subtitle: DateFormat(
+                            'hh:mm a',
+                          ).format(appointment.sessionTime),
+                          context: context,
+                        ),
+                        _buildListTile(
+                          icon: Icons.payments_outlined,
+                          title: t.admin.appointments_tab.fee,
+                          subtitle: t.patient_appointments.fee_value(
+                            Fee: appointment.fee.toString(),
+                          ),
+                          context: context,
+                        ),
+                      ],
                     ),
-                    Text(
-                      appointment.doctor.specialty.name,
-                      style: context.light10.textSecondary.rubik,
-                      overflow: .ellipsis,
-                    ),
+                    ?appointment.status == AppointmentStatus.completed
+                        ? appointment.review != null
+                              ? AppointmentReviewReadOnlyWidget(
+                                  review: appointment.review!,
+                                )
+                              : null
+                        : null,
+
+                    /// buttons
+                    switch (appointment.status) {
+                      AppointmentStatus.upcoming => _buildUpcomingButtons(
+                        context: context,
+                      ),
+                      AppointmentStatus.completed => _buildViewDetailsButton(
+                        context: context,
+                      ),
+                      AppointmentStatus.cancelled => _buildViewDetailsButton(
+                        context: context,
+                      ),
+                    },
                   ],
                 ),
               ),
-              Chip(
-                padding: EdgeInsets.all(5),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                side: BorderSide(width: 0, color: AppColors.transparent),
-                backgroundColor:
-                    appointment.status != AppointmentStatus.cancelled
-                    ? AppColors.brandPrimary20
-                    : AppColors.statusErrorSurface,
-                avatarBoxConstraints: .tightFor(width: 15),
-                avatar: Icon(
-                  Icons.circle,
-                  size: 10,
-                  color: appointment.status != AppointmentStatus.cancelled
-                      ? AppColors.brandPrimaryDark
-                      : AppColors.statusError,
-                ),
-                label: Text(
-                  appointment.status.name,
-                  style: appointment.status != AppointmentStatus.cancelled
-                      ? context.medium9.brandPrimaryDark.rubik
-                      : context.regular9.statusError.rubik,
-                ),
-              ),
-            ],
-          ),
-          Divider(color: AppColors.textSecondary, thickness: 0.2),
-
-          /// appointment details
-          Wrap(
-            spacing: 30,
-            runSpacing: 15,
-            children: [
-              _buildListTile(
-                icon: Icons.calendar_month_outlined,
-                title: t.admin.appointments_tab.date,
-                subtitle: DateFormat(
-                  'dd MMM yyyy',
-                ).format(appointment.sessionTime),
-                context: context,
-              ),
-              _buildListTile(
-                icon: Icons.access_time,
-                title: t.admin.appointments_tab.time,
-                subtitle: DateFormat('hh:mm a').format(appointment.sessionTime),
-                context: context,
-              ),
-              _buildListTile(
-                icon: Icons.payments_outlined,
-                title: t.admin.appointments_tab.fee,
-                subtitle: t.patient_appointments.fee_value(
-                  Fee: appointment.fee.toString(),
-                ),
-                context: context,
-              ),
-            ],
-          ),
-          ?appointment.status == AppointmentStatus.completed
-              ? appointment.review != null
-                    ? AppointmentReviewReadOnlyWidget(
-                        review: appointment.review!,
-                      )
-                    : null
-              : null,
-
-          /// buttons
-          switch (appointment.status) {
-            AppointmentStatus.upcoming => _buildUpcomingButtons(
-              context: context,
             ),
-            AppointmentStatus.completed => _buildViewDetailsButton(
-              context: context,
-            ),
-            AppointmentStatus.cancelled => _buildViewDetailsButton(
-              context: context,
-            ),
-          },
-        ],
+          );
+        },
       ),
     );
   }

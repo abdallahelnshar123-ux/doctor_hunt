@@ -25,8 +25,13 @@ class AppointmentsListWidget extends StatelessWidget {
     return SafeArea(
       top: false,
       child: ListView.separated(
-        itemBuilder: (context, index) =>
-            AdminAppointmentCard(appointment: filteredAppointments[index]),
+        itemBuilder: (context, index) {
+          final appointment = filteredAppointments[index];
+          return AdminAppointmentCard(
+            key: ValueKey(appointment.id),
+            appointment: appointment,
+          );
+        },
         separatorBuilder: (context, index) => const SizedBox(height: 15),
         itemCount: filteredAppointments.length,
         padding: const EdgeInsets.all(20),

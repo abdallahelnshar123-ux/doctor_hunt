@@ -9,6 +9,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../../../core/utils/snack_bar_utils.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
 import '../../../../../core/widgets/appointment_review_read_only_widget.dart';
 import '../../../../../core/widgets/custom_cached_network_image.dart';

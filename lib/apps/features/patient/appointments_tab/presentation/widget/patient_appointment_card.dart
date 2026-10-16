@@ -25,6 +25,7 @@ class PatientAppointmentCard extends HookWidget {
   Widget build(BuildContext context) {
     final appointmentReview = useValueNotifier<Review?>(appointment.review);
     final tempReview = useRef<Review?>(null);
+    final isLoading = useValueNotifier<bool>(false);
     return BlocListener<AppointmentsBloc, AppointmentsState>(
       listenWhen: (previous, current) {
         if (current is AddReviewLoading &&
@@ -36,6 +37,18 @@ class PatientAppointmentCard extends HookWidget {
           return true;
         }
         if (current is AddReviewError &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+        if (current is CancelAppointmentLoading &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+        if (current is CancelAppointmentSuccess &&
+            current.appointmentId == appointment.id) {
+          return true;
+        }
+        if (current is CancelAppointmentError &&
             current.appointmentId == appointment.id) {
           return true;
         }
@@ -52,150 +65,179 @@ class PatientAppointmentCard extends HookWidget {
             message: state.message,
           );
         }
+        if (state is CancelAppointmentSuccess) {
+          isLoading.value = false;
+        }
+        if (state is CancelAppointmentError) {
+          isLoading.value = false;
+          SnackBarUtils.showErrorSnackBar(
+            context: context,
+            message: state.message,
+          );
+        }
+        if (state is CancelAppointmentLoading) {
+          isLoading.value = true;
+        }
       },
-      child: AppContainerWithShadow(
-        padding: EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          spacing: 10,
-          crossAxisAlignment: .start,
-          children: [
-            ///doctor details
-            Row(
-              spacing: 15,
-              children: [
-                Container(
-                  width: 80,
-                  height: 80,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    image: DecorationImage(
-                      fit: .cover,
-                      image: CustomCachedNetworkImage.getProvider(
-                        appointment.doctor.imageUrl,
-                      ),
+      child: ValueListenableBuilder(
+        valueListenable: isLoading,
+         builder: (BuildContext context, bool isLoading, Widget? child) {
+          return IgnorePointer(
+            ignoring: isLoading,
+            child: Opacity(
+              opacity: isLoading ? .5 : 1.0,
+              child: AppContainerWithShadow(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  spacing: 10,
+                  crossAxisAlignment: .start,
+                  children: [
+                    ///doctor details
+                    Row(
+                      spacing: 15,
+                      children: [
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            image: DecorationImage(
+                              fit: .cover,
+                              image: CustomCachedNetworkImage.getProvider(
+                                appointment.doctor.imageUrl,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            mainAxisAlignment: .spaceBetween,
+                            crossAxisAlignment: .start,
+                            children: [
+                              Text(
+                                appointment.doctor.name,
+                                style: context.medium16.textTertiary.rubik,
+                                overflow: .ellipsis,
+                              ),
+                              Text(
+                                appointment.doctor.specialty.name,
+                                style: context.light14.textSecondary.rubik,
+                                overflow: .ellipsis,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Chip(
+                          padding: EdgeInsets.all(5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          side: BorderSide(width: 0, color: AppColors.transparent),
+                          backgroundColor:
+                          appointment.status != AppointmentStatus.cancelled
+                              ? AppColors.brandPrimary20
+                              : AppColors.statusErrorSurface,
+                          avatarBoxConstraints: .tightFor(width: 15),
+                          avatar: Icon(
+                            Icons.circle,
+                            size: 10,
+                            color: appointment.status != AppointmentStatus.cancelled
+                                ? AppColors.brandPrimaryDark
+                                : AppColors.statusError,
+                          ),
+                          label: Text(
+                            appointment.status.name,
+                            style: appointment.status != AppointmentStatus.cancelled
+                                ? context.medium9.brandPrimaryDark.rubik
+                                : context.regular9.statusError.rubik,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: .spaceBetween,
-                    crossAxisAlignment: .start,
-                    children: [
-                      Text(
-                        appointment.doctor.name,
-                        style: context.medium16.textTertiary.rubik,
-                        overflow: .ellipsis,
-                      ),
-                      Text(
-                        appointment.doctor.specialty.name,
-                        style: context.light14.textSecondary.rubik,
-                        overflow: .ellipsis,
-                      ),
-                    ],
-                  ),
-                ),
-                Chip(
-                  padding: EdgeInsets.all(5),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  side: BorderSide(width: 0, color: AppColors.transparent),
-                  backgroundColor:
-                      appointment.status != AppointmentStatus.cancelled
-                      ? AppColors.brandPrimary20
-                      : AppColors.statusErrorSurface,
-                  avatarBoxConstraints: .tightFor(width: 15),
-                  avatar: Icon(
-                    Icons.circle,
-                    size: 10,
-                    color: appointment.status != AppointmentStatus.cancelled
-                        ? AppColors.brandPrimaryDark
-                        : AppColors.statusError,
-                  ),
-                  label: Text(
-                    appointment.status.name,
-                    style: appointment.status != AppointmentStatus.cancelled
-                        ? context.medium9.brandPrimaryDark.rubik
-                        : context.regular9.statusError.rubik,
-                  ),
-                ),
-              ],
-            ),
-            Divider(color: AppColors.textSecondary, thickness: 0.2),
+                    Divider(color: AppColors.textSecondary, thickness: 0.2),
 
-            /// appointment details
-            Wrap(
-              spacing: 30,
-              runSpacing: 15,
-              children: [
-                _buildListTile(
-                  icon: Icons.calendar_month_outlined,
-                  title: t.patient_appointments.appointment_date,
-                  subtitle: DateFormat(
-                    'dd MMM yyyy',
-                  ).format(appointment.sessionTime),
-                  context: context,
-                ),
-                _buildListTile(
-                  icon: Icons.access_time,
-                  title: t.patient_appointments.appointment_time,
-                  subtitle: DateFormat(
-                    'hh:mm a',
-                  ).format(appointment.sessionTime),
-                  context: context,
-                ),
-                _buildListTile(
-                  icon: Icons.payments_outlined,
-                  title: t.patient_appointments.consultation_fee,
-                  subtitle: t.patient_appointments.fee_value(
-                    Fee: appointment.fee.toString(),
-                  ),
-                  context: context,
-                ),
-              ],
-            ),
-            ?appointment.status == AppointmentStatus.completed
-                ? ValueListenableBuilder(
-                    valueListenable: appointmentReview,
-                    builder: (context, value, child) {
-                      if (value == null) {
-                        return ReviewInputWidget(
-                          onReviewChanged: (value) => tempReview.value = value,
-                          reviewer: appointment.patient,
+                    /// appointment details
+                    Wrap(
+                      spacing: 30,
+                      runSpacing: 15,
+                      children: [
+                        _buildListTile(
+                          icon: Icons.calendar_month_outlined,
+                          title: t.patient_appointments.appointment_date,
+                          subtitle: DateFormat(
+                            'dd MMM yyyy',
+                          ).format(appointment.sessionTime),
+                          context: context,
+                        ),
+                        _buildListTile(
+                          icon: Icons.access_time,
+                          title: t.patient_appointments.appointment_time,
+                          subtitle: DateFormat(
+                            'hh:mm a',
+                          ).format(appointment.sessionTime),
+                          context: context,
+                        ),
+                        _buildListTile(
+                          icon: Icons.payments_outlined,
+                          title: t.patient_appointments.consultation_fee,
+                          subtitle: t.patient_appointments.fee_value(
+                            Fee: appointment.fee.toString(),
+                          ),
+                          context: context,
+                        ),
+                      ],
+                    ),
+                    ?appointment.status == AppointmentStatus.completed
+                        ? ValueListenableBuilder(
+                      valueListenable: appointmentReview,
+                      builder: (context, value, child) {
+                        if (value == null) {
+                          return ReviewInputWidget(
+                            onReviewChanged: (value) =>
+                            tempReview.value = value,
+                            reviewer: appointment.patient,
+                          );
+                        }
+                        return AppointmentReviewReadOnlyWidget(
+                          review: appointmentReview.value!,
                         );
-                      }
-                      return AppointmentReviewReadOnlyWidget(
-                        review: appointmentReview.value!,
-                      );
-                    },
-                  )
-                : null,
+                      },
+                    )
+                        : null,
 
-            /// buttons
-            switch (appointment.status) {
-              AppointmentStatus.upcoming => _buildUpcomingButtons(
-                context: context,
-              ),
-              AppointmentStatus.completed =>
-                appointmentReview.value == null
-                    ? _buildCompletedButtons(
+                    /// buttons
+                    switch (appointment.status) {
+                      AppointmentStatus.upcoming => _buildUpcomingButtons(
+                        context: context,
+                      ),
+                      AppointmentStatus.completed =>
+                      appointmentReview.value == null
+                          ? _buildCompletedButtons(
                         context: context,
                         appointmentReview: appointmentReview,
                         tempReview: tempReview,
                       )
-                    : Row(
+                          : Row(
+                        children: [
+                          _buildViewDetailsButton(context: context),
+                        ],
+                      ),
+                      AppointmentStatus.cancelled => Row(
                         children: [_buildViewDetailsButton(context: context)],
                       ),
-              AppointmentStatus.cancelled => Row(
-                children: [_buildViewDetailsButton(context: context)],
+                    },
+                  ],
+                ),
               ),
-            },
-          ],
-        ),
+            ),
+          );
+
+         },
+
       ),
     );
   }
@@ -237,7 +279,9 @@ class PatientAppointmentCard extends HookWidget {
       borderRadius: 8,
       backgroundColor: AppColors.statusErrorSurface,
       onPressed: () {
-         context.read<AppointmentsBloc>().add( CancelAppointmentEvent(appointment.id) );
+        context.read<AppointmentsBloc>().add(
+          CancelAppointmentEvent(appointment.id),
+        );
       },
       borderSideColor: AppColors.statusError,
       child: FittedBox(

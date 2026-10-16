@@ -42,7 +42,7 @@ class TopRatedDoctorsItem extends StatelessWidget {
                 ),
                 Spacer(),
                 SvgPicture.asset(AppAssets.icons.starIconRated.path, width: 15),
-                Text('5.0', style: context.medium10.black.rubik),
+                Text(doctor.rating.rating.toString()  , style: context.medium10.black.rubik),
               ],
             ),
             Expanded(

@@ -13,11 +13,33 @@ class PatientDoctorsLoading extends PatientDoctorsState {}
 
 class PatientDoctorsSuccess extends PatientDoctorsState {
   final List<Doctor> doctors;
+  final List<Doctor> topRatedDoctors;
+  final List<Doctor> searchResults;
+  final String? searchQuery;
 
-  const PatientDoctorsSuccess({required this.doctors});
+  const PatientDoctorsSuccess({
+    required this.doctors,
+    required this.topRatedDoctors,
+    this.searchResults = const [],
+    this.searchQuery,
+  });
+
+  PatientDoctorsSuccess copyWith({
+    List<Doctor>? doctors,
+    List<Doctor>? topRatedDoctors,
+    List<Doctor>? searchResults,
+    String? searchQuery,
+  }) {
+    return PatientDoctorsSuccess(
+      doctors: doctors ?? this.doctors,
+      topRatedDoctors: topRatedDoctors ?? this.topRatedDoctors,
+      searchResults: searchResults ?? this.searchResults,
+      searchQuery: searchQuery ?? this.searchQuery,
+    );
+  }
 
   @override
-  List<Object?> get props => [doctors];
+  List<Object?> get props => [doctors, topRatedDoctors, searchResults, searchQuery];
 }
 
 class PatientDoctorsError extends PatientDoctorsState {

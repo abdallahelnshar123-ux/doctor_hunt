@@ -32,7 +32,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
 
           builder: (context, state) {
             if (state is PatientDoctorsSuccess) {
-              if (state.doctors.isEmpty) {
+              if (state.topRatedDoctors.isEmpty) {
                 return Container(
                   alignment: .center,
                   height: 190,
@@ -48,7 +48,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ListView.separated(
                   itemBuilder: (context, index) {
-                    var doctor = state.doctors[index];
+                    var doctor = state.topRatedDoctors[index];
                     return GestureDetector(
                       onTap: () {
                         PatientDoctorDetailsRoute(doctor).push(context);
@@ -58,7 +58,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
                   },
                   separatorBuilder: (context, index) =>
                       const SizedBox(width: 15),
-                  itemCount: state.doctors.length,
+                  itemCount: state.topRatedDoctors.length,
                   scrollDirection: .horizontal,
                   padding: const EdgeInsets.all(20),
                 ),

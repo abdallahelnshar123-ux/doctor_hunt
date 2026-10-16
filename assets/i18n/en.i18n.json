@@ -92,6 +92,11 @@
     "search": "search....",
     "live": "Live"
   },
+  "favouriteDoctors": {
+    "noFavouriteDoctorsMatchSearch": "No Favourite Doctors Match Search ",
+    "noFavouriteDoctorsDescription": "You haven't added any doctors to your favourites yet.",
+    "errorWhileFetchingFavouriteDoctors": "Error while fetching favourite doctors. try again later"
+  },
   "settings": {
     "title": "Settings",
     "logout": "Logout",
@@ -231,7 +236,8 @@
     "error": "Error",
     "allSetUp": "All set up",
     "registeredSuccessfully": "Registered Successfully, Please login.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirm": "Confirm"
   },
   "admin": {
     "main": {
@@ -346,6 +352,17 @@
     "failed_to_book_appointment": "Failed to book appointment ${E}",
     "userNotLoggedIn": "User not logged in",
     "failed_to_update_appointment_status": "Failed to update appointment status ${E}"
+  },
+  "validators" : {
+    "thisFieldIsRequired": "This field is required",
+    "emailIsRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email format",
+    "passwordIsRequired": "Password is required",
+    "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+    "confirmPasswordIsRequired": "Confirm password is required",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "phoneIsRequired": "Phone number is required",
+    "invalidPhoneNumber": "Invalid phone number"
   },
   "eCodes": {
     "webUserInteractionFailed": "web-user-interaction-failed",

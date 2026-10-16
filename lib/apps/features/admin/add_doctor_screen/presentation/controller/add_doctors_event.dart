@@ -1,7 +1,10 @@
 part of 'add_doctors_bloc.dart';
 
 @immutable
-abstract class AddDoctorsEvent {}
+abstract class AddDoctorsEvent extends Equatable {
+  @override
+  List<Object?> get props => [];
+}
 
 class AddDoctorRequested extends AddDoctorsEvent {
   final String name;
@@ -19,6 +22,16 @@ class AddDoctorRequested extends AddDoctorsEvent {
     required this.consultationFee,
     this.active = true,
   });
+
+  @override
+  List<Object?> get props => [
+        name,
+        specialty,
+        adminId,
+        image,
+        active,
+        consultationFee,
+      ];
 }
 
 class PickDoctorImageRequested extends AddDoctorsEvent {}

@@ -1,6 +1,8 @@
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../generated/translations.g.dart';
 import '../theme/app_colors.dart';
 
 class DialogUtils {
@@ -96,42 +98,66 @@ class DialogUtils {
     required BuildContext context,
     String title = '',
     required String message,
-    String confirmText = 'Confirm',
-    String cancelText = 'Cancel',
+    String? confirmText,
+    String? cancelText,
   }) {
-    final TextEditingController passwordController = TextEditingController();
-    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
     return _showAppDialog<String>(
       context: context,
-      child: AlertDialog(
-        contentPadding: const EdgeInsets.all(20),
-        title: Text(title, style: context.regular16.brandPrimary.rubik),
-        content: Form(
-          key: formKey,
-          child: Column(
-            spacing: 15,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(message, style: context.regular14.brandPrimary.rubik),
-            ],
+      child: _PasswordDialogContent(
+        title: title,
+        message: message,
+        confirmText: confirmText ?? t.dialog.confirm,
+        cancelText: cancelText ?? t.dialog.cancel,
+      ),
+    );
+  }
+}
+
+class _PasswordDialogContent extends HookWidget {
+  final String title;
+  final String message;
+  final String confirmText;
+  final String cancelText;
+
+  const _PasswordDialogContent({
+    required this.title,
+    required this.message,
+    required this.confirmText,
+    required this.cancelText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final passwordController = useTextEditingController();
+    final formKey = useMemoized(() => GlobalKey<FormState>());
+
+    return AlertDialog(
+      contentPadding: const EdgeInsets.all(20),
+      title: Text(title, style: context.regular16.brandPrimary.rubik),
+      content: Form(
+        key: formKey,
+        child: Column(
+          spacing: 15,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(message, style: context.regular14.brandPrimary.rubik),
+          ],
+        ),
+      ),
+      actions: [
+        DialogUtils._buildActionButton(context: context, text: cancelText),
+        TextButton(
+          onPressed: () {
+            if (formKey.currentState!.validate()) {
+              Navigator.pop(context, passwordController.text.trim());
+            }
+          },
+          child: Text(
+            confirmText,
+            style: context.regular16.brandPrimary.rubik,
           ),
         ),
-        actions: [
-          _buildActionButton(context: context, text: cancelText),
-          TextButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                Navigator.pop(context, passwordController.text.trim());
-              }
-            },
-            child: Text(
-              confirmText,
-              style: context.regular16.brandPrimary.rubik,
-            ),
-          ),
-        ],
-      ),
+      ],
     );
   }
 }

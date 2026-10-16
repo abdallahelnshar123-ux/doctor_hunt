@@ -85,9 +85,9 @@ feature_name/
 ├── data/
 │   ├── models/                # DTOs & data classes
 │   ├── mappers/               # Data-to-Domain mappers
-│   ├── repo/                  # Repository implementations & abstract interfaces
+│   ├── repo/                  # Concrete Repository implementations (No Abstract Interfaces)
 │   ├── service/               # Datasources (Firebase/Remote/Local)
-│   └── use_case/              # Business use cases (optional for simple features)
+│   └── use_case/              # Business use cases (ONLY for complex logic, avoid pass-throughs)
 └── presentation/
     ├── controller/            # BLoC / Cubit (Event, State, Bloc)
     ├── screens/               # Screen UI widgets
@@ -104,13 +104,14 @@ feature_name/
   * All BLoCs MUST be annotated with `@injectable` or `@lazySingleton` for GetIt injection.
   * All Events and States MUST extend `Equatable` and implement `props`.
 * **UI & Widget State**:
-  * Screens SHOULD extend `HookWidget` from `flutter_hooks` to manage local UI controllers (e.g. `useTextEditingController()`, `useMemoized()`, `useRef()`).
+  * Screens and widgets managing controllers (like `TextEditingController`), references (`useRef`), or external lifecycles MUST extend `HookWidget` from `flutter_hooks`.
+  * **Important Exception**: Do **NOT** convert a `StatefulWidget` to a `HookWidget` if it **ONLY** manages simple local UI toggles using `setState` (e.g., toggling password visibility or a simple star rating) and has **NO** controllers or resources requiring manual initialization (`initState`) or disposal (`dispose`). Introducing hooks for purely primitive state toggles adds unnecessary abstraction.
   * Use `BlocBuilder`, `BlocListener`, or `BlocConsumer` to react to BLoC state changes.
 
 ### 3.2 Dependency Injection (GetIt + Injectable)
 * **Annotations**:
   * Services/Datasources: `@lazySingleton` or `@injectable`.
-  * Repositories: `@LazySingleton(as: AuthRepository)` or `@Injectable(as: DoctorRepository)`.
+  * Repositories: `@lazySingleton` or `@injectable` (Inject the concrete class directly, DO NOT use abstract interfaces).
   * BLoCs: `@injectable`.
 * **Initialization**: Dependency injection is configured in `lib/apps/core/di/di.dart`.
 * **Rule**: NEVER instantiate dependencies manually inside BLoCs or UI screens; always retrieve them via `getIt<T>()` or inject them through BLoC constructors.
@@ -127,7 +128,8 @@ feature_name/
 * Run `flutter pub run slang` or `flutter pub run build_runner build` whenever `en.i18n.json` is modified.
 
 ### 3.5 Error Handling & Functional Architecture
-* Use `dartz` `Either<Failure, T>` for all Repository and UseCase return types (`Left(Failure)` vs `Right(T)`).
+* Use `dartz` `Either<Failure, T>` for all Repository (and UseCase, if any) return types (`Left(Failure)` vs `Right(T)`).
+* **Use Cases are STRICTLY OPTIONAL:** Do not create Use Cases that merely pass calls to the Repository. BLoCs should call Repositories directly. Only create a Use Case if it contains actual business logic, data transformation across multiple repositories, or complex validations.
 * Exceptions thrown at the service/datasource layer MUST extend `AppException` (e.g., `ServerException`, `NetworkException`).
 * Repositories MUST catch `AppException` and map them to domain `Failure` instances (e.g., `ServerFailure`, `NetworkFailure`).
 * UI/BLoC layers consume `Failure` and present user messages via `DialogUtils` or `SnackBarUtils`.
@@ -176,9 +178,9 @@ When assigned a task in this project, follow this exact workflow:
 1. **Data Layer**:
    * Create/update Model or DTO.
    * Implement Service/Datasource with Firebase/Cloudinary calls using `FirestoreConstants`.
-   * Define abstract Repository interface & concrete implementation with `Either<Failure, T>` return types. Annotate with `@Injectable(as: RepoInterface)`.
+   * Create a concrete Repository class with `Either<Failure, T>` return types. Annotate directly with `@injectable` or `@lazySingleton` (Do NOT create abstract interfaces).
 2. **Business Layer**:
-   * Create Use Cases if needed.
+   * Create Use Cases ONLY if there is complex business logic (avoid pass-through use cases). Otherwise, BLoCs should call the Repository directly.
    * Create BLoC, Events (`Equatable`), and States (`Equatable`). Annotate BLoC with `@injectable`.
 3. **Routing & DI**:
    * Define route in `app_routes.dart` using `@TypedGoRoute`.

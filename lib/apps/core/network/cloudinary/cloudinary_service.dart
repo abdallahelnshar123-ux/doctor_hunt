@@ -4,6 +4,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
+import '../../../../generated/translations.g.dart';
+import '../../exceptions/app_exceptions.dart';
+
 @injectable
 class CloudinaryService {
   final String cloudName;
@@ -31,7 +34,7 @@ class CloudinaryService {
     final responseBody = await response.stream.bytesToString();
 
     if (response.statusCode != 200) {
-      throw Exception('Cloudinary upload failed: $responseBody');
+      throw ServerException(message: t.errors.some_thing_went_wrong);
     }
 
     final data = jsonDecode(responseBody) as Map<String, dynamic>;
@@ -39,7 +42,7 @@ class CloudinaryService {
     final secureUrl = data['secure_url'] as String?;
 
     if (secureUrl == null || secureUrl.isEmpty) {
-      throw Exception('Cloudinary did not return secure_url');
+      throw ServerException(message: t.errors.some_thing_went_wrong);
     }
 
     return secureUrl;

@@ -60,9 +60,9 @@ class UserPrefs {
     }
   }
 
-  Future<void> saveUserType(String userType) async {
-    await _preferences.setString('userType', userType);
-  }
+  // Future<void> saveUserType(String userType) async {
+  //   await _preferences.setString('userType', userType);
+  // }
 
   bool get onboarding => _preferences.getBool(PrefsKeys.onBoardingKey) ?? false;
 

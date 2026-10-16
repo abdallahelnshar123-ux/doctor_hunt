@@ -15,6 +15,7 @@ import '../../../../../core/mapper/exception_mapper.dart';
 import '../../../../../core/network/cloudinary/cloudinary_service.dart';
 
 @injectable
+// CR: According to the project guidelines, you should define an abstract Repository interface and a concrete implementation, then annotate with @Injectable(as: RepoInterface).
 class DoctorRepository {
   final CloudinaryService _cloudinaryService;
   final DoctorFirestoreService _firestoreService;
@@ -74,6 +75,21 @@ class DoctorRepository {
       yield Left(UnexpectedFailure(e.toString()));
     }
   }
+
+  // Future<Either<Failure, List<Doctor>>> getFavouriteDoctors(
+  //   List<String> doctorIds,
+  // ) async {
+  //   try {
+  //     final doctorDtos =
+  //         await _firestoreService.getFavouriteDoctors(doctorIds);
+  //     final doctors = doctorDtos.map((dto) => dto.toDoctor()).toList();
+  //     return Right(doctors);
+  //   } on AppException catch (e) {
+  //     return Left(e.toFailure());
+  //   } catch (e) {
+  //     return Left(UnexpectedFailure(e.toString()));
+  //   }
+  // }
 
   Future<Either<Failure, File>> pickDoctorImage() async {
     try {

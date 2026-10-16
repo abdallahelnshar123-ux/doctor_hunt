@@ -53,7 +53,7 @@ class AdminAppointmentsBloc
     CompleteAppointmentRequested event,
     Emitter<AdminAppointmentsState> emit,
   ) async {
-    emit(AdminUpdateAppointmentLoadingState());
+    emit(AdminUpdateAppointmentLoadingState( event.appointmentId ));
 
     final result = await _repository.updateAppointmentStatus(
       event.appointmentId,
@@ -61,14 +61,11 @@ class AdminAppointmentsBloc
     );
 
     result.fold(
-      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message)),
+      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message , event.appointmentId)),
       (_) {
         emit(
           AdminUpdateAppointmentSuccessState(
-            t
-                .admin
-                .appointments_tab
-                .appointment_was_marked_as_completed_successfully,
+          event.appointmentId,
           ),
         );
       },
@@ -79,7 +76,7 @@ class AdminAppointmentsBloc
     CancelAppointmentRequested event,
     Emitter<AdminAppointmentsState> emit,
   ) async {
-    emit(AdminUpdateAppointmentLoadingState());
+    emit(AdminUpdateAppointmentLoadingState(event.appointmentId));
 
     final result = await _repository.updateAppointmentStatus(
       event.appointmentId,
@@ -87,11 +84,11 @@ class AdminAppointmentsBloc
     );
 
     result.fold(
-      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message)),
+      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message, event.appointmentId )),
       (_) {
         emit(
           AdminUpdateAppointmentSuccessState(
-            t.admin.appointments_tab.appointment_was_cancelled_successfully,
+            event.appointmentId,
           ),
         );
       },

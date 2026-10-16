@@ -49,6 +49,8 @@ import '../../features/patient/appointments_tab/data/service/review_batch_firest
     as _i129;
 import '../../features/patient/appointments_tab/presentation/controller/appointments_bloc.dart'
     as _i365;
+import '../../features/patient/favourite_tab/presentation/controller/favourite_doctors_bloc.dart'
+    as _i670;
 import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
     as _i486;
 import '../../features/patient/patient_profile_screen/data/repo/user_repository.dart'
@@ -88,6 +90,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => localStorageModule.sharedPreferences,
       preResolve: true,
     );
+    gh.factory<_i670.FavouriteDoctorsBloc>(() => _i670.FavouriteDoctorsBloc());
     gh.factory<_i485.GenerateDoctorSlotsUseCase>(
       () => _i485.GenerateDoctorSlotsUseCase(),
     );

@@ -49,6 +49,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$patient_appointments$en patient_appointments = Translations$patient_appointments$en.internal(_root);
   late final Translations$select_time$en select_time = Translations$select_time$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
+  late final Translations$favourite_doctors$en favourite_doctors = Translations$favourite_doctors$en.internal(_root);
   late final Translations$settings$en settings = Translations$settings$en.internal(_root);
   late final Translations$profile$en profile = Translations$profile$en.internal(_root);
   late final Translations$privacy_policy$en privacy_policy = Translations$privacy_policy$en.internal(_root);
@@ -59,6 +60,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$dialog$en dialog = Translations$dialog$en.internal(_root);
   late final Translations$admin$en admin = Translations$admin$en.internal(_root);
   late final Translations$errors$en errors = Translations$errors$en.internal(_root);
+  late final Translations$validators$en validators = Translations$validators$en.internal(_root);
   late final Translations$e_codes$en e_codes = Translations$e_codes$en.internal(_root);
 }
 
@@ -299,6 +301,24 @@ class Translations$home$en {
 
   /// en: 'Live'
   String get live => 'Live';
+}
+
+// Path: favourite_doctors
+class Translations$favourite_doctors$en {
+  Translations$favourite_doctors$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'No Favourite Doctors Match Search '
+  String get no_favourite_doctors_match_search => 'No Favourite Doctors Match Search ';
+
+  /// en: 'You haven't added any doctors to your favourites yet.'
+  String get no_favourite_doctors_description => 'You haven\'t added any doctors to your favourites yet.';
+
+  /// en: 'Error while fetching favourite doctors. try again later'
+  String get error_while_fetching_favourite_doctors => 'Error while fetching favourite doctors. try again later';
 }
 
 // Path: settings
@@ -563,6 +583,9 @@ class Translations$dialog$en {
 
   /// en: 'Cancel'
   String get cancel => 'Cancel';
+
+  /// en: 'Confirm'
+  String get confirm => 'Confirm';
 }
 
 // Path: admin
@@ -634,6 +657,42 @@ class Translations$errors$en {
 
   /// en: 'Failed to update appointment status ${E}'
   String failed_to_update_appointment_status({required Object E}) => 'Failed to update appointment status ${E}';
+}
+
+// Path: validators
+class Translations$validators$en {
+  Translations$validators$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'This field is required'
+  String get this_field_is_required => 'This field is required';
+
+  /// en: 'Email is required'
+  String get email_is_required => 'Email is required';
+
+  /// en: 'Invalid email format'
+  String get invalid_email_format => 'Invalid email format';
+
+  /// en: 'Password is required'
+  String get password_is_required => 'Password is required';
+
+  /// en: 'Password must be at least 6 characters'
+  String get password_must_be_at_least6_characters => 'Password must be at least 6 characters';
+
+  /// en: 'Confirm password is required'
+  String get confirm_password_is_required => 'Confirm password is required';
+
+  /// en: 'Passwords do not match'
+  String get passwords_do_not_match => 'Passwords do not match';
+
+  /// en: 'Phone number is required'
+  String get phone_is_required => 'Phone number is required';
+
+  /// en: 'Invalid phone number'
+  String get invalid_phone_number => 'Invalid phone number';
 }
 
 // Path: e_codes
