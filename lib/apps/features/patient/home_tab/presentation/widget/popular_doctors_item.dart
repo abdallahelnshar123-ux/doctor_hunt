@@ -60,19 +60,6 @@ class PopularDoctorsItem extends StatelessWidget {
                   starSize: 13,
                   showRating: false,
                 ),
-                // Row(
-                //   spacing: 5,
-                //   mainAxisAlignment: .center,
-                //   children: List.generate(
-                //     5,
-                //     (index) => SvgPicture.asset(
-                //       index < doctor.rating.rating.floor()
-                //           ? AppAssets.icons.starIconRated.path
-                //           : AppAssets.icons.starIconUnrated.path,
-                //       width: 13,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),

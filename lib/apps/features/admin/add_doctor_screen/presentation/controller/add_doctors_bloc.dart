@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 part 'add_doctors_event.dart';
+
 part 'add_doctors_state.dart';
 
 @injectable
@@ -19,45 +20,7 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
   AddDoctorsBloc(this._doctorRepository) : super(DoctorInitial()) {
     on<AddDoctorRequested>(_onAddDoctorRequested);
     on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
-    // on<GetDoctorsRequested>(_onGetDoctorsRequested);
-    // on<FilterDoctorsRequested>(_onFilterDoctorsRequested);
   }
-
-  // Future<void> _onFilterDoctorsRequested(
-  //   FilterDoctorsRequested event,
-  //   Emitter<AddDoctorsState> emit,
-  // ) async {
-  //   final currentState = state;
-  //   if (currentState is GetDoctorsSuccessState) {
-  //     if (event.selectedSpecialty == currentState.selectedSpecialty) return;
-  //
-  //     if (event.selectedSpecialty == null) {
-  //       emit(
-  //         GetDoctorsSuccessState(
-  //           allDoctors: currentState.allDoctors,
-  //           specialtyCounts: currentState.specialtyCounts,
-  //           activeDoctorsCount: currentState.activeDoctorsCount,
-  //           selectedSpecialty: null,
-  //           filteredDoctors: null,
-  //         ),
-  //       );
-  //       return;
-  //     } else {
-  //       List<Doctor> filtered = [];
-  //
-  //       filtered = currentState.allDoctors
-  //           .where((d) => d.specialty == event.selectedSpecialty)
-  //           .toList();
-  //
-  //       emit(
-  //         currentState.copyWith(
-  //           filteredDoctors: filtered,
-  //           selectedSpecialty: event.selectedSpecialty,
-  //         ),
-  //       );
-  //     }
-  //   }
-  // }
 
   Future<void> _onAddDoctorRequested(
     AddDoctorRequested event,
@@ -83,42 +46,6 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
       (r) => emit(AddDoctorSuccessState()),
     );
   }
-
-  // Future<void> _onGetDoctorsRequested(
-  //   GetDoctorsRequested event,
-  //   Emitter<AddDoctorsState> emit,
-  // ) async {
-  //   emit(GetDoctorsLoadingState());
-  //   await emit.forEach(
-  //     _doctorRepository.getDoctors(adminId: event.adminId),
-  //     onData: (result) => result.fold(
-  //       (failure) => GetDoctorsErrorState(failure.message),
-  //       (doctorsList) {
-  //         int activeCount = 0;
-  //         final Map<Specialty, int> counts = {};
-  //
-  //         for (var doctor in doctorsList) {
-  //           if (doctor.active) {
-  //             activeCount++;
-  //           }
-  //           final specialtyName = doctor.specialty;
-  //           counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
-  //         }
-  //
-  //         final List<Map<Specialty, int>> specialtyCounts = counts.entries
-  //             .map((e) => {e.key: e.value})
-  //             .toList();
-  //
-  //         return GetDoctorsSuccessState(
-  //           allDoctors: doctorsList,
-  //           specialtyCounts: specialtyCounts,
-  //           activeDoctorsCount: activeCount,
-  //         );
-  //       },
-  //     ),
-  //     onError: (error, stackTrace) => GetDoctorsErrorState(error.toString()),
-  //   );
-  // }
 
   Future<void> _onPickDoctorImageRequested(
     PickDoctorImageRequested event,

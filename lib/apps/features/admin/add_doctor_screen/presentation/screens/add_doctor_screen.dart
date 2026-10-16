@@ -138,36 +138,6 @@ class AddDoctorScreen extends HookWidget {
                 selectedSpecialty: selectedSpecialty,
                 user: user,
               ),
-              // CustomElevatedButton(
-              //   backgroundColor: AppColors.brandPrimary,
-              //   onPressed: () {
-              //     FocusManager.instance.primaryFocus?.unfocus();
-              //     var adminId = user?.id ?? '';
-              //     if (formKey.currentState!.validate()) {
-              //       if (selectedImage.value == null) {
-              //         SnackBarUtils.showInfoSnackBar(
-              //           context: context,
-              //           message: t.create_doctor.you_must_pick_doctor_image,
-              //         );
-              //         return;
-              //       }
-              //       context.read<DoctorBloc>().add(
-              //         AddDoctorRequested(
-              //           name: nameController.text.trim(),
-              //           specialty: selectedSpecialty.value!,
-              //           image: selectedImage.value!,
-              //           adminId: adminId,
-              //           consultationFee:
-              //               double.tryParse(feeController.text.trim()) ?? 0.0,
-              //         ),
-              //       );
-              //     }
-              //   },
-              //   child: Text(
-              //     t.admin.add_doctor_screen.create_doctor,
-              //     style: context.medium18.white.rubik,
-              //   ),
-              // ),
             ],
           ),
         ),

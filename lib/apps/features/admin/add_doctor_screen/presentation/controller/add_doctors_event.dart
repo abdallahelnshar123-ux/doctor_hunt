@@ -35,15 +35,3 @@ class AddDoctorRequested extends AddDoctorsEvent {
 }
 
 class PickDoctorImageRequested extends AddDoctorsEvent {}
-
-// class GetDoctorsRequested extends AddDoctorsEvent {
-//   final String adminId;
-//
-//   GetDoctorsRequested({required this.adminId});
-// }
-//
-// class FilterDoctorsRequested extends AddDoctorsEvent {
-//   final Specialty? selectedSpecialty;
-//
-//   FilterDoctorsRequested(this.selectedSpecialty);
-// }

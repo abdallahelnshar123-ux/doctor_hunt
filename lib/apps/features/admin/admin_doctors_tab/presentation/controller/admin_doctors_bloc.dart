@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'admin_doctors_event.dart';
+
 part 'admin_doctors_state.dart';
 
 EventTransformer<T> debounce<T>(Duration duration) {
@@ -124,18 +125,6 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
             doctor.specialty.name.toLowerCase().contains(lowerQuery);
       }).toList();
 
-      // bool matchesQuery = true;
-      // if (query.trim().isNotEmpty) {
-      //   final lowerQuery = query.toLowerCase();
-      //
-      // }
-
-      // final updatedFilteredDoctors = _applyFilterAndSearch(
-      //   currentState.allDoctors,
-      //   currentState.selectedSpecialty,
-      //   event.query,
-      // );
-
       emit(
         currentState.copyWith(
           searchQuery: event.query,
@@ -154,18 +143,6 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
     return allDoctors.where((doctor) {
       bool matchesSpecialty = true;
       matchesSpecialty = doctor.specialty == specialty;
-
-      // if (specialty ) {
-      //   matchesSpecialty = doctor.specialty == specialty;
-      // }
-      //
-      // bool matchesQuery = true;
-      // if (query.trim().isNotEmpty) {
-      //   final lowerQuery = query.toLowerCase();
-      //   matchesQuery =
-      //       doctor.name.toLowerCase().contains(lowerQuery) ||
-      //       doctor.specialty.name.toLowerCase().contains(lowerQuery);
-      // }
 
       return matchesSpecialty;
     }).toList();

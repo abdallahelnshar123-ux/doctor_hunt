@@ -302,38 +302,20 @@ class DoctorAvailabilityScreen extends HookWidget {
               ],
             ),
           ),
-          // Text.rich(
-          //   TextSpan(
-          //     text: '${doctor.name}\n',
-          //     style: context.medium16.textTertiary.rubik,
-          //     children: [
-          //       TextSpan(
-          //         text: doctor.specialty.name,
-          //         style: context.light14.textSecondary.rubik,
-          //       ),
-          //     ],
-          //   ),
-          //   overflow: .ellipsis,
-          //   softWrap: true,
-          // ),
           Chip(
             padding: EdgeInsets.all(5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30),
             ),
             side: BorderSide(width: 0, color: AppColors.transparent),
-            backgroundColor:
-                // AppColors.black,
-                doctor.active
+            backgroundColor: doctor.active
                 ? AppColors.brandPrimary20
                 : AppColors.statusErrorSurface,
             avatarBoxConstraints: .tightFor(width: 15),
             avatar: Icon(
               Icons.circle,
               size: 10,
-              color:
-                  // AppColors.black,
-                  doctor.active
+              color: doctor.active
                   ? AppColors.brandPrimaryDark
                   : AppColors.statusError,
             ),

@@ -18,7 +18,6 @@ import '../models/user_dto/my_user_dto.dart';
 import '../service/firebase_services/user_firestore_service.dart';
 
 @lazySingleton
-// CR: According to the project guidelines, you should define an abstract Repository interface and a concrete implementation (e.g., AuthRepositoryImpl), then annotate with @LazySingleton(as: AuthRepository).
 class AuthRepository {
   final AuthService _authService;
   final UserFirestoreService _firestoreService;

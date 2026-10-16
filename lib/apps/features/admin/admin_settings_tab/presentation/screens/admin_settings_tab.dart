@@ -19,7 +19,6 @@ class AdminSettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -27,34 +26,6 @@ class AdminSettingsTab extends StatelessWidget {
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20),
           children: [
-            // AppContainerWithShadow(
-            //   clipBehavior: .antiAlias,
-            //   decoration: BoxDecoration(
-            //     color: AppColors.white,
-            //     borderRadius: BorderRadius.circular(16),
-            //   ),
-            //   child: Material(
-            //     color: AppColors.transparent,
-            //     child: ListTile(
-            //       contentPadding: EdgeInsets.all(16),
-            //       onTap: () {
-            //         // if (user == null) return;
-            //         // PatientProfileRoute(user).push(context);
-            //       },
-            //       leading: CircleAvatar(
-            //         radius: 30,
-            //         backgroundColor: AppColors.shimmerBaseColor,
-            //         backgroundImage: CustomCachedNetworkImage.getProvider(
-            //           user?.image,
-            //         ),
-            //       ),
-            //       titleTextStyle: context.bold16.textPrimary.rubik,
-            //       subtitleTextStyle: context.regular12.textSecondary.rubik,
-            //       title: Text(user?.name ?? '-', textAlign: .start),
-            //       subtitle: Text(user?.email ?? '-'),
-            //     ),
-            //   ),
-            // ),
             SettingsUserCard(),
             SizedBox(height: 20),
             AccountSettingsWidget(),

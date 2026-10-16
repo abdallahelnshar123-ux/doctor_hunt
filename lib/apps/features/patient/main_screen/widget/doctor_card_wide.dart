@@ -61,31 +61,7 @@ class DoctorCardWide extends StatelessWidget {
                   style: context.light14.textSecondary.rubik,
                   overflow: .ellipsis,
                 ),
-                // Text.rich(
-                //   TextSpan(
-                //     text: '${doctor.name}\n',
-                //     style: context.medium18.textTertiary.rubik,
-                //     children: [
-                //       TextSpan(
-                //         text: doctor.specialty.name,
-                //         style: context.light14.textSecondary.rubik,
-                //       ),
-                //     ],
-                //   ),
-                //   overflow: .ellipsis,
-                // ),
                 Spacer(),
-                // Row(
-                //   spacing: 6,
-                //   crossAxisAlignment: .center,
-                //   children: List.generate(
-                //     5,
-                //     (index) => SvgPicture.asset(
-                //       AppAssets.icons.starIconRated.path,
-                //       width: 15,
-                //     ),
-                //   ),
-                // ),
                 RatingWidget(
                   rating: doctor.rating.rating,
                   showRating: false,

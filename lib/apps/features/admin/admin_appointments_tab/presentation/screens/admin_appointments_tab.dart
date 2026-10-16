@@ -22,6 +22,7 @@ import '../controller/admin_appointments_bloc.dart';
 import '../controller/admin_appointments_state.dart';
 
 part '../widget/admin_appointment_card.dart';
+
 part '../widget/appointments_list_widget.dart';
 
 class AdminAppointmentsTab extends StatelessWidget {
@@ -102,33 +103,6 @@ class AdminAppointmentsTab extends StatelessWidget {
                           return const AppointmentsListShimmerWidget();
                         },
                       ),
-
-                  // TabBarView(
-                  //   children: [],
-                  //   // children: [
-                  //   //   ListView.separated(
-                  //   //     itemBuilder: (context, index) => PatientAppointmentCard(),
-                  //   //     separatorBuilder: (context, index) =>
-                  //   //         const SizedBox(height: 15),
-                  //   //     itemCount: 10,
-                  //   //     padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //   //   ),
-                  //   //   ListView.separated(
-                  //   //     itemBuilder: (context, index) => PatientAppointmentCard(),
-                  //   //     separatorBuilder: (context, index) =>
-                  //   //         const SizedBox(height: 15),
-                  //   //     itemCount: 10,
-                  //   //     padding: const EdgeInsets.all(20),
-                  //   //   ),
-                  //   //   ListView.separated(
-                  //   //     itemBuilder: (context, index) => PatientAppointmentCard(),
-                  //   //     separatorBuilder: (context, index) =>
-                  //   //         const SizedBox(height: 15),
-                  //   //     itemCount: 10,
-                  //   //     padding: const EdgeInsets.symmetric(horizontal: 20),
-                  //   //   ),
-                  //   // ],
-                  // ),
                 ),
               ],
             ),

@@ -40,12 +40,10 @@ class FavoriteTab extends HookWidget {
       listenWhen: (previous, current) {
         final prevFavs = previous.user?.patientInfo?.favDoctors ?? [];
         final currFavs = current.user?.patientInfo?.favDoctors ?? [];
-        return prevFavs !=
-            currFavs; // استمع فقط لو المفضلة اتغيرت (اليوزر داس على القلب)
+        return prevFavs != currFavs;
       },
       listener: (context, state) {
         final newFavIds = state.user?.patientInfo?.favDoctors ?? [];
-        // 4. إخبار بلوك المفضلة بإزالة الدكتور من الـ UI لحظياً
         context.read<FavouriteDoctorsBloc>().add(
           UpdateFavoriteIdsEvent(newFavIds),
         );
@@ -109,23 +107,10 @@ class FavoriteTab extends HookWidget {
                       );
                     }
                     return const FavouriteDoctorsShimmer();
-
-                    // return Center(
-                    //   child: Text(
-                    //     t.favourite_doctors.no_favourite_doctors_description,
-                    //   ),
-                    // );
                   },
                 ),
               ),
             ),
-            // SizedBox(height: 20,)
-            // SizedBox(
-            //   width: double.infinity,
-            //   height: 450,
-            //   child:
-            // ),
-            // TopRatedDoctorsWidget(),
           ],
         ),
       ),

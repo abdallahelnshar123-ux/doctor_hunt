@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -99,25 +99,11 @@ class AdminDoctorsTab extends HookWidget {
     return Expanded(
       child: BlocBuilder<AdminDoctorsBloc, AdminDoctorsState>(
         builder: (context, state) {
-          // if (state is AdminDoctorsLoading || state is AdminDoctorsInitial) {
-          //   return AdminDoctorsShimmer();
-          // } else
-
           if (state is AdminDoctorsSuccess) {
-            // final List<Doctor> doctors = (query.isEmpty)
-            //     ? state.allDoctors
-            //     : (state.filteredDoctors ?? state.allDoctors);
-
             if (state.allDoctors.isEmpty) {
               return ListView(
                 padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
                 children: [
-                  // Image.asset(
-                  //   AppAssets.images.noDoctorsFoundImage.path,
-                  //   width: context.width / 4,
-                  //   height: context.width / 4,
-                  //   fit: BoxFit.fitHeight,
-                  // ),
                   Text(
                     t.admin.doctors_tab.no_doctors,
                     style: context.bold16.textPrimary.rubik.copyWith(height: 2),
@@ -135,12 +121,6 @@ class AdminDoctorsTab extends HookWidget {
               return ListView(
                 padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
                 children: [
-                  // Image.asset(
-                  //   AppAssets.images.noDoctorsFoundImage.path,
-                  //   width: context.width / 4,
-                  //   height: context.width / 4,
-                  //   fit: BoxFit.fitHeight,
-                  // ),
                   Text(
                     t.admin.doctors_tab.no_doctors_found,
                     style: context.bold16.textPrimary.rubik.copyWith(height: 2),
@@ -180,12 +160,6 @@ class AdminDoctorsTab extends HookWidget {
             );
           }
 
-          // return Center(
-          //   child: Text(
-          //     state.message,
-          //     style: context.bold16.statusError.rubik,
-          //   ),
-          // );
           return AdminDoctorsShimmer();
         },
       ),

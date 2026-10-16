@@ -11,7 +11,6 @@ class AdminAppbar extends StatelessWidget implements PreferredSizeWidget {
     final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return AppBar(
       title: Text(title),
-      // leading: Icon(Icons.menu, color: AppColors.brandPrimaryDark),
       actionsPadding: EdgeInsets.symmetric(horizontal: 20),
       actions: [
         IconButton(
@@ -24,12 +23,6 @@ class AdminAppbar extends StatelessWidget implements PreferredSizeWidget {
           backgroundColor: AppColors.brandPrimary,
           backgroundImage: CustomCachedNetworkImage.getProvider(user?.image),
         ),
-        // IconButton(
-        //   onPressed: () {
-        //     context.read<AuthBloc>().add(LogoutRequested());
-        //   },
-        //   icon: Icon(Icons.logout, color: AppColors.statusError),
-        // ),
       ],
     );
   }

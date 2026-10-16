@@ -51,28 +51,6 @@ class AppointmentFirestoreService {
       );
     }
   }
-
-  // Future<List<AppointmentDto>> getPatientAppointments(String patientId) async {
-  //   try {
-  //     final querySnapshot = await _firestore
-  //         .collection(FirestoreConstants.appointmentsCollection)
-  //         .where(
-  //           '${FirestoreConstants.patient}.${FirestoreConstants.id}',
-  //           isEqualTo: patientId,
-  //         )
-  //         .orderBy(FirestoreConstants.sessionTime, descending: true)
-  //         .get();
-  //
-  //     return querySnapshot.docs
-  //         .map((doc) => AppointmentDto.fromJson(doc.data()))
-  //         .toList();
-  //   } catch (e) {
-  //     throw ServerException(
-  //       message: t.errors.failed_to_fetch_appointments(E: e.toString()),
-  //     );
-  //   }
-  // }
-
   Stream<List<AppointmentDto>> getPatientAppointmentsStream(String patientId) {
     return _firestore
         .collection(FirestoreConstants.appointmentsCollection)
@@ -102,23 +80,13 @@ class AppointmentFirestoreService {
       );
       var doc = collectionRef.doc();
 
-      // Set the ID of the document
       appointmentDto = appointmentDto.copyWith(id: doc.id);
 
       await collectionRef
           .doc(appointmentDto.id)
           .set(appointmentDto.toFireStore());
 
-      // // If ID is empty, let Firestore generate it
-      // if (appointmentDto.id.isEmpty) {
-      //   final docRef = await collectionRef.add(appointmentDto.toFireStore());
-      //   // Update the document with its generated ID inside the document itself
-      //   await docRef.update({FirestoreConstants.id: docRef.id});
-      // } else {
-      //   await collectionRef
-      //       .doc(appointmentDto.id)
-      //       .set(appointmentDto.toFireStore());
-      // }
+
     } catch (e) {
       throw ServerException(
         message: t.errors.failed_to_book_appointment(E: e.toString()),
@@ -126,26 +94,6 @@ class AppointmentFirestoreService {
     }
   }
 
-  // Future<List<AppointmentDto>> getAdminAppointments(String adminId) async {
-  //   try {
-  //     final querySnapshot = await _firestore
-  //         .collection(FirestoreConstants.appointmentsCollection)
-  //         .where(
-  //           '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
-  //           isEqualTo: adminId,
-  //         )
-  //         .orderBy(FirestoreConstants.sessionTime, descending: true)
-  //         .get();
-  //
-  //     return querySnapshot.docs
-  //         .map((doc) => AppointmentDto.fromJson(doc.data()))
-  //         .toList();
-  //   } catch (e) {
-  //     throw ServerException(
-  //       message: t.errors.failed_to_fetch_appointments(E: e.toString()),
-  //     );
-  //   }
-  // }
 
   Stream<List<AppointmentDto>> getAdminAppointmentsStream(String adminId) {
     return _firestore

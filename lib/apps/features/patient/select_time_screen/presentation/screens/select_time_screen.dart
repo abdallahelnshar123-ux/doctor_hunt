@@ -219,15 +219,6 @@ class SelectTimeScreen extends HookWidget {
                   style: context.medium18.white.rubik,
                 ),
               ),
-              // TextButton(
-              //   onPressed: () {
-              //     const PatientMainRoute().go(context);
-              //   },
-              //   child: Text(
-              //     t.appointment.edit,
-              //     style: context.regular14.textSecondary.rubik,
-              //   ),
-              // ),
             ],
           ),
         ),

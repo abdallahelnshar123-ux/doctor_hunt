@@ -15,6 +15,7 @@ import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
+
 part '../widget/more_option_widget.dart';
 
 class SettingsTab extends StatelessWidget {
@@ -55,42 +56,12 @@ class SettingsTab extends StatelessWidget {
                       PatientProfileRoute(user).push(context);
                     },
                   ),
-                  // AppContainerWithShadow(
-                  //   clipBehavior: .antiAlias,
-                  //   decoration: BoxDecoration(
-                  //     color: AppColors.white,
-                  //     borderRadius: BorderRadius.circular(16),
-                  //   ),
-                  //   child: Material(
-                  //     color: AppColors.transparent,
-                  //     child: ListTile(
-                  //       contentPadding: EdgeInsets.all(16),
-                  //       onTap: () {
-                  //         if (user == null) return;
-                  //         PatientProfileRoute(user).push(context);
-                  //       },
-                  //       leading: CircleAvatar(
-                  //         radius: 30,
-                  //         backgroundColor: AppColors.shimmerBaseColor,
-                  //         backgroundImage: CustomCachedNetworkImage.getProvider(
-                  //           user?.image,
-                  //         ),
-                  //       ),
-                  //       titleTextStyle: context.bold16.textPrimary.rubik,
-                  //       subtitleTextStyle:
-                  //           context.regular12.textSecondary.rubik,
-                  //       title: Text(user?.name ?? '-', textAlign: .start),
-                  //       subtitle: Text(user?.email ?? '-'),
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(height: 15),
                   AccountSettingsWidget(),
                   SizedBox(height: 15),
                   MoreOptionWidget(),
                   SizedBox(height: 40),
                   LogoutButton(),
-                  // _buildLogoutButton(context),
                 ],
               ),
             ),
@@ -99,36 +70,4 @@ class SettingsTab extends StatelessWidget {
       ),
     );
   }
-
-  //
-  // Widget _buildLogoutButton(BuildContext context) {
-  //   return TextButton.icon(
-  //     icon: Icon(Icons.logout),
-  //     style: ButtonStyle(
-  //       shape: WidgetStatePropertyAll(
-  //         RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-  //       ),
-  //       padding: WidgetStatePropertyAll(EdgeInsets.all(16)),
-  //       backgroundColor: WidgetStatePropertyAll(AppColors.statusErrorSurface),
-  //       iconColor: WidgetStatePropertyAll(AppColors.statusError),
-  //       iconSize: WidgetStatePropertyAll(20),
-  //       textStyle: WidgetStatePropertyAll(context.semiBold14.statusError.rubik),
-  //       foregroundColor: WidgetStatePropertyAll(AppColors.statusError),
-  //     ),
-  //
-  //     onPressed: () {
-  //       DialogUtils.showMessage(
-  //         context: context,
-  //         message: t.settings.logout_confirmation,
-  //         title: t.settings.logout,
-  //         posActionText: t.dialog.ok,
-  //         posAction: () {
-  //           context.read<AuthBloc>().add(LogoutRequested());
-  //         },
-  //         negActionText: t.dialog.cancel,
-  //       );
-  //     },
-  //     label: Text(t.settings.logout),
-  //   );
-  // }
 }

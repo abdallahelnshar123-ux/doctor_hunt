@@ -36,19 +36,6 @@ class RegisterWithEmailPasswordErrorState extends AuthState {
   List<Object?> get props => [message];
 }
 
-// class RegisterLoadingState extends AuthState {}
-//
-// class RegisterSuccessState extends AuthState {}
-//
-// class RegisterErrorState extends AuthState {
-//   final String message;
-//
-//   RegisterErrorState(this.message);
-//
-//   @override
-//   List<Object?> get props => [message];
-// }
-
 class ContinueWithGoogleLoadingState extends AuthState {}
 
 class ContinueWithGoogleErrorState extends AuthState {

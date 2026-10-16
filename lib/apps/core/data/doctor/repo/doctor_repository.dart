@@ -74,21 +74,6 @@ class DoctorRepository {
     }
   }
 
-  // Future<Either<Failure, List<Doctor>>> getFavouriteDoctors(
-  //   List<String> doctorIds,
-  // ) async {
-  //   try {
-  //     final doctorDtos =
-  //         await _firestoreService.getFavouriteDoctors(doctorIds);
-  //     final doctors = doctorDtos.map((dto) => dto.toDoctor()).toList();
-  //     return Right(doctors);
-  //   } on AppException catch (e) {
-  //     return Left(e.toFailure());
-  //   } catch (e) {
-  //     return Left(UnexpectedFailure(e.toString()));
-  //   }
-  // }
-
   Future<Either<Failure, File>> pickDoctorImage() async {
     try {
       final result = await _imageService.pickImage();

@@ -31,7 +31,6 @@ class AdminProfileScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController(text: user.name);
-    // final phoneController = useTextEditingController(text: user.phone ?? '');
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
     final hasChanges = useValueNotifier<bool>(false);
@@ -39,18 +38,13 @@ class AdminProfileScreen extends HookWidget {
     useEffect(() {
       void checkForChanges() {
         final isNameChanged = nameController.text.trim() != user.name;
-        // final isPhoneChanged =
-        //     phoneController.text.trim() != (user.phone ?? '');
         final isImageChanged = selectedImage.value != null;
         hasChanges.value = isNameChanged || isImageChanged;
       }
 
       nameController.addListener(checkForChanges);
-      // phoneController.addListener(checkForChanges);
-
       return () {
         nameController.removeListener(checkForChanges);
-        // phoneController.removeListener(checkForChanges);
       };
     }, [user]);
 
@@ -95,18 +89,12 @@ class AdminProfileScreen extends HookWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // MainAppBar(
-            //   backgroundColor: AppColors.brandPrimary,
-            //   title: t.profile.title,
-            //   titleStyle: context.bold18.white.rubik,
-            // ),
             SizedBox(height: 40),
             _buildImageWidget(selectedImage, hasChanges),
             _buildProfileForm(
               context: context,
               formKey: formKey,
               nameController: nameController,
-              // phoneController: phoneController,
               hasChanges: hasChanges,
               selectedImage: selectedImage,
             ),
@@ -212,23 +200,7 @@ class AdminProfileScreen extends HookWidget {
               hintText: t.admin.profile_screen.full_name,
               hintStyle: context.regular12.textSecondary.rubik,
             ),
-            // TextFormWidget(
-            //   label: t.profile.name,
-            //   controller: nameController,
-            //   validator: (value) => Validators.required(value),
-            // ),
             const SizedBox(height: 10),
-
-            // TextFormWidget(
-            //   label: t.profile.phone,
-            //   controller: phoneController,
-            //   validator: (value) {
-            //     if (value == null || value.trim().isEmpty) {
-            //       return null;
-            //     }
-            //     return Validators.phone(value);
-            //   },
-            // ),
             Text(
               t.admin.profile_screen.email_address,
               style: context.semiBold12.textPrimary.rubik,
@@ -258,7 +230,6 @@ class AdminProfileScreen extends HookWidget {
                       if (formKey.currentState?.validate() ?? false) {
                         final updatedUser = user.copyWith(
                           name: nameController.text.trim(),
-                          // phone: phoneController.text.trim(),
                         );
                         context.read<AdminProfileBloc>().add(
                           AdminProfileUpdateRequested(

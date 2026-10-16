@@ -123,14 +123,4 @@ class DoctorsWidget extends StatelessWidget {
       ],
     );
   }
-
-  // List<Doctor> _buildDoctorsList({
-  //   required List<Doctor> allDoctors,
-  //   required List<Doctor>? filteredDoctors,
-  // }) {
-  //   if (filteredDoctors == null) {
-  //     return allDoctors;
-  //   }
-  //   return filteredDoctors;
-  // }
 }

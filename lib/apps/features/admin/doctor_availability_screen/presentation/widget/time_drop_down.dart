@@ -3,13 +3,11 @@ part of '../screens/doctor_availability_screen.dart';
 class TimeDropDown extends StatelessWidget {
   const TimeDropDown({
     super.key,
-    // required this.workingHour,
     this.onSelected,
     required this.title,
     required this.initialSelection,
   });
 
-  // final List<WorkingHour> workingHour;
   final void Function(String?)? onSelected;
   final String title;
 

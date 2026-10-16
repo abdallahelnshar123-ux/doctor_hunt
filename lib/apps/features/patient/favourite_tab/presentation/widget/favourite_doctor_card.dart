@@ -27,15 +27,6 @@ class FavouriteDoctorCard extends StatelessWidget {
         spacing: 5,
         crossAxisAlignment: .center,
         children: [
-          // Row(
-          //   mainAxisAlignment: .end,
-          //   children: [
-          //     GestureDetector(
-          //       onTap: () {},
-          //       child: Icon(Icons.favorite, color: AppColors.badge, size: 20),
-          //     ),
-          //   ],
-          // ),
           Align(
             alignment: .topRight,
             child: FavoriteButtonWidget(doctorId: doctor.id, size: 25),
@@ -60,8 +51,6 @@ class FavouriteDoctorCard extends StatelessWidget {
             style: context.regular12.brandPrimary.rubik,
             overflow: .ellipsis,
           ),
-
-          // SizedBox(height: 20),
         ],
       ),
     );

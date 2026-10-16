@@ -42,23 +42,6 @@ class AppointmentRepository {
     }
   }
 
-  // Future<Either<Failure, List<Appointment>>> getPatientAppointments(
-  //     String patientId) async {
-  //   try {
-  //     final appointmentDtos =
-  //         await _firestoreService.getPatientAppointments(patientId);
-  //
-  //     final appointments =
-  //         appointmentDtos.map((dto) => dto.toAppointment()).toList();
-  //
-  //     return Right(appointments);
-  //   } on AppException catch (e) {
-  //     return Left(e.toFailure());
-  //   } catch (e) {
-  //     return Left(UnexpectedFailure(e.toString()));
-  //   }
-  // }
-
   Stream<Either<Failure, List<Appointment>>> getPatientAppointmentsStream(
     String patientId,
   ) async* {
@@ -103,23 +86,6 @@ class AppointmentRepository {
       return Left(UnexpectedFailure(e.toString()));
     }
   }
-
-  // Future<Either<Failure, List<Appointment>>> getAdminAppointments(
-  //     String adminId) async {
-  //   try {
-  //     final appointmentDtos =
-  //         await _firestoreService.getAdminAppointments(adminId);
-  //
-  //     final appointments =
-  //         appointmentDtos.map((dto) => dto.toAppointment()).toList();
-  //
-  //     return Right(appointments);
-  //   } on AppException catch (e) {
-  //     return Left(e.toFailure());
-  //   } catch (e) {
-  //     return Left(UnexpectedFailure(e.toString()));
-  //   }
-  // }
 
   Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream(
     String adminId,
