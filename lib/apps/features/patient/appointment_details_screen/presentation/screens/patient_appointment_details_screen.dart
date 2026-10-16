@@ -86,7 +86,8 @@ class PatientAppointmentDetailsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),SizedBox(height: 20),
+                  ),
+                  SizedBox(height: 20),
                   ?appointment.review != null
                       ? AppointmentReviewReadOnlyWidget(
                           review: appointment.review!,

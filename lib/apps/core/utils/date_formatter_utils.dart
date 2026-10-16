@@ -13,9 +13,9 @@ class DateFormatterUtils {
     final today = DateTime(now.year, now.month, now.day);
     final tomorrow = today.add(const Duration(days: 1));
     final targetDate = DateTime(date.year, date.month, date.day);
-    
+
     final formattedDate = DateFormat('d MMM').format(date);
-    
+
     if (targetDate == today) {
       return 'Today, $formattedDate';
     } else if (targetDate == tomorrow) {

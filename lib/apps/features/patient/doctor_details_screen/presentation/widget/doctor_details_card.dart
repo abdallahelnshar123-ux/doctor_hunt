@@ -64,22 +64,30 @@ class DoctorDetailsCard extends StatelessWidget {
                       Row(
                         mainAxisAlignment: .spaceBetween,
                         children: [
-                          RatingWidget(rating: doctor.rating.rating , showRating: false ,starSize: 13,),
+                          RatingWidget(
+                            rating: doctor.rating.rating,
+                            showRating: false,
+                            starSize: 13,
+                          ),
                           Row(
                             crossAxisAlignment: .center,
                             spacing: 5,
                             mainAxisAlignment: .end,
                             children: [
-                              SvgPicture.asset(AppAssets.icons.sDollarIcon.path, width: 9),
+                              SvgPicture.asset(
+                                AppAssets.icons.sDollarIcon.path,
+                                width: 9,
+                              ),
                               Text(
-                                t.doctor_details.price_per_hour(Price: doctor.consultationFee.toString()),
+                                t.doctor_details.price_per_hour(
+                                  Price: doctor.consultationFee.toString(),
+                                ),
                                 style: context.light10.textSecondary.rubik,
                               ),
                             ],
                           ),
-
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

@@ -1,5 +1,5 @@
+import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -13,7 +13,8 @@ EventTransformer<T> _debounce<T>(Duration duration) {
 }
 
 @injectable
-class PatientDoctorsBloc extends Bloc<PatientDoctorsEvent, PatientDoctorsState> {
+class PatientDoctorsBloc
+    extends Bloc<PatientDoctorsEvent, PatientDoctorsState> {
   final DoctorRepository _doctorRepository;
 
   PatientDoctorsBloc(this._doctorRepository) : super(PatientDoctorsInitial()) {
@@ -66,16 +67,19 @@ class PatientDoctorsBloc extends Bloc<PatientDoctorsEvent, PatientDoctorsState> 
       } else {
         filtered = currentState.doctors.where((doctor) {
           final nameMatches = doctor.name.toLowerCase().contains(trimmedQuery);
-          final specialtyMatches =
-              doctor.specialty.name.toLowerCase().contains(trimmedQuery);
+          final specialtyMatches = doctor.specialty.name.toLowerCase().contains(
+            trimmedQuery,
+          );
           return nameMatches || specialtyMatches;
         }).toList();
       }
 
-      emit(currentState.copyWith(
-        searchQuery: event.query,
-        searchResults: filtered,
-      ));
+      emit(
+        currentState.copyWith(
+          searchQuery: event.query,
+          searchResults: filtered,
+        ),
+      );
     }
   }
 }

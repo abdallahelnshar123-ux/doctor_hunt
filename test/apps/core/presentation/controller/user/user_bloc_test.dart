@@ -6,9 +6,9 @@ import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_prov
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/patient_info.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_event.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_state.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

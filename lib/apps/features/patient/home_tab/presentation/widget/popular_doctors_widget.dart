@@ -81,7 +81,8 @@ class PopularDoctorsWidget extends StatelessWidget {
                       child: PopularDoctorsItem(doctor: doctor),
                     );
                   },
-                  separatorBuilder: (context, index) => const SizedBox(width: 15),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 15),
                   itemCount: state.doctors.length,
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.all(20),
@@ -92,7 +93,7 @@ class PopularDoctorsWidget extends StatelessWidget {
             return const SizedBox(
               height: 330,
               width: double.infinity,
-              child: TopRatedDoctorsShimmer(), 
+              child: TopRatedDoctorsShimmer(),
             );
           },
         ),

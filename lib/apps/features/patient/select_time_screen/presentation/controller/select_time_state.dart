@@ -50,4 +50,3 @@ class BookAppointmentError extends SelectTimeState {
   @override
   List<Object?> get props => [message];
 }
-

@@ -1,9 +1,8 @@
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 
 part 'favourite_doctors_event.dart';
 part 'favourite_doctors_state.dart';
@@ -31,10 +30,12 @@ class FavouriteDoctorsBloc
     emit(FavouriteDoctorsLoading());
 
     if (event.favoriteDoctorIds.isEmpty) {
-      emit(const FavouriteDoctorsSuccess(
-        allFavouriteDoctors: [],
-        filteredDoctors: [],
-      ));
+      emit(
+        const FavouriteDoctorsSuccess(
+          allFavouriteDoctors: [],
+          filteredDoctors: [],
+        ),
+      );
       return;
     }
 
@@ -42,10 +43,12 @@ class FavouriteDoctorsBloc
         .where((doc) => event.favoriteDoctorIds.contains(doc.id))
         .toList();
 
-    emit(FavouriteDoctorsSuccess(
-      allFavouriteDoctors: favoriteDoctors,
-      filteredDoctors: favoriteDoctors,
-    ));
+    emit(
+      FavouriteDoctorsSuccess(
+        allFavouriteDoctors: favoriteDoctors,
+        filteredDoctors: favoriteDoctors,
+      ),
+    );
   }
 
   void _onUpdateFavoriteIdsEvent(
@@ -65,10 +68,12 @@ class FavouriteDoctorsBloc
           .where((doc) => event.favoriteDoctorIds.contains(doc.id))
           .toList();
 
-      emit(currentState.copyWith(
-        allFavouriteDoctors: updatedFavouriteDoctors,
-        filteredDoctors: updatedFilteredDoctors,
-      ));
+      emit(
+        currentState.copyWith(
+          allFavouriteDoctors: updatedFavouriteDoctors,
+          filteredDoctors: updatedFilteredDoctors,
+        ),
+      );
     }
   }
 
@@ -88,16 +93,19 @@ class FavouriteDoctorsBloc
       } else {
         filtered = currentState.allFavouriteDoctors.where((doctor) {
           final nameMatches = doctor.name.toLowerCase().contains(trimmedQuery);
-          final specialtyMatches =
-              doctor.specialty.name.toLowerCase().contains(trimmedQuery);
+          final specialtyMatches = doctor.specialty.name.toLowerCase().contains(
+            trimmedQuery,
+          );
           return nameMatches || specialtyMatches;
         }).toList();
       }
 
-      emit(currentState.copyWith(
-        searchQuery: event.query,
-        filteredDoctors: filtered,
-      ));
+      emit(
+        currentState.copyWith(
+          searchQuery: event.query,
+          filteredDoctors: filtered,
+        ),
+      );
     }
   }
 }

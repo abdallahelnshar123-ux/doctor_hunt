@@ -1,9 +1,9 @@
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../generated/style_atoms.dart';
 import '../../features/common/auth/data/models/user/my_user.dart';
-import '../../features/common/auth/presentation/controller/user/user_bloc.dart';
 import '../theme/app_colors.dart';
 import 'app_container_with_shadow.dart';
 import 'custom_cached_network_image.dart';

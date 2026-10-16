@@ -1,10 +1,10 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -81,7 +81,9 @@ class AddDoctorScreen extends HookWidget {
               buildUploadImage(context),
               TextButton(
                 onPressed: () {
-                  context.read<AddDoctorsBloc>().add(PickDoctorImageRequested());
+                  context.read<AddDoctorsBloc>().add(
+                    PickDoctorImageRequested(),
+                  );
                 },
                 child: Text(
                   t.create_doctor.add_photo,

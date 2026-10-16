@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/constants/firestore_constants.dart';
 import '../../../../../core/data/models/doctor/doctor_dto.dart';
-import '../models/appointment_dto/appointment_dto.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';
-import '../../../../../../generated/translations.g.dart';
-import 'dart:io';
+import '../models/appointment_dto/appointment_dto.dart';
 
 @injectable
 class ReviewBatchFirestoreService {
@@ -23,13 +25,13 @@ class ReviewBatchFirestoreService {
       final doctorRef = _firestore
           .collection(FirestoreConstants.doctorsCollection)
           .doc(updatedDoctorDto.id);
-      
+
       batch.update(doctorRef, updatedDoctorDto.toFireStore());
 
       final appointmentRef = _firestore
           .collection(FirestoreConstants.appointmentsCollection)
           .doc(updatedAppointmentDto.id);
-          
+
       batch.update(appointmentRef, updatedAppointmentDto.toFireStore());
 
       await batch.commit();

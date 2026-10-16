@@ -25,13 +25,13 @@ class AddDoctorRequested extends AddDoctorsEvent {
 
   @override
   List<Object?> get props => [
-        name,
-        specialty,
-        adminId,
-        image,
-        active,
-        consultationFee,
-      ];
+    name,
+    specialty,
+    adminId,
+    image,
+    active,
+    consultationFee,
+  ];
 }
 
 class PickDoctorImageRequested extends AddDoctorsEvent {}

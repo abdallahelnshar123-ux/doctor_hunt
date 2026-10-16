@@ -49,7 +49,11 @@ class FavouriteDoctorCard extends StatelessWidget {
             ),
           ),
 
-          Text(doctor.name, style: context.medium16.textTertiary.rubik, overflow: .ellipsis,),
+          Text(
+            doctor.name,
+            style: context.medium16.textTertiary.rubik,
+            overflow: .ellipsis,
+          ),
 
           Text(
             doctor.specialty.name,

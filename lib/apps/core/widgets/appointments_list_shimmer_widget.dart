@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AppointmentsListShimmerWidget extends StatelessWidget {
-  const AppointmentsListShimmerWidget({
-    super.key,
-    this.itemCount = 5,
-  });
+  const AppointmentsListShimmerWidget({super.key, this.itemCount = 5});
 
   final int itemCount;
 

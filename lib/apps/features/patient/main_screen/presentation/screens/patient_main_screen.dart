@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/features/patient/settings_tab/presentation/screens/settings_tab.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -16,7 +17,6 @@ import '../../../../common/auth/data/models/user/my_user.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
-import '../../../../common/auth/presentation/controller/user/user_bloc.dart';
 import '../../../appointments_tab/presentation/screens/appointments_tab.dart';
 import '../../../favourite_tab/presentation/controller/favourite_doctors_bloc.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
@@ -43,71 +43,68 @@ class PatientMainScreen extends HookWidget {
     ]);
 
     final drawerController = useMemoized(
-          () =>
-          KFDrawerController(
-            items: <KFDrawerItem>[
-              KFDrawerItem(
-                onPressed: () {
-                  if (selectedIndex.value == 0) return;
-                  selectedIndex.value = 0;
-                },
-                alias: t.patient_main.home,
-                icon: buildDrawerIcon(iconName: AppAssets.icons.homeIcon.path),
-                text: Text(
-                  t.patient_main.home,
-                  style: context.regular16.white.rubik,
-                ),
-                page: tabsList.value[0],
-              ),
-              KFDrawerItem(
-                onPressed: () {
-                  if (selectedIndex.value == 1) return;
-
-                  selectedIndex.value = 1;
-                },
-                alias: t.patient_main.favourite,
-                icon: buildDrawerIcon(
-                    iconName: AppAssets.icons.favouriteIcon.path),
-                text: Text(
-                  t.patient_main.favourite,
-                  style: context.regular16.white.rubik,
-                ),
-                page: tabsList.value[1],
-              ),
-
-              KFDrawerItem(
-                onPressed: () {
-                  if (selectedIndex.value == 2) return;
-
-                  selectedIndex.value = 2;
-                },
-                alias: t.patient_main.appointment,
-                icon: buildDrawerIcon(
-                  iconName: AppAssets.icons.appointmentsIcon.path,
-                ),
-                text: Text(
-                  t.patient_main.appointment,
-                  style: context.regular16.white.rubik,
-                ),
-                page: tabsList.value[2],
-              ),
-              KFDrawerItem(
-                onPressed: () {
-                  if (selectedIndex.value == 3) return;
-                  selectedIndex.value = 3;
-                },
-                alias: t.patient_main.settings,
-                icon: buildDrawerIcon(
-                    iconName: AppAssets.icons.settingsIcon.path),
-                text: Text(
-                  t.patient_main.settings,
-                  style: context.regular16.white.rubik,
-                ),
-                page: tabsList.value[3],
-              ),
-            ],
-            initialPage: tabsList.value[0],
+      () => KFDrawerController(
+        items: <KFDrawerItem>[
+          KFDrawerItem(
+            onPressed: () {
+              if (selectedIndex.value == 0) return;
+              selectedIndex.value = 0;
+            },
+            alias: t.patient_main.home,
+            icon: buildDrawerIcon(iconName: AppAssets.icons.homeIcon.path),
+            text: Text(
+              t.patient_main.home,
+              style: context.regular16.white.rubik,
+            ),
+            page: tabsList.value[0],
           ),
+          KFDrawerItem(
+            onPressed: () {
+              if (selectedIndex.value == 1) return;
+
+              selectedIndex.value = 1;
+            },
+            alias: t.patient_main.favourite,
+            icon: buildDrawerIcon(iconName: AppAssets.icons.favouriteIcon.path),
+            text: Text(
+              t.patient_main.favourite,
+              style: context.regular16.white.rubik,
+            ),
+            page: tabsList.value[1],
+          ),
+
+          KFDrawerItem(
+            onPressed: () {
+              if (selectedIndex.value == 2) return;
+
+              selectedIndex.value = 2;
+            },
+            alias: t.patient_main.appointment,
+            icon: buildDrawerIcon(
+              iconName: AppAssets.icons.appointmentsIcon.path,
+            ),
+            text: Text(
+              t.patient_main.appointment,
+              style: context.regular16.white.rubik,
+            ),
+            page: tabsList.value[2],
+          ),
+          KFDrawerItem(
+            onPressed: () {
+              if (selectedIndex.value == 3) return;
+              selectedIndex.value = 3;
+            },
+            alias: t.patient_main.settings,
+            icon: buildDrawerIcon(iconName: AppAssets.icons.settingsIcon.path),
+            text: Text(
+              t.patient_main.settings,
+              style: context.regular16.white.rubik,
+            ),
+            page: tabsList.value[3],
+          ),
+        ],
+        initialPage: tabsList.value[0],
+      ),
     );
     useEffect(() {
       return () => drawerController.dispose();

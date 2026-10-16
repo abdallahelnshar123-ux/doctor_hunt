@@ -6,7 +6,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -22,8 +22,11 @@ import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
 
 part '../widget/admin_appbar.dart';
+
 part '../widget/doctor_card.dart';
+
 part '../widget/doctors_widget.dart';
+
 part '../widget/status_widget.dart';
 
 class AdminDoctorsTab extends HookWidget {

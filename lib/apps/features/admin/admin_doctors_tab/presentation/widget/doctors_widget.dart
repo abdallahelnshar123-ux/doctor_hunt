@@ -7,21 +7,21 @@ class DoctorsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AdminDoctorsBloc, AdminDoctorsState>(
       buildWhen: (previous, current) =>
-          current is AdminDoctorsSuccess ||
-          current is AdminDoctorsLoading,
+          current is AdminDoctorsSuccess || current is AdminDoctorsLoading,
       builder: (context, state) {
         if (state is AdminDoctorsSuccess) {
-          if (state.allDoctors.isEmpty ) {
+          if (state.allDoctors.isEmpty) {
             return Expanded(child: _noDoctorFoundWidget(context: context));
           }
-           var doctorList = state.selectedSpecialty != null ? state.filteredDoctors : state.allDoctors;
+          var doctorList = state.selectedSpecialty != null
+              ? state.filteredDoctors
+              : state.allDoctors;
 
           return Expanded(
             child: Column(
               mainAxisSize: .min,
               children: [
                 DefaultTabController(
-
                   length: state.specialtyCounts.length + 1,
                   child: TabBar(
                     overlayColor: WidgetStatePropertyAll(AppColors.transparent),
@@ -65,25 +65,22 @@ class DoctorsWidget extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child:
-                     SafeArea(
-                          child: ListView.separated(
-                            padding: EdgeInsets.all(20),
-                            itemBuilder: (context, index) => GestureDetector(
-                              onTap: () {
-                                AdminDoctorDetailsRoute(
-                                 doctorList[index]
-                                ).push(context);
-                              },
-                              child: DoctorCard(
-                                doctor: doctorList[index],
-                              ),
-                            ),
-                            separatorBuilder: (context, index) =>
-                                SizedBox(height: 10),
-                            itemCount: doctorList.length,
-                          ),
-                        ),
+                  child: SafeArea(
+                    child: ListView.separated(
+                      padding: EdgeInsets.all(20),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          AdminDoctorDetailsRoute(
+                            doctorList[index],
+                          ).push(context);
+                        },
+                        child: DoctorCard(doctor: doctorList[index]),
+                      ),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10),
+                      itemCount: doctorList.length,
+                    ),
+                  ),
                 ),
               ],
             ),

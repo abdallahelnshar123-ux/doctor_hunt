@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../core/data/session/user_session_manager.dart';
 import '../../../../patient/appointments_tab/data/models/appointment/appointment.dart';
-import '../../../../patient/select_time_screen/data/repo/appointment_repository.dart';
 import 'admin_appointments_event.dart';
 import 'admin_appointments_state.dart';
 
@@ -32,7 +32,7 @@ class AdminAppointmentsBloc
     final userOption = _userSessionManager.getCurrentUser();
 
     if (userOption.isNone()) {
-      emit( AdminAppointmentsErrorState(t.errors.user_not_authenticated));
+      emit(AdminAppointmentsErrorState(t.errors.user_not_authenticated));
       return;
     }
 
@@ -53,7 +53,7 @@ class AdminAppointmentsBloc
     CompleteAppointmentRequested event,
     Emitter<AdminAppointmentsState> emit,
   ) async {
-    emit(AdminUpdateAppointmentLoadingState( event.appointmentId ));
+    emit(AdminUpdateAppointmentLoadingState(event.appointmentId));
 
     final result = await _repository.updateAppointmentStatus(
       event.appointmentId,
@@ -61,13 +61,11 @@ class AdminAppointmentsBloc
     );
 
     result.fold(
-      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message , event.appointmentId)),
+      (failure) => emit(
+        AdminUpdateAppointmentErrorState(failure.message, event.appointmentId),
+      ),
       (_) {
-        emit(
-          AdminUpdateAppointmentSuccessState(
-          event.appointmentId,
-          ),
-        );
+        emit(AdminUpdateAppointmentSuccessState(event.appointmentId));
       },
     );
   }
@@ -84,13 +82,11 @@ class AdminAppointmentsBloc
     );
 
     result.fold(
-      (failure) => emit(AdminUpdateAppointmentErrorState(failure.message, event.appointmentId )),
+      (failure) => emit(
+        AdminUpdateAppointmentErrorState(failure.message, event.appointmentId),
+      ),
       (_) {
-        emit(
-          AdminUpdateAppointmentSuccessState(
-            event.appointmentId,
-          ),
-        );
+        emit(AdminUpdateAppointmentSuccessState(event.appointmentId));
       },
     );
   }

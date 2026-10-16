@@ -1,18 +1,16 @@
 import 'package:dartz/dartz.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/service/appointment_firestore_service.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
+import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
+import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/mappers/appointment_mapper.dart';
+import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/service/review_batch_firestore_service.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/exceptions/app_exceptions.dart';
-import '../../../../../core/failure/failure.dart';
-import '../../../../../core/mapper/exception_mapper.dart';
-import '../../../appointments_tab/data/models/appointment/appointment.dart';
-import '../../../appointments_tab/data/mappers/appointment_mapper.dart';
-import '../service/appointment_firestore_service.dart';
-
 @injectable
-// CR: According to the project guidelines, you should define an abstract Repository interface and a concrete implementation, then annotate with @Injectable(as: RepoInterface).
 class AppointmentRepository {
   final AppointmentFirestoreService _firestoreService;
   final ReviewBatchFirestoreService _reviewBatchService;
@@ -25,14 +23,16 @@ class AppointmentRepository {
     required DateTime endDate,
   }) async {
     try {
-      final appointmentDtos = await _firestoreService.getBookedAppointmentsInRange(
-        doctorId: doctorId,
-        startDate: startDate,
-        endDate: endDate,
-      );
+      final appointmentDtos = await _firestoreService
+          .getBookedAppointmentsInRange(
+            doctorId: doctorId,
+            startDate: startDate,
+            endDate: endDate,
+          );
 
-      final appointments =
-          appointmentDtos.map((dto) => dto.toAppointment()).toList();
+      final appointments = appointmentDtos
+          .map((dto) => dto.toAppointment())
+          .toList();
 
       return Right(appointments);
     } on AppException catch (e) {
@@ -60,10 +60,12 @@ class AppointmentRepository {
   // }
 
   Stream<Either<Failure, List<Appointment>>> getPatientAppointmentsStream(
-      String patientId) async* {
+    String patientId,
+  ) async* {
     try {
-      await for (final dtos
-          in _firestoreService.getPatientAppointmentsStream(patientId)) {
+      await for (final dtos in _firestoreService.getPatientAppointmentsStream(
+        patientId,
+      )) {
         final appointments = dtos.map((dto) => dto.toAppointment()).toList();
         yield Right(appointments);
       }
@@ -120,10 +122,12 @@ class AppointmentRepository {
   // }
 
   Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream(
-      String adminId) async* {
+    String adminId,
+  ) async* {
     try {
-      await for (final dtos
-          in _firestoreService.getAdminAppointmentsStream(adminId)) {
+      await for (final dtos in _firestoreService.getAdminAppointmentsStream(
+        adminId,
+      )) {
         final appointments = dtos.map((dto) => dto.toAppointment()).toList();
         yield Right(appointments);
       }
@@ -135,7 +139,9 @@ class AppointmentRepository {
   }
 
   Future<Either<Failure, Unit>> updateAppointmentStatus(
-      String appointmentId, AppointmentStatus status) async {
+    String appointmentId,
+    AppointmentStatus status,
+  ) async {
     try {
       await _firestoreService.updateAppointmentStatus(appointmentId, status);
       return const Right(unit);

@@ -19,7 +19,7 @@ class FavouriteDoctorsSuccess extends FavouriteDoctorsState {
   const FavouriteDoctorsSuccess({
     required this.allFavouriteDoctors,
     required this.filteredDoctors,
-    this.searchQuery ,
+    this.searchQuery,
   });
 
   FavouriteDoctorsSuccess copyWith({
@@ -35,5 +35,9 @@ class FavouriteDoctorsSuccess extends FavouriteDoctorsState {
   }
 
   @override
-  List<Object?> get props => [allFavouriteDoctors, filteredDoctors, searchQuery];
+  List<Object?> get props => [
+    allFavouriteDoctors,
+    filteredDoctors,
+    searchQuery,
+  ];
 }

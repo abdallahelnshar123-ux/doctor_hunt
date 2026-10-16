@@ -26,7 +26,8 @@ class FavouriteDoctorsShimmer extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         width: double.infinity,
         height: double.infinity,
-        child: Shimmer.fromColors(  baseColor: AppColors.shimmerBaseColor,
+        child: Shimmer.fromColors(
+          baseColor: AppColors.shimmerBaseColor,
           highlightColor: AppColors.shimmerHighlightColor,
           child: Column(
             spacing: 5,

@@ -38,24 +38,24 @@ class AdminUpdateAppointmentLoadingState extends AdminAppointmentsState {
 
   @override
   List<Object?> get props => [appointmentId];
-
 }
 
 class AdminUpdateAppointmentSuccessState extends AdminAppointmentsState {
   final String appointmentId;
 
-  const AdminUpdateAppointmentSuccessState( this.appointmentId);
+  const AdminUpdateAppointmentSuccessState(this.appointmentId);
 
   @override
-  List<Object?> get props => [ appointmentId];
+  List<Object?> get props => [appointmentId];
 }
 
 class AdminUpdateAppointmentErrorState extends AdminAppointmentsState {
   final String message;
 
   final String appointmentId;
+
   const AdminUpdateAppointmentErrorState(this.message, this.appointmentId);
 
   @override
-  List<Object?> get props => [message , appointmentId];
+  List<Object?> get props => [message, appointmentId];
 }

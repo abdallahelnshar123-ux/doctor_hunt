@@ -2,7 +2,7 @@ part of 'appointments_bloc.dart';
 
 sealed class AppointmentsState extends Equatable {
   const AppointmentsState();
-  
+
   @override
   List<Object> get props => [];
 }

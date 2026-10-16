@@ -50,13 +50,13 @@ class Appointment extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        patient,
-        doctor,
-        sessionTime,
-        createdAt,
-        fee,
-        status,
-        review,
-      ];
+    id,
+    patient,
+    doctor,
+    sessionTime,
+    createdAt,
+    fee,
+    status,
+    review,
+  ];
 }

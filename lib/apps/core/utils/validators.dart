@@ -1,10 +1,7 @@
 import 'package:doctor_hunt/generated/translations.g.dart';
 
 class Validators {
-  static String? required(
-    String? value, {
-    String? message ,
-  }) {
+  static String? required(String? value, {String? message}) {
     if (value == null || value.trim().isEmpty) {
       return message ?? t.validators.this_field_is_required;
     }

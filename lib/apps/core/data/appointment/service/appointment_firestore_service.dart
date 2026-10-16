@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
+import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
+import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../../generated/translations.g.dart';
-import '../../../../../core/constants/firestore_constants.dart';
-import '../../../../../core/exceptions/app_exceptions.dart';
-import '../../../appointments_tab/data/models/appointment/appointment.dart';
-import '../../../appointments_tab/data/models/appointment_dto/appointment_dto.dart';
 
 @injectable
 class AppointmentFirestoreService {
@@ -74,8 +73,7 @@ class AppointmentFirestoreService {
   //   }
   // }
 
-  Stream<List<AppointmentDto>> getPatientAppointmentsStream(
-      String patientId) {
+  Stream<List<AppointmentDto>> getPatientAppointmentsStream(String patientId) {
     return _firestore
         .collection(FirestoreConstants.appointmentsCollection)
         .where(
@@ -84,16 +82,17 @@ class AppointmentFirestoreService {
         )
         .snapshots()
         .map((snapshot) {
-      final appointments = snapshot.docs
-          .map((doc) => AppointmentDto.fromJson(doc.data()))
-          .toList();
-      appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
-      return appointments;
-    }).handleError((e) {
-      throw ServerException(
-        message: t.errors.failed_to_fetch_appointments(E: e.toString()),
-      );
-    });
+          final appointments = snapshot.docs
+              .map((doc) => AppointmentDto.fromJson(doc.data()))
+              .toList();
+          appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
+          return appointments;
+        })
+        .handleError((e) {
+          throw ServerException(
+            message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+          );
+        });
   }
 
   Future<void> bookAppointment(AppointmentDto appointmentDto) async {
@@ -157,19 +156,23 @@ class AppointmentFirestoreService {
         )
         .snapshots()
         .map((snapshot) {
-      final appointments = snapshot.docs
-          .map((doc) => AppointmentDto.fromJson(doc.data()))
-          .toList();
-      appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
-      return appointments;
-    }).handleError((e) {
-      throw ServerException(
-        message: t.errors.failed_to_fetch_appointments(E: e.toString()),
-      );
-    });
+          final appointments = snapshot.docs
+              .map((doc) => AppointmentDto.fromJson(doc.data()))
+              .toList();
+          appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
+          return appointments;
+        })
+        .handleError((e) {
+          throw ServerException(
+            message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+          );
+        });
   }
 
-  Future<void> updateAppointmentStatus(String appointmentId, AppointmentStatus status) async {
+  Future<void> updateAppointmentStatus(
+    String appointmentId,
+    AppointmentStatus status,
+  ) async {
     try {
       await _firestore
           .collection(FirestoreConstants.appointmentsCollection)
@@ -177,7 +180,7 @@ class AppointmentFirestoreService {
           .update({FirestoreConstants.status: status.name});
     } catch (e) {
       throw ServerException(
-        message:t.errors.failed_to_update_appointment_status(E: e.toString()),
+        message: t.errors.failed_to_update_appointment_status(E: e.toString()),
       );
     }
   }

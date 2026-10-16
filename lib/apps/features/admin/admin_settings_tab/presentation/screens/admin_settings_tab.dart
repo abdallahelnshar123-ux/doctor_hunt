@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/widgets/settings_user_card.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,6 @@ import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
 import '../../../../../core/widgets/logout_button.dart';
 import '../../../../common/auth/data/models/user/my_user.dart';
-import '../../../../common/auth/presentation/controller/user/user_bloc.dart';
 
 part '../widget/account_settings_widget.dart';
 

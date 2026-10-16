@@ -1,8 +1,8 @@
+import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/data/models/doctor/doctor_availability.dart';
-import '../../../add_doctor_screen/data/repo/doctor_repository.dart';
 import 'doctor_availability_event.dart';
 import 'doctor_availability_state.dart';
 

@@ -1,9 +1,9 @@
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/common/auth/presentation/controller/user/user_bloc.dart';
-import '../../features/common/auth/presentation/controller/user/user_event.dart';
-import '../../features/common/auth/presentation/controller/user/user_state.dart';
+import '../presentation/controller/user/user_event.dart';
+import '../presentation/controller/user/user_state.dart';
 import '../theme/app_colors.dart';
 import '../utils/snack_bar_utils.dart';
 

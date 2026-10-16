@@ -1,4 +1,5 @@
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctor_card.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctors_shimmer.dart';
@@ -9,9 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../generated/style_atoms.dart';
+import '../../../../../core/presentation/controller/user/user_state.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
-import '../../../../common/auth/presentation/controller/user/user_bloc.dart';
-import '../../../../common/auth/presentation/controller/user/user_state.dart';
 import '../controller/favourite_doctors_bloc.dart';
 
 class FavoriteTab extends HookWidget {

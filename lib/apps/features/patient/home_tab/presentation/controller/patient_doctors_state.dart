@@ -39,7 +39,12 @@ class PatientDoctorsSuccess extends PatientDoctorsState {
   }
 
   @override
-  List<Object?> get props => [doctors, topRatedDoctors, searchResults, searchQuery];
+  List<Object?> get props => [
+    doctors,
+    topRatedDoctors,
+    searchResults,
+    searchQuery,
+  ];
 }
 
 class PatientDoctorsError extends PatientDoctorsState {

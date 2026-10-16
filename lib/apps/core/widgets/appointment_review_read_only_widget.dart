@@ -21,7 +21,8 @@ class AppointmentReviewReadOnlyWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          Row(spacing: 5,
+          Row(
+            spacing: 5,
             children: [
               Icon(Icons.star, color: AppColors.textTertiary, size: 17),
               Text(

@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,5 +1,5 @@
+import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/repo/doctor_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -105,24 +105,24 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
   ) async {
     final currentState = state;
     if (currentState is AdminDoctorsSuccess) {
-
       if (event.query == currentState.searchQuery) return;
-      final allDoctors = currentState .allDoctors;
-
+      final allDoctors = currentState.allDoctors;
 
       if (event.query.trim().isEmpty) {
-        emit(currentState.copyWith(searchQuery: event.query ,searchDoctors: allDoctors ));
+        emit(
+          currentState.copyWith(
+            searchQuery: event.query,
+            searchDoctors: allDoctors,
+          ),
+        );
         return;
       }
 
       final searchDoctors = allDoctors.where((doctor) {
         final lowerQuery = event.query.toLowerCase();
-        return
-            doctor.name.toLowerCase().contains(lowerQuery) ||
-                doctor.specialty.name.toLowerCase().contains(lowerQuery);
-
+        return doctor.name.toLowerCase().contains(lowerQuery) ||
+            doctor.specialty.name.toLowerCase().contains(lowerQuery);
       }).toList();
-
 
       // bool matchesQuery = true;
       // if (query.trim().isNotEmpty) {
@@ -139,7 +139,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
       emit(
         currentState.copyWith(
           searchQuery: event.query,
-          searchDoctors: searchDoctors ,
+          searchDoctors: searchDoctors,
         ),
       );
     }
@@ -149,7 +149,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
     List<Doctor> allDoctors,
     Specialty? specialty,
   ) {
-    if (specialty == null ) return null;
+    if (specialty == null) return null;
 
     return allDoctors.where((doctor) {
       bool matchesSpecialty = true;
@@ -167,7 +167,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
       //       doctor.specialty.name.toLowerCase().contains(lowerQuery);
       // }
 
-      return matchesSpecialty ;
+      return matchesSpecialty;
     }).toList();
   }
 }

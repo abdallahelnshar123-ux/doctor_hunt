@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/data/user/repo/user_repository.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/data/repo/user_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

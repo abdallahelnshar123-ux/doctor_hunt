@@ -24,8 +24,7 @@ class PatientAppointmentsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<AppointmentsBloc>(),
+      create: (context) => getIt<AppointmentsBloc>(),
       child: AppScaffold(
         bottomSafeArea: false,
         body: Column(

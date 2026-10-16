@@ -82,7 +82,7 @@ class PatientAppointmentCard extends HookWidget {
       },
       child: ValueListenableBuilder(
         valueListenable: isLoading,
-         builder: (BuildContext context, bool isLoading, Widget? child) {
+        builder: (BuildContext context, bool isLoading, Widget? child) {
           return IgnorePointer(
             ignoring: isLoading,
             child: Opacity(
@@ -137,22 +137,29 @@ class PatientAppointmentCard extends HookWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          side: BorderSide(width: 0, color: AppColors.transparent),
+                          side: BorderSide(
+                            width: 0,
+                            color: AppColors.transparent,
+                          ),
                           backgroundColor:
-                          appointment.status != AppointmentStatus.cancelled
+                              appointment.status != AppointmentStatus.cancelled
                               ? AppColors.brandPrimary20
                               : AppColors.statusErrorSurface,
                           avatarBoxConstraints: .tightFor(width: 15),
                           avatar: Icon(
                             Icons.circle,
                             size: 10,
-                            color: appointment.status != AppointmentStatus.cancelled
+                            color:
+                                appointment.status !=
+                                    AppointmentStatus.cancelled
                                 ? AppColors.brandPrimaryDark
                                 : AppColors.statusError,
                           ),
                           label: Text(
                             appointment.status.name,
-                            style: appointment.status != AppointmentStatus.cancelled
+                            style:
+                                appointment.status !=
+                                    AppointmentStatus.cancelled
                                 ? context.medium9.brandPrimaryDark.rubik
                                 : context.regular9.statusError.rubik,
                           ),
@@ -194,20 +201,20 @@ class PatientAppointmentCard extends HookWidget {
                     ),
                     ?appointment.status == AppointmentStatus.completed
                         ? ValueListenableBuilder(
-                      valueListenable: appointmentReview,
-                      builder: (context, value, child) {
-                        if (value == null) {
-                          return ReviewInputWidget(
-                            onReviewChanged: (value) =>
-                            tempReview.value = value,
-                            reviewer: appointment.patient,
-                          );
-                        }
-                        return AppointmentReviewReadOnlyWidget(
-                          review: appointmentReview.value!,
-                        );
-                      },
-                    )
+                            valueListenable: appointmentReview,
+                            builder: (context, value, child) {
+                              if (value == null) {
+                                return ReviewInputWidget(
+                                  onReviewChanged: (value) =>
+                                      tempReview.value = value,
+                                  reviewer: appointment.patient,
+                                );
+                              }
+                              return AppointmentReviewReadOnlyWidget(
+                                review: appointmentReview.value!,
+                              );
+                            },
+                          )
                         : null,
 
                     /// buttons
@@ -216,17 +223,17 @@ class PatientAppointmentCard extends HookWidget {
                         context: context,
                       ),
                       AppointmentStatus.completed =>
-                      appointmentReview.value == null
-                          ? _buildCompletedButtons(
-                        context: context,
-                        appointmentReview: appointmentReview,
-                        tempReview: tempReview,
-                      )
-                          : Row(
-                        children: [
-                          _buildViewDetailsButton(context: context),
-                        ],
-                      ),
+                        appointmentReview.value == null
+                            ? _buildCompletedButtons(
+                                context: context,
+                                appointmentReview: appointmentReview,
+                                tempReview: tempReview,
+                              )
+                            : Row(
+                                children: [
+                                  _buildViewDetailsButton(context: context),
+                                ],
+                              ),
                       AppointmentStatus.cancelled => Row(
                         children: [_buildViewDetailsButton(context: context)],
                       ),
@@ -236,9 +243,7 @@ class PatientAppointmentCard extends HookWidget {
               ),
             ),
           );
-
-         },
-
+        },
       ),
     );
   }
@@ -302,8 +307,7 @@ class PatientAppointmentCard extends HookWidget {
         borderRadius: 8,
         backgroundColor: AppColors.white,
         onPressed: () {
-               PatientAppointmentDetailsRoute(appointment).push(context);
-
+          PatientAppointmentDetailsRoute(appointment).push(context);
         },
         borderSideColor: AppColors.brandPrimary,
         child: FittedBox(

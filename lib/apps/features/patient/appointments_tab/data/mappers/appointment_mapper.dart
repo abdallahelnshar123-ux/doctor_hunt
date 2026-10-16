@@ -1,11 +1,11 @@
 import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_mapper.dart';
+import 'package:doctor_hunt/apps/core/mapper/review_dto_mapper.dart';
+import 'package:doctor_hunt/apps/core/mapper/review_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
-import 'package:doctor_hunt/apps/core/mapper/review_mapper.dart';
-import 'package:doctor_hunt/apps/core/mapper/review_dto_mapper.dart';
 
 extension AppointmentMapper on AppointmentDto {
   Appointment toAppointment() {

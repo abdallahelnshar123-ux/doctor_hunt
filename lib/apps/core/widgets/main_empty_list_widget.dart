@@ -19,7 +19,7 @@ class MainEmptyListWidget extends StatelessWidget {
             AppAssets.lottie.emptyState.path,
             width: context.width - 100,
           ),
-          Text(title ??'', style: context.regular14.textSecondary.rubik),
+          Text(title ?? '', style: context.regular14.textSecondary.rubik),
         ],
       ),
     );

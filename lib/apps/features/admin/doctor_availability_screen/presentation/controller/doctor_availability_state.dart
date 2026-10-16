@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-
 abstract class DoctorAvailabilityState extends Equatable {
   const DoctorAvailabilityState();
 

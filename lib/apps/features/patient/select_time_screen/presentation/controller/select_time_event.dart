@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/data/models/doctor/doctor_availability.dart';
 import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../../core/data/models/doctor/doctor_availability.dart';
 
 abstract class SelectTimeEvent extends Equatable {
   const SelectTimeEvent();

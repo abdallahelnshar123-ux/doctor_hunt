@@ -49,6 +49,7 @@ class AppColors {
   static const Color settingsOrange = Color(0xffF2994A);
   static const Color profileBlack = Color(0xCC677294);
   static const Color star = Color(0xffF6D060);
+
   // static const Color star8 = Color(0x14F6D060);
   static const Color reviewBg = Color(0xffFFF8E8);
 

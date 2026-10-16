@@ -1,12 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_dto.dart';
+import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../../generated/translations.g.dart';
-import '../../../../../core/constants/firestore_constants.dart';
-import '../../../../../core/exceptions/app_exceptions.dart';
 
 @lazySingleton
 class DoctorFirestoreService {

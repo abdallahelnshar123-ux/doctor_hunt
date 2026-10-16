@@ -1,21 +1,19 @@
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
+import 'package:doctor_hunt/apps/core/data/doctor/service/doctor_firestore_service.dart';
 import 'package:doctor_hunt/apps/core/data/image_service/image_service.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/doctor_mapper.dart';
-import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/data/service/doctor_firestore_service.dart';
+import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
+import 'package:doctor_hunt/apps/core/network/cloudinary/cloudinary_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
-import '../../../../../core/exceptions/app_exceptions.dart';
-import '../../../../../core/mapper/exception_mapper.dart';
-import '../../../../../core/network/cloudinary/cloudinary_service.dart';
-
 @injectable
-// CR: According to the project guidelines, you should define an abstract Repository interface and a concrete implementation, then annotate with @Injectable(as: RepoInterface).
 class DoctorRepository {
   final CloudinaryService _cloudinaryService;
   final DoctorFirestoreService _firestoreService;

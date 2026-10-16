@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
@@ -11,7 +12,6 @@ import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentatio
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -104,23 +104,32 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
     );
   }
 }
+
 @TypedGoRoute<AdminAppointmentDetailsRoute>(path: '/admin_appointment_details')
-class AdminAppointmentDetailsRoute extends GoRouteData with $AdminAppointmentDetailsRoute {
-  const AdminAppointmentDetailsRoute( this.$extra );
- final Appointment $extra;
+class AdminAppointmentDetailsRoute extends GoRouteData
+    with $AdminAppointmentDetailsRoute {
+  const AdminAppointmentDetailsRoute(this.$extra);
+
+  final Appointment $extra;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  AdminAppointmentDetailsScreen(appointment: $extra);
+    return AdminAppointmentDetailsScreen(appointment: $extra);
   }
 }
 
-@TypedGoRoute<PatientAppointmentDetailsRoute>(path: '/patient_appointment_details')
-class PatientAppointmentDetailsRoute extends GoRouteData with $PatientAppointmentDetailsRoute {
-  const PatientAppointmentDetailsRoute( this.$extra );
+@TypedGoRoute<PatientAppointmentDetailsRoute>(
+  path: '/patient_appointment_details',
+)
+class PatientAppointmentDetailsRoute extends GoRouteData
+    with $PatientAppointmentDetailsRoute {
+  const PatientAppointmentDetailsRoute(this.$extra);
+
   final Appointment $extra;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return  PatientAppointmentDetailsScreen(appointment: $extra);
+    return PatientAppointmentDetailsScreen(appointment: $extra);
   }
 }
 

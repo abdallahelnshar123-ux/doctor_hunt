@@ -16,7 +16,7 @@ class RatingWidget extends StatelessWidget {
   final double rating;
   final double? starSize;
   final double? gap;
-  final bool showRating ;
+  final bool showRating;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,10 @@ class RatingWidget extends StatelessWidget {
           ),
         ),
         SizedBox(width: 5),
-        Text(showRating ? rating.toString() :'', style: context.regular10.textSecondary.rubik),
+        Text(
+          showRating ? rating.toString() : '',
+          style: context.regular10.textSecondary.rubik,
+        ),
       ],
     );
   }

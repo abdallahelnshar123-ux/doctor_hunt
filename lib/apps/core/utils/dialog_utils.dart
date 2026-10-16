@@ -152,10 +152,7 @@ class _PasswordDialogContent extends HookWidget {
               Navigator.pop(context, passwordController.text.trim());
             }
           },
-          child: Text(
-            confirmText,
-            style: context.regular16.brandPrimary.rubik,
-          ),
+          child: Text(confirmText, style: context.regular16.brandPrimary.rubik),
         ),
       ],
     );

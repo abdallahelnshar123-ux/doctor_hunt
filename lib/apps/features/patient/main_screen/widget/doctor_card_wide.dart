@@ -86,8 +86,11 @@ class DoctorCardWide extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-                RatingWidget(rating: doctor.rating.rating , showRating: false, starSize: 17,),
-
+                RatingWidget(
+                  rating: doctor.rating.rating,
+                  showRating: false,
+                  starSize: 17,
+                ),
               ],
             ),
           ),

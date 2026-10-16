@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
@@ -8,7 +9,6 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/data/session/user_session_manager.dart';
-import '../../../select_time_screen/data/repo/appointment_repository.dart';
 import '../../data/models/appointment/appointment.dart';
 
 part 'appointments_event.dart';

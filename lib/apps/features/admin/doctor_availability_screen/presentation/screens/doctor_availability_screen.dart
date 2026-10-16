@@ -161,8 +161,7 @@ class DoctorAvailabilityScreen extends HookWidget {
               Expanded(
                 child: TimeDropDown(
                   initialSelection: startTime.value,
-                  onSelected: (value) =>
-                  startTime.value = WorkingHour.values
+                  onSelected: (value) => startTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
                   title: t.admin.doctor_availability_screen.start_time,
                 ),
@@ -170,8 +169,7 @@ class DoctorAvailabilityScreen extends HookWidget {
               Expanded(
                 child: TimeDropDown(
                   initialSelection: endTime.value,
-                  onSelected: (value) =>
-                  endTime.value = WorkingHour.values
+                  onSelected: (value) => endTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
                   title: t.admin.doctor_availability_screen.end_time,
                 ),
@@ -180,8 +178,7 @@ class DoctorAvailabilityScreen extends HookWidget {
           ),
           SlotDurationDropDown(
             initialSelection: slotDuration.value,
-            onSelected: (value) =>
-            slotDuration.value = SlotDuration.values
+            onSelected: (value) => slotDuration.value = SlotDuration.values
                 .firstWhere((element) => element.name == value),
             title: t.admin.doctor_availability_screen.slot_duration,
           ),
@@ -210,8 +207,7 @@ class DoctorAvailabilityScreen extends HookWidget {
         itemBuilder: (context, index) {
           var workingDaysList = WorkingDay.values
               .map(
-                (day) =>
-                ValueListenableBuilder(
+                (day) => ValueListenableBuilder(
                   valueListenable: workingDays,
                   builder: (context, workingDaysValue, child) {
                     bool isActive = workingDaysValue.contains(day);
@@ -253,7 +249,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                     );
                   },
                 ),
-          )
+              )
               .toList();
           return workingDaysList[index];
         },
@@ -293,15 +289,19 @@ class DoctorAvailabilityScreen extends HookWidget {
             child: Column(
               crossAxisAlignment: .start,
               children: [
-                Text(doctor.name,
+                Text(
+                  doctor.name,
                   style: context.medium16.textPrimary.rubik,
-                  overflow: .ellipsis,),
-                Text(doctor.specialty.name,
+                  overflow: .ellipsis,
+                ),
+                Text(
+                  doctor.specialty.name,
                   style: context.light14.textSecondary.rubik,
-                  overflow: .ellipsis,),
+                  overflow: .ellipsis,
+                ),
               ],
             ),
-          ) ,
+          ),
           // Text.rich(
           //   TextSpan(
           //     text: '${doctor.name}\n',
@@ -323,8 +323,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             ),
             side: BorderSide(width: 0, color: AppColors.transparent),
             backgroundColor:
-            // AppColors.black,
-            doctor.active
+                // AppColors.black,
+                doctor.active
                 ? AppColors.brandPrimary20
                 : AppColors.statusErrorSurface,
             avatarBoxConstraints: .tightFor(width: 15),
@@ -332,8 +332,8 @@ class DoctorAvailabilityScreen extends HookWidget {
               Icons.circle,
               size: 10,
               color:
-              // AppColors.black,
-              doctor.active
+                  // AppColors.black,
+                  doctor.active
                   ? AppColors.brandPrimaryDark
                   : AppColors.statusError,
             ),
@@ -341,8 +341,7 @@ class DoctorAvailabilityScreen extends HookWidget {
               doctor.active
                   ? t.admin.doctor_availability_screen.active
                   : t.admin.doctor_availability_screen.inactive,
-              style:
-              doctor.active
+              style: doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,
             ),
