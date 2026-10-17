@@ -10,8 +10,7 @@
 See the app in action — exploring both the patient booking flow and the admin management dashboard:
 
 ### 👨‍⚕️ Admin Role
-https://github.com/user-attachments/assets/75a16d70-19a6-4c7b-92b6-7eb4ce5459ca
-
+https://github.com/user-attachments/assets/550c510a-9ce0-4751-8e23-adab0005ef11
 ### 🏥 Patient Role
 https://github.com/user-attachments/assets/75a16d70-19a6-4c7b-92b6-7eb4ce5459ca
 
