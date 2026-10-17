@@ -1,0 +1,151 @@
+import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
+import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt/generated/app_assets.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../../core/extensions/context_extensions.dart';
+
+class DoctorDetailsCard extends StatelessWidget {
+  const DoctorDetailsCard({super.key, required this.doctor});
+
+  final Doctor doctor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      width: double.infinity,
+      height: 185,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withAlpha(20),
+            blurRadius: 25,
+            spreadRadius: 0.5,
+            offset: const Offset(0, 0),
+          ),
+        ],
+        color: AppColors.bgPrimary,
+      ),
+      child: Column(
+        crossAxisAlignment: .center,
+        spacing: 15,
+        children: [
+          Expanded(
+            child: Row(
+              spacing: 15,
+              children: [
+                Expanded(flex: 3, child: _doctorImageWidget(context: context)),
+                Expanded(
+                  flex: 6,
+                  child: Column(
+                    mainAxisAlignment: .spaceAround,
+                    children: [
+                      Row(
+                        crossAxisAlignment: .start,
+                        spacing: 15,
+                        children: [
+                          Expanded(
+                            child: _doctorDetailsWidget(context: context),
+                          ),
+                          FavoriteButtonWidget(doctorId: doctor.id, size: 25),
+                        ],
+                      ),
+                      // _ratingWidget(context: context),
+                      Row(
+                        mainAxisAlignment: .spaceBetween,
+                        children: [
+                          RatingWidget(
+                            rating: doctor.rating.rating,
+                            showRating: false,
+                            starSize: 13,
+                          ),
+                          Row(
+                            crossAxisAlignment: .center,
+                            spacing: 5,
+                            mainAxisAlignment: .end,
+                            children: [
+                              SvgPicture.asset(
+                                AppAssets.icons.sDollarIcon.path,
+                                width: 9,
+                              ),
+                              Text(
+                                t.doctor_details.price_per_hour(
+                                  Price: doctor.consultationFee.toString(),
+                                ),
+                                style: context.light10.textSecondary.rubik,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _buildBookNowButton(context: context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBookNowButton({required BuildContext context}) {
+    return CustomElevatedButton(
+      buttonWidth: context.width * 0.4,
+      paddingVertical: 10,
+      borderRadius: 6,
+      backgroundColor: AppColors.brandPrimary,
+      onPressed: () {
+        SelectTimeRoute(doctor).push(context);
+      },
+      child: Text(
+        t.doctor_details.book_now,
+        style: context.medium11.bgPrimary.rubik,
+      ),
+    );
+  }
+
+  Widget _doctorDetailsWidget({required BuildContext context}) {
+    return Column(
+      mainAxisAlignment: .spaceBetween,
+      crossAxisAlignment: .start,
+      children: [
+        FittedBox(
+          fit: .scaleDown,
+          child: Text(doctor.name, style: context.medium16.textTertiary.rubik),
+        ),
+        FittedBox(
+          fit: .scaleDown,
+          child: Text(
+            doctor.specialty.name,
+            style: context.light11.textSecondary.rubik,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _doctorImageWidget({required BuildContext context}) => Container(
+    width: double.infinity,
+    height: double.infinity,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: AppColors.shimmerBaseColor,
+      image: DecorationImage(
+        image: CustomCachedNetworkImage.getProvider(doctor.imageUrl),
+        fit: .cover,
+      ),
+    ),
+  );
+}

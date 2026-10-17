@@ -1,0 +1,55 @@
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:flutter/material.dart';
+
+import 'custom_text_form_field.dart';
+
+class SearchTextFieldWidget extends StatelessWidget {
+  final void Function(String)? onChanged;
+  final Widget? suffixIcon;
+  final String? hintText;
+  final double? borderRadius;
+  final FocusNode? focusNode;
+  final TextEditingController? controller;
+  final void Function(PointerDownEvent)? onTapOutside;
+
+  const SearchTextFieldWidget({
+    super.key,
+    this.onChanged,
+    this.suffixIcon,
+    this.borderRadius,
+    this.hintText,
+    this.focusNode,
+    this.controller,
+    this.onTapOutside,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return AppContainerWithShadow(
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(6)),
+      child: CustomTextFormField(
+        onTapOutside: onTapOutside,
+        focusNode: focusNode,
+        controller: controller,
+        borderSideColor: AppColors.transparent,
+        suffixIcon: suffixIcon,
+        onChanged: onChanged,
+        borderRadius: borderRadius ?? 6,
+        style: context.regular16.textSecondary.rubik,
+        keyboardType: TextInputType.text,
+        prefixIcon: Icon(
+          Icons.search_rounded,
+          color: AppColors.textSecondary,
+          size: 30,
+        ),
+        hintText: hintText ?? t.home.search,
+        hintStyle: context.regular14.textSecondary.rubik,
+        filled: true,
+        fillColor: AppColors.bgPrimary,
+      ),
+    );
+  }
+}

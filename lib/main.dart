@@ -1,7 +1,30 @@
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/theme/app_theme.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'apps/core/di/di.dart';
+import 'apps/core/router/app_routes.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await configureDependencies();
+  runApp(
+    TranslationProvider(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => getIt<AuthBloc>()),
+          BlocProvider(create: (context) => getIt<UserBloc>()),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -9,8 +32,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    return MaterialApp.router(
+      theme: AppTheme.lightTheme,
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
+      routerConfig: appRouter,
     );
   }
 }

@@ -1,0 +1,96 @@
+import 'package:equatable/equatable.dart';
+
+import '../../../../../../core/constants/firestore_constants.dart';
+import '../user/auth_providers.dart';
+import '../user/my_user.dart';
+import 'admin_info_dto.dart';
+import 'patient_info_dto.dart';
+
+class MyUserDto extends Equatable {
+  final String name;
+  final String email;
+  final String id;
+  final UserAuthProvider provider;
+  final String? image;
+  final UserRoles? role;
+  final String? phone;
+  final PatientInfoDto? patientInfo;
+  final AdminInfoDto? adminInfo;
+
+  const MyUserDto({
+    required this.id,
+    required this.email,
+    required this.name,
+    required this.provider,
+    this.image,
+    this.role,
+    this.phone,
+    this.patientInfo,
+    this.adminInfo,
+  });
+
+  factory MyUserDto.fromFireStore(Map<String, dynamic> data) {
+    return MyUserDto(
+      id: data[FirestoreConstants.id]?.toString() ?? '',
+      name: data[FirestoreConstants.name]?.toString() ?? '',
+      email: data[FirestoreConstants.email]?.toString() ?? '',
+      provider: UserAuthProvider.values.firstWhere(
+        (element) => element.name == data[FirestoreConstants.provider],
+        orElse: () => UserAuthProvider.emailPassword,
+      ),
+      image: data[FirestoreConstants.image]?.toString(),
+      role: data[FirestoreConstants.role] != null
+          ? UserRoles.values.firstWhere(
+              (e) => e.name == data[FirestoreConstants.role],
+              orElse: () => UserRoles.patient,
+            )
+          : null,
+      phone: data[FirestoreConstants.phone]?.toString(),
+      patientInfo: data[FirestoreConstants.patientInfo] != null
+          ? PatientInfoDto.fromFireStore(
+              data[FirestoreConstants.patientInfo] as Map<String, dynamic>,
+            )
+          : null,
+      adminInfo: data[FirestoreConstants.adminInfo] != null
+          ? AdminInfoDto.fromFireStore(
+              data[FirestoreConstants.adminInfo] as Map<String, dynamic>,
+            )
+          : null,
+    );
+  }
+
+  Map<String, dynamic> toFireStore() {
+    return {
+      FirestoreConstants.id: id,
+      FirestoreConstants.name: name,
+      FirestoreConstants.email: email,
+      FirestoreConstants.provider: provider.name,
+      FirestoreConstants.image: image,
+      FirestoreConstants.role: role?.name,
+      FirestoreConstants.phone: phone,
+      FirestoreConstants.patientInfo: patientInfo?.toFireStore(),
+      FirestoreConstants.adminInfo: adminInfo?.toFireStore(),
+    };
+  }
+
+  factory MyUserDto.fromJson(Map<String, dynamic> json) {
+    return MyUserDto.fromFireStore(json);
+  }
+
+  Map<String, dynamic> toJson() {
+    return toFireStore();
+  }
+
+  @override
+  List<Object?> get props => [
+    name,
+    email,
+    id,
+    provider,
+    image,
+    role,
+    phone,
+    patientInfo,
+    adminInfo,
+  ];
+}

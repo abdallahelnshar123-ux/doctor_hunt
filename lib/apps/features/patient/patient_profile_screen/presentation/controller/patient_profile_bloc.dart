@@ -1,0 +1,55 @@
+import 'dart:io';
+
+import 'package:doctor_hunt/apps/core/data/user/repo/user_repository.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+
+import '../../../../../core/data/session/user_session_manager.dart';
+import '../../../../common/auth/data/models/user/my_user.dart';
+
+part 'patient_profile_event.dart';
+part 'patient_profile_state.dart';
+
+@injectable
+class PatientProfileBloc
+    extends Bloc<PatientProfileEvent, PatientProfileState> {
+  final UserRepository _repository;
+  final UserSessionManager _userSessionManager;
+
+  PatientProfileBloc(this._repository, this._userSessionManager)
+    : super(PatientProfileInitial()) {
+    on<PatientProfileUpdateRequested>(_onUpdateProfileRequested);
+    on<PickPatientProfileImageRequested>(_onPickImageRequested);
+  }
+
+  Future<void> _onUpdateProfileRequested(
+    PatientProfileUpdateRequested event,
+    Emitter<PatientProfileState> emit,
+  ) async {
+    emit(PatientProfileLoading());
+
+    final result = await _repository.updateUserProfile(
+      user: event.user,
+      image: event.image,
+    );
+
+    result.fold((failure) => emit(PatientProfileUpdateError(failure.message)), (
+      updatedUser,
+    ) {
+      _userSessionManager.updateUser(updatedUser);
+      emit(PatientProfileUpdateSuccess(updatedUser));
+    });
+  }
+
+  Future<void> _onPickImageRequested(
+    PickPatientProfileImageRequested event,
+    Emitter<PatientProfileState> emit,
+  ) async {
+    final result = await _repository.pickUserImage();
+    result.fold(
+      (failure) => emit(PickPatientImageErrorState(failure.message)),
+      (image) => emit(PickPatientImageSuccessState(image)),
+    );
+  }
+}

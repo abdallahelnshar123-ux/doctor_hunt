@@ -1,0 +1,404 @@
+import 'dart:async';
+
+import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
+import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
+import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
+import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';
+import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
+import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/screens/patient_profile_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/popular_doctor_screen/presentation/screens/popular_doctor_screen.dart';
+import 'package:doctor_hunt/apps/features/patient/privacy_policy_screen/presentation/screens/privacy_policy_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
+import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
+import '../../features/admin/doctor_availability_screen/presentation/controller/doctor_availability_bloc.dart';
+import '../../features/admin/doctor_availability_screen/presentation/screens/doctor_availability_screen.dart';
+import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
+import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
+import '../../features/common/auth/data/models/user/my_user.dart';
+import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
+import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
+import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
+import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
+import '../../features/patient/select_time_screen/presentation/controller/select_time_bloc.dart';
+import '../../features/patient/select_time_screen/presentation/controller/select_time_event.dart';
+import '../../features/patient/select_time_screen/presentation/screens/select_time_screen.dart';
+import '../data/models/doctor/doctor_availability.dart';
+
+part 'app_routes.g.dart';
+
+@TypedGoRoute<AdminLoginRoute>(path: '/admin_login')
+class AdminLoginRoute extends GoRouteData with $AdminLoginRoute {
+  const AdminLoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return AdminLoginScreen();
+  }
+}
+
+@TypedGoRoute<PatientLoginRoute>(path: '/patient_login')
+class PatientLoginRoute extends GoRouteData with $PatientLoginRoute {
+  const PatientLoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PatientLoginScreen();
+  }
+}
+
+@TypedGoRoute<RegisterRoute>(path: '/register')
+class RegisterRoute extends GoRouteData with $RegisterRoute {
+  const RegisterRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const RegisterScreen();
+  }
+}
+
+@TypedGoRoute<PatientMainRoute>(path: '/patient_main')
+class PatientMainRoute extends GoRouteData with $PatientMainRoute {
+  const PatientMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<PatientDoctorsBloc>(),
+      child: const PatientMainScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<AdminMainRoute>(path: '/admin_main')
+class AdminMainRoute extends GoRouteData with $AdminMainRoute {
+  const AdminMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    return BlocProvider(
+      create: (context) =>
+          getIt<AdminDoctorsBloc>()
+            ..add(AdminGetDoctorsRequested(user?.id ?? '')),
+      child: const AdminMainScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<AdminAppointmentDetailsRoute>(path: '/admin_appointment_details')
+class AdminAppointmentDetailsRoute extends GoRouteData
+    with $AdminAppointmentDetailsRoute {
+  const AdminAppointmentDetailsRoute(this.$extra);
+
+  final Appointment $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return AdminAppointmentDetailsScreen(appointment: $extra);
+  }
+}
+
+@TypedGoRoute<PatientAppointmentDetailsRoute>(
+  path: '/patient_appointment_details',
+)
+class PatientAppointmentDetailsRoute extends GoRouteData
+    with $PatientAppointmentDetailsRoute {
+  const PatientAppointmentDetailsRoute(this.$extra);
+
+  final Appointment $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PatientAppointmentDetailsScreen(appointment: $extra);
+  }
+}
+
+@TypedGoRoute<AddDoctorRoute>(path: '/add_doctor')
+class AddDoctorRoute extends GoRouteData with $AddDoctorRoute {
+  const AddDoctorRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<AddDoctorsBloc>(),
+      child: AddDoctorScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<OnboardingRoute>(path: '/')
+class OnboardingRoute extends GoRouteData with $OnboardingRoute {
+  const OnboardingRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const OnboardingScreen();
+  }
+}
+
+@TypedGoRoute<ChooseRoleRoute>(path: '/choose_role')
+class ChooseRoleRoute extends GoRouteData with $ChooseRoleRoute {
+  const ChooseRoleRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ChooseRoleScreen();
+  }
+}
+
+@TypedGoRoute<PopularDoctorsRoute>(path: '/popular_doctors')
+class PopularDoctorsRoute extends GoRouteData with $PopularDoctorsRoute {
+  const PopularDoctorsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const PopularDoctorScreen();
+  }
+}
+
+@TypedGoRoute<FindDoctorsRoute>(path: '/find_doctors')
+class FindDoctorsRoute extends GoRouteData with $FindDoctorsRoute {
+  const FindDoctorsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<PatientDoctorsBloc>(),
+      child: const FindDoctorsScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<PatientDoctorDetailsRoute>(path: '/patient_doctor_details')
+class PatientDoctorDetailsRoute extends GoRouteData
+    with $PatientDoctorDetailsRoute {
+  const PatientDoctorDetailsRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PatientDoctorDetailsScreen(doctor: $extra);
+  }
+}
+
+@TypedGoRoute<PatientProfileRoute>(path: '/patient_profile')
+class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
+  const PatientProfileRoute(this.$extra);
+
+  final MyUser $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<PatientProfileBloc>(),
+      child: PatientProfileScreen(user: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<AdminProfileRoute>(path: '/admin_profile')
+class AdminProfileRoute extends GoRouteData with $AdminProfileRoute {
+  const AdminProfileRoute(this.$extra);
+
+  final MyUser $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<AdminProfileBloc>(),
+      child: AdminProfileScreen(user: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<PrivacyPolicyRoute>(path: '/privacy_policy')
+class PrivacyPolicyRoute extends GoRouteData with $PrivacyPolicyRoute {
+  const PrivacyPolicyRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PrivacyPolicyScreen();
+  }
+}
+
+@TypedGoRoute<AdminDoctorDetailsRoute>(path: '/admin_doctor_details')
+class AdminDoctorDetailsRoute extends GoRouteData
+    with $AdminDoctorDetailsRoute {
+  const AdminDoctorDetailsRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<AdminDoctorActionBloc>(),
+      child: AdminDoctorDetailsScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<AdminUpdateDoctorDetailsRoute>(
+  path: '/admin_update_doctor_details',
+)
+class AdminUpdateDoctorDetailsRoute extends GoRouteData
+    with $AdminUpdateDoctorDetailsRoute {
+  const AdminUpdateDoctorDetailsRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<UpdateDoctorDetailsBloc>(),
+      child: UpdateDoctorDetailsScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<DoctorAvailabilityRoute>(path: '/doctor_availability')
+class DoctorAvailabilityRoute extends GoRouteData
+    with $DoctorAvailabilityRoute {
+  const DoctorAvailabilityRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<DoctorAvailabilityBloc>(),
+      child: DoctorAvailabilityScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<SelectTimeRoute>(path: '/select_time')
+class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
+  const SelectTimeRoute(this.$extra);
+
+  final Doctor $extra;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final Doctor doctor = state.extra as Doctor;
+    return BlocProvider(
+      create: (context) => getIt<SelectTimeBloc>()
+        ..add(
+          GetDoctorSlotsEvent(
+            availability: doctor.availability ?? DoctorAvailability.initial(),
+            doctorId: doctor.id,
+            startDate: DateTime.now(),
+          ),
+        ),
+      child: SelectTimeScreen(doctor: $extra),
+    );
+  }
+}
+
+class GoRouterRefreshStream extends ChangeNotifier {
+  late final StreamSubscription<dynamic> _subscription;
+
+  GoRouterRefreshStream(Stream<dynamic> stream) {
+    notifyListeners();
+    _subscription = stream.asBroadcastStream().listen((_) => notifyListeners());
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+}
+
+GoRouter createRouter({
+  AuthBloc? authBloc,
+  required UserPrefs userPrefs,
+  String initialLocation = '/',
+}) {
+  final refreshStream = authBloc?.stream ?? const Stream.empty();
+
+  return GoRouter(
+    routes: $appRoutes,
+    initialLocation: initialLocation,
+    refreshListenable: GoRouterRefreshStream(refreshStream),
+    redirect: (context, state) {
+      final authState = authBloc?.state;
+      final isLoggedIn = authState is UserAuthenticatedState;
+      final user = authState is UserAuthenticatedState
+          ? authState.currentUser
+          : null;
+      final onboardingDone = userPrefs.onboarding;
+      final currentLocation = state.matchedLocation;
+
+      if (!onboardingDone) {
+        if (currentLocation != '/') {
+          return '/';
+        }
+        return null;
+      }
+
+      if (currentLocation == '/') {
+        if (isLoggedIn) {
+          return user?.role == UserRoles.admin
+              ? '/admin_main'
+              : '/patient_main';
+        } else {
+          return '/choose_role';
+        }
+      }
+
+      final protectedRoutes = [
+        '/patient_main',
+        '/admin_main',
+        '/add_doctor',
+        '/find_doctor',
+        '/patient_doctor_details',
+        '/admin_doctor_details',
+        '/admin_update_doctor_details',
+        '/appointment',
+      ];
+
+      if (protectedRoutes.contains(currentLocation) && !isLoggedIn) {
+        return '/choose_role';
+      }
+
+      final authRoutes = [
+        '/choose_role',
+        '/patient_login',
+        '/admin_login',
+        '/register',
+      ];
+
+      if (isLoggedIn && authRoutes.contains(currentLocation)) {
+        return user?.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+      }
+
+      return null;
+    },
+  );
+}
+
+final appRouter = createRouter(
+  authBloc: getIt<AuthBloc>(),
+  userPrefs: getIt<UserPrefs>(),
+);

@@ -1,0 +1,380 @@
+{
+  "auth": {
+    "welcomeBack": "Welcome back",
+    "authSubtitle": "You can search course, apply course and find scholarship for abroad studies",
+    "adminSubtitle": "Login to your admin account",
+    "forgotPassword": "Forgot password",
+    "noAccount": "Don’t have an account? Join us",
+    "login": "Login",
+    "joinUs": "Join us to start searching",
+    "haveAccount": "Have an account? Log in",
+    "agreeTerms": "I agree with the Terms of Service & Privacy Policy",
+    "signUp": "Sign up",
+    "email": "email",
+    "username": "username",
+    "password": "Password",
+    "google": "Google",
+    "youMustAgreeToTerms": "you must agree with the Terms of Service & Privacy Policy"
+  },
+  "onboarding": {
+    "next": "Next",
+    "skip": "Skip",
+    "getStarted": "Get Started",
+    "page1": {
+      "title": "Find Trusted Doctors",
+      "subtitle": "Find trusted doctors near you. Get the care you need from experienced professionals."
+    },
+    "page2": {
+      "title": "Choose Best Doctors",
+      "subtitle": "Explore doctors based on your needs. Choose the one that’s right for you."
+    },
+    "page3": {
+      "title": "Easy Appointments",
+      "subtitle": "Book your appointment in just a few taps. Choose a time that works best for you."
+    }
+  },
+  "chooseRole": {
+    "title": "Doctor Hunt",
+    "roleSelection": "Choose your role",
+    "patient": {
+      "title": "Patient",
+      "description": "Book appointments and consult with doctors."
+    },
+    "doctor": {
+      "title": "Doctor",
+      "description": "Manage appointments and consult with patients."
+    },
+    "admin": {
+      "title": "Admin",
+      "description": "Manage doctors and app settings."
+    }
+  },
+  "patientMain": {
+    "home": "Home",
+    "settings": "Settings",
+    "appointment": "Appointment",
+    "favourite": "Favourite"
+  },
+  "patientAppointments": {
+    "title": "Appointments",
+    "upcoming": "Upcoming",
+    "completed": "Completed",
+    "Canceled": "Canceled",
+    "viewDetails": "View Details",
+    "CancelAppointment": "Cancel Appointment",
+    "RateDoctor": "Rate Doctor",
+    "appointmentDate": "Appointment date",
+    "consultationFee": "Consultation fee",
+    "appointmentTime": "Appointment time",
+    "feeValue": "$ ${fee}",
+    "noAppointmentsFound": "No Appointments Found",
+    "tabToWriteReview": "Tab to write a review",
+    "youMustSelectAtLeastOneStar": "You must select at least one star"
+  },
+  "selectTime": {
+    "title": "Select Time",
+    "noSlotsAvailable": "No slots available",
+    "slotAvailable": "${number} Slot available",
+    "morningSlots": "Morning ${number} Slots",
+    "afternoonSlots": "Afternoon ${number} Slots",
+    "eveningSlots": "Evening ${number} Slots",
+    "confirm": "Confirm",
+    "youMustSelectAppointmentTime": "You must select appointment time"
+  },
+  "home": {
+    "welcome": "Hi ${name}",
+    "findDoctor": "Find Your Doctor",
+    "liveDoctors": "Live Doctors",
+    "popularDoctors": "Popular Doctors",
+    "favouriteDoctors": "Favourite Doctors",
+    "topRatedDoctors": "Top Rated Doctors",
+    "seeAll": "See all",
+    "search": "search....",
+    "live": "Live"
+  },
+  "favouriteDoctors": {
+    "noFavouriteDoctorsMatchSearch": "No Favourite Doctors Match Search ",
+    "noFavouriteDoctorsDescription": "You haven't added any doctors to your favourites yet.",
+    "errorWhileFetchingFavouriteDoctors": "Error while fetching favourite doctors. try again later"
+  },
+  "settings": {
+    "title": "Settings",
+    "logout": "Logout",
+    "accountSettings": "Account Settings",
+    "changePassword": "Change Password",
+    "notifications": "Notifications",
+    "privacyPolicy": "Privacy Policy",
+    "moreOptions": "More Options",
+    "language": "Language",
+    "buildVersion": "Build Version",
+    "english": "English",
+    "v1.0.0": "v1.0.0",
+    "logoutConfirmation": "Are you sure you want to logout?"
+  },
+  "profile": {
+    "title": "Profile",
+    "personalInformation": "Personal information",
+    "name": "Name",
+    "phone": "Phone",
+    "dataWasUpdatedSuccessfully": "Data was updated successfully"
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: October 2026",
+    "introduction": "Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.",
+    "sections": {
+      "informationWeCollect": {
+        "title": "1. Information We Collect",
+        "description": "We collect information required to provide doctor booking and healthcare management services:",
+        "bullets": [
+          "Personal Identification: Name, email address, and phone number.",
+          "Appointment Data: Selected doctors, appointment dates, times, and booking status.",
+          "Medical Details: Basic consultation preferences and patient notes shared for appointments.",
+          "Account & Technical Data: User role (Patient, Doctor, Admin) and system log data."
+        ]
+      },
+      "howWeUseInformation": {
+        "title": "2. How We Use Your Information",
+        "description": "Your information is used strictly to deliver and improve our healthcare services:",
+        "bullets": [
+          "Facilitating doctor searches, appointment scheduling, and management.",
+          "Sending appointment reminders and account updates.",
+          "Ensuring secure login and authentication.",
+          "Enhancing app performance and customer support experience."
+        ]
+      },
+      "dataSecurity": {
+        "title": "3. Data Security & Storage",
+        "description": "We take the security of your health and personal data seriously:",
+        "bullets": [
+          "Data is stored securely using encrypted cloud database infrastructure.",
+          "Access controls restrict administrative and medical data to authorized users only.",
+          "We regularly update our security practices to protect against unauthorized access."
+        ]
+      },
+      "thirdPartyServices": {
+        "title": "4. Third-Party Services",
+        "description": "We integrate trusted third-party services to ensure optimal performance:",
+        "bullets": [
+          "Firebase: Used for secure user authentication and cloud database management.",
+          "Cloudinary: Used for secure storage and delivery of profile and doctor images.",
+          "We never sell, trade, or rent your personal data to third parties for marketing purposes."
+        ]
+      },
+      "yourRights": {
+        "title": "5. Your Rights & Control",
+        "description": "You have full control over your personal data within Doctor Hunt:",
+        "bullets": [
+          "View and update your personal profile information at any time.",
+          "Manage notification settings and reminders.",
+          "Request account deletion or data erasure by contacting support."
+        ]
+      },
+      "contactUs": {
+        "title": "6. Contact Us",
+        "description": "If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com."
+      }
+    }
+  },
+  "doctorDetails": {
+    "title": "Doctor Details",
+    "findDoctors": "Find Doctors",
+    "bookNow": "Book now",
+    "services": "Services",
+    "servicesList": [
+      "Patient care should be the number one priority.",
+      "If you run your practice you know how frustrating.",
+      "That’s why some of appointment reminder system."
+    ],
+    "running": "Running",
+    "ongoing": "Ongoing",
+    "patient": "Patient",
+    "experience": "${years} Years experience",
+    "patientStories": "${count} Patient Stories",
+    "nextAvailable": "Next Available",
+    "tomorrow": "tomorrow",
+    "pricePerHour": "${price}/ hours",
+    "doctorName": "Doctor name",
+    "specialistCardiology": "Specialist Cardiologist",
+    "toothDentist": "Tooth Dentist"
+  },
+  "appointment": {
+    "title": "Appointment",
+    "pickDate": "Pick a date to see available time",
+    "availableTime": "Available Time",
+    "reminderMe": "Reminder Me Before",
+    "thankYou": "Thank You !",
+    "success": "Your Appointment Successful",
+    "bookingDetails": "You booked an appointment with ${doctor} on ${date}, at ${time}",
+    "done": "Done",
+    "edit": "Edit your appointment",
+    "confirm": "Confirm"
+  },
+  "createDoctor": {
+    "title": "Create doctor",
+    "addPhoto": "Add photo",
+    "doctorAddedSuccessfully": "Doctor was added Successfully",
+    "youMustPickDoctorImage": "You must pick doctor image"
+  },
+  "common": {
+    "am": "AM",
+    "pm": "PM",
+    "min": "Min.",
+    "weekdays": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ]
+  },
+  "dialog": {
+    "ok": "Ok",
+    "success": "Success",
+    "error": "Error",
+    "allSetUp": "All set up",
+    "registeredSuccessfully": "Registered Successfully, Please login.",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "admin": {
+    "main": {
+      "doctors": "Doctors",
+      "settings": "Settings"
+    },
+    "appointmentDetails": {
+      "title" : "Appointment Details",
+      "patient" : "Patient",
+      "doctor" : "Doctor",
+      "appointment" : "Appointment"
+    },
+    "doctorsTab": {
+      "addDoctor": "Add doctor",
+      "searchDoctors": "Search doctors",
+      "noDoctorsFound": "No Doctors Found",
+      "noDoctorsDescription": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
+      "totalDoctors": "Total doctors",
+      "active": "Active",
+      "inactive": "Inactive",
+      "all": "All",
+      "dash": "-",
+      "noDoctorNameOrSpecialtyMatchSearch": "No doctor name or specialty match search",
+      "noDoctors": "No doctors",
+      "noDoctorsToSearchAddSome": "No doctors to search add some"
+    },
+    "appointmentsTab": {
+      "title": "Appointments",
+      "upcoming": "Upcoming",
+      "completed": "Completed",
+      "Canceled": "Canceled",
+      "appointmentWasCancelledSuccessfully": "Appointment was cancelled successfully",
+      "appointmentWasMarkedAsCompletedSuccessfully": "Appointment was marked as completed successfully",
+      "time": "Time",
+      "date": "Date",
+      "fee": "Fee",
+      "markAsCompleted": "Mark as completed"
+
+    },
+    "settings": {
+      "adminProfile": "Admin Profile",
+      "changePassword": "Change Password",
+      "appInformation": "App Information",
+      "editSuperAdminDetailsPermissions": "Edit super admin details & permissions",
+      "updateMasterSecurityCredentials": "Update master security credentials",
+      "buildVersion": "Build version",
+      "v1.0.0": "v1.0.0",
+      "logoutConfirmation": "Are you sure you want to logout?",
+      "logout": "Logout"
+    },
+    "addDoctorScreen": {
+      "enterName": "Enter doctor name",
+      "enterFee": "Enter consultation fee",
+      "uploadImage": "Upload doctor image",
+      "tapToPick": "Tap to pick an image",
+      "createDoctor": "Create doctor",
+      "selectSpecialty": "Select specialty",
+      "doctorName": "Doctor name",
+      "specialty": "Specialty",
+      "consultationFee": "Consultation fee",
+      "nameExample": "e.g. Dr. Ahmed Ali",
+      "feeExample": "e.g. $ 28.00"
+    },
+    "doctorDetailsScreen": {
+      "doctorDetails": "Doctor details",
+      "specialty": "Specialty",
+      "accountStatus": "Account Status",
+      "heartCare": "Heart Care",
+      "editDoctor": "Edit Doctor",
+      "manageAvailability": "Manage Availability",
+      "doctorDeletedSuccessfully": "Doctor was deleted successfully",
+      "rating": "Rating",
+      "consultationFee": "Consultation Fee",
+      "fee": "$ ${price}"
+    },
+    "doctorAvailabilityScreen": {
+      "doctorAvailability": "Doctor Availability",
+      "workingDays": "Working Days",
+      "workingHours": "Working Hours",
+      "startTime": "Start Time",
+      "endTime": "End Time",
+      "slotDuration": "Slot Duration",
+      "saveAvailability": "Save Availability",
+      "active": "Active",
+      "inactive": "Inactive",
+      "startTimeAndEndtimeMustBeDifferent": "Start time and end time must be different",
+      "dataWasUpdatedSuccessfully": "Data was updated successfully"
+    },
+    "updateDoctorDetails": {
+      "doctorWasUpdatedSuccessfully": "Doctor was Updated Successfully",
+      "editDoctor": "Edit doctor",
+      "changePhoto": "Change photo",
+      "doctorStatues": "Doctor Statues",
+      "activeAndAvailable": "Active & Available",
+      "inactive": "Inactive",
+      "deleteDoctor": "Delete Doctor",
+      "saveChanges": "Save Changes"
+    },
+    "ProfileScreen": {
+      "title": "Profile",
+      "fullName": "Full Name",
+      "EmailAddress": "Email Address",
+      "dataWasUpdatedSuccessfully": "Data was updated successfully"
+    }
+  },
+  "errors": {
+    "noAccountAssociated": "No account associated with this email",
+    "someThingWentWrong": "Some thing went wrong",
+    "serverError": "Server error",
+    "noInternet": "No internet",
+    "emailOrPasswordIsIncorrect": "The email or password is incorrect",
+    "emailAddressAlreadyInUseByAnotherAccount": "The email address is already in use by another account",
+    "userNotAuthenticated": "User isn't Authenticated",
+    "errorWhileAddingDoctorPleaseTryAgainLater": "Error while adding doctor please try again later",
+    "errorWhileUpdatingDoctorPleaseTryAgainLater": "Error while updating doctor please try again later",
+    "cancelledByUser": "Cancelled by user",
+    "failed_to_fetch_appointments": "Failed to fetch appointments ${E}",
+    "failed_to_book_appointment": "Failed to book appointment ${E}",
+    "userNotLoggedIn": "User not logged in",
+    "failed_to_update_appointment_status": "Failed to update appointment status ${E}"
+  },
+  "validators" : {
+    "thisFieldIsRequired": "This field is required",
+    "emailIsRequired": "Email is required",
+    "invalidEmailFormat": "Invalid email format",
+    "passwordIsRequired": "Password is required",
+    "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+    "confirmPasswordIsRequired": "Confirm password is required",
+    "passwordsDoNotMatch": "Passwords do not match",
+    "phoneIsRequired": "Phone number is required",
+    "invalidPhoneNumber": "Invalid phone number"
+  },
+  "eCodes": {
+    "webUserInteractionFailed": "web-user-interaction-failed",
+    "cancelled": "cancelled",
+    "invalidCredential": "invalid-credential",
+    "emailAlreadyInUse": "email-already-in-use",
+    "cancelledByUser" : " [16] Cancelled by user."
+  }
+}

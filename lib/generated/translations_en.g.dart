@@ -1,0 +1,1405 @@
+///
+/// Generated file. Do not edit.
+///
+// coverage:ignore-file
+// ignore_for_file: type=lint, unused_import
+
+part of 'translations.g.dart';
+
+// Path: <root>
+typedef TranslationsEn = Translations; // ignore: unused_element
+
+class Translations with BaseTranslations<AppLocale, Translations> {
+  /// Returns the current translations of the given [context].
+  ///
+  /// Usage:
+  /// final t = Translations.of(context);
+  static Translations of(BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+
+  /// You can call this constructor and build your own translation instance of this locale.
+  /// Constructing via the enum [AppLocale.build] is preferred.
+  Translations({
+    Map<String, Node>? overrides,
+    PluralResolver? cardinalResolver,
+    PluralResolver? ordinalResolver,
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) : assert(
+         overrides == null,
+         'Set "translation_overrides: true" in order to enable this feature.',
+       ),
+       $meta =
+           meta ??
+           TranslationMetadata(
+             locale: AppLocale.en,
+             overrides: overrides ?? {},
+             cardinalResolver: cardinalResolver,
+             ordinalResolver: ordinalResolver,
+           );
+
+  /// Metadata for the translations of <en>.
+  @override
+  final TranslationMetadata<AppLocale, Translations> $meta;
+
+  late final Translations _root = this; // ignore: unused_field
+
+  Translations $copyWith({
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) => Translations(meta: meta ?? this.$meta);
+
+  // Translations
+  late final Translations$auth$en auth = Translations$auth$en.internal(_root);
+  late final Translations$onboarding$en onboarding =
+      Translations$onboarding$en.internal(_root);
+  late final Translations$choose_role$en choose_role =
+      Translations$choose_role$en.internal(_root);
+  late final Translations$patient_main$en patient_main =
+      Translations$patient_main$en.internal(_root);
+  late final Translations$patient_appointments$en patient_appointments =
+      Translations$patient_appointments$en.internal(_root);
+  late final Translations$select_time$en select_time =
+      Translations$select_time$en.internal(_root);
+  late final Translations$home$en home = Translations$home$en.internal(_root);
+  late final Translations$favourite_doctors$en favourite_doctors =
+      Translations$favourite_doctors$en.internal(_root);
+  late final Translations$settings$en settings =
+      Translations$settings$en.internal(_root);
+  late final Translations$profile$en profile = Translations$profile$en.internal(
+    _root,
+  );
+  late final Translations$privacy_policy$en privacy_policy =
+      Translations$privacy_policy$en.internal(_root);
+  late final Translations$doctor_details$en doctor_details =
+      Translations$doctor_details$en.internal(_root);
+  late final Translations$appointment$en appointment =
+      Translations$appointment$en.internal(_root);
+  late final Translations$create_doctor$en create_doctor =
+      Translations$create_doctor$en.internal(_root);
+  late final Translations$common$en common = Translations$common$en.internal(
+    _root,
+  );
+  late final Translations$dialog$en dialog = Translations$dialog$en.internal(
+    _root,
+  );
+  late final Translations$admin$en admin = Translations$admin$en.internal(
+    _root,
+  );
+  late final Translations$errors$en errors = Translations$errors$en.internal(
+    _root,
+  );
+  late final Translations$validators$en validators =
+      Translations$validators$en.internal(_root);
+  late final Translations$e_codes$en e_codes = Translations$e_codes$en.internal(
+    _root,
+  );
+}
+
+// Path: auth
+class Translations$auth$en {
+  Translations$auth$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Welcome back'
+  String get welcome_back => 'Welcome back';
+
+  /// en: 'You can search course, apply course and find scholarship for abroad studies'
+  String get auth_subtitle =>
+      'You can search course, apply course and find scholarship for abroad studies';
+
+  /// en: 'Login to your admin account'
+  String get admin_subtitle => 'Login to your admin account';
+
+  /// en: 'Forgot password'
+  String get forgot_password => 'Forgot password';
+
+  /// en: 'Don’t have an account? Join us'
+  String get no_account => 'Don’t have an account? Join us';
+
+  /// en: 'Login'
+  String get login => 'Login';
+
+  /// en: 'Join us to start searching'
+  String get join_us => 'Join us to start searching';
+
+  /// en: 'Have an account? Log in'
+  String get have_account => 'Have an account? Log in';
+
+  /// en: 'I agree with the Terms of Service & Privacy Policy'
+  String get agree_terms =>
+      'I agree with the Terms of Service & Privacy Policy';
+
+  /// en: 'Sign up'
+  String get sign_up => 'Sign up';
+
+  /// en: 'email'
+  String get email => 'email';
+
+  /// en: 'username'
+  String get username => 'username';
+
+  /// en: 'Password'
+  String get password => 'Password';
+
+  /// en: 'Google'
+  String get google => 'Google';
+
+  /// en: 'you must agree with the Terms of Service & Privacy Policy'
+  String get you_must_agree_to_terms =>
+      'you must agree with the Terms of Service & Privacy Policy';
+}
+
+// Path: onboarding
+class Translations$onboarding$en {
+  Translations$onboarding$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Next'
+  String get next => 'Next';
+
+  /// en: 'Skip'
+  String get skip => 'Skip';
+
+  /// en: 'Get Started'
+  String get get_started => 'Get Started';
+
+  late final Translations$onboarding$page1$en page1 =
+      Translations$onboarding$page1$en.internal(_root);
+  late final Translations$onboarding$page2$en page2 =
+      Translations$onboarding$page2$en.internal(_root);
+  late final Translations$onboarding$page3$en page3 =
+      Translations$onboarding$page3$en.internal(_root);
+}
+
+// Path: choose_role
+class Translations$choose_role$en with PageData2 {
+  Translations$choose_role$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Hunt'
+  @override
+  String get title => 'Doctor Hunt';
+
+  /// en: 'Choose your role'
+  String get role_selection => 'Choose your role';
+
+  late final Translations$choose_role$patient$en patient =
+      Translations$choose_role$patient$en.internal(_root);
+  late final Translations$choose_role$doctor$en doctor =
+      Translations$choose_role$doctor$en.internal(_root);
+  late final Translations$choose_role$admin$en admin =
+      Translations$choose_role$admin$en.internal(_root);
+}
+
+// Path: patient_main
+class Translations$patient_main$en {
+  Translations$patient_main$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Home'
+  String get home => 'Home';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+
+  /// en: 'Appointment'
+  String get appointment => 'Appointment';
+
+  /// en: 'Favourite'
+  String get favourite => 'Favourite';
+}
+
+// Path: patient_appointments
+class Translations$patient_appointments$en with PageData2 {
+  Translations$patient_appointments$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointments'
+  @override
+  String get title => 'Appointments';
+
+  /// en: 'Upcoming'
+  String get upcoming => 'Upcoming';
+
+  /// en: 'Completed'
+  String get completed => 'Completed';
+
+  /// en: 'Canceled'
+  String get canceled => 'Canceled';
+
+  /// en: 'View Details'
+  String get view_details => 'View Details';
+
+  /// en: 'Cancel Appointment'
+  String get cancel_appointment => 'Cancel Appointment';
+
+  /// en: 'Rate Doctor'
+  String get rate_doctor => 'Rate Doctor';
+
+  /// en: 'Appointment date'
+  String get appointment_date => 'Appointment date';
+
+  /// en: 'Consultation fee'
+  String get consultation_fee => 'Consultation fee';
+
+  /// en: 'Appointment time'
+  String get appointment_time => 'Appointment time';
+
+  /// en: '$ ${fee}'
+  String fee_value({required Object Fee}) => '\$ ${Fee}';
+
+  /// en: 'No Appointments Found'
+  String get no_appointments_found => 'No Appointments Found';
+
+  /// en: 'Tab to write a review'
+  String get tab_to_write_review => 'Tab to write a review';
+
+  /// en: 'You must select at least one star'
+  String get you_must_select_at_least_one_star =>
+      'You must select at least one star';
+}
+
+// Path: select_time
+class Translations$select_time$en with PageData2 {
+  Translations$select_time$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Select Time'
+  @override
+  String get title => 'Select Time';
+
+  /// en: 'No slots available'
+  String get no_slots_available => 'No slots available';
+
+  /// en: '${number} Slot available'
+  String slot_available({required Object Number}) => '${Number} Slot available';
+
+  /// en: 'Morning ${number} Slots'
+  String morning_slots({required Object Number}) => 'Morning ${Number} Slots';
+
+  /// en: 'Afternoon ${number} Slots'
+  String afternoon_slots({required Object Number}) =>
+      'Afternoon ${Number} Slots';
+
+  /// en: 'Evening ${number} Slots'
+  String evening_slots({required Object Number}) => 'Evening ${Number} Slots';
+
+  /// en: 'Confirm'
+  String get confirm => 'Confirm';
+
+  /// en: 'You must select appointment time'
+  String get you_must_select_appointment_time =>
+      'You must select appointment time';
+}
+
+// Path: home
+class Translations$home$en {
+  Translations$home$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Hi ${name}'
+  String welcome({required Object Name}) => 'Hi ${Name}';
+
+  /// en: 'Find Your Doctor'
+  String get find_doctor => 'Find Your Doctor';
+
+  /// en: 'Live Doctors'
+  String get live_doctors => 'Live Doctors';
+
+  /// en: 'Popular Doctors'
+  String get popular_doctors => 'Popular Doctors';
+
+  /// en: 'Favourite Doctors'
+  String get favourite_doctors => 'Favourite Doctors';
+
+  /// en: 'Top Rated Doctors'
+  String get top_rated_doctors => 'Top Rated Doctors';
+
+  /// en: 'See all'
+  String get see_all => 'See all';
+
+  /// en: 'search....'
+  String get search => 'search....';
+
+  /// en: 'Live'
+  String get live => 'Live';
+}
+
+// Path: favourite_doctors
+class Translations$favourite_doctors$en {
+  Translations$favourite_doctors$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'No Favourite Doctors Match Search '
+  String get no_favourite_doctors_match_search =>
+      'No Favourite Doctors Match Search ';
+
+  /// en: 'You haven't added any doctors to your favourites yet.'
+  String get no_favourite_doctors_description =>
+      'You haven\'t added any doctors to your favourites yet.';
+
+  /// en: 'Error while fetching favourite doctors. try again later'
+  String get error_while_fetching_favourite_doctors =>
+      'Error while fetching favourite doctors. try again later';
+}
+
+// Path: settings
+class Translations$settings$en with PageData2 {
+  Translations$settings$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Settings'
+  @override
+  String get title => 'Settings';
+
+  /// en: 'Logout'
+  String get logout => 'Logout';
+
+  /// en: 'Account Settings'
+  String get account_settings => 'Account Settings';
+
+  /// en: 'Change Password'
+  String get change_password => 'Change Password';
+
+  /// en: 'Notifications'
+  String get notifications => 'Notifications';
+
+  /// en: 'Privacy Policy'
+  String get privacy_policy => 'Privacy Policy';
+
+  /// en: 'More Options'
+  String get more_options => 'More Options';
+
+  /// en: 'Language'
+  String get language => 'Language';
+
+  /// en: 'Build Version'
+  String get build_version => 'Build Version';
+
+  /// en: 'English'
+  String get english => 'English';
+
+  /// en: 'v1.0.0'
+  String get v1_0_0 => 'v1.0.0';
+
+  /// en: 'Are you sure you want to logout?'
+  String get logout_confirmation => 'Are you sure you want to logout?';
+}
+
+// Path: profile
+class Translations$profile$en with PageData2 {
+  Translations$profile$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Profile'
+  @override
+  String get title => 'Profile';
+
+  /// en: 'Personal information'
+  String get personal_information => 'Personal information';
+
+  /// en: 'Name'
+  String get name => 'Name';
+
+  /// en: 'Phone'
+  String get phone => 'Phone';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
+}
+
+// Path: privacy_policy
+class Translations$privacy_policy$en with PageData2 {
+  Translations$privacy_policy$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Privacy Policy'
+  @override
+  String get title => 'Privacy Policy';
+
+  /// en: 'Last updated: October 2026'
+  String get last_updated => 'Last updated: October 2026';
+
+  /// en: 'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.'
+  String get introduction =>
+      'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.';
+
+  late final Translations$privacy_policy$sections$en sections =
+      Translations$privacy_policy$sections$en.internal(_root);
+}
+
+// Path: doctor_details
+class Translations$doctor_details$en with PageData2 {
+  Translations$doctor_details$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Details'
+  @override
+  String get title => 'Doctor Details';
+
+  /// en: 'Find Doctors'
+  String get find_doctors => 'Find Doctors';
+
+  /// en: 'Book now'
+  String get book_now => 'Book now';
+
+  /// en: 'Services'
+  String get services => 'Services';
+
+  List<String> get services_list => [
+    'Patient care should be the number one priority.',
+    'If you run your practice you know how frustrating.',
+    'That’s why some of appointment reminder system.',
+  ];
+
+  /// en: 'Running'
+  String get running => 'Running';
+
+  /// en: 'Ongoing'
+  String get ongoing => 'Ongoing';
+
+  /// en: 'Patient'
+  String get patient => 'Patient';
+
+  /// en: '${years} Years experience'
+  String experience({required Object Years}) => '${Years} Years experience';
+
+  /// en: '${count} Patient Stories'
+  String patient_stories({required Object Count}) => '${Count} Patient Stories';
+
+  /// en: 'Next Available'
+  String get next_available => 'Next Available';
+
+  /// en: 'tomorrow'
+  String get tomorrow => 'tomorrow';
+
+  /// en: '${price}/ hours'
+  String price_per_hour({required Object Price}) => '${Price}/ hours';
+
+  /// en: 'Doctor name'
+  String get doctor_name => 'Doctor name';
+
+  /// en: 'Specialist Cardiologist'
+  String get specialist_cardiology => 'Specialist Cardiologist';
+
+  /// en: 'Tooth Dentist'
+  String get tooth_dentist => 'Tooth Dentist';
+}
+
+// Path: appointment
+class Translations$appointment$en with PageData2 {
+  Translations$appointment$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointment'
+  @override
+  String get title => 'Appointment';
+
+  /// en: 'Pick a date to see available time'
+  String get pick_date => 'Pick a date to see available time';
+
+  /// en: 'Available Time'
+  String get available_time => 'Available Time';
+
+  /// en: 'Reminder Me Before'
+  String get reminder_me => 'Reminder Me Before';
+
+  /// en: 'Thank You !'
+  String get thank_you => 'Thank You !';
+
+  /// en: 'Your Appointment Successful'
+  String get success => 'Your Appointment Successful';
+
+  /// en: 'You booked an appointment with ${doctor} on ${date}, at ${time}'
+  String booking_details({
+    required Object Doctor,
+    required Object Date,
+    required Object Time,
+  }) => 'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
+
+  /// en: 'Done'
+  String get done => 'Done';
+
+  /// en: 'Edit your appointment'
+  String get edit => 'Edit your appointment';
+
+  /// en: 'Confirm'
+  String get confirm => 'Confirm';
+}
+
+// Path: create_doctor
+class Translations$create_doctor$en with PageData2 {
+  Translations$create_doctor$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Create doctor'
+  @override
+  String get title => 'Create doctor';
+
+  /// en: 'Add photo'
+  String get add_photo => 'Add photo';
+
+  /// en: 'Doctor was added Successfully'
+  String get doctor_added_successfully => 'Doctor was added Successfully';
+
+  /// en: 'You must pick doctor image'
+  String get you_must_pick_doctor_image => 'You must pick doctor image';
+}
+
+// Path: common
+class Translations$common$en {
+  Translations$common$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'AM'
+  String get am => 'AM';
+
+  /// en: 'PM'
+  String get pm => 'PM';
+
+  /// en: 'Min.'
+  String get min => 'Min.';
+
+  List<String> get weekdays => ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+}
+
+// Path: dialog
+class Translations$dialog$en {
+  Translations$dialog$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Ok'
+  String get ok => 'Ok';
+
+  /// en: 'Success'
+  String get success => 'Success';
+
+  /// en: 'Error'
+  String get error => 'Error';
+
+  /// en: 'All set up'
+  String get all_set_up => 'All set up';
+
+  /// en: 'Registered Successfully, Please login.'
+  String get registered_successfully =>
+      'Registered Successfully, Please login.';
+
+  /// en: 'Cancel'
+  String get cancel => 'Cancel';
+
+  /// en: 'Confirm'
+  String get confirm => 'Confirm';
+}
+
+// Path: admin
+class Translations$admin$en {
+  Translations$admin$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final Translations$admin$main$en main =
+      Translations$admin$main$en.internal(_root);
+  late final Translations$admin$appointment_details$en appointment_details =
+      Translations$admin$appointment_details$en.internal(_root);
+  late final Translations$admin$doctors_tab$en doctors_tab =
+      Translations$admin$doctors_tab$en.internal(_root);
+  late final Translations$admin$appointments_tab$en appointments_tab =
+      Translations$admin$appointments_tab$en.internal(_root);
+  late final Translations$admin$settings$en settings =
+      Translations$admin$settings$en.internal(_root);
+  late final Translations$admin$add_doctor_screen$en add_doctor_screen =
+      Translations$admin$add_doctor_screen$en.internal(_root);
+  late final Translations$admin$doctor_details_screen$en doctor_details_screen =
+      Translations$admin$doctor_details_screen$en.internal(_root);
+  late final Translations$admin$doctor_availability_screen$en
+  doctor_availability_screen =
+      Translations$admin$doctor_availability_screen$en.internal(_root);
+  late final Translations$admin$update_doctor_details$en update_doctor_details =
+      Translations$admin$update_doctor_details$en.internal(_root);
+  late final Translations$admin$profile_screen$en profile_screen =
+      Translations$admin$profile_screen$en.internal(_root);
+}
+
+// Path: errors
+class Translations$errors$en {
+  Translations$errors$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'No account associated with this email'
+  String get no_account_associated => 'No account associated with this email';
+
+  /// en: 'Some thing went wrong'
+  String get some_thing_went_wrong => 'Some thing went wrong';
+
+  /// en: 'Server error'
+  String get server_error => 'Server error';
+
+  /// en: 'No internet'
+  String get no_internet => 'No internet';
+
+  /// en: 'The email or password is incorrect'
+  String get email_or_password_is_incorrect =>
+      'The email or password is incorrect';
+
+  /// en: 'The email address is already in use by another account'
+  String get email_address_already_in_use_by_another_account =>
+      'The email address is already in use by another account';
+
+  /// en: 'User isn't Authenticated'
+  String get user_not_authenticated => 'User isn\'t Authenticated';
+
+  /// en: 'Error while adding doctor please try again later'
+  String get error_while_adding_doctor_please_try_again_later =>
+      'Error while adding doctor please try again later';
+
+  /// en: 'Error while updating doctor please try again later'
+  String get error_while_updating_doctor_please_try_again_later =>
+      'Error while updating doctor please try again later';
+
+  /// en: 'Cancelled by user'
+  String get cancelled_by_user => 'Cancelled by user';
+
+  /// en: 'Failed to fetch appointments ${E}'
+  String failed_to_fetch_appointments({required Object E}) =>
+      'Failed to fetch appointments ${E}';
+
+  /// en: 'Failed to book appointment ${E}'
+  String failed_to_book_appointment({required Object E}) =>
+      'Failed to book appointment ${E}';
+
+  /// en: 'User not logged in'
+  String get user_not_logged_in => 'User not logged in';
+
+  /// en: 'Failed to update appointment status ${E}'
+  String failed_to_update_appointment_status({required Object E}) =>
+      'Failed to update appointment status ${E}';
+}
+
+// Path: validators
+class Translations$validators$en {
+  Translations$validators$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'This field is required'
+  String get this_field_is_required => 'This field is required';
+
+  /// en: 'Email is required'
+  String get email_is_required => 'Email is required';
+
+  /// en: 'Invalid email format'
+  String get invalid_email_format => 'Invalid email format';
+
+  /// en: 'Password is required'
+  String get password_is_required => 'Password is required';
+
+  /// en: 'Password must be at least 6 characters'
+  String get password_must_be_at_least6_characters =>
+      'Password must be at least 6 characters';
+
+  /// en: 'Confirm password is required'
+  String get confirm_password_is_required => 'Confirm password is required';
+
+  /// en: 'Passwords do not match'
+  String get passwords_do_not_match => 'Passwords do not match';
+
+  /// en: 'Phone number is required'
+  String get phone_is_required => 'Phone number is required';
+
+  /// en: 'Invalid phone number'
+  String get invalid_phone_number => 'Invalid phone number';
+}
+
+// Path: e_codes
+class Translations$e_codes$en {
+  Translations$e_codes$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'web-user-interaction-failed'
+  String get web_user_interaction_failed => 'web-user-interaction-failed';
+
+  /// en: 'cancelled'
+  String get cancelled => 'cancelled';
+
+  /// en: 'invalid-credential'
+  String get invalid_credential => 'invalid-credential';
+
+  /// en: 'email-already-in-use'
+  String get email_already_in_use => 'email-already-in-use';
+
+  /// en: ' [16] Cancelled by user.'
+  String get cancelled_by_user => ' [16] Cancelled by user.';
+}
+
+// Path: onboarding.page1
+class Translations$onboarding$page1$en with PageData2 {
+  Translations$onboarding$page1$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Find Trusted Doctors'
+  @override
+  String get title => 'Find Trusted Doctors';
+
+  /// en: 'Find trusted doctors near you. Get the care you need from experienced professionals.'
+  String get subtitle =>
+      'Find trusted doctors near you. Get the care you need from experienced professionals.';
+}
+
+// Path: onboarding.page2
+class Translations$onboarding$page2$en with PageData2 {
+  Translations$onboarding$page2$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Choose Best Doctors'
+  @override
+  String get title => 'Choose Best Doctors';
+
+  /// en: 'Explore doctors based on your needs. Choose the one that’s right for you.'
+  String get subtitle =>
+      'Explore doctors based on your needs. Choose the one that’s right for you.';
+}
+
+// Path: onboarding.page3
+class Translations$onboarding$page3$en with PageData2 {
+  Translations$onboarding$page3$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Easy Appointments'
+  @override
+  String get title => 'Easy Appointments';
+
+  /// en: 'Book your appointment in just a few taps. Choose a time that works best for you.'
+  String get subtitle =>
+      'Book your appointment in just a few taps. Choose a time that works best for you.';
+}
+
+// Path: choose_role.patient
+class Translations$choose_role$patient$en with PageData2 {
+  Translations$choose_role$patient$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Patient'
+  @override
+  String get title => 'Patient';
+
+  /// en: 'Book appointments and consult with doctors.'
+  String get description => 'Book appointments and consult with doctors.';
+}
+
+// Path: choose_role.doctor
+class Translations$choose_role$doctor$en with PageData2 {
+  Translations$choose_role$doctor$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor'
+  @override
+  String get title => 'Doctor';
+
+  /// en: 'Manage appointments and consult with patients.'
+  String get description => 'Manage appointments and consult with patients.';
+}
+
+// Path: choose_role.admin
+class Translations$choose_role$admin$en with PageData2 {
+  Translations$choose_role$admin$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Admin'
+  @override
+  String get title => 'Admin';
+
+  /// en: 'Manage doctors and app settings.'
+  String get description => 'Manage doctors and app settings.';
+}
+
+// Path: privacy_policy.sections
+class Translations$privacy_policy$sections$en {
+  Translations$privacy_policy$sections$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final Translations$privacy_policy$sections$information_we_collect$en
+  information_we_collect =
+      Translations$privacy_policy$sections$information_we_collect$en.internal(
+        _root,
+      );
+  late final Translations$privacy_policy$sections$how_we_use_information$en
+  how_we_use_information =
+      Translations$privacy_policy$sections$how_we_use_information$en.internal(
+        _root,
+      );
+  late final Translations$privacy_policy$sections$data_security$en
+  data_security =
+      Translations$privacy_policy$sections$data_security$en.internal(_root);
+  late final Translations$privacy_policy$sections$third_party_services$en
+  third_party_services =
+      Translations$privacy_policy$sections$third_party_services$en.internal(
+        _root,
+      );
+  late final Translations$privacy_policy$sections$your_rights$en your_rights =
+      Translations$privacy_policy$sections$your_rights$en.internal(_root);
+  late final Translations$privacy_policy$sections$contact_us$en contact_us =
+      Translations$privacy_policy$sections$contact_us$en.internal(_root);
+}
+
+// Path: admin.main
+class Translations$admin$main$en {
+  Translations$admin$main$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctors'
+  String get doctors => 'Doctors';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+}
+
+// Path: admin.appointment_details
+class Translations$admin$appointment_details$en with PageData2 {
+  Translations$admin$appointment_details$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointment Details'
+  @override
+  String get title => 'Appointment Details';
+
+  /// en: 'Patient'
+  String get patient => 'Patient';
+
+  /// en: 'Doctor'
+  String get doctor => 'Doctor';
+
+  /// en: 'Appointment'
+  String get appointment => 'Appointment';
+}
+
+// Path: admin.doctors_tab
+class Translations$admin$doctors_tab$en {
+  Translations$admin$doctors_tab$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Add doctor'
+  String get add_doctor => 'Add doctor';
+
+  /// en: 'Search doctors'
+  String get search_doctors => 'Search doctors';
+
+  /// en: 'No Doctors Found'
+  String get no_doctors_found => 'No Doctors Found';
+
+  /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
+  String get no_doctors_description =>
+      'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+
+  /// en: 'Total doctors'
+  String get total_doctors => 'Total doctors';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'All'
+  String get all => 'All';
+
+  /// en: '-'
+  String get dash => '-';
+
+  /// en: 'No doctor name or specialty match search'
+  String get no_doctor_name_or_specialty_match_search =>
+      'No doctor name or specialty match search';
+
+  /// en: 'No doctors'
+  String get no_doctors => 'No doctors';
+
+  /// en: 'No doctors to search add some'
+  String get no_doctors_to_search_add_some => 'No doctors to search add some';
+}
+
+// Path: admin.appointments_tab
+class Translations$admin$appointments_tab$en with PageData2 {
+  Translations$admin$appointments_tab$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Appointments'
+  @override
+  String get title => 'Appointments';
+
+  /// en: 'Upcoming'
+  String get upcoming => 'Upcoming';
+
+  /// en: 'Completed'
+  String get completed => 'Completed';
+
+  /// en: 'Canceled'
+  String get canceled => 'Canceled';
+
+  /// en: 'Appointment was cancelled successfully'
+  String get appointment_was_cancelled_successfully =>
+      'Appointment was cancelled successfully';
+
+  /// en: 'Appointment was marked as completed successfully'
+  String get appointment_was_marked_as_completed_successfully =>
+      'Appointment was marked as completed successfully';
+
+  /// en: 'Time'
+  String get time => 'Time';
+
+  /// en: 'Date'
+  String get date => 'Date';
+
+  /// en: 'Fee'
+  String get fee => 'Fee';
+
+  /// en: 'Mark as completed'
+  String get mark_as_completed => 'Mark as completed';
+}
+
+// Path: admin.settings
+class Translations$admin$settings$en {
+  Translations$admin$settings$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Admin Profile'
+  String get admin_profile => 'Admin Profile';
+
+  /// en: 'Change Password'
+  String get change_password => 'Change Password';
+
+  /// en: 'App Information'
+  String get app_information => 'App Information';
+
+  /// en: 'Edit super admin details & permissions'
+  String get edit_super_admin_details_permissions =>
+      'Edit super admin details & permissions';
+
+  /// en: 'Update master security credentials'
+  String get update_master_security_credentials =>
+      'Update master security credentials';
+
+  /// en: 'Build version'
+  String get build_version => 'Build version';
+
+  /// en: 'v1.0.0'
+  String get v1_0_0 => 'v1.0.0';
+
+  /// en: 'Are you sure you want to logout?'
+  String get logout_confirmation => 'Are you sure you want to logout?';
+
+  /// en: 'Logout'
+  String get logout => 'Logout';
+}
+
+// Path: admin.add_doctor_screen
+class Translations$admin$add_doctor_screen$en {
+  Translations$admin$add_doctor_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Enter doctor name'
+  String get enter_name => 'Enter doctor name';
+
+  /// en: 'Enter consultation fee'
+  String get enter_fee => 'Enter consultation fee';
+
+  /// en: 'Upload doctor image'
+  String get upload_image => 'Upload doctor image';
+
+  /// en: 'Tap to pick an image'
+  String get tap_to_pick => 'Tap to pick an image';
+
+  /// en: 'Create doctor'
+  String get create_doctor => 'Create doctor';
+
+  /// en: 'Select specialty'
+  String get select_specialty => 'Select specialty';
+
+  /// en: 'Doctor name'
+  String get doctor_name => 'Doctor name';
+
+  /// en: 'Specialty'
+  String get specialty => 'Specialty';
+
+  /// en: 'Consultation fee'
+  String get consultation_fee => 'Consultation fee';
+
+  /// en: 'e.g. Dr. Ahmed Ali'
+  String get name_example => 'e.g. Dr. Ahmed Ali';
+
+  /// en: 'e.g. $ 28.00'
+  String get fee_example => 'e.g. \$ 28.00';
+}
+
+// Path: admin.doctor_details_screen
+class Translations$admin$doctor_details_screen$en {
+  Translations$admin$doctor_details_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor details'
+  String get doctor_details => 'Doctor details';
+
+  /// en: 'Specialty'
+  String get specialty => 'Specialty';
+
+  /// en: 'Account Status'
+  String get account_status => 'Account Status';
+
+  /// en: 'Heart Care'
+  String get heart_care => 'Heart Care';
+
+  /// en: 'Edit Doctor'
+  String get edit_doctor => 'Edit Doctor';
+
+  /// en: 'Manage Availability'
+  String get manage_availability => 'Manage Availability';
+
+  /// en: 'Doctor was deleted successfully'
+  String get doctor_deleted_successfully => 'Doctor was deleted successfully';
+
+  /// en: 'Rating'
+  String get rating => 'Rating';
+
+  /// en: 'Consultation Fee'
+  String get consultation_fee => 'Consultation Fee';
+
+  /// en: '$ ${price}'
+  String fee({required Object Price}) => '\$ ${Price}';
+}
+
+// Path: admin.doctor_availability_screen
+class Translations$admin$doctor_availability_screen$en {
+  Translations$admin$doctor_availability_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Availability'
+  String get doctor_availability => 'Doctor Availability';
+
+  /// en: 'Working Days'
+  String get working_days => 'Working Days';
+
+  /// en: 'Working Hours'
+  String get working_hours => 'Working Hours';
+
+  /// en: 'Start Time'
+  String get start_time => 'Start Time';
+
+  /// en: 'End Time'
+  String get end_time => 'End Time';
+
+  /// en: 'Slot Duration'
+  String get slot_duration => 'Slot Duration';
+
+  /// en: 'Save Availability'
+  String get save_availability => 'Save Availability';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Start time and end time must be different'
+  String get start_time_and_endtime_must_be_different =>
+      'Start time and end time must be different';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
+}
+
+// Path: admin.update_doctor_details
+class Translations$admin$update_doctor_details$en {
+  Translations$admin$update_doctor_details$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor was Updated Successfully'
+  String get doctor_was_updated_successfully =>
+      'Doctor was Updated Successfully';
+
+  /// en: 'Edit doctor'
+  String get edit_doctor => 'Edit doctor';
+
+  /// en: 'Change photo'
+  String get change_photo => 'Change photo';
+
+  /// en: 'Doctor Statues'
+  String get doctor_statues => 'Doctor Statues';
+
+  /// en: 'Active & Available'
+  String get active_and_available => 'Active & Available';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Delete Doctor'
+  String get delete_doctor => 'Delete Doctor';
+
+  /// en: 'Save Changes'
+  String get save_changes => 'Save Changes';
+}
+
+// Path: admin.profile_screen
+class Translations$admin$profile_screen$en with PageData2 {
+  Translations$admin$profile_screen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Profile'
+  @override
+  String get title => 'Profile';
+
+  /// en: 'Full Name'
+  String get full_name => 'Full Name';
+
+  /// en: 'Email Address'
+  String get email_address => 'Email Address';
+
+  /// en: 'Data was updated successfully'
+  String get data_was_updated_successfully => 'Data was updated successfully';
+}
+
+// Path: privacy_policy.sections.information_we_collect
+class Translations$privacy_policy$sections$information_we_collect$en
+    with PageData2 {
+  Translations$privacy_policy$sections$information_we_collect$en.internal(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '1. Information We Collect'
+  @override
+  String get title => '1. Information We Collect';
+
+  /// en: 'We collect information required to provide doctor booking and healthcare management services:'
+  String get description =>
+      'We collect information required to provide doctor booking and healthcare management services:';
+
+  List<String> get bullets => [
+    'Personal Identification: Name, email address, and phone number.',
+    'Appointment Data: Selected doctors, appointment dates, times, and booking status.',
+    'Medical Details: Basic consultation preferences and patient notes shared for appointments.',
+    'Account & Technical Data: User role (Patient, Doctor, Admin) and system log data.',
+  ];
+}
+
+// Path: privacy_policy.sections.how_we_use_information
+class Translations$privacy_policy$sections$how_we_use_information$en
+    with PageData2 {
+  Translations$privacy_policy$sections$how_we_use_information$en.internal(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '2. How We Use Your Information'
+  @override
+  String get title => '2. How We Use Your Information';
+
+  /// en: 'Your information is used strictly to deliver and improve our healthcare services:'
+  String get description =>
+      'Your information is used strictly to deliver and improve our healthcare services:';
+
+  List<String> get bullets => [
+    'Facilitating doctor searches, appointment scheduling, and management.',
+    'Sending appointment reminders and account updates.',
+    'Ensuring secure login and authentication.',
+    'Enhancing app performance and customer support experience.',
+  ];
+}
+
+// Path: privacy_policy.sections.data_security
+class Translations$privacy_policy$sections$data_security$en with PageData2 {
+  Translations$privacy_policy$sections$data_security$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '3. Data Security & Storage'
+  @override
+  String get title => '3. Data Security & Storage';
+
+  /// en: 'We take the security of your health and personal data seriously:'
+  String get description =>
+      'We take the security of your health and personal data seriously:';
+
+  List<String> get bullets => [
+    'Data is stored securely using encrypted cloud database infrastructure.',
+    'Access controls restrict administrative and medical data to authorized users only.',
+    'We regularly update our security practices to protect against unauthorized access.',
+  ];
+}
+
+// Path: privacy_policy.sections.third_party_services
+class Translations$privacy_policy$sections$third_party_services$en
+    with PageData2 {
+  Translations$privacy_policy$sections$third_party_services$en.internal(
+    this._root,
+  );
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '4. Third-Party Services'
+  @override
+  String get title => '4. Third-Party Services';
+
+  /// en: 'We integrate trusted third-party services to ensure optimal performance:'
+  String get description =>
+      'We integrate trusted third-party services to ensure optimal performance:';
+
+  List<String> get bullets => [
+    'Firebase: Used for secure user authentication and cloud database management.',
+    'Cloudinary: Used for secure storage and delivery of profile and doctor images.',
+    'We never sell, trade, or rent your personal data to third parties for marketing purposes.',
+  ];
+}
+
+// Path: privacy_policy.sections.your_rights
+class Translations$privacy_policy$sections$your_rights$en with PageData2 {
+  Translations$privacy_policy$sections$your_rights$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '5. Your Rights & Control'
+  @override
+  String get title => '5. Your Rights & Control';
+
+  /// en: 'You have full control over your personal data within Doctor Hunt:'
+  String get description =>
+      'You have full control over your personal data within Doctor Hunt:';
+
+  List<String> get bullets => [
+    'View and update your personal profile information at any time.',
+    'Manage notification settings and reminders.',
+    'Request account deletion or data erasure by contacting support.',
+  ];
+}
+
+// Path: privacy_policy.sections.contact_us
+class Translations$privacy_policy$sections$contact_us$en with PageData2 {
+  Translations$privacy_policy$sections$contact_us$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: '6. Contact Us'
+  @override
+  String get title => '6. Contact Us';
+
+  /// en: 'If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com.'
+  String get description =>
+      'If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com.';
+}

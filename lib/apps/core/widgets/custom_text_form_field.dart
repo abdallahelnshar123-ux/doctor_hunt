@@ -1,0 +1,121 @@
+import 'package:flutter/material.dart';
+
+import '../../../generated/style_atoms.dart';
+import '../theme/app_colors.dart';
+
+typedef OnChanged = void Function(String)?;
+typedef OnValidator = String? Function(String?)?;
+typedef OnFieldSubmitted = void Function(String)?;
+
+class CustomTextFormField extends StatelessWidget {
+  final Color? borderSideColor;
+  final Color? fillColor;
+  final bool? filled;
+  final String? hintText;
+  final TextStyle? hintStyle;
+  final String? labelText;
+  final TextStyle? labelStyle;
+  final TextStyle? style;
+  final TextStyle? errorStyle;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final int? maxLines;
+  final OnChanged onChanged;
+  final OnFieldSubmitted onFieldSubmitted;
+  final TextEditingController? controller;
+  final OnValidator validator;
+  final TextInputType? keyboardType;
+  final String obscuringCharacter;
+  final bool obscureText;
+  final double borderRadius;
+  final EdgeInsetsGeometry? contentPadding;
+  final FocusNode? focusNode;
+  final bool enabled;
+  final bool readOnly;
+  final String? initialValue;
+  final void Function(PointerDownEvent)? onTapOutside;
+
+  const CustomTextFormField({
+    super.key,
+    this.style,
+    this.hintText,
+    this.hintStyle,
+    this.labelText,
+    this.labelStyle,
+    this.fillColor,
+    this.filled,
+    this.borderSideColor,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.maxLines,
+    this.controller,
+    this.onChanged,
+    this.validator,
+    this.obscureText = false,
+    this.obscuringCharacter = '•',
+    this.keyboardType,
+    this.errorStyle,
+    this.onFieldSubmitted,
+    this.borderRadius = 16,
+    this.contentPadding,
+    this.focusNode,
+    this.enabled = true,
+    this.readOnly = false,
+    this.initialValue,
+    this.onTapOutside,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onTapOutside: onTapOutside,
+      initialValue: initialValue,
+      enabled: enabled,
+      readOnly: readOnly,
+      focusNode: focusNode,
+      onFieldSubmitted: onFieldSubmitted,
+      maxLines: maxLines ?? 1,
+      controller: controller,
+      onChanged: onChanged,
+      validator: validator,
+      obscureText: obscureText,
+      obscuringCharacter: obscuringCharacter,
+      keyboardType: keyboardType,
+      style: style,
+      cursorColor: AppColors.brandPrimary,
+      decoration: InputDecoration(
+        contentPadding: contentPadding ?? EdgeInsets.all(17),
+        filled: filled,
+        fillColor: fillColor,
+        errorMaxLines: 2,
+        errorStyle: errorStyle,
+        enabledBorder: builtDecorationBorder(
+          borderColor: borderSideColor ?? AppColors.borderDefault,
+        ),
+        focusedBorder: builtDecorationBorder(
+          borderColor: borderSideColor ?? AppColors.borderDefault,
+        ),
+        errorBorder: builtDecorationBorder(borderColor: AppColors.statusError),
+        focusedErrorBorder: builtDecorationBorder(
+          borderColor: AppColors.statusError,
+        ),
+        disabledBorder: builtDecorationBorder(
+          borderColor: borderSideColor ?? AppColors.borderDefault,
+        ),
+        hintText: hintText,
+        hintStyle: hintStyle ?? context.light16.textSecondary.rubik,
+        labelText: labelText,
+        labelStyle: labelStyle,
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+      ),
+    );
+  }
+
+  OutlineInputBorder builtDecorationBorder({required Color borderColor}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(borderRadius),
+      borderSide: BorderSide(width: 2, color: borderColor),
+    );
+  }
+}
