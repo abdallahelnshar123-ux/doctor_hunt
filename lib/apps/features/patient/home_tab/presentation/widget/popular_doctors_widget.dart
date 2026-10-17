@@ -2,7 +2,7 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/widget/popular_doctors_item.dart';
-import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/widget/top_rated_doctors_shimmer.dart';
+import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/widget/popular_doctors_shimmer.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -93,7 +93,9 @@ class PopularDoctorsWidget extends StatelessWidget {
             return const SizedBox(
               height: 330,
               width: double.infinity,
-              child: TopRatedDoctorsShimmer(),
+              child: PopularDoctorsShimmer(),
+
+              // TopRatedDoctorsShimmer(),
             );
           },
         ),

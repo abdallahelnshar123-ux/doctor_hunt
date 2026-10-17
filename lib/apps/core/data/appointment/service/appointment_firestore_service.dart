@@ -51,6 +51,7 @@ class AppointmentFirestoreService {
       );
     }
   }
+
   Stream<List<AppointmentDto>> getPatientAppointmentsStream(String patientId) {
     return _firestore
         .collection(FirestoreConstants.appointmentsCollection)
@@ -85,15 +86,12 @@ class AppointmentFirestoreService {
       await collectionRef
           .doc(appointmentDto.id)
           .set(appointmentDto.toFireStore());
-
-
     } catch (e) {
       throw ServerException(
         message: t.errors.failed_to_book_appointment(E: e.toString()),
       );
     }
   }
-
 
   Stream<List<AppointmentDto>> getAdminAppointmentsStream(String adminId) {
     return _firestore

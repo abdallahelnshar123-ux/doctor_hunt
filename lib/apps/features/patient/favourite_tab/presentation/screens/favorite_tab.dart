@@ -57,7 +57,9 @@ class FavoriteTab extends HookWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SearchTextFieldWidget(
-                onTapOutside: (event) {},
+                onTapOutside: (event) {
+                  FocusScope.of(context).unfocus();
+                },
                 onChanged: (query) {
                   context.read<FavouriteDoctorsBloc>().add(
                     SearchFavouriteDoctorsRequested(query),

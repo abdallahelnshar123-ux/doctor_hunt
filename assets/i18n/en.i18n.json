@@ -374,6 +374,7 @@
     "webUserInteractionFailed": "web-user-interaction-failed",
     "cancelled": "cancelled",
     "invalidCredential": "invalid-credential",
-    "emailAlreadyInUse": "email-already-in-use"
+    "emailAlreadyInUse": "email-already-in-use",
+    "cancelledByUser" : " [16] Cancelled by user."
   }
 }

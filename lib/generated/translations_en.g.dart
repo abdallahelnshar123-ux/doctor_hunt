@@ -782,6 +782,9 @@ class Translations$e_codes$en {
 
   /// en: 'email-already-in-use'
   String get email_already_in_use => 'email-already-in-use';
+
+  /// en: ' [16] Cancelled by user.'
+  String get cancelled_by_user => ' [16] Cancelled by user.';
 }
 
 // Path: onboarding.page1

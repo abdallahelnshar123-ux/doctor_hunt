@@ -42,7 +42,7 @@ class PatientLoginScreen extends HookWidget {
         }
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
-          if (state.message != t.errors.cancelled_by_user) {
+          if (state.message.contains(t.errors.cancelled_by_user)) {
             DialogUtils.showMessage(
               posActionText: t.dialog.ok,
               title: t.dialog.error,

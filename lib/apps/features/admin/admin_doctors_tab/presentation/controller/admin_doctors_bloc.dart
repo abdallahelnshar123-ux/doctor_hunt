@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'admin_doctors_event.dart';
-
 part 'admin_doctors_state.dart';
 
 EventTransformer<T> debounce<T>(Duration duration) {

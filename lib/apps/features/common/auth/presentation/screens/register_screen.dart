@@ -56,12 +56,14 @@ class RegisterScreen extends HookWidget {
         }
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
-          DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
-            context: context,
-            message: state.message,
-          );
+          if (state.message != t.errors.cancelled_by_user) {
+            DialogUtils.showMessage(
+              posActionText: t.dialog.ok,
+              title: t.dialog.error,
+              context: context,
+              message: state.message,
+            );
+          }
         }
         if (state is RegisterWithEmailPasswordLoadingState ||
             state is ContinueWithGoogleLoadingState) {

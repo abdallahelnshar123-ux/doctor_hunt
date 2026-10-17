@@ -10,7 +10,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 part 'add_doctors_event.dart';
-
 part 'add_doctors_state.dart';
 
 @injectable

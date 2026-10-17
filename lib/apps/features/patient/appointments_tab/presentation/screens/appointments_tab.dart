@@ -16,6 +16,7 @@ import '../../../../common/auth/data/models/user/my_user.dart';
 import '../controller/appointments_bloc.dart';
 
 part '../widget/appointments_list_widget.dart';
+
 part '../widget/review_input_widget.dart';
 
 class PatientAppointmentsTab extends StatelessWidget {

@@ -15,7 +15,6 @@ import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
-
 part '../widget/more_option_widget.dart';
 
 class SettingsTab extends StatelessWidget {

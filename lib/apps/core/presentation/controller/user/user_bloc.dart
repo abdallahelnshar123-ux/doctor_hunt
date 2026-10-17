@@ -1,6 +1,5 @@
 import 'dart:async';
 
-
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,6 @@ import '../../../../features/common/auth/data/models/user/my_user.dart';
 import '../../../../features/common/auth/data/models/user/patient_info.dart';
 import '../../../../features/common/auth/data/repo/auth_repository.dart';
 import '../../../data/session/user_session_manager.dart';
-
 
 @lazySingleton
 class UserBloc extends Bloc<UserEvent, UserState> {

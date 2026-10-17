@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -42,9 +43,23 @@ class AuthService {
         throw const CancelledByUserException();
       }
       throw ServerException(message: e.message ?? t.errors.server_error);
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
+        throw const CancelledByUserException();
+      }
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
       throw NetworkException(message: t.errors.no_internet);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -67,6 +82,15 @@ class AuthService {
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -91,6 +115,15 @@ class AuthService {
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -120,9 +153,23 @@ class AuthService {
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
+        throw const CancelledByUserException();
+      }
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -135,6 +182,15 @@ class AuthService {
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -153,9 +209,23 @@ class AuthService {
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
       throw ServerException(message: e.message ?? t.errors.server_error);
+    } on PlatformException catch (e) {
+      if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
+        throw const CancelledByUserException();
+      }
+      throw ServerException(message: e.message ?? t.errors.server_error);
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
@@ -168,6 +238,15 @@ class AuthService {
     } on SocketException {
       throw NetworkException(message: t.errors.server_error);
     } catch (e) {
+      if (e is PlatformException &&
+          (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
+        throw const CancelledByUserException();
+      }
+      if (e.toString().contains('GoogleSignInExceptionCode.canceled') ||
+          e.toString().contains('sign_in_canceled') ||
+          e.toString().contains('Cancelled by user')) {
+        throw const CancelledByUserException();
+      }
       throw UnexpectedException(message: e.toString());
     }
   }
