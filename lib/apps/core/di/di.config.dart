@@ -81,17 +81,17 @@ extension GetItInjectableX on _i174.GetIt {
     final firebaseModule = _$FirebaseModule();
     final cloudinaryConfig = _$CloudinaryConfig();
     gh.factory<_i181.ImageService>(() => _i181.ImageService());
-    await gh.factoryAsync<_i460.SharedPreferences>(
-      () => localStorageModule.sharedPreferences,
-      preResolve: true,
-    );
     gh.factory<_i670.FavouriteDoctorsBloc>(() => _i670.FavouriteDoctorsBloc());
     gh.factory<_i485.GenerateDoctorSlotsUseCase>(
       () => _i485.GenerateDoctorSlotsUseCase(),
     );
-    gh.singleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
-    gh.singleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
-    gh.singleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    await gh.singletonAsync<_i460.SharedPreferences>(
+      () => localStorageModule.sharedPreferences,
+      preResolve: true,
+    );
+    gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
+    gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
+    gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
     gh.factory<String>(
       () => cloudinaryConfig.uploadPreset,
       instanceName: 'upload_preset',

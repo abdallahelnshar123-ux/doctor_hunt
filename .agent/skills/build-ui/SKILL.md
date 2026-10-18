@@ -1,6 +1,6 @@
 ---
 name: build-ui-guidelines
-description: Guidelines for building UI components in the Flutter project. Follow these rules for consistency, performance, and maintainability.
+description: Use this skill whenever you are asked to build, create, refactor, or style UI components or screens in Flutter. This skill contains strict project rules regarding state management (Hooks vs StatefulWidgets), layout spacing, localization using the slang package, theming (AppColors), and widget decomposition. Always consult this skill to ensure consistency and maintainability when writing Flutter UI code.
 ---
 
 # UI Construction Guidelines
@@ -14,7 +14,7 @@ description: Guidelines for building UI components in the Flutter project. Follo
 - [Widget Decomposition](#widget-decomposition)
 
 ## State & Hooks
-* **Flutter Hooks**: Always refer to `.agent/skills/flutter_hooks_guidelines.md` when managing local state in UI components. Prefer `HookWidget` over `StatefulWidget` for managing controllers (e.g., `TextEditingController`, `AnimationController`) or simple state (`useState`).
+* **Flutter Hooks**: Always refer to `../flutter-hooks/SKILL.md` when managing local state in UI components. Prefer `HookWidget` over `StatefulWidget` for managing controllers (e.g., `TextEditingController`, `AnimationController`) or simple state (`useState`).
 * Maintain clean business logic by keeping it out of the UI layer. Use the state management solution already established in the project (e.g., `bloc` or `cubit`), or follow whatever specific state management approach the user requests for the task.
 
 ## Layout & Spacing
@@ -26,18 +26,18 @@ description: Guidelines for building UI components in the Flutter project. Follo
 ## Localization & Text
 * **No Hardcoded Text**: Hardcoded user-visible strings are strictly prohibited.
 * **Slang Package**: Utilize the `slang` package for localization.
-* All text strings MUST be added to `assets/i18n/en.i18n.json` and accessed via the global translation getter `t`.
+* All text strings MUST be added to `../../../assets/i18n/en.i18n.json` and accessed via the global translation getter `t`.
 * *Example*: `Text(t.admin.doctors_tab.add_doctor)`
 
 ## Colors & Styling
 * **No Hardcoded Colors**: Avoid using raw `Color(0xFF...)` or `Colors.red` directly in widgets.
-* **App Colors**: All colors must be sourced from the central theme file `lib/apps/core/theme/app_colors.dart` (e.g., `AppColors.brandPrimary`).
+* **App Colors**: All colors must be sourced from the central theme file `../../../lib/apps/core/theme/app_colors.dart` (e.g., `AppColors.brandPrimary`).
 * **Typography**: Utilize the generated style atom extensions on `BuildContext` for text styling.
 * *Example*: `style: context.regular12.white.rubik`
 
 ## Assets & Images
 * **No Direct Asset Paths**: Never use raw string paths (e.g., `'assets/images/logo.png'`).
-* **App Assets**: All image and asset paths must be sourced from the generated `lib/generated/app_assets.dart` file.
+* **App Assets**: All image and asset paths must be sourced from the generated `../../../lib/generated/app_assets.dart` file.
 * *Example*: `Image.asset(AppAssets.imagesDoctor1)`
 
 ## Widget Decomposition

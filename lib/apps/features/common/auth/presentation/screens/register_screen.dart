@@ -133,14 +133,15 @@ class RegisterScreen extends HookWidget {
                         emailController,
                         passwordController,
                       ),
+
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: _buildHaveAnAccount(context),
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 25),
-              child: _buildHaveAnAccount(context),
             ),
           ],
         ),

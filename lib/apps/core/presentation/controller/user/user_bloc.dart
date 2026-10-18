@@ -21,8 +21,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
 
-    _userSubscription = _userSessionManager.userStream.listen((user) {
-      add(UserStreamUpdatedEvent(user));
+
+    _listenToUserSession();
+    // _userSubscription = _userSessionManager.userStream.listen((user) {
+    //   add(UserStreamUpdatedEvent(user));
+    // });
+  }
+
+  void _listenToUserSession() {
+    _userSessionManager.userStream.listen((user) {
+      if (!isClosed) {
+        add(UserStreamUpdatedEvent(user));
+      }
     });
   }
 

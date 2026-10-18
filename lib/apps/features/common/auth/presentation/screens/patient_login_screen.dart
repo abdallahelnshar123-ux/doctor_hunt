@@ -57,7 +57,7 @@ class PatientLoginScreen extends HookWidget {
         }
       },
       child: AppScaffold(
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         body: Column(
           children: [
             MainAppBar(),
@@ -103,14 +103,11 @@ class PatientLoginScreen extends HookWidget {
                         passwordController,
                       ),
                       _buildForgetPassword(context),
+                      _buildDoNotHaveAccount(context),
                     ],
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 25),
-              child: _buildDoNotHaveAccount(context),
             ),
           ],
         ),

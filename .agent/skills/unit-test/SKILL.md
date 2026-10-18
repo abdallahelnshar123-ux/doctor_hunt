@@ -1,9 +1,6 @@
 ---
 name: test-packages
-description: Write and organize unit tests for functions, methods, and classes using `package:test`. Use when creating new logic or fixing bugs to ensure code remains correct and regression-free.
-metadata:
-  model: models/gemini-3.1-pro-preview
-  last_modified: Fri, 24 Apr 2026 15:07:58 GMT
+description: Use this skill whenever the user asks you to write, fix, or update unit tests for Dart or Flutter code (e.g., Repositories, Blocs, Cubits, UseCases, Models, Mappers). This skill contains mandatory testing conventions, including structure, mocktail strict verification rules, and specific patterns for testing BLoCs and Data Sources. Always trigger this skill when doing any unit testing tasks.
 ---
 # Testing Dart and Flutter Applications
 
@@ -133,7 +130,7 @@ Use `package:bloc_test` for verifying state emissions.
 
 ## Test Implementation Workflow
 
-- [ ] 1. Create the test file mirroring `lib/`.
+- [ ] 1. Create the test file mirroring `../../../lib`.
 - [ ] 2. Setup `Mock` classes for all dependencies.
 - [ ] 3. Register fallback values in `setUpAll` (including enums).
 - [ ] 4. Initialize the system under test in `setUp`.

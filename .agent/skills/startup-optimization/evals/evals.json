@@ -1,0 +1,23 @@
+{
+  "skill_name": "startup-optimization",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "My Flutter app takes like 10 seconds to show the first screen. I'm using GoRouter, Firebase, and google_fonts. How can I make it open instantly?",
+      "expected_output": "Agent identifies google_fonts, Firebase eager initialization, and GoRouter async state as potential bottlenecks and provides the specific solutions.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I noticed a white screen delay before the app UI loads. I already optimized my images. What should I check in main.dart or my dependency injection?",
+      "expected_output": "Agent suggests using flutter_native_splash for the white screen, and checks SharedPreferences (@preResolve + @singleton) and Firebase lazy initialization in DI.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "When the app opens, it flashes the login screen for a split second before going to the home screen. How do I fix this startup glitch?",
+      "expected_output": "Agent identifies the Router & Auth State Race Condition and explains how to read the user session synchronously from SharedPreferences.",
+      "files": []
+    }
+  ]
+}

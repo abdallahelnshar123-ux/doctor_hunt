@@ -6,11 +6,13 @@ class TextFormWidget extends StatefulWidget {
     required this.label,
     required this.controller,
     this.validator,
+    this.hintText,
   });
 
   final String label;
   final TextEditingController controller;
   final String? Function(String?)? validator;
+  final String? hintText;
 
   @override
   State<TextFormWidget> createState() => _TextFormWidgetState();
@@ -43,13 +45,15 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         title: Text(widget.label),
         titleTextStyle: context.medium10.brandPrimary.rubik,
         subtitle: CustomTextFormField(
+          hintStyle: context.light10.textSecondary.rubik ,
+          hintText: widget.hintText ,
           readOnly: _readOnly,
           focusNode: _focusNode,
           borderSideColor: AppColors.transparent,
           controller: widget.controller,
           validator: widget.validator,
           contentPadding: EdgeInsets.zero,
-          style: context.light16.textSecondary.rubik,
+          style: context.regular16.textSecondary.rubik,
         ),
 
         trailing: IconButton(
