@@ -33,7 +33,11 @@ void main() {
 
   setUp(() {
     mockUserPrefs = MockUserPrefs();
+    when(
+      () => mockUserPrefs.getCurrentUser(),
+    ).thenReturn(null); // stub init call
     userSessionManager = UserSessionManager(mockUserPrefs);
+    clearInteractions(mockUserPrefs); // clear init interactions for clean tests
   });
 
   tearDown(() {
@@ -41,68 +45,144 @@ void main() {
   });
 
   group('UserSessionManager', () {
-    test('should have null currentUser initially', () {
+    test('should have null currentUser and isLoggedIn false initially', () {
       expect(userSessionManager.currentUser, isNull);
+      expect(userSessionManager.isLoggedIn, isFalse);
     });
+
+    test(
+      'should initialize currentUser from UserPrefs if user exists on instantiation',
+      () {
+        final localPrefs = MockUserPrefs();
+        when(() => localPrefs.getCurrentUser()).thenReturn(tUserDto);
+
+        final manager = UserSessionManager(localPrefs);
+
+        expect(manager.currentUser, equals(tUser));
+        expect(manager.isLoggedIn, isTrue);
+        verify(() => localPrefs.getCurrentUser()).called(1);
+        verifyNoMoreInteractions(localPrefs);
+        manager.dispose();
+      },
+    );
 
     group('updateUser', () {
       test(
-          'should update currentUser, call setUser on UserPrefs, and emit to stream when user is not null',
-          () async {
-        // Arrange
-        when(() => mockUserPrefs.setUser(any())).thenAnswer((_) => Future.value());
+        'should update currentUser, call setUser on UserPrefs, and emit to stream when user is not null',
+        () async {
+          // Arrange
+          when(
+            () => mockUserPrefs.setUser(any()),
+          ).thenAnswer((_) => Future.value());
 
-        // Act & Assert
-        final streamFuture = expectLater(
-          userSessionManager.userStream,
-          emitsInOrder([null, tUser]),
-        );
-        
-        await Future.delayed(Duration.zero);
-        userSessionManager.updateUser(tUser);
-        
-        await streamFuture;
+          // Act & Assert
+          final streamFuture = expectLater(
+            userSessionManager.userStream,
+            emitsInOrder([null, tUser]),
+          );
 
-        // Assert
-        expect(userSessionManager.currentUser, equals(tUser));
-        verify(() => mockUserPrefs.setUser(tUserDto)).called(1);
-        verifyNoMoreInteractions(mockUserPrefs);
-      });
+          await Future.delayed(Duration.zero);
+          userSessionManager.updateUser(tUser);
+
+          await streamFuture;
+
+          // Assert
+          expect(userSessionManager.currentUser, equals(tUser));
+          verify(() => mockUserPrefs.setUser(tUserDto)).called(1);
+          verifyNoMoreInteractions(mockUserPrefs);
+        },
+      );
 
       test(
-          'should clear currentUser, call clearUser on UserPrefs, and emit null to stream when user is null',
-          () async {
-        // Arrange
-        when(() => mockUserPrefs.clearUser()).thenAnswer((_) => Future.value());
-        when(() => mockUserPrefs.setUser(any())).thenAnswer((_) => Future.value());
-        userSessionManager.updateUser(tUser); // Set initial state
-        verify(() => mockUserPrefs.setUser(tUserDto)).called(1); // consume the verify
+        'should clear currentUser, call clearUser on UserPrefs, and emit null to stream when user is null',
+        () async {
+          // Arrange
+          when(
+            () => mockUserPrefs.clearUser(),
+          ).thenAnswer((_) => Future.value());
+          when(
+            () => mockUserPrefs.setUser(any()),
+          ).thenAnswer((_) => Future.value());
+          userSessionManager.updateUser(tUser); // Set initial state
+          verify(
+            () => mockUserPrefs.setUser(tUserDto),
+          ).called(1); // consume the verify
 
-        // Act & Assert
-        final streamFuture = expectLater(
-          userSessionManager.userStream,
-          emitsInOrder([tUser, null]),
-        );
-        
-        await Future.delayed(Duration.zero);
-        userSessionManager.updateUser(null);
-        
-        await streamFuture;
+          // Act & Assert
+          final streamFuture = expectLater(
+            userSessionManager.userStream,
+            emitsInOrder([tUser, null]),
+          );
 
-        // Assert
-        expect(userSessionManager.currentUser, isNull);
-        verify(() => mockUserPrefs.clearUser()).called(1);
-        verifyNoMoreInteractions(mockUserPrefs);
-      });
+          await Future.delayed(Duration.zero);
+          userSessionManager.updateUser(null);
+
+          await streamFuture;
+
+          // Assert
+          expect(userSessionManager.currentUser, isNull);
+          verify(() => mockUserPrefs.clearUser()).called(1);
+          verifyNoMoreInteractions(mockUserPrefs);
+        },
+      );
+
+      test(
+        'should emit to authStateStream when login state changes from false to true and back to false',
+        () async {
+          when(() => mockUserPrefs.setUser(any())).thenAnswer((_) => Future.value());
+          when(() => mockUserPrefs.clearUser()).thenAnswer((_) => Future.value());
+
+          final authStreamFuture = expectLater(
+            userSessionManager.authStateStream,
+            emitsInOrder([false, true, false]),
+          );
+
+          await Future.delayed(Duration.zero);
+          userSessionManager.updateUser(tUser);
+          await Future.delayed(Duration.zero);
+          userSessionManager.updateUser(null);
+
+          await authStreamFuture;
+        },
+      );
+
+      test(
+        'should not emit to authStateStream when user is updated but login state remains true',
+        () async {
+          when(() => mockUserPrefs.setUser(any())).thenAnswer((_) => Future.value());
+          userSessionManager.updateUser(tUser);
+
+          const updatedUser = MyUser(
+            id: 'test_id',
+            email: 'test@example.com',
+            name: 'Updated Name',
+            provider: UserAuthProvider.emailPassword,
+          );
+
+          final authStreamFuture = expectLater(
+            userSessionManager.authStateStream,
+            emitsInOrder([true]),
+          );
+
+          await Future.delayed(Duration.zero);
+          userSessionManager.updateUser(updatedUser);
+
+          await authStreamFuture;
+        },
+      );
     });
 
     group('getCurrentUser', () {
       test('should return Some(currentUser) when _currentUser is not null', () {
         // Arrange
-        when(() => mockUserPrefs.setUser(any())).thenAnswer((_) => Future.value());
+        when(
+          () => mockUserPrefs.setUser(any()),
+        ).thenAnswer((_) => Future.value());
         userSessionManager.updateUser(tUser); // Sets _currentUser
         verify(() => mockUserPrefs.setUser(tUserDto)).called(1);
-        clearInteractions(mockUserPrefs); // Clear interactions to test getCurrentUser
+        clearInteractions(
+          mockUserPrefs,
+        ); // Clear interactions to test getCurrentUser
 
         // Act
         final result = userSessionManager.getCurrentUser();
@@ -113,36 +193,38 @@ void main() {
       });
 
       test(
-          'should read from UserPrefs and update _currentUser when _currentUser is null and prefs has user',
-          () {
-        // Arrange
-        when(() => mockUserPrefs.getCurrentUser()).thenReturn(tUserDto);
+        'should read from UserPrefs and update _currentUser when _currentUser is null and prefs has user',
+        () {
+          // Arrange
+          when(() => mockUserPrefs.getCurrentUser()).thenReturn(tUserDto);
 
-        // Act
-        final result = userSessionManager.getCurrentUser();
+          // Act
+          final result = userSessionManager.getCurrentUser();
 
-        // Assert
-        expect(result, equals(const Some(tUser)));
-        expect(userSessionManager.currentUser, equals(tUser));
-        verify(() => mockUserPrefs.getCurrentUser()).called(1);
-        verifyNoMoreInteractions(mockUserPrefs);
-      });
+          // Assert
+          expect(result, equals(const Some(tUser)));
+          expect(userSessionManager.currentUser, equals(tUser));
+          verify(() => mockUserPrefs.getCurrentUser()).called(1);
+          verifyNoMoreInteractions(mockUserPrefs);
+        },
+      );
 
       test(
-          'should return none when _currentUser is null and UserPrefs returns null',
-          () {
-        // Arrange
-        when(() => mockUserPrefs.getCurrentUser()).thenReturn(null);
+        'should return none when _currentUser is null and UserPrefs returns null',
+        () {
+          // Arrange
+          when(() => mockUserPrefs.getCurrentUser()).thenReturn(null);
 
-        // Act
-        final result = userSessionManager.getCurrentUser();
+          // Act
+          final result = userSessionManager.getCurrentUser();
 
-        // Assert
-        expect(result, equals(const None()));
-        expect(userSessionManager.currentUser, isNull);
-        verify(() => mockUserPrefs.getCurrentUser()).called(1);
-        verifyNoMoreInteractions(mockUserPrefs);
-      });
+          // Assert
+          expect(result, equals(const None()));
+          expect(userSessionManager.currentUser, isNull);
+          verify(() => mockUserPrefs.getCurrentUser()).called(1);
+          verifyNoMoreInteractions(mockUserPrefs);
+        },
+      );
 
       test('should return none when UserPrefs throws an exception', () {
         // Arrange
@@ -175,13 +257,16 @@ void main() {
     });
 
     group('dispose', () {
-      test('should close the user stream', () async {
+      test('should close both user stream and auth state stream', () async {
         // Act
         userSessionManager.dispose();
 
         // Assert
-        // A closed stream will yield the initial currentUser (null) and then complete immediately.
         expect(userSessionManager.userStream, emitsInOrder([null, emitsDone]));
+        expect(
+          userSessionManager.authStateStream,
+          emitsInOrder([false, emitsDone]),
+        );
       });
     });
   });

@@ -139,7 +139,7 @@ class _MainBackground extends StatelessWidget {
               ),
             ),
           ),
-      
+
           Positioned(
             bottom: -650,
             left: 50,

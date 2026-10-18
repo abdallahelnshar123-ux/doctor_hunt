@@ -2,20 +2,21 @@ import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/patient_info.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/auth_user_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/auth_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/patient_info.dart';
 
 class MockAuthService extends Mock implements AuthService {}
+
 class MockUserFirestoreService extends Mock implements UserFirestoreService {}
 
 void main() {
@@ -53,40 +54,45 @@ void main() {
   setUp(() {
     mockAuthService = MockAuthService();
     mockFirestoreService = MockUserFirestoreService();
-    repository = AuthRepository(
-      mockAuthService,
-      mockFirestoreService,
-    );
+    repository = AuthRepository(mockAuthService, mockFirestoreService);
   });
 
   group('continueWithGoogle', () {
-    test('should create new user, save to firestore, and return MyUser when user does not exist in database', () async {
-      // Arrange
-      when(() => mockAuthService.continueWithGoogle())
-          .thenAnswer((_) async => tAuthUserDto);
-      when(() => mockFirestoreService.getUser(tAuthUserDto.id))
-          .thenAnswer((_) async => null);
-      when(() => mockFirestoreService.addUser(any()))
-          .thenAnswer((_) async {});
+    test(
+      'should create new user, save to firestore, and return MyUser when user does not exist in database',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.continueWithGoogle(),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenAnswer((_) async => null);
+        when(
+          () => mockFirestoreService.addUser(any()),
+        ).thenAnswer((_) async {});
 
-      // Act
-      final result = await repository.continueWithGoogle();
+        // Act
+        final result = await repository.continueWithGoogle();
 
-      // Assert
-      expect(result, Right(tMyUser));
-      verify(() => mockAuthService.continueWithGoogle()).called(1);
-      verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
-      verify(() => mockFirestoreService.addUser(tMyUserDto)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyNoMoreInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Right(tMyUser));
+        verify(() => mockAuthService.continueWithGoogle()).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verify(() => mockFirestoreService.addUser(tMyUserDto)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
 
     test('should return MyUser when user already exists in database', () async {
       // Arrange
-      when(() => mockAuthService.continueWithGoogle())
-          .thenAnswer((_) async => tAuthUserDto);
-      when(() => mockFirestoreService.getUser(tAuthUserDto.id))
-          .thenAnswer((_) async => tMyUserDto);
+      when(
+        () => mockAuthService.continueWithGoogle(),
+      ).thenAnswer((_) async => tAuthUserDto);
+      when(
+        () => mockFirestoreService.getUser(tAuthUserDto.id),
+      ).thenAnswer((_) async => tMyUserDto);
 
       // Act
       final result = await repository.continueWithGoogle();
@@ -99,37 +105,91 @@ void main() {
       verifyNoMoreInteractions(mockFirestoreService);
     });
 
-    test('should return Failure when AuthService throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Google Sign In Failed');
-      when(() => mockAuthService.continueWithGoogle())
-          .thenThrow(tException);
+    test(
+      'should return Failure when AuthService throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Google Sign In Failed');
+        when(() => mockAuthService.continueWithGoogle()).thenThrow(tException);
 
-      // Act
-      final result = await repository.continueWithGoogle();
+        // Act
+        final result = await repository.continueWithGoogle();
 
-      // Assert
-      expect(result, const Left(ServerFailure('Google Sign In Failed')));
-      verify(() => mockAuthService.continueWithGoogle()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Google Sign In Failed')));
+        verify(() => mockAuthService.continueWithGoogle()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when an unexpected error occurs', () async {
-      // Arrange
-      final tException = Exception('Unexpected error');
-      when(() => mockAuthService.continueWithGoogle())
-          .thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when an unexpected error occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Unexpected error');
+        when(() => mockAuthService.continueWithGoogle()).thenThrow(tException);
 
-      // Act
-      final result = await repository.continueWithGoogle();
+        // Act
+        final result = await repository.continueWithGoogle();
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.continueWithGoogle()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockAuthService.continueWithGoogle()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
+
+    test(
+      'should return Failure when FirestoreService.getUser throws AppException',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.continueWithGoogle(),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenThrow(const ServerException(message: 'Database error'));
+
+        // Act
+        final result = await repository.continueWithGoogle();
+
+        // Assert
+        expect(result, const Left(ServerFailure('Database error')));
+        verify(() => mockAuthService.continueWithGoogle()).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
+
+    test(
+      'should return Failure when FirestoreService.addUser throws AppException',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.continueWithGoogle(),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenAnswer((_) async => null);
+        when(
+          () => mockFirestoreService.addUser(any()),
+        ).thenThrow(const ServerException(message: 'Insert failed'));
+
+        // Act
+        final result = await repository.continueWithGoogle();
+
+        // Assert
+        expect(result, const Left(ServerFailure('Insert failed')));
+        verify(() => mockAuthService.continueWithGoogle()).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verify(() => mockFirestoreService.addUser(tMyUserDto)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('registerWithEmailAndPassword', () {
@@ -153,190 +213,311 @@ void main() {
 
     final tRegisterUserDto = tRegisterUser.toMyUserDto();
 
-    test('should add user to firestore, and return MyUser when registration is successful', () async {
-      // Arrange
-      when(() => mockAuthService.registerWithEmailAndPassword(
+    test(
+      'should add user to firestore, and return MyUser when registration is successful',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenAnswer((_) async => tRegisterAuthUserDto);
-      when(() => mockFirestoreService.addUser(any()))
-          .thenAnswer((_) async {});
+          ),
+        ).thenAnswer((_) async => tRegisterAuthUserDto);
+        when(
+          () => mockFirestoreService.addUser(any()),
+        ).thenAnswer((_) async {});
 
-      // Act
-      final result = await repository.registerWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-        name: tName,
-      );
+        // Act
+        final result = await repository.registerWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+          name: tName,
+        );
 
-      // Assert
-      expect(result, const Right(tRegisterUser));
-      verify(() => mockAuthService.registerWithEmailAndPassword(
+        // Assert
+        expect(result, const Right(tRegisterUser));
+        verify(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verify(() => mockFirestoreService.addUser(tRegisterUserDto)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyNoMoreInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verify(() => mockFirestoreService.addUser(tRegisterUserDto)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return Failure when AuthService throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Email already in use');
-      when(() => mockAuthService.registerWithEmailAndPassword(
+    test(
+      'should return Failure when AuthService throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Email already in use');
+        when(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenThrow(tException);
+          ),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.registerWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-        name: tName,
-      );
+        // Act
+        final result = await repository.registerWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+          name: tName,
+        );
 
-      // Assert
-      expect(result, const Left(ServerFailure('Email already in use')));
-      verify(() => mockAuthService.registerWithEmailAndPassword(
+        // Assert
+        expect(result, const Left(ServerFailure('Email already in use')));
+        verify(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Registration failed');
-      when(() => mockAuthService.registerWithEmailAndPassword(
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Registration failed');
+        when(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenThrow(tException);
+          ),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.registerWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-        name: tName,
-      );
+        // Act
+        final result = await repository.registerWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+          name: tName,
+        );
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.registerWithEmailAndPassword(
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(
+          () => mockAuthService.registerWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
+
+    test(
+      'should return Failure when FirestoreService.addUser throws AppException',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.registerWithEmailAndPassword(
+            email: tEmail,
+            password: tPassword,
+          ),
+        ).thenAnswer((_) async => tRegisterAuthUserDto);
+        when(
+          () => mockFirestoreService.addUser(any()),
+        ).thenThrow(const ServerException(message: 'Save user failed'));
+
+        // Act
+        final result = await repository.registerWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+          name: tName,
+        );
+
+        // Assert
+        expect(result, const Left(ServerFailure('Save user failed')));
+        verify(
+          () => mockAuthService.registerWithEmailAndPassword(
+            email: tEmail,
+            password: tPassword,
+          ),
+        ).called(1);
+        verify(() => mockFirestoreService.addUser(tRegisterUserDto)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('loginWithEmailAndPassword', () {
     const tEmail = 'test@example.com';
     const tPassword = 'password123';
 
-    test('should fetch user from firestore, and return MyUser when login is successful', () async {
-      // Arrange
-      when(() => mockAuthService.loginWithEmailAndPassword(
+    test(
+      'should fetch user from firestore, and return MyUser when login is successful',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenAnswer((_) async => tAuthUserDto);
-      when(() => mockFirestoreService.getUser(tAuthUserDto.id))
-          .thenAnswer((_) async => tMyUserDto);
+          ),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenAnswer((_) async => tMyUserDto);
 
-      // Act
-      final result = await repository.loginWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(result, Right(tMyUser));
-      verify(() => mockAuthService.loginWithEmailAndPassword(
+        // Assert
+        expect(result, Right(tMyUser));
+        verify(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyNoMoreInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnauthorizedFailure when user is not found in database', () async {
-      // Arrange
-      when(() => mockAuthService.loginWithEmailAndPassword(
+    test(
+      'should return UnauthorizedFailure when user is not found in database',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenAnswer((_) async => tAuthUserDto);
-      when(() => mockFirestoreService.getUser(tAuthUserDto.id))
-          .thenAnswer((_) async => null);
+          ),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenAnswer((_) async => null);
 
-      // Act
-      final result = await repository.loginWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(
-        result,
-        Left(UnauthorizedFailure(t.errors.some_thing_went_wrong)),
-      );
-      verify(() => mockAuthService.loginWithEmailAndPassword(
+        // Assert
+        expect(
+          result,
+          Left(UnauthorizedFailure(t.errors.some_thing_went_wrong)),
+        );
+        verify(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyNoMoreInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return Failure when AuthService throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Invalid credentials');
-      when(() => mockAuthService.loginWithEmailAndPassword(
+    test(
+      'should return Failure when AuthService throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Invalid credentials');
+        when(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenThrow(tException);
+          ),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.loginWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(result, const Left(ServerFailure('Invalid credentials')));
-      verify(() => mockAuthService.loginWithEmailAndPassword(
+        // Assert
+        expect(result, const Left(ServerFailure('Invalid credentials')));
+        verify(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Login failed');
-      when(() => mockAuthService.loginWithEmailAndPassword(
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Login failed');
+        when(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).thenThrow(tException);
+          ),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.loginWithEmailAndPassword(
-        email: tEmail,
-        password: tPassword,
-      );
+        // Act
+        final result = await repository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        );
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.loginWithEmailAndPassword(
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(
+          () => mockAuthService.loginWithEmailAndPassword(
             email: tEmail,
             password: tPassword,
-          )).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+          ),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
+
+    test(
+      'should return Failure when FirestoreService.getUser throws AppException',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.loginWithEmailAndPassword(
+            email: tEmail,
+            password: tPassword,
+          ),
+        ).thenAnswer((_) async => tAuthUserDto);
+        when(
+          () => mockFirestoreService.getUser(tAuthUserDto.id),
+        ).thenThrow(const ServerException(message: 'Fetch user failed'));
+
+        // Act
+        final result = await repository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        );
+
+        // Assert
+        expect(result, const Left(ServerFailure('Fetch user failed')));
+        verify(
+          () => mockAuthService.loginWithEmailAndPassword(
+            email: tEmail,
+            password: tPassword,
+          ),
+        ).called(1);
+        verify(() => mockFirestoreService.getUser(tAuthUserDto.id)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyNoMoreInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('logout', () {
@@ -354,35 +535,41 @@ void main() {
       verifyZeroInteractions(mockFirestoreService);
     });
 
-    test('should return Failure when AuthService logout throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Logout failed');
-      when(() => mockAuthService.logout()).thenThrow(tException);
+    test(
+      'should return Failure when AuthService logout throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Logout failed');
+        when(() => mockAuthService.logout()).thenThrow(tException);
 
-      // Act
-      final result = await repository.logout();
+        // Act
+        final result = await repository.logout();
 
-      // Assert
-      expect(result, const Left(ServerFailure('Logout failed')));
-      verify(() => mockAuthService.logout()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Logout failed')));
+        verify(() => mockAuthService.logout()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Logout unexpected error');
-      when(() => mockAuthService.logout()).thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Logout unexpected error');
+        when(() => mockAuthService.logout()).thenThrow(tException);
 
-      // Act
-      final result = await repository.logout();
+        // Act
+        final result = await repository.logout();
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.logout()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockAuthService.logout()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('deleteAuthUser', () {
@@ -400,135 +587,177 @@ void main() {
       verifyZeroInteractions(mockFirestoreService);
     });
 
-    test('should return Failure when deleteAccount throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Delete failed');
-      when(() => mockAuthService.deleteAccount()).thenThrow(tException);
+    test(
+      'should return Failure when deleteAccount throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Delete failed');
+        when(() => mockAuthService.deleteAccount()).thenThrow(tException);
 
-      // Act
-      final result = await repository.deleteAuthUser();
+        // Act
+        final result = await repository.deleteAuthUser();
 
-      // Assert
-      expect(result, const Left(ServerFailure('Delete failed')));
-      verify(() => mockAuthService.deleteAccount()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Delete failed')));
+        verify(() => mockAuthService.deleteAccount()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Delete error');
-      when(() => mockAuthService.deleteAccount()).thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Delete error');
+        when(() => mockAuthService.deleteAccount()).thenThrow(tException);
 
-      // Act
-      final result = await repository.deleteAuthUser();
+        // Act
+        final result = await repository.deleteAuthUser();
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.deleteAccount()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockAuthService.deleteAccount()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('reAuthenticateWithEmailAndPassword', () {
     const tPassword = 'password123';
 
-    test('should return user ID when re-authentication is successful', () async {
-      // Arrange
-      when(() => mockAuthService.reAuthenticate(password: tPassword))
-          .thenAnswer((_) async => tAuthUserDto);
+    test(
+      'should return user ID when re-authentication is successful',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).thenAnswer((_) async => tAuthUserDto);
 
-      // Act
-      final result = await repository.reAuthenticateWithEmailAndPassword(tPassword);
+        // Act
+        final result = await repository.reAuthenticateWithEmailAndPassword(
+          tPassword,
+        );
 
-      // Assert
-      expect(result, const Right('user_123'));
-      verify(() => mockAuthService.reAuthenticate(password: tPassword)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Right('user_123'));
+        verify(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return Failure when reAuthenticate throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Re-auth failed');
-      when(() => mockAuthService.reAuthenticate(password: tPassword))
-          .thenThrow(tException);
+    test(
+      'should return Failure when reAuthenticate throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Re-auth failed');
+        when(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.reAuthenticateWithEmailAndPassword(tPassword);
+        // Act
+        final result = await repository.reAuthenticateWithEmailAndPassword(
+          tPassword,
+        );
 
-      // Assert
-      expect(result, const Left(ServerFailure('Re-auth failed')));
-      verify(() => mockAuthService.reAuthenticate(password: tPassword)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Re-auth failed')));
+        verify(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Re-auth error');
-      when(() => mockAuthService.reAuthenticate(password: tPassword))
-          .thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Re-auth error');
+        when(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.reAuthenticateWithEmailAndPassword(tPassword);
+        // Act
+        final result = await repository.reAuthenticateWithEmailAndPassword(
+          tPassword,
+        );
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.reAuthenticate(password: tPassword)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(
+          () => mockAuthService.reAuthenticate(password: tPassword),
+        ).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('reAuthenticateWithGoogle', () {
-    test('should return user ID when Google re-authentication is successful', () async {
-      // Arrange
-      when(() => mockAuthService.reAuthenticateWithGoogle())
-          .thenAnswer((_) async => tAuthUserDto);
+    test(
+      'should return user ID when Google re-authentication is successful',
+      () async {
+        // Arrange
+        when(
+          () => mockAuthService.reAuthenticateWithGoogle(),
+        ).thenAnswer((_) async => tAuthUserDto);
 
-      // Act
-      final result = await repository.reAuthenticateWithGoogle();
+        // Act
+        final result = await repository.reAuthenticateWithGoogle();
 
-      // Assert
-      expect(result, const Right('user_123'));
-      verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Right('user_123'));
+        verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return Failure when reAuthenticateWithGoogle throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Google Re-auth failed');
-      when(() => mockAuthService.reAuthenticateWithGoogle())
-          .thenThrow(tException);
+    test(
+      'should return Failure when reAuthenticateWithGoogle throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Google Re-auth failed');
+        when(
+          () => mockAuthService.reAuthenticateWithGoogle(),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.reAuthenticateWithGoogle();
+        // Act
+        final result = await repository.reAuthenticateWithGoogle();
 
-      // Assert
-      expect(result, const Left(ServerFailure('Google Re-auth failed')));
-      verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Google Re-auth failed')));
+        verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Google Re-auth error');
-      when(() => mockAuthService.reAuthenticateWithGoogle())
-          .thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Google Re-auth error');
+        when(
+          () => mockAuthService.reAuthenticateWithGoogle(),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.reAuthenticateWithGoogle();
+        // Act
+        final result = await repository.reAuthenticateWithGoogle();
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockAuthService.reAuthenticateWithGoogle()).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
   });
 
   group('toggleFavoriteDoctor', () {
@@ -553,53 +782,62 @@ void main() {
 
     test('should add doctorId to favorites if it is not present', () async {
       // Arrange
-      when(() => mockFirestoreService.updateUser(any()))
-          .thenAnswer((_) async {});
+      when(
+        () => mockFirestoreService.updateUser(any()),
+      ).thenAnswer((_) async {});
 
       // Act
-      final result = await repository.toggleFavoriteDoctor(tDoctorId, tUserWithoutFavs);
+      final result = await repository.toggleFavoriteDoctor(
+        tDoctorId,
+        tUserWithoutFavs,
+      );
 
       // Assert
       expect(result.isRight(), isTrue);
-      result.fold(
-        (l) => fail('Should not be left'),
-        (r) {
-          expect(r.patientInfo?.favDoctors, contains(tDoctorId));
-        },
-      );
+      result.fold((l) => fail('Should not be left'), (r) {
+        expect(r.patientInfo?.favDoctors, contains(tDoctorId));
+      });
       verify(() => mockFirestoreService.updateUser(any())).called(1);
       verifyNoMoreInteractions(mockFirestoreService);
       verifyZeroInteractions(mockAuthService);
     });
 
-    test('should remove doctorId from favorites if it is already present', () async {
-      // Arrange
-      when(() => mockFirestoreService.updateUser(any()))
-          .thenAnswer((_) async {});
+    test(
+      'should remove doctorId from favorites if it is already present',
+      () async {
+        // Arrange
+        when(
+          () => mockFirestoreService.updateUser(any()),
+        ).thenAnswer((_) async {});
 
-      // Act
-      final result = await repository.toggleFavoriteDoctor(tDoctorId, tUserWithFavs);
+        // Act
+        final result = await repository.toggleFavoriteDoctor(
+          tDoctorId,
+          tUserWithFavs,
+        );
 
-      // Assert
-      expect(result.isRight(), isTrue);
-      result.fold(
-        (l) => fail('Should not be left'),
-        (r) {
+        // Assert
+        expect(result.isRight(), isTrue);
+        result.fold((l) => fail('Should not be left'), (r) {
           expect(r.patientInfo?.favDoctors, isNot(contains(tDoctorId)));
-        },
-      );
-      verify(() => mockFirestoreService.updateUser(any())).called(1);
-      verifyNoMoreInteractions(mockFirestoreService);
-      verifyZeroInteractions(mockAuthService);
-    });
+        });
+        verify(() => mockFirestoreService.updateUser(any())).called(1);
+        verifyNoMoreInteractions(mockFirestoreService);
+        verifyZeroInteractions(mockAuthService);
+      },
+    );
 
     test('should return Failure when updateUser throws AppException', () async {
       // Arrange
-      when(() => mockFirestoreService.updateUser(any()))
-          .thenThrow(const ServerException(message: 'Update failed'));
+      when(
+        () => mockFirestoreService.updateUser(any()),
+      ).thenThrow(const ServerException(message: 'Update failed'));
 
       // Act
-      final result = await repository.toggleFavoriteDoctor(tDoctorId, tUserWithoutFavs);
+      final result = await repository.toggleFavoriteDoctor(
+        tDoctorId,
+        tUserWithoutFavs,
+      );
 
       // Assert
       expect(result, const Left(ServerFailure('Update failed')));
@@ -608,21 +846,62 @@ void main() {
       verifyZeroInteractions(mockAuthService);
     });
 
-    test('should return UnexpectedFailure when updateUser throws generic Exception', () async {
-      // Arrange
-      final tException = Exception('Generic error');
-      when(() => mockFirestoreService.updateUser(any()))
-          .thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when updateUser throws generic Exception',
+      () async {
+        // Arrange
+        final tException = Exception('Generic error');
+        when(
+          () => mockFirestoreService.updateUser(any()),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.toggleFavoriteDoctor(tDoctorId, tUserWithoutFavs);
+        // Act
+        final result = await repository.toggleFavoriteDoctor(
+          tDoctorId,
+          tUserWithoutFavs,
+        );
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockFirestoreService.updateUser(any())).called(1);
-      verifyNoMoreInteractions(mockFirestoreService);
-      verifyZeroInteractions(mockAuthService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockFirestoreService.updateUser(any())).called(1);
+        verifyNoMoreInteractions(mockFirestoreService);
+        verifyZeroInteractions(mockAuthService);
+      },
+    );
+
+    test(
+      'should initialize patientInfo and add doctorId when current.patientInfo is null',
+      () async {
+        // Arrange
+        const tUserWithNullPatientInfo = MyUser(
+          id: 'user_123',
+          email: 'test@example.com',
+          name: 'Test User',
+          provider: UserAuthProvider.google,
+          role: UserRoles.patient,
+          patientInfo: null,
+        );
+
+        when(
+          () => mockFirestoreService.updateUser(any()),
+        ).thenAnswer((_) async {});
+
+        // Act
+        final result = await repository.toggleFavoriteDoctor(
+          tDoctorId,
+          tUserWithNullPatientInfo,
+        );
+
+        // Assert
+        expect(result.isRight(), isTrue);
+        result.fold((l) => fail('Should not be left'), (r) {
+          expect(r.patientInfo?.favDoctors, equals([tDoctorId]));
+        });
+        verify(() => mockFirestoreService.updateUser(any())).called(1);
+        verifyNoMoreInteractions(mockFirestoreService);
+        verifyZeroInteractions(mockAuthService);
+      },
+    );
   });
 
   group('resetPassword', () {
@@ -630,8 +909,9 @@ void main() {
 
     test('should call resetPassword on AuthService when successful', () async {
       // Arrange
-      when(() => mockAuthService.resetPassword(email: tEmail))
-          .thenAnswer((_) async {});
+      when(
+        () => mockAuthService.resetPassword(email: tEmail),
+      ).thenAnswer((_) async {});
 
       // Act
       final result = await repository.resetPassword(email: tEmail);
@@ -643,36 +923,44 @@ void main() {
       verifyZeroInteractions(mockFirestoreService);
     });
 
-    test('should return Failure when resetPassword throws AppException', () async {
-      // Arrange
-      const tException = ServerException(message: 'Reset password failed');
-      when(() => mockAuthService.resetPassword(email: tEmail))
-          .thenThrow(tException);
+    test(
+      'should return Failure when resetPassword throws AppException',
+      () async {
+        // Arrange
+        const tException = ServerException(message: 'Reset password failed');
+        when(
+          () => mockAuthService.resetPassword(email: tEmail),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.resetPassword(email: tEmail);
+        // Act
+        final result = await repository.resetPassword(email: tEmail);
 
-      // Assert
-      expect(result, const Left(ServerFailure('Reset password failed')));
-      verify(() => mockAuthService.resetPassword(email: tEmail)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, const Left(ServerFailure('Reset password failed')));
+        verify(() => mockAuthService.resetPassword(email: tEmail)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
 
-    test('should return UnexpectedFailure when unexpected exception occurs', () async {
-      // Arrange
-      final tException = Exception('Reset password error');
-      when(() => mockAuthService.resetPassword(email: tEmail))
-          .thenThrow(tException);
+    test(
+      'should return UnexpectedFailure when unexpected exception occurs',
+      () async {
+        // Arrange
+        final tException = Exception('Reset password error');
+        when(
+          () => mockAuthService.resetPassword(email: tEmail),
+        ).thenThrow(tException);
 
-      // Act
-      final result = await repository.resetPassword(email: tEmail);
+        // Act
+        final result = await repository.resetPassword(email: tEmail);
 
-      // Assert
-      expect(result, Left(UnexpectedFailure(tException.toString())));
-      verify(() => mockAuthService.resetPassword(email: tEmail)).called(1);
-      verifyNoMoreInteractions(mockAuthService);
-      verifyZeroInteractions(mockFirestoreService);
-    });
+        // Assert
+        expect(result, Left(UnexpectedFailure(tException.toString())));
+        verify(() => mockAuthService.resetPassword(email: tEmail)).called(1);
+        verifyNoMoreInteractions(mockAuthService);
+        verifyZeroInteractions(mockFirestoreService);
+      },
+    );
   });
 }

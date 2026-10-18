@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
+import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,11 @@ class RegisterScreen extends HookWidget {
       child: AppScaffold(
         body: Column(
           children: [
+            MainAppBar(
+              onPressed: () {
+                const ChooseRoleRoute().go(context);
+              },
+            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -82,7 +88,7 @@ class RegisterScreen extends HookWidget {
                     spacing: 8,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      SizedBox(height: 150),
+                      SizedBox(height: 100),
                       FittedBox(
                         fit: .scaleDown,
                         child: Text(

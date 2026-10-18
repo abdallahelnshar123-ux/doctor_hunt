@@ -14,28 +14,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSessionManager _userSessionManager;
 
   AuthBloc(this._repository, this._loginUseCase, this._userSessionManager)
-    : super(_userSessionManager.isLoggedIn
-      ? UserAuthenticatedState(_userSessionManager.currentUser!)
-      : UserUnauthenticatedState(),) {
-    // on<CheckAuthStatusRequested>(_onCheckAuthStatusRequested);
+    : super(
+        _userSessionManager.isLoggedIn
+            ? UserAuthenticatedState(_userSessionManager.currentUser!)
+            : UserUnauthenticatedState(),
+      ) {
     on<LoginRequested>(_onLoginRequested);
     on<RegisterRequested>(_onRegisterRequested);
     on<ContinueWithGoogleRequested>(_onContinueWithGoogleRequested);
     on<LogoutRequested>(_onLogoutRequested);
     on<ResetPasswordRequested>(_onResetPasswordRequested);
-    // add(CheckAuthStatusRequested());
   }
-
-  // void _onCheckAuthStatusRequested(
-  //   CheckAuthStatusRequested event,
-  //   Emitter<AuthState> emit,
-  // ) {
-  //   final result = _userSessionManager.getCurrentUser();
-  //   result.fold(
-  //     () => emit(UserUnauthenticatedState()),
-  //     (user) => emit(UserAuthenticatedState(user)),
-  //   );
-  // }
 
   Future<void> _onLoginRequested(
     LoginRequested event,
@@ -72,7 +61,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(RegisterWithEmailPasswordErrorState(failure.message));
       },
       (user) {
-        _userSessionManager.updateUser(user);
         emit(RegisterWithEmailPasswordSuccessState());
       },
     );

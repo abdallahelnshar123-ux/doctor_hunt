@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
+import '../../../../../core/extensions/context_extensions.dart';
+import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../data/models/user/my_user.dart';
@@ -46,7 +48,11 @@ class AdminLoginScreen extends HookWidget {
         resizeToAvoidBottomInset: true,
         body: Column(
           children: [
-            MainAppBar(),
+            MainAppBar(
+              onPressed: () {
+                const ChooseRoleRoute().go(context);
+              },
+            ),
             Expanded(
               child: SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -99,6 +105,7 @@ class AdminLoginScreen extends HookWidget {
       ),
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
+        const ForgotPasswordRoute().push(context);
       },
       child: Text(
         t.auth.forgot_password,
@@ -114,7 +121,7 @@ class AdminLoginScreen extends HookWidget {
     TextEditingController passwordController,
   ) {
     return CustomElevatedButton(
-      buttonWidth: MediaQuery.sizeOf(context).width - 80,
+      buttonWidth: context.width - 80,
       onPressed: () {
         if (formKey.currentState!.validate()) {
           context.read<AuthBloc>().add(

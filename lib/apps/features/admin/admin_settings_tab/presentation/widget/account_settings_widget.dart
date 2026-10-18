@@ -33,6 +33,9 @@ class AccountSettingsWidget extends StatelessWidget {
           ),
           _buildDivider(),
           _buildSettingsCard(
+            onTap: () {
+              const ForgotPasswordRoute().push(context);
+            },
             context,
             title: t.admin.settings.change_password,
             subtitle: t.admin.settings.update_master_security_credentials,

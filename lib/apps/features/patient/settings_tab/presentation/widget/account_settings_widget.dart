@@ -5,6 +5,7 @@ class AccountSettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
     return Column(
       spacing: 5,
       crossAxisAlignment: .start,
@@ -14,18 +15,26 @@ class AccountSettingsWidget extends StatelessWidget {
           style: context.medium16.textSecondary.rubik,
         ),
         SizedBox(height: 5),
-        _buildSettingsCard(
-          context,
-          title: t.settings.change_password,
-          icon: Icons.lock,
-          trailing: Icon(
-            Icons.arrow_forward_ios_rounded,
-            color: AppColors.textSecondary,
-            weight: 0.01,
-          ),
-          backgroundColor: AppColors.settingsRed,
-        ),
-        _buildDivider(),
+        ?user?.provider == UserAuthProvider.emailPassword
+            ? _buildSettingsCard(
+                onTap: () {
+                  const ForgotPasswordRoute().push(context);
+                },
+                context,
+                title: t.settings.change_password,
+                icon: Icons.lock,
+                trailing: Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: AppColors.textSecondary,
+                  weight: 0.01,
+                ),
+                backgroundColor: AppColors.settingsRed,
+              )
+            : null,
+        ?user?.provider == UserAuthProvider.emailPassword
+            ? _buildDivider()
+            : null,
+
         _buildSettingsCard(
           context,
           title: t.settings.notifications,

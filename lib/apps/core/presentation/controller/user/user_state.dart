@@ -14,9 +14,10 @@ class UserState extends Equatable {
     MyUser? user,
     String? favoriteError,
     bool clearError = false,
+    bool clearUser = false,
   }) {
     return UserState(
-      user: user ?? this.user,
+      user: clearUser ? null : (user ?? this.user),
       favoriteError: clearError ? null : (favoriteError ?? this.favoriteError),
     );
   }

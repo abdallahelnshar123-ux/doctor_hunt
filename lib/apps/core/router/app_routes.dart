@@ -12,6 +12,7 @@ import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/s
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -72,6 +73,16 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const RegisterScreen();
+  }
+}
+
+@TypedGoRoute<ForgotPasswordRoute>(path: '/forget_password')
+class ForgotPasswordRoute extends GoRouteData with $ForgotPasswordRoute {
+  const ForgotPasswordRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ForgotPasswordScreen();
   }
 }
 
@@ -171,7 +182,10 @@ class PopularDoctorsRoute extends GoRouteData with $PopularDoctorsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const PopularDoctorScreen();
+    return BlocProvider(
+      create: (context) => getIt<PatientDoctorsBloc>(),
+      child: PopularDoctorScreen(),
+    );
   }
 }
 
@@ -335,11 +349,12 @@ GoRouter createRouter({
   required UserPrefs userPrefs,
   String initialLocation = '/',
 }) {
-
   return GoRouter(
     routes: $appRoutes,
     initialLocation: initialLocation,
-    refreshListenable: GoRouterRefreshStream(userSessionManager.authStateStream),
+    refreshListenable: GoRouterRefreshStream(
+      userSessionManager.authStateStream,
+    ),
     redirect: (context, state) {
       final user = userSessionManager.currentUser;
       final isLoggedIn = userSessionManager.isLoggedIn;

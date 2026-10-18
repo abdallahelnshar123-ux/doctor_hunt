@@ -45,8 +45,8 @@ class _TextFormWidgetState extends State<TextFormWidget> {
         title: Text(widget.label),
         titleTextStyle: context.medium10.brandPrimary.rubik,
         subtitle: CustomTextFormField(
-          hintStyle: context.light10.textSecondary.rubik ,
-          hintText: widget.hintText ,
+          hintStyle: context.light10.textSecondary.rubik,
+          hintText: widget.hintText,
           readOnly: _readOnly,
           focusNode: _focusNode,
           borderSideColor: AppColors.transparent,

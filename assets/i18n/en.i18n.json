@@ -16,6 +16,14 @@
     "google": "Google",
     "youMustAgreeToTerms": "you must agree with the Terms of Service & Privacy Policy"
   },
+  "forgotPassword": {
+    "title": "Forgot Password",
+    "email": "Email",
+    "description": "Enter your email address and we'll send you a link to reset your password.",
+    "sendLink": "Send Link",
+    "backToLogin": "Back to Login",
+    "successDialogMessage": "We've sent you an email to reset your password. Please check your inbox or spam folder."
+  },
   "onboarding": {
     "next": "Next",
     "skip": "Skip",
@@ -246,10 +254,10 @@
       "settings": "Settings"
     },
     "appointmentDetails": {
-      "title" : "Appointment Details",
-      "patient" : "Patient",
-      "doctor" : "Doctor",
-      "appointment" : "Appointment"
+      "title": "Appointment Details",
+      "patient": "Patient",
+      "doctor": "Doctor",
+      "appointment": "Appointment"
     },
     "doctorsTab": {
       "addDoctor": "Add doctor",
@@ -276,7 +284,6 @@
       "date": "Date",
       "fee": "Fee",
       "markAsCompleted": "Mark as completed"
-
     },
     "settings": {
       "adminProfile": "Admin Profile",
@@ -360,7 +367,7 @@
     "userNotLoggedIn": "User not logged in",
     "failed_to_update_appointment_status": "Failed to update appointment status ${E}"
   },
-  "validators" : {
+  "validators": {
     "thisFieldIsRequired": "This field is required",
     "emailIsRequired": "Email is required",
     "invalidEmailFormat": "Invalid email format",
@@ -376,6 +383,6 @@
     "cancelled": "cancelled",
     "invalidCredential": "invalid-credential",
     "emailAlreadyInUse": "email-already-in-use",
-    "cancelledByUser" : " [16] Cancelled by user."
+    "cancelledByUser": " [16] Cancelled by user."
   }
 }

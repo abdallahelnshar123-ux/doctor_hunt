@@ -17,6 +17,7 @@ import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 
 part '../widget/details_widget.dart';
+
 part '../widget/doctor_details_widget.dart';
 
 class AdminDoctorDetailsScreen extends HookWidget {

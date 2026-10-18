@@ -21,7 +21,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
 
-
     _listenToUserSession();
     // _userSubscription = _userSessionManager.userStream.listen((user) {
     //   add(UserStreamUpdatedEvent(user));
@@ -29,7 +28,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   void _listenToUserSession() {
-    _userSessionManager.userStream.listen((user) {
+    _userSubscription = _userSessionManager.userStream.listen((user) {
       if (!isClosed) {
         add(UserStreamUpdatedEvent(user));
       }
@@ -42,7 +41,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserStreamUpdatedEvent event,
     Emitter<UserState> emit,
   ) {
-    emit(state.copyWith(user: event.user, clearError: true));
+    emit(state.copyWith(
+      user: event.user,
+      clearUser: event.user == null,
+      clearError: true,
+    ));
   }
 
   Future<void> _onToggleFavoriteDoctor(
