@@ -48,7 +48,7 @@ void main() {
     FirestoreConstants.role: 'patient',
     FirestoreConstants.phone: null,
     FirestoreConstants.patientInfo: {
-      'fav_doctors': ['doc1', 'doc2']
+      'fav_doctors': ['doc1', 'doc2'],
     },
     FirestoreConstants.adminInfo: <String, dynamic>{},
   };
@@ -81,17 +81,14 @@ void main() {
         },
       );
 
-      test(
-        'should parse patientInfo and adminInfo properly if provided',
-        () {
-          final result = MyUserDto.fromFireStore(tMapWithInfo);
+      test('should parse patientInfo and adminInfo properly if provided', () {
+        final result = MyUserDto.fromFireStore(tMapWithInfo);
 
-          expect(result, equals(tMyUserDtoWithInfo));
-          expect(result.patientInfo, isNotNull);
-          expect(result.adminInfo, isNotNull);
-          expect(result.patientInfo!.favDoctors, equals(['doc1', 'doc2']));
-        },
-      );
+        expect(result, equals(tMyUserDtoWithInfo));
+        expect(result.patientInfo, isNotNull);
+        expect(result.adminInfo, isNotNull);
+        expect(result.patientInfo!.favDoctors, equals(['doc1', 'doc2']));
+      });
 
       test('should return a valid MyUserDto via fromJson alias', () {
         final result = MyUserDto.fromJson(tMap);
@@ -147,6 +144,14 @@ void main() {
         expect(result.image, isNull);
         expect(result.role, isNull);
       });
+
+      test('should parse non-null phone correctly', () {
+        final result = MyUserDto.fromFireStore({
+          FirestoreConstants.phone: '+1234567890',
+        });
+
+        expect(result.phone, equals('+1234567890'));
+      });
     });
 
     group('toFireStore / toJson', () {
@@ -156,11 +161,14 @@ void main() {
         expect(result, equals(tMap));
       });
 
-      test('should serialize patientInfo and adminInfo correctly if present', () {
-        final result = tMyUserDtoWithInfo.toFireStore();
+      test(
+        'should serialize patientInfo and adminInfo correctly if present',
+        () {
+          final result = tMyUserDtoWithInfo.toFireStore();
 
-        expect(result, equals(tMapWithInfo));
-      });
+          expect(result, equals(tMapWithInfo));
+        },
+      );
 
       test('should return a Map containing correct data via toJson alias', () {
         final result = tMyUserDto.toJson();
@@ -187,6 +195,25 @@ void main() {
           FirestoreConstants.patientInfo: null,
           FirestoreConstants.adminInfo: null,
         });
+      });
+
+      test('should serialize non-null phone correctly', () {
+        const dto = MyUserDto(
+          id: '1',
+          email: 'test@example.com',
+          name: 'Test',
+          provider: UserAuthProvider.emailPassword,
+          phone: '+1234567890',
+        );
+
+        expect(
+          dto.toFireStore()[FirestoreConstants.phone],
+          equals('+1234567890'),
+        );
+        expect(
+          dto.toJson()[FirestoreConstants.phone],
+          equals('+1234567890'),
+        );
       });
     });
   });

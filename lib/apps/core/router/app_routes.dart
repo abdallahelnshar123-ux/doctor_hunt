@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
@@ -11,7 +12,7 @@ import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/s
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
@@ -34,7 +35,6 @@ import '../../features/admin/doctor_availability_screen/presentation/screens/doc
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
 import '../../features/common/auth/data/models/user/my_user.dart';
-import '../../features/common/auth/presentation/controller/auth/auth_state.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
 import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
@@ -73,6 +73,16 @@ class RegisterRoute extends GoRouteData with $RegisterRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const RegisterScreen();
+  }
+}
+
+@TypedGoRoute<ForgotPasswordRoute>(path: '/forget_password')
+class ForgotPasswordRoute extends GoRouteData with $ForgotPasswordRoute {
+  const ForgotPasswordRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ForgotPasswordScreen();
   }
 }
 
@@ -172,7 +182,10 @@ class PopularDoctorsRoute extends GoRouteData with $PopularDoctorsRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const PopularDoctorScreen();
+    return BlocProvider(
+      create: (context) => getIt<PatientDoctorsBloc>(),
+      child: PopularDoctorScreen(),
+    );
   }
 }
 
@@ -331,22 +344,20 @@ class GoRouterRefreshStream extends ChangeNotifier {
 }
 
 GoRouter createRouter({
-  AuthBloc? authBloc,
+  required UserSessionManager userSessionManager,
+  // AuthBloc? authBloc,
   required UserPrefs userPrefs,
   String initialLocation = '/',
 }) {
-  final refreshStream = authBloc?.stream ?? const Stream.empty();
-
   return GoRouter(
     routes: $appRoutes,
     initialLocation: initialLocation,
-    refreshListenable: GoRouterRefreshStream(refreshStream),
+    refreshListenable: GoRouterRefreshStream(
+      userSessionManager.authStateStream,
+    ),
     redirect: (context, state) {
-      final authState = authBloc?.state;
-      final isLoggedIn = authState is UserAuthenticatedState;
-      final user = authState is UserAuthenticatedState
-          ? authState.currentUser
-          : null;
+      final user = userSessionManager.currentUser;
+      final isLoggedIn = userSessionManager.isLoggedIn;
       final onboardingDone = userPrefs.onboarding;
       final currentLocation = state.matchedLocation;
 
@@ -399,6 +410,6 @@ GoRouter createRouter({
 }
 
 final appRouter = createRouter(
-  authBloc: getIt<AuthBloc>(),
+  userSessionManager: getIt<UserSessionManager>(),
   userPrefs: getIt<UserPrefs>(),
 );

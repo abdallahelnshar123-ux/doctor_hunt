@@ -1,9 +1,6 @@
 ---
 name: flutter_hooks
-description: Guidelines and best practices for using flutter_hooks. Covers when to use HookWidget, useValueNotifier vs useState, useRef, useMemoized, and anti-patterns. Use when refactoring widgets or creating screens with local controllers and state.
-metadata:
-  model: models/gemini-3.1-pro-preview
-  last_modified: Mon, 11 May 2026 00:00:00 GMT
+description: Use this skill whenever you need to manage local state, animation controllers, focus nodes, text editing controllers, or any widget lifecycle events in Flutter. This skill details the strict rules for using the 'flutter_hooks' package, including when to use 'HookWidget', 'useValueNotifier', 'useMemoized', and 'useRef'. You MUST read this skill before writing or refactoring any StatefulWidgets or stateful logic in the UI.
 ---
 # Flutter Hooks Best Practices & Guidelines
 

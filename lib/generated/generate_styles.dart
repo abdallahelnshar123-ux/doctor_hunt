@@ -82,7 +82,7 @@ void main() {
   sink.writeln('// Last updated: ${DateTime.now()}');
   sink.writeln('// Run `dart run generate_styles.dart` to update this file.');
   sink.writeln("import 'package:flutter/material.dart';");
-  sink.writeln("import 'package:google_fonts/google_fonts.dart';");
+  // sink.writeln("import 'package:google_fonts/google_fonts.dart';");
   sink.writeln(importColorsClass);
 
   generateWeightAtoms(sink);
@@ -167,12 +167,15 @@ void generateWeightAndPxMixes(
 void generateFontFamilies(IOSink sink, List<String> fontFamilies) {
   sink.writeln('extension FontFamilyAtoms on TextStyle {');
 
-  for (final String fontFamily in fontFamilies) {
-    sink.writeln(
-      '  TextStyle get $fontFamily => GoogleFonts.$fontFamily(textStyle: this);',
-    );
-  }
-
+  // for (final String fontFamily in fontFamilies) {
+  //   sink.writeln(
+  //     '  TextStyle get $fontFamily => GoogleFonts.$fontFamily(textStyle: this);',
+  //   );
+  // }
+  sink.writeln(
+    "  TextStyle get plusJakartaSans => copyWith(fontFamily: 'PlusJakartaSans');",
+  );
+  sink.writeln("  TextStyle get rubik => copyWith(fontFamily: 'Rubik');");
   sink.writeln('}');
 }
 

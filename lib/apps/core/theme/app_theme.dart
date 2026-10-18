@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colors.dart';
 
@@ -22,7 +21,7 @@ class AppTheme {
         color: AppColors.textPrimary,
         fontSize: 18,
         fontWeight: FontWeight.w400,
-        fontFamily: GoogleFonts.rubik().fontFamily,
+        fontFamily: 'Rubik',
       ),
     ),
   );

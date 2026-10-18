@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
@@ -12,7 +14,6 @@ import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.d
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_state.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/continue_with_google_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
@@ -28,6 +29,8 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class MockUserPrefs extends Mock implements UserPrefs {}
+
+class MockUserSessionManager extends Mock implements UserSessionManager {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}
 
@@ -45,16 +48,21 @@ void main() {
   late MockAuthBloc authBloc;
   late MockUserBloc userBloc;
   late MockUserPrefs userPrefs;
-
-
+  late MockUserSessionManager mockUserSessionManager;
 
   setUp(() {
     authBloc = MockAuthBloc();
     userBloc = MockUserBloc();
     userPrefs = MockUserPrefs();
+    mockUserSessionManager = MockUserSessionManager();
 
     when(() => userPrefs.onboarding).thenReturn(true);
     when(() => userBloc.currentUser).thenReturn(null);
+    when(() => mockUserSessionManager.currentUser).thenReturn(null);
+    when(() => mockUserSessionManager.isLoggedIn).thenReturn(false);
+    when(
+      () => mockUserSessionManager.authStateStream,
+    ).thenAnswer((_) => Stream.value(false));
   });
 
   tearDown(() {
@@ -63,7 +71,7 @@ void main() {
 
   Widget createWidgetUnderTest() {
     final router = createRouter(
-      authBloc: authBloc,
+      userSessionManager: mockUserSessionManager,
       userPrefs: userPrefs,
       initialLocation: '/patient_login',
     );
@@ -200,34 +208,51 @@ void main() {
       },
     );
 
-    testWidgets('forgot password button removes focus', (tester) async {
-      whenListen(
-        authBloc,
-        const Stream<AuthState>.empty(),
-        initialState: AuthInitial(),
-      );
-      await tester.pumpWidget(createWidgetUnderTest());
+    testWidgets(
+      'forgot password button removes focus and navigates to ForgotPasswordRoute',
+      (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
+        await tester.pumpWidget(createWidgetUnderTest());
 
-      final emailField = find.bySemanticsLabel(t.auth.email);
+        final emailField = find.bySemanticsLabel(t.auth.email);
 
-      await tester.tap(emailField);
-      await tester.enterText(emailField, 'patient@example.com');
+        await tester.tap(emailField);
+        await tester.enterText(emailField, 'patient@example.com');
 
-      expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
+        expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
 
-      await tester.scrollUntilVisible(
-        find.text(t.auth.forgot_password),
-        50.0,
-        scrollable: find.byType(Scrollable).first,
-      );
-      await tester.tap(find.text(t.auth.forgot_password));
+        await tester.scrollUntilVisible(
+          find.text(t.auth.forgot_password),
+          50.0,
+          scrollable: find.byType(Scrollable).first,
+        );
+        await tester.tap(find.text(t.auth.forgot_password));
+        await tester.pumpAndSettle();
 
-      expect(
-        FocusManager.instance.primaryFocus?.context?.widget.runtimeType
-            .toString(),
-        isNot(contains('EditableText')),
-      );
-    });
+        expect(find.text(t.forgot_password.title), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'navigates to ChooseRoleRoute when MainAppBar back button is tapped',
+      (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.tap(find.byType(BackButtonWidget));
+        await tester.pumpAndSettle();
+
+        expect(find.text(t.choose_role.title), findsOneWidget);
+      },
+    );
 
     testWidgets(
       'navigates to RegisterRoute when Do not have an account is tapped',

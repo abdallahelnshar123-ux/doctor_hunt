@@ -1,9 +1,6 @@
 ---
 name: flutter-add-widget-test
-description: Implement a component-level test using `WidgetTester` to verify UI rendering and user interactions (tapping, scrolling, entering text). Use when validating that a specific widget displays correct data and responds to events as expected.
-metadata:
-  model: models/gemini-3.1-pro-preview
-  last_modified: Tue, 21 Apr 2026 21:15:41 GMT
+description: Use this skill whenever the user asks you to write, fix, or update Flutter widget tests or UI component tests. It contains crucial agent-specific rules for dealing with GoRouter, BlocProvider, bloc_test mocking streams, and widget finding inside tests. You MUST trigger this skill before executing any widget testing tasks to prevent common testing errors.
 ---
 # Writing Flutter Widget Tests
 
@@ -19,8 +16,8 @@ metadata:
 
 Ensure the testing environment is properly configured before authoring widget tests.
 
-1. Add the `flutter_test` dependency to the `dev_dependencies` section of `pubspec.yaml`.
-2. Place all test files in the `test/` directory at the root of the project.
+1. Add the `flutter_test` dependency to the `dev_dependencies` section of `../../../pubspec.yaml`.
+2. Place all test files in the `../../../test` directory at the root of the project.
 3. Suffix all test file names with `_test.dart` (e.g., `widget_test.dart`).
 
 ## Agent Specific Rules & Best Practices

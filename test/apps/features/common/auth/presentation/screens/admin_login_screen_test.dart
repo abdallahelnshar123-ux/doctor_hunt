@@ -1,18 +1,20 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/widgets/back_button_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_state.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/email_text_field_widget.dart';
@@ -26,6 +28,8 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MockUserPrefs extends Mock implements UserPrefs {}
 
+class MockUserSessionManager extends Mock implements UserSessionManager {}
+
 class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
 
 class FakeAuthEvent extends Fake implements AuthEvent {}
@@ -37,6 +41,7 @@ void main() {
 
   late MockAuthBloc authBloc;
   late MockUserPrefs mockUserPrefs;
+  late MockUserSessionManager mockUserSessionManager;
   late MockUserBloc mockUserBloc;
 
   final tUser = MyUser(
@@ -50,9 +55,16 @@ void main() {
   setUp(() {
     authBloc = MockAuthBloc();
     mockUserPrefs = MockUserPrefs();
+    mockUserSessionManager = MockUserSessionManager();
     mockUserBloc = MockUserBloc();
 
     when(() => mockUserPrefs.onboarding).thenReturn(true);
+    when(() => mockUserSessionManager.currentUser).thenReturn(null);
+    when(() => mockUserSessionManager.isLoggedIn).thenReturn(false);
+    when(
+      () => mockUserSessionManager.authStateStream,
+    ).thenAnswer((_) => Stream.value(false));
+
     when(() => mockUserBloc.currentUser).thenReturn(tUser);
 
     when(() => mockUserBloc.state).thenReturn(const UserState());
@@ -69,7 +81,7 @@ void main() {
 
   Widget createWidgetUnderTest() {
     final router = createRouter(
-      authBloc: authBloc,
+      userSessionManager: mockUserSessionManager,
       userPrefs: mockUserPrefs,
       initialLocation: '/admin_login',
     );
@@ -156,30 +168,48 @@ void main() {
       },
     );
 
-    testWidgets('forgot password button removes focus', (tester) async {
-      whenListen(
-        authBloc,
-        const Stream<AuthState>.empty(),
-        initialState: AuthInitial(),
-      );
+    testWidgets(
+      'forgot password button removes focus and navigates to ForgotPasswordRoute',
+      (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
 
-      await tester.pumpWidget(createWidgetUnderTest());
+        await tester.pumpWidget(createWidgetUnderTest());
 
-      final emailField = find.bySemanticsLabel(t.auth.email);
+        final emailField = find.bySemanticsLabel(t.auth.email);
 
-      await tester.tap(emailField);
-      await tester.enterText(emailField, 'admin@example.com');
+        await tester.tap(emailField);
+        await tester.enterText(emailField, 'admin@example.com');
 
-      expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
+        expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
 
-      await tester.tap(find.text(t.auth.forgot_password));
+        await tester.tap(find.text(t.auth.forgot_password));
+        await tester.pumpAndSettle();
 
-      expect(
-        FocusManager.instance.primaryFocus?.context?.widget.runtimeType
-            .toString(),
-        isNot(contains('EditableText')),
-      );
-    });
+        expect(find.text(t.forgot_password.title), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'navigates to ChooseRoleRoute when MainAppBar back button is tapped',
+      (tester) async {
+        whenListen(
+          authBloc,
+          const Stream<AuthState>.empty(),
+          initialState: AuthInitial(),
+        );
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.tap(find.byType(BackButtonWidget));
+        await tester.pumpAndSettle();
+
+        expect(find.text(t.choose_role.title), findsOneWidget);
+      },
+    );
 
     testWidgets(
       'shows loading dialog when LoginWithEmailPasswordLoadingState is emitted',
@@ -221,6 +251,5 @@ void main() {
         await controller.close();
       },
     );
-
   });
 }

@@ -216,6 +216,7 @@ class PatientProfileScreen extends HookWidget {
             ),
             const SizedBox(height: 10),
             TextFormWidget(
+              hintText: t.profile.add_phone_number,
               label: t.profile.phone,
               controller: phoneController,
               validator: (value) {

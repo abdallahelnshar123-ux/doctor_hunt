@@ -1,19 +1,21 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
-import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/patient_info.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockAuthRepository extends Mock implements AuthRepository {}
+
 class MockUserSessionManager extends Mock implements UserSessionManager {}
+
 class FakeMyUser extends Fake implements MyUser {}
 
 void main() {
@@ -49,8 +51,9 @@ void main() {
 
   test('initial state should contain current user from repository', () {
     when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
-    when(() => mockUserSessionManager.userStream)
-        .thenAnswer((_) => Stream.empty());
+    when(
+      () => mockUserSessionManager.userStream,
+    ).thenAnswer((_) => Stream.empty());
 
     final userBloc = UserBloc(mockAuthRepository, mockUserSessionManager);
 
@@ -64,18 +67,53 @@ void main() {
     userBloc.close();
   });
 
+  test('currentUser getter should return state.user', () {
+    when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
+    when(
+      () => mockUserSessionManager.userStream,
+    ).thenAnswer((_) => Stream.empty());
+
+    final userBloc = UserBloc(mockAuthRepository, mockUserSessionManager);
+
+    expect(userBloc.currentUser, equals(tUser));
+    userBloc.close();
+  });
+
   group('UserStreamUpdatedEvent', () {
     blocTest<UserBloc, UserState>(
       'should emit updated state when userStream emits new user',
       build: () {
         when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
-        when(() => mockUserSessionManager.userStream)
-            .thenAnswer((_) => Stream.value(tUserWithFavDoc2));
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.value(tUserWithFavDoc2));
 
         return UserBloc(mockAuthRepository, mockUserSessionManager);
       },
       expect: () => [
         const UserState(user: tUserWithFavDoc2, favoriteError: null),
+      ],
+      verify: (_) {
+        verify(() => mockUserSessionManager.currentUser).called(1);
+        verify(() => mockUserSessionManager.userStream).called(1);
+        verifyNoMoreInteractions(mockUserSessionManager);
+        verifyZeroInteractions(mockAuthRepository);
+      },
+    );
+
+    blocTest<UserBloc, UserState>(
+      'should emit null user and clear previous error when stream emits null',
+      build: () {
+        when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.value(null));
+
+        return UserBloc(mockAuthRepository, mockUserSessionManager);
+      },
+      seed: () => const UserState(user: tUser, favoriteError: 'Some error'),
+      expect: () => [
+        const UserState(user: null, favoriteError: null),
       ],
       verify: (_) {
         verify(() => mockUserSessionManager.currentUser).called(1);
@@ -91,10 +129,12 @@ void main() {
       'should optimistically add doctorId and emit updated state on success',
       build: () {
         when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
-        when(() => mockUserSessionManager.userStream)
-            .thenAnswer((_) => Stream.empty());
-        when(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser))
-            .thenAnswer((_) async => const Right(tUserWithFavDoc2));
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.empty());
+        when(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser),
+        ).thenAnswer((_) async => const Right(tUserWithFavDoc2));
 
         return UserBloc(mockAuthRepository, mockUserSessionManager);
       },
@@ -106,9 +146,13 @@ void main() {
         verify(() => mockUserSessionManager.currentUser).called(1);
         verify(() => mockUserSessionManager.userStream).called(1);
         // updateUser is called first optimistically, then again on success
-        verify(() => mockUserSessionManager.updateUser(tUserWithFavDoc2)).called(2);
+        verify(
+          () => mockUserSessionManager.updateUser(tUserWithFavDoc2),
+        ).called(2);
 
-        verify(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser)).called(1);
+        verify(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser),
+        ).called(1);
         verifyNoMoreInteractions(mockAuthRepository);
         verifyNoMoreInteractions(mockUserSessionManager);
       },
@@ -117,24 +161,34 @@ void main() {
     blocTest<UserBloc, UserState>(
       'should optimistically remove doctorId if already present and emit updated state on success',
       build: () {
-        when(() => mockUserSessionManager.currentUser).thenReturn(tUserWithFavDoc2);
-        when(() => mockUserSessionManager.userStream)
-            .thenAnswer((_) => Stream.empty());
-        when(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUserWithFavDoc2))
-            .thenAnswer((_) async => const Right(tUser));
+        when(
+          () => mockUserSessionManager.currentUser,
+        ).thenReturn(tUserWithFavDoc2);
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.empty());
+        when(
+          () => mockAuthRepository.toggleFavoriteDoctor(
+            'doc_2',
+            tUserWithFavDoc2,
+          ),
+        ).thenAnswer((_) async => const Right(tUser));
 
         return UserBloc(mockAuthRepository, mockUserSessionManager);
       },
       act: (bloc) => bloc.add(const ToggleFavoriteDoctorEvent('doc_2')),
-      expect: () => [
-        const UserState(user: tUser, favoriteError: null),
-      ],
+      expect: () => [const UserState(user: tUser, favoriteError: null)],
       verify: (_) {
         verify(() => mockUserSessionManager.currentUser).called(1);
         verify(() => mockUserSessionManager.userStream).called(1);
         verify(() => mockUserSessionManager.updateUser(tUser)).called(2);
 
-        verify(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUserWithFavDoc2)).called(1);
+        verify(
+          () => mockAuthRepository.toggleFavoriteDoctor(
+            'doc_2',
+            tUserWithFavDoc2,
+          ),
+        ).called(1);
         verifyNoMoreInteractions(mockAuthRepository);
         verifyNoMoreInteractions(mockUserSessionManager);
       },
@@ -144,10 +198,12 @@ void main() {
       'should optimistically update and then rollback with error message on repository failure',
       build: () {
         when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
-        when(() => mockUserSessionManager.userStream)
-            .thenAnswer((_) => Stream.empty());
-        when(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser))
-            .thenAnswer((_) async => const Left(ServerFailure('Network error')));
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.empty());
+        when(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser),
+        ).thenAnswer((_) async => const Left(ServerFailure('Network error')));
 
         return UserBloc(mockAuthRepository, mockUserSessionManager);
       },
@@ -159,10 +215,14 @@ void main() {
       verify: (_) {
         verify(() => mockUserSessionManager.currentUser).called(1);
         verify(() => mockUserSessionManager.userStream).called(1);
-        verify(() => mockUserSessionManager.updateUser(tUserWithFavDoc2)).called(1);
+        verify(
+          () => mockUserSessionManager.updateUser(tUserWithFavDoc2),
+        ).called(1);
         verify(() => mockUserSessionManager.updateUser(tUser)).called(1);
 
-        verify(() => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser)).called(1);
+        verify(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_2', tUser),
+        ).called(1);
         verifyNoMoreInteractions(mockAuthRepository);
         verifyNoMoreInteractions(mockUserSessionManager);
       },
@@ -172,8 +232,9 @@ void main() {
       'should not emit anything if currentUser is null',
       build: () {
         when(() => mockUserSessionManager.currentUser).thenReturn(null);
-        when(() => mockUserSessionManager.userStream)
-            .thenAnswer((_) => Stream.empty());
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.empty());
 
         return UserBloc(mockAuthRepository, mockUserSessionManager);
       },
@@ -186,5 +247,66 @@ void main() {
         verifyZeroInteractions(mockAuthRepository);
       },
     );
+
+    blocTest<UserBloc, UserState>(
+      'should initialize patientInfo when currentUser.patientInfo is null and add doctorId',
+      build: () {
+        const tUserNoPatientInfo = MyUser(
+          id: '123',
+          email: 'test@example.com',
+          name: 'Test User',
+          provider: UserAuthProvider.emailPassword,
+          role: UserRoles.patient,
+          patientInfo: null,
+        );
+        const tUserWithDoc1 = MyUser(
+          id: '123',
+          email: 'test@example.com',
+          name: 'Test User',
+          provider: UserAuthProvider.emailPassword,
+          role: UserRoles.patient,
+          patientInfo: PatientInfo(favDoctors: ['doc_1']),
+        );
+
+        when(() => mockUserSessionManager.currentUser).thenReturn(tUserNoPatientInfo);
+        when(
+          () => mockUserSessionManager.userStream,
+        ).thenAnswer((_) => Stream.empty());
+        when(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_1', any()),
+        ).thenAnswer((_) async => const Right(tUserWithDoc1));
+
+        return UserBloc(mockAuthRepository, mockUserSessionManager);
+      },
+      act: (bloc) => bloc.add(const ToggleFavoriteDoctorEvent('doc_1')),
+      expect: () => [
+        const UserState(
+          user: MyUser(
+            id: '123',
+            email: 'test@example.com',
+            name: 'Test User',
+            provider: UserAuthProvider.emailPassword,
+            role: UserRoles.patient,
+            patientInfo: PatientInfo(favDoctors: ['doc_1']),
+          ),
+          favoriteError: null,
+        ),
+      ],
+      verify: (_) {
+        verify(
+          () => mockAuthRepository.toggleFavoriteDoctor('doc_1', any()),
+        ).called(1);
+      },
+    );
+  });
+
+  test('close should cancel userStream subscription without throwing', () async {
+    when(() => mockUserSessionManager.currentUser).thenReturn(tUser);
+    when(
+      () => mockUserSessionManager.userStream,
+    ).thenAnswer((_) => Stream.empty());
+
+    final userBloc = UserBloc(mockAuthRepository, mockUserSessionManager);
+    await expectLater(userBloc.close(), completes);
   });
 }

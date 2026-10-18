@@ -119,44 +119,45 @@ class _MainBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(color: AppColors.white),
-
-        Positioned(
-          top: -600,
-          right: 50,
-          child: Container(
-            width: 1000,
-            height: 1000,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                radius: .5,
-                stops: [0, 0.8],
-                colors: [AppColors.bgBlueGradient, AppColors.bgPrimary],
+    return RepaintBoundary(
+      child: Stack(
+        children: [
+          Container(color: AppColors.white),
+          Positioned(
+            top: -600,
+            right: 50,
+            child: Container(
+              width: 1000,
+              height: 1000,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  radius: .5,
+                  stops: [0, 0.8],
+                  colors: [AppColors.bgBlueGradient, AppColors.bgPrimary],
+                ),
               ),
             ),
           ),
-        ),
 
-        Positioned(
-          bottom: -650,
-          left: 50,
-          child: Container(
-            width: 1000,
-            height: 1000,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: RadialGradient(
-                radius: .5,
-                stops: [0, 0.8],
-                colors: [AppColors.bgGreenGradient, AppColors.bgPrimary],
+          Positioned(
+            bottom: -650,
+            left: 50,
+            child: Container(
+              width: 1000,
+              height: 1000,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  radius: .5,
+                  stops: [0, 0.8],
+                  colors: [AppColors.bgGreenGradient, AppColors.bgPrimary],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

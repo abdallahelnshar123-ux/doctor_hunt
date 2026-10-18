@@ -8,18 +8,20 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.backgroundColor,
     this.titleStyle,
+    this.onPressed,
   });
 
   final double appBarHeight;
   final String? title;
   final Color? backgroundColor;
   final TextStyle? titleStyle;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title ?? '', style: titleStyle),
-      leading: BackButtonWidget(),
+      leading: BackButtonWidget(onPressed: onPressed),
       backgroundColor: backgroundColor,
     );
   }

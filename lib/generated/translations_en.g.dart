@@ -49,6 +49,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
   // Translations
   late final Translations$auth$en auth = Translations$auth$en.internal(_root);
+  late final Translations$forgot_password$en forgot_password =
+      Translations$forgot_password$en.internal(_root);
   late final Translations$onboarding$en onboarding =
       Translations$onboarding$en.internal(_root);
   late final Translations$choose_role$en choose_role =
@@ -149,6 +151,36 @@ class Translations$auth$en {
   /// en: 'you must agree with the Terms of Service & Privacy Policy'
   String get you_must_agree_to_terms =>
       'you must agree with the Terms of Service & Privacy Policy';
+}
+
+// Path: forgot_password
+class Translations$forgot_password$en with PageData2 {
+  Translations$forgot_password$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Forgot Password'
+  @override
+  String get title => 'Forgot Password';
+
+  /// en: 'Email'
+  String get email => 'Email';
+
+  /// en: 'Enter your email address and we'll send you a link to reset your password.'
+  String get description =>
+      'Enter your email address and we\'ll send you a link to reset your password.';
+
+  /// en: 'Send Link'
+  String get send_link => 'Send Link';
+
+  /// en: 'Back to Login'
+  String get back_to_login => 'Back to Login';
+
+  /// en: 'We've sent you an email to reset your password. Please check your inbox or spam folder.'
+  String get success_dialog_message =>
+      'We\'ve sent you an email to reset your password. Please check your inbox or spam folder.';
 }
 
 // Path: onboarding
@@ -435,6 +467,9 @@ class Translations$profile$en with PageData2 {
 
   /// en: 'Data was updated successfully'
   String get data_was_updated_successfully => 'Data was updated successfully';
+
+  /// en: 'Add phone number'
+  String get add_phone_number => 'Add phone number';
 }
 
 // Path: privacy_policy

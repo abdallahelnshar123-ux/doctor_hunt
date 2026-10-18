@@ -4,9 +4,7 @@ import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/patie
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  const tPatientInfoDto = PatientInfoDto(
-    favDoctors: ['doc_1', 'doc_2'],
-  );
+  const tPatientInfoDto = PatientInfoDto(favDoctors: ['doc_1', 'doc_2']);
 
   final tMap = <String, dynamic>{
     FirestoreConstants.favDoctors: ['doc_1', 'doc_2'],

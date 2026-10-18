@@ -1,8 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
+import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/widgets/back_button_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_event.dart';
@@ -22,6 +27,10 @@ class MockAuthBloc extends MockBloc<AuthEvent, AuthState> implements AuthBloc {}
 
 class MockUserPrefs extends Mock implements UserPrefs {}
 
+class MockUserSessionManager extends Mock implements UserSessionManager {}
+
+class MockUserBloc extends MockBloc<UserEvent, UserState> implements UserBloc {}
+
 class FakeAuthEvent extends Fake implements AuthEvent {}
 
 void main() {
@@ -31,24 +40,44 @@ void main() {
 
   late MockAuthBloc authBloc;
   late MockUserPrefs mockUserPrefs;
+  late MockUserSessionManager mockUserSessionManager;
+  late MockUserBloc mockUserBloc;
 
   setUp(() {
     authBloc = MockAuthBloc();
     mockUserPrefs = MockUserPrefs();
+    mockUserSessionManager = MockUserSessionManager();
+    mockUserBloc = MockUserBloc();
 
     when(() => authBloc.state).thenReturn(AuthInitial());
     when(() => mockUserPrefs.onboarding).thenReturn(true);
+    when(() => mockUserSessionManager.currentUser).thenReturn(null);
+    when(() => mockUserSessionManager.isLoggedIn).thenReturn(false);
+    when(
+      () => mockUserSessionManager.authStateStream,
+    ).thenAnswer((_) => Stream.value(false));
+
+    when(() => mockUserBloc.currentUser).thenReturn(null);
+    when(() => mockUserBloc.state).thenReturn(const UserState());
+    whenListen(
+      mockUserBloc,
+      const Stream<UserState>.empty(),
+      initialState: const UserState(),
+    );
   });
 
   Widget createWidgetUnderTest() {
     final router = createRouter(
+      userSessionManager: mockUserSessionManager,
       userPrefs: mockUserPrefs,
-      authBloc: authBloc,
       initialLocation: '/register',
     );
     return TranslationProvider(
-      child: BlocProvider<AuthBloc>(
-        create: (context) => authBloc,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthBloc>(create: (context) => authBloc),
+          BlocProvider<UserBloc>(create: (context) => mockUserBloc),
+        ],
         child: MaterialApp.router(routerConfig: router),
       ),
     );
@@ -213,6 +242,41 @@ void main() {
     );
 
     testWidgets(
+      'tapping agree with terms toggles state from false to true and back to false',
+      (tester) async {
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.scrollUntilVisible(
+          find.text(t.auth.agree_terms),
+          50.0,
+          scrollable: find.byType(Scrollable).first,
+        );
+
+        expect(find.byIcon(Icons.circle_outlined), findsOneWidget);
+
+        await tester.tap(find.text(t.auth.agree_terms));
+        await tester.pump();
+        expect(find.byIcon(Icons.circle), findsOneWidget);
+
+        await tester.tap(find.text(t.auth.agree_terms));
+        await tester.pump();
+        expect(find.byIcon(Icons.circle_outlined), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'navigates to ChooseRoleRoute when MainAppBar back button is tapped',
+      (tester) async {
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        await tester.tap(find.byType(BackButtonWidget));
+        await tester.pumpAndSettle();
+
+        expect(find.text(t.choose_role.title), findsOneWidget);
+      },
+    );
+
+    testWidgets(
       'shows loading dialog when RegisterWithEmailPasswordLoadingState is emitted',
       (tester) async {
         final controller = StreamController<AuthState>.broadcast();
@@ -295,6 +359,29 @@ void main() {
         expect(find.text('Google Sign-In Failed'), findsOneWidget);
         expect(find.text(t.dialog.error), findsOneWidget);
         expect(find.text(t.dialog.ok), findsOneWidget);
+
+        await controller.close();
+      },
+    );
+
+    testWidgets(
+      'does NOT show error dialog when ContinueWithGoogleErrorState is emitted with cancelled by user message',
+      (tester) async {
+        final controller = StreamController<AuthState>.broadcast();
+
+        whenListen(authBloc, controller.stream, initialState: AuthInitial());
+
+        await tester.pumpWidget(createWidgetUnderTest());
+
+        controller.add(ContinueWithGoogleLoadingState());
+        await tester.pump();
+
+        controller.add(
+          ContinueWithGoogleErrorState(t.errors.cancelled_by_user),
+        );
+        await tester.pump();
+
+        expect(find.text(t.dialog.error), findsNothing);
 
         await controller.close();
       },

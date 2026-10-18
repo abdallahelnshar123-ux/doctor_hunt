@@ -10,6 +10,7 @@ List<RouteBase> get $appRoutes => [
   $adminLoginRoute,
   $patientLoginRoute,
   $registerRoute,
+  $forgotPasswordRoute,
   $patientMainRoute,
   $adminMainRoute,
   $adminAppointmentDetailsRoute,
@@ -94,6 +95,33 @@ mixin $RegisterRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/register');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $forgotPasswordRoute => GoRouteData.$route(
+  path: '/forget_password',
+  hasOverriddenOnExit: false,
+  factory: $ForgotPasswordRoute._fromState,
+);
+
+mixin $ForgotPasswordRoute on GoRouteData {
+  static ForgotPasswordRoute _fromState(GoRouterState state) =>
+      const ForgotPasswordRoute();
+
+  @override
+  String get location => GoRouteData.$location('/forget_password');
 
   @override
   void go(BuildContext context) => context.go(location);

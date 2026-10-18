@@ -95,34 +95,31 @@ void main() {
       },
     );
 
-    test(
-      'should return Left(Failure) when repository login fails',
-      () async {
-        // Arrange
-        when(
-          () => mockAuthRepository.loginWithEmailAndPassword(
-            email: tEmail,
-            password: tPassword,
-          ),
-        ).thenAnswer((_) async => const Left(tFailure));
-
-        // Act
-        final result = await loginUseCase.login(
-          role: UserRoles.patient,
+    test('should return Left(Failure) when repository login fails', () async {
+      // Arrange
+      when(
+        () => mockAuthRepository.loginWithEmailAndPassword(
           email: tEmail,
           password: tPassword,
-        );
+        ),
+      ).thenAnswer((_) async => const Left(tFailure));
 
-        // Assert
-        expect(result, equals(const Left(tFailure)));
-        verify(
-          () => mockAuthRepository.loginWithEmailAndPassword(
-            email: tEmail,
-            password: tPassword,
-          ),
-        ).called(1);
-        verifyNoMoreInteractions(mockAuthRepository);
-      },
-    );
+      // Act
+      final result = await loginUseCase.login(
+        role: UserRoles.patient,
+        email: tEmail,
+        password: tPassword,
+      );
+
+      // Assert
+      expect(result, equals(const Left(tFailure)));
+      verify(
+        () => mockAuthRepository.loginWithEmailAndPassword(
+          email: tEmail,
+          password: tPassword,
+        ),
+      ).called(1);
+      verifyNoMoreInteractions(mockAuthRepository);
+    });
   });
 }

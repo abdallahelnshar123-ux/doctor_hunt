@@ -15,18 +15,34 @@ class UserSessionManager {
   final StreamController<MyUser?> _userStreamController =
       StreamController<MyUser?>.broadcast();
 
+  final StreamController<bool> _authStateController =
+      StreamController<bool>.broadcast();
+
   MyUser? _currentUser;
 
-  UserSessionManager(this._userPrefs);
+  UserSessionManager(this._userPrefs) {
+    final userDto = _userPrefs.getCurrentUser();
+    if (userDto != null) {
+      _currentUser = userDto.toUser();
+    }
+  }
 
   MyUser? get currentUser => _currentUser;
+
+  bool get isLoggedIn => _currentUser != null;
 
   Stream<MyUser?> get userStream async* {
     yield _currentUser;
     yield* _userStreamController.stream;
   }
 
+  Stream<bool> get authStateStream async* {
+    yield isLoggedIn;
+    yield* _authStateController.stream;
+  }
+
   void updateUser(MyUser? user) {
+    final bool wasLoggedIn = isLoggedIn;
     _currentUser = user;
     if (user != null) {
       _userPrefs.setUser(user.toMyUserDto());
@@ -34,6 +50,11 @@ class UserSessionManager {
       _userPrefs.clearUser();
     }
     _userStreamController.add(_currentUser);
+
+    // Only notify auth stream if login state actually changed
+    if (wasLoggedIn != isLoggedIn) {
+      _authStateController.add(isLoggedIn);
+    }
   }
 
   Option<MyUser> getCurrentUser() {
@@ -60,5 +81,6 @@ class UserSessionManager {
 
   void dispose() {
     _userStreamController.close();
+    _authStateController.close();
   }
 }
