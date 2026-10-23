@@ -30,7 +30,7 @@ class LogoutButton extends StatelessWidget {
       onPressed: () {
         DialogUtils.showMessage(
           context: context,
-          message: t.settings.logout_confirmation,
+          message: t.settings.logoutConfirmation,
           title: t.settings.logout,
           posActionText: t.dialog.ok,
           posAction: () {

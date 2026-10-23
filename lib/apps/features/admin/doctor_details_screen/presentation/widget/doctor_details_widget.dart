@@ -18,7 +18,7 @@ class DoctorDetailsWidget extends StatelessWidget {
         children: [
           _buildSettingsCard(
             context,
-            title: t.admin.doctor_details_screen.specialty,
+            title: t.admin.doctorDetailsScreen.specialty,
             icon: AppAssets.icons.medicalIcon.path,
             subtitleWidget: Text(
               doctor.specialty.name,
@@ -28,7 +28,7 @@ class DoctorDetailsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.admin.doctor_details_screen.rating,
+            title: t.admin.doctorDetailsScreen.rating,
             subtitleWidget: RatingWidget(
               rating: doctor.rating.rating,
               starSize: 17,
@@ -38,10 +38,10 @@ class DoctorDetailsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.admin.doctor_details_screen.consultation_fee,
+            title: t.admin.doctorDetailsScreen.consultationFee,
             icon: AppAssets.icons.feeIcon.path,
             subtitleWidget: Text(
-              t.admin.doctor_details_screen.fee(
+              t.admin.doctorDetailsScreen.fee(
                 Price: doctor.consultationFee.toString(),
               ),
               style: context.semiBold14.textTertiary.rubik,

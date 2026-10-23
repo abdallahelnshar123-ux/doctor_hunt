@@ -31,7 +31,7 @@ class PatientAppointmentsTab extends StatelessWidget {
         body: Column(
           spacing: 10,
           children: [
-            AppBar(title: Text(t.patient_appointments.title)),
+            AppBar(title: Text(t.patientAppointments.title)),
             Expanded(
               child: DefaultTabController(
                 initialIndex: 0,
@@ -56,9 +56,9 @@ class PatientAppointmentsTab extends StatelessWidget {
                       indicatorSize: .tab,
                       indicatorAnimation: .elastic,
                       tabs: [
-                        Tab(child: Text(t.patient_appointments.upcoming)),
-                        Tab(child: Text(t.patient_appointments.completed)),
-                        Tab(child: Text(t.patient_appointments.canceled)),
+                        Tab(child: Text(t.patientAppointments.upcoming)),
+                        Tab(child: Text(t.patientAppointments.completed)),
+                        Tab(child: Text(t.patientAppointments.canceled)),
                       ],
                     ),
                     Expanded(

@@ -39,7 +39,7 @@ class SelectTimeScreen extends HookWidget {
         child: Column(
           spacing: 15,
           children: [
-            MainAppBar(title: t.select_time.title),
+            MainAppBar(title: t.selectTime.title),
             DoctorCardWide(
               doctor: doctor,
               margin: EdgeInsets.symmetric(horizontal: 20),
@@ -92,8 +92,8 @@ class SelectTimeScreen extends HookWidget {
                                       .weeklyAvailability[index]
                                       .availableSlots
                                       .isEmpty
-                                  ? t.select_time.no_slots_available
-                                  : t.select_time.slot_available(
+                                  ? t.selectTime.noSlotsAvailable
+                                  : t.selectTime.slotAvailable(
                                       Number: state
                                           .weeklyAvailability[index]
                                           .availableSlots
@@ -112,7 +112,7 @@ class SelectTimeScreen extends HookWidget {
                                   .availableSlots
                                   .isEmpty) {
                                 return MainEmptyListWidget(
-                                  title: t.select_time.no_slots_available,
+                                  title: t.selectTime.noSlotsAvailable,
                                 );
                               }
                               return SlotsTab(
@@ -184,7 +184,7 @@ class SelectTimeScreen extends HookWidget {
                 ),
               ),
               Text(
-                t.appointment.thank_you,
+                t.appointment.thankYou,
                 style: context.medium38.black.rubik,
                 textAlign: .center,
               ),
@@ -198,7 +198,7 @@ class SelectTimeScreen extends HookWidget {
               ),
               SizedBox(height: 30),
               Text(
-                t.appointment.booking_details(
+                t.appointment.bookingDetails(
                   Doctor: doctor.name,
                   Date: DateFormat('MMMM d').format(selectedTime),
                   Time: DateFormat('hh:mm a').format(selectedTime),

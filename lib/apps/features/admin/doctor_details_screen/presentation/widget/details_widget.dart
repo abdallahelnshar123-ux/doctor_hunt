@@ -23,7 +23,7 @@ class DetailsWidget extends StatelessWidget {
           _buildInfoCard(
             context,
             value: doctor.specialty.name,
-            title: t.admin.doctor_details_screen.specialty,
+            title: t.admin.doctorDetailsScreen.specialty,
             icon: AppAssets.icons.medicalIcon.path,
             trailing: Chip(
               padding: EdgeInsets.all(5),
@@ -35,7 +35,7 @@ class DetailsWidget extends StatelessWidget {
               avatarBoxConstraints: .tightFor(width: 15),
 
               label: Text(
-                t.admin.doctor_details_screen.heart_care,
+                t.admin.doctorDetailsScreen.heartCare,
                 style: context.medium12.brandPrimary.rubik,
               ),
             ),
@@ -47,9 +47,9 @@ class DetailsWidget extends StatelessWidget {
               return _buildInfoCard(
                 context,
                 value: value
-                    ? t.admin.doctors_tab.active
-                    : t.admin.doctors_tab.inactive,
-                title: t.admin.doctor_details_screen.account_status,
+                    ? t.admin.doctorsTab.active
+                    : t.admin.doctorsTab.inactive,
+                title: t.admin.doctorDetailsScreen.accountStatus,
                 icon: AppAssets.icons.switchIcon.path,
                 trailing: ValueListenableBuilder(
                   valueListenable: isActive,

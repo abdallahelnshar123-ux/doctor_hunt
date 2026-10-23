@@ -46,7 +46,7 @@ class AddDoctorScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.create_doctor.doctor_added_successfully,
+            message: t.createDoctor.doctorAddedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
@@ -72,7 +72,7 @@ class AddDoctorScreen extends HookWidget {
       },
 
       child: Scaffold(
-        appBar: AppBar(title: Text(t.create_doctor.title)),
+        appBar: AppBar(title: Text(t.createDoctor.title)),
         body: Form(
           key: formKey,
           child: ListView(
@@ -86,27 +86,27 @@ class AddDoctorScreen extends HookWidget {
                   );
                 },
                 child: Text(
-                  t.create_doctor.add_photo,
+                  t.createDoctor.addPhoto,
                   style: context.medium12.brandPrimary.rubik,
                 ),
               ),
               SizedBox(height: 20),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.doctor_name,
+                text: t.admin.addDoctorScreen.doctorName,
               ),
               CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.add_doctor_screen.name_example,
+                hintText: t.admin.addDoctorScreen.nameExample,
                 hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
               ),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.specialty,
+                text: t.admin.addDoctorScreen.specialty,
               ),
               SpecialtyDropdownWidget(
                 selectedSpecialty: (value) {
@@ -115,14 +115,14 @@ class AddDoctorScreen extends HookWidget {
               ),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.consultation_fee,
+                text: t.admin.addDoctorScreen.consultationFee,
               ),
               CustomTextFormField(
                 controller: feeController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
                 keyboardType: TextInputType.number,
-                hintText: t.admin.add_doctor_screen.fee_example,
+                hintText: t.admin.addDoctorScreen.feeExample,
                 hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
@@ -170,7 +170,7 @@ class AddDoctorScreen extends HookWidget {
           if (selectedImage.value == null) {
             SnackBarUtils.showInfoSnackBar(
               context: context,
-              message: t.create_doctor.you_must_pick_doctor_image,
+              message: t.createDoctor.youMustPickDoctorImage,
             );
             return;
           }
@@ -187,7 +187,7 @@ class AddDoctorScreen extends HookWidget {
         }
       },
       child: Text(
-        t.admin.add_doctor_screen.create_doctor,
+        t.admin.addDoctorScreen.createDoctor,
         style: context.medium18.white.rubik,
       ),
     );

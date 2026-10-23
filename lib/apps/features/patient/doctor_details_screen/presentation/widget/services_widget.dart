@@ -8,12 +8,12 @@ class ServicesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final servicesList = t.doctor_details.services_list;
+    final servicesList = t.doctorDetails.servicesList;
     return Column(
       crossAxisAlignment: .start,
       children: [
         Text(
-          t.doctor_details.services,
+          t.doctorDetails.services,
           style: context.medium18.textTertiary.rubik,
         ),
         ListView.separated(

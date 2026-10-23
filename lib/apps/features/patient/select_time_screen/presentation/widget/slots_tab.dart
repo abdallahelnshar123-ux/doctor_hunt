@@ -45,14 +45,14 @@ class SlotsTab extends HookWidget {
           context: context,
           selectedSlot: selectedSlot,
           slotsList: morningSlots.value,
-          title: t.select_time.morning_slots(Number: morningSlots.value.length),
+          title: t.selectTime.morningSlots(Number: morningSlots.value.length),
         ),
         SizedBox(height: 20),
         _buildPeriodSlots(
           context: context,
           selectedSlot: selectedSlot,
           slotsList: afternoonSlots.value,
-          title: t.select_time.afternoon_slots(
+          title: t.selectTime.afternoonSlots(
             Number: afternoonSlots.value.length,
           ),
         ),
@@ -61,7 +61,7 @@ class SlotsTab extends HookWidget {
           context: context,
           selectedSlot: selectedSlot,
           slotsList: eveningSlots.value,
-          title: t.select_time.evening_slots(Number: eveningSlots.value.length),
+          title: t.selectTime.eveningSlots(Number: eveningSlots.value.length),
         ),
         SizedBox(height: 20),
         _buildConfirmButton(context, selectedSlot, doctor),
@@ -88,12 +88,12 @@ class SlotsTab extends HookWidget {
         } else {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t.select_time.you_must_select_appointment_time,
+            message: t.selectTime.youMustSelectAppointmentTime,
           );
         }
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text(t.select_time.confirm, style: context.medium18.white.rubik),
+      child: Text(t.selectTime.confirm, style: context.medium18.white.rubik),
     );
   }
 

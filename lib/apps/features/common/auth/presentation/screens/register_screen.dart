@@ -48,7 +48,7 @@ class RegisterScreen extends HookWidget {
           DialogUtils.showMessage(
             title: t.dialog.success,
             context: context,
-            message: t.dialog.registered_successfully,
+            message: t.dialog.registeredSuccessfully,
             posAction: () {
               const PatientLoginRoute().go(context);
             },
@@ -57,7 +57,7 @@ class RegisterScreen extends HookWidget {
         }
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
-          if (state.message != t.errors.cancelled_by_user) {
+          if (state.message != t.errors.cancelledByUser) {
             DialogUtils.showMessage(
               posActionText: t.dialog.ok,
               title: t.dialog.error,
@@ -92,13 +92,13 @@ class RegisterScreen extends HookWidget {
                       FittedBox(
                         fit: .scaleDown,
                         child: Text(
-                          t.auth.join_us,
+                          t.auth.joinUs,
                           style: context.medium24.black.rubik,
                           textAlign: TextAlign.center,
                         ),
                       ),
                       Text(
-                        t.auth.auth_subtitle,
+                        t.auth.authSubtitle,
                         style: context.regular14.textSecondary.rubik,
                         textAlign: TextAlign.center,
                       ),
@@ -165,7 +165,7 @@ class RegisterScreen extends HookWidget {
         const PatientLoginRoute().go(context);
       },
       child: Text(
-        t.auth.have_account,
+        t.auth.haveAccount,
         style: context.regular14.brandPrimary.rubik,
       ),
     );
@@ -192,7 +192,7 @@ class RegisterScreen extends HookWidget {
           onPressed: () {
             isAgreedToTerms.value = !isAgreedToTerms.value;
           },
-          label: Text(t.auth.agree_terms),
+          label: Text(t.auth.agreeTerms),
         );
       },
     );
@@ -214,7 +214,7 @@ class RegisterScreen extends HookWidget {
           if (!isAgreedToTerms.value) {
             SnackBarUtils.showErrorSnackBar(
               context: context,
-              message: t.auth.you_must_agree_to_terms,
+              message: t.auth.youMustAgreeToTerms,
             );
             return;
           }
@@ -228,7 +228,7 @@ class RegisterScreen extends HookWidget {
         }
       },
       backgroundColor: AppColors.brandPrimary,
-      child: Text(t.auth.sign_up, style: context.medium18.white.rubik),
+      child: Text(t.auth.signUp, style: context.medium18.white.rubik),
     );
   }
 }

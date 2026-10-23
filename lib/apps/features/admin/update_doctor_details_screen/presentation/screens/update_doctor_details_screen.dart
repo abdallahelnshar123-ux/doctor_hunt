@@ -50,7 +50,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.admin.doctor_details_screen.doctor_deleted_successfully,
+            message: t.admin.doctorDetailsScreen.doctorDeletedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
@@ -72,7 +72,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
           SnackBarUtils.showSuccessSnackBar(
             context: context,
             message:
-                t.admin.update_doctor_details.doctor_was_updated_successfully,
+                t.admin.updateDoctorDetails.doctorWasUpdatedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
@@ -93,7 +93,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
 
       child: Scaffold(
         appBar: AppBar(
-          title: Text(t.admin.update_doctor_details.edit_doctor),
+          title: Text(t.admin.updateDoctorDetails.editDoctor),
           centerTitle: true,
         ),
         body: Form(
@@ -106,20 +106,20 @@ class UpdateDoctorDetailsScreen extends HookWidget {
               SizedBox(height: 20),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.doctor_name,
+                text: t.admin.addDoctorScreen.doctorName,
               ),
               CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.add_doctor_screen.name_example,
+                hintText: t.admin.addDoctorScreen.nameExample,
                 hintStyle: context.light16.textSecondary.rubik,
                 style: context.medium16.textTertiary.rubik,
                 validator: (value) => Validators.required(value),
               ),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.specialty,
+                text: t.admin.addDoctorScreen.specialty,
               ),
               SpecialtyDropdownWidget(
                 initialSelection: doctor.specialty,
@@ -127,14 +127,14 @@ class UpdateDoctorDetailsScreen extends HookWidget {
               ),
               _buildText(
                 context: context,
-                text: t.admin.add_doctor_screen.consultation_fee,
+                text: t.admin.addDoctorScreen.consultationFee,
               ),
               CustomTextFormField(
                 controller: feeController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
                 keyboardType: TextInputType.number,
-                hintText: t.admin.add_doctor_screen.fee_example,
+                hintText: t.admin.addDoctorScreen.feeExample,
                 hintStyle: context.light16.textSecondary.rubik,
                 style: context.medium16.textTertiary.rubik,
                 validator: (value) => Validators.required(value),
@@ -159,7 +159,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
                   children: [
                     Icon(Icons.check_rounded, color: AppColors.white, size: 20),
                     Text(
-                      t.admin.update_doctor_details.save_changes,
+                      t.admin.updateDoctorDetails.saveChanges,
                       style: context.semiBold16.white.rubik,
                     ),
                   ],
@@ -183,7 +183,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
         );
       },
       child: Text(
-        t.admin.update_doctor_details.change_photo,
+        t.admin.updateDoctorDetails.changePhoto,
         style: context.medium12.brandPrimary.rubik,
       ),
     );
@@ -246,12 +246,12 @@ class UpdateDoctorDetailsScreen extends HookWidget {
                 BlendMode.srcIn,
               ),
             ),
-            title: Text(t.admin.update_doctor_details.doctor_statues),
+            title: Text(t.admin.updateDoctorDetails.doctorStatues),
             titleTextStyle: context.semiBold14.textPrimary.rubik,
             subtitle: Text(
               value
-                  ? t.admin.update_doctor_details.active_and_available
-                  : t.admin.update_doctor_details.inactive,
+                  ? t.admin.updateDoctorDetails.activeAndAvailable
+                  : t.admin.updateDoctorDetails.inactive,
             ),
             subtitleTextStyle: context.regular12.textSecondary.rubik,
             trailing: Switch(
@@ -334,7 +334,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
           DeleteDoctorRequested(doctorId: doctor.id),
         );
       },
-      label: Text(t.admin.update_doctor_details.delete_doctor),
+      label: Text(t.admin.updateDoctorDetails.deleteDoctor),
     );
   }
 }

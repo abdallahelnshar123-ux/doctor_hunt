@@ -50,10 +50,10 @@ class PatientMainScreen extends HookWidget {
               if (selectedIndex.value == 0) return;
               selectedIndex.value = 0;
             },
-            alias: t.patient_main.home,
+            alias: t.patientMain.home,
             icon: buildDrawerIcon(iconName: AppAssets.icons.homeIcon.path),
             text: Text(
-              t.patient_main.home,
+              t.patientMain.home,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[0],
@@ -64,10 +64,10 @@ class PatientMainScreen extends HookWidget {
 
               selectedIndex.value = 1;
             },
-            alias: t.patient_main.favourite,
+            alias: t.patientMain.favourite,
             icon: buildDrawerIcon(iconName: AppAssets.icons.favouriteIcon.path),
             text: Text(
-              t.patient_main.favourite,
+              t.patientMain.favourite,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[1],
@@ -79,12 +79,12 @@ class PatientMainScreen extends HookWidget {
 
               selectedIndex.value = 2;
             },
-            alias: t.patient_main.appointment,
+            alias: t.patientMain.appointment,
             icon: buildDrawerIcon(
               iconName: AppAssets.icons.appointmentsIcon.path,
             ),
             text: Text(
-              t.patient_main.appointment,
+              t.patientMain.appointment,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[2],
@@ -94,10 +94,10 @@ class PatientMainScreen extends HookWidget {
               if (selectedIndex.value == 3) return;
               selectedIndex.value = 3;
             },
-            alias: t.patient_main.settings,
+            alias: t.patientMain.settings,
             icon: buildDrawerIcon(iconName: AppAssets.icons.settingsIcon.path),
             text: Text(
-              t.patient_main.settings,
+              t.patientMain.settings,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[3],
@@ -216,26 +216,26 @@ class PatientMainScreen extends HookWidget {
 
                       switch (index) {
                         case 0:
-                          drawerController.selectItem(t.patient_main.home);
+                          drawerController.selectItem(t.patientMain.home);
                           selectedIndex.value = 0;
                           break;
                         case 1:
-                          drawerController.selectItem(t.patient_main.favourite);
+                          drawerController.selectItem(t.patientMain.favourite);
                           selectedIndex.value = 1;
                           break;
                         case 2:
                           drawerController.selectItem(
-                            t.patient_main.appointment,
+                            t.patientMain.appointment,
                           );
                           selectedIndex.value = 2;
 
                           break;
                         case 3:
-                          drawerController.selectItem(t.patient_main.settings);
+                          drawerController.selectItem(t.patientMain.settings);
                           selectedIndex.value = 3;
                           break;
                         default:
-                          drawerController.selectItem(t.patient_main.home);
+                          drawerController.selectItem(t.patientMain.home);
                           selectedIndex.value = 0;
                       }
                     },
@@ -293,7 +293,7 @@ class PatientMainScreen extends HookWidget {
       onPressed: () {
         DialogUtils.showMessage(
           context: context,
-          message: t.settings.logout_confirmation,
+          message: t.settings.logoutConfirmation,
           title: t.settings.logout,
           posActionText: t.dialog.ok,
           posAction: () {

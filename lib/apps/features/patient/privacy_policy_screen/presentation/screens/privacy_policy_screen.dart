@@ -11,13 +11,13 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = t.privacy_policy.sections;
+    final sections = t.privacyPolicy.sections;
 
     return AppScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MainAppBar(title: t.privacy_policy.title),
+          MainAppBar(title: t.privacyPolicy.title),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -26,48 +26,48 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 _buildSectionCard(
                   context,
-                  title: sections.information_we_collect.title,
-                  description: sections.information_we_collect.description,
-                  bullets: sections.information_we_collect.bullets,
+                  title: sections.informationWeCollect.title,
+                  description: sections.informationWeCollect.description,
+                  bullets: sections.informationWeCollect.bullets,
                   icon: Icons.shield_outlined,
                 ),
                 const SizedBox(height: 16),
                 _buildSectionCard(
                   context,
-                  title: sections.how_we_use_information.title,
-                  description: sections.how_we_use_information.description,
-                  bullets: sections.how_we_use_information.bullets,
+                  title: sections.howWeUseInformation.title,
+                  description: sections.howWeUseInformation.description,
+                  bullets: sections.howWeUseInformation.bullets,
                   icon: Icons.analytics_outlined,
                 ),
                 const SizedBox(height: 16),
                 _buildSectionCard(
                   context,
-                  title: sections.data_security.title,
-                  description: sections.data_security.description,
-                  bullets: sections.data_security.bullets,
+                  title: sections.dataSecurity.title,
+                  description: sections.dataSecurity.description,
+                  bullets: sections.dataSecurity.bullets,
                   icon: Icons.lock_outline,
                 ),
                 const SizedBox(height: 16),
                 _buildSectionCard(
                   context,
-                  title: sections.third_party_services.title,
-                  description: sections.third_party_services.description,
-                  bullets: sections.third_party_services.bullets,
+                  title: sections.thirdPartyServices.title,
+                  description: sections.thirdPartyServices.description,
+                  bullets: sections.thirdPartyServices.bullets,
                   icon: Icons.extension_outlined,
                 ),
                 const SizedBox(height: 16),
                 _buildSectionCard(
                   context,
-                  title: sections.your_rights.title,
-                  description: sections.your_rights.description,
-                  bullets: sections.your_rights.bullets,
+                  title: sections.yourRights.title,
+                  description: sections.yourRights.description,
+                  bullets: sections.yourRights.bullets,
                   icon: Icons.admin_panel_settings_outlined,
                 ),
                 const SizedBox(height: 16),
                 _buildSectionCard(
                   context,
-                  title: sections.contact_us.title,
-                  description: sections.contact_us.description,
+                  title: sections.contactUs.title,
+                  description: sections.contactUs.description,
                   bullets: null,
                   icon: Icons.mail_outline,
                 ),
@@ -113,12 +113,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      t.privacy_policy.title,
+                      t.privacyPolicy.title,
                       style: context.bold18.textPrimary.rubik,
                     ),
                     // const SizedBox(height: 2),
                     Text(
-                      t.privacy_policy.last_updated,
+                      t.privacyPolicy.lastUpdated,
                       style: context.regular12.textMuted.rubik,
                     ),
                   ],
@@ -128,7 +128,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           ),
           // const SizedBox(height: 16),
           Text(
-            t.privacy_policy.introduction,
+            t.privacyPolicy.introduction,
             style: context.regular14.textSecondary.rubik.copyWith(height: 1.5),
           ),
         ],

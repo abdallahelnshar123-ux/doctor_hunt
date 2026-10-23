@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/validators.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_text_password.dart';
@@ -64,12 +65,12 @@ class AdminLoginScreen extends HookWidget {
                     children: [
                       SizedBox(height: 100),
                       Text(
-                        t.auth.welcome_back,
+                        t.auth.welcomeBack,
                         style: context.medium24.black.rubik,
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        t.auth.admin_subtitle,
+                        t.auth.adminSubtitle,
                         style: context.regular14.textSecondary.rubik,
                         textAlign: TextAlign.center,
                       ),
@@ -78,7 +79,10 @@ class AdminLoginScreen extends HookWidget {
                         controller: emailController,
                         fillColor: AppColors.bgPrimary,
                       ),
-                      CustomTextPassword(controller: passwordController),
+                      CustomTextPassword(
+                        controller: passwordController,
+                        validator: (value) => Validators.password(value),
+                      ),
                       SizedBox(height: 24),
                       _builtLoginButton(
                         context,
@@ -108,7 +112,7 @@ class AdminLoginScreen extends HookWidget {
         const ForgotPasswordRoute().push(context);
       },
       child: Text(
-        t.auth.forgot_password,
+        t.auth.forgotPassword,
         style: context.regular14.brandPrimary.rubik,
       ),
     );

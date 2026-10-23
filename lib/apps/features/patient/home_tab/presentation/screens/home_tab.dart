@@ -100,7 +100,7 @@ class HomeTab extends StatelessWidget {
           style: context.light20.bgPrimary.rubik,
           children: [
             TextSpan(
-              text: '\n${t.home.find_doctor}',
+              text: '\n${t.home.findDoctor}',
               style: context.bold24.bgPrimary.rubik,
             ),
           ],

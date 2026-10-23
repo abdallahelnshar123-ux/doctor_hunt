@@ -28,13 +28,13 @@ class ChooseRoleScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AppAssets.icons.appLogo.path, width: 70),
                     Text(
-                      t.choose_role.title,
+                      t.chooseRole.title,
                       style: context.bold24.textPrimary.rubik,
                       textAlign: .center,
                     ),
                     SizedBox(height: 25),
                     Text(
-                      t.choose_role.role_selection,
+                      t.chooseRole.roleSelection,
                       style: context.extraLight28.textDark.plusJakartaSans,
                       textAlign: .center,
                     ),
@@ -43,8 +43,8 @@ class ChooseRoleScreen extends StatelessWidget {
                         const PatientLoginRoute().push(context);
                       },
                       child: RoleWidget(
-                        roleTitle: t.choose_role.patient.title,
-                        roleDescription: t.choose_role.patient.description,
+                        roleTitle: t.chooseRole.patient.title,
+                        roleDescription: t.chooseRole.patient.description,
                         roleIcon: AppAssets.icons.patientIcon.path,
                         role: UserRoles.patient,
                       ),
@@ -54,8 +54,8 @@ class ChooseRoleScreen extends StatelessWidget {
                         const AdminLoginRoute().push(context);
                       },
                       child: RoleWidget(
-                        roleTitle: t.choose_role.admin.title,
-                        roleDescription: t.choose_role.admin.description,
+                        roleTitle: t.chooseRole.admin.title,
+                        roleDescription: t.chooseRole.admin.description,
                         roleIcon: AppAssets.icons.adminIcon.path,
                         role: UserRoles.admin,
                       ),

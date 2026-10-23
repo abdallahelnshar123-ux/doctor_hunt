@@ -39,7 +39,7 @@ class OnboardingScreen extends HookWidget {
         title: t.onboarding.page3.title,
         subtitle: t.onboarding.page3.subtitle,
         imageUrl: AppAssets.images.onBoarding3.path,
-        firstButton: t.onboarding.get_started,
+        firstButton: t.onboarding.getStarted,
         secondButton: t.onboarding.skip,
       ),
     ];
@@ -85,13 +85,15 @@ class OnboardingScreen extends HookWidget {
             SizedBox(height: 30),
             CustomElevatedButton(
               buttonWidth: context.width - 48,
-              onPressed: () {
+              onPressed: () async {
                 if (currentIndex.value < onboardingPages.length - 1) {
                   debugPrint(currentIndex.value.toString());
                   currentIndex.value++;
                 } else {
-                  userPrefs.setOnboardingDone();
-                  const ChooseRoleRoute().go(context);
+                  await userPrefs.setOnboardingDone();
+                  if (context.mounted) {
+                    const ChooseRoleRoute().go(context);
+                  }
                 }
               },
               backgroundColor: AppColors.brandPrimary,
@@ -102,9 +104,11 @@ class OnboardingScreen extends HookWidget {
             ),
 
             TextButton(
-              onPressed: () {
-                userPrefs.setOnboardingDone();
-                const ChooseRoleRoute().go(context);
+              onPressed: () async {
+                await userPrefs.setOnboardingDone();
+                if (context.mounted) {
+                  const ChooseRoleRoute().go(context);
+                }
               },
               child: Text(
                 currentPage.secondButton,

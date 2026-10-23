@@ -80,7 +80,7 @@ class DoctorCard extends StatelessWidget {
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {},
       child: Text(
-        t.doctor_details.book_now,
+        t.doctorDetails.bookNow,
         style: context.medium11.bgPrimary.rubik,
       ),
     ),
@@ -91,7 +91,7 @@ class DoctorCard extends StatelessWidget {
       flex: 3,
       child: Text.rich(
         TextSpan(
-          text: '${t.doctor_details.next_available}\n',
+          text: '${t.doctorDetails.nextAvailable}\n',
           style: context.medium12.brandPrimary.rubik,
           children: [
             TextSpan(
@@ -99,7 +99,7 @@ class DoctorCard extends StatelessWidget {
               style: context.medium12.textSecondary.rubik,
             ),
             TextSpan(
-              text: ' ${t.common.am} ${t.doctor_details.tomorrow}',
+              text: ' ${t.common.am} ${t.doctorDetails.tomorrow}',
               style: context.light12.textSecondary.rubik,
             ),
           ],
@@ -118,16 +118,16 @@ class DoctorCard extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              doctor?.name ?? t.doctor_details.doctor_name,
+              doctor?.name ?? t.doctorDetails.doctorName,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
           Text(
-            doctor?.specialty.name ?? t.doctor_details.tooth_dentist,
+            doctor?.specialty.name ?? t.doctorDetails.toothDentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(
-            t.doctor_details.experience(Years: '7'),
+            t.doctorDetails.experience(Years: '7'),
             style: context.light11.textSecondary.rubik,
           ),
           SizedBox(height: 5),
@@ -139,7 +139,7 @@ class DoctorCard extends StatelessWidget {
             children: [
               _patientStoriesWidget(text: '87%', context: context),
               _patientStoriesWidget(
-                text: t.doctor_details.patient_stories(Count: '69'),
+                text: t.doctorDetails.patientStories(Count: '69'),
                 context: context,
               ),
             ],

@@ -60,7 +60,7 @@ class AdminMainScreen extends HookWidget {
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.appointmentsIcon.path,
-              label: t.admin.appointments_tab.title,
+              label: t.admin.appointmentsTab.title,
               index: 1,
               selectedIndex: selectedIndex.value,
               context: context,

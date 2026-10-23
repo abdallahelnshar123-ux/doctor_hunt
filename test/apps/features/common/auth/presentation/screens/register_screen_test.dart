@@ -87,11 +87,11 @@ void main() {
     testWidgets('renders all required widgets', (tester) async {
       await tester.pumpWidget(createWidgetUnderTest());
 
-      expect(find.text(t.auth.join_us), findsOneWidget);
-      expect(find.text(t.auth.auth_subtitle), findsOneWidget);
-      expect(find.text(t.auth.sign_up), findsOneWidget);
-      expect(find.text(t.auth.have_account), findsOneWidget);
-      expect(find.text(t.auth.agree_terms), findsOneWidget);
+      expect(find.text(t.auth.joinUs), findsOneWidget);
+      expect(find.text(t.auth.authSubtitle), findsOneWidget);
+      expect(find.text(t.auth.signUp), findsOneWidget);
+      expect(find.text(t.auth.haveAccount), findsOneWidget);
+      expect(find.text(t.auth.agreeTerms), findsOneWidget);
       expect(find.text(t.auth.username), findsOneWidget);
       expect(find.text(t.auth.google), findsOneWidget);
       expect(find.text(t.auth.password), findsOneWidget);
@@ -112,17 +112,17 @@ void main() {
       await tester.pumpWidget(createWidgetUnderTest());
 
       await tester.scrollUntilVisible(
-        find.text(t.auth.sign_up),
+        find.text(t.auth.signUp),
         50.0,
         scrollable: find.byType(Scrollable).first,
       );
 
-      await tester.tap(find.text(t.auth.sign_up));
+      await tester.tap(find.text(t.auth.signUp));
       await tester.pumpAndSettle();
 
-      expect(find.text(t.validators.this_field_is_required), findsOneWidget);
-      expect(find.text(t.validators.email_is_required), findsOneWidget);
-      expect(find.text(t.validators.password_is_required), findsOneWidget);
+      expect(find.text(t.validators.thisFieldIsRequired), findsOneWidget);
+      expect(find.text(t.validators.emailIsRequired), findsOneWidget);
+      expect(find.text(t.validators.passwordIsRequired), findsOneWidget);
 
       verifyNever(() => authBloc.add(any()));
     });
@@ -144,16 +144,16 @@ void main() {
         await tester.pump();
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.sign_up),
+          find.text(t.auth.signUp),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
 
-        await tester.tap(find.text(t.auth.sign_up));
+        await tester.tap(find.text(t.auth.signUp));
 
         await tester.pump();
 
-        expect(find.text(t.auth.you_must_agree_to_terms), findsOneWidget);
+        expect(find.text(t.auth.youMustAgreeToTerms), findsOneWidget);
         verifyNever(() => authBloc.add(any()));
       },
     );
@@ -175,21 +175,21 @@ void main() {
         await tester.pump();
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.agree_terms),
+          find.text(t.auth.agreeTerms),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
-        await tester.tap(find.text(t.auth.agree_terms));
+        await tester.tap(find.text(t.auth.agreeTerms));
         await tester.pump();
         expect(find.byIcon(Icons.circle), findsOneWidget);
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.sign_up),
+          find.text(t.auth.signUp),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
 
-        await tester.tap(find.text(t.auth.sign_up));
+        await tester.tap(find.text(t.auth.signUp));
 
         final captured = verify(() => authBloc.add(captureAny())).captured;
 
@@ -229,12 +229,12 @@ void main() {
         await tester.pumpWidget(createWidgetUnderTest());
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.have_account),
+          find.text(t.auth.haveAccount),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
 
-        await tester.tap(find.text(t.auth.have_account));
+        await tester.tap(find.text(t.auth.haveAccount));
         await tester.pumpAndSettle();
 
         expect(find.byType(PatientLoginScreen), findsOneWidget);
@@ -247,18 +247,18 @@ void main() {
         await tester.pumpWidget(createWidgetUnderTest());
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.agree_terms),
+          find.text(t.auth.agreeTerms),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
 
         expect(find.byIcon(Icons.circle_outlined), findsOneWidget);
 
-        await tester.tap(find.text(t.auth.agree_terms));
+        await tester.tap(find.text(t.auth.agreeTerms));
         await tester.pump();
         expect(find.byIcon(Icons.circle), findsOneWidget);
 
-        await tester.tap(find.text(t.auth.agree_terms));
+        await tester.tap(find.text(t.auth.agreeTerms));
         await tester.pump();
         expect(find.byIcon(Icons.circle_outlined), findsOneWidget);
       },
@@ -272,7 +272,7 @@ void main() {
         await tester.tap(find.byType(BackButtonWidget));
         await tester.pumpAndSettle();
 
-        expect(find.text(t.choose_role.title), findsOneWidget);
+        expect(find.text(t.chooseRole.title), findsOneWidget);
       },
     );
 
@@ -377,7 +377,7 @@ void main() {
         await tester.pump();
 
         controller.add(
-          ContinueWithGoogleErrorState(t.errors.cancelled_by_user),
+          ContinueWithGoogleErrorState(t.errors.cancelledByUser),
         );
         await tester.pump();
 
@@ -404,7 +404,7 @@ void main() {
         await tester.pump();
 
         expect(find.text(t.dialog.success), findsOneWidget);
-        expect(find.text(t.dialog.registered_successfully), findsOneWidget);
+        expect(find.text(t.dialog.registeredSuccessfully), findsOneWidget);
         expect(find.text(t.dialog.ok), findsOneWidget);
 
         await controller.close();
@@ -426,7 +426,7 @@ void main() {
         controller.add(RegisterWithEmailPasswordSuccessState());
         await tester.pump();
 
-        expect(find.text(t.dialog.registered_successfully), findsOneWidget);
+        expect(find.text(t.dialog.registeredSuccessfully), findsOneWidget);
 
         await tester.tap(find.text(t.dialog.ok));
         await tester.pumpAndSettle();

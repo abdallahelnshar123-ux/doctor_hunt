@@ -84,7 +84,7 @@ class PatientProfileScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.profile.data_was_updated_successfully,
+            message: t.profile.dataWasUpdatedSuccessfully,
           );
           context.read<AuthBloc>().add(CheckAuthStatusRequested());
           const PatientMainRoute().go(context);
@@ -205,7 +205,7 @@ class PatientProfileScreen extends HookWidget {
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           children: [
             Text(
-              t.profile.personal_information,
+              t.profile.personalInformation,
               style: context.medium18.textPrimary.rubik,
             ),
             const SizedBox(height: 10),
@@ -216,7 +216,7 @@ class PatientProfileScreen extends HookWidget {
             ),
             const SizedBox(height: 10),
             TextFormWidget(
-              hintText: t.profile.add_phone_number,
+              hintText: t.profile.addPhoneNumber,
               label: t.profile.phone,
               controller: phoneController,
               validator: (value) {
@@ -259,7 +259,7 @@ class PatientProfileScreen extends HookWidget {
                           size: 20,
                         ),
                         Text(
-                          t.admin.update_doctor_details.save_changes,
+                          t.admin.updateDoctorDetails.saveChanges,
                           style: context.semiBold16.white.rubik,
                         ),
                       ],

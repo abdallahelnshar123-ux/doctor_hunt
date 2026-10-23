@@ -60,8 +60,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             context: context,
             message: t
                 .admin
-                .doctor_availability_screen
-                .data_was_updated_successfully,
+                .doctorAvailabilityScreen
+                .dataWasUpdatedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
@@ -71,7 +71,7 @@ class DoctorAvailabilityScreen extends HookWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(t.admin.doctor_availability_screen.doctor_availability),
+          title: Text(t.admin.doctorAvailabilityScreen.doctorAvailability),
         ),
         body: ListView(
           padding: EdgeInsets.all(20),
@@ -79,12 +79,12 @@ class DoctorAvailabilityScreen extends HookWidget {
             _buildDoctorCard(doctor: doctor, context: context),
             _buildText(
               context: context,
-              text: t.admin.doctor_availability_screen.working_days,
+              text: t.admin.doctorAvailabilityScreen.workingDays,
             ),
             _buildWorkingDaysWidget(context: context, workingDays: workingDays),
             _buildText(
               context: context,
-              text: t.admin.doctor_availability_screen.working_hours,
+              text: t.admin.doctorAvailabilityScreen.workingHours,
             ),
             _buildDropDownGroup(
               context: context,
@@ -101,8 +101,8 @@ class DoctorAvailabilityScreen extends HookWidget {
                     context: context,
                     message: t
                         .admin
-                        .doctor_availability_screen
-                        .start_time_and_endtime_must_be_different,
+                        .doctorAvailabilityScreen
+                        .startTimeAndEndtimeMustBeDifferent,
                   );
                   return;
                 }
@@ -126,7 +126,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                     size: 20,
                   ),
                   Text(
-                    t.admin.update_doctor_details.save_changes,
+                    t.admin.updateDoctorDetails.saveChanges,
                     style: context.semiBold16.white.rubik,
                   ),
                 ],
@@ -163,7 +163,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   initialSelection: startTime.value,
                   onSelected: (value) => startTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
-                  title: t.admin.doctor_availability_screen.start_time,
+                  title: t.admin.doctorAvailabilityScreen.startTime,
                 ),
               ),
               Expanded(
@@ -171,7 +171,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   initialSelection: endTime.value,
                   onSelected: (value) => endTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
-                  title: t.admin.doctor_availability_screen.end_time,
+                  title: t.admin.doctorAvailabilityScreen.endTime,
                 ),
               ),
             ],
@@ -180,7 +180,7 @@ class DoctorAvailabilityScreen extends HookWidget {
             initialSelection: slotDuration.value,
             onSelected: (value) => slotDuration.value = SlotDuration.values
                 .firstWhere((element) => element.name == value),
-            title: t.admin.doctor_availability_screen.slot_duration,
+            title: t.admin.doctorAvailabilityScreen.slotDuration,
           ),
         ],
       ),
@@ -321,8 +321,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             ),
             label: Text(
               doctor.active
-                  ? t.admin.doctor_availability_screen.active
-                  : t.admin.doctor_availability_screen.inactive,
+                  ? t.admin.doctorAvailabilityScreen.active
+                  : t.admin.doctorAvailabilityScreen.inactive,
               style: doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,

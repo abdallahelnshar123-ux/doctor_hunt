@@ -106,10 +106,10 @@ void main() {
 
       await tester.pumpWidget(createWidgetUnderTest());
 
-      expect(find.text(t.auth.welcome_back), findsOneWidget);
-      expect(find.text(t.auth.admin_subtitle), findsOneWidget);
+      expect(find.text(t.auth.welcomeBack), findsOneWidget);
+      expect(find.text(t.auth.adminSubtitle), findsOneWidget);
       expect(find.text(t.auth.login), findsOneWidget);
-      expect(find.text(t.auth.forgot_password), findsOneWidget);
+      expect(find.text(t.auth.forgotPassword), findsOneWidget);
 
       expect(find.byType(EmailTextFieldWidget), findsOneWidget);
       expect(find.byType(CustomTextPassword), findsOneWidget);
@@ -132,7 +132,7 @@ void main() {
         await tester.pump();
 
         verifyNever(() => authBloc.add(any()));
-        expect(find.text(t.validators.email_is_required), findsOneWidget);
+        expect(find.text(t.validators.emailIsRequired), findsOneWidget);
       },
     );
 
@@ -186,10 +186,10 @@ void main() {
 
         expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
 
-        await tester.tap(find.text(t.auth.forgot_password));
+        await tester.tap(find.text(t.auth.forgotPassword));
         await tester.pumpAndSettle();
 
-        expect(find.text(t.forgot_password.title), findsOneWidget);
+        expect(find.text(t.forgotPassword.title), findsOneWidget);
       },
     );
 
@@ -207,7 +207,7 @@ void main() {
         await tester.tap(find.byType(BackButtonWidget));
         await tester.pumpAndSettle();
 
-        expect(find.text(t.choose_role.title), findsOneWidget);
+        expect(find.text(t.chooseRole.title), findsOneWidget);
       },
     );
 

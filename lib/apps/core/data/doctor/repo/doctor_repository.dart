@@ -36,7 +36,7 @@ class DoctorRepository {
       } catch (e) {
         return Left(
           ServerFailure(
-            t.errors.error_while_adding_doctor_please_try_again_later,
+            t.errors.errorWhileAddingDoctorPleaseTryAgainLater,
           ),
         );
       }
@@ -45,6 +45,17 @@ class DoctorRepository {
 
       await _firestoreService.addDoctor(doctorDto);
       return right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, Doctor>> getDoctorById(String doctorId) async {
+    try {
+      final doctorDto = await _firestoreService.getDoctorById(doctorId);
+      return Right(doctorDto.toDoctor());
     } on AppException catch (e) {
       return Left(e.toFailure());
     } catch (e) {
@@ -114,7 +125,7 @@ class DoctorRepository {
         } catch (e) {
           return Left(
             ServerFailure(
-              t.errors.error_while_updating_doctor_please_try_again_later,
+              t.errors.errorWhileUpdatingDoctorPleaseTryAgainLater,
             ),
           );
         }

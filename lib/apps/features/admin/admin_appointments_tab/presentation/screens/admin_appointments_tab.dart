@@ -37,7 +37,7 @@ class AdminAppointmentsTab extends StatelessWidget {
             getIt<AdminAppointmentsBloc>()
               ..add(FetchAdminAppointmentsRequested()),
         child: Scaffold(
-          appBar: AdminAppbar(title: t.admin.appointments_tab.title),
+          appBar: AdminAppbar(title: t.admin.appointmentsTab.title),
           body: DefaultTabController(
             initialIndex: 0,
             length: 3,
@@ -58,9 +58,9 @@ class AdminAppointmentsTab extends StatelessWidget {
                   indicatorSize: .tab,
                   indicatorAnimation: .elastic,
                   tabs: [
-                    Tab(child: Text(t.patient_appointments.upcoming)),
-                    Tab(child: Text(t.patient_appointments.completed)),
-                    Tab(child: Text(t.patient_appointments.canceled)),
+                    Tab(child: Text(t.patientAppointments.upcoming)),
+                    Tab(child: Text(t.patientAppointments.completed)),
+                    Tab(child: Text(t.patientAppointments.canceled)),
                   ],
                 ),
                 Expanded(

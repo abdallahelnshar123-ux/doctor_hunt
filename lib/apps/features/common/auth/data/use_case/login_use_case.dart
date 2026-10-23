@@ -26,7 +26,7 @@ class LoginUseCase {
       if (r.role == role) {
         return Right(r);
       } else {
-        return Left(UnauthorizedFailure(t.errors.no_account_associated));
+        return Left(UnauthorizedFailure(t.errors.noAccountAssociated));
       }
     });
   }

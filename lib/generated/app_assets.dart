@@ -18,114 +18,56 @@ class AppAssets {
 class $AppAssetsGenIcons {
   const $AppAssetsGenIcons();
 
-  final SvgGenImage adminIcon = const SvgGenImage(
-    'assets/icons/admin_icon.svg',
-  );
+  final SvgGenImage adminIcon = const SvgGenImage('assets/icons/admin_icon.svg');
   final SvgGenImage appLogo = const SvgGenImage('assets/icons/app_logo.svg');
-  final SvgGenImage appointmentsIcon = const SvgGenImage(
-    'assets/icons/appointments_icon.svg',
-  );
-  final SvgGenImage facebookIcon = const SvgGenImage(
-    'assets/icons/facebook_icon.svg',
-  );
-  final SvgGenImage favouriteIcon = const SvgGenImage(
-    'assets/icons/favourite_icon.svg',
-  );
+  final SvgGenImage appointmentsIcon = const SvgGenImage('assets/icons/appointments_icon.svg');
+  final SvgGenImage facebookIcon = const SvgGenImage('assets/icons/facebook_icon.svg');
+  final SvgGenImage favouriteIcon = const SvgGenImage('assets/icons/favourite_icon.svg');
   final SvgGenImage feeIcon = const SvgGenImage('assets/icons/fee_icon.svg');
-  final SvgGenImage googleIcon = const SvgGenImage(
-    'assets/icons/google_icon.svg',
-  );
+  final SvgGenImage googleIcon = const SvgGenImage('assets/icons/google_icon.svg');
   final SvgGenImage homeIcon = const SvgGenImage('assets/icons/home_icon.svg');
   final SvgGenImage likeIcon = const SvgGenImage('assets/icons/like_icon.svg');
-  final SvgGenImage medicalIcon = const SvgGenImage(
-    'assets/icons/medical_icon.svg',
-  );
-  final SvgGenImage patientIcon = const SvgGenImage(
-    'assets/icons/patient_icon.svg',
-  );
-  final SvgGenImage sDollarIcon = const SvgGenImage(
-    'assets/icons/s_dollar_icon.svg',
-  );
-  final SvgGenImage settingsIcon = const SvgGenImage(
-    'assets/icons/settings_icon.svg',
-  );
+  final SvgGenImage medicalIcon = const SvgGenImage('assets/icons/medical_icon.svg');
+  final SvgGenImage patientIcon = const SvgGenImage('assets/icons/patient_icon.svg');
+  final SvgGenImage sDollarIcon = const SvgGenImage('assets/icons/s_dollar_icon.svg');
+  final SvgGenImage settingsIcon = const SvgGenImage('assets/icons/settings_icon.svg');
   final SvgGenImage starIcon = const SvgGenImage('assets/icons/star_icon.svg');
-  final SvgGenImage starIconRated = const SvgGenImage(
-    'assets/icons/star_icon_rated.svg',
-  );
-  final SvgGenImage starIconUnrated = const SvgGenImage(
-    'assets/icons/star_icon_unrated.svg',
-  );
-  final SvgGenImage switchIcon = const SvgGenImage(
-    'assets/icons/switch_icon.svg',
-  );
+  final SvgGenImage starIconRated = const SvgGenImage('assets/icons/star_icon_rated.svg');
+  final SvgGenImage starIconUnrated = const SvgGenImage('assets/icons/star_icon_unrated.svg');
+  final SvgGenImage switchIcon = const SvgGenImage('assets/icons/switch_icon.svg');
 }
 
 class $AppAssetsGenImages {
   const $AppAssetsGenImages();
 
-  final AssetGenImage appIcon = const AssetGenImage(
-    'assets/images/app_icon.png',
-  );
-  final AssetGenImage categoryImage1 = const AssetGenImage(
-    'assets/images/category_image1.png',
-  );
-  final AssetGenImage categoryImage2 = const AssetGenImage(
-    'assets/images/category_image2.png',
-  );
-  final AssetGenImage categoryImage3 = const AssetGenImage(
-    'assets/images/category_image3.png',
-  );
-  final AssetGenImage categoryImage4 = const AssetGenImage(
-    'assets/images/category_image4.png',
-  );
-  final AssetGenImage fallbackUserImage = const AssetGenImage(
-    'assets/images/fallback_user_image.png',
-  );
-  final AssetGenImage forgotPasswordImage = const AssetGenImage(
-    'assets/images/forgot_password_image.png',
-  );
-  final AssetGenImage noDoctorsFoundImage = const AssetGenImage(
-    'assets/images/no_doctors_found_image.png',
-  );
-  final AssetGenImage onBoarding1 = const AssetGenImage(
-    'assets/images/on_boarding1.png',
-  );
-  final AssetGenImage onBoarding2 = const AssetGenImage(
-    'assets/images/on_boarding2.png',
-  );
-  final AssetGenImage onBoarding3 = const AssetGenImage(
-    'assets/images/on_boarding3.png',
-  );
-  final AssetGenImage splashImage12 = const AssetGenImage(
-    'assets/images/splash_image_12+.png',
-  );
-  final AssetGenImage testDoctorImage = const AssetGenImage(
-    'assets/images/test_doctor_image.png',
-  );
-  final AssetGenImage testMapImage = const AssetGenImage(
-    'assets/images/test_map_image.png',
-  );
-  final AssetGenImage userAvatar = const AssetGenImage(
-    'assets/images/user_avatar.png',
-  );
+  final AssetGenImage appIcon = const AssetGenImage('assets/images/app_icon.png');
+  final AssetGenImage categoryImage1 = const AssetGenImage('assets/images/category_image1.png');
+  final AssetGenImage categoryImage2 = const AssetGenImage('assets/images/category_image2.png');
+  final AssetGenImage categoryImage3 = const AssetGenImage('assets/images/category_image3.png');
+  final AssetGenImage categoryImage4 = const AssetGenImage('assets/images/category_image4.png');
+  final AssetGenImage fallbackUserImage = const AssetGenImage('assets/images/fallback_user_image.png');
+  final AssetGenImage forgotPasswordImage = const AssetGenImage('assets/images/forgot_password_image.png');
+  final AssetGenImage noDoctorsFoundImage = const AssetGenImage('assets/images/no_doctors_found_image.png');
+  final AssetGenImage onBoarding1 = const AssetGenImage('assets/images/on_boarding1.png');
+  final AssetGenImage onBoarding2 = const AssetGenImage('assets/images/on_boarding2.png');
+  final AssetGenImage onBoarding3 = const AssetGenImage('assets/images/on_boarding3.png');
+  final AssetGenImage splashImage12 = const AssetGenImage('assets/images/splash_image_12+.png');
+  final AssetGenImage testDoctorImage = const AssetGenImage('assets/images/test_doctor_image.png');
+  final AssetGenImage testMapImage = const AssetGenImage('assets/images/test_map_image.png');
+  final AssetGenImage userAvatar = const AssetGenImage('assets/images/user_avatar.png');
 }
 
 class $AppAssetsGenLottie {
   const $AppAssetsGenLottie();
 
-  final LottieGenImage emptyState = const LottieGenImage(
-    'assets/lottie/empty_state.lottie',
-  );
+  final LottieGenImage emptyState = const LottieGenImage('assets/lottie/empty_state.lottie');
 }
 
 class $AppAssetsGenFonts {
   const $AppAssetsGenFonts();
 
-  final String plusJakartaSansVariableFontWght =
-      'assets/fonts/PlusJakartaSans-VariableFont_wght.ttf';
-  final String rubikVariableFontWght =
-      'assets/fonts/Rubik-VariableFont_wght.ttf';
+  final String plusJakartaSansVariableFontWght = 'assets/fonts/PlusJakartaSans-VariableFont_wght.ttf';
+  final String rubikVariableFontWght = 'assets/fonts/Rubik-VariableFont_wght.ttf';
 }
 
 class AssetGenImage {
@@ -193,14 +135,8 @@ class AssetGenImage {
     return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;
@@ -250,14 +186,8 @@ class SvgGenImage {
     );
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;
@@ -282,12 +212,7 @@ class LottieGenImage {
     LottieImageProviderFactory? imageProviderFactory,
     Key? key,
     AssetBundle? bundle,
-    Widget Function(
-      BuildContext context,
-      Widget child,
-      LottieComposition? composition,
-    )?
-    frameBuilder,
+    Widget Function(BuildContext context, Widget child, LottieComposition? composition)? frameBuilder,
     ImageErrorWidgetBuilder? errorBuilder,
     double? width,
     double? height,
@@ -324,14 +249,8 @@ class LottieGenImage {
     );
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;

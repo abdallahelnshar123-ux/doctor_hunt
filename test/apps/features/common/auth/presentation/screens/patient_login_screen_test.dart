@@ -97,16 +97,16 @@ void main() {
 
       await tester.pumpWidget(createWidgetUnderTest());
 
-      expect(find.text(t.auth.welcome_back), findsOneWidget);
-      expect(find.text(t.auth.auth_subtitle), findsOneWidget);
+      expect(find.text(t.auth.welcomeBack), findsOneWidget);
+      expect(find.text(t.auth.authSubtitle), findsOneWidget);
       expect(find.text(t.auth.login), findsOneWidget);
 
       expect(find.text(t.auth.google), findsOneWidget);
       expect(find.text(t.auth.password), findsOneWidget);
       expect(find.text(t.auth.email), findsOneWidget);
 
-      expect(find.text(t.auth.forgot_password), findsOneWidget);
-      expect(find.text(t.auth.no_account), findsOneWidget);
+      expect(find.text(t.auth.forgotPassword), findsOneWidget);
+      expect(find.text(t.auth.noAccount), findsOneWidget);
 
       expect(find.byType(EmailTextFieldWidget), findsOneWidget);
       expect(find.byType(CustomTextPassword), findsOneWidget);
@@ -140,7 +140,7 @@ void main() {
         await tester.pump();
 
         verifyNever(() => authBloc.add(any()));
-        expect(find.text(t.validators.email_is_required), findsOneWidget);
+        expect(find.text(t.validators.emailIsRequired), findsOneWidget);
       },
     );
 
@@ -226,14 +226,14 @@ void main() {
         expect(FocusManager.instance.primaryFocus?.hasFocus, isTrue);
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.forgot_password),
+          find.text(t.auth.forgotPassword),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
-        await tester.tap(find.text(t.auth.forgot_password));
+        await tester.tap(find.text(t.auth.forgotPassword));
         await tester.pumpAndSettle();
 
-        expect(find.text(t.forgot_password.title), findsOneWidget);
+        expect(find.text(t.forgotPassword.title), findsOneWidget);
       },
     );
 
@@ -250,7 +250,7 @@ void main() {
         await tester.tap(find.byType(BackButtonWidget));
         await tester.pumpAndSettle();
 
-        expect(find.text(t.choose_role.title), findsOneWidget);
+        expect(find.text(t.chooseRole.title), findsOneWidget);
       },
     );
 
@@ -265,16 +265,16 @@ void main() {
         await tester.pumpWidget(createWidgetUnderTest());
 
         await tester.scrollUntilVisible(
-          find.text(t.auth.no_account),
+          find.text(t.auth.noAccount),
           50.0,
           scrollable: find.byType(Scrollable).first,
         );
 
-        await tester.tap(find.text(t.auth.no_account));
+        await tester.tap(find.text(t.auth.noAccount));
         await tester.pumpAndSettle();
 
         // Check if we navigated to the register screen (verifying its app bar or title)
-        expect(find.text(t.auth.sign_up), findsOneWidget);
+        expect(find.text(t.auth.signUp), findsOneWidget);
       },
     );
 
@@ -365,7 +365,7 @@ void main() {
         await tester.pump();
 
         controller.add(
-          ContinueWithGoogleErrorState(t.errors.cancelled_by_user),
+          ContinueWithGoogleErrorState(t.errors.cancelledByUser),
         );
         await tester.pump();
 

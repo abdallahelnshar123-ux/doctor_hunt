@@ -21,7 +21,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Text(
-            t.home.top_rated_doctors,
+            t.home.topRatedDoctors,
             style: context.medium18.textTertiary.rubik,
           ),
         ),
@@ -38,7 +38,7 @@ class TopRatedDoctorsWidget extends StatelessWidget {
                   height: 190,
                   width: double.infinity,
                   child: Text(
-                    t.admin.doctors_tab.no_doctors_found,
+                    t.admin.doctorsTab.noDoctorsFound,
                     style: context.medium10.black.rubik,
                   ),
                 );

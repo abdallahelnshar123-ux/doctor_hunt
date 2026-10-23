@@ -80,7 +80,7 @@ class _ReviewInputWidgetState extends State<ReviewInputWidget> {
             style: context.regular10.textPrimary.rubik,
             borderSideColor: AppColors.transparent,
             contentPadding: EdgeInsets.all(10),
-            hintText: t.patient_appointments.tab_to_write_review,
+            hintText: t.patientAppointments.tabToWriteReview,
             hintStyle: context.regular10.textSecondary.rubik,
           ),
         ],

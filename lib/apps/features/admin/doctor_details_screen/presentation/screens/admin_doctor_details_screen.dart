@@ -29,7 +29,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.admin.doctor_details_screen.doctor_details),
+        title: Text(t.admin.doctorDetailsScreen.doctorDetails),
         centerTitle: true,
       ),
       body: ListView(
@@ -57,7 +57,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
               children: [
                 Icon(Icons.edit_outlined, color: AppColors.white, size: 20),
                 Text(
-                  t.admin.doctor_details_screen.edit_doctor,
+                  t.admin.doctorDetailsScreen.editDoctor,
                   style: context.semiBold16.white.rubik,
                 ),
               ],
@@ -85,7 +85,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
       onPressed: () {
         DoctorAvailabilityRoute(doctor).push(context);
       },
-      label: Text(t.admin.doctor_details_screen.manage_availability),
+      label: Text(t.admin.doctorDetailsScreen.manageAvailability),
     );
   }
 
@@ -107,7 +107,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
         color: isActive ? AppColors.brandPrimaryDark : AppColors.statusError,
       ),
       label: Text(
-        isActive ? t.admin.doctors_tab.active : t.admin.doctors_tab.inactive,
+        isActive ? t.admin.doctorsTab.active : t.admin.doctorsTab.inactive,
         style: isActive
             ? context.medium10.brandPrimaryDark.rubik
             : context.regular10.statusError.rubik,

@@ -32,7 +32,7 @@ class AdminAppointmentsBloc
     final userOption = _userSessionManager.getCurrentUser();
 
     if (userOption.isNone()) {
-      emit(AdminAppointmentsErrorState(t.errors.user_not_authenticated));
+      emit(AdminAppointmentsErrorState(t.errors.userNotAuthenticated));
       return;
     }
 

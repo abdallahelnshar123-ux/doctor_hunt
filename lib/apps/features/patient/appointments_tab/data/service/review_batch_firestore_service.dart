@@ -36,9 +36,9 @@ class ReviewBatchFirestoreService {
 
       await batch.commit();
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }

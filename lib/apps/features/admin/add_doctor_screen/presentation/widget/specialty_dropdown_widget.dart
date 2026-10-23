@@ -43,7 +43,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         hintStyle: context.light14.textSecondary.rubik,
-        hintText: t.admin.add_doctor_screen.select_specialty,
+        hintText: t.admin.addDoctorScreen.selectSpecialty,
         enabled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),

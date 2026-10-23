@@ -409,7 +409,7 @@ void main() {
         // Assert
         expect(
           result,
-          Left(UnauthorizedFailure(t.errors.some_thing_went_wrong)),
+          Left(UnauthorizedFailure(t.errors.someThingWentWrong)),
         );
         verify(
           () => mockAuthService.loginWithEmailAndPassword(

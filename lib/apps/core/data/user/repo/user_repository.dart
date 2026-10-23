@@ -48,7 +48,7 @@ class UserRepository {
         try {
           imageUrl = await _cloudinaryService.uploadImage(file: image);
         } catch (e) {
-          return Left(ServerFailure(t.errors.some_thing_went_wrong));
+          return Left(ServerFailure(t.errors.someThingWentWrong));
         }
       }
 

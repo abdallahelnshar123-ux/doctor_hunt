@@ -75,7 +75,7 @@ class AdminProfileScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.profile.data_was_updated_successfully,
+            message: t.profile.dataWasUpdatedSuccessfully,
           );
           context.read<AuthBloc>().add(CheckAuthStatusRequested());
           const AdminMainRoute().go(context);
@@ -83,7 +83,7 @@ class AdminProfileScreen extends HookWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(t.admin.profile_screen.title),
+          title: Text(t.admin.profileScreen.title),
           centerTitle: true,
         ),
         body: Column(
@@ -187,7 +187,7 @@ class AdminProfileScreen extends HookWidget {
           padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           children: [
             Text(
-              t.admin.profile_screen.full_name,
+              t.admin.profileScreen.fullName,
               style: context.semiBold12.textPrimary.rubik,
             ),
             const SizedBox(height: 10),
@@ -197,12 +197,12 @@ class AdminProfileScreen extends HookWidget {
                 Icons.person_2_outlined,
                 color: AppColors.textSecondary,
               ),
-              hintText: t.admin.profile_screen.full_name,
+              hintText: t.admin.profileScreen.fullName,
               hintStyle: context.regular12.textSecondary.rubik,
             ),
             const SizedBox(height: 10),
             Text(
-              t.admin.profile_screen.email_address,
+              t.admin.profileScreen.emailAddress,
               style: context.semiBold12.textPrimary.rubik,
             ),
             const SizedBox(height: 10),
@@ -249,7 +249,7 @@ class AdminProfileScreen extends HookWidget {
                           size: 20,
                         ),
                         Text(
-                          t.admin.update_doctor_details.save_changes,
+                          t.admin.updateDoctorDetails.saveChanges,
                           style: context.semiBold16.white.rubik,
                         ),
                       ],

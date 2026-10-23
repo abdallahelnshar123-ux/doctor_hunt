@@ -20,7 +20,7 @@ class PatientDoctorDetailsScreen extends StatelessWidget {
     return AppScaffold(
       body: Column(
         children: [
-          MainAppBar(title: t.doctor_details.title),
+          MainAppBar(title: t.doctorDetails.title),
           Expanded(
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),

@@ -95,7 +95,7 @@ class AuthRepository {
         authUserDto.id,
       );
       if (databaseUser == null) {
-        return Left(UnauthorizedFailure(t.errors.some_thing_went_wrong));
+        return Left(UnauthorizedFailure(t.errors.someThingWentWrong));
       }
 
       final user = databaseUser.toUser();
