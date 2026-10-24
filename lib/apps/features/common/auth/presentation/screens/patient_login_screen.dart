@@ -42,7 +42,7 @@ class PatientLoginScreen extends HookWidget {
         }
         if (state is ContinueWithGoogleErrorState) {
           DialogUtils.hideLoading(context: context);
-          if (!state.message.contains(t.errors.cancelled_by_user)) {
+          if (!state.message.contains(t.errors.cancelledByUser)) {
             DialogUtils.showMessage(
               posActionText: t.dialog.ok,
               title: t.dialog.error,
@@ -76,12 +76,12 @@ class PatientLoginScreen extends HookWidget {
                     children: [
                       SizedBox(height: 100),
                       Text(
-                        t.auth.welcome_back,
+                        t.auth.welcomeBack,
                         style: context.medium24.black.rubik,
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        t.auth.auth_subtitle,
+                        t.auth.authSubtitle,
                         style: context.regular14.textSecondary.rubik,
                         textAlign: TextAlign.center,
                       ),
@@ -129,7 +129,7 @@ class PatientLoginScreen extends HookWidget {
         const ForgotPasswordRoute().push(context);
       },
       child: Text(
-        t.auth.forgot_password,
+        t.auth.forgotPassword,
         style: context.regular14.brandPrimary.rubik,
       ),
     );
@@ -145,7 +145,7 @@ class PatientLoginScreen extends HookWidget {
         const RegisterRoute().go(context);
       },
       child: Text(
-        t.auth.no_account,
+        t.auth.noAccount,
         style: context.regular14.brandPrimary.rubik,
       ),
     );

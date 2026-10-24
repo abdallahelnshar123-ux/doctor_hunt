@@ -18,7 +18,7 @@ class FindDoctorsScreen extends StatelessWidget {
     return AppScaffold(
       body: Column(
         children: [
-          MainAppBar(title: t.doctor_details.find_doctors),
+          MainAppBar(title: t.doctorDetails.findDoctors),
           Expanded(
             child: Column(
               children: [
@@ -46,7 +46,7 @@ class FindDoctorsScreen extends StatelessWidget {
                         if (displayList.isEmpty) {
                           return Center(
                             child: Text(
-                              t.admin.doctors_tab.no_doctors_found,
+                              t.admin.doctorsTab.noDoctorsFound,
                               style: context.medium16.textTertiary.rubik,
                             ),
                           );

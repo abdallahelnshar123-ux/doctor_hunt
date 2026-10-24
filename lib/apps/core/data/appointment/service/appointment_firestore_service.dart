@@ -47,7 +47,7 @@ class AppointmentFirestoreService {
           .toList();
     } catch (e) {
       throw ServerException(
-        message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+        message: t.errors.failedToFetchAppointments(E: e.toString()),
       );
     }
   }
@@ -69,7 +69,7 @@ class AppointmentFirestoreService {
         })
         .handleError((e) {
           throw ServerException(
-            message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+            message: t.errors.failedToFetchAppointments(E: e.toString()),
           );
         });
   }
@@ -88,7 +88,7 @@ class AppointmentFirestoreService {
           .set(appointmentDto.toFireStore());
     } catch (e) {
       throw ServerException(
-        message: t.errors.failed_to_book_appointment(E: e.toString()),
+        message: t.errors.failedToBookAppointment(E: e.toString()),
       );
     }
   }
@@ -110,7 +110,7 @@ class AppointmentFirestoreService {
         })
         .handleError((e) {
           throw ServerException(
-            message: t.errors.failed_to_fetch_appointments(E: e.toString()),
+            message: t.errors.failedToFetchAppointments(E: e.toString()),
           );
         });
   }
@@ -126,7 +126,7 @@ class AppointmentFirestoreService {
           .update({FirestoreConstants.status: status.name});
     } catch (e) {
       throw ServerException(
-        message: t.errors.failed_to_update_appointment_status(E: e.toString()),
+        message: t.errors.failedToUpdateAppointmentStatus(E: e.toString()),
       );
     }
   }

@@ -67,7 +67,7 @@ class AdminDoctorsTab extends HookWidget {
                 child: Builder(
                   builder: (context) {
                     return SearchTextFieldWidget(
-                      hintText: t.admin.doctors_tab.search_doctors,
+                      hintText: t.admin.doctorsTab.searchDoctors,
                       borderRadius: 12,
                       focusNode: searchFocusNode,
                       controller: searchController,
@@ -107,7 +107,7 @@ class AdminDoctorsTab extends HookWidget {
                   padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
                   children: [
                     Text(
-                      t.admin.doctors_tab.no_doctors_found,
+                      t.admin.doctorsTab.noDoctorsFound,
                       style: context.bold16.textPrimary.rubik.copyWith(
                         height: 2,
                       ),
@@ -116,8 +116,8 @@ class AdminDoctorsTab extends HookWidget {
                     Text(
                       t
                           .admin
-                          .doctors_tab
-                          .no_doctor_name_or_specialty_match_search,
+                          .doctorsTab
+                          .noDoctorNameOrSpecialtyMatchSearch,
                       style: context.regular12.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),
@@ -144,12 +144,12 @@ class AdminDoctorsTab extends HookWidget {
                 padding: const EdgeInsets.fromLTRB(40, 70, 40, 40),
                 children: [
                   Text(
-                    t.admin.doctors_tab.no_doctors,
+                    t.admin.doctorsTab.noDoctors,
                     style: context.bold16.textPrimary.rubik.copyWith(height: 2),
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    t.admin.doctors_tab.no_doctors_to_search_add_some,
+                    t.admin.doctorsTab.noDoctorsToSearchAddSome,
                     style: context.regular12.textSecondary.rubik,
                     textAlign: TextAlign.center,
                   ),
@@ -191,7 +191,7 @@ class AdminDoctorsTab extends HookWidget {
         const AddDoctorRoute().push(context);
       },
       label: Text(
-        t.admin.doctors_tab.add_doctor,
+        t.admin.doctorsTab.addDoctor,
         style: context.regular12.white.rubik,
       ),
       icon: Icon(Icons.add_rounded, fontWeight: .w700),

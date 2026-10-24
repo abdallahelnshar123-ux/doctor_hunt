@@ -17,9 +17,9 @@ class AccountSettingsWidget extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           _buildSettingsCard(
-            subtitle: t.admin.settings.edit_super_admin_details_permissions,
+            subtitle: t.admin.settings.editSuperAdminDetailsPermissions,
             context,
-            title: t.admin.settings.admin_profile,
+            title: t.admin.settings.adminProfile,
             icon: Icons.person_2_outlined,
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
@@ -37,8 +37,8 @@ class AccountSettingsWidget extends StatelessWidget {
               const ForgotPasswordRoute().push(context);
             },
             context,
-            title: t.admin.settings.change_password,
-            subtitle: t.admin.settings.update_master_security_credentials,
+            title: t.admin.settings.changePassword,
+            subtitle: t.admin.settings.updateMasterSecurityCredentials,
             icon: Icons.lock_reset_outlined,
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
@@ -49,11 +49,11 @@ class AccountSettingsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.admin.settings.app_information,
-            subtitle: t.admin.settings.v1_0_0,
+            title: t.admin.settings.appInformation,
+            subtitle: t.admin.settings.v100,
             icon: Icons.info_outline,
             trailing: Text(
-              t.settings.v1_0_0,
+              t.settings.v100,
               style: context.light12.textSecondary.rubik,
             ),
           ),

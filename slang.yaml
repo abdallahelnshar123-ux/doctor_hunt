@@ -12,8 +12,8 @@ translate_var: t
 enum_name: AppLocale
 class_name: Translations
 translation_class_visibility: private
-key_case: snake
-key_map_case: camel
+key_case: camel
+key_map_case: snake
 param_case: pascal
 sanitization:
   enabled: true

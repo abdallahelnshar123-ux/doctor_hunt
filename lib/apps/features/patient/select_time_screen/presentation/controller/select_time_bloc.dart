@@ -54,7 +54,7 @@ class SelectTimeBloc extends Bloc<SelectTimeEvent, SelectTimeState> {
     final userOption = _userSessionManager.getCurrentUser();
 
     await userOption.fold(
-      () async => emit(BookAppointmentError(t.errors.user_not_logged_in)),
+      () async => emit(BookAppointmentError(t.errors.userNotLoggedIn)),
       (user) async {
         final appointment = Appointment(
           id: '',

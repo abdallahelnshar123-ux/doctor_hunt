@@ -9,7 +9,7 @@ class MoreOptionWidget extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Text(
-          t.settings.more_options,
+          t.settings.moreOptions,
           style: context.medium16.textSecondary.rubik,
         ),
         SizedBox(height: 5),
@@ -35,9 +35,9 @@ class MoreOptionWidget extends StatelessWidget {
         _buildDivider(),
         _buildSettingsCard(
           context,
-          title: t.settings.build_version,
+          title: t.settings.buildVersion,
           trailing: Text(
-            t.settings.v1_0_0,
+            t.settings.v100,
             style: context.light12.textSecondary.rubik,
           ),
           backgroundColor: AppColors.settingsOrange,

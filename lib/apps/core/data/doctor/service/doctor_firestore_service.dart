@@ -28,9 +28,26 @@ class DoctorFirestoreService {
       var doc = _getDoctorsCollection().doc();
       return doc.set(doctor.copyWith(id: doc.id));
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
+
+  Future<DoctorDto> getDoctorById(String doctorId) async {
+    try {
+      final doc = await _getDoctorsCollection().doc(doctorId).get();
+      final data = doc.data();
+      if (data == null) {
+        throw ServerException(message: t.errors.someThingWentWrong);
+      }
+      return data;
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? t.errors.serverError);
+    } on SocketException {
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -45,10 +62,10 @@ class DoctorFirestoreService {
           switch (error) {
             case FirebaseException _:
               throw ServerException(
-                message: error.message ?? t.errors.server_error,
+                message: error.message ?? t.errors.serverError,
               );
             case SocketException _:
-              throw NetworkException(message: t.errors.no_internet);
+              throw NetworkException(message: t.errors.noInternet);
             default:
               throw UnexpectedException(message: error.toString());
           }
@@ -57,16 +74,17 @@ class DoctorFirestoreService {
 
   Stream<List<DoctorDto>> getDoctorsStreamForPatient() {
     return _getDoctorsCollection()
+        .where(FirestoreConstants.active, isEqualTo: true)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
         .handleError((error) {
           switch (error) {
             case FirebaseException _:
               throw ServerException(
-                message: error.message ?? t.errors.server_error,
+                message: error.message ?? t.errors.serverError,
               );
             case SocketException _:
-              throw NetworkException(message: t.errors.no_internet);
+              throw NetworkException(message: t.errors.noInternet);
             default:
               throw UnexpectedException(message: error.toString());
           }
@@ -82,9 +100,9 @@ class DoctorFirestoreService {
         FirestoreConstants.active: active,
       });
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -94,9 +112,9 @@ class DoctorFirestoreService {
     try {
       await _getDoctorsCollection().doc(doctor.id).set(doctor);
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -106,9 +124,9 @@ class DoctorFirestoreService {
     try {
       await _getDoctorsCollection().doc(doctorId).delete();
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }

@@ -34,7 +34,7 @@ class CloudinaryService {
     final responseBody = await response.stream.bytesToString();
 
     if (response.statusCode != 200) {
-      throw ServerException(message: t.errors.some_thing_went_wrong);
+      throw ServerException(message: t.errors.someThingWentWrong);
     }
 
     final data = jsonDecode(responseBody) as Map<String, dynamic>;
@@ -42,7 +42,7 @@ class CloudinaryService {
     final secureUrl = data['secure_url'] as String?;
 
     if (secureUrl == null || secureUrl.isEmpty) {
-      throw ServerException(message: t.errors.some_thing_went_wrong);
+      throw ServerException(message: t.errors.someThingWentWrong);
     }
 
     return secureUrl;

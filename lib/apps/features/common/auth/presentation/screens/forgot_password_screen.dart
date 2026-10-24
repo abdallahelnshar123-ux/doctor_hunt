@@ -44,7 +44,7 @@ class ForgotPasswordScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             context: context,
-            message: t.forgot_password.success_dialog_message,
+            message: t.forgotPassword.successDialogMessage,
             posActionText: t.dialog.ok,
             title: t.dialog.success,
             posAction: () {
@@ -54,7 +54,7 @@ class ForgotPasswordScreen extends HookWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(t.forgot_password.title)),
+        appBar: AppBar(title: Text(t.forgotPassword.title)),
         body: Form(
           key: formKey,
           child: ListView(
@@ -69,13 +69,13 @@ class ForgotPasswordScreen extends HookWidget {
               ),
               SizedBox(height: 20),
               Text(
-                t.forgot_password.description,
+                t.forgotPassword.description,
                 style: context.regular14.textSecondary.rubik,
                 textAlign: .center,
               ),
               SizedBox(height: 60),
               CustomTextFormField(
-                hintText: t.forgot_password.email,
+                hintText: t.forgotPassword.email,
                 controller: emailController,
                 validator: (value) => Validators.email(value),
               ),
@@ -103,7 +103,7 @@ class ForgotPasswordScreen extends HookWidget {
       },
       backgroundColor: AppColors.brandPrimary,
       child: Text(
-        t.forgot_password.send_link,
+        t.forgotPassword.sendLink,
         style: context.medium18.white.rubik,
       ),
     );

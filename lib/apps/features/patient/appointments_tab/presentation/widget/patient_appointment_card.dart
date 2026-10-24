@@ -175,7 +175,7 @@ class PatientAppointmentCard extends HookWidget {
                       children: [
                         _buildListTile(
                           icon: Icons.calendar_month_outlined,
-                          title: t.patient_appointments.appointment_date,
+                          title: t.patientAppointments.appointmentDate,
                           subtitle: DateFormat(
                             'dd MMM yyyy',
                           ).format(appointment.sessionTime),
@@ -183,7 +183,7 @@ class PatientAppointmentCard extends HookWidget {
                         ),
                         _buildListTile(
                           icon: Icons.access_time,
-                          title: t.patient_appointments.appointment_time,
+                          title: t.patientAppointments.appointmentTime,
                           subtitle: DateFormat(
                             'hh:mm a',
                           ).format(appointment.sessionTime),
@@ -191,8 +191,8 @@ class PatientAppointmentCard extends HookWidget {
                         ),
                         _buildListTile(
                           icon: Icons.payments_outlined,
-                          title: t.patient_appointments.consultation_fee,
-                          subtitle: t.patient_appointments.fee_value(
+                          title: t.patientAppointments.consultationFee,
+                          subtitle: t.patientAppointments.feeValue(
                             Fee: appointment.fee.toString(),
                           ),
                           context: context,
@@ -293,7 +293,7 @@ class PatientAppointmentCard extends HookWidget {
       child: FittedBox(
         fit: .scaleDown,
         child: Text(
-          t.patient_appointments.cancel_appointment,
+          t.patientAppointments.cancelAppointment,
           style: context.medium11.statusError.rubik,
         ),
       ),
@@ -313,7 +313,7 @@ class PatientAppointmentCard extends HookWidget {
         child: FittedBox(
           fit: .scaleDown,
           child: Text(
-            t.patient_appointments.view_details,
+            t.patientAppointments.viewDetails,
             style: context.medium11.brandPrimary.rubik,
           ),
         ),
@@ -335,7 +335,7 @@ class PatientAppointmentCard extends HookWidget {
           if (tempReview.value?.rating == 0 || tempReview.value == null) {
             SnackBarUtils.showInfoSnackBar(
               context: context,
-              message: t.patient_appointments.you_must_select_at_least_one_star,
+              message: t.patientAppointments.youMustSelectAtLeastOneStar,
             );
             return;
           }
@@ -349,7 +349,7 @@ class PatientAppointmentCard extends HookWidget {
       child: FittedBox(
         fit: .scaleDown,
         child: Text(
-          t.patient_appointments.rate_doctor,
+          t.patientAppointments.rateDoctor,
           style: context.medium11.white.rubik,
         ),
       ),

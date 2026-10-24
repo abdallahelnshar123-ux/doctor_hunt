@@ -18,12 +18,12 @@ class StatusWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: buildListTile(
-                title: t.admin.doctors_tab.total_doctors,
+                title: t.admin.doctorsTab.totalDoctors,
                 number: context.select<AdminDoctorsBloc, String>((bloc) {
                   final currentState = bloc.state;
                   return currentState is AdminDoctorsSuccess
                       ? currentState.allDoctors.length.toString()
-                      : t.admin.doctors_tab.dash;
+                      : t.admin.doctorsTab.dash;
                 }),
                 context: context,
               ),
@@ -43,7 +43,7 @@ class StatusWidget extends StatelessWidget {
                     current is AdminDoctorsLoading,
                 builder: (context, state) {
                   return buildListTile(
-                    title: t.admin.doctors_tab.active,
+                    title: t.admin.doctorsTab.active,
                     number: state is AdminDoctorsSuccess
                         ? state.activeDoctorsCount.toString()
                         : '-',

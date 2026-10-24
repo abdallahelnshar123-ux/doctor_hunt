@@ -139,7 +139,7 @@ class AdminAppointmentCard extends HookWidget {
                       children: [
                         _buildListTile(
                           icon: Icons.calendar_month_outlined,
-                          title: t.admin.appointments_tab.date,
+                          title: t.admin.appointmentsTab.date,
                           subtitle: DateFormat(
                             'dd MMM yyyy',
                           ).format(appointment.sessionTime),
@@ -147,7 +147,7 @@ class AdminAppointmentCard extends HookWidget {
                         ),
                         _buildListTile(
                           icon: Icons.access_time,
-                          title: t.admin.appointments_tab.time,
+                          title: t.admin.appointmentsTab.time,
                           subtitle: DateFormat(
                             'hh:mm a',
                           ).format(appointment.sessionTime),
@@ -155,8 +155,8 @@ class AdminAppointmentCard extends HookWidget {
                         ),
                         _buildListTile(
                           icon: Icons.payments_outlined,
-                          title: t.admin.appointments_tab.fee,
-                          subtitle: t.patient_appointments.fee_value(
+                          title: t.admin.appointmentsTab.fee,
+                          subtitle: t.patientAppointments.feeValue(
                             Fee: appointment.fee.toString(),
                           ),
                           context: context,
@@ -217,7 +217,7 @@ class AdminAppointmentCard extends HookWidget {
       child: FittedBox(
         fit: .scaleDown,
         child: Text(
-          t.patient_appointments.cancel_appointment,
+          t.patientAppointments.cancelAppointment,
           style: context.medium11.statusError.rubik,
         ),
       ),
@@ -239,7 +239,7 @@ class AdminAppointmentCard extends HookWidget {
             child: FittedBox(
               fit: .scaleDown,
               child: Text(
-                t.patient_appointments.view_details,
+                t.patientAppointments.viewDetails,
                 style: context.medium11.brandPrimary.rubik,
               ),
             ),
@@ -263,7 +263,7 @@ class AdminAppointmentCard extends HookWidget {
       child: FittedBox(
         fit: .scaleDown,
         child: Text(
-          t.admin.appointments_tab.mark_as_completed,
+          t.admin.appointmentsTab.markAsCompleted,
           style: context.medium11.white.rubik,
         ),
       ),

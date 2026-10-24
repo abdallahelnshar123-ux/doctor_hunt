@@ -381,12 +381,18 @@ GoRouter createRouter({
       final protectedRoutes = [
         '/patient_main',
         '/admin_main',
+        '/admin_appointment_details',
+        '/patient_appointment_details',
         '/add_doctor',
-        '/find_doctor',
+        '/popular_doctors',
+        '/find_doctors',
         '/patient_doctor_details',
+        '/patient_profile',
+        '/admin_profile',
         '/admin_doctor_details',
         '/admin_update_doctor_details',
-        '/appointment',
+        '/doctor_availability',
+        '/select_time',
       ];
 
       if (protectedRoutes.contains(currentLocation) && !isLoggedIn) {

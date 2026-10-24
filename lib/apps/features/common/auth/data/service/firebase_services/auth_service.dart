@@ -38,18 +38,18 @@ class AuthService {
       var userCredential = await _firebaseAuth.signInWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.e_codes.web_user_interaction_failed ||
-          e.code == t.e_codes.cancelled) {
+      if (e.code == t.eCodes.webUserInteractionFailed ||
+          e.code == t.eCodes.cancelled) {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -75,12 +75,12 @@ class AuthService {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.e_codes.invalid_credential) {
-        throw ServerException(message: t.errors.email_or_password_is_incorrect);
+      if (e.code == t.eCodes.invalidCredential) {
+        throw ServerException(message: t.errors.emailOrPasswordIsIncorrect);
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -106,14 +106,14 @@ class AuthService {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.e_codes.email_already_in_use) {
+      if (e.code == t.eCodes.emailAlreadyInUse) {
         throw ServerException(
-          message: t.errors.email_address_already_in_use_by_another_account,
+          message: t.errors.emailAddressAlreadyInUseByAnotherAccount,
         );
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -132,9 +132,9 @@ class AuthService {
     try {
       await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.no_internet);
+      throw NetworkException(message: t.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -152,14 +152,14 @@ class AuthService {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -178,9 +178,9 @@ class AuthService {
     try {
       await _firebaseAuth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -200,7 +200,7 @@ class AuthService {
       final user = _firebaseAuth.currentUser;
 
       if (user == null) {
-        throw UnauthorizedException(message: t.errors.user_not_authenticated);
+        throw UnauthorizedException(message: t.errors.userNotAuthenticated);
       }
 
       final credential = await _getGoogleCredential();
@@ -208,14 +208,14 @@ class AuthService {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -234,9 +234,9 @@ class AuthService {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.server_error);
+      throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.server_error);
+      throw NetworkException(message: t.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {

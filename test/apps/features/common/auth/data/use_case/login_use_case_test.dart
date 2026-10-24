@@ -83,7 +83,7 @@ void main() {
         // Assert
         expect(
           result,
-          equals(Left(UnauthorizedFailure(t.errors.no_account_associated))),
+          equals(Left(UnauthorizedFailure(t.errors.noAccountAssociated))),
         );
         verify(
           () => mockAuthRepository.loginWithEmailAndPassword(

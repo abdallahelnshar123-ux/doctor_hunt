@@ -89,7 +89,6 @@ dev_dependencies:
   flutter_lints: ^6.0.0
   build_runner: ^2.15.1
   go_router_builder: ^4.4.0
-  slang_build_runner: ^4.19.0
   injectable_generator: ^3.0.2
 
 

@@ -50,7 +50,7 @@ class DoctorsWidget extends StatelessWidget {
                       TabBarWidget(
                         isSelected: state.selectedSpecialty == null,
                         number: state.allDoctors.length,
-                        label: t.admin.doctors_tab.all,
+                        label: t.admin.doctorsTab.all,
                       ),
                       ...state.specialtyCounts.map((map) {
                         final label = map.keys.first.name;
@@ -111,12 +111,12 @@ class DoctorsWidget extends StatelessWidget {
           fit: .fitHeight,
         ),
         Text(
-          t.admin.doctors_tab.no_doctors_found,
+          t.admin.doctorsTab.noDoctorsFound,
           style: context.bold16.textPrimary.rubik.copyWith(height: 2),
           textAlign: .center,
         ),
         Text(
-          t.admin.doctors_tab.no_doctors_description,
+          t.admin.doctorsTab.noDoctorsDescription,
           style: context.regular12.textSecondary.rubik,
           textAlign: .center,
         ),
