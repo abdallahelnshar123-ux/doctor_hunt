@@ -14,7 +14,7 @@ A checklist of common architectural, network, and rendering bottlenecks that del
 **✅ Solution:** Explain that fonts should be local. 
 - Remove the `google_fonts` package.
 - Download the required `.ttf` or `.otf` files.
-- Place them in `assets/fonts/` and register them explicitly in `pubspec.yaml` under the `fonts:` section.
+- Place them in `../../assets/fonts` and register them explicitly in `../../pubspec.yaml` under the `fonts:` section.
 - Update `ThemeData(fontFamily: 'YourFont')` and any TextStyles to use the local font family directly.
 
 ### 2. Local Storage Initialization (Dependency Injection)

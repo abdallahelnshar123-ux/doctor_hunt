@@ -26,18 +26,18 @@ description: Use this skill whenever you are asked to build, create, refactor, o
 ## Localization & Text
 * **No Hardcoded Text**: Hardcoded user-visible strings are strictly prohibited.
 * **Slang Package**: Utilize the `slang` package for localization.
-* All text strings MUST be added to `../../../assets/i18n/en.i18n.json` and accessed via the global translation getter `t`.
+* All text strings MUST be added to `../../assets/i18n/en.i18n.json` and accessed via the global translation getter `t`.
 * *Example*: `Text(t.admin.doctors_tab.add_doctor)`
 
 ## Colors & Styling
 * **No Hardcoded Colors**: Avoid using raw `Color(0xFF...)` or `Colors.red` directly in widgets.
-* **App Colors**: All colors must be sourced from the central theme file `../../../lib/apps/core/theme/app_colors.dart` (e.g., `AppColors.brandPrimary`).
+* **App Colors**: All colors must be sourced from the central theme file `../../lib/apps/core/theme/app_colors.dart` (e.g., `AppColors.brandPrimary`).
 * **Typography**: Utilize the generated style atom extensions on `BuildContext` for text styling.
 * *Example*: `style: context.regular12.white.rubik`
 
 ## Assets & Images
 * **No Direct Asset Paths**: Never use raw string paths (e.g., `'assets/images/logo.png'`).
-* **App Assets**: All image and asset paths must be sourced from the generated `../../../lib/generated/app_assets.dart` file.
+* **App Assets**: All image and asset paths must be sourced from the generated `../../lib/generated/app_assets.dart` file.
 * *Example*: `Image.asset(AppAssets.imagesDoctor1)`
 
 ## Widget Decomposition

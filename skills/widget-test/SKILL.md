@@ -16,8 +16,8 @@ description: Use this skill whenever the user asks you to write, fix, or update 
 
 Ensure the testing environment is properly configured before authoring widget tests.
 
-1. Add the `flutter_test` dependency to the `dev_dependencies` section of `../../../pubspec.yaml`.
-2. Place all test files in the `../../../test` directory at the root of the project.
+1. Add the `flutter_test` dependency to the `dev_dependencies` section of `../../pubspec.yaml`.
+2. Place all test files in the `../../test` directory at the root of the project.
 3. Suffix all test file names with `_test.dart` (e.g., `widget_test.dart`).
 
 ## Agent Specific Rules & Best Practices

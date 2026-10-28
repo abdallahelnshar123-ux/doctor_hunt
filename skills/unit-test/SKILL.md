@@ -130,7 +130,7 @@ Use `package:bloc_test` for verifying state emissions.
 
 ## Test Implementation Workflow
 
-- [ ] 1. Create the test file mirroring `../../../lib`.
+- [ ] 1. Create the test file mirroring `../../lib`.
 - [ ] 2. Setup `Mock` classes for all dependencies.
 - [ ] 3. Register fallback values in `setUpAll` (including enums).
 - [ ] 4. Initialize the system under test in `setUp`.
