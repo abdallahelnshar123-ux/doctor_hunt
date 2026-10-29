@@ -3,35 +3,34 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../features/common/auth/data/mappers/my_user_dto_mapper.dart';
-import '../../../features/common/auth/data/mappers/my_user_mapper.dart';
-import '../../../features/common/auth/data/models/user/my_user.dart';
+import '../../../features/common/auth/data/mappers/user_mapper.dart';
+import '../../../features/common/auth/domain/entity/user/app_user.dart';
 import '../shared_prefs/user_pref.dart';
 
 @lazySingleton
 class UserSessionManager {
   final UserPrefs _userPrefs;
 
-  final StreamController<MyUser?> _userStreamController =
-      StreamController<MyUser?>.broadcast();
+  final StreamController<AppUserEntity?> _userStreamController =
+      StreamController<AppUserEntity?>.broadcast();
 
   final StreamController<bool> _authStateController =
       StreamController<bool>.broadcast();
 
-  MyUser? _currentUser;
+  AppUserEntity? _currentUser;
 
   UserSessionManager(this._userPrefs) {
     final userDto = _userPrefs.getCurrentUser();
     if (userDto != null) {
-      _currentUser = userDto.toUser();
+      _currentUser = userDto.toEntity();
     }
   }
 
-  MyUser? get currentUser => _currentUser;
+  AppUserEntity? get currentUser => _currentUser;
 
   bool get isLoggedIn => _currentUser != null;
 
-  Stream<MyUser?> get userStream async* {
+  Stream<AppUserEntity?> get userStream async* {
     yield _currentUser;
     yield* _userStreamController.stream;
   }
@@ -41,11 +40,11 @@ class UserSessionManager {
     yield* _authStateController.stream;
   }
 
-  void updateUser(MyUser? user) {
+  void updateUser(AppUserEntity? user) {
     final bool wasLoggedIn = isLoggedIn;
     _currentUser = user;
     if (user != null) {
-      _userPrefs.setUser(user.toMyUserDto());
+      _userPrefs.setUser(user.toDto());
     } else {
       _userPrefs.clearUser();
     }
@@ -57,14 +56,14 @@ class UserSessionManager {
     }
   }
 
-  Option<MyUser> getCurrentUser() {
+  Option<AppUserEntity> getCurrentUser() {
     try {
       if (_currentUser != null) {
         return Some(_currentUser!);
       }
       final userDto = _userPrefs.getCurrentUser();
       if (userDto != null) {
-        final user = userDto.toUser();
+        final user = userDto.toEntity();
         _currentUser = user;
         return Some(user);
       } else {

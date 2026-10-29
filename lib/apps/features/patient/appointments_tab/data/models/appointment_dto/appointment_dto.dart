@@ -1,17 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_dto.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/rating_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/app_user_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user_dto/my_user_dto.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:equatable/equatable.dart';
 
+
+import '../../../../../common/auth/data/dto/user/patient_dto.dart';
+
 class AppointmentDto extends Equatable {
   final String id;
-  final MyUserDto patient;
+  final AppUserDto patient;
   final DoctorDto doctor;
   final DateTime sessionTime;
   final DateTime createdAt;
@@ -34,27 +37,29 @@ class AppointmentDto extends Equatable {
     return AppointmentDto(
       id: data[FirestoreConstants.id]?.toString() ?? '',
       patient: data[FirestoreConstants.patient] != null
-          ? MyUserDto.fromFireStore(
+          ? AppUserDto.fromJson(
               data[FirestoreConstants.patient] as Map<String, dynamic>,
             )
-          : const MyUserDto(
+          : const PatientDto(
               id: '',
               email: '',
               name: '',
               provider: UserAuthProvider.emailPassword,
             ),
       doctor: data[FirestoreConstants.doctor] != null
-          ? DoctorDto.fromFireStore(
+          ? DoctorDto.fromJson(
               data[FirestoreConstants.doctor] as Map<String, dynamic>,
             )
           : const DoctorDto(
               id: '',
+              email: '',
               name: '',
+              provider: UserAuthProvider.emailPassword,
               adminId: '',
               specialty: Specialty.allergists,
               active: false,
               consultationFee: 0.0,
-              rating: RatingDto(rating: 0.0, reviews: []),
+              rating: Rating(rating: 0.0, reviews: []),
             ),
       sessionTime: data[FirestoreConstants.sessionTime] is Timestamp
           ? (data[FirestoreConstants.sessionTime] as Timestamp).toDate()
@@ -80,8 +85,8 @@ class AppointmentDto extends Equatable {
   Map<String, dynamic> toFireStore() {
     return {
       FirestoreConstants.id: id,
-      FirestoreConstants.patient: patient.toFireStore(),
-      FirestoreConstants.doctor: doctor.toFireStore(),
+      FirestoreConstants.patient: patient.toJson(),
+      FirestoreConstants.doctor: doctor.toJson(),
       FirestoreConstants.sessionTime: Timestamp.fromDate(sessionTime),
       FirestoreConstants.createdAt: Timestamp.fromDate(createdAt),
       FirestoreConstants.fee: fee,
@@ -100,7 +105,7 @@ class AppointmentDto extends Equatable {
 
   AppointmentDto copyWith({
     String? id,
-    MyUserDto? patient,
+    AppUserDto? patient,
     DoctorDto? doctor,
     DateTime? sessionTime,
     DateTime? createdAt,

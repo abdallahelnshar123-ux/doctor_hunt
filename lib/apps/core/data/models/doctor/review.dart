@@ -1,9 +1,9 @@
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../features/common/auth/data/models/user/my_user.dart';
 
 class Review extends Equatable {
-  final MyUser reviewer;
+  final AppUserEntity reviewer;
   final int rating;
   final String? comment;
 

@@ -109,7 +109,7 @@ class PatientAppointmentCard extends HookWidget {
                             image: DecorationImage(
                               fit: .cover,
                               image: CustomCachedNetworkImage.getProvider(
-                                appointment.doctor.imageUrl,
+                                appointment.doctor.image,
                               ),
                             ),
                           ),

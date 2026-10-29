@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TopRatedDoctorsItem extends StatelessWidget {
   const TopRatedDoctorsItem({super.key, required this.doctor});
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class TopRatedDoctorsItem extends StatelessWidget {
                 maxRadius: double.infinity,
                 backgroundColor: AppColors.shimmerBaseColor,
                 foregroundImage: CustomCachedNetworkImage.getProvider(
-                  doctor.imageUrl,
+                  doctor.image,
                 ),
               ),
             ),

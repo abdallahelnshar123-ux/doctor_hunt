@@ -1,20 +1,20 @@
 import 'dart:async';
 
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../features/common/auth/data/models/user/my_user.dart';
-import '../../../../features/common/auth/data/models/user/patient_info.dart';
-import '../../../../features/common/auth/data/repo/auth_repository.dart';
+import '../../../../features/common/auth/domain/entity/user/app_user.dart';
+import '../../../../features/common/auth/domain/entity/user/patient.dart';
+import '../../../../features/common/auth/domain/repository/auth_repository.dart';
 import '../../../data/session/user_session_manager.dart';
+import 'user_event.dart';
+import 'user_state.dart';
 
 @lazySingleton
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthRepository _authRepository;
   final UserSessionManager _userSessionManager;
-  StreamSubscription<MyUser?>? _userSubscription;
+  StreamSubscription<AppUserEntity?>? _userSubscription;
 
   UserBloc(this._authRepository, this._userSessionManager)
     : super(UserState(user: _userSessionManager.currentUser)) {
@@ -22,9 +22,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
 
     _listenToUserSession();
-    // _userSubscription = _userSessionManager.userStream.listen((user) {
-    //   add(UserStreamUpdatedEvent(user));
-    // });
   }
 
   void _listenToUserSession() {
@@ -35,17 +32,19 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
   }
 
-  MyUser? get currentUser => state.user;
+  AppUserEntity? get currentUser => state.user;
 
   void _onUserStreamUpdated(
     UserStreamUpdatedEvent event,
     Emitter<UserState> emit,
   ) {
-    emit(state.copyWith(
-      user: event.user,
-      clearUser: event.user == null,
-      clearError: true,
-    ));
+    emit(
+      state.copyWith(
+        user: event.user,
+        clearUser: event.user == null,
+        clearError: true,
+      ),
+    );
   }
 
   Future<void> _onToggleFavoriteDoctor(
@@ -54,12 +53,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   ) async {
     final currentUser = state.user;
     if (currentUser == null) return;
+    if (currentUser is! PatientEntity) return;
 
     // Save previous state for potential rollback
     final previousUser = currentUser;
 
     // Optimistic local update
-    final currentFavs = currentUser.patientInfo?.favDoctors ?? [];
+    final currentFavs = currentUser.favDoctors;
     final updatedFavs = List<String>.from(currentFavs);
     if (updatedFavs.contains(event.doctorId)) {
       updatedFavs.remove(event.doctorId);
@@ -67,10 +67,14 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       updatedFavs.add(event.doctorId);
     }
 
-    final updatedPatientInfo = (currentUser.patientInfo ?? const PatientInfo())
-        .copyWith(favDoctors: updatedFavs);
-    final optimisticUser = currentUser.copyWith(
-      patientInfo: updatedPatientInfo,
+    final optimisticUser = PatientEntity(
+      id: currentUser.id,
+      email: currentUser.email,
+      name: currentUser.name,
+      provider: currentUser.provider,
+      image: currentUser.image,
+      phone: currentUser.phone,
+      favDoctors: updatedFavs,
     );
 
     // Emit optimistic state immediately

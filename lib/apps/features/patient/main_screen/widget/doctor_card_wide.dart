@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 
 import '../../../../../generated/app_assets.dart';
 import '../../../../../generated/style_atoms.dart';
-import '../../../../core/data/models/doctor/doctor.dart';
+import '../../../../features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_container_with_shadow.dart';
 
 class DoctorCardWide extends StatelessWidget {
-  final Doctor doctor;
+  final DoctorEntity doctor;
   final EdgeInsetsGeometry? margin;
 
   const DoctorCardWide({super.key, required this.doctor, this.margin});
@@ -38,8 +38,8 @@ class DoctorCardWide extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 image: DecorationImage(
                   fit: .cover,
-                  image: doctor.imageUrl != null && doctor.imageUrl!.isNotEmpty
-                      ? CachedNetworkImageProvider(doctor.imageUrl!)
+                  image: doctor.image != null && doctor.image!.isNotEmpty
+                      ? CachedNetworkImageProvider(doctor.image!)
                       : AssetImage(AppAssets.images.testDoctorImage.path)
                             as ImageProvider,
                 ),

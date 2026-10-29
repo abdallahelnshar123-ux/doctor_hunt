@@ -4,6 +4,7 @@ import 'admin_info.dart';
 import 'auth_providers.dart';
 import 'patient_info.dart';
 
+@Deprecated('Use AppUserEntity instead. This will be removed in later phases.')
 class MyUser extends Equatable {
   final String name;
   final String email;
@@ -62,4 +63,4 @@ class MyUser extends Equatable {
   }
 }
 
-enum UserRoles { admin, patient }
+enum UserRoles { admin, patient, doctor }

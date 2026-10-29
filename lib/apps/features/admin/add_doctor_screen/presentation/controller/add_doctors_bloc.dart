@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:equatable/equatable.dart';
@@ -28,8 +29,10 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
     emit(AddDoctorLoadingState());
 
     var result = await _doctorRepository.addDoctor(
-      doctor: Doctor(
+      doctor: DoctorEntity(
         id: '',
+        email: event.email,
+        provider: UserAuthProvider.emailPassword,
         name: event.name,
         adminId: event.adminId,
         specialty: event.specialty,
@@ -38,6 +41,7 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
         rating: const Rating(rating: 0.0, reviews: []),
       ),
       image: event.image,
+      password: event.password,
     );
 
     result.fold(

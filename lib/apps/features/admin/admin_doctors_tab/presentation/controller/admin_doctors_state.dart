@@ -12,9 +12,9 @@ class AdminDoctorsInitial extends AdminDoctorsState {}
 class AdminDoctorsLoading extends AdminDoctorsState {}
 
 class AdminDoctorsSuccess extends AdminDoctorsState {
-  final List<Doctor> allDoctors;
-  final List<Doctor> filteredDoctors;
-  final List<Doctor> searchDoctors;
+  final List<DoctorEntity> allDoctors;
+  final List<DoctorEntity> filteredDoctors;
+  final List<DoctorEntity> searchDoctors;
   final List<Map<Specialty, int>> specialtyCounts;
   final int activeDoctorsCount;
   final Specialty? selectedSpecialty;
@@ -31,9 +31,9 @@ class AdminDoctorsSuccess extends AdminDoctorsState {
   });
 
   AdminDoctorsSuccess copyWith({
-    List<Doctor>? allDoctors,
-    List<Doctor>? filteredDoctors,
-    List<Doctor>? searchDoctors,
+    List<DoctorEntity>? allDoctors,
+    List<DoctorEntity>? filteredDoctors,
+    List<DoctorEntity>? searchDoctors,
     List<Map<Specialty, int>>? specialtyCounts,
     int? activeDoctorsCount,
     Specialty? selectedSpecialty,

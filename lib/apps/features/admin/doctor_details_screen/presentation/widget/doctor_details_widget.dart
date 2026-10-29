@@ -3,7 +3,7 @@ part of '../screens/admin_doctor_details_screen.dart';
 class DoctorDetailsWidget extends StatelessWidget {
   const DoctorDetailsWidget({super.key, required this.doctor});
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {

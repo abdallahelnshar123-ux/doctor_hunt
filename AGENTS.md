@@ -151,13 +151,13 @@ When adding or modifying routes, DI annotations, or translation keys, execute th
 
 ```bash
 # 1. Run build_runner to generate DI (di.config.dart) and Router (app_routes.g.dart)
-flutter pub run build_runner build --delete-conflicting-outputs
+dart run build_runner build 
 
 # 2. Run slang to generate localization files
-flutter pub run slang
+dart run slang
 
 # 3. Generate asset paths (if assets changed)
-flutter pub run flutter_assets_generator
+dart run flutter_assets_generator
 ```
 
 ---
@@ -201,3 +201,18 @@ When assigned a task in this project, follow this exact workflow:
 6. **Testing & Quality**:
    * Write unit tests for BLoCs and Repositories in `test`.
    * Run `flutter test` to ensure zero regressions.
+
+---
+
+## 8. Agent Operational Rules & Constraints
+
+As an AI Agent operating within this project, you MUST strictly adhere to the following workflow constraints:
+
+* **Branching**: Do NOT create a new branch unless the user explicitly tells you to do so.
+* **Committing**: Do NOT commit any changes unless the user explicitly tells you to do so.
+* **Pushing**: Do NOT push code unless the user explicitly tells you to do so.
+* **Testing**: Do NOT build or write tests unless the user explicitly tells you to do so.
+* **UI Construction/Modification**: Do NOT build or modify UI (User Interface) components unless the user explicitly tells you to do so.
+* **No Hardcoded Text**: There must be NO hardcoded text. You MUST use the available localization tool (`slang` with `assets/i18n/en.i18n.json`) for any strings.
+* **README.md**: Do NOT read or modify the `README.md` file unless the user explicitly tells you to do so.
+* **Updating Guidelines**: Do NOT update this `AGENTS.md` file for every task. Only update it for major architectural or system rule changes that belong here, or when explicitly requested by the user.

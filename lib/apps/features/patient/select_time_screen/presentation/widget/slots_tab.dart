@@ -10,7 +10,7 @@ class SlotsTab extends HookWidget {
 
   final int index;
   final SelectTimeLoaded state;
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class SlotsTab extends HookWidget {
   Widget _buildConfirmButton(
     BuildContext context,
     ValueNotifier<DateTime?> selectedSlot,
-    Doctor doctor,
+    DoctorEntity doctor,
   ) {
     return CustomElevatedButton(
       buttonWidth: context.width - 80,

@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/appointments_list_shimmer_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_empty_list_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/presentation/widget/patient_appointment_card.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -12,11 +13,10 @@ import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/data/models/doctor/review.dart';
 import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+
 import '../controller/appointments_bloc.dart';
 
 part '../widget/appointments_list_widget.dart';
-
 part '../widget/review_input_widget.dart';
 
 class PatientAppointmentsTab extends StatelessWidget {

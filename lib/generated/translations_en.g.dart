@@ -63,6 +63,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   late final Translations$errors$en errors = Translations$errors$en.internal(_root);
   late final Translations$validators$en validators = Translations$validators$en.internal(_root);
   late final Translations$eCodes$en eCodes = Translations$eCodes$en.internal(_root);
+  late final Translations$doctor$en doctor = Translations$doctor$en.internal(_root);
 }
 
 // Path: auth
@@ -117,6 +118,9 @@ class Translations$auth$en {
 
   /// en: 'email'
   String get email => 'email';
+
+  /// en: 'Login to your doctor account'
+  String get doctorSubtitle => 'Login to your doctor account';
 }
 
 // Path: forgotPassword
@@ -183,6 +187,7 @@ class Translations$chooseRole$en with PageData2 {
 
   late final Translations$chooseRole$patient$en patient = Translations$chooseRole$patient$en.internal(_root);
   late final Translations$chooseRole$admin$en admin = Translations$chooseRole$admin$en.internal(_root);
+  late final Translations$chooseRole$doctor$en doctor = Translations$chooseRole$doctor$en.internal(_root);
 }
 
 // Path: patientMain
@@ -707,6 +712,17 @@ class Translations$eCodes$en {
   String get emailAlreadyInUse => 'email-already-in-use';
 }
 
+// Path: doctor
+class Translations$doctor$en {
+  Translations$doctor$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+  late final Translations$doctor$main$en main = Translations$doctor$main$en.internal(_root);
+  late final Translations$doctor$settings$en settings = Translations$doctor$settings$en.internal(_root);
+}
+
 // Path: onboarding.page1
 class Translations$onboarding$page1$en with PageData2 {
   Translations$onboarding$page1$en.internal(this._root);
@@ -785,6 +801,22 @@ class Translations$chooseRole$admin$en with PageData2 {
 
   /// en: 'Manage doctors and app settings.'
   String get description => 'Manage doctors and app settings.';
+}
+
+// Path: chooseRole.doctor
+class Translations$chooseRole$doctor$en with PageData2 {
+  Translations$chooseRole$doctor$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor'
+  @override
+  String get title => 'Doctor';
+
+  /// en: 'Manage appointments and consult with patients.'
+  String get description => 'Manage appointments and consult with patients.';
 }
 
 // Path: privacyPolicy.sections
@@ -956,6 +988,18 @@ class Translations$admin$addDoctorScreen$en {
   /// en: 'Doctor name'
   String get doctorName => 'Doctor name';
 
+  /// en: 'Email'
+  String get email => 'Email';
+
+  /// en: 'Password'
+  String get password => 'Password';
+
+  /// en: 'e.g. doctor@hospital.com'
+  String get emailExample => 'e.g. doctor@hospital.com';
+
+  /// en: '••••••••'
+  String get passwordExample => '••••••••';
+
   /// en: 'Specialty'
   String get specialty => 'Specialty';
 
@@ -1097,6 +1141,61 @@ class Translations$admin$profileScreen$en with PageData2 {
 
   /// en: 'Email Address'
   String get emailAddress => 'Email Address';
+}
+
+// Path: doctor.main
+class Translations$doctor$main$en {
+  Translations$doctor$main$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'My Schedule'
+  String get mySchedule => 'My Schedule';
+
+  /// en: 'My Profile'
+  String get myProfile => 'My Profile';
+
+  /// en: 'Settings'
+  String get settings => 'Settings';
+}
+
+// Path: doctor.settings
+class Translations$doctor$settings$en with PageData2 {
+  Translations$doctor$settings$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Settings'
+  @override
+  String get title => 'Doctor Settings';
+
+  /// en: 'Doctor Profile'
+  String get doctorProfile => 'Doctor Profile';
+
+  /// en: 'Edit your profile and consultation fee'
+  String get editProfileDesc => 'Edit your profile and consultation fee';
+
+  /// en: 'Manage Availability'
+  String get availability => 'Manage Availability';
+
+  /// en: 'Update working days and working hours'
+  String get availabilityDesc => 'Update working days and working hours';
+
+  /// en: 'Change Password'
+  String get changePassword => 'Change Password';
+
+  /// en: 'Update your account password'
+  String get updateMasterSecurityCredentials => 'Update your account password';
+
+  /// en: 'App Information'
+  String get appInformation => 'App Information';
+
+  /// en: 'v1.0.0'
+  String get v100 => 'v1.0.0';
 }
 
 // Path: privacyPolicy.sections.informationWeCollect

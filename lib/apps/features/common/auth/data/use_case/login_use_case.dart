@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/repo/auth_repository.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,7 +13,7 @@ class LoginUseCase {
 
   LoginUseCase(this._repository);
 
-  Future<Either<Failure, MyUser>> login({
+  Future<Either<Failure, AppUserEntity>> login({
     required UserRoles role,
     required String email,
     required String password,
@@ -23,7 +24,7 @@ class LoginUseCase {
     );
 
     return result.fold((l) => Left(l), (r) {
-      if (r.role == role) {
+      if (r.role.name == role.name) {
         return Right(r);
       } else {
         return Left(UnauthorizedFailure(t.errors.noAccountAssociated));

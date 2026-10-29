@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctor_card.dart';
@@ -12,6 +12,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/presentation/controller/user/user_state.dart';
 import '../../../../../core/widgets/app_scaffold.dart';
+import '../../../../common/auth/domain/entity/user/patient.dart';
 import '../controller/favourite_doctors_bloc.dart';
 
 class FavoriteTab extends HookWidget {
@@ -22,10 +23,12 @@ class FavoriteTab extends HookWidget {
     final patientState = context.read<PatientDoctorsBloc>().state;
     final allDoctors = patientState is PatientDoctorsSuccess
         ? patientState.doctors
-        : <Doctor>[];
+        : <DoctorEntity>[];
 
-    final initialFavIds =
-        context.read<UserBloc>().state.user?.patientInfo?.favDoctors ?? [];
+    final patient = context.read<UserBloc>().state.user is PatientEntity
+        ? context.read<UserBloc>().state.user as PatientEntity
+        : null;
+    final initialFavIds = patient?.favDoctors ?? [];
 
     useEffect(() {
       context.read<FavouriteDoctorsBloc>().add(
@@ -38,12 +41,21 @@ class FavoriteTab extends HookWidget {
     }, const []);
     return BlocListener<UserBloc, UserState>(
       listenWhen: (previous, current) {
-        final prevFavs = previous.user?.patientInfo?.favDoctors ?? [];
-        final currFavs = current.user?.patientInfo?.favDoctors ?? [];
+        final previousPatient = previous.user is PatientEntity
+            ? previous.user as PatientEntity
+            : null;
+        final currentPatient = current.user is PatientEntity
+            ? current.user as PatientEntity
+            : null;
+        final prevFavs = previousPatient?.favDoctors ?? [];
+        final currFavs = currentPatient?.favDoctors ?? [];
         return prevFavs != currFavs;
       },
       listener: (context, state) {
-        final newFavIds = state.user?.patientInfo?.favDoctors ?? [];
+        final patient = state.user is PatientEntity
+            ? state.user as PatientEntity
+            : null;
+        final newFavIds = patient?.favDoctors ?? [];
         context.read<FavouriteDoctorsBloc>().add(
           UpdateFavoriteIdsEvent(newFavIds),
         );

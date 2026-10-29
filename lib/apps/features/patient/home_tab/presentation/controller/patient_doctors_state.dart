@@ -12,9 +12,9 @@ class PatientDoctorsInitial extends PatientDoctorsState {}
 class PatientDoctorsLoading extends PatientDoctorsState {}
 
 class PatientDoctorsSuccess extends PatientDoctorsState {
-  final List<Doctor> doctors;
-  final List<Doctor> topRatedDoctors;
-  final List<Doctor> searchResults;
+  final List<DoctorEntity> doctors;
+  final List<DoctorEntity> topRatedDoctors;
+  final List<DoctorEntity> searchResults;
   final String? searchQuery;
 
   const PatientDoctorsSuccess({
@@ -25,9 +25,9 @@ class PatientDoctorsSuccess extends PatientDoctorsState {
   });
 
   PatientDoctorsSuccess copyWith({
-    List<Doctor>? doctors,
-    List<Doctor>? topRatedDoctors,
-    List<Doctor>? searchResults,
+    List<DoctorEntity>? doctors,
+    List<DoctorEntity>? topRatedDoctors,
+    List<DoctorEntity>? searchResults,
     String? searchQuery,
   }) {
     return PatientDoctorsSuccess(

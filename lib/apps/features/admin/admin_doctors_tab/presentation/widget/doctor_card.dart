@@ -1,7 +1,7 @@
 part of '../screens/admin_doctors_tab.dart';
 
 class DoctorCard extends StatelessWidget {
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   const DoctorCard({super.key, required this.doctor});
 
@@ -23,8 +23,8 @@ class DoctorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: .cover,
-                image: doctor.imageUrl != null && doctor.imageUrl!.isNotEmpty
-                    ? CachedNetworkImageProvider(doctor.imageUrl!)
+                image: doctor.image != null && doctor.image!.isNotEmpty
+                    ? CachedNetworkImageProvider(doctor.image!)
                     : AssetImage(AppAssets.images.testDoctorImage.path)
                           as ImageProvider,
               ),

@@ -7,8 +7,11 @@ import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
 import 'package:doctor_hunt/apps/core/network/cloudinary/cloudinary_service.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+import '../../../../features/common/auth/data/mappers/user_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/admin.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/patient.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
@@ -38,8 +41,8 @@ class UserRepository {
     }
   }
 
-  Future<Either<Failure, MyUser>> updateUserProfile({
-    required MyUser user,
+  Future<Either<Failure, AppUserEntity>> updateUserProfile({
+    required AppUserEntity user,
     File? image,
   }) async {
     try {
@@ -52,12 +55,50 @@ class UserRepository {
         }
       }
 
-      final updatedUser = user.copyWith(image: imageUrl);
-      final userDto = updatedUser.toMyUserDto();
+      AppUserEntity updatedUser;
+
+      if (user is AdminEntity) {
+        updatedUser = AdminEntity(
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          provider: user.provider,
+          phone: user.phone,
+          image: imageUrl ?? user.image,
+        );
+      } else if (user is PatientEntity) {
+        updatedUser = PatientEntity(
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          provider: user.provider,
+          phone: user.phone,
+          image: imageUrl ?? user.image,
+          favDoctors: user.favDoctors,
+        );
+      } else if (user is DoctorEntity) {
+        updatedUser = DoctorEntity(
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          provider: user.provider,
+          phone: user.phone,
+          image: imageUrl ?? user.image,
+          adminId: user.adminId,
+          specialty: user.specialty,
+          active: user.active,
+          consultationFee: user.consultationFee,
+          rating: user.rating,
+          availability: user.availability,
+        );
+      } else {
+        updatedUser = user;
+      }
+      final userDto = updatedUser.toDto();
 
       await Future.wait([
         _firestoreService.updateUser(userDto),
-        _userPrefs.setUser(userDto),
+      _userPrefs.setUser(userDto),
       ]);
 
       return Right(updatedUser);

@@ -13,7 +13,7 @@ import 'package:kf_drawer/kf_drawer.dart';
 import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/dialog_utils.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
@@ -27,7 +27,7 @@ class PatientMainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
 
     final selectedIndex = useValueNotifier<int>(0);
     final isDrawerOpen = useValueNotifier<bool>(false);
@@ -151,7 +151,7 @@ class PatientMainScreen extends HookWidget {
     );
   }
 
-  Widget _buildHeader({required BuildContext context, required MyUser? user}) {
+  Widget _buildHeader({required BuildContext context, required AppUserEntity? user}) {
     return ListTile(
       contentPadding: EdgeInsets.all(16),
       leading: CircleAvatar(

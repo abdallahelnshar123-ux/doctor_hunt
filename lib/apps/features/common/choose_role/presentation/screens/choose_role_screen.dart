@@ -51,6 +51,17 @@ class ChooseRoleScreen extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
+                        const DoctorLoginRoute().push(context);
+                      },
+                      child: RoleWidget(
+                        roleTitle: t.chooseRole.doctor.title,
+                        roleDescription: t.chooseRole.doctor.description,
+                        roleIcon: AppAssets.icons.medicalIcon.path,
+                        role: UserRoles.doctor,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
                         const AdminLoginRoute().push(context);
                       },
                       child: RoleWidget(

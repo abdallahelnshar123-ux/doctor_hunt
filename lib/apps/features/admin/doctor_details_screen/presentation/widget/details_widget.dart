@@ -7,7 +7,7 @@ class DetailsWidget extends StatelessWidget {
     required this.isActive,
   });
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
   final ValueNotifier<bool> isActive;
 
   @override

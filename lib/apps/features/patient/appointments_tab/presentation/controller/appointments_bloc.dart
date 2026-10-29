@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
-import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
-import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,10 +24,9 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
 
   AppointmentsBloc(
     this._appointmentRepository,
-    this._userSessionManager, [
-    DoctorRepository? doctorRepository,
-  ])  : _doctorRepository = doctorRepository ?? getIt<DoctorRepository>(),
-        super(AppointmentsInitial()) {
+    this._userSessionManager,
+    this._doctorRepository,
+  ) : super(AppointmentsInitial()) {
     on<FetchPatientAppointments>(_onFetchPatientAppointments);
     on<AddAppointmentReviewEvent>(_onAddAppointmentReview);
     on<CancelAppointmentEvent>(_onCancelAppointment);
@@ -105,19 +103,16 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
     );
   }
 
-  ({Doctor updatedDoctor, Appointment updatedAppointment})
-      _calculateUpdatedDoctorAndAppointment({
-    required Doctor freshDoctor,
+  ({DoctorEntity updatedDoctor, Appointment updatedAppointment})
+  _calculateUpdatedDoctorAndAppointment({
+    required DoctorEntity freshDoctor,
     required Appointment appointment,
     required Review review,
   }) {
     final oldRating = freshDoctor.rating;
 
     final newReviews = List<Review>.from(oldRating.reviews)..add(review);
-    final newTotalRating = newReviews.fold(
-      0,
-      (sum, item) => sum + item.rating,
-    );
+    final newTotalRating = newReviews.fold(0, (sum, item) => sum + item.rating);
     final newAverage = newTotalRating / newReviews.length;
 
     final updatedRating = Rating(rating: newAverage, reviews: newReviews);

@@ -1,10 +1,11 @@
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/app_user_dto.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../features/common/auth/data/models/user_dto/my_user_dto.dart';
+
 import '../../../constants/firestore_constants.dart';
 
 class ReviewDto extends Equatable {
-  final MyUserDto reviewer;
+  final AppUserDto reviewer;
   final int rating;
   final String? comment;
 
@@ -12,7 +13,7 @@ class ReviewDto extends Equatable {
 
   factory ReviewDto.fromFireStore(Map<String, dynamic> data) {
     return ReviewDto(
-      reviewer: MyUserDto.fromFireStore(
+      reviewer: AppUserDto.fromJson(
         Map<String, dynamic>.from(data[FirestoreConstants.reviewer] ?? {}),
       ),
       rating: (data[FirestoreConstants.rating] as num?)?.toInt() ?? 0,
@@ -22,7 +23,7 @@ class ReviewDto extends Equatable {
 
   Map<String, dynamic> toFireStore() {
     return {
-      FirestoreConstants.reviewer: reviewer.toFireStore(),
+      FirestoreConstants.reviewer: reviewer.toJson(),
       FirestoreConstants.rating: rating,
       if (comment != null) FirestoreConstants.comment: comment,
     };

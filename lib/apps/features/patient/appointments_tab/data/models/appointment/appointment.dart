@@ -1,14 +1,16 @@
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
+
 import 'package:equatable/equatable.dart';
+
+import '../../../../../common/auth/domain/entity/user/app_user.dart';
 
 enum AppointmentStatus { upcoming, completed, cancelled }
 
 class Appointment extends Equatable {
   final String id;
-  final MyUser patient;
-  final Doctor doctor;
+  final AppUserEntity patient;
+  final DoctorEntity doctor;
   final DateTime sessionTime;
   final DateTime createdAt;
   final double fee;
@@ -28,8 +30,8 @@ class Appointment extends Equatable {
 
   Appointment copyWith({
     String? id,
-    MyUser? patient,
-    Doctor? doctor,
+    AppUserEntity? patient,
+    DoctorEntity? doctor,
     DateTime? sessionTime,
     DateTime? createdAt,
     double? fee,

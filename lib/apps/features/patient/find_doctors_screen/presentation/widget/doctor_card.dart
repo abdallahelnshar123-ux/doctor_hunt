@@ -6,12 +6,12 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../../features/common/auth/domain/entity/user/doctor.dart';
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key, this.doctor});
 
-  final Doctor? doctor;
+  final DoctorEntity? doctor;
 
   @override
   Widget build(BuildContext context) {

@@ -12,7 +12,7 @@ class AdminProfileInitial extends AdminProfileState {}
 class AdminProfileLoading extends AdminProfileState {}
 
 class AdminProfileUpdateSuccess extends AdminProfileState {
-  final MyUser user;
+  final AppUserEntity user;
 
   const AdminProfileUpdateSuccess(this.user);
 

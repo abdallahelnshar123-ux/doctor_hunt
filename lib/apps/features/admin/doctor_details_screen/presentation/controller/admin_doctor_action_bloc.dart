@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
+import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

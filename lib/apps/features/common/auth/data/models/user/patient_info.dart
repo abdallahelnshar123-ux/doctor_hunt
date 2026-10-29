@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+@Deprecated('Use PatientEntity instead. This will be removed in later phases.')
 class PatientInfo extends Equatable {
   final List<String> favDoctors;
 

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/user/my_user.dart';
+import '../../../domain/entity/user/app_user.dart';
+
 
 abstract class AuthState extends Equatable {
   @override
@@ -59,7 +60,7 @@ class LogoutErrorState extends AuthState {
 }
 
 class UserAuthenticatedState extends AuthState {
-  final MyUser currentUser;
+  final AppUserEntity currentUser;
 
   UserAuthenticatedState(this.currentUser);
 

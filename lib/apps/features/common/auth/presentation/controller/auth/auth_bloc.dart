@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/data/session/user_session_manager.dart';
-import '../../../data/repo/auth_repository.dart';
+import '../../../domain/repository/auth_repository.dart';
 import '../../../data/use_case/login_use_case.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';

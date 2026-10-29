@@ -12,12 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
+import '../../../../common/auth/presentation/widgets/custom_text_password.dart';
 import '../widget/specialty_dropdown_widget.dart';
 
 class AddDoctorScreen extends HookWidget {
@@ -26,11 +27,13 @@ class AddDoctorScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final nameController = useTextEditingController();
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
     final feeController = useTextEditingController();
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
     final selectedSpecialty = useRef<Specialty?>(null);
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return BlocListener<AddDoctorsBloc, AddDoctorsState>(
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||
@@ -106,6 +109,33 @@ class AddDoctorScreen extends HookWidget {
               ),
               _buildText(
                 context: context,
+                text: t.admin.addDoctorScreen.email,
+              ),
+              CustomTextFormField(
+                controller: emailController,
+                fillColor: AppColors.bgPrimary,
+                filled: true,
+                keyboardType: TextInputType.emailAddress,
+                hintText: t.admin.addDoctorScreen.emailExample,
+                hintStyle: context.light14.textSecondary.rubik,
+                style: context.light16.textSecondary.rubik,
+                validator: (value) => Validators.email(value),
+              ),
+              _buildText(
+                context: context,
+                text: t.admin.addDoctorScreen.password,
+              ),
+              CustomTextPassword(
+                controller: passwordController,
+                fillColor: AppColors.bgPrimary,
+                filled: true,
+                hintText: t.admin.addDoctorScreen.passwordExample,
+                hintStyle: context.light14.textSecondary.rubik,
+                style: context.light16.textSecondary.rubik,
+                validator: (value) => Validators.password(value),
+              ),
+              _buildText(
+                context: context,
                 text: t.admin.addDoctorScreen.specialty,
               ),
               SpecialtyDropdownWidget(
@@ -133,6 +163,8 @@ class AddDoctorScreen extends HookWidget {
                 context: context,
                 formKey: formKey,
                 nameController: nameController,
+                emailController: emailController,
+                passwordController: passwordController,
                 feeController: feeController,
                 selectedImage: selectedImage,
                 selectedSpecialty: selectedSpecialty,
@@ -156,10 +188,12 @@ class AddDoctorScreen extends HookWidget {
     required BuildContext context,
     required GlobalKey<FormState> formKey,
     required TextEditingController nameController,
+    required TextEditingController emailController,
+    required TextEditingController passwordController,
     required TextEditingController feeController,
     required ObjectRef<File?> selectedImage,
     required ObjectRef<Specialty?> selectedSpecialty,
-    required MyUser? user,
+    required AppUserEntity? user,
   }) {
     return CustomElevatedButton(
       backgroundColor: AppColors.brandPrimary,
@@ -174,9 +208,18 @@ class AddDoctorScreen extends HookWidget {
             );
             return;
           }
+          if (selectedSpecialty.value == null) {
+            SnackBarUtils.showInfoSnackBar(
+              context: context,
+              message: t.admin.addDoctorScreen.selectSpecialty,
+            );
+            return;
+          }
           context.read<AddDoctorsBloc>().add(
             AddDoctorRequested(
               name: nameController.text.trim(),
+              email: emailController.text.trim(),
+              password: passwordController.text,
               specialty: selectedSpecialty.value!,
               image: selectedImage.value!,
               adminId: adminId,

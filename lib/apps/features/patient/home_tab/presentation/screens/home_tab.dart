@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/router/app_routes.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../widget/categories_widget.dart';
 import '../widget/popular_doctors_widget.dart';
 import '../widget/top_rated_doctors_widget.dart';
@@ -90,7 +90,7 @@ class HomeTab extends StatelessWidget {
   }
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,

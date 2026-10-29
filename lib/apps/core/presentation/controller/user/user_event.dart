@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../features/common/auth/data/models/user/my_user.dart';
+import '../../../../features/common/auth/domain/entity/user/app_user.dart';
 
 abstract class UserEvent extends Equatable {
   const UserEvent();
@@ -10,7 +10,7 @@ abstract class UserEvent extends Equatable {
 }
 
 class UserStreamUpdatedEvent extends UserEvent {
-  final MyUser? user;
+  final AppUserEntity? user;
 
   const UserStreamUpdatedEvent(this.user);
 

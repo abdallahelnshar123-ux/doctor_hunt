@@ -1,11 +1,11 @@
-import '../../features/common/auth/data/mappers/my_user_dto_mapper.dart';
+import '../../features/common/auth/data/mappers/user_mapper.dart';
 import '../data/models/doctor/review.dart';
 import '../data/models/doctor/review_dto.dart';
 
 extension ReviewDtoMapper on Review {
   ReviewDto toDto() {
     return ReviewDto(
-      reviewer: reviewer.toMyUserDto(),
+      reviewer: reviewer.toDto(),
       rating: rating,
       comment: comment,
     );

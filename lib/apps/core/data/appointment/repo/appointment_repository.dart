@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/service/appointment_firestore_service.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/mappers/user_mapper.dart';
 import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
-import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/mappers/appointment_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
@@ -71,12 +72,12 @@ class AppointmentRepository {
   }
 
   Future<Either<Failure, Unit>> addReviewAndUpdateDoctor({
-    required Doctor updatedDoctor,
+    required DoctorEntity updatedDoctor,
     required Appointment updatedAppointment,
   }) async {
     try {
       await _reviewBatchService.addReviewAndUpdateAppointment(
-        updatedDoctorDto: updatedDoctor.toDoctorDto(),
+        updatedDoctorDto: updatedDoctor.toDto() as DoctorDto,
         updatedAppointmentDto: updatedAppointment.toAppointmentDto(),
       );
       return const Right(unit);

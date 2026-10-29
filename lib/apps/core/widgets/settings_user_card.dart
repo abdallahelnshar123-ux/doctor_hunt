@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../generated/style_atoms.dart';
-import '../../features/common/auth/data/models/user/my_user.dart';
+import '../../features/common/auth/domain/entity/user/app_user.dart';
 import '../theme/app_colors.dart';
 import 'app_container_with_shadow.dart';
 import 'custom_cached_network_image.dart';
@@ -15,7 +15,7 @@ class SettingsUserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(

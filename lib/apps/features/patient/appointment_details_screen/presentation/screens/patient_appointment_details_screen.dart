@@ -35,7 +35,7 @@ class PatientAppointmentDetailsScreen extends StatelessWidget {
                   _buildPatientCard(
                     title: appointment.doctor.name,
                     subtitle: appointment.doctor.specialty.name,
-                    image: appointment.doctor.imageUrl,
+                    image: appointment.doctor.image,
                     context: context,
                   ),
                   SizedBox(height: 10),

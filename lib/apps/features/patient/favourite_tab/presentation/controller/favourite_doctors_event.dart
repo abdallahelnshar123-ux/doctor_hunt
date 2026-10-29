@@ -8,7 +8,7 @@ abstract class FavouriteDoctorsEvent extends Equatable {
 }
 
 class LoadFavoritesEvent extends FavouriteDoctorsEvent {
-  final List<Doctor> allDoctors;
+  final List<DoctorEntity> allDoctors;
   final List<String> favoriteDoctorIds;
 
   const LoadFavoritesEvent({

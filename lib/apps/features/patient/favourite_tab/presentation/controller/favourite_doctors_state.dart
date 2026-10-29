@@ -12,8 +12,8 @@ class FavouriteDoctorsInitial extends FavouriteDoctorsState {}
 class FavouriteDoctorsLoading extends FavouriteDoctorsState {}
 
 class FavouriteDoctorsSuccess extends FavouriteDoctorsState {
-  final List<Doctor> allFavouriteDoctors;
-  final List<Doctor> filteredDoctors;
+  final List<DoctorEntity> allFavouriteDoctors;
+  final List<DoctorEntity> filteredDoctors;
   final String? searchQuery;
 
   const FavouriteDoctorsSuccess({
@@ -23,8 +23,8 @@ class FavouriteDoctorsSuccess extends FavouriteDoctorsState {
   });
 
   FavouriteDoctorsSuccess copyWith({
-    List<Doctor>? allFavouriteDoctors,
-    List<Doctor>? filteredDoctors,
+    List<DoctorEntity>? allFavouriteDoctors,
+    List<DoctorEntity>? filteredDoctors,
     String? searchQuery,
   }) {
     return FavouriteDoctorsSuccess(

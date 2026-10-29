@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/constants/firestore_constants.dart';
 import '../../../../../../core/exceptions/app_exceptions.dart';
+import '../../dto/user/app_user_dto.dart';
 import '../../models/user_dto/my_user_dto.dart';
 
 @lazySingleton
@@ -49,10 +50,10 @@ class UserFirestoreService {
     }
   }
 
-  Future<void> updateUser(MyUserDto user) async {
+  Future<void> updateUser(AppUserDto user) async {
     try {
       var querySnapshot = _getUsersCollection().doc(user.id);
-      await querySnapshot.update(user.toFireStore());
+      await querySnapshot.update(user.toJson());
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? 'server_error');
     } on SocketException {

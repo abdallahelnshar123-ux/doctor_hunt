@@ -1,18 +1,18 @@
-import 'package:doctor_hunt/apps/core/mapper/doctor_dto_mapper.dart';
-import 'package:doctor_hunt/apps/core/mapper/doctor_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/core/mapper/review_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/review_mapper.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_dto_mapper.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/mappers/my_user_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
+
+import '../../../../common/auth/data/mappers/user_mapper.dart';
 
 extension AppointmentMapper on AppointmentDto {
   Appointment toAppointment() {
     return Appointment(
       id: id,
-      patient: patient.toUser(),
-      doctor: doctor.toDoctor(),
+      patient: patient.toEntity(),
+      doctor: doctor.toEntity() as DoctorEntity,
       sessionTime: sessionTime,
       createdAt: createdAt,
       fee: fee,
@@ -26,8 +26,8 @@ extension AppointmentDtoMapper on Appointment {
   AppointmentDto toAppointmentDto() {
     return AppointmentDto(
       id: id,
-      patient: patient.toMyUserDto(),
-      doctor: doctor.toDoctorDto(),
+      patient: patient.toDto(),
+      doctor: doctor.toDto() as DoctorDto,
       sessionTime: sessionTime,
       createdAt: createdAt,
       fee: fee,

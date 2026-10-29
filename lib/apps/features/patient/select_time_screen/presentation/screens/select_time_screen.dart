@@ -1,5 +1,5 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/time_slot.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
@@ -29,7 +29,7 @@ part '../widget/slots_tab.dart';
 class SelectTimeScreen extends HookWidget {
   const SelectTimeScreen({super.key, required this.doctor});
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +152,7 @@ class SelectTimeScreen extends HookWidget {
   Future<dynamic> _buildSuccessDialog(
     BuildContext context,
     DateTime selectedTime,
-    Doctor doctor,
+    DoctorEntity doctor,
   ) {
     return showDialog(
       barrierDismissible: false,

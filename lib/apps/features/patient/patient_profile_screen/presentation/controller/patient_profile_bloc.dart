@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/data/session/user_session_manager.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 
 part 'patient_profile_event.dart';
 part 'patient_profile_state.dart';

@@ -1,5 +1,5 @@
-import 'package:doctor_hunt/apps/core/data/doctor/repo/doctor_repository.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -38,7 +38,7 @@ class PatientDoctorsBloc
       onData: (result) => result.fold(
         (failure) => PatientDoctorsError(failure.message),
         (doctorsList) {
-          final topRated = List<Doctor>.from(doctorsList)
+          final topRated = List<DoctorEntity>.from(doctorsList)
             ..sort((a, b) => b.rating.rating.compareTo(a.rating.rating));
 
           return PatientDoctorsSuccess(
@@ -60,7 +60,7 @@ class PatientDoctorsBloc
       if (event.query == currentState.searchQuery) return;
 
       final trimmedQuery = event.query.trim().toLowerCase();
-      final List<Doctor> filtered;
+      final List<DoctorEntity> filtered;
 
       if (trimmedQuery.isEmpty) {
         filtered = currentState.doctors;

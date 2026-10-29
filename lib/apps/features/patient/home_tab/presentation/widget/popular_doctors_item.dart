@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/widgets/rating_widget.dart';
 
 class PopularDoctorsItem extends StatelessWidget {
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   const PopularDoctorsItem({super.key, required this.doctor});
 
@@ -26,9 +26,9 @@ class PopularDoctorsItem extends StatelessWidget {
         crossAxisAlignment: .center,
         children: [
           Expanded(
-            child: doctor.imageUrl != null && doctor.imageUrl!.isNotEmpty
+            child: doctor.image != null && doctor.image!.isNotEmpty
                 ? CustomCachedNetworkImage(
-                    imgUrl: doctor.imageUrl!,
+                    imgUrl: doctor.image!,
                     fit: BoxFit.cover,
                     width: double.infinity,
                   )

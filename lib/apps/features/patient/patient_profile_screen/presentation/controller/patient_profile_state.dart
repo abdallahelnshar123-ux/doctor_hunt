@@ -12,7 +12,7 @@ class PatientProfileInitial extends PatientProfileState {}
 class PatientProfileLoading extends PatientProfileState {}
 
 class PatientProfileUpdateSuccess extends PatientProfileState {
-  final MyUser user;
+  final AppUserEntity user;
 
   const PatientProfileUpdateSuccess(this.user);
 

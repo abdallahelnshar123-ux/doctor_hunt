@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/data/models/doctor/doctor_availability.dart';
 
 abstract class SelectTimeEvent extends Equatable {
@@ -27,7 +27,7 @@ class GetDoctorSlotsEvent extends SelectTimeEvent {
 
 class BookAppointmentEvent extends SelectTimeEvent {
   final DateTime selectedTime;
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   const BookAppointmentEvent({
     required this.selectedTime,

@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../features/common/auth/domain/entity/user/patient.dart';
 import '../presentation/controller/user/user_event.dart';
 import '../presentation/controller/user/user_state.dart';
 import '../theme/app_colors.dart';
@@ -35,13 +36,21 @@ class FavoriteButtonWidget extends StatelessWidget {
       },
       child: BlocBuilder<UserBloc, UserState>(
         buildWhen: (previous, current) {
-          final prevFavs = previous.user?.patientInfo?.favDoctors ?? [];
-          final currFavs = current.user?.patientInfo?.favDoctors ?? [];
+          final previousPatient = previous.user is PatientEntity
+              ? previous.user as PatientEntity
+              : null;
+          final currentPatient = current.user is PatientEntity
+              ? current.user as PatientEntity
+              : null;
+          final prevFavs = previousPatient?.favDoctors ?? [];
+          final currFavs = currentPatient?.favDoctors ?? [];
           return prevFavs.contains(doctorId) != currFavs.contains(doctorId);
         },
         builder: (context, state) {
-          final isFavorite =
-              state.user?.patientInfo?.favDoctors.contains(doctorId) ?? false;
+          final patient = state.user is PatientEntity
+              ? state.user as PatientEntity
+              : null;
+          final isFavorite = patient?.favDoctors.contains(doctorId) ?? false;
 
           return GestureDetector(
             onTap: readOnly == true

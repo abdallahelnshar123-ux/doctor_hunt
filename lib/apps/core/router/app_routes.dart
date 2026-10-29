@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
@@ -11,7 +11,6 @@ import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/c
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
-import 'package:doctor_hunt/apps/features/admin/update_doctor_details_screen/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
@@ -30,11 +29,15 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
 import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
-import '../../features/admin/doctor_availability_screen/presentation/controller/doctor_availability_bloc.dart';
-import '../../features/admin/doctor_availability_screen/presentation/screens/doctor_availability_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
-import '../../features/admin/update_doctor_details_screen/presentation/screens/update_doctor_details_screen.dart';
-import '../../features/common/auth/data/models/user/my_user.dart';
+import '../../features/doctor/presentation/controller/doctor_availability_bloc.dart';
+import '../../features/doctor/presentation/controller/update_doctor_details_bloc.dart';
+import '../../features/doctor/presentation/screens/doctor_availability_screen.dart';
+import '../../features/doctor/presentation/screens/doctor_main_screen.dart';
+import '../../features/doctor/presentation/screens/update_doctor_details_screen.dart';
+import '../../features/common/auth/presentation/screens/doctor_login_screen.dart';
+import '../../features/common/auth/domain/entity/user/app_user.dart';
+import '../../features/common/auth/domain/entity/user/user_roles.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
 import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
 import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
@@ -63,6 +66,16 @@ class PatientLoginRoute extends GoRouteData with $PatientLoginRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return PatientLoginScreen();
+  }
+}
+
+@TypedGoRoute<DoctorLoginRoute>(path: '/doctor_login')
+class DoctorLoginRoute extends GoRouteData with $DoctorLoginRoute {
+  const DoctorLoginRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const DoctorLoginScreen();
   }
 }
 
@@ -105,12 +118,28 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return BlocProvider(
       create: (context) =>
           getIt<AdminDoctorsBloc>()
             ..add(AdminGetDoctorsRequested(user?.id ?? '')),
       child: const AdminMainScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<DoctorMainRoute>(path: '/doctor_main')
+class DoctorMainRoute extends GoRouteData with $DoctorMainRoute {
+  const DoctorMainRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<DoctorAvailabilityBloc>()),
+        BlocProvider(create: (context) => getIt<UpdateDoctorDetailsBloc>()),
+      ],
+      child: const DoctorMainScreen(),
     );
   }
 }
@@ -207,7 +236,7 @@ class PatientDoctorDetailsRoute extends GoRouteData
     with $PatientDoctorDetailsRoute {
   const PatientDoctorDetailsRoute(this.$extra);
 
-  final Doctor $extra;
+  final DoctorEntity $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -219,7 +248,7 @@ class PatientDoctorDetailsRoute extends GoRouteData
 class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
   const PatientProfileRoute(this.$extra);
 
-  final MyUser $extra;
+  final AppUserEntity $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -234,7 +263,7 @@ class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
 class AdminProfileRoute extends GoRouteData with $AdminProfileRoute {
   const AdminProfileRoute(this.$extra);
 
-  final MyUser $extra;
+  final AppUserEntity $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -260,7 +289,7 @@ class AdminDoctorDetailsRoute extends GoRouteData
     with $AdminDoctorDetailsRoute {
   const AdminDoctorDetailsRoute(this.$extra);
 
-  final Doctor $extra;
+  final DoctorEntity $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -271,20 +300,15 @@ class AdminDoctorDetailsRoute extends GoRouteData
   }
 }
 
-@TypedGoRoute<AdminUpdateDoctorDetailsRoute>(
-  path: '/admin_update_doctor_details',
-)
-class AdminUpdateDoctorDetailsRoute extends GoRouteData
-    with $AdminUpdateDoctorDetailsRoute {
-  const AdminUpdateDoctorDetailsRoute(this.$extra);
-
-  final Doctor $extra;
+@TypedGoRoute<DoctorProfileRoute>(path: '/doctor_profile')
+class DoctorProfileRoute extends GoRouteData with $DoctorProfileRoute {
+  const DoctorProfileRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
       create: (context) => getIt<UpdateDoctorDetailsBloc>(),
-      child: UpdateDoctorDetailsScreen(doctor: $extra),
+      child: const UpdateDoctorDetailsScreen(),
     );
   }
 }
@@ -292,15 +316,13 @@ class AdminUpdateDoctorDetailsRoute extends GoRouteData
 @TypedGoRoute<DoctorAvailabilityRoute>(path: '/doctor_availability')
 class DoctorAvailabilityRoute extends GoRouteData
     with $DoctorAvailabilityRoute {
-  const DoctorAvailabilityRoute(this.$extra);
-
-  final Doctor $extra;
+  const DoctorAvailabilityRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
       create: (context) => getIt<DoctorAvailabilityBloc>(),
-      child: DoctorAvailabilityScreen(doctor: $extra),
+      child: const DoctorAvailabilityScreen(),
     );
   }
 }
@@ -309,11 +331,11 @@ class DoctorAvailabilityRoute extends GoRouteData
 class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
   const SelectTimeRoute(this.$extra);
 
-  final Doctor $extra;
+  final DoctorEntity $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final Doctor doctor = state.extra as Doctor;
+    final DoctorEntity doctor = state.extra as DoctorEntity;
     return BlocProvider(
       create: (context) => getIt<SelectTimeBloc>()
         ..add(
@@ -370,9 +392,13 @@ GoRouter createRouter({
 
       if (currentLocation == '/') {
         if (isLoggedIn) {
-          return user?.role == UserRoles.admin
-              ? '/admin_main'
-              : '/patient_main';
+          if (user?.role == UserRoles.admin) {
+            return '/admin_main';
+          } else if (user?.role == UserRoles.doctor) {
+            return '/doctor_main';
+          } else {
+            return '/patient_main';
+          }
         } else {
           return '/choose_role';
         }
@@ -381,6 +407,7 @@ GoRouter createRouter({
       final protectedRoutes = [
         '/patient_main',
         '/admin_main',
+        '/doctor_main',
         '/admin_appointment_details',
         '/patient_appointment_details',
         '/add_doctor',
@@ -389,8 +416,8 @@ GoRouter createRouter({
         '/patient_doctor_details',
         '/patient_profile',
         '/admin_profile',
+        '/doctor_profile',
         '/admin_doctor_details',
-        '/admin_update_doctor_details',
         '/doctor_availability',
         '/select_time',
       ];
@@ -403,11 +430,36 @@ GoRouter createRouter({
         '/choose_role',
         '/patient_login',
         '/admin_login',
+        '/doctor_login',
         '/register',
       ];
 
       if (isLoggedIn && authRoutes.contains(currentLocation)) {
-        return user?.role == UserRoles.admin ? '/admin_main' : '/patient_main';
+        if (user?.role == UserRoles.admin) {
+          return '/admin_main';
+        } else if (user?.role == UserRoles.doctor) {
+          return '/doctor_main';
+        } else {
+          return '/patient_main';
+        }
+      }
+
+      if (isLoggedIn) {
+        if (user?.role == UserRoles.doctor &&
+            (currentLocation == '/admin_main' ||
+                currentLocation == '/patient_main')) {
+          return '/doctor_main';
+        }
+        if (user?.role == UserRoles.admin &&
+            (currentLocation == '/doctor_main' ||
+                currentLocation == '/patient_main')) {
+          return '/admin_main';
+        }
+        if (user?.role == UserRoles.patient &&
+            (currentLocation == '/admin_main' ||
+                currentLocation == '/doctor_main')) {
+          return '/patient_main';
+        }
       }
 
       return null;

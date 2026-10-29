@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctor_hunt/apps/core/data/models/doctor/doctor.dart';
-import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
@@ -14,16 +13,14 @@ import '../../../../../../generated/app_assets.dart';
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/extensions/context_extensions.dart';
-import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 
 part '../widget/details_widget.dart';
-
 part '../widget/doctor_details_widget.dart';
 
 class AdminDoctorDetailsScreen extends HookWidget {
   const AdminDoctorDetailsScreen({super.key, required this.doctor});
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -43,49 +40,11 @@ class AdminDoctorDetailsScreen extends HookWidget {
             textAlign: .center,
           ),
           _buildActiveChip(context: context, isActive: doctor.active),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           DoctorDetailsWidget(doctor: doctor),
-          SizedBox(height: 50),
-          CustomElevatedButton(
-            backgroundColor: AppColors.brandPrimary,
-            onPressed: () {
-              AdminUpdateDoctorDetailsRoute(doctor).push(context);
-            },
-            child: Row(
-              spacing: 8,
-              mainAxisAlignment: .center,
-              children: [
-                Icon(Icons.edit_outlined, color: AppColors.white, size: 20),
-                Text(
-                  t.admin.doctorDetailsScreen.editDoctor,
-                  style: context.semiBold16.white.rubik,
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 10),
-          _buildManageAvailabilityButton(context),
+          const SizedBox(height: 20),
         ],
       ),
-    );
-  }
-
-  Widget _buildManageAvailabilityButton(BuildContext context) {
-    return TextButton.icon(
-      icon: Icon(Icons.settings_outlined),
-      style: ButtonStyle(
-        iconColor: WidgetStatePropertyAll(AppColors.brandPrimary),
-        iconSize: WidgetStatePropertyAll(20),
-        textStyle: WidgetStatePropertyAll(
-          context.semiBold14.brandPrimary.rubik,
-        ),
-        foregroundColor: WidgetStatePropertyAll(AppColors.brandPrimary),
-      ),
-
-      onPressed: () {
-        DoctorAvailabilityRoute(doctor).push(context);
-      },
-      label: Text(t.admin.doctorDetailsScreen.manageAvailability),
     );
   }
 
@@ -127,8 +86,8 @@ class AdminDoctorDetailsScreen extends HookWidget {
               shape: BoxShape.circle,
               color: AppColors.brandPrimary20,
               image: DecorationImage(
-                image: doctor.imageUrl != null
-                    ? CachedNetworkImageProvider(doctor.imageUrl!)
+                image: doctor.image != null
+                    ? CachedNetworkImageProvider(doctor.image!)
                     : AssetImage(AppAssets.images.fallbackUserImage.path),
               ),
             ),

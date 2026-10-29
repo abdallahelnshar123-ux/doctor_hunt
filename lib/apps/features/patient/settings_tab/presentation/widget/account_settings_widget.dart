@@ -5,7 +5,7 @@ class AccountSettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return Column(
       spacing: 5,
       crossAxisAlignment: .start,

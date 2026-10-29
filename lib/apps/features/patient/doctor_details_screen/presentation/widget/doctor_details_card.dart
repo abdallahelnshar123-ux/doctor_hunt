@@ -10,13 +10,13 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/extensions/context_extensions.dart';
 
 class DoctorDetailsCard extends StatelessWidget {
   const DoctorDetailsCard({super.key, required this.doctor});
 
-  final Doctor doctor;
+  final DoctorEntity doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +143,7 @@ class DoctorDetailsCard extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       color: AppColors.shimmerBaseColor,
       image: DecorationImage(
-        image: CustomCachedNetworkImage.getProvider(doctor.imageUrl),
+        image: CustomCachedNetworkImage.getProvider(doctor.image),
         fit: .cover,
       ),
     ),

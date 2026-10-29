@@ -3,7 +3,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../../generated/style_atoms.dart';
-import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/theme/app_colors.dart';
 

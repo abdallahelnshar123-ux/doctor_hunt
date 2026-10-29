@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/constants/firestore_constants.dart';
-import '../../../../../core/data/models/doctor/doctor_dto.dart';
+import '../../../../common/auth/data/dto/user/doctor_dto.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';
 import '../models/appointment_dto/appointment_dto.dart';
 
@@ -22,11 +22,27 @@ class ReviewBatchFirestoreService {
     try {
       final batch = _firestore.batch();
 
-      final doctorRef = _firestore
-          .collection(FirestoreConstants.doctorsCollection)
-          .doc(updatedDoctorDto.id);
+      final userDoc = await _firestore
+          .collection(FirestoreConstants.usersCollection)
+          .doc(updatedDoctorDto.id)
+          .get();
+      if (userDoc.exists) {
+        final userDoctorRef = _firestore
+            .collection(FirestoreConstants.usersCollection)
+            .doc(updatedDoctorDto.id);
+        batch.update(userDoctorRef, updatedDoctorDto.toJson());
+      }
 
-      batch.update(doctorRef, updatedDoctorDto.toFireStore());
+      final doctorDoc = await _firestore
+          .collection(FirestoreConstants.doctorsCollection)
+          .doc(updatedDoctorDto.id)
+          .get();
+      if (doctorDoc.exists || !userDoc.exists) {
+        final doctorRef = _firestore
+            .collection(FirestoreConstants.doctorsCollection)
+            .doc(updatedDoctorDto.id);
+        batch.update(doctorRef, updatedDoctorDto.toJson());
+      }
 
       final appointmentRef = _firestore
           .collection(FirestoreConstants.appointmentsCollection)

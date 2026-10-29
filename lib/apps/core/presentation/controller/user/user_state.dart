@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../features/common/auth/data/models/user/my_user.dart';
+import '../../../../features/common/auth/domain/entity/user/app_user.dart';
 
 class UserState extends Equatable {
-  final MyUser? user;
+  final AppUserEntity? user;
   final String? favoriteError;
 
   const UserState({this.user, this.favoriteError});
@@ -11,7 +11,7 @@ class UserState extends Equatable {
   bool get isAuthenticated => user != null;
 
   UserState copyWith({
-    MyUser? user,
+    AppUserEntity? user,
     String? favoriteError,
     bool clearError = false,
     bool clearUser = false,

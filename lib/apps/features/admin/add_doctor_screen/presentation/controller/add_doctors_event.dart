@@ -8,6 +8,8 @@ abstract class AddDoctorsEvent extends Equatable {
 
 class AddDoctorRequested extends AddDoctorsEvent {
   final String name;
+  final String email;
+  final String password;
   final Specialty specialty;
   final String adminId;
   final File image;
@@ -16,6 +18,8 @@ class AddDoctorRequested extends AddDoctorsEvent {
 
   AddDoctorRequested({
     required this.name,
+    required this.email,
+    required this.password,
     required this.specialty,
     required this.image,
     required this.adminId,
@@ -26,6 +30,8 @@ class AddDoctorRequested extends AddDoctorsEvent {
   @override
   List<Object?> get props => [
     name,
+    email,
+    password,
     specialty,
     adminId,
     image,

@@ -8,7 +8,7 @@ class ReviewInputWidget extends StatefulWidget {
   });
 
   final ValueChanged<Review> onReviewChanged;
-  final MyUser reviewer;
+  final AppUserEntity reviewer;
 
   @override
   State<ReviewInputWidget> createState() => _ReviewInputWidgetState();

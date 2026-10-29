@@ -10,7 +10,8 @@ import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/widgets/app_container_with_shadow.dart';
 import '../../../../../core/widgets/logout_button.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 
 part '../widget/account_settings_widget.dart';
 

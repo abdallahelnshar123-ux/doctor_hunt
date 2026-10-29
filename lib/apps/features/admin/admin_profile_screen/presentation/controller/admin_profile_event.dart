@@ -8,7 +8,7 @@ abstract class AdminProfileEvent extends Equatable {
 }
 
 class AdminProfileUpdateRequested extends AdminProfileEvent {
-  final MyUser user;
+  final AppUserEntity user;
   final File? image;
 
   const AdminProfileUpdateRequested({required this.user, this.image});

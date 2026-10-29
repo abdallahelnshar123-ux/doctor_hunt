@@ -8,7 +8,7 @@ abstract class PatientProfileEvent extends Equatable {
 }
 
 class PatientProfileUpdateRequested extends PatientProfileEvent {
-  final MyUser user;
+  final AppUserEntity user;
   final File? image;
 
   const PatientProfileUpdateRequested({required this.user, this.image});

@@ -22,7 +22,6 @@ import '../controller/admin_appointments_bloc.dart';
 import '../controller/admin_appointments_state.dart';
 
 part '../widget/admin_appointment_card.dart';
-
 part '../widget/appointments_list_widget.dart';
 
 class AdminAppointmentsTab extends StatelessWidget {

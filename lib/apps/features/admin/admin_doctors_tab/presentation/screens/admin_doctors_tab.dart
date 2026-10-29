@@ -14,9 +14,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../core/data/models/doctor/doctor.dart';
+import '../../../../common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/router/app_routes.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../controller/admin_doctors_bloc.dart';
 import '../widget/admin_doctors_shimmer.dart';
 import '../widget/tab_bar_widget.dart';
@@ -114,10 +115,7 @@ class AdminDoctorsTab extends HookWidget {
                       textAlign: TextAlign.center,
                     ),
                     Text(
-                      t
-                          .admin
-                          .doctorsTab
-                          .noDoctorNameOrSpecialtyMatchSearch,
+                      t.admin.doctorsTab.noDoctorNameOrSpecialtyMatchSearch,
                       style: context.regular12.textSecondary.rubik,
                       textAlign: TextAlign.center,
                     ),

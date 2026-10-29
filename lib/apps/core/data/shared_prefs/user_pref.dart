@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+
 import 'package:doctor_hunt/apps/core/data/shared_prefs/prefs_keys.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../features/common/auth/data/models/user_dto/my_user_dto.dart';
+import '../../../features/common/auth/data/dto/user/app_user_dto.dart';
 
 @lazySingleton
 class UserPrefs {
@@ -16,7 +17,7 @@ class UserPrefs {
     await _preferences.setString(PrefsKeys.tokenKey, token);
   }
 
-  Future<void> setUser(MyUserDto user) async {
+  Future<void> setUser(AppUserDto user) async {
     await _preferences.setString(PrefsKeys.userKey, jsonEncode(user.toJson()));
   }
 
@@ -50,11 +51,11 @@ class UserPrefs {
     // await _preferences.remove(PrefsKeys.tokenKey);
   }
 
-  MyUserDto? getCurrentUser() {
+  AppUserDto? getCurrentUser() {
     final userJson = _preferences.getString(PrefsKeys.userKey);
     if (userJson == null || userJson.isEmpty) return null;
     try {
-      return MyUserDto.fromJson(jsonDecode(userJson));
+      return AppUserDto.fromJson(jsonDecode(userJson));
     } catch (e) {
       return null;
     }

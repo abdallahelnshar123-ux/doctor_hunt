@@ -11,11 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
-import '../../../../common/auth/data/models/user/my_user.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
+
 part '../widget/more_option_widget.dart';
 
 class SettingsTab extends StatelessWidget {
@@ -23,7 +24,7 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, MyUser?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
           current is LogoutLoadingState || current is LogoutErrorState,
