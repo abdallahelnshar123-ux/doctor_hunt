@@ -1,18 +1,16 @@
-import 'dart:io';
-
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
+import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/widget/add_specialty_dialog.dart';
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/utils/dialog_utils.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
@@ -20,6 +18,8 @@ import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../../common/auth/presentation/widgets/custom_text_password.dart';
 import '../widget/specialty_dropdown_widget.dart';
+
+part '../widget/add_specialty_button.dart';
 
 class AddDoctorScreen extends HookWidget {
   const AddDoctorScreen({super.key});
@@ -29,22 +29,17 @@ class AddDoctorScreen extends HookWidget {
     final nameController = useTextEditingController();
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final feeController = useTextEditingController();
     final formKey = useMemoized(() => GlobalKey<FormState>());
-    final selectedImage = useRef<File?>(null);
-    final selectedSpecialty = useRef<Specialty?>(null);
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final selectedSpecialty = useRef<SpecialtyModel?>(null);
+    final user = context.select<UserBloc, AppUserEntity?>(
+      (bloc) => bloc.currentUser,
+    );
     return BlocListener<AddDoctorsBloc, AddDoctorsState>(
       listenWhen: (previous, current) =>
           current is AddDoctorLoadingState ||
           current is AddDoctorErrorState ||
-          current is AddDoctorSuccessState ||
-          current is PickDoctorImageErrorState ||
-          current is PickDoctorImageSuccessState,
+          current is AddDoctorSuccessState,
       listener: (context, state) {
-        if (state is PickDoctorImageSuccessState) {
-          selectedImage.value = state.image;
-        }
         if (state is AddDoctorSuccessState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
@@ -66,12 +61,6 @@ class AddDoctorScreen extends HookWidget {
         if (state is AddDoctorLoadingState) {
           DialogUtils.showLoading(context: context);
         }
-        if (state is PickDoctorImageErrorState) {
-          SnackBarUtils.showErrorSnackBar(
-            context: context,
-            message: state.message,
-          );
-        }
       },
 
       child: Scaffold(
@@ -81,18 +70,6 @@ class AddDoctorScreen extends HookWidget {
           child: ListView(
             padding: EdgeInsets.all(20),
             children: [
-              buildUploadImage(context),
-              TextButton(
-                onPressed: () {
-                  context.read<AddDoctorsBloc>().add(
-                    PickDoctorImageRequested(),
-                  );
-                },
-                child: Text(
-                  t.createDoctor.addPhoto,
-                  style: context.medium12.brandPrimary.rubik,
-                ),
-              ),
               SizedBox(height: 20),
               _buildText(
                 context: context,
@@ -107,10 +84,7 @@ class AddDoctorScreen extends HookWidget {
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
               ),
-              _buildText(
-                context: context,
-                text: t.admin.addDoctorScreen.email,
-              ),
+              _buildText(context: context, text: t.admin.addDoctorScreen.email),
               CustomTextFormField(
                 controller: emailController,
                 fillColor: AppColors.bgPrimary,
@@ -138,26 +112,19 @@ class AddDoctorScreen extends HookWidget {
                 context: context,
                 text: t.admin.addDoctorScreen.specialty,
               ),
-              SpecialtyDropdownWidget(
-                selectedSpecialty: (value) {
-                  selectedSpecialty.value = value;
-                },
+              Row(
+                spacing: 15,
+                children: [
+                  Expanded(
+                    child: SpecialtyDropdownWidget(
+                      selectedSpecialty: (value) {
+                        selectedSpecialty.value = value;
+                      },
+                    ),
+                  ),
+                  const AddSpecialtyButton(),
+                ],
               ),
-              _buildText(
-                context: context,
-                text: t.admin.addDoctorScreen.consultationFee,
-              ),
-              CustomTextFormField(
-                controller: feeController,
-                fillColor: AppColors.bgPrimary,
-                filled: true,
-                keyboardType: TextInputType.number,
-                hintText: t.admin.addDoctorScreen.feeExample,
-                hintStyle: context.light14.textSecondary.rubik,
-                style: context.light16.textSecondary.rubik,
-                validator: (value) => Validators.required(value),
-              ),
-
               SizedBox(height: 40),
               _buildCreateDoctorButton(
                 context: context,
@@ -165,8 +132,6 @@ class AddDoctorScreen extends HookWidget {
                 nameController: nameController,
                 emailController: emailController,
                 passwordController: passwordController,
-                feeController: feeController,
-                selectedImage: selectedImage,
                 selectedSpecialty: selectedSpecialty,
                 user: user,
               ),
@@ -190,9 +155,7 @@ class AddDoctorScreen extends HookWidget {
     required TextEditingController nameController,
     required TextEditingController emailController,
     required TextEditingController passwordController,
-    required TextEditingController feeController,
-    required ObjectRef<File?> selectedImage,
-    required ObjectRef<Specialty?> selectedSpecialty,
+    required ObjectRef<SpecialtyModel?> selectedSpecialty,
     required AppUserEntity? user,
   }) {
     return CustomElevatedButton(
@@ -201,13 +164,6 @@ class AddDoctorScreen extends HookWidget {
         FocusManager.instance.primaryFocus?.unfocus();
         var adminId = user?.id ?? '';
         if (formKey.currentState!.validate()) {
-          if (selectedImage.value == null) {
-            SnackBarUtils.showInfoSnackBar(
-              context: context,
-              message: t.createDoctor.youMustPickDoctorImage,
-            );
-            return;
-          }
           if (selectedSpecialty.value == null) {
             SnackBarUtils.showInfoSnackBar(
               context: context,
@@ -221,10 +177,7 @@ class AddDoctorScreen extends HookWidget {
               email: emailController.text.trim(),
               password: passwordController.text,
               specialty: selectedSpecialty.value!,
-              image: selectedImage.value!,
               adminId: adminId,
-              consultationFee:
-                  double.tryParse(feeController.text.trim()) ?? 0.0,
             ),
           );
         }
@@ -232,41 +185,6 @@ class AddDoctorScreen extends HookWidget {
       child: Text(
         t.admin.addDoctorScreen.createDoctor,
         style: context.medium18.white.rubik,
-      ),
-    );
-  }
-
-  Widget buildUploadImage(BuildContext context) {
-    return Container(
-      clipBehavior: .antiAlias,
-      decoration: BoxDecoration(shape: .circle),
-      width: 120,
-      height: 120,
-      alignment: .center,
-      child: BlocBuilder<AddDoctorsBloc, AddDoctorsState>(
-        buildWhen: (previous, current) =>
-            current is PickDoctorImageSuccessState,
-        builder: (context, state) {
-          if (state is PickDoctorImageSuccessState) {
-            return Image.file(state.image, fit: .fitHeight);
-          }
-          return DottedBorder(
-            options: CircularDottedBorderOptions(
-              padding: EdgeInsets.all(40),
-              stackFit: .loose,
-              strokeCap: .round,
-              dashPattern: const [10, 5],
-              color: AppColors.borderMuted,
-              strokeWidth: 2,
-            ),
-
-            child: Icon(
-              Icons.image_outlined,
-              size: 35,
-              color: AppColors.textSecondary,
-            ),
-          );
-        },
       ),
     );
   }

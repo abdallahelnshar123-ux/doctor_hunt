@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:equatable/equatable.dart';
@@ -36,7 +37,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
         (failure) => AdminDoctorsError(failure.message),
         (doctorsList) {
           int activeCount = 0;
-          final Map<Specialty, int> counts = {};
+          final Map<SpecialtyModel, int> counts = {};
 
           for (var doctor in doctorsList) {
             if (doctor.active) {
@@ -46,7 +47,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
             counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
           }
 
-          final List<Map<Specialty, int>> specialtyCounts = counts.entries
+          final List<Map<SpecialtyModel, int>> specialtyCounts = counts.entries
               .map((e) => {e.key: e.value})
               .toList();
 
@@ -121,7 +122,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
       final searchDoctors = allDoctors.where((doctor) {
         final lowerQuery = event.query.toLowerCase();
         return doctor.name.toLowerCase().contains(lowerQuery) ||
-            doctor.specialty.name.toLowerCase().contains(lowerQuery);
+            doctor.specialty.localizedName().toLowerCase().contains(lowerQuery);
       }).toList();
 
       emit(
@@ -135,7 +136,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
 
   List<DoctorEntity>? _applyFilterAndSearch(
     List<DoctorEntity> allDoctors,
-    Specialty? specialty,
+    SpecialtyModel? specialty,
   ) {
     if (specialty == null) return null;
 

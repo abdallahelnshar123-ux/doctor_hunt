@@ -67,7 +67,7 @@ class PatientDoctorsBloc
       } else {
         filtered = currentState.doctors.where((doctor) {
           final nameMatches = doctor.name.toLowerCase().contains(trimmedQuery);
-          final specialtyMatches = doctor.specialty.name.toLowerCase().contains(
+          final specialtyMatches = doctor.specialty.localizedName().toLowerCase().contains(
             trimmedQuery,
           );
           return nameMatches || specialtyMatches;

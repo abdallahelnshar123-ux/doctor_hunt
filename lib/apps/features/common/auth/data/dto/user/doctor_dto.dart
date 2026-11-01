@@ -1,3 +1,5 @@
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
+
 import '../../../../../../core/constants/firestore_constants.dart';
 import '../../../../../../core/data/models/doctor/doctor_availability.dart';
 import '../../../../../../core/data/models/doctor/doctor_availability_dto.dart';
@@ -5,16 +7,15 @@ import '../../../../../../core/data/models/doctor/rating.dart';
 import '../../../../../../core/data/models/doctor/rating_dto.dart';
 import '../../../../../../core/mapper/review_dto_mapper.dart';
 import '../../../../../../core/mapper/review_mapper.dart';
-import '../../../domain/entity/user/doctor.dart';
 import '../../../domain/entity/user/user_roles.dart';
 import '../../models/user/auth_providers.dart';
 import 'app_user_dto.dart';
 
 class DoctorDto extends AppUserDto {
   final String adminId;
-  final Specialty specialty;
+  final SpecialtyModel specialty;
   final bool active;
-  final double consultationFee;
+  final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
 
@@ -28,7 +29,7 @@ class DoctorDto extends AppUserDto {
     required this.adminId,
     required this.specialty,
     required this.active,
-    required this.consultationFee,
+    this.consultationFee,
     required this.rating,
     this.availability,
   }) : super(role: UserRoles.doctor);
@@ -45,9 +46,8 @@ class DoctorDto extends AppUserDto {
       image: json[FirestoreConstants.image]?.toString(),
       phone: json[FirestoreConstants.phone]?.toString(),
       adminId: json[FirestoreConstants.adminId]?.toString() ?? '',
-      specialty: Specialty.values.firstWhere(
-        (e) => e.name == json[FirestoreConstants.specialty],
-        orElse: () => Specialty.allergists,
+      specialty: SpecialtyModel.fromMap(
+        Map<String, dynamic>.from(json[FirestoreConstants.specialty] as Map? ?? {}),
       ),
       active: json[FirestoreConstants.active] as bool? ?? false,
       consultationFee:
@@ -94,7 +94,7 @@ class DoctorDto extends AppUserDto {
       FirestoreConstants.role: role.name,
       FirestoreConstants.phone: phone,
       FirestoreConstants.adminId: adminId,
-      FirestoreConstants.specialty: specialty.name,
+      FirestoreConstants.specialty: specialty.toMap(),
       FirestoreConstants.active: active,
       FirestoreConstants.consultationFee: consultationFee,
       FirestoreConstants.rating: _ratingToJson(rating),

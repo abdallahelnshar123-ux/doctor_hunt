@@ -34,7 +34,7 @@ class PatientAppointmentDetailsScreen extends StatelessWidget {
                   ),
                   _buildPatientCard(
                     title: appointment.doctor.name,
-                    subtitle: appointment.doctor.specialty.name,
+                    subtitle: appointment.doctor.specialty.localizedName(),
                     image: appointment.doctor.image,
                     context: context,
                   ),
@@ -179,7 +179,7 @@ class PatientAppointmentDetailsScreen extends StatelessWidget {
                   overflow: .ellipsis,
                 ),
                 Text(
-                  appointment.doctor.specialty.name,
+                  appointment.doctor.specialty.localizedName(),
                   style: context.light10.textSecondary.rubik,
                   overflow: .ellipsis,
                 ),

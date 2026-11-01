@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/widgets/logout_button.dart';
-import 'package:doctor_hunt/apps/core/widgets/settings_user_card.dart';
+import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
 import 'package:doctor_hunt/apps/features/doctor/presentation/widgets/doctor_account_settings_widget.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +27,7 @@ class DoctorSettingsTab extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            const SettingsUserCard(),
+            const BasicUserCard(),
             const SizedBox(height: 20),
             DoctorAccountSettingsWidget(
               onSelectScheduleTab: onSelectScheduleTab,

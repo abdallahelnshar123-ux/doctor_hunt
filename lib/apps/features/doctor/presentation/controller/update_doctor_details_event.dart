@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class UpdateDoctorDetailsEvent extends Equatable {
@@ -12,7 +12,7 @@ sealed class UpdateDoctorDetailsEvent extends Equatable {
 
 class UpdateDoctorDetailsRequested extends UpdateDoctorDetailsEvent {
   final String? name;
-  final Specialty? specialty;
+  final SpecialtyModel? specialty;
   final double? consultationFee;
   final String? phone;
   final bool? active;

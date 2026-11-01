@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
-import 'package:doctor_hunt/apps/core/widgets/settings_user_card.dart';
+import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +27,7 @@ class AdminSettingsTab extends StatelessWidget {
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 20),
           children: [
-            SettingsUserCard(),
+            BasicUserCard(),
             SizedBox(height: 20),
             AccountSettingsWidget(),
             SizedBox(height: 40),

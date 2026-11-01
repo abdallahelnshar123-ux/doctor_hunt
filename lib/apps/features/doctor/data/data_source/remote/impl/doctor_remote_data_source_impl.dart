@@ -18,16 +18,6 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
 
   DoctorRemoteDataSourceImpl(this._firebaseFirestore);
 
-  CollectionReference<DoctorDto> _getDoctorsCollection() {
-    return _firebaseFirestore
-        .collection(FirestoreConstants.doctorsCollection)
-        .withConverter<DoctorDto>(
-          fromFirestore: (snapshot, options) =>
-              DoctorDto.fromJson(snapshot.data()!),
-          toFirestore: (doctor, options) => doctor.toJson(),
-        );
-  }
-
   CollectionReference<DoctorDto> _getUsersCollection() {
     return _firebaseFirestore
         .collection(FirestoreConstants.usersCollection)
@@ -91,7 +81,6 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
       );
 
       await _getUsersCollection().doc(uid).set(newDoctor);
-      await _getDoctorsCollection().doc(uid).set(newDoctor);
 
       try {
         await auth.signOut();
@@ -123,16 +112,12 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
   Future<DoctorDto> getDoctorById(String doctorId) async {
     try {
       final userDoc = await _getUsersCollection().doc(doctorId).get();
-      if (userDoc.exists && userDoc.data() != null) {
-        return userDoc.data()!;
+      final data = userDoc.data();
+      if (userDoc.exists && data != null) {
+        return data;
       }
-
-      final doc = await _getDoctorsCollection().doc(doctorId).get();
-      final data = doc.data();
-      if (data == null) {
-        throw ServerException(message: t.errors.someThingWentWrong);
-      }
-      return data;
+      
+      throw ServerException(message: t.errors.someThingWentWrong);
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
@@ -190,26 +175,10 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
     required bool active,
   }) async {
     try {
-      final userDoc = await _firebaseFirestore
+      await _firebaseFirestore
           .collection(FirestoreConstants.usersCollection)
           .doc(doctorId)
-          .get();
-      if (userDoc.exists) {
-        await _firebaseFirestore
-            .collection(FirestoreConstants.usersCollection)
-            .doc(doctorId)
-            .update({FirestoreConstants.active: active});
-      }
-
-      final doctorDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.doctorsCollection)
-          .doc(doctorId)
-          .get();
-      if (doctorDoc.exists || !userDoc.exists) {
-        await _getDoctorsCollection().doc(doctorId).update({
-          FirestoreConstants.active: active,
-        });
-      }
+          .update({FirestoreConstants.active: active});
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
@@ -222,21 +191,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
   @override
   Future<void> updateDoctorDetails(DoctorDto doctor) async {
     try {
-      final userDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.usersCollection)
-          .doc(doctor.id)
-          .get();
-      if (userDoc.exists) {
-        await _getUsersCollection().doc(doctor.id).set(doctor);
-      }
-
-      final doctorDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.doctorsCollection)
-          .doc(doctor.id)
-          .get();
-      if (doctorDoc.exists || !userDoc.exists) {
-        await _getDoctorsCollection().doc(doctor.id).set(doctor);
-      }
+      await _getUsersCollection().doc(doctor.id).set(doctor);
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
@@ -252,27 +207,10 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
     required DoctorAvailabilityDto availability,
   }) async {
     try {
-      final userDoc = await _firebaseFirestore
+      await _firebaseFirestore
           .collection(FirestoreConstants.usersCollection)
           .doc(doctorId)
-          .get();
-      if (userDoc.exists) {
-        await _firebaseFirestore
-            .collection(FirestoreConstants.usersCollection)
-            .doc(doctorId)
-            .update({FirestoreConstants.availability: availability.toFireStore()});
-      }
-
-      final doctorDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.doctorsCollection)
-          .doc(doctorId)
-          .get();
-      if (doctorDoc.exists || !userDoc.exists) {
-        await _firebaseFirestore
-            .collection(FirestoreConstants.doctorsCollection)
-            .doc(doctorId)
-            .update({FirestoreConstants.availability: availability.toFireStore()});
-      }
+          .update({FirestoreConstants.availability: availability.toFireStore()});
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {
@@ -285,21 +223,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
   @override
   Future<void> deleteDoctor({required String doctorId}) async {
     try {
-      final userDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.usersCollection)
-          .doc(doctorId)
-          .get();
-      if (userDoc.exists) {
-        await _getUsersCollection().doc(doctorId).delete();
-      }
-
-      final doctorDoc = await _firebaseFirestore
-          .collection(FirestoreConstants.doctorsCollection)
-          .doc(doctorId)
-          .get();
-      if (doctorDoc.exists || !userDoc.exists) {
-        await _getDoctorsCollection().doc(doctorId).delete();
-      }
+      await _getUsersCollection().doc(doctorId).delete();
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {

@@ -57,7 +57,7 @@ class DoctorCardWide extends StatelessWidget {
                   overflow: .ellipsis,
                 ),
                 Text(
-                  doctor.specialty.name,
+                  doctor.specialty.localizedName(),
                   style: context.light14.textSecondary.rubik,
                   overflow: .ellipsis,
                 ),

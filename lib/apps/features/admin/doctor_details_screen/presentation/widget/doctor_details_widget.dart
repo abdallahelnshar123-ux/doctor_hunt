@@ -21,7 +21,7 @@ class DoctorDetailsWidget extends StatelessWidget {
             title: t.admin.doctorDetailsScreen.specialty,
             icon: AppAssets.icons.medicalIcon.path,
             subtitleWidget: Text(
-              doctor.specialty.name,
+              doctor.specialty.localizedName(),
               style: context.semiBold14.textTertiary.rubik,
             ),
           ),

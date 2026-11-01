@@ -15,9 +15,9 @@ class AdminDoctorsSuccess extends AdminDoctorsState {
   final List<DoctorEntity> allDoctors;
   final List<DoctorEntity> filteredDoctors;
   final List<DoctorEntity> searchDoctors;
-  final List<Map<Specialty, int>> specialtyCounts;
+  final List<Map<SpecialtyModel, int>> specialtyCounts;
   final int activeDoctorsCount;
-  final Specialty? selectedSpecialty;
+  final SpecialtyModel? selectedSpecialty;
   final String searchQuery;
 
   const AdminDoctorsSuccess({
@@ -34,9 +34,9 @@ class AdminDoctorsSuccess extends AdminDoctorsState {
     List<DoctorEntity>? allDoctors,
     List<DoctorEntity>? filteredDoctors,
     List<DoctorEntity>? searchDoctors,
-    List<Map<Specialty, int>>? specialtyCounts,
+    List<Map<SpecialtyModel, int>>? specialtyCounts,
     int? activeDoctorsCount,
-    Specialty? selectedSpecialty,
+    SpecialtyModel? selectedSpecialty,
     String? searchQuery,
     bool clearSpecialty = false,
   }) {

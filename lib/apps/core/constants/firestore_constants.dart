@@ -4,10 +4,16 @@ class FirestoreConstants {
   static const String doctorsCollection = 'doctors';
   static const String adminsCollection = 'admins';
   static const String appointmentsCollection = 'appointments';
+  static const String specialtiesCollection = 'specialties';
 
   // Common Fields
   static const String id = 'id';
   static const String createdAt = 'created_at';
+  static const String updatedAt = 'updated_at';
+
+  // Specialty Fields
+  static const String en = 'en';
+  static const String ar = 'ar';
 
   // User Fields
   static const String name = 'name';

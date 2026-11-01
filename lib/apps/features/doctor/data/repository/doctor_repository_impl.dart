@@ -31,24 +31,24 @@ class DoctorRepositoryImpl implements DoctorRepository {
   @override
   Future<Either<Failure, Unit>> addDoctor({
     required DoctorEntity doctor,
-    required File image,
+    // required File image,
     required String password,
   }) async {
     try {
-      final String imageUrl;
-      try {
-        imageUrl = await _cloudinaryService.uploadImage(file: image);
-      } catch (e) {
-        return Left(
-          ServerFailure(t.errors.errorWhileAddingDoctorPleaseTryAgainLater),
-        );
-      }
+      // final String imageUrl;
+      // try {
+      //   imageUrl = await _cloudinaryService.uploadImage(file: image);
+      // } catch (e) {
+      //   return Left(
+      //     ServerFailure(t.errors.errorWhileAddingDoctorPleaseTryAgainLater),
+      //   );
+      // }
 
-      final newDoctor = doctor.copyWith(image: imageUrl);
-      final doctorDto = newDoctor.toDto() as DoctorDto;
+      // final newDoctor = doctor.copyWith(image: imageUrl);
+      // final doctorDto = newDoctor.toDto() as DoctorDto;
 
       await _remoteDataSource.addDoctor(
-        doctor: doctorDto,
+        doctor: doctor.toDto() as DoctorDto,
         password: password,
       );
       return right(unit);

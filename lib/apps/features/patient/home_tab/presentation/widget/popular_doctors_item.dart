@@ -52,7 +52,7 @@ class PopularDoctorsItem extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  doctor.specialty.name,
+                  doctor.specialty.localizedName(),
                   style: context.light12.textSecondary80.rubik,
                 ),
                 RatingWidget(

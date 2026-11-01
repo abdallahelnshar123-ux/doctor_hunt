@@ -89,7 +89,7 @@ class AdminAppointmentCard extends HookWidget {
                                 overflow: .ellipsis,
                               ),
                               Text(
-                                appointment.doctor.specialty.name,
+                                appointment.doctor.specialty.localizedName(),
                                 style: context.light10.textSecondary.rubik,
                                 overflow: .ellipsis,
                               ),

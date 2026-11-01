@@ -1,22 +1,23 @@
 import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_availability.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'app_user.dart';
 import 'user_roles.dart';
 
-enum Specialty {
-  allergists,
-  anesthesiologists,
-  cardiologists,
-  rectalSurgeons,
-  dermatologists,
-}
+// enum Specialty {
+//   allergists,
+//   anesthesiologists,
+//   cardiologists,
+//   rectalSurgeons,
+//   dermatologists,
+// }
 
 class DoctorEntity extends AppUserEntity {
   final String adminId;
-  final Specialty specialty;
+  final SpecialtyModel specialty;
   final bool active;
-  final double consultationFee;
+  final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
 
@@ -30,7 +31,7 @@ class DoctorEntity extends AppUserEntity {
     required this.adminId,
     required this.specialty,
     required this.active,
-    required this.consultationFee,
+    this.consultationFee,
     required this.rating,
     this.availability,
   }) : super(role: UserRoles.doctor);
@@ -43,7 +44,7 @@ class DoctorEntity extends AppUserEntity {
     String? image,
     String? phone,
     String? adminId,
-    Specialty? specialty,
+    SpecialtyModel? specialty,
     bool? active,
     double? consultationFee,
     Rating? rating,

@@ -8,7 +8,7 @@ import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.
 abstract class DoctorRepository {
   Future<Either<Failure, Unit>> addDoctor({
     required DoctorEntity doctor,
-    required File image,
+    // required File image,
     required String password,
   });
 

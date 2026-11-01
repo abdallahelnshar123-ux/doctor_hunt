@@ -53,10 +53,10 @@ class DoctorsWidget extends StatelessWidget {
                         label: t.admin.doctorsTab.all,
                       ),
                       ...state.specialtyCounts.map((map) {
-                        final label = map.keys.first.name;
+                        final label = map.keys.first.localizedName();
                         final number = map.values.first;
                         return TabBarWidget(
-                          isSelected: state.selectedSpecialty?.name == label,
+                          isSelected: state.selectedSpecialty?.localizedName() == label,
                           number: number,
                           label: label,
                         );

@@ -593,6 +593,7 @@ class Translations$admin$en {
 
   // Translations
   late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
+  late final Translations$admin$patientsTab$en patientsTab = Translations$admin$patientsTab$en.internal(_root);
   late final Translations$admin$appointmentDetails$en appointmentDetails = Translations$admin$appointmentDetails$en.internal(_root);
   late final Translations$admin$doctorsTab$en doctorsTab = Translations$admin$doctorsTab$en.internal(_root);
   late final Translations$admin$appointmentsTab$en appointmentsTab = Translations$admin$appointmentsTab$en.internal(_root);
@@ -848,8 +849,30 @@ class Translations$admin$main$en {
   /// en: 'Doctors'
   String get doctors => 'Doctors';
 
+  /// en: 'Patients'
+  String get patients => 'Patients';
+
   /// en: 'Settings'
   String get settings => 'Settings';
+}
+
+// Path: admin.patientsTab
+class Translations$admin$patientsTab$en with PageData2 {
+  Translations$admin$patientsTab$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'All Patients'
+  @override
+  String get title => 'All Patients';
+
+  /// en: 'No patients found'
+  String get noPatients => 'No patients found';
+
+  /// en: 'Search patients...'
+  String get searchHint => 'Search patients...';
 }
 
 // Path: admin.appointmentDetails
@@ -882,8 +905,8 @@ class Translations$admin$doctorsTab$en {
 
   // Translations
 
-  /// en: 'Add doctor'
-  String get addDoctor => 'Add doctor';
+  /// en: 'Create doctor'
+  String get createDoctor => 'Create doctor';
 
   /// en: 'Search doctors'
   String get searchDoctors => 'Search doctors';
@@ -1011,6 +1034,15 @@ class Translations$admin$addDoctorScreen$en {
 
   /// en: 'e.g. $ 28.00'
   String get feeExample => 'e.g. \$ 28.00';
+
+  /// en: 'English Name'
+  String get englishName => 'English Name';
+
+  /// en: 'Arabic Name'
+  String get arabicName => 'Arabic Name';
+
+  /// en: 'Add Specialty'
+  String get addSpecialty => 'Add Specialty';
 }
 
 // Path: admin.doctorDetailsScreen

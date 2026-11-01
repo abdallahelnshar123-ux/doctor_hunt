@@ -2,7 +2,7 @@ import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dar
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/logout_button.dart';
-import 'package:doctor_hunt/apps/core/widgets/settings_user_card.dart';
+import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +51,7 @@ class SettingsTab extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.all(20),
                 children: [
-                  SettingsUserCard(
+                  BasicUserCard(
                     onTap: () {
                       if (user == null) return;
                       PatientProfileRoute(user).push(context);

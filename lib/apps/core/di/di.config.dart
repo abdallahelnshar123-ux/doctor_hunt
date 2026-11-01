@@ -23,6 +23,12 @@ import '../../features/admin/admin_appointments_tab/presentation/controller/admi
     as _i995;
 import '../../features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart'
     as _i900;
+import '../../features/admin/admin_patients_tab/data/repo/admin_patients_repository.dart'
+    as _i218;
+import '../../features/admin/admin_patients_tab/data/service/admin_patients_remote_data_source.dart'
+    as _i43;
+import '../../features/admin/admin_patients_tab/presentation/controller/admin_patients_bloc.dart'
+    as _i101;
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
     as _i90;
 import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
@@ -42,6 +48,12 @@ import '../../features/common/auth/domain/repository/auth_repository.dart'
     as _i747;
 import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i613;
+import '../../features/common/specialties/data/repo/specialty_repository.dart'
+    as _i195;
+import '../../features/common/specialties/data/service/specialty_service.dart'
+    as _i596;
+import '../../features/common/specialties/presentation/controller/specialties_bloc.dart'
+    as _i642;
 import '../../features/doctor/data/data_source/remote/doctor_remote_data_source.dart'
     as _i1021;
 import '../../features/doctor/data/data_source/remote/impl/doctor_remote_data_source_impl.dart'
@@ -142,6 +154,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i129.ReviewBatchFirestoreService>(
       () => _i129.ReviewBatchFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
+    gh.lazySingleton<_i43.AdminPatientsRemoteDataSource>(
+      () => _i43.AdminPatientsRemoteDataSource(gh<_i974.FirebaseFirestore>()),
+    );
+    gh.lazySingleton<_i596.SpecialtyService>(
+      () => _i596.SpecialtyService(gh<_i974.FirebaseFirestore>()),
+    );
     gh.factory<_i417.CloudinaryService>(
       () => _i417.CloudinaryService(
         cloudName: gh<String>(instanceName: 'cloud_name'),
@@ -154,11 +172,22 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i129.ReviewBatchFirestoreService>(),
       ),
     );
+    gh.lazySingleton<_i218.AdminPatientsRepository>(
+      () => _i218.AdminPatientsRepository(
+        gh<_i43.AdminPatientsRemoteDataSource>(),
+      ),
+    );
     gh.lazySingleton<_i583.UserSessionManager>(
       () => _i583.UserSessionManager(gh<_i708.UserPrefs>()),
     );
+    gh.lazySingleton<_i195.SpecialtyRepository>(
+      () => _i195.SpecialtyRepository(gh<_i596.SpecialtyService>()),
+    );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i747.AuthRepository>()),
+    );
+    gh.factory<_i101.AdminPatientsBloc>(
+      () => _i101.AdminPatientsBloc(gh<_i218.AdminPatientsRepository>()),
     );
     gh.lazySingleton<_i849.DoctorRepository>(
       () => _i819.DoctorRepositoryImpl(
@@ -230,6 +259,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i1046.UserRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
+    );
+    gh.lazySingleton<_i642.SpecialtiesBloc>(
+      () => _i642.SpecialtiesBloc(gh<_i195.SpecialtyRepository>()),
     );
     gh.factory<_i730.DoctorAvailabilityBloc>(
       () => _i730.DoctorAvailabilityBloc(

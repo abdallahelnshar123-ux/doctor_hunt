@@ -128,7 +128,7 @@ class DoctorDetailsCard extends StatelessWidget {
         FittedBox(
           fit: .scaleDown,
           child: Text(
-            doctor.specialty.name,
+            doctor.specialty.localizedName(),
             style: context.light11.textSecondary.rubik,
           ),
         ),

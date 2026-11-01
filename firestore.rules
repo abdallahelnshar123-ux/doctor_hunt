@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /users/{userId} {
+      // السماح للمستخدم بقراءة وتعديل بياناته الخاصة، وللأدمن بقراءة وتعديل بيانات أي مستخدم
+      allow read, write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+
+      match /{document=**} {
+        allow read, write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+      }
+    }
+
+    match /doctors/{doctorId} {
+      allow read: if isSignedIn();
+
+      // السماح للأدمن بأي تعديل/إضافة/حذف
+      // والسماح لأي مستخدم مسجل الدخول (المريض) إنه يعمل update بس (عشان يقدر يضيف ريفيو وريتنج)
+      allow create, delete: if isAdmin();
+      allow update: if isSignedIn();
+    }
+
+    match /appointments/{appointmentId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+  }
+}

@@ -64,7 +64,7 @@ class SelectTimeBloc extends Bloc<SelectTimeEvent, SelectTimeState> {
           doctor: event.doctor,
           sessionTime: event.selectedTime,
           createdAt: DateTime.now(),
-          fee: event.doctor.consultationFee,
+          fee: event.doctor.consultationFee ??0.0,
           status: AppointmentStatus.upcoming,
         );
 

@@ -1,6 +1,7 @@
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/theme/app_theme.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/specialties/presentation/controller/specialties_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ void main() async {
         providers: [
           BlocProvider(create: (context) => getIt<AuthBloc>()),
           BlocProvider(create: (context) => getIt<UserBloc>()),
+          BlocProvider(create: (context) => getIt<SpecialtiesBloc>()),
         ],
         child: const MyApp(),
       ),

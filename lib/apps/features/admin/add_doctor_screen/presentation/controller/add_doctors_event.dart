@@ -10,20 +10,20 @@ class AddDoctorRequested extends AddDoctorsEvent {
   final String name;
   final String email;
   final String password;
-  final Specialty specialty;
+  final SpecialtyModel specialty;
   final String adminId;
-  final File image;
+  // final File image;
   final bool active;
-  final double consultationFee;
+  // final double consultationFee;
 
   AddDoctorRequested({
     required this.name,
     required this.email,
     required this.password,
     required this.specialty,
-    required this.image,
+    // required this.image,
     required this.adminId,
-    required this.consultationFee,
+    // required this.consultationFee,
     this.active = true,
   });
 
@@ -34,10 +34,10 @@ class AddDoctorRequested extends AddDoctorsEvent {
     password,
     specialty,
     adminId,
-    image,
+    // image,
     active,
-    consultationFee,
+    // consultationFee,
   ];
 }
 
-class PickDoctorImageRequested extends AddDoctorsEvent {}
+// class PickDoctorImageRequested extends AddDoctorsEvent {}

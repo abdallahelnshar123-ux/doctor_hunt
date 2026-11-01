@@ -6,6 +6,9 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     popupMenuTheme: PopupMenuThemeData(color: AppColors.white),
     dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      circularTrackColor: AppColors.brandPrimary
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparent,
       type: BottomNavigationBarType.shifting,

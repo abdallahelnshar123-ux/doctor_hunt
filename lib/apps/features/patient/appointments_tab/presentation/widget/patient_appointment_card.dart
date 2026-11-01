@@ -125,7 +125,7 @@ class PatientAppointmentCard extends HookWidget {
                                 overflow: .ellipsis,
                               ),
                               Text(
-                                appointment.doctor.specialty.name,
+                                appointment.doctor.specialty.localizedName(),
                                 style: context.light14.textSecondary.rubik,
                                 overflow: .ellipsis,
                               ),

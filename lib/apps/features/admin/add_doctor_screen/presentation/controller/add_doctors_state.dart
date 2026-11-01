@@ -23,22 +23,22 @@ final class AddDoctorErrorState extends AddDoctorsState {
 
 /// =========================  pick image states ==========================
 
-final class PickDoctorImageSuccessState extends AddDoctorsState {
-  final File image;
-
-  PickDoctorImageSuccessState(this.image);
-
-  @override
-  List<Object?> get props => [image];
-}
-
-final class PickDoctorImageCancelledState extends AddDoctorsState {}
-
-final class PickDoctorImageErrorState extends AddDoctorsState {
-  final String message;
-
-  PickDoctorImageErrorState(this.message);
-
-  @override
-  List<Object?> get props => [message];
-}
+// final class PickDoctorImageSuccessState extends AddDoctorsState {
+//   final File image;
+//
+//   PickDoctorImageSuccessState(this.image);
+//
+//   @override
+//   List<Object?> get props => [image];
+// }
+//
+// final class PickDoctorImageCancelledState extends AddDoctorsState {}
+//
+// final class PickDoctorImageErrorState extends AddDoctorsState {
+//   final String message;
+//
+//   PickDoctorImageErrorState(this.message);
+//
+//   @override
+//   List<Object?> get props => [message];
+// }

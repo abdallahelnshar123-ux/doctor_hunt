@@ -1,20 +1,29 @@
 import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/screens/admin_appointments_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_patients_tab/presentation/screens/admin_patients_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_settings_tab/presentation/screens/admin_settings_tab.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
+import '../../../admin_patients_tab/presentation/controller/admin_patients_bloc.dart';
 
 class AdminMainScreen extends HookWidget {
   const AdminMainScreen({super.key});
 
-  static const List<Widget> _tabsList = [
+  static final List<Widget> _tabsList = [
     AdminDoctorsTab(),
+    BlocProvider(
+      create: (context) =>
+          getIt<AdminPatientsBloc>()..add(AdminGetPatientsRequested()),
+      child: AdminPatientsTab(),
+    ),
     AdminAppointmentsTab(),
     AdminSettingsTab(),
   ];
@@ -59,16 +68,23 @@ class AdminMainScreen extends HookWidget {
               context: context,
             ),
             builtBottomNavigationBarItem(
+              iconName: AppAssets.icons.patientIcon.path,
+              label: t.admin.main.patients,
+              index: 1,
+              selectedIndex: selectedIndex.value,
+              context: context,
+            ),
+            builtBottomNavigationBarItem(
               iconName: AppAssets.icons.appointmentsIcon.path,
               label: t.admin.appointmentsTab.title,
-              index: 1,
+              index: 2,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.settingsIcon.path,
               label: t.admin.main.settings,
-              index: 2,
+              index: 3,
               selectedIndex: selectedIndex.value,
               context: context,
             ),

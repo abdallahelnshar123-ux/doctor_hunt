@@ -17,7 +17,7 @@ class AdminGetDoctorsRequested extends AdminDoctorsEvent {
 }
 
 class AdminFilterDoctorsRequested extends AdminDoctorsEvent {
-  final Specialty? selectedSpecialty;
+  final SpecialtyModel? selectedSpecialty;
 
   const AdminFilterDoctorsRequested(this.selectedSpecialty);
 

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
@@ -189,7 +188,7 @@ class AdminDoctorsTab extends HookWidget {
         const AddDoctorRoute().push(context);
       },
       label: Text(
-        t.admin.doctorsTab.addDoctor,
+        t.admin.doctorsTab.createDoctor,
         style: context.regular12.white.rubik,
       ),
       icon: Icon(Icons.add_rounded, fontWeight: .w700),

@@ -12,6 +12,7 @@ import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/w
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_bloc.dart';
 import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_event.dart';
 import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_state.dart';
@@ -47,8 +48,8 @@ class UpdateDoctorDetailsScreen extends HookWidget {
     final isActive = useValueNotifier(doctor?.active ?? true);
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final selectedImage = useRef<File?>(null);
-    final selectedSpecialty = useRef<Specialty>(
-      doctor?.specialty ?? Specialty.cardiologists,
+    final selectedSpecialty = useRef<SpecialtyModel>(
+      doctor?.specialty ?? SpecialtyModel(id: 'id', en: "", ar: "") ,
     );
 
     return BlocListener<UpdateDoctorDetailsBloc, UpdateDoctorDetailsState>(
@@ -112,7 +113,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
                 text: t.admin.addDoctorScreen.specialty,
               ),
               SpecialtyDropdownWidget(
-                initialSelection: doctor?.specialty ?? Specialty.cardiologists,
+                initialSelection: doctor?.specialty.id,
                 selectedSpecialty: (value) => selectedSpecialty.value = value,
               ),
               _buildText(
@@ -277,7 +278,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
     TextEditingController nameController,
     TextEditingController feeController,
     ObjectRef<File?> selectedImage,
-    ObjectRef<Specialty> selectedSpecialty,
+    ObjectRef<SpecialtyModel> selectedSpecialty,
     ValueNotifier<bool> isActive,
     DoctorEntity? doctor,
   ) {

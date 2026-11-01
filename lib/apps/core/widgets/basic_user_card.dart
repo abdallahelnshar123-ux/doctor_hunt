@@ -8,14 +8,15 @@ import '../theme/app_colors.dart';
 import 'app_container_with_shadow.dart';
 import 'custom_cached_network_image.dart';
 
-class SettingsUserCard extends StatelessWidget {
-  const SettingsUserCard({super.key, this.onTap});
+class BasicUserCard extends StatelessWidget {
+  const BasicUserCard({super.key, this.onTap , this.outerUser});
 
   final void Function()? onTap;
+  final AppUserEntity? outerUser ;
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user = outerUser ??  context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(

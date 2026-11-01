@@ -1,10 +1,8 @@
-import 'dart:io';
-
+import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
-import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +17,6 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
 
   AddDoctorsBloc(this._doctorRepository) : super(DoctorInitial()) {
     on<AddDoctorRequested>(_onAddDoctorRequested);
-    on<PickDoctorImageRequested>(_onPickDoctorImageRequested);
   }
 
   Future<void> _onAddDoctorRequested(
@@ -37,10 +34,10 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
         adminId: event.adminId,
         specialty: event.specialty,
         active: event.active,
-        consultationFee: event.consultationFee,
+        // consultationFee: event.consultationFee,
         rating: const Rating(rating: 0.0, reviews: []),
       ),
-      image: event.image,
+      // image: event.image,
       password: event.password,
     );
 
@@ -48,17 +45,5 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
       (l) => emit(AddDoctorErrorState(l.message)),
       (r) => emit(AddDoctorSuccessState()),
     );
-  }
-
-  Future<void> _onPickDoctorImageRequested(
-    PickDoctorImageRequested event,
-    Emitter<AddDoctorsState> emit,
-  ) async {
-    final result = await _doctorRepository.pickDoctorImage();
-    result.fold((failure) {
-      if (failure is! CancelledByUserFailure) {
-        emit(PickDoctorImageErrorState(failure.message));
-      }
-    }, (image) => emit(PickDoctorImageSuccessState(image)));
   }
 }

@@ -23,10 +23,7 @@ class DoctorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: .cover,
-                image: doctor.image != null && doctor.image!.isNotEmpty
-                    ? CachedNetworkImageProvider(doctor.image!)
-                    : AssetImage(AppAssets.images.testDoctorImage.path)
-                          as ImageProvider,
+                image: CustomCachedNetworkImage.getProvider(doctor.image),
               ),
             ),
           ),
@@ -40,7 +37,7 @@ class DoctorCard extends StatelessWidget {
                   overflow: .ellipsis,
                 ),
                 Text(
-                  doctor.specialty.name,
+                  doctor.specialty.localizedName(),
                   style: context.medium12.textSecondary.rubik,
                   overflow: .ellipsis,
                 ),

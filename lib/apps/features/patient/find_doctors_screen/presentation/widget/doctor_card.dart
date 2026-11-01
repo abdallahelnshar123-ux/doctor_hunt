@@ -123,7 +123,7 @@ class DoctorCard extends StatelessWidget {
             ),
           ),
           Text(
-            doctor?.specialty.name ?? t.doctorDetails.toothDentist,
+            doctor?.specialty.localizedName() ?? t.doctorDetails.toothDentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(

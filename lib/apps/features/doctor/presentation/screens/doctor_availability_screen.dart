@@ -293,7 +293,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  doctor.specialty.name,
+                  doctor.specialty.localizedName(),
                   style: context.light14.textSecondary.rubik,
                   overflow: TextOverflow.ellipsis,
                 ),

@@ -22,7 +22,7 @@ class DetailsWidget extends StatelessWidget {
         children: [
           _buildInfoCard(
             context,
-            value: doctor.specialty.name,
+            value: doctor.specialty.localizedName(),
             title: t.admin.doctorDetailsScreen.specialty,
             icon: AppAssets.icons.medicalIcon.path,
             trailing: Chip(
