@@ -32,6 +32,34 @@ The project relies on a strictly configured `../../slang.yaml` file at the root.
 When modifying translations, keep these architectural decisions in mind:
 
 - **Ignoring Unused Keys (Commenting):** If a translation key is unused but should be kept as a reference, **DO NOT delete it**. Instead, prefix the key with `@` in the JSON file (e.g., `"@old_title": "Old"`). Slang will ignore it, keeping the Dart code clean.
+- **Linked Translations (Reusing Keys):** To prevent duplication and reduce the generated file size, you can reference another key's value using `@:path.to.key`. 
+  - *Example in JSON:*
+    ```json
+    {
+      "common": {
+        "next": "Next",
+        "skip": "Skip"
+      },
+      "onboarding": {
+        "btn_next": "@:common.next",
+        "btn_skip": "@:common.skip"
+      }
+    }
+    ```
+- **Interfaces (Polymorphism in Translations):** When dealing with lists of objects that share the same structure (e.g., Onboarding pages, Pricing plans), use the `(interface=Name)` modifier directly in the JSON file. 
+  - ❌ **DO NOT** declare paths in `slang.yaml` (Deprecated since v4.13.0).
+  - ✅ **DO** declare it directly in the `.i18n.json` file:
+    ```json
+    {
+      "onboarding": {
+        "pages(interface=PageData)": [
+          { "title": "Page 1", "description": "Desc 1", "image": "assets/1.png" },
+          { "title": "Page 2", "description": "Desc 2", "image": "assets/2.png" }
+        ]
+      }
+    }
+    ```
+  - *Note:* Do not put global UI elements (like "Next" or "Skip" buttons) inside these interface lists. Keep the interface focused only on the unique data for each item.
 - **Numbers and Versions in Keys:** Slang strips special characters and underscores around numbers. A JSON key like `"v1_0_0"` will be generated in Dart as `v100` (e.g., `t.settings.v100`). Always double-check the generated getter name.
 - **Dynamic Backend Errors:** The project uses the `maps:` property in `../../slang.yaml` for things like `e_codes`. This generates a `Map<String, String>` where keys remain `snake_case`. This is intentional so you can do direct lookups for backend errors: `t.eCodes['email_already_in_use']`.
 - **Finding Dead Code:** Use the analyzer command periodically to detect unused translations:

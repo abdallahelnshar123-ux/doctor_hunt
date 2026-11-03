@@ -4,9 +4,9 @@
 /// To regenerate, run: `dart run slang`
 ///
 /// Locales: 1
-/// Strings: 274
+/// Strings: 278
 ///
-/// Built on 2026-11-01 at 13:38 UTC
+/// Built on 2026-11-03 at 12:47 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
@@ -144,14 +144,15 @@ class AppLocaleUtils extends BaseAppLocaleUtils<AppLocale, Translations> {
 
 // interfaces generated as mixins
 
-mixin PageData2 {
+mixin PageData {
   String get title;
-  String? get content => null;
+  String get subtitle;
+  String get imagePath;
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! PageData2) return false;
+    if (other is! PageData) return false;
 
     final fields = $fields;
     final otherFields = other.$fields;
@@ -173,5 +174,5 @@ mixin PageData2 {
     return result;
   }
 
-  List<Object?> get $fields => [title, content];
+  List<Object?> get $fields => [title, subtitle, imagePath];
 }

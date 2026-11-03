@@ -1,7 +1,7 @@
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
-import 'package:doctor_hunt/apps/core/widgets/logout_button.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_negative_button.dart';
 import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -13,6 +13,7 @@ import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
+import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
@@ -62,7 +63,22 @@ class SettingsTab extends StatelessWidget {
                   SizedBox(height: 15),
                   MoreOptionWidget(),
                   SizedBox(height: 40),
-                  LogoutButton(),
+                  CustomNegativeButton(
+                    icon: Icon(Icons.logout),
+                    text: t.settings.logout,
+                    onPressed: () {
+                      DialogUtils.showMessage(
+                        context: context,
+                        message: t.settings.logoutConfirmation,
+                        title: t.settings.logout,
+                        posActionText: t.dialog.ok,
+                        posAction: () {
+                          context.read<AuthBloc>().add(LogoutRequested());
+                        },
+                        negActionText: t.dialog.cancel,
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

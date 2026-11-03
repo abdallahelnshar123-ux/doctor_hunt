@@ -17,7 +17,6 @@ import '../../../../../core/widgets/custom_cached_network_image.dart';
 import '../../../../../core/widgets/main_empty_list_widget.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../../../patient/appointments_tab/data/models/appointment/appointment.dart';
-import '../../../admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import '../controller/admin_appointments_bloc.dart';
 import '../controller/admin_appointments_state.dart';
 
@@ -35,76 +34,73 @@ class AdminAppointmentsTab extends StatelessWidget {
         create: (context) =>
             getIt<AdminAppointmentsBloc>()
               ..add(FetchAdminAppointmentsRequested()),
-        child: Scaffold(
-          appBar: AdminAppbar(title: t.admin.appointmentsTab.title),
-          body: DefaultTabController(
-            initialIndex: 0,
-            length: 3,
-            child: Column(
-              children: [
-                TabBar(
-                  overlayColor: WidgetStatePropertyAll(AppColors.transparent),
-                  onTap: (index) {},
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  dividerColor: AppColors.transparent,
-                  indicator: BoxDecoration(
-                    color: AppColors.brandPrimary,
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  labelStyle: context.medium12.white.rubik,
-                  unselectedLabelStyle: context.medium12.brandPrimary.rubik,
-                  tabAlignment: .fill,
-                  indicatorSize: .tab,
-                  indicatorAnimation: .elastic,
-                  tabs: [
-                    Tab(child: Text(t.patientAppointments.upcoming)),
-                    Tab(child: Text(t.patientAppointments.completed)),
-                    Tab(child: Text(t.patientAppointments.canceled)),
-                  ],
+        child:DefaultTabController(
+          initialIndex: 0,
+          length: 3,
+          child: Column(
+            children: [
+              TabBar(
+                overlayColor: WidgetStatePropertyAll(AppColors.transparent),
+                onTap: (index) {},
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                dividerColor: AppColors.transparent,
+                indicator: BoxDecoration(
+                  color: AppColors.brandPrimary,
+                  borderRadius: BorderRadius.circular(6),
                 ),
-                Expanded(
-                  child:
-                      BlocBuilder<
-                        AdminAppointmentsBloc,
-                        AdminAppointmentsState
-                      >(
-                        buildWhen: (previous, current) =>
-                            current is AdminAppointmentsLoadedState ||
-                            current is AdminAppointmentsErrorState ||
-                            current is AdminAppointmentsLoadingState,
-                        builder: (context, state) {
-                          if (state is AdminAppointmentsLoadedState) {
-                            return TabBarView(
-                              children: [
-                                AppointmentsListWidget(
-                                  allAppointmentsList: state.appointments,
-                                  index: 0,
-                                ),
-                                AppointmentsListWidget(
-                                  allAppointmentsList: state.appointments,
-                                  index: 1,
-                                ),
-                                AppointmentsListWidget(
-                                  allAppointmentsList: state.appointments,
-                                  index: 2,
-                                ),
-                              ],
-                            );
-                          }
-                          if (state is AdminAppointmentsErrorState) {
-                            return Center(
-                              child: Text(
-                                state.message,
-                                style: context.medium16.textSecondary.rubik,
-                              ),
-                            );
-                          }
-                          return const AppointmentsListShimmerWidget();
-                        },
-                      ),
+                labelStyle: context.medium12.white.rubik,
+                unselectedLabelStyle: context.medium12.brandPrimary.rubik,
+                tabAlignment: .fill,
+                indicatorSize: .tab,
+                indicatorAnimation: .elastic,
+                tabs: [
+                  Tab(child: Text(t.patientAppointments.upcoming)),
+                  Tab(child: Text(t.patientAppointments.completed)),
+                  Tab(child: Text(t.patientAppointments.canceled)),
+                ],
+              ),
+              Expanded(
+                child:
+                BlocBuilder<
+                    AdminAppointmentsBloc,
+                    AdminAppointmentsState
+                >(
+                  buildWhen: (previous, current) =>
+                  current is AdminAppointmentsLoadedState ||
+                      current is AdminAppointmentsErrorState ||
+                      current is AdminAppointmentsLoadingState,
+                  builder: (context, state) {
+                    if (state is AdminAppointmentsLoadedState) {
+                      return TabBarView(
+                        children: [
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 0,
+                          ),
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 1,
+                          ),
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 2,
+                          ),
+                        ],
+                      );
+                    }
+                    if (state is AdminAppointmentsErrorState) {
+                      return Center(
+                        child: Text(
+                          state.message,
+                          style: context.medium16.textSecondary.rubik,
+                        ),
+                      );
+                    }
+                    return const AppointmentsListShimmerWidget();
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

@@ -39,12 +39,12 @@ contexts:
   GenderContext:
     default_parameter: gender
     generate_enum: true
-interfaces:
-  PageData: onboarding.pages.*
-  PageData2:
-    attributes:
-      - String title
-      - String? content
+#interfaces:
+#  PageData: onboarding.pages.*
+#  PageData2:
+#    attributes:
+#      - String title
+#      - String? content
 obfuscation:
   enabled: false
   secret: somekey

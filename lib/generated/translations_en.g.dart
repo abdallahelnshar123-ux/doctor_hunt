@@ -124,7 +124,7 @@ class Translations$auth$en {
 }
 
 // Path: forgotPassword
-class Translations$forgotPassword$en with PageData2 {
+class Translations$forgotPassword$en {
   Translations$forgotPassword$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -132,7 +132,6 @@ class Translations$forgotPassword$en with PageData2 {
   // Translations
 
   /// en: 'Forgot Password'
-  @override
   String get title => 'Forgot Password';
 
   /// en: 'Email'
@@ -165,13 +164,15 @@ class Translations$onboarding$en {
   /// en: 'Get Started'
   String get getStarted => 'Get Started';
 
-  late final Translations$onboarding$page1$en page1 = Translations$onboarding$page1$en.internal(_root);
-  late final Translations$onboarding$page2$en page2 = Translations$onboarding$page2$en.internal(_root);
-  late final Translations$onboarding$page3$en page3 = Translations$onboarding$page3$en.internal(_root);
+  List<PageData> get pages => [
+    Translations$onboarding$pages$0$en.internal(_root),
+    Translations$onboarding$pages$1$en.internal(_root),
+    Translations$onboarding$pages$2$en.internal(_root),
+  ];
 }
 
 // Path: chooseRole
-class Translations$chooseRole$en with PageData2 {
+class Translations$chooseRole$en {
   Translations$chooseRole$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -179,7 +180,6 @@ class Translations$chooseRole$en with PageData2 {
   // Translations
 
   /// en: 'Doctor Hunt'
-  @override
   String get title => 'Doctor Hunt';
 
   /// en: 'Choose your role'
@@ -212,7 +212,7 @@ class Translations$patientMain$en {
 }
 
 // Path: patientAppointments
-class Translations$patientAppointments$en with PageData2 {
+class Translations$patientAppointments$en {
   Translations$patientAppointments$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -220,7 +220,6 @@ class Translations$patientAppointments$en with PageData2 {
   // Translations
 
   /// en: 'Appointments'
-  @override
   String get title => 'Appointments';
 
   /// en: 'Upcoming'
@@ -264,7 +263,7 @@ class Translations$patientAppointments$en with PageData2 {
 }
 
 // Path: selectTime
-class Translations$selectTime$en with PageData2 {
+class Translations$selectTime$en {
   Translations$selectTime$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -272,7 +271,6 @@ class Translations$selectTime$en with PageData2 {
   // Translations
 
   /// en: 'Select Time'
-  @override
   String get title => 'Select Time';
 
   /// en: 'No slots available'
@@ -343,7 +341,7 @@ class Translations$favouriteDoctors$en {
 }
 
 // Path: settings
-class Translations$settings$en with PageData2 {
+class Translations$settings$en {
   Translations$settings$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -351,7 +349,6 @@ class Translations$settings$en with PageData2 {
   // Translations
 
   /// en: 'Settings'
-  @override
   String get title => 'Settings';
 
   /// en: 'Logout'
@@ -389,7 +386,7 @@ class Translations$settings$en with PageData2 {
 }
 
 // Path: profile
-class Translations$profile$en with PageData2 {
+class Translations$profile$en {
   Translations$profile$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -397,7 +394,6 @@ class Translations$profile$en with PageData2 {
   // Translations
 
   /// en: 'Profile'
-  @override
   String get title => 'Profile';
 
   /// en: 'Personal information'
@@ -417,7 +413,7 @@ class Translations$profile$en with PageData2 {
 }
 
 // Path: privacyPolicy
-class Translations$privacyPolicy$en with PageData2 {
+class Translations$privacyPolicy$en {
   Translations$privacyPolicy$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -425,7 +421,6 @@ class Translations$privacyPolicy$en with PageData2 {
   // Translations
 
   /// en: 'Privacy Policy'
-  @override
   String get title => 'Privacy Policy';
 
   /// en: 'Last updated: October 2026'
@@ -439,7 +434,7 @@ class Translations$privacyPolicy$en with PageData2 {
 }
 
 // Path: doctorDetails
-class Translations$doctorDetails$en with PageData2 {
+class Translations$doctorDetails$en {
   Translations$doctorDetails$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -447,7 +442,6 @@ class Translations$doctorDetails$en with PageData2 {
   // Translations
 
   /// en: 'Doctor Details'
-  @override
   String get title => 'Doctor Details';
 
   /// en: 'Find Doctors'
@@ -519,7 +513,7 @@ class Translations$appointment$en {
 }
 
 // Path: createDoctor
-class Translations$createDoctor$en with PageData2 {
+class Translations$createDoctor$en {
   Translations$createDoctor$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -527,7 +521,6 @@ class Translations$createDoctor$en with PageData2 {
   // Translations
 
   /// en: 'Create doctor'
-  @override
   String get title => 'Create doctor';
 
   /// en: 'Add photo'
@@ -724,56 +717,62 @@ class Translations$doctor$en {
   late final Translations$doctor$settings$en settings = Translations$doctor$settings$en.internal(_root);
 }
 
-// Path: onboarding.page1
-class Translations$onboarding$page1$en with PageData2 {
-  Translations$onboarding$page1$en.internal(this._root);
+// Path: onboarding.pages.0
+class Translations$onboarding$pages$0$en with PageData {
+  Translations$onboarding$pages$0$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
 
-  /// en: 'Find Trusted Doctors'
   @override
   String get title => 'Find Trusted Doctors';
 
-  /// en: 'Find trusted doctors near you. Get the care you need from experienced professionals.'
+  @override
   String get subtitle => 'Find trusted doctors near you. Get the care you need from experienced professionals.';
+
+  @override
+  String get imagePath => 'assets/images/on_boarding1.png';
 }
 
-// Path: onboarding.page2
-class Translations$onboarding$page2$en with PageData2 {
-  Translations$onboarding$page2$en.internal(this._root);
+// Path: onboarding.pages.1
+class Translations$onboarding$pages$1$en with PageData {
+  Translations$onboarding$pages$1$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
 
-  /// en: 'Choose Best Doctors'
   @override
   String get title => 'Choose Best Doctors';
 
-  /// en: 'Explore doctors based on your needs. Choose the one that’s right for you.'
+  @override
   String get subtitle => 'Explore doctors based on your needs. Choose the one that’s right for you.';
+
+  @override
+  String get imagePath => 'assets/images/on_boarding2.png';
 }
 
-// Path: onboarding.page3
-class Translations$onboarding$page3$en with PageData2 {
-  Translations$onboarding$page3$en.internal(this._root);
+// Path: onboarding.pages.2
+class Translations$onboarding$pages$2$en with PageData {
+  Translations$onboarding$pages$2$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
 
-  /// en: 'Easy Appointments'
   @override
   String get title => 'Easy Appointments';
 
-  /// en: 'Book your appointment in just a few taps. Choose a time that works best for you.'
+  @override
   String get subtitle => 'Book your appointment in just a few taps. Choose a time that works best for you.';
+
+  @override
+  String get imagePath => 'assets/images/on_boarding3.png';
 }
 
 // Path: chooseRole.patient
-class Translations$chooseRole$patient$en with PageData2 {
+class Translations$chooseRole$patient$en {
   Translations$chooseRole$patient$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -781,7 +780,6 @@ class Translations$chooseRole$patient$en with PageData2 {
   // Translations
 
   /// en: 'Patient'
-  @override
   String get title => 'Patient';
 
   /// en: 'Book appointments and consult with doctors.'
@@ -789,7 +787,7 @@ class Translations$chooseRole$patient$en with PageData2 {
 }
 
 // Path: chooseRole.admin
-class Translations$chooseRole$admin$en with PageData2 {
+class Translations$chooseRole$admin$en {
   Translations$chooseRole$admin$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -797,7 +795,6 @@ class Translations$chooseRole$admin$en with PageData2 {
   // Translations
 
   /// en: 'Admin'
-  @override
   String get title => 'Admin';
 
   /// en: 'Manage doctors and app settings.'
@@ -805,7 +802,7 @@ class Translations$chooseRole$admin$en with PageData2 {
 }
 
 // Path: chooseRole.doctor
-class Translations$chooseRole$doctor$en with PageData2 {
+class Translations$chooseRole$doctor$en {
   Translations$chooseRole$doctor$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -813,7 +810,6 @@ class Translations$chooseRole$doctor$en with PageData2 {
   // Translations
 
   /// en: 'Doctor'
-  @override
   String get title => 'Doctor';
 
   /// en: 'Manage appointments and consult with patients.'
@@ -857,16 +853,15 @@ class Translations$admin$main$en {
 }
 
 // Path: admin.patientsTab
-class Translations$admin$patientsTab$en with PageData2 {
+class Translations$admin$patientsTab$en {
   Translations$admin$patientsTab$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
 
   // Translations
 
-  /// en: 'All Patients'
-  @override
-  String get title => 'All Patients';
+  /// en: 'Patients'
+  String get title => 'Patients';
 
   /// en: 'No patients found'
   String get noPatients => 'No patients found';
@@ -876,7 +871,7 @@ class Translations$admin$patientsTab$en with PageData2 {
 }
 
 // Path: admin.appointmentDetails
-class Translations$admin$appointmentDetails$en with PageData2 {
+class Translations$admin$appointmentDetails$en {
   Translations$admin$appointmentDetails$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -884,7 +879,6 @@ class Translations$admin$appointmentDetails$en with PageData2 {
   // Translations
 
   /// en: 'Appointment Details'
-  @override
   String get title => 'Appointment Details';
 
   /// en: 'Patient'
@@ -943,7 +937,7 @@ class Translations$admin$doctorsTab$en {
 }
 
 // Path: admin.appointmentsTab
-class Translations$admin$appointmentsTab$en with PageData2 {
+class Translations$admin$appointmentsTab$en {
   Translations$admin$appointmentsTab$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -951,7 +945,6 @@ class Translations$admin$appointmentsTab$en with PageData2 {
   // Translations
 
   /// en: 'Appointments'
-  @override
   String get title => 'Appointments';
 
   /// en: 'Time'
@@ -1065,14 +1058,17 @@ class Translations$admin$doctorDetailsScreen$en {
   /// en: 'Heart Care'
   String get heartCare => 'Heart Care';
 
-  /// en: 'Edit Doctor'
-  String get editDoctor => 'Edit Doctor';
-
-  /// en: 'Manage Availability'
-  String get manageAvailability => 'Manage Availability';
+  /// en: 'Delete Doctor'
+  String get deleteDoctor => 'Delete Doctor';
 
   /// en: 'Doctor was deleted successfully'
   String get doctorDeletedSuccessfully => 'Doctor was deleted successfully';
+
+  /// en: 'Delete Doctor'
+  String get deleteDoctorConfirmationTitle => 'Delete Doctor';
+
+  /// en: 'Are you sure you want to delete this doctor? This action cannot be undone.'
+  String get deleteDoctorConfirmationMessage => 'Are you sure you want to delete this doctor? This action cannot be undone.';
 
   /// en: 'Rating'
   String get rating => 'Rating';
@@ -1157,7 +1153,7 @@ class Translations$admin$updateDoctorDetails$en {
 }
 
 // Path: admin.profileScreen
-class Translations$admin$profileScreen$en with PageData2 {
+class Translations$admin$profileScreen$en {
   Translations$admin$profileScreen$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1165,7 +1161,6 @@ class Translations$admin$profileScreen$en with PageData2 {
   // Translations
 
   /// en: 'Profile'
-  @override
   String get title => 'Profile';
 
   /// en: 'Full Name'
@@ -1194,7 +1189,7 @@ class Translations$doctor$main$en {
 }
 
 // Path: doctor.settings
-class Translations$doctor$settings$en with PageData2 {
+class Translations$doctor$settings$en {
   Translations$doctor$settings$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1202,7 +1197,6 @@ class Translations$doctor$settings$en with PageData2 {
   // Translations
 
   /// en: 'Doctor Settings'
-  @override
   String get title => 'Doctor Settings';
 
   /// en: 'Doctor Profile'
@@ -1231,7 +1225,7 @@ class Translations$doctor$settings$en with PageData2 {
 }
 
 // Path: privacyPolicy.sections.informationWeCollect
-class Translations$privacyPolicy$sections$informationWeCollect$en with PageData2 {
+class Translations$privacyPolicy$sections$informationWeCollect$en {
   Translations$privacyPolicy$sections$informationWeCollect$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1239,7 +1233,6 @@ class Translations$privacyPolicy$sections$informationWeCollect$en with PageData2
   // Translations
 
   /// en: '1. Information We Collect'
-  @override
   String get title => '1. Information We Collect';
 
   /// en: 'We collect information required to provide doctor booking and healthcare management services:'
@@ -1254,7 +1247,7 @@ class Translations$privacyPolicy$sections$informationWeCollect$en with PageData2
 }
 
 // Path: privacyPolicy.sections.howWeUseInformation
-class Translations$privacyPolicy$sections$howWeUseInformation$en with PageData2 {
+class Translations$privacyPolicy$sections$howWeUseInformation$en {
   Translations$privacyPolicy$sections$howWeUseInformation$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1262,7 +1255,6 @@ class Translations$privacyPolicy$sections$howWeUseInformation$en with PageData2 
   // Translations
 
   /// en: '2. How We Use Your Information'
-  @override
   String get title => '2. How We Use Your Information';
 
   /// en: 'Your information is used strictly to deliver and improve our healthcare services:'
@@ -1277,7 +1269,7 @@ class Translations$privacyPolicy$sections$howWeUseInformation$en with PageData2 
 }
 
 // Path: privacyPolicy.sections.dataSecurity
-class Translations$privacyPolicy$sections$dataSecurity$en with PageData2 {
+class Translations$privacyPolicy$sections$dataSecurity$en {
   Translations$privacyPolicy$sections$dataSecurity$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1285,7 +1277,6 @@ class Translations$privacyPolicy$sections$dataSecurity$en with PageData2 {
   // Translations
 
   /// en: '3. Data Security & Storage'
-  @override
   String get title => '3. Data Security & Storage';
 
   /// en: 'We take the security of your health and personal data seriously:'
@@ -1299,7 +1290,7 @@ class Translations$privacyPolicy$sections$dataSecurity$en with PageData2 {
 }
 
 // Path: privacyPolicy.sections.thirdPartyServices
-class Translations$privacyPolicy$sections$thirdPartyServices$en with PageData2 {
+class Translations$privacyPolicy$sections$thirdPartyServices$en {
   Translations$privacyPolicy$sections$thirdPartyServices$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1307,7 +1298,6 @@ class Translations$privacyPolicy$sections$thirdPartyServices$en with PageData2 {
   // Translations
 
   /// en: '4. Third-Party Services'
-  @override
   String get title => '4. Third-Party Services';
 
   /// en: 'We integrate trusted third-party services to ensure optimal performance:'
@@ -1321,7 +1311,7 @@ class Translations$privacyPolicy$sections$thirdPartyServices$en with PageData2 {
 }
 
 // Path: privacyPolicy.sections.yourRights
-class Translations$privacyPolicy$sections$yourRights$en with PageData2 {
+class Translations$privacyPolicy$sections$yourRights$en {
   Translations$privacyPolicy$sections$yourRights$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1329,7 +1319,6 @@ class Translations$privacyPolicy$sections$yourRights$en with PageData2 {
   // Translations
 
   /// en: '5. Your Rights & Control'
-  @override
   String get title => '5. Your Rights & Control';
 
   /// en: 'You have full control over your personal data within Doctor Hunt:'
@@ -1343,7 +1332,7 @@ class Translations$privacyPolicy$sections$yourRights$en with PageData2 {
 }
 
 // Path: privacyPolicy.sections.contactUs
-class Translations$privacyPolicy$sections$contactUs$en with PageData2 {
+class Translations$privacyPolicy$sections$contactUs$en {
   Translations$privacyPolicy$sections$contactUs$en.internal(this._root);
 
   final Translations _root; // ignore: unused_field
@@ -1351,7 +1340,6 @@ class Translations$privacyPolicy$sections$contactUs$en with PageData2 {
   // Translations
 
   /// en: '6. Contact Us'
-  @override
   String get title => '6. Contact Us';
 
   /// en: 'If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com.'

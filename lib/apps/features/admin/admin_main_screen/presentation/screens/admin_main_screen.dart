@@ -28,6 +28,13 @@ class AdminMainScreen extends HookWidget {
     AdminSettingsTab(),
   ];
 
+  static final List<String> _titlesList = [
+    t.admin.main.doctors,
+    t.admin.patientsTab.title,
+    t.admin.appointmentsTab.title,
+    t.admin.main.settings,
+  ];
+
   @override
   Widget build(BuildContext context) {
     final selectedIndex = useState(0);
@@ -35,6 +42,7 @@ class AdminMainScreen extends HookWidget {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
+      appBar: AdminAppbar(title: _titlesList[selectedIndex.value]),
       body: _tabsList[selectedIndex.value],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(

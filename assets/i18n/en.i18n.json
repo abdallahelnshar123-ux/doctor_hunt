@@ -29,15 +29,32 @@
     "next": "Next",
     "skip": "Skip",
     "get_started": "Get Started",
-    "page1": {
+    "pages(interface=PageData)": [
+      {
+        "title": "Find Trusted Doctors",
+        "subtitle": "Find trusted doctors near you. Get the care you need from experienced professionals.",
+        "imagePath": "assets/images/on_boarding1.png"
+      },
+      {
+        "title": "Choose Best Doctors",
+        "subtitle": "Explore doctors based on your needs. Choose the one that’s right for you.",
+        "imagePath": "assets/images/on_boarding2.png"
+      },
+      {
+        "title": "Easy Appointments",
+        "subtitle": "Book your appointment in just a few taps. Choose a time that works best for you.",
+        "imagePath": "assets/images/on_boarding3.png"
+      }
+    ],
+    "@page1": {
       "title": "Find Trusted Doctors",
       "subtitle": "Find trusted doctors near you. Get the care you need from experienced professionals."
     },
-    "page2": {
+    "@page2": {
       "title": "Choose Best Doctors",
       "subtitle": "Explore doctors based on your needs. Choose the one that’s right for you."
     },
-    "page3": {
+    "@page3": {
       "title": "Easy Appointments",
       "subtitle": "Book your appointment in just a few taps. Choose a time that works best for you."
     }
@@ -256,7 +273,7 @@
       "settings": "Settings"
     },
     "patientsTab": {
-      "title": "All Patients",
+      "title": "Patients",
       "no_patients": "No patients found",
       "search_hint": "Search patients..."
     },
@@ -328,9 +345,12 @@
       "specialty": "Specialty",
       "account_status": "Account Status",
       "heart_care": "Heart Care",
-      "edit_doctor": "Edit Doctor",
-      "manage_availability": "Manage Availability",
+      "@edit_doctor": "Edit Doctor",
+      "@manage_availability": "Manage Availability",
+      "deleteDoctor" : "Delete Doctor",
       "doctor_deleted_successfully": "Doctor was deleted successfully",
+      "delete_doctor_confirmation_title": "Delete Doctor",
+      "delete_doctor_confirmation_message": "Are you sure you want to delete this doctor? This action cannot be undone.",
       "rating": "Rating",
       "consultation_fee": "Consultation Fee",
       "fee": "$ ${price}"
