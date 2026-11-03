@@ -1,9 +1,10 @@
+import 'package:doctor_hunt/apps/features/common/auth/data/models/user/my_user.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/data/session/user_session_manager.dart';
-import '../../../domain/repository/auth_repository.dart';
 import '../../../data/use_case/login_use_case.dart';
+import '../../../domain/repository/auth_repository.dart';
 import 'auth_event.dart';
 import 'auth_state.dart';
 
@@ -71,7 +72,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(ContinueWithGoogleLoadingState());
-    final result = await _repository.continueWithGoogle();
+    final result = await _loginUseCase.continueWithGoogle(
+      role: UserRoles.patient,
+    );
 
     result.fold(
       (failure) {

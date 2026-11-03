@@ -26,17 +26,13 @@ class PopularDoctorsItem extends StatelessWidget {
         crossAxisAlignment: .center,
         children: [
           Expanded(
-            child: doctor.image != null && doctor.image!.isNotEmpty
-                ? CustomCachedNetworkImage(
-                    imgUrl: doctor.image!,
+            child:
+               CustomCachedNetworkImage(
+                    imgUrl: doctor.image,
                     fit: BoxFit.cover,
                     width: double.infinity,
                   )
-                : Image.asset(
-                    AppAssets.images.testDoctorImage.path,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
+
           ),
           Padding(
             padding: const EdgeInsets.all(10),

@@ -5,6 +5,7 @@ import 'app_user_dto.dart';
 
 class PatientDto extends AppUserDto {
   final List<String> favDoctors;
+  final bool active;
 
   const PatientDto({
     required super.id,
@@ -14,6 +15,7 @@ class PatientDto extends AppUserDto {
     super.image,
     super.phone,
     this.favDoctors = const [],
+    this.active = true,
   }) : super(role: UserRoles.patient);
 
   factory PatientDto.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,7 @@ class PatientDto extends AppUserDto {
       image: json[FirestoreConstants.image]?.toString(),
       phone: json[FirestoreConstants.phone]?.toString(),
       favDoctors: favDoctorsList?.map((e) => e.toString()).toList() ?? const [],
+      active: json[FirestoreConstants.active] ?? true,
     );
   }
 
@@ -45,6 +48,7 @@ class PatientDto extends AppUserDto {
       FirestoreConstants.image: image,
       FirestoreConstants.role: role.name,
       FirestoreConstants.phone: phone,
+      FirestoreConstants.active: active,
       FirestoreConstants.patientInfo: {
         FirestoreConstants.favDoctors: favDoctors,
       },
@@ -52,5 +56,5 @@ class PatientDto extends AppUserDto {
   }
 
   @override
-  List<Object?> get props => [...super.props, favDoctors];
+  List<Object?> get props => [...super.props, favDoctors, active];
 }

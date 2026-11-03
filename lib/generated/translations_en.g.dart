@@ -609,6 +609,9 @@ class Translations$errors$en {
   /// en: 'No account associated with this email'
   String get noAccountAssociated => 'No account associated with this email';
 
+  /// en: 'Account is disabled. Please contact the administrator.'
+  String get accountDisabled => 'Account is disabled. Please contact the administrator.';
+
   /// en: 'Some thing went wrong'
   String get someThingWentWrong => 'Some thing went wrong';
 
@@ -868,6 +871,18 @@ class Translations$admin$patientsTab$en {
 
   /// en: 'Search patients...'
   String get searchHint => 'Search patients...';
+
+  /// en: 'Delete Patient'
+  String get deletePatient => 'Delete Patient';
+
+  /// en: 'Delete Patient'
+  String get deletePatientConfirmationTitle => 'Delete Patient';
+
+  /// en: 'Are you sure you want to delete this patient? This action cannot be undone.'
+  String get deletePatientConfirmationMessage => 'Are you sure you want to delete this patient? This action cannot be undone.';
+
+  /// en: 'Patient was deleted successfully'
+  String get patientDeletedSuccessfully => 'Patient was deleted successfully';
 }
 
 // Path: admin.appointmentDetails

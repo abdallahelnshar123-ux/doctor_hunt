@@ -17,3 +17,16 @@ class AdminSearchPatientsRequested extends AdminPatientsEvent {
   @override
   List<Object> get props => [query];
 }
+
+class AdminUpdatePatientStatusLocally extends AdminPatientsEvent {
+  final String patientId;
+  final bool active;
+
+  const AdminUpdatePatientStatusLocally({
+    required this.patientId,
+    required this.active,
+  });
+
+  @override
+  List<Object> get props => [patientId, active];
+}

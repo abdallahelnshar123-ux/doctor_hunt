@@ -15,12 +15,4 @@ final class ToggleDoctorActiveStatusError extends AdminDoctorActionState {
   ToggleDoctorActiveStatusError(this.message);
 }
 
-final class DeleteDoctorLoading extends AdminDoctorActionState {}
 
-final class DeleteDoctorSuccess extends AdminDoctorActionState {}
-
-final class DeleteDoctorError extends AdminDoctorActionState {
-  final String message;
-
-  DeleteDoctorError(this.message);
-}

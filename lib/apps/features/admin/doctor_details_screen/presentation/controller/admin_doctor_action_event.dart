@@ -13,8 +13,4 @@ class ToggleDoctorActiveStatusRequested extends AdminDoctorActionEvent {
   });
 }
 
-class DeleteDoctorRequested extends AdminDoctorActionEvent {
-  final String doctorId;
 
-  DeleteDoctorRequested({required this.doctorId});
-}

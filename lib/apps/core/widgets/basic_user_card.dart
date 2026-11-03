@@ -9,10 +9,11 @@ import 'app_container_with_shadow.dart';
 import 'custom_cached_network_image.dart';
 
 class BasicUserCard extends StatelessWidget {
-  const BasicUserCard({super.key, this.onTap , this.outerUser});
+  const BasicUserCard({super.key, this.onTap, this.outerUser, this.trailing});
 
   final void Function()? onTap;
-  final AppUserEntity? outerUser ;
+  final AppUserEntity? outerUser;
+  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class BasicUserCard extends StatelessWidget {
         child: ListTile(
           contentPadding: EdgeInsets.all(16),
           onTap: onTap,
+          trailing: trailing,
           leading: CircleAvatar(
             radius: 30,
             backgroundColor: AppColors.shimmerBaseColor,

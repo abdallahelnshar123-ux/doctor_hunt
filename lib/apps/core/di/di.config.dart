@@ -27,6 +27,8 @@ import '../../features/admin/admin_patients_tab/data/repo/admin_patients_reposit
     as _i218;
 import '../../features/admin/admin_patients_tab/data/service/admin_patients_remote_data_source.dart'
     as _i43;
+import '../../features/admin/admin_patients_tab/presentation/controller/admin_patient_action_bloc.dart'
+    as _i710;
 import '../../features/admin/admin_patients_tab/presentation/controller/admin_patients_bloc.dart'
     as _i101;
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
@@ -185,6 +187,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i747.AuthRepository>()),
+    );
+    gh.factory<_i710.AdminPatientActionBloc>(
+      () => _i710.AdminPatientActionBloc(gh<_i218.AdminPatientsRepository>()),
     );
     gh.factory<_i101.AdminPatientsBloc>(
       () => _i101.AdminPatientsBloc(gh<_i218.AdminPatientsRepository>()),

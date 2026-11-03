@@ -23,6 +23,36 @@ class AdminPatientsBloc extends Bloc<AdminPatientsEvent, AdminPatientsState> {
       _onSearchPatientsRequested,
       transformer: debounce(const Duration(milliseconds: 300)),
     );
+    on<AdminUpdatePatientStatusLocally>(_onUpdatePatientStatusLocally);
+  }
+
+  void _onUpdatePatientStatusLocally(
+    AdminUpdatePatientStatusLocally event,
+    Emitter<AdminPatientsState> emit,
+  ) {
+    final currentState = state;
+    if (currentState is AdminPatientsSuccess) {
+      final updatedAll = currentState.allPatients.map((patient) {
+        if (patient.id == event.patientId) {
+          return patient.copyWith(active: event.active);
+        }
+        return patient;
+      }).toList();
+
+      final updatedSearch = currentState.searchPatients?.map((patient) {
+        if (patient.id == event.patientId) {
+          return patient.copyWith(active: event.active);
+        }
+        return patient;
+      }).toList();
+
+      emit(
+        currentState.copyWith(
+          allPatients: updatedAll,
+          searchPatients: updatedSearch,
+        ),
+      );
+    }
   }
 
   Future<void> _onGetPatientsRequested(

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/utils/dialog_utils.dart';
-import '../../../admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import '../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../common/auth/presentation/controller/auth/auth_event.dart';
 

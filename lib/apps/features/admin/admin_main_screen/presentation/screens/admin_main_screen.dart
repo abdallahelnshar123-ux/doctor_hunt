@@ -22,6 +22,7 @@ class AdminMainScreen extends HookWidget {
     BlocProvider(
       create: (context) =>
           getIt<AdminPatientsBloc>()..add(AdminGetPatientsRequested()),
+
       child: AdminPatientsTab(),
     ),
     AdminAppointmentsTab(),

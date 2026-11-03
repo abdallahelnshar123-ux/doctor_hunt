@@ -27,6 +27,7 @@ class FirestoreConstants {
   static const String patientInfo = 'patient_info';
   static const String adminInfo = 'admin_info';
   static const String favDoctors = 'fav_doctors';
+  static const String active = 'active';
 
   // Appointment Fields
   static const String patient = 'patient';
@@ -49,6 +50,5 @@ class FirestoreConstants {
   static const String slotDuration = 'slot_duration';
 
   // static const String password = 'password';
-  static const String active = 'active';
   static const String loginMethods = 'login_methods';
 }

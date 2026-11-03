@@ -41,45 +41,13 @@ class DetailsWidget extends StatelessWidget {
             ),
           ),
           Divider(color: AppColors.textSecondary),
-          ValueListenableBuilder(
-            valueListenable: isActive,
-            builder: (context, value, child) {
-              return _buildInfoCard(
-                context,
-                value: value
-                    ? t.admin.doctorsTab.active
-                    : t.admin.doctorsTab.inactive,
-                title: t.admin.doctorDetailsScreen.accountStatus,
-                icon: AppAssets.icons.switchIcon.path,
-                trailing: ValueListenableBuilder(
-                  valueListenable: isActive,
-                  builder: (context, value, child) {
-                    return Switch(
-                      value: value,
-
-                      onChanged: (value) {
-                        context.read<AdminDoctorActionBloc>().add(
-                          ToggleDoctorActiveStatusRequested(
-                            doctorId: doctor.id,
-                            active: value,
-                          ),
-                        );
-                      },
-                      activeThumbColor: AppColors.white,
-                      activeTrackColor: AppColors.brandPrimary,
-                      thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                        Set<WidgetState> states,
-                      ) {
-                        if (states.contains(WidgetState.selected)) {
-                          return Icon(
-                            Icons.check_rounded,
-                            color: AppColors.brandPrimary,
-                          );
-                        }
-                        return null;
-                      }),
-                    );
-                  },
+          AccountStatusSwitchTile(
+            isActive: isActive,
+            onChanged: (value) {
+              context.read<AdminDoctorActionBloc>().add(
+                ToggleDoctorActiveStatusRequested(
+                  doctorId: doctor.id,
+                  active: value,
                 ),
               );
             },

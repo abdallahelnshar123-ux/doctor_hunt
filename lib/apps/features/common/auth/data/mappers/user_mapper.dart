@@ -29,6 +29,7 @@ extension AppUserDtoMapper on AppUserDto {
         image: dto.image,
         phone: dto.phone,
         favDoctors: dto.favDoctors,
+        active: dto.active,
       );
     } else if (this is DoctorDto) {
       final dto = this as DoctorDto;
@@ -73,6 +74,7 @@ extension AppUserEntityMapper on AppUserEntity {
         image: entity.image,
         phone: entity.phone,
         favDoctors: entity.favDoctors,
+        active: entity.active,
       );
     } else if (this is DoctorEntity) {
       final entity = this as DoctorEntity;

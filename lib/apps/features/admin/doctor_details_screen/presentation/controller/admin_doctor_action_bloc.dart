@@ -14,7 +14,6 @@ class AdminDoctorActionBloc
   AdminDoctorActionBloc(this._doctorRepository)
     : super(AdminDoctorActionInitial()) {
     on<ToggleDoctorActiveStatusRequested>(_onToggleDoctorActiveStatusRequested);
-    on<DeleteDoctorRequested>(_onDeleteDoctorRequested);
   }
 
   Future<void> _onToggleDoctorActiveStatusRequested(
@@ -31,22 +30,6 @@ class AdminDoctorActionBloc
     result.fold(
       (failure) => emit(ToggleDoctorActiveStatusError(failure.message)),
       (_) => emit(ToggleDoctorActiveStatusSuccess()),
-    );
-  }
-
-  Future<void> _onDeleteDoctorRequested(
-    DeleteDoctorRequested event,
-    Emitter<AdminDoctorActionState> emit,
-  ) async {
-    emit(DeleteDoctorLoading());
-
-    final result = await _doctorRepository.deleteDoctor(
-      doctorId: event.doctorId,
-    );
-
-    result.fold(
-      (failure) => emit(DeleteDoctorError(failure.message)),
-      (_) => emit(DeleteDoctorSuccess()),
     );
   }
 }

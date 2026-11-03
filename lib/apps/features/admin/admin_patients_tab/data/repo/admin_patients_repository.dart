@@ -26,4 +26,21 @@ class AdminPatientsRepository {
       return Left(UnexpectedFailure(e.toString()));
     }
   }
+
+  Future<Either<Failure, void>> updatePatientActiveStatus({
+    required String patientId,
+    required bool active,
+  }) async {
+    try {
+      await _remoteDataSource.updatePatientActiveStatus(
+        patientId: patientId,
+        active: active,
+      );
+      return const Right(null);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
 }

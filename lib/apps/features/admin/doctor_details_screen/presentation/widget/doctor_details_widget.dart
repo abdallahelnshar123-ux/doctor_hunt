@@ -16,22 +16,7 @@ class DoctorDetailsWidget extends HookWidget {
 
     return BlocListener<AdminDoctorActionBloc, AdminDoctorActionState>(
       listener: (context, state) {
-        if (state is DeleteDoctorLoading) {
-          DialogUtils.showLoading(context: context);
-        } else if (state is DeleteDoctorSuccess) {
-          DialogUtils.hideLoading(context: context);
-          SnackBarUtils.showSuccessSnackBar(
-            context: context,
-            message: t.admin.doctorDetailsScreen.doctorDeletedSuccessfully,
-          );
-          Navigator.pop(context); // Go back to the previous screen
-        } else if (state is DeleteDoctorError) {
-          DialogUtils.hideLoading(context: context);
-          SnackBarUtils.showErrorSnackBar(
-            context: context,
-            message: state.message,
-          );
-        } else if (state is ToggleDoctorActiveStatusError) {
+        if (state is ToggleDoctorActiveStatusError) {
           // Revert back on failure (UI-first rollback)
           isActive.value = !isActive.value;
           isActiveChip(isActive.value);
@@ -87,44 +72,15 @@ class DoctorDetailsWidget extends HookWidget {
               ),
             ),
             _buildDivider(),
-            ValueListenableBuilder<bool>(
-              valueListenable: isActive,
-              builder: (context, value, _) {
-                return _buildSettingsCard(
-                  context,
-                  title: t.admin.doctorDetailsScreen.accountStatus,
-                  icon: AppAssets.icons.switchIcon.path,
-                  subtitleWidget: Text(
-                    value
-                        ? t.admin.doctorsTab.active
-                        : t.admin.doctorsTab.inactive,
-                    style: context.semiBold14.textTertiary.rubik,
-                  ),
-                  trailing: Switch(
-                    value: value,
-                    onChanged: (newValue) {
-                      isActive.value = newValue;
-                      isActiveChip(newValue);
-                      context.read<AdminDoctorActionBloc>().add(
-                        ToggleDoctorActiveStatusRequested(
-                          doctorId: doctor.id,
-                          active: newValue,
-                        ),
-                      );
-                    },
-                    activeThumbColor: AppColors.white,
-                    activeTrackColor: AppColors.brandPrimary,
-                    thumbIcon: WidgetStateProperty.resolveWith<Icon?>((
-                      Set<WidgetState> states,
-                    ) {
-                      if (states.contains(WidgetState.selected)) {
-                        return const Icon(
-                          Icons.check_rounded,
-                          color: AppColors.brandPrimary,
-                        );
-                      }
-                      return null;
-                    }),
+            AccountStatusSwitchTile(
+              isActive: isActive,
+              onChanged: (newValue) {
+                isActive.value = newValue;
+                isActiveChip(newValue);
+                context.read<AdminDoctorActionBloc>().add(
+                  ToggleDoctorActiveStatusRequested(
+                    doctorId: doctor.id,
+                    active: newValue,
                   ),
                 );
               },

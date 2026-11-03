@@ -33,4 +33,24 @@ class AdminPatientsRemoteDataSource {
       throw UnexpectedException(message: e.toString());
     }
   }
+
+  Future<void> updatePatientActiveStatus({
+    required String patientId,
+    required bool active,
+  }) async {
+    try {
+      await _firestore
+          .collection(FirestoreConstants.usersCollection)
+          .doc(patientId)
+          .update({
+            FirestoreConstants.active: active,
+          });
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? 'server_error');
+    } on SocketException {
+      throw NetworkException(message: 'no_internet');
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
 }
