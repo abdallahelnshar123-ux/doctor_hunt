@@ -51,15 +51,19 @@ class DoctorDto extends AppUserDto {
       ),
       active: json[FirestoreConstants.active] as bool? ?? false,
       consultationFee:
-          (json[FirestoreConstants.consultationFee] as num?)?.toDouble() ?? 0.0,
+          (json[FirestoreConstants.consultationFee] as num?)?.toDouble(),
       rating: json[FirestoreConstants.rating] != null
           ? _ratingFromJson(
-              json[FirestoreConstants.rating] as Map<String, dynamic>,
+              Map<String, dynamic>.from(
+                json[FirestoreConstants.rating] as Map,
+              ),
             )
           : const Rating(rating: 0.0, reviews: []),
       availability: json[FirestoreConstants.availability] != null
           ? _availabilityFromJson(
-              json[FirestoreConstants.availability] as Map<String, dynamic>,
+              Map<String, dynamic>.from(
+                json[FirestoreConstants.availability] as Map,
+              ),
             )
           : null,
     );
@@ -94,7 +98,7 @@ class DoctorDto extends AppUserDto {
       FirestoreConstants.role: role.name,
       FirestoreConstants.phone: phone,
       FirestoreConstants.adminId: adminId,
-      FirestoreConstants.specialty: specialty.toMap(),
+      FirestoreConstants.specialty: specialty.toJson(),
       FirestoreConstants.active: active,
       FirestoreConstants.consultationFee: consultationFee,
       FirestoreConstants.rating: _ratingToJson(rating),

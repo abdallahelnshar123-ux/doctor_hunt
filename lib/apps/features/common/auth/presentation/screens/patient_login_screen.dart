@@ -55,6 +55,9 @@ class PatientLoginScreen extends HookWidget {
             state is ContinueWithGoogleLoadingState) {
           DialogUtils.showLoading(context: context);
         }
+        if (state is UserAuthenticatedState) {
+          DialogUtils.hideLoading(context: context);
+        }
       },
       child: AppScaffold(
         resizeToAvoidBottomInset: true,

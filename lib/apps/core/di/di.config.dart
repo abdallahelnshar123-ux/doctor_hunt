@@ -64,9 +64,11 @@ import '../../features/doctor/data/repository/doctor_repository_impl.dart'
     as _i819;
 import '../../features/doctor/domain/repository/doctor_repository.dart'
     as _i849;
-import '../../features/doctor/presentation/controller/doctor_availability_bloc.dart'
+import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart'
     as _i730;
-import '../../features/doctor/presentation/controller/update_doctor_details_bloc.dart'
+import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart'
+    as _i741;
+import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart'
     as _i899;
 import '../../features/patient/appointments_tab/data/service/review_batch_firestore_service.dart'
     as _i129;
@@ -274,8 +276,14 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i583.UserSessionManager>(),
       ),
     );
-    gh.factory<_i899.UpdateDoctorDetailsBloc>(
-      () => _i899.UpdateDoctorDetailsBloc(
+    gh.factory<_i741.DoctorOnboardingBloc>(
+      () => _i741.DoctorOnboardingBloc(
+        gh<_i849.DoctorRepository>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
+    gh.factory<_i899.DoctorProfileBloc>(
+      () => _i899.DoctorProfileBloc(
         gh<_i849.DoctorRepository>(),
         gh<_i583.UserSessionManager>(),
       ),

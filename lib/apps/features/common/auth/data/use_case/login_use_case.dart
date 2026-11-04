@@ -7,7 +7,6 @@ import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/patient.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_repository.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../models/user/my_user.dart';

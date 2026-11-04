@@ -13,9 +13,7 @@ import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_use
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_bloc.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_event.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/update_doctor_details_state.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -24,8 +22,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 
-class UpdateDoctorDetailsScreen extends HookWidget {
-  const UpdateDoctorDetailsScreen({
+import '../controller/doctor_profile_event.dart';
+import '../controller/doctor_profile_state.dart';
+
+class DoctorProfileScreen extends HookWidget {
+  const DoctorProfileScreen({
     super.key,
     this.showAppBar = true,
     this.automaticallyImplyLeading = true,
@@ -52,7 +53,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
       doctor?.specialty ?? SpecialtyModel(id: 'id', en: "", ar: "") ,
     );
 
-    return BlocListener<UpdateDoctorDetailsBloc, UpdateDoctorDetailsState>(
+    return BlocListener<DoctorProfileBloc, DoctorProfileState>(
       listenWhen: (previous, current) =>
           current is UpdateDoctorDetailsSuccess ||
           current is UpdateDoctorDetailsError ||
@@ -168,7 +169,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
   Widget _buildChangePhotoButton(BuildContext context) {
     return TextButton(
       onPressed: () {
-        context.read<UpdateDoctorDetailsBloc>().add(
+        context.read<DoctorProfileBloc>().add(
           PickDoctorUpdateImageRequested(),
         );
       },
@@ -191,7 +192,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
         width: 120,
         height: 120,
         alignment: Alignment.center,
-        child: BlocConsumer<UpdateDoctorDetailsBloc, UpdateDoctorDetailsState>(
+        child: BlocConsumer<DoctorProfileBloc, DoctorProfileState>(
           listener: (context, state) {
             if (state is PickDoctorUpdateImageErrorState) {
               SnackBarUtils.showErrorSnackBar(
@@ -284,7 +285,7 @@ class UpdateDoctorDetailsScreen extends HookWidget {
   ) {
     FocusManager.instance.primaryFocus?.unfocus();
     if (formKey.currentState!.validate()) {
-      context.read<UpdateDoctorDetailsBloc>().add(
+      context.read<DoctorProfileBloc>().add(
         UpdateDoctorDetailsRequested(
           image: selectedImage.value,
           name: nameController.text.trim(),

@@ -593,7 +593,6 @@ class Translations$admin$en {
   late final Translations$admin$settings$en settings = Translations$admin$settings$en.internal(_root);
   late final Translations$admin$addDoctorScreen$en addDoctorScreen = Translations$admin$addDoctorScreen$en.internal(_root);
   late final Translations$admin$doctorDetailsScreen$en doctorDetailsScreen = Translations$admin$doctorDetailsScreen$en.internal(_root);
-  late final Translations$admin$doctorAvailabilityScreen$en doctorAvailabilityScreen = Translations$admin$doctorAvailabilityScreen$en.internal(_root);
   late final Translations$admin$updateDoctorDetails$en updateDoctorDetails = Translations$admin$updateDoctorDetails$en.internal(_root);
   late final Translations$admin$profileScreen$en profileScreen = Translations$admin$profileScreen$en.internal(_root);
 }
@@ -718,6 +717,10 @@ class Translations$doctor$en {
   // Translations
   late final Translations$doctor$main$en main = Translations$doctor$main$en.internal(_root);
   late final Translations$doctor$settings$en settings = Translations$doctor$settings$en.internal(_root);
+  late final Translations$doctor$onboarding$en onboarding = Translations$doctor$onboarding$en.internal(_root);
+  late final Translations$doctor$doctorAvailabilityScreen$en doctorAvailabilityScreen = Translations$doctor$doctorAvailabilityScreen$en.internal(
+    _root,
+  );
 }
 
 // Path: onboarding.pages.0
@@ -1095,45 +1098,6 @@ class Translations$admin$doctorDetailsScreen$en {
   String fee({required Object Price}) => '\$ ${Price}';
 }
 
-// Path: admin.doctorAvailabilityScreen
-class Translations$admin$doctorAvailabilityScreen$en {
-  Translations$admin$doctorAvailabilityScreen$en.internal(this._root);
-
-  final Translations _root; // ignore: unused_field
-
-  // Translations
-
-  /// en: 'Doctor Availability'
-  String get doctorAvailability => 'Doctor Availability';
-
-  /// en: 'Working Days'
-  String get workingDays => 'Working Days';
-
-  /// en: 'Working Hours'
-  String get workingHours => 'Working Hours';
-
-  /// en: 'Start Time'
-  String get startTime => 'Start Time';
-
-  /// en: 'End Time'
-  String get endTime => 'End Time';
-
-  /// en: 'Slot Duration'
-  String get slotDuration => 'Slot Duration';
-
-  /// en: 'Active'
-  String get active => 'Active';
-
-  /// en: 'Inactive'
-  String get inactive => 'Inactive';
-
-  /// en: 'Start time and end time must be different'
-  String get startTimeAndEndtimeMustBeDifferent => 'Start time and end time must be different';
-
-  /// en: 'Data was updated successfully'
-  String get dataWasUpdatedSuccessfully => 'Data was updated successfully';
-}
-
 // Path: admin.updateDoctorDetails
 class Translations$admin$updateDoctorDetails$en {
   Translations$admin$updateDoctorDetails$en.internal(this._root);
@@ -1237,6 +1201,111 @@ class Translations$doctor$settings$en {
 
   /// en: 'v1.0.0'
   String get v100 => 'v1.0.0';
+}
+
+// Path: doctor.onboarding
+class Translations$doctor$onboarding$en {
+  Translations$doctor$onboarding$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Welcome to Doctor Hunt!'
+  String get welcomeTitle => 'Welcome to Doctor Hunt!';
+
+  /// en: 'Let's complete your profile and set up your working schedule so patients can find and book appointments with you.'
+  String get welcomeSubtitle => 'Let\'s complete your profile and set up your working schedule so patients can find and book appointments with you.';
+
+  /// en: 'Continue'
+  String get continueBtn => 'Continue';
+
+  /// en: 'Profile Details'
+  String get stepProfileTitle => 'Profile Details';
+
+  /// en: 'Please provide your contact information and consultation fee'
+  String get stepProfileSubtitle => 'Please provide your contact information and consultation fee';
+
+  /// en: 'Phone Number'
+  String get phoneNumber => 'Phone Number';
+
+  /// en: '+20 100 000 0000'
+  String get phoneHint => '+20 100 000 0000';
+
+  /// en: 'Consultation Fee'
+  String get consultationFee => 'Consultation Fee';
+
+  /// en: 'e.g. 200'
+  String get feeHint => 'e.g. 200';
+
+  /// en: 'Please choose a profile photo'
+  String get photoRequired => 'Please choose a profile photo';
+
+  /// en: 'Choose Photo'
+  String get choosePhoto => 'Choose Photo';
+
+  /// en: 'Change Photo'
+  String get changePhoto => 'Change Photo';
+
+  /// en: 'Working Schedule'
+  String get stepAvailabilityTitle => 'Working Schedule';
+
+  /// en: 'Set your working days and consultation hours'
+  String get stepAvailabilitySubtitle => 'Set your working days and consultation hours';
+
+  /// en: 'Please select at least one working day'
+  String get selectAtLeastOneDay => 'Please select at least one working day';
+
+  /// en: 'Save & Complete'
+  String get saveAndContinue => 'Save & Complete';
+
+  /// en: 'All Set!'
+  String get successTitle => 'All Set!';
+
+  /// en: 'Your profile and availability have been successfully updated. You are now ready to start receiving appointments.'
+  String get successSubtitle => 'Your profile and availability have been successfully updated. You are now ready to start receiving appointments.';
+
+  /// en: 'Finish'
+  String get finish => 'Finish';
+}
+
+// Path: doctor.doctorAvailabilityScreen
+class Translations$doctor$doctorAvailabilityScreen$en {
+  Translations$doctor$doctorAvailabilityScreen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Availability'
+  String get doctorAvailability => 'Doctor Availability';
+
+  /// en: 'Working Days'
+  String get workingDays => 'Working Days';
+
+  /// en: 'Working Hours'
+  String get workingHours => 'Working Hours';
+
+  /// en: 'Start Time'
+  String get startTime => 'Start Time';
+
+  /// en: 'End Time'
+  String get endTime => 'End Time';
+
+  /// en: 'Slot Duration'
+  String get slotDuration => 'Slot Duration';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Start time and end time must be different'
+  String get startTimeAndEndtimeMustBeDifferent => 'Start time and end time must be different';
+
+  /// en: 'Data was updated successfully'
+  String get dataWasUpdatedSuccessfully => 'Data was updated successfully';
 }
 
 // Path: privacyPolicy.sections.informationWeCollect

@@ -3,14 +3,14 @@ import 'dart:io';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class UpdateDoctorDetailsEvent extends Equatable {
-  const UpdateDoctorDetailsEvent();
+sealed class DoctorProfileEvent extends Equatable {
+  const DoctorProfileEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class UpdateDoctorDetailsRequested extends UpdateDoctorDetailsEvent {
+class UpdateDoctorDetailsRequested extends DoctorProfileEvent {
   final String? name;
   final SpecialtyModel? specialty;
   final double? consultationFee;
@@ -38,4 +38,4 @@ class UpdateDoctorDetailsRequested extends UpdateDoctorDetailsEvent {
   ];
 }
 
-class PickDoctorUpdateImageRequested extends UpdateDoctorDetailsEvent {}
+class PickDoctorUpdateImageRequested extends DoctorProfileEvent {}

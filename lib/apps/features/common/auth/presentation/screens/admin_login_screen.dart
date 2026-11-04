@@ -43,6 +43,9 @@ class AdminLoginScreen extends HookWidget {
         if (state is LoginWithEmailPasswordLoadingState) {
           DialogUtils.showLoading(context: context);
         }
+        if (state is UserAuthenticatedState) {
+          DialogUtils.hideLoading(context: context);
+        }
       },
 
       child: AppScaffold(

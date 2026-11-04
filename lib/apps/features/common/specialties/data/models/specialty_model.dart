@@ -26,6 +26,15 @@ class SpecialtyModel extends Equatable {
     return en;
   }
 
+  static DateTime? _parseDateTime(dynamic value) {
+    if (value == null) return null;
+    if (value is Timestamp) return value.toDate();
+    if (value is DateTime) return value;
+    if (value is String) return DateTime.tryParse(value);
+    if (value is int) return DateTime.fromMillisecondsSinceEpoch(value);
+    return null;
+  }
+
   factory SpecialtyModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> doc,
   ) {
@@ -34,8 +43,8 @@ class SpecialtyModel extends Equatable {
       id: doc.id,
       en: data[FirestoreConstants.en] as String? ?? '',
       ar: data[FirestoreConstants.ar] as String? ?? '',
-      createdAt: (data[FirestoreConstants.createdAt] as Timestamp?)?.toDate(),
-      updatedAt: (data[FirestoreConstants.updatedAt] as Timestamp?)?.toDate(),
+      createdAt: _parseDateTime(data[FirestoreConstants.createdAt]),
+      updatedAt: _parseDateTime(data[FirestoreConstants.updatedAt]),
     );
   }
 
@@ -44,9 +53,21 @@ class SpecialtyModel extends Equatable {
       id: id ?? map[FirestoreConstants.id] as String? ?? '',
       en: map[FirestoreConstants.en] as String? ?? '',
       ar: map[FirestoreConstants.ar] as String? ?? '',
-      createdAt: (map[FirestoreConstants.createdAt] as Timestamp?)?.toDate(),
-      updatedAt: (map[FirestoreConstants.updatedAt] as Timestamp?)?.toDate(),
+      createdAt: _parseDateTime(map[FirestoreConstants.createdAt]),
+      updatedAt: _parseDateTime(map[FirestoreConstants.updatedAt]),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      FirestoreConstants.id: id,
+      FirestoreConstants.en: en,
+      FirestoreConstants.ar: ar,
+      if (createdAt != null)
+        FirestoreConstants.createdAt: createdAt!.toIso8601String(),
+      if (updatedAt != null)
+        FirestoreConstants.updatedAt: updatedAt!.toIso8601String(),
+    };
   }
 
   Map<String, dynamic> toMap() {

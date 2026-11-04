@@ -1,18 +1,14 @@
-import 'package:flutter/material.dart';
+part of 'working_hours_widget.dart';
 
-import '../../../../core/data/models/doctor/working_hour.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../../../../generated/style_atoms.dart';
-
-class TimeDropDown extends StatelessWidget {
-  const TimeDropDown({
+class SlotDurationDropDown extends StatelessWidget {
+  const SlotDurationDropDown({
     super.key,
     required this.initialSelection,
     this.onSelected,
     required this.title,
   });
 
-  final WorkingHour initialSelection;
+  final SlotDuration initialSelection;
   final void Function(String?)? onSelected;
   final String title;
 
@@ -40,11 +36,11 @@ class TimeDropDown extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           ),
-          dropdownMenuEntries: WorkingHour.values
+          dropdownMenuEntries: SlotDuration.values
               .map(
-                (hour) => DropdownMenuEntry<String>(
-                  value: hour.name,
-                  label: hour.label,
+                (duration) => DropdownMenuEntry<String>(
+                  value: duration.name,
+                  label: '${duration.minutes} min',
                 ),
               )
               .toList(),

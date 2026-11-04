@@ -1,13 +1,14 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/screens/doctor_availability_screen.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/screens/doctor_settings_tab.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/screens/update_doctor_details_screen.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_avaiability_screen/screen/doctor_availability_screen.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../doctor_settings_tab/screen/doctor_settings_tab.dart';
 
 class DoctorMainScreen extends HookWidget {
   const DoctorMainScreen({super.key});
@@ -21,7 +22,7 @@ class DoctorMainScreen extends HookWidget {
         showAppBar: true,
         automaticallyImplyLeading: false,
       ),
-      const UpdateDoctorDetailsScreen(
+      const DoctorProfileScreen(
         showAppBar: true,
         automaticallyImplyLeading: false,
       ),

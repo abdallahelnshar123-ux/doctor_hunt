@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/apps/core/widgets/custom_negative_button.dart';
 import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/widgets/doctor_account_settings_widget.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/dialog_utils.dart';
 import '../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../common/auth/presentation/controller/auth/auth_event.dart';
+import '../widget/doctor_account_settings_widget.dart';
 
 class DoctorSettingsTab extends StatelessWidget {
   const DoctorSettingsTab({

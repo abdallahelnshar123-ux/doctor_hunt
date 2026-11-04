@@ -30,11 +30,13 @@ import 'package:go_router/go_router.dart';
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
 import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
-import '../../features/doctor/presentation/controller/doctor_availability_bloc.dart';
-import '../../features/doctor/presentation/controller/update_doctor_details_bloc.dart';
-import '../../features/doctor/presentation/screens/doctor_availability_screen.dart';
-import '../../features/doctor/presentation/screens/doctor_main_screen.dart';
-import '../../features/doctor/presentation/screens/update_doctor_details_screen.dart';
+import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart';
+import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
+import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
+import '../../features/doctor/doctor_avaiability_screen/screen/doctor_availability_screen.dart';
+import '../../features/doctor/doctor_main_screen/screen/doctor_main_screen.dart';
+import '../../features/doctor/doctor_onboarding_screen/screen/doctor_onboarding_screen.dart';
+import '../../features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
 import '../../features/common/auth/presentation/screens/doctor_login_screen.dart';
 import '../../features/common/auth/domain/entity/user/app_user.dart';
 import '../../features/common/auth/domain/entity/user/user_roles.dart';
@@ -137,7 +139,7 @@ class DoctorMainRoute extends GoRouteData with $DoctorMainRoute {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<DoctorAvailabilityBloc>()),
-        BlocProvider(create: (context) => getIt<UpdateDoctorDetailsBloc>()),
+        BlocProvider(create: (context) => getIt<DoctorProfileBloc>()),
       ],
       child: const DoctorMainScreen(),
     );
@@ -307,8 +309,8 @@ class DoctorProfileRoute extends GoRouteData with $DoctorProfileRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
-      create: (context) => getIt<UpdateDoctorDetailsBloc>(),
-      child: const UpdateDoctorDetailsScreen(),
+      create: (context) => getIt<DoctorProfileBloc>(),
+      child: const DoctorProfileScreen(),
     );
   }
 }
@@ -323,6 +325,19 @@ class DoctorAvailabilityRoute extends GoRouteData
     return BlocProvider(
       create: (context) => getIt<DoctorAvailabilityBloc>(),
       child: const DoctorAvailabilityScreen(),
+    );
+  }
+}
+
+@TypedGoRoute<DoctorOnboardingRoute>(path: '/doctor_onboarding')
+class DoctorOnboardingRoute extends GoRouteData with $DoctorOnboardingRoute {
+  const DoctorOnboardingRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<DoctorOnboardingBloc>(),
+      child: const DoctorOnboardingScreen(),
     );
   }
 }
@@ -365,6 +380,18 @@ class GoRouterRefreshStream extends ChangeNotifier {
   }
 }
 
+bool isDoctorProfileIncomplete(AppUserEntity? user) {
+  if (user is DoctorEntity) {
+    final hasNoImage = user.image == null || user.image!.trim().isEmpty;
+    final hasNoPhone = user.phone == null || user.phone!.trim().isEmpty;
+    final hasNoFee = user.consultationFee == null || user.consultationFee! <= 0;
+    final hasNoAvailability = user.availability == null ||
+        user.availability!.workingDays.isEmpty;
+    return hasNoImage || hasNoPhone || hasNoFee || hasNoAvailability;
+  }
+  return false;
+}
+
 GoRouter createRouter({
   required UserSessionManager userSessionManager,
   // AuthBloc? authBloc,
@@ -390,12 +417,15 @@ GoRouter createRouter({
         return null;
       }
 
+      final doctorNeedsOnboarding =
+          user?.role == UserRoles.doctor && isDoctorProfileIncomplete(user);
+
       if (currentLocation == '/') {
         if (isLoggedIn) {
           if (user?.role == UserRoles.admin) {
             return '/admin_main';
           } else if (user?.role == UserRoles.doctor) {
-            return '/doctor_main';
+            return doctorNeedsOnboarding ? '/doctor_onboarding' : '/doctor_main';
           } else {
             return '/patient_main';
           }
@@ -408,6 +438,7 @@ GoRouter createRouter({
         '/patient_main',
         '/admin_main',
         '/doctor_main',
+        '/doctor_onboarding',
         '/admin_appointment_details',
         '/patient_appointment_details',
         '/add_doctor',
@@ -438,25 +469,34 @@ GoRouter createRouter({
         if (user?.role == UserRoles.admin) {
           return '/admin_main';
         } else if (user?.role == UserRoles.doctor) {
-          return '/doctor_main';
+          return doctorNeedsOnboarding ? '/doctor_onboarding' : '/doctor_main';
         } else {
           return '/patient_main';
         }
       }
 
       if (isLoggedIn) {
-        if (user?.role == UserRoles.doctor &&
-            (currentLocation == '/admin_main' ||
-                currentLocation == '/patient_main')) {
-          return '/doctor_main';
+        if (user?.role == UserRoles.doctor) {
+          if (currentLocation == '/admin_main' ||
+              currentLocation == '/patient_main') {
+            return doctorNeedsOnboarding ? '/doctor_onboarding' : '/doctor_main';
+          }
+          if (doctorNeedsOnboarding && currentLocation == '/doctor_main') {
+            return '/doctor_onboarding';
+          }
+          if (!doctorNeedsOnboarding && currentLocation == '/doctor_onboarding') {
+            return '/doctor_main';
+          }
         }
         if (user?.role == UserRoles.admin &&
             (currentLocation == '/doctor_main' ||
+                currentLocation == '/doctor_onboarding' ||
                 currentLocation == '/patient_main')) {
           return '/admin_main';
         }
         if (user?.role == UserRoles.patient &&
             (currentLocation == '/admin_main' ||
+                currentLocation == '/doctor_onboarding' ||
                 currentLocation == '/doctor_main')) {
           return '/patient_main';
         }

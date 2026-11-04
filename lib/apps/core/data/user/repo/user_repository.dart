@@ -7,14 +7,15 @@ import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
 import 'package:doctor_hunt/apps/core/network/cloudinary/cloudinary_service.dart';
-import '../../../../features/common/auth/data/mappers/user_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/admin.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/patient.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/service/firebase_services/user_firestore_service.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../../../features/common/auth/data/mappers/user_mapper.dart';
 
 @injectable
 class UserRepository {
@@ -98,7 +99,7 @@ class UserRepository {
 
       await Future.wait([
         _firestoreService.updateUser(userDto),
-      _userPrefs.setUser(userDto),
+        _userPrefs.setUser(userDto),
       ]);
 
       return Right(updatedUser);

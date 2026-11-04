@@ -5,16 +5,16 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
-import 'update_doctor_details_event.dart';
-import 'update_doctor_details_state.dart';
+import 'doctor_profile_event.dart';
+import 'doctor_profile_state.dart';
 
 @injectable
-class UpdateDoctorDetailsBloc
-    extends Bloc<UpdateDoctorDetailsEvent, UpdateDoctorDetailsState> {
+class DoctorProfileBloc
+    extends Bloc<DoctorProfileEvent, DoctorProfileState> {
   final DoctorRepository _doctorRepository;
   final UserSessionManager _userSessionManager;
 
-  UpdateDoctorDetailsBloc(
+  DoctorProfileBloc(
     this._doctorRepository,
     this._userSessionManager,
   ) : super(UpdateDoctorDetailsInitial()) {
@@ -24,7 +24,7 @@ class UpdateDoctorDetailsBloc
 
   Future<void> _onUpdateDoctorDetailsRequested(
     UpdateDoctorDetailsRequested event,
-    Emitter<UpdateDoctorDetailsState> emit,
+    Emitter<DoctorProfileState> emit,
   ) async {
     emit(UpdateDoctorDetailsLoading());
 
@@ -62,7 +62,7 @@ class UpdateDoctorDetailsBloc
 
   Future<void> _onPickDoctorImageRequested(
     PickDoctorUpdateImageRequested event,
-    Emitter<UpdateDoctorDetailsState> emit,
+    Emitter<DoctorProfileState> emit,
   ) async {
     final result = await _doctorRepository.pickDoctorImage();
     result.fold(

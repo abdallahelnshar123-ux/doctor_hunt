@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-
 import 'package:doctor_hunt/apps/core/data/shared_prefs/prefs_keys.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +18,14 @@ class UserPrefs {
   }
 
   Future<void> setUser(AppUserDto user) async {
-    await _preferences.setString(PrefsKeys.userKey, jsonEncode(user.toJson()));
+    try {
+      await _preferences.setString(
+        PrefsKeys.userKey,
+        jsonEncode(user.toJson()),
+      );
+    } catch (e, stack) {
+      debugPrint('Error saving user to UserPrefs: $e\n$stack');
+    }
   }
 
   // Future<void> setUserFcmToken(String fcm) async {
@@ -56,7 +63,8 @@ class UserPrefs {
     if (userJson == null || userJson.isEmpty) return null;
     try {
       return AppUserDto.fromJson(jsonDecode(userJson));
-    } catch (e) {
+    } catch (e, stack) {
+      debugPrint('Error parsing user in UserPrefs: $e\n$stack');
       return null;
     }
   }

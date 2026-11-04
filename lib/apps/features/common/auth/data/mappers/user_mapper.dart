@@ -88,7 +88,7 @@ extension AppUserEntityMapper on AppUserEntity {
         adminId: entity.adminId,
         specialty: entity.specialty,
         active: entity.active,
-        // consultationFee: entity.consultationFee,
+        consultationFee: entity.consultationFee,
         rating: entity.rating,
         availability: entity.availability,
       );

@@ -359,19 +359,6 @@
       "consultation_fee": "Consultation Fee",
       "fee": "$ ${price}"
     },
-    "doctor_availability_screen": {
-      "doctor_availability": "Doctor Availability",
-      "working_days": "Working Days",
-      "working_hours": "Working Hours",
-      "start_time": "Start Time",
-      "end_time": "End Time",
-      "slot_duration": "Slot Duration",
-      "@save_availability": "Save Availability",
-      "active": "Active",
-      "inactive": "Inactive",
-      "start_time_and_endtime_must_be_different": "Start time and end time must be different",
-      "data_was_updated_successfully": "Data was updated successfully"
-    },
     "update_doctor_details": {
       "doctor_was_updated_successfully": "Doctor was Updated Successfully",
       "edit_doctor": "Edit doctor",
@@ -440,6 +427,40 @@
       "update_master_security_credentials": "Update your account password",
       "app_information": "App Information",
       "v1_0_0": "v1.0.0"
+    },
+    "onboarding": {
+      "welcome_title": "Welcome to Doctor Hunt!",
+      "welcome_subtitle": "Let's complete your profile and set up your working schedule so patients can find and book appointments with you.",
+      "continue_btn": "Continue",
+      "step_profile_title": "Profile Details",
+      "step_profile_subtitle": "Please provide your contact information and consultation fee",
+      "phone_number": "Phone Number",
+      "phone_hint": "+20 100 000 0000",
+      "consultation_fee": "Consultation Fee",
+      "fee_hint": "e.g. 200",
+      "photo_required": "Please choose a profile photo",
+      "choose_photo": "Choose Photo",
+      "change_photo": "Change Photo",
+      "step_availability_title": "Working Schedule",
+      "step_availability_subtitle": "Set your working days and consultation hours",
+      "select_at_least_one_day": "Please select at least one working day",
+      "save_and_continue": "Save & Complete",
+      "success_title": "All Set!",
+      "success_subtitle": "Your profile and availability have been successfully updated. You are now ready to start receiving appointments.",
+      "finish": "Finish"
+    },
+    "doctor_availability_screen": {
+      "doctor_availability": "Doctor Availability",
+      "working_days": "Working Days",
+      "working_hours": "Working Hours",
+      "start_time": "Start Time",
+      "end_time": "End Time",
+      "slot_duration": "Slot Duration",
+      "@save_availability": "Save Availability",
+      "active": "Active",
+      "inactive": "Inactive",
+      "start_time_and_endtime_must_be_different": "Start time and end time must be different",
+      "data_was_updated_successfully": "Data was updated successfully"
     }
   }
 }

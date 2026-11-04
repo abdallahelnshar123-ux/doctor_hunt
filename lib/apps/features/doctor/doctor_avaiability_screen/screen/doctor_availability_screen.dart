@@ -10,11 +10,11 @@ import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/app_user.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/doctor_availability_bloc.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/doctor_availability_event.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/controller/doctor_availability_state.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/widgets/slot_duration_drop_down.dart';
-import 'package:doctor_hunt/apps/features/doctor/presentation/widgets/time_drop_down.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_avaiability_screen/controller/doctor_availability_event.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_avaiability_screen/controller/doctor_availability_state.dart';
+import 'package:doctor_hunt/apps/features/doctor/widget/working_days_widget.dart';
+import 'package:doctor_hunt/apps/features/doctor/widget/working_hours_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +65,7 @@ class DoctorAvailabilityScreen extends HookWidget {
           SnackBarUtils.showSuccessSnackBar(
             context: context,
             message:
-                t.admin.doctorAvailabilityScreen.dataWasUpdatedSuccessfully,
+                t.doctor.doctorAvailabilityScreen.dataWasUpdatedSuccessfully,
           );
         }
         if (state is DoctorAvailabilityLoading) {
@@ -75,7 +75,9 @@ class DoctorAvailabilityScreen extends HookWidget {
       child: Scaffold(
         appBar: showAppBar
             ? AppBar(
-                title: Text(t.admin.doctorAvailabilityScreen.doctorAvailability),
+                title: Text(
+                  t.doctor.doctorAvailabilityScreen.doctorAvailability,
+                ),
                 automaticallyImplyLeading: automaticallyImplyLeading,
                 centerTitle: true,
               )
@@ -83,18 +85,25 @@ class DoctorAvailabilityScreen extends HookWidget {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: [
-            if (doctor != null) _buildDoctorCard(doctor: doctor, context: context),
-            _buildText(
-              context: context,
-              text: t.admin.doctorAvailabilityScreen.workingDays,
-            ),
-            _buildWorkingDaysWidget(context: context, workingDays: workingDays),
-            _buildText(
-              context: context,
-              text: t.admin.doctorAvailabilityScreen.workingHours,
-            ),
-            _buildDropDownGroup(
-              context: context,
+            if (doctor != null)
+              _buildDoctorCard(doctor: doctor, context: context),
+            WorkingDaysWidget(workingDays: workingDays),
+            // _buildText(
+            //   context: context,
+            //   text: t.admin.doctorAvailabilityScreen.workingDays,
+            // ),
+            // _buildWorkingDaysWidget(context: context, workingDays: workingDays),
+            // _buildText(
+            //   context: context,
+            //   text: t.doctor.doctorAvailabilityScreen.workingHours,
+            // ),
+            // _buildDropDownGroup(
+            //   context: context,
+            //   startTime: startTime,
+            //   endTime: endTime,
+            //   slotDuration: slotDuration,
+            // ),
+            WorkingHoursWidget(
               startTime: startTime,
               endTime: endTime,
               slotDuration: slotDuration,
@@ -107,7 +116,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   SnackBarUtils.showInfoSnackBar(
                     context: context,
                     message: t
-                        .admin
+                        .doctor
                         .doctorAvailabilityScreen
                         .startTimeAndEndtimeMustBeDifferent,
                   );
@@ -145,117 +154,117 @@ class DoctorAvailabilityScreen extends HookWidget {
     );
   }
 
-  Widget _buildDropDownGroup({
-    required BuildContext context,
-    required ObjectRef<WorkingHour> startTime,
-    required ObjectRef<WorkingHour> endTime,
-    required ObjectRef<SlotDuration> slotDuration,
-  }) {
-    return AppContainerWithShadow(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: TimeDropDown(
-                  initialSelection: startTime.value,
-                  onSelected: (value) => startTime.value = WorkingHour.values
-                      .firstWhere((element) => element.name == value),
-                  title: t.admin.doctorAvailabilityScreen.startTime,
-                ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: TimeDropDown(
-                  initialSelection: endTime.value,
-                  onSelected: (value) => endTime.value = WorkingHour.values
-                      .firstWhere((element) => element.name == value),
-                  title: t.admin.doctorAvailabilityScreen.endTime,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          SlotDurationDropDown(
-            initialSelection: slotDuration.value,
-            onSelected: (value) => slotDuration.value = SlotDuration.values
-                .firstWhere((element) => element.name == value),
-            title: t.admin.doctorAvailabilityScreen.slotDuration,
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _buildDropDownGroup({
+  //   required BuildContext context,
+  //   required ObjectRef<WorkingHour> startTime,
+  //   required ObjectRef<WorkingHour> endTime,
+  //   required ObjectRef<SlotDuration> slotDuration,
+  // }) {
+  //   return AppContainerWithShadow(
+  //     padding: const EdgeInsets.all(15),
+  //     decoration: BoxDecoration(
+  //       color: AppColors.white,
+  //       borderRadius: BorderRadius.circular(16),
+  //     ),
+  //     child: Column(
+  //       spacing: 10,
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Row(
+  //           spacing: 10,
+  //           children: [
+  //             Expanded(
+  //               child: TimeDropDown(
+  //                 initialSelection: startTime.value,
+  //                 onSelected: (value) => startTime.value = WorkingHour.values
+  //                     .firstWhere((element) => element.name == value),
+  //                 title: t.doctor.doctorAvailabilityScreen.startTime,
+  //               ),
+  //             ),
+  //             Expanded(
+  //               child: TimeDropDown(
+  //                 initialSelection: endTime.value,
+  //                 onSelected: (value) => endTime.value = WorkingHour.values
+  //                     .firstWhere((element) => element.name == value),
+  //                 title: t.doctor.doctorAvailabilityScreen.endTime,
+  //               ),
+  //             ),
+  //           ],
+  //         ),
+  //         SlotDurationDropDown(
+  //           initialSelection: slotDuration.value,
+  //           onSelected: (value) => slotDuration.value = SlotDuration.values
+  //               .firstWhere((element) => element.name == value),
+  //           title: t.doctor.doctorAvailabilityScreen.slotDuration,
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildDivider() {
-    return const Divider(color: AppColors.bgSurfaceLight, height: 5);
-  }
+  // Widget _buildDivider() {
+  //   return const Divider(color: AppColors.bgSurfaceLight, height: 5);
+  // }
 
-  Widget _buildWorkingDaysWidget({
-    required BuildContext context,
-    required ValueNotifier<List<WorkingDay>> workingDays,
-  }) {
-    return AppContainerWithShadow(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: ListView.separated(
-        physics: const NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          final day = WorkingDay.values[index];
-          return ValueListenableBuilder(
-            valueListenable: workingDays,
-            builder: (context, workingDaysValue, child) {
-              final bool isActive = workingDaysValue.contains(day);
-              return ListTile(
-                leading: Container(
-                  padding: const EdgeInsets.all(7),
-                  decoration: BoxDecoration(
-                    color: isActive
-                        ? AppColors.brandPrimary8
-                        : AppColors.borderDefault,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(
-                    Icons.calendar_month_outlined,
-                    color: isActive
-                        ? AppColors.brandPrimary
-                        : AppColors.textSecondary,
-                  ),
-                ),
-                title: Text(day.name),
-                titleTextStyle: isActive
-                    ? context.semiBold14.textPrimary.rubik
-                    : context.semiBold14.textSecondary.rubik,
-                trailing: Switch(
-                  value: isActive,
-                  onChanged: (val) {
-                    final newList = List<WorkingDay>.from(workingDaysValue);
-                    val ? newList.add(day) : newList.remove(day);
-                    workingDays.value = newList;
-                  },
-                  activeThumbColor: AppColors.white,
-                  activeTrackColor: AppColors.brandPrimary,
-                ),
-                contentPadding: EdgeInsets.zero,
-              );
-            },
-          );
-        },
-        separatorBuilder: (context, index) => _buildDivider(),
-        itemCount: WorkingDay.values.length,
-      ),
-    );
-  }
+  // Widget _buildWorkingDaysWidget({
+  //   required BuildContext context,
+  //   required ValueNotifier<List<WorkingDay>> workingDays,
+  // }) {
+  //   return AppContainerWithShadow(
+  //     padding: const EdgeInsets.all(15),
+  //     decoration: BoxDecoration(
+  //       color: AppColors.white,
+  //       borderRadius: BorderRadius.circular(16),
+  //     ),
+  //     child: ListView.separated(
+  //       physics: const NeverScrollableScrollPhysics(),
+  //       shrinkWrap: true,
+  //       itemBuilder: (context, index) {
+  //         final day = WorkingDay.values[index];
+  //         return ValueListenableBuilder(
+  //           valueListenable: workingDays,
+  //           builder: (context, workingDaysValue, child) {
+  //             final bool isActive = workingDaysValue.contains(day);
+  //             return ListTile(
+  //               leading: Container(
+  //                 padding: const EdgeInsets.all(7),
+  //                 decoration: BoxDecoration(
+  //                   color: isActive
+  //                       ? AppColors.brandPrimary8
+  //                       : AppColors.borderDefault,
+  //                   borderRadius: BorderRadius.circular(8),
+  //                 ),
+  //                 child: Icon(
+  //                   Icons.calendar_month_outlined,
+  //                   color: isActive
+  //                       ? AppColors.brandPrimary
+  //                       : AppColors.textSecondary,
+  //                 ),
+  //               ),
+  //               title: Text(day.name),
+  //               titleTextStyle: isActive
+  //                   ? context.semiBold14.textPrimary.rubik
+  //                   : context.semiBold14.textSecondary.rubik,
+  //               trailing: Switch(
+  //                 value: isActive,
+  //                 onChanged: (val) {
+  //                   final newList = List<WorkingDay>.from(workingDaysValue);
+  //                   val ? newList.add(day) : newList.remove(day);
+  //                   workingDays.value = newList;
+  //                 },
+  //                 activeThumbColor: AppColors.white,
+  //                 activeTrackColor: AppColors.brandPrimary,
+  //               ),
+  //               contentPadding: EdgeInsets.zero,
+  //             );
+  //           },
+  //         );
+  //       },
+  //       separatorBuilder: (context, index) => _buildDivider(),
+  //       itemCount: WorkingDay.values.length,
+  //     ),
+  //   );
+  // }
 
   Widget _buildDoctorCard({
     required DoctorEntity doctor,
@@ -276,9 +285,7 @@ class DoctorAvailabilityScreen extends HookWidget {
               borderRadius: BorderRadius.circular(8),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: CustomCachedNetworkImage.getProvider(
-                  doctor.image ?? '',
-                ),
+                image: CustomCachedNetworkImage.getProvider(doctor.image ?? ''),
               ),
             ),
           ),
@@ -319,8 +326,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             ),
             label: Text(
               doctor.active
-                  ? t.admin.doctorAvailabilityScreen.active
-                  : t.admin.doctorAvailabilityScreen.inactive,
+                  ? t.doctor.doctorAvailabilityScreen.active
+                  : t.doctor.doctorAvailabilityScreen.inactive,
               style: doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,
@@ -331,10 +338,10 @@ class DoctorAvailabilityScreen extends HookWidget {
     );
   }
 
-  Widget _buildText({required BuildContext context, required String text}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 15),
-      child: Text(text, style: context.bold14.textTertiary.rubik),
-    );
-  }
+  // Widget _buildText({required BuildContext context, required String text}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 15),
+  //     child: Text(text, style: context.bold14.textTertiary.rubik),
+  //   );
+  // }
 }
