@@ -79,12 +79,12 @@ class PatientMainScreen extends HookWidget {
 
               selectedIndex.value = 2;
             },
-            alias: t.patientMain.appointment,
+            alias: t.patientMain.appointments,
             icon: buildDrawerIcon(
               iconName: AppAssets.icons.appointmentsIcon.path,
             ),
             text: Text(
-              t.patientMain.appointment,
+              t.patientMain.appointments,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[2],
@@ -225,7 +225,7 @@ class PatientMainScreen extends HookWidget {
                           break;
                         case 2:
                           drawerController.selectItem(
-                            t.patientMain.appointment,
+                            t.patientMain.appointments,
                           );
                           selectedIndex.value = 2;
 

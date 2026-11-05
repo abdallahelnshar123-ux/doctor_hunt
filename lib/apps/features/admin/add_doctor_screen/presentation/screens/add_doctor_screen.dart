@@ -162,7 +162,6 @@ class AddDoctorScreen extends HookWidget {
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {
         FocusManager.instance.primaryFocus?.unfocus();
-        var adminId = user?.id ?? '';
         if (formKey.currentState!.validate()) {
           if (selectedSpecialty.value == null) {
             SnackBarUtils.showInfoSnackBar(
@@ -177,7 +176,6 @@ class AddDoctorScreen extends HookWidget {
               email: emailController.text.trim(),
               password: passwordController.text,
               specialty: selectedSpecialty.value!,
-              adminId: adminId,
             ),
           );
         }

@@ -31,7 +31,6 @@ class AddDoctorsBloc extends Bloc<AddDoctorsEvent, AddDoctorsState> {
         email: event.email,
         provider: UserAuthProvider.emailPassword,
         name: event.name,
-        adminId: event.adminId,
         specialty: event.specialty,
         active: event.active,
         // consultationFee: event.consultationFee,

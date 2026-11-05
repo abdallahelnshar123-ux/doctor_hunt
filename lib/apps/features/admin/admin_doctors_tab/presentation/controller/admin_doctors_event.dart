@@ -8,12 +8,10 @@ abstract class AdminDoctorsEvent extends Equatable {
 }
 
 class AdminGetDoctorsRequested extends AdminDoctorsEvent {
-  final String adminId;
-
-  const AdminGetDoctorsRequested(this.adminId);
+  const AdminGetDoctorsRequested();
 
   @override
-  List<Object?> get props => [adminId];
+  List<Object?> get props => [];
 }
 
 class AdminFilterDoctorsRequested extends AdminDoctorsEvent {

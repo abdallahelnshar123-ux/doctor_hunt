@@ -204,8 +204,8 @@ class Translations$patientMain$en {
   /// en: 'Settings'
   String get settings => 'Settings';
 
-  /// en: 'Appointment'
-  String get appointment => 'Appointment';
+  /// en: 'Appointments'
+  String get appointments => 'Appointments';
 
   /// en: 'Favourite'
   String get favourite => 'Favourite';
@@ -721,6 +721,7 @@ class Translations$doctor$en {
   late final Translations$doctor$doctorAvailabilityScreen$en doctorAvailabilityScreen = Translations$doctor$doctorAvailabilityScreen$en.internal(
     _root,
   );
+  late final Translations$doctor$doctorProfileScreen$en doctorProfileScreen = Translations$doctor$doctorProfileScreen$en.internal(_root);
 }
 
 // Path: onboarding.pages.0
@@ -1160,8 +1161,8 @@ class Translations$doctor$main$en {
   /// en: 'My Schedule'
   String get mySchedule => 'My Schedule';
 
-  /// en: 'My Profile'
-  String get myProfile => 'My Profile';
+  /// en: 'Appointments'
+  String get appointments => _root.patientMain.appointments;
 
   /// en: 'Settings'
   String get settings => 'Settings';
@@ -1306,6 +1307,45 @@ class Translations$doctor$doctorAvailabilityScreen$en {
 
   /// en: 'Data was updated successfully'
   String get dataWasUpdatedSuccessfully => 'Data was updated successfully';
+}
+
+// Path: doctor.doctorProfileScreen
+class Translations$doctor$doctorProfileScreen$en {
+  Translations$doctor$doctorProfileScreen$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Doctor Profile'
+  String get title => 'Doctor Profile';
+
+  /// en: 'Personal information'
+  String get personalInformation => 'Personal information';
+
+  /// en: 'Name'
+  String get name => 'Name';
+
+  /// en: 'Phone'
+  String get phone => 'Phone';
+
+  /// en: 'Data was updated successfully'
+  String get dataWasUpdatedSuccessfully => 'Data was updated successfully';
+
+  /// en: 'Specialty'
+  String get speciality => 'Specialty';
+
+  /// en: 'Status'
+  String get status => 'Status';
+
+  /// en: 'Active'
+  String get active => 'Active';
+
+  /// en: 'Inactive'
+  String get inactive => 'Inactive';
+
+  /// en: 'Fee'
+  String get fee => 'Fee';
 }
 
 // Path: privacyPolicy.sections.informationWeCollect

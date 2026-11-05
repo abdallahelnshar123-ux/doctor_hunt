@@ -55,7 +55,6 @@ class AppointmentDto extends Equatable {
               email: '',
               name: '',
               provider: UserAuthProvider.emailPassword,
-              adminId: '',
               specialty: SpecialtyModel(id: "id", en: "", ar: ""),
               active: false,
               consultationFee: 0.0,

@@ -51,6 +51,10 @@ class UserRepository {
       if (image != null) {
         try {
           imageUrl = await _cloudinaryService.uploadImage(file: image);
+          // Delete old image if exists and a new one is successfully uploaded
+          if (user.image != null && user.image!.isNotEmpty) {
+            await _cloudinaryService.deleteImage(user.image!);
+          }
         } catch (e) {
           return Left(ServerFailure(t.errors.someThingWentWrong));
         }
@@ -85,7 +89,6 @@ class UserRepository {
           provider: user.provider,
           phone: user.phone,
           image: imageUrl ?? user.image,
-          adminId: user.adminId,
           specialty: user.specialty,
           active: user.active,
           consultationFee: user.consultationFee,

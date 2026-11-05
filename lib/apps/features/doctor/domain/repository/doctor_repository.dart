@@ -14,7 +14,7 @@ abstract class DoctorRepository {
 
   Future<Either<Failure, DoctorEntity>> getDoctorById(String doctorId);
 
-  Stream<Either<Failure, List<DoctorEntity>>> getDoctors({String? adminId});
+  Stream<Either<Failure, List<DoctorEntity>>> getDoctors();
 
   Future<Either<Failure, File>> pickDoctorImage();
 

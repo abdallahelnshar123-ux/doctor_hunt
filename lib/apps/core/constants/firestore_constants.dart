@@ -22,7 +22,6 @@ class FirestoreConstants {
   static const String image = 'image';
   static const String role = 'role';
   static const String phone = 'phone';
-  static const String adminId = 'admin_id';
   static const String specialty = 'specialty';
   static const String patientInfo = 'patient_info';
   static const String adminInfo = 'admin_info';

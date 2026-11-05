@@ -72,7 +72,6 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         provider: doctor.provider,
         image: doctor.image,
         phone: doctor.phone,
-        adminId: doctor.adminId,
         specialty: doctor.specialty,
         active: doctor.active,
         consultationFee: doctor.consultationFee,
@@ -116,7 +115,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
       if (userDoc.exists && data != null) {
         return data;
       }
-      
+
       throw ServerException(message: t.errors.someThingWentWrong);
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
@@ -128,10 +127,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
   }
 
   @override
-  Stream<List<DoctorDto>> getDoctorsStreamForAdmin({required String adminId}) {
+  Stream<List<DoctorDto>> getDoctorsStreamForAdmin() {
     return _getUsersCollection()
         .where(FirestoreConstants.role, isEqualTo: UserRoles.doctor.name)
-        .where(FirestoreConstants.adminId, isEqualTo: adminId)
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
         .handleError((error) {
@@ -210,7 +208,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
       await _firebaseFirestore
           .collection(FirestoreConstants.usersCollection)
           .doc(doctorId)
-          .update({FirestoreConstants.availability: availability.toFireStore()});
+          .update({
+            FirestoreConstants.availability: availability.toFireStore(),
+          });
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {

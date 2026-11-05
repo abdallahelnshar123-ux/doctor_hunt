@@ -36,10 +36,10 @@ class AdminAppointmentsBloc
       return;
     }
 
-    final user = userOption.fold(() => null, (user) => user)!;
+    // final user = userOption.fold(() => null, (user) => user)!;
 
     await emit.forEach<Either<Failure, List<Appointment>>>(
-      _repository.getAdminAppointmentsStream(user.id),
+      _repository.getAdminAppointmentsStream(),
       onData: (result) => result.fold(
         (failure) => AdminAppointmentsErrorState(failure.message),
         (appointments) => AdminAppointmentsLoadedState(appointments),

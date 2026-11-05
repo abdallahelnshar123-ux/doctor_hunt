@@ -30,6 +30,7 @@ class $AppAssetsGenIcons {
   final SvgGenImage medicalIcon = const SvgGenImage('assets/icons/medical_icon.svg');
   final SvgGenImage patientIcon = const SvgGenImage('assets/icons/patient_icon.svg');
   final SvgGenImage sDollarIcon = const SvgGenImage('assets/icons/s_dollar_icon.svg');
+  final SvgGenImage scheduleIcon = const SvgGenImage('assets/icons/schedule_icon.svg');
   final SvgGenImage settingsIcon = const SvgGenImage('assets/icons/settings_icon.svg');
   final SvgGenImage starIcon = const SvgGenImage('assets/icons/star_icon.svg');
   final SvgGenImage starIconRated = const SvgGenImage('assets/icons/star_icon_rated.svg');
@@ -75,7 +76,6 @@ class AssetGenImage {
   const AssetGenImage(this._assetName, {this.size, this.flavors = const {}});
 
   final String _assetName;
-
 
   final Size? size;
   final Set<String> flavors;
@@ -133,27 +133,14 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider({
-    AssetBundle? bundle,
-    String? package,
-  }) {
-    return AssetImage(
-      _assetName,
-      bundle: bundle,
-      package: package,
-    );
+  ImageProvider provider({AssetBundle? bundle, String? package}) {
+    return AssetImage(_assetName, bundle: bundle, package: package);
   }
 
-  Widget custom({
-    Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
-  }) {
-    return Builder(
-      key: key,
-      builder: (context) => builder(context, _assetName),
-    );
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
-  
+
   String get path => _assetName;
 
   String get keyName => _assetName;
@@ -164,50 +151,45 @@ class SvgGenImage {
 
   final String _assetName;
 
-SvgPicture svg({
-  Key? key,
-  bool matchTextDirection = false,
-  AssetBundle? bundle,
-  String? package,
-  double? width,
-  double? height,
-  BoxFit fit = BoxFit.contain,
-  AlignmentGeometry alignment = Alignment.center,
-  bool allowDrawingOutsideViewBox = false,
-  WidgetBuilder? placeholderBuilder,
-  String? semanticsLabel,
-  bool excludeFromSemantics = false,
-  SvgTheme? theme,
-  ColorFilter? colorFilter,
-  Clip clipBehavior = Clip.hardEdge,
-}) {
-  return SvgPicture.asset(
-    _assetName,
-    key: key,
-    matchTextDirection: matchTextDirection,
-    bundle: bundle,
-    package: package,
-    width: width,
-    height: height,
-    fit: fit,
-    alignment: alignment,
-    allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
-    placeholderBuilder: placeholderBuilder,
-    semanticsLabel: semanticsLabel,
-    excludeFromSemantics: excludeFromSemantics,
-    theme: theme,
-    colorFilter: colorFilter,
-    clipBehavior: clipBehavior,
-  );
-}
-  Widget custom({
+  SvgPicture svg({
     Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme? theme,
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
   }) {
-    return Builder(
+    return SvgPicture.asset(
+      _assetName,
       key: key,
-      builder: (context) => builder(context, _assetName),
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      clipBehavior: clipBehavior,
     );
+  }
+
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;
@@ -220,65 +202,60 @@ class LottieGenImage {
 
   final String _assetName;
 
-LottieBuilder lottie({
-  Animation<double>? controller,
-  bool? animate,
-  FrameRate? frameRate,
-  bool? repeat,
-  bool? reverse,
-  LottieDelegates? delegates,
-  LottieOptions? options,
-  void Function(LottieComposition)? onLoaded,
-  LottieImageProviderFactory? imageProviderFactory,
-  Key? key,
-  AssetBundle? bundle,
-  Widget Function(BuildContext context, Widget child, LottieComposition? composition)? frameBuilder,
-  ImageErrorWidgetBuilder? errorBuilder,
-  double? width,
-  double? height,
-  BoxFit? fit,
-  AlignmentGeometry? alignment,
-  String? package,
-  bool? addRepaintBoundary,
-  FilterQuality? filterQuality,
-  void Function(String)? onWarning,
-}) {
-  return Lottie.asset(
-    _assetName,
-    controller: controller,
-    animate: animate,
-    frameRate: frameRate,
-    repeat: repeat,
-    reverse: reverse,
-    delegates: delegates,
-    options: options,
-    onLoaded: onLoaded,
-    imageProviderFactory: imageProviderFactory,
-    key: key,
-    bundle: bundle,
-    frameBuilder: frameBuilder,
-    errorBuilder: errorBuilder,
-    width: width,
-    height: height,
-    fit: fit,
-    alignment: alignment,
-    package: package,
-    addRepaintBoundary: addRepaintBoundary,
-    filterQuality: filterQuality,
-    onWarning: onWarning,
-  );
-}  Widget custom({
+  LottieBuilder lottie({
+    Animation<double>? controller,
+    bool? animate,
+    FrameRate? frameRate,
+    bool? repeat,
+    bool? reverse,
+    LottieDelegates? delegates,
+    LottieOptions? options,
+    void Function(LottieComposition)? onLoaded,
+    LottieImageProviderFactory? imageProviderFactory,
     Key? key,
-    required Widget Function(BuildContext context, String assetPath) builder,
+    AssetBundle? bundle,
+    Widget Function(BuildContext context, Widget child, LottieComposition? composition)? frameBuilder,
+    ImageErrorWidgetBuilder? errorBuilder,
+    double? width,
+    double? height,
+    BoxFit? fit,
+    AlignmentGeometry? alignment,
+    String? package,
+    bool? addRepaintBoundary,
+    FilterQuality? filterQuality,
+    void Function(String)? onWarning,
   }) {
-    return Builder(
+    return Lottie.asset(
+      _assetName,
+      controller: controller,
+      animate: animate,
+      frameRate: frameRate,
+      repeat: repeat,
+      reverse: reverse,
+      delegates: delegates,
+      options: options,
+      onLoaded: onLoaded,
+      imageProviderFactory: imageProviderFactory,
       key: key,
-      builder: (context) => builder(context, _assetName),
+      bundle: bundle,
+      frameBuilder: frameBuilder,
+      errorBuilder: errorBuilder,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      package: package,
+      addRepaintBoundary: addRepaintBoundary,
+      filterQuality: filterQuality,
+      onWarning: onWarning,
     );
+  }
+
+  Widget custom({Key? key, required Widget Function(BuildContext context, String assetPath) builder}) {
+    return Builder(key: key, builder: (context) => builder(context, _assetName));
   }
 
   String get path => _assetName;
 
   String get keyName => _assetName;
 }
-

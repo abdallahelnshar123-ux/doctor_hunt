@@ -56,20 +56,22 @@ import '../../features/common/specialties/data/service/specialty_service.dart'
     as _i596;
 import '../../features/common/specialties/presentation/controller/specialties_bloc.dart'
     as _i642;
+import '../../features/doctor/appointments_tab/presentation/controller/appointments_bloc.dart'
+    as _i487;
 import '../../features/doctor/data/data_source/remote/doctor_remote_data_source.dart'
     as _i1021;
 import '../../features/doctor/data/data_source/remote/impl/doctor_remote_data_source_impl.dart'
     as _i34;
 import '../../features/doctor/data/repository/doctor_repository_impl.dart'
     as _i819;
+import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart'
+    as _i1037;
+import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart'
+    as _i601;
+import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart'
+    as _i922;
 import '../../features/doctor/domain/repository/doctor_repository.dart'
     as _i849;
-import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart'
-    as _i730;
-import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart'
-    as _i741;
-import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart'
-    as _i899;
 import '../../features/patient/appointments_tab/data/service/review_batch_firestore_service.dart'
     as _i129;
 import '../../features/patient/appointments_tab/presentation/controller/appointments_bloc.dart'
@@ -121,12 +123,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.factory<String>(() => cloudinaryConfig.apiKey, instanceName: 'api_key');
     gh.factory<String>(
       () => cloudinaryConfig.uploadPreset,
       instanceName: 'upload_preset',
     );
     gh.lazySingleton<_i749.UserFirestoreService>(
       () => _i749.UserFirestoreService(gh<_i974.FirebaseFirestore>()),
+    );
+    gh.factory<String>(
+      () => cloudinaryConfig.apiSecret,
+      instanceName: 'api_secret',
     );
     gh.factory<String>(
       () => cloudinaryConfig.cloudName,
@@ -168,6 +175,8 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i417.CloudinaryService(
         cloudName: gh<String>(instanceName: 'cloud_name'),
         uploadPreset: gh<String>(instanceName: 'upload_preset'),
+        apiKey: gh<String>(instanceName: 'api_key'),
+        apiSecret: gh<String>(instanceName: 'api_secret'),
       ),
     );
     gh.factory<_i148.AppointmentRepository>(
@@ -235,6 +244,13 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i485.GenerateDoctorSlotsUseCase>(),
       ),
     );
+    gh.factory<_i487.AppointmentsBloc>(
+      () => _i487.AppointmentsBloc(
+        gh<_i148.AppointmentRepository>(),
+        gh<_i583.UserSessionManager>(),
+        gh<_i849.DoctorRepository>(),
+      ),
+    );
     gh.factory<_i365.AppointmentsBloc>(
       () => _i365.AppointmentsBloc(
         gh<_i148.AppointmentRepository>(),
@@ -270,20 +286,20 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i642.SpecialtiesBloc>(
       () => _i642.SpecialtiesBloc(gh<_i195.SpecialtyRepository>()),
     );
-    gh.factory<_i730.DoctorAvailabilityBloc>(
-      () => _i730.DoctorAvailabilityBloc(
+    gh.factory<_i1037.DoctorAvailabilityBloc>(
+      () => _i1037.DoctorAvailabilityBloc(
         gh<_i849.DoctorRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
     );
-    gh.factory<_i741.DoctorOnboardingBloc>(
-      () => _i741.DoctorOnboardingBloc(
+    gh.factory<_i601.DoctorOnboardingBloc>(
+      () => _i601.DoctorOnboardingBloc(
         gh<_i849.DoctorRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
     );
-    gh.factory<_i899.DoctorProfileBloc>(
-      () => _i899.DoctorProfileBloc(
+    gh.factory<_i922.DoctorProfileBloc>(
+      () => _i922.DoctorProfileBloc(
         gh<_i849.DoctorRepository>(),
         gh<_i583.UserSessionManager>(),
       ),

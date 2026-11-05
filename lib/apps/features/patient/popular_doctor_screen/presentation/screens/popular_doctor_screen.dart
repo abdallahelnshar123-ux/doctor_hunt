@@ -71,7 +71,6 @@ class PopularDoctorScreen extends StatelessWidget {
             //     doctor: Doctor(
             //       id: "id",
             //       name: 'hghghgh',
-            //       adminId: 'kkid',
             //       specialty: Specialty.allergists,
             //       active: true,
             //       consultationFee: 0.0,

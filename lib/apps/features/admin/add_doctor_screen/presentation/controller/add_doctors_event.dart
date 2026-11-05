@@ -11,7 +11,6 @@ class AddDoctorRequested extends AddDoctorsEvent {
   final String email;
   final String password;
   final SpecialtyModel specialty;
-  final String adminId;
   // final File image;
   final bool active;
   // final double consultationFee;
@@ -22,7 +21,6 @@ class AddDoctorRequested extends AddDoctorsEvent {
     required this.password,
     required this.specialty,
     // required this.image,
-    required this.adminId,
     // required this.consultationFee,
     this.active = true,
   });
@@ -33,7 +31,6 @@ class AddDoctorRequested extends AddDoctorsEvent {
     email,
     password,
     specialty,
-    adminId,
     // image,
     active,
     // consultationFee,

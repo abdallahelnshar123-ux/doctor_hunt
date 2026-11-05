@@ -6,15 +6,10 @@ import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
-import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../common/auth/domain/entity/user/app_user.dart';
-import '../../../../common/auth/domain/entity/user/patient.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
@@ -22,11 +17,12 @@ import '../../../../../../generated/app_assets.dart';
 import '../../../../../../generated/style_atoms.dart';
 import '../../../../../core/utils/validators.dart';
 import '../../../../../core/widgets/main_app_bar.dart';
+import '../../../../../core/widgets/profile_text_form_widget.dart';
+import '../../../../common/auth/domain/entity/user/app_user.dart';
+import '../../../../common/auth/domain/entity/user/patient.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../controller/patient_profile_bloc.dart';
-
-part '../widget/text_form_widget.dart';
 
 class PatientProfileScreen extends HookWidget {
   const PatientProfileScreen({super.key, required this.user});
@@ -211,13 +207,13 @@ class PatientProfileScreen extends HookWidget {
               style: context.medium18.textPrimary.rubik,
             ),
             const SizedBox(height: 10),
-            TextFormWidget(
+            ProfileTextFormWidget(
               label: t.profile.name,
               controller: nameController,
               validator: (value) => Validators.required(value),
             ),
             const SizedBox(height: 10),
-            TextFormWidget(
+            ProfileTextFormWidget(
               hintText: t.profile.addPhoneNumber,
               label: t.profile.phone,
               controller: phoneController,

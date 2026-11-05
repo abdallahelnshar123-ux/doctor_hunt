@@ -34,7 +34,7 @@ class PatientDoctorsBloc
     emit(PatientDoctorsLoading());
 
     await emit.forEach(
-      _doctorRepository.getDoctors(adminId: null),
+      _doctorRepository.getDoctors(),
       onData: (result) => result.fold(
         (failure) => PatientDoctorsError(failure.message),
         (doctorsList) {

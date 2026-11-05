@@ -88,13 +88,9 @@ class AppointmentRepository {
     }
   }
 
-  Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream(
-    String adminId,
-  ) async* {
+  Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream() async* {
     try {
-      await for (final dtos in _firestoreService.getAdminAppointmentsStream(
-        adminId,
-      )) {
+      await for (final dtos in _firestoreService.getAdminAppointmentsStream()) {
         final appointments = dtos.map((dto) => dto.toAppointment()).toList();
         yield Right(appointments);
       }

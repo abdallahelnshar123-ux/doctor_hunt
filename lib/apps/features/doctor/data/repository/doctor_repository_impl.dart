@@ -72,18 +72,11 @@ class DoctorRepositoryImpl implements DoctorRepository {
   }
 
   @override
-  Stream<Either<Failure, List<DoctorEntity>>> getDoctors({String? adminId}) async* {
+  Stream<Either<Failure, List<DoctorEntity>>> getDoctors() async* {
     try {
-      if (adminId == null) {
-        await for (final doctorDtoList in _remoteDataSource.getDoctorsStreamForPatient()) {
-          final doctors = doctorDtoList.map((dto) => dto.toEntity() as DoctorEntity).toList();
-          yield Right(doctors);
-        }
-      } else {
-        await for (final doctorDtoList in _remoteDataSource.getDoctorsStreamForAdmin(adminId: adminId)) {
-          final doctors = doctorDtoList.map((dto) => dto.toEntity() as DoctorEntity).toList();
-          yield Right(doctors);
-        }
+      await for (final doctorDtoList in _remoteDataSource.getDoctorsStreamForPatient()) {
+        final doctors = doctorDtoList.map((dto) => dto.toEntity() as DoctorEntity).toList();
+        yield Right(doctors);
       }
     } on AppException catch (e) {
       yield Left(e.toFailure());
@@ -132,6 +125,10 @@ class DoctorRepositoryImpl implements DoctorRepository {
       if (image != null) {
         try {
           imageUrl = await _cloudinaryService.uploadImage(file: image);
+          // Delete old image if exists and a new one is successfully uploaded
+          if (doctor.image != null && doctor.image!.isNotEmpty) {
+            await _cloudinaryService.deleteImage(doctor.image!);
+          }
         } catch (e) {
           return Left(
             ServerFailure(t.errors.errorWhileUpdatingDoctorPleaseTryAgainLater),

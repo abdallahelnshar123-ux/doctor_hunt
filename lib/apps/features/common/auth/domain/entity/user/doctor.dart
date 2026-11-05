@@ -14,7 +14,6 @@ import 'user_roles.dart';
 // }
 
 class DoctorEntity extends AppUserEntity {
-  final String adminId;
   final SpecialtyModel specialty;
   final bool active;
   final double? consultationFee;
@@ -28,7 +27,6 @@ class DoctorEntity extends AppUserEntity {
     required super.provider,
     super.image,
     super.phone,
-    required this.adminId,
     required this.specialty,
     required this.active,
     this.consultationFee,
@@ -43,7 +41,6 @@ class DoctorEntity extends AppUserEntity {
     UserAuthProvider? provider,
     String? image,
     String? phone,
-    String? adminId,
     SpecialtyModel? specialty,
     bool? active,
     double? consultationFee,
@@ -57,7 +54,6 @@ class DoctorEntity extends AppUserEntity {
       provider: provider ?? this.provider,
       image: image ?? this.image,
       phone: phone ?? this.phone,
-      adminId: adminId ?? this.adminId,
       specialty: specialty ?? this.specialty,
       active: active ?? this.active,
       consultationFee: consultationFee ?? this.consultationFee,
@@ -69,7 +65,6 @@ class DoctorEntity extends AppUserEntity {
   @override
   List<Object?> get props => [
     ...super.props,
-    adminId,
     specialty,
     active,
     consultationFee,

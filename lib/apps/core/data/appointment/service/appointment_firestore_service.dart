@@ -93,13 +93,9 @@ class AppointmentFirestoreService {
     }
   }
 
-  Stream<List<AppointmentDto>> getAdminAppointmentsStream(String adminId) {
+  Stream<List<AppointmentDto>> getAdminAppointmentsStream() {
     return _firestore
         .collection(FirestoreConstants.appointmentsCollection)
-        .where(
-          '${FirestoreConstants.doctor}.${FirestoreConstants.adminId}',
-          isEqualTo: adminId,
-        )
         .snapshots()
         .map((snapshot) {
           final appointments = snapshot.docs

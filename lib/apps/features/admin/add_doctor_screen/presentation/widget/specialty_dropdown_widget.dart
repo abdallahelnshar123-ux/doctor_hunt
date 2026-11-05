@@ -13,29 +13,35 @@ class SpecialtyDropdownWidget extends StatelessWidget {
   final ValueChanged<SpecialtyModel> selectedSpecialty;
 
   final String? initialSelection;
+  final bool readOnly;
+  final bool? isProfile;
+  final FocusNode? focusNode;
 
   const SpecialtyDropdownWidget({
     super.key,
     required this.selectedSpecialty,
     this.initialSelection,
+    this.isProfile,
+    this.readOnly = false,
+    this.focusNode,
   });
 
   @override
   Widget build(BuildContext context) {
     var specialities = context.watch<SpecialtiesBloc>().state.specialties;
     return DropdownMenuFormField(
-
-      textStyle: context.medium16.textTertiary.rubik,
+      textStyle: context.medium16.textSecondary.rubik,
       onSelected: (value) => selectedSpecialty(
         specialities.firstWhere((element) => element.id == value),
       ),
+      enabled: !readOnly,
       initialSelection: initialSelection,
-      validator: (value) => Validators.required(value),
+      validator: (value) => Validators.required(value.toString()),
       menuStyle: MenuStyle(
         backgroundColor: WidgetStatePropertyAll(AppColors.bgPrimary),
         maximumSize: WidgetStatePropertyAll(Size.fromWidth(context.width - 40)),
       ),
-      showTrailingIcon: true,
+      showTrailingIcon: isProfile ?? true ? !readOnly : true,
       selectedTrailingIcon: Icon(Icons.keyboard_arrow_up_rounded),
       dropdownMenuEntries: specialities
           .map(
@@ -46,17 +52,22 @@ class SpecialtyDropdownWidget extends StatelessWidget {
           )
           .toList(),
       width: double.infinity,
-      requestFocusOnTap: true,
+      requestFocusOnTap: false,
+      focusNode: focusNode,
       trailingIcon: Icon(Icons.keyboard_arrow_down_rounded),
       enableSearch: true,
-      enableFilter: true,
-      filterCallback: (entries, query) {
-        if (query.isEmpty) return entries;
-        return entries
-            .where((entry) =>
-                entry.label.toLowerCase().contains(query.toLowerCase()))
-            .toList();
-      },
+      enableFilter: !readOnly,
+      filterCallback: readOnly
+          ? null
+          : (entries, query) {
+              if (query.isEmpty) return entries;
+              return entries
+                  .where(
+                    (entry) =>
+                        entry.label.toLowerCase().contains(query.toLowerCase()),
+                  )
+                  .toList();
+            },
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         hintStyle: context.light14.textSecondary.rubik,
@@ -64,16 +75,35 @@ class SpecialtyDropdownWidget extends StatelessWidget {
         enabled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.borderDefault, width: 2),
+          borderSide: BorderSide(
+            color: isProfile ?? false
+                ? AppColors.transparent
+                : AppColors.borderDefault,
+            width: 2,
+          ),
         ),
-        focusedBorder:OutlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.borderDefault, width: 2),
-        ) ,
+          borderSide: BorderSide(
+            color: isProfile ?? false
+                ? AppColors.transparent
+                : AppColors.borderDefault,
+            width: 2,
+          ),
+        ),
         fillColor: AppColors.bgPrimary,
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: AppColors.transparent, width: 2),
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.borderDefault, width: 2),
+          borderSide: BorderSide(
+            color: isProfile ?? false
+                ? AppColors.transparent
+                : AppColors.borderDefault,
+            width: 2,
+          ),
         ),
       ),
     );

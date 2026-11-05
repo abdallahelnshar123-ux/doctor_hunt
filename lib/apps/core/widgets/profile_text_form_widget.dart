@@ -1,7 +1,13 @@
-part of '../screens/patient_profile_screen.dart';
 
-class TextFormWidget extends StatefulWidget {
-  const TextFormWidget({
+import 'package:flutter/material.dart';
+
+import '../../../generated/style_atoms.dart';
+import '../theme/app_colors.dart';
+import 'app_container_with_shadow.dart';
+import 'custom_text_form_field.dart';
+
+class ProfileTextFormWidget extends StatefulWidget {
+  const ProfileTextFormWidget({
     super.key,
     required this.label,
     required this.controller,
@@ -15,10 +21,10 @@ class TextFormWidget extends StatefulWidget {
   final String? hintText;
 
   @override
-  State<TextFormWidget> createState() => _TextFormWidgetState();
+  State<ProfileTextFormWidget> createState() => _ProfileTextFormWidgetState();
 }
 
-class _TextFormWidgetState extends State<TextFormWidget> {
+class _ProfileTextFormWidgetState extends State<ProfileTextFormWidget> {
   bool _readOnly = true;
   late FocusNode _focusNode;
 

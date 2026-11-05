@@ -12,7 +12,6 @@ import '../../models/user/auth_providers.dart';
 import 'app_user_dto.dart';
 
 class DoctorDto extends AppUserDto {
-  final String adminId;
   final SpecialtyModel specialty;
   final bool active;
   final double? consultationFee;
@@ -26,7 +25,6 @@ class DoctorDto extends AppUserDto {
     required super.provider,
     super.image,
     super.phone,
-    required this.adminId,
     required this.specialty,
     required this.active,
     this.consultationFee,
@@ -45,7 +43,6 @@ class DoctorDto extends AppUserDto {
       ),
       image: json[FirestoreConstants.image]?.toString(),
       phone: json[FirestoreConstants.phone]?.toString(),
-      adminId: json[FirestoreConstants.adminId]?.toString() ?? '',
       specialty: SpecialtyModel.fromMap(
         Map<String, dynamic>.from(json[FirestoreConstants.specialty] as Map? ?? {}),
       ),
@@ -97,7 +94,6 @@ class DoctorDto extends AppUserDto {
       FirestoreConstants.image: image,
       FirestoreConstants.role: role.name,
       FirestoreConstants.phone: phone,
-      FirestoreConstants.adminId: adminId,
       FirestoreConstants.specialty: specialty.toJson(),
       FirestoreConstants.active: active,
       FirestoreConstants.consultationFee: consultationFee,
@@ -126,7 +122,6 @@ class DoctorDto extends AppUserDto {
   @override
   List<Object?> get props => [
     ...super.props,
-    adminId,
     specialty,
     active,
     consultationFee,

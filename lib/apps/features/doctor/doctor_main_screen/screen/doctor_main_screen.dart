@@ -1,6 +1,6 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_avaiability_screen/screen/doctor_availability_screen.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
+import 'package:doctor_hunt/apps/features/doctor/appointments_tab/presentation/screens/doctor_appointments_tab.dart';
+import 'package:doctor_hunt/apps/features/doctor/schedule_tab/screen/schedule_tab.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../core/widgets/app_scaffold.dart';
 import '../../doctor_settings_tab/screen/doctor_settings_tab.dart';
 
 class DoctorMainScreen extends HookWidget {
@@ -18,21 +19,15 @@ class DoctorMainScreen extends HookWidget {
     final selectedIndex = useState(0);
 
     final tabsList = [
-      const DoctorAvailabilityScreen(
-        showAppBar: true,
-        automaticallyImplyLeading: false,
-      ),
-      const DoctorProfileScreen(
-        showAppBar: true,
-        automaticallyImplyLeading: false,
-      ),
+      ScheduleTab(),
+      DoctorAppointmentsTab(),
       DoctorSettingsTab(
         onSelectScheduleTab: () => selectedIndex.value = 0,
         onSelectProfileTab: () => selectedIndex.value = 1,
       ),
     ];
 
-    return Scaffold(
+    return AppScaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
       body: tabsList[selectedIndex.value],
@@ -60,15 +55,15 @@ class DoctorMainScreen extends HookWidget {
           },
           items: [
             _buildBottomNavigationBarItem(
-              iconName: AppAssets.icons.appointmentsIcon.path,
+              iconName: AppAssets.icons.scheduleIcon.path,
               label: t.doctor.main.mySchedule,
               index: 0,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             _buildBottomNavigationBarItem(
-              iconName: AppAssets.icons.medicalIcon.path,
-              label: t.doctor.main.myProfile,
+              iconName: AppAssets.icons.appointmentsIcon.path,
+              label: t.doctor.main.appointments,
               index: 1,
               selectedIndex: selectedIndex.value,
               context: context,

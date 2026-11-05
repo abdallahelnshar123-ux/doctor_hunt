@@ -1,21 +1,21 @@
 import 'dart:async';
 
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/shared_prefs/user_pref.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
-import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/screens/add_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_main_screen/presentation/screens/admin_main_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_profile_screen/presentation/screens/admin_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
+import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';
@@ -30,17 +30,16 @@ import 'package:go_router/go_router.dart';
 import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
 import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
-import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart';
-import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
-import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
-import '../../features/doctor/doctor_avaiability_screen/screen/doctor_availability_screen.dart';
-import '../../features/doctor/doctor_main_screen/screen/doctor_main_screen.dart';
-import '../../features/doctor/doctor_onboarding_screen/screen/doctor_onboarding_screen.dart';
-import '../../features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
-import '../../features/common/auth/presentation/screens/doctor_login_screen.dart';
 import '../../features/common/auth/domain/entity/user/app_user.dart';
 import '../../features/common/auth/domain/entity/user/user_roles.dart';
 import '../../features/common/auth/presentation/screens/admin_login_screen.dart';
+import '../../features/common/auth/presentation/screens/doctor_login_screen.dart';
+import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availability_bloc.dart';
+import '../../features/doctor/doctor_avaiability_screen/screen/doctor_availability_screen.dart';
+import '../../features/doctor/doctor_main_screen/screen/doctor_main_screen.dart';
+import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
+import '../../features/doctor/doctor_onboarding_screen/screen/doctor_onboarding_screen.dart';
+import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
 import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
 import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
@@ -120,11 +119,10 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return BlocProvider(
       create: (context) =>
-          getIt<AdminDoctorsBloc>()
-            ..add(AdminGetDoctorsRequested(user?.id ?? '')),
+      getIt<AdminDoctorsBloc>()
+        ..add(AdminGetDoctorsRequested()),
       child: const AdminMainScreen(),
     );
   }
@@ -308,9 +306,10 @@ class DoctorProfileRoute extends GoRouteData with $DoctorProfileRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    var user = getIt<UserSessionManager>().currentUser;
     return BlocProvider(
       create: (context) => getIt<DoctorProfileBloc>(),
-      child: const DoctorProfileScreen(),
+      child: DoctorProfileScreen(user: user as DoctorEntity),
     );
   }
 }
@@ -352,7 +351,8 @@ class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
   Widget build(BuildContext context, GoRouterState state) {
     final DoctorEntity doctor = state.extra as DoctorEntity;
     return BlocProvider(
-      create: (context) => getIt<SelectTimeBloc>()
+      create: (context) =>
+      getIt<SelectTimeBloc>()
         ..add(
           GetDoctorSlotsEvent(
             availability: doctor.availability ?? DoctorAvailability.initial(),
@@ -385,8 +385,8 @@ bool isDoctorProfileIncomplete(AppUserEntity? user) {
     final hasNoImage = user.image == null || user.image!.trim().isEmpty;
     final hasNoPhone = user.phone == null || user.phone!.trim().isEmpty;
     final hasNoFee = user.consultationFee == null || user.consultationFee! <= 0;
-    final hasNoAvailability = user.availability == null ||
-        user.availability!.workingDays.isEmpty;
+    final hasNoAvailability =
+        user.availability == null || user.availability!.workingDays.isEmpty;
     return hasNoImage || hasNoPhone || hasNoFee || hasNoAvailability;
   }
   return false;
@@ -425,7 +425,9 @@ GoRouter createRouter({
           if (user?.role == UserRoles.admin) {
             return '/admin_main';
           } else if (user?.role == UserRoles.doctor) {
-            return doctorNeedsOnboarding ? '/doctor_onboarding' : '/doctor_main';
+            return doctorNeedsOnboarding
+                ? '/doctor_onboarding'
+                : '/doctor_main';
           } else {
             return '/patient_main';
           }
@@ -479,12 +481,15 @@ GoRouter createRouter({
         if (user?.role == UserRoles.doctor) {
           if (currentLocation == '/admin_main' ||
               currentLocation == '/patient_main') {
-            return doctorNeedsOnboarding ? '/doctor_onboarding' : '/doctor_main';
+            return doctorNeedsOnboarding
+                ? '/doctor_onboarding'
+                : '/doctor_main';
           }
           if (doctorNeedsOnboarding && currentLocation == '/doctor_main') {
             return '/doctor_onboarding';
           }
-          if (!doctorNeedsOnboarding && currentLocation == '/doctor_onboarding') {
+          if (!doctorNeedsOnboarding &&
+              currentLocation == '/doctor_onboarding') {
             return '/doctor_main';
           }
         }

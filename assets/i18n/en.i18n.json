@@ -78,7 +78,7 @@
   "patient_main": {
     "home": "Home",
     "settings": "Settings",
-    "appointment": "Appointment",
+    "appointments": "Appointments",
     "favourite": "Favourite"
   },
   "patient_appointments": {
@@ -414,7 +414,7 @@
   "doctor": {
     "main": {
       "my_schedule": "My Schedule",
-      "my_profile": "My Profile",
+      "appointments": "@:patientMain.appointments",
       "settings": "Settings"
     },
     "settings": {
@@ -461,6 +461,19 @@
       "inactive": "Inactive",
       "start_time_and_endtime_must_be_different": "Start time and end time must be different",
       "data_was_updated_successfully": "Data was updated successfully"
+    },
+    "doctor_profile_screen": {
+      "title": "Doctor Profile",
+      "personal_information": "Personal information",
+      "name": "Name",
+      "phone": "Phone",
+      "data_was_updated_successfully": "Data was updated successfully",
+      "speciality": "Specialty",
+      "status": "Status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "fee" : "Fee"
+
     }
   }
 }

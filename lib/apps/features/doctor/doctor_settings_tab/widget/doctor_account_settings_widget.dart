@@ -37,11 +37,10 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
               size: 16,
             ),
             onTap: () {
-              if (onSelectProfileTab != null) {
-                onSelectProfileTab!();
-              } else {
+
+
                 const DoctorProfileRoute().push(context);
-              }
+
             },
           ),
           _buildDivider(),

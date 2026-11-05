@@ -34,16 +34,16 @@ class DoctorProfileBloc
       return;
     }
 
-    final updatedDoctor = currentUser.copyWith(
-      name: event.name ?? currentUser.name,
-      specialty: event.specialty ?? currentUser.specialty,
-      consultationFee: event.consultationFee ?? currentUser.consultationFee,
-      phone: event.phone ?? currentUser.phone,
-      active: event.active ?? currentUser.active,
-    );
+    // final updatedDoctor = currentUser.copyWith(
+    //   name: event.name ?? currentUser.name,
+    //   specialty: event.specialty ?? currentUser.specialty,
+    //   consultationFee: event.consultationFee ?? currentUser.consultationFee,
+    //   phone: event.phone ?? currentUser.phone,
+    //   active: event.active ?? currentUser.active,
+    // );
 
     final result = await _doctorRepository.updateDoctorProfile(
-      doctor: updatedDoctor,
+      doctor: event.updatedDoctor,
       image: event.image,
     );
 
@@ -52,7 +52,7 @@ class DoctorProfileBloc
       (_) async {
         final refreshed = await _doctorRepository.getDoctorById(currentUser.id);
         refreshed.fold(
-          (_) => _userSessionManager.updateUser(updatedDoctor),
+          (_) => _userSessionManager.updateUser(event.updatedDoctor),
           (freshDoctor) => _userSessionManager.updateUser(freshDoctor),
         );
         emit(UpdateDoctorDetailsSuccess());

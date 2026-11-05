@@ -32,7 +32,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
   ) async {
     emit(AdminDoctorsLoading());
     await emit.forEach(
-      _doctorRepository.getDoctors(adminId: event.adminId),
+      _doctorRepository.getDoctors(),
       onData: (result) => result.fold(
         (failure) => AdminDoctorsError(failure.message),
         (doctorsList) {

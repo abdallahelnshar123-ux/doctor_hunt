@@ -9,7 +9,7 @@ abstract class DoctorRemoteDataSource {
 
   Future<DoctorDto> getDoctorById(String doctorId);
 
-  Stream<List<DoctorDto>> getDoctorsStreamForAdmin({required String adminId});
+  Stream<List<DoctorDto>> getDoctorsStreamForAdmin();
 
   Stream<List<DoctorDto>> getDoctorsStreamForPatient();
 
