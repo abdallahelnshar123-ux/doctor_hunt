@@ -8,12 +8,7 @@ import 'package:flutter/material.dart';
 class DoctorAccountSettingsWidget extends StatelessWidget {
   const DoctorAccountSettingsWidget({
     super.key,
-    this.onSelectScheduleTab,
-    this.onSelectProfileTab,
   });
-
-  final VoidCallback? onSelectScheduleTab;
-  final VoidCallback? onSelectProfileTab;
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +50,7 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
               size: 16,
             ),
             onTap: () {
-              if (onSelectScheduleTab != null) {
-                onSelectScheduleTab!();
-              } else {
-                const DoctorAvailabilityRoute().push(context);
-              }
+              const DoctorAvailabilityRoute().push(context);
             },
           ),
           _buildDivider(),

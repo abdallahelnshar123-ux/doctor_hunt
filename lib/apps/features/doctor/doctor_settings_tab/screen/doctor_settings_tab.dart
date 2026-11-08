@@ -12,12 +12,7 @@ import '../widget/doctor_account_settings_widget.dart';
 class DoctorSettingsTab extends StatelessWidget {
   const DoctorSettingsTab({
     super.key,
-    this.onSelectScheduleTab,
-    this.onSelectProfileTab,
   });
-
-  final VoidCallback? onSelectScheduleTab;
-  final VoidCallback? onSelectProfileTab;
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +30,7 @@ class DoctorSettingsTab extends StatelessWidget {
             children: [
               const BasicUserCard(),
               const SizedBox(height: 20),
-              DoctorAccountSettingsWidget(
-                onSelectScheduleTab: onSelectScheduleTab,
-                onSelectProfileTab: onSelectProfileTab,
-              ),
+              const DoctorAccountSettingsWidget(),
               const SizedBox(height: 40),
               CustomNegativeButton(
                 icon: Icon(Icons.logout),

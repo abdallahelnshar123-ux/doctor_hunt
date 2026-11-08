@@ -722,6 +722,7 @@ class Translations$doctor$en {
     _root,
   );
   late final Translations$doctor$doctorProfileScreen$en doctorProfileScreen = Translations$doctor$doctorProfileScreen$en.internal(_root);
+  late final Translations$doctor$schedule$en schedule = Translations$doctor$schedule$en.internal(_root);
 }
 
 // Path: onboarding.pages.0
@@ -1346,6 +1347,33 @@ class Translations$doctor$doctorProfileScreen$en {
 
   /// en: 'Fee'
   String get fee => 'Fee';
+}
+
+// Path: doctor.schedule
+class Translations$doctor$schedule$en {
+  Translations$doctor$schedule$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'My Schedule'
+  String get title => 'My Schedule';
+
+  /// en: 'Today'
+  String get today => 'Today';
+
+  /// en: 'Tomorrow'
+  String get tomorrow => 'Tomorrow';
+
+  /// en: 'Next 7 Days'
+  String get next7Days => 'Next 7 Days';
+
+  /// en: 'No appointments found'
+  String get noAppointments => 'No appointments found';
+
+  /// en: 'Refresh'
+  String get refresh => 'Refresh';
 }
 
 // Path: privacyPolicy.sections.informationWeCollect

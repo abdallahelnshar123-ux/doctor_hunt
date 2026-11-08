@@ -473,7 +473,14 @@
       "active": "Active",
       "inactive": "Inactive",
       "fee" : "Fee"
-
+    },
+    "schedule": {
+      "title": "My Schedule",
+      "today": "Today",
+      "tomorrow": "Tomorrow",
+      "next_7_days": "Next 7 Days",
+      "no_appointments": "No appointments found",
+      "refresh": "Refresh"
     }
   }
 }

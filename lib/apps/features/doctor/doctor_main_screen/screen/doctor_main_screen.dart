@@ -8,6 +8,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:doctor_hunt/apps/features/doctor/schedule_tab/presentation/controller/doctor_schedule_bloc.dart';
+import 'package:doctor_hunt/apps/features/doctor/schedule_tab/presentation/controller/doctor_schedule_event.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+
 import '../../../../core/widgets/app_scaffold.dart';
 import '../../doctor_settings_tab/screen/doctor_settings_tab.dart';
 
@@ -16,15 +21,24 @@ class DoctorMainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<DoctorScheduleBloc>()..add(const FetchDoctorSchedule()),
+      child: const _DoctorMainScreenContent(),
+    );
+  }
+}
+
+class _DoctorMainScreenContent extends HookWidget {
+  const _DoctorMainScreenContent();
+
+  @override
+  Widget build(BuildContext context) {
     final selectedIndex = useState(0);
 
     final tabsList = [
-      ScheduleTab(),
-      DoctorAppointmentsTab(),
-      DoctorSettingsTab(
-        onSelectScheduleTab: () => selectedIndex.value = 0,
-        onSelectProfileTab: () => selectedIndex.value = 1,
-      ),
+      const ScheduleTab(),
+      const DoctorAppointmentsTab(),
+      const DoctorSettingsTab(),
     ];
 
     return AppScaffold(

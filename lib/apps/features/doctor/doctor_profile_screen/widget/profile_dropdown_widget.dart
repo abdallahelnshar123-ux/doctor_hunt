@@ -1,6 +1,5 @@
 import 'package:doctor_hunt/apps/features/admin/add_doctor_screen/presentation/widget/specialty_dropdown_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../generated/style_atoms.dart';
 import '../../../../core/theme/app_colors.dart';

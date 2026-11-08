@@ -72,6 +72,8 @@ import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bl
     as _i922;
 import '../../features/doctor/domain/repository/doctor_repository.dart'
     as _i849;
+import '../../features/doctor/schedule_tab/presentation/controller/doctor_schedule_bloc.dart'
+    as _i86;
 import '../../features/patient/appointments_tab/data/service/review_batch_firestore_service.dart'
     as _i129;
 import '../../features/patient/appointments_tab/presentation/controller/appointments_bloc.dart'
@@ -280,6 +282,12 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i495.PatientProfileBloc>(
       () => _i495.PatientProfileBloc(
         gh<_i1046.UserRepository>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
+    gh.factory<_i86.DoctorScheduleBloc>(
+      () => _i86.DoctorScheduleBloc(
+        gh<_i148.AppointmentRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
     );
