@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/widget/doctor_details_card.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/widget/doctor_statistics_widget.dart';
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/widget/services_widget.dart';
@@ -7,7 +8,6 @@ import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/theme/app_colors.dart';
 
 class PatientDoctorDetailsScreen extends StatelessWidget {

@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'patient_doctors_event.dart';
+
 part 'patient_doctors_state.dart';
 
 EventTransformer<T> _debounce<T>(Duration duration) {
@@ -67,9 +68,10 @@ class PatientDoctorsBloc
       } else {
         filtered = currentState.doctors.where((doctor) {
           final nameMatches = doctor.name.toLowerCase().contains(trimmedQuery);
-          final specialtyMatches = doctor.specialty.localizedName().toLowerCase().contains(
-            trimmedQuery,
-          );
+          final specialtyMatches = doctor.specialty
+              .localizedName()
+              .toLowerCase()
+              .contains(trimmedQuery);
           return nameMatches || specialtyMatches;
         }).toList();
       }

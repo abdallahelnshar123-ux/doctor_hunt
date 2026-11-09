@@ -2,6 +2,7 @@ import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_availability.dar
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
+
 import 'app_user.dart';
 import 'user_roles.dart';
 
@@ -16,6 +17,7 @@ import 'user_roles.dart';
 class DoctorEntity extends AppUserEntity {
   final SpecialtyModel specialty;
   final bool active;
+  final bool disabled;
   final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
@@ -29,6 +31,7 @@ class DoctorEntity extends AppUserEntity {
     super.phone,
     required this.specialty,
     required this.active,
+    this.disabled = false,
     this.consultationFee,
     required this.rating,
     this.availability,
@@ -43,6 +46,7 @@ class DoctorEntity extends AppUserEntity {
     String? phone,
     SpecialtyModel? specialty,
     bool? active,
+    bool? disabled,
     double? consultationFee,
     Rating? rating,
     DoctorAvailability? availability,
@@ -56,6 +60,7 @@ class DoctorEntity extends AppUserEntity {
       phone: phone ?? this.phone,
       specialty: specialty ?? this.specialty,
       active: active ?? this.active,
+      disabled: disabled ?? this.disabled,
       consultationFee: consultationFee ?? this.consultationFee,
       rating: rating ?? this.rating,
       availability: availability ?? this.availability,
@@ -67,6 +72,7 @@ class DoctorEntity extends AppUserEntity {
     ...super.props,
     specialty,
     active,
+    disabled,
     consultationFee,
     rating,
     availability,

@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.abdallahelnshar.doctor_hunt"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

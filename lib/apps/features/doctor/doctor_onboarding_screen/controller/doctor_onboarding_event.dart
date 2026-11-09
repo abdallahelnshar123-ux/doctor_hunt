@@ -26,10 +26,5 @@ class SaveDoctorOnboardingRequested extends DoctorOnboardingEvent {
   });
 
   @override
-  List<Object?> get props => [
-    image,
-    phone,
-    consultationFee,
-    availability,
-  ];
+  List<Object?> get props => [image, phone, consultationFee, availability];
 }

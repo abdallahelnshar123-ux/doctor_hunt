@@ -8,7 +8,9 @@ class AdminAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>(
+      (bloc) => bloc.currentUser,
+    );
     return AppBar(
       title: Text(title),
       actionsPadding: EdgeInsets.symmetric(horizontal: 20),

@@ -16,11 +16,18 @@ abstract class DoctorRepository {
 
   Stream<Either<Failure, List<DoctorEntity>>> getDoctors();
 
+  Stream<Either<Failure, List<DoctorEntity>>> getDoctorsForAdmin();
+
   Future<Either<Failure, File>> pickDoctorImage();
 
   Future<Either<Failure, Unit>> updateDoctorActiveStatus({
     required String doctorId,
     required bool active,
+  });
+
+  Future<Either<Failure, Unit>> updateDoctorDisabledStatus({
+    required String doctorId,
+    required bool disabled,
   });
 
   Future<Either<Failure, Unit>> updateDoctorDetails({

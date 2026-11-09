@@ -1,7 +1,7 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 
@@ -25,13 +25,11 @@ class PopularDoctorsItem extends StatelessWidget {
         crossAxisAlignment: .center,
         children: [
           Expanded(
-            child:
-               CustomCachedNetworkImage(
-                    imgUrl: doctor.image,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  )
-
+            child: CustomCachedNetworkImage(
+              imgUrl: doctor.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(10),

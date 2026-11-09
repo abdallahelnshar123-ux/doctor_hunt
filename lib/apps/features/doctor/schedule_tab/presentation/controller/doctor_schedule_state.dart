@@ -1,11 +1,7 @@
-import 'package:equatable/equatable.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import 'package:equatable/equatable.dart';
 
-enum ScheduleFilter {
-  today,
-  tomorrow,
-  next7Days
-}
+enum ScheduleFilter { today, tomorrow, next7Days }
 
 class DoctorScheduleState extends Equatable {
   final ScheduleFilter filter;

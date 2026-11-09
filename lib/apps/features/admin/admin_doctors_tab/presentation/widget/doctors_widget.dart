@@ -56,7 +56,8 @@ class DoctorsWidget extends StatelessWidget {
                         final label = map.keys.first.localizedName();
                         final number = map.values.first;
                         return TabBarWidget(
-                          isSelected: state.selectedSpecialty?.localizedName() == label,
+                          isSelected:
+                              state.selectedSpecialty?.localizedName() == label,
                           number: number,
                           label: label,
                         );

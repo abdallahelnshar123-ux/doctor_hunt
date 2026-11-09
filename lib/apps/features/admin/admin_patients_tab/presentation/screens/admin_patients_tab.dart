@@ -111,9 +111,7 @@ class AdminPatientsTab extends HookWidget {
   Widget _buildActiveChip(BuildContext context, bool isActive) {
     return Chip(
       padding: const EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       side: const BorderSide(width: 0, color: AppColors.transparent),
       backgroundColor: isActive
           ? AppColors.brandPrimary20
@@ -133,7 +131,10 @@ class AdminPatientsTab extends HookWidget {
     );
   }
 
-  Widget _buildPatientsList(BuildContext context, List<PatientEntity> patients) {
+  Widget _buildPatientsList(
+    BuildContext context,
+    List<PatientEntity> patients,
+  ) {
     return SafeArea(
       child: ListView.separated(
         itemCount: patients.length,
@@ -147,7 +148,7 @@ class AdminPatientsTab extends HookWidget {
             },
             child: BasicUserCard(
               outerUser: patient,
-              trailing: _buildActiveChip(context, patient.active),
+              trailing: _buildActiveChip(context, !patient.disabled),
             ),
           );
         },

@@ -15,7 +15,6 @@ class SpecialtiesBloc extends Bloc<SpecialtiesEvent, SpecialtiesState> {
     on<AddSpecialtyEvent>(_onAddSpecialty);
     on<UpdateSpecialtyEvent>(_onUpdateSpecialty);
     add(GetSpecialtiesEvent());
-
   }
 
   Future<void> _onGetSpecialties(
@@ -69,11 +68,12 @@ class SpecialtiesBloc extends Bloc<SpecialtiesEvent, SpecialtiesState> {
         debugPrint('===============================');
 
         emit(
-        state.copyWith(
-          status: SpecialtiesStatus.failure,
-          failureMessage: failure.message,
-        ),
-      );},
+          state.copyWith(
+            status: SpecialtiesStatus.failure,
+            failureMessage: failure.message,
+          ),
+        );
+      },
       (newSpecialty) {
         final updatedList = List<SpecialtyModel>.from(state.specialties)
           ..add(newSpecialty);

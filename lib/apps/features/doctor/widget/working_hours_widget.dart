@@ -9,7 +9,6 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/app_container_with_shadow.dart';
 
 part 'slot_duration_drop_down.dart';
-
 part 'time_drop_down.dart';
 
 class WorkingHoursWidget extends StatelessWidget {
@@ -40,7 +39,6 @@ class WorkingHoursWidget extends StatelessWidget {
         _buildDropDownGroup(context: context),
       ],
     );
-
   }
 
   Widget _buildDropDownGroup({required BuildContext context}) {

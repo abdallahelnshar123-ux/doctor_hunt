@@ -25,10 +25,5 @@ class UpdateAvailabilityConfigEvent extends DoctorAvailabilityEvent {
   });
 
   @override
-  List<Object?> get props => [
-    workingDays,
-    startTime,
-    endTime,
-    slotDuration,
-  ];
+  List<Object?> get props => [workingDays, startTime, endTime, slotDuration];
 }

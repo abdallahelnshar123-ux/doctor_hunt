@@ -7,7 +7,7 @@ class AppTheme {
     popupMenuTheme: PopupMenuThemeData(color: AppColors.white),
     dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      circularTrackColor: AppColors.brandPrimary
+      circularTrackColor: AppColors.brandPrimary,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparent,

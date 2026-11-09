@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../../generated/app_assets.dart';
 import '../../../../../generated/style_atoms.dart';
-import '../../../../features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/app_container_with_shadow.dart';
+import '../../../../features/common/auth/domain/entity/user/doctor.dart';
 
 class DoctorCardWide extends StatelessWidget {
   final DoctorEntity doctor;

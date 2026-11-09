@@ -74,8 +74,28 @@ class DoctorRepositoryImpl implements DoctorRepository {
   @override
   Stream<Either<Failure, List<DoctorEntity>>> getDoctors() async* {
     try {
-      await for (final doctorDtoList in _remoteDataSource.getDoctorsStreamForPatient()) {
-        final doctors = doctorDtoList.map((dto) => dto.toEntity() as DoctorEntity).toList();
+      await for (final doctorDtoList
+          in _remoteDataSource.getDoctorsStreamForPatient()) {
+        final doctors = doctorDtoList
+            .map((dto) => dto.toEntity() as DoctorEntity)
+            .toList();
+        yield Right(doctors);
+      }
+    } on AppException catch (e) {
+      yield Left(e.toFailure());
+    } catch (e) {
+      yield Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  @override
+  Stream<Either<Failure, List<DoctorEntity>>> getDoctorsForAdmin() async* {
+    try {
+      await for (final doctorDtoList
+          in _remoteDataSource.getDoctorsStreamForAdmin()) {
+        final doctors = doctorDtoList
+            .map((dto) => dto.toEntity() as DoctorEntity)
+            .toList();
         yield Right(doctors);
       }
     } on AppException catch (e) {
@@ -106,6 +126,24 @@ class DoctorRepositoryImpl implements DoctorRepository {
       await _remoteDataSource.updateDoctorActiveStatus(
         doctorId: doctorId,
         active: active,
+      );
+      return const Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> updateDoctorDisabledStatus({
+    required String doctorId,
+    required bool disabled,
+  }) async {
+    try {
+      await _remoteDataSource.updateDoctorDisabledStatus(
+        doctorId: doctorId,
+        disabled: disabled,
       );
       return const Right(unit);
     } on AppException catch (e) {

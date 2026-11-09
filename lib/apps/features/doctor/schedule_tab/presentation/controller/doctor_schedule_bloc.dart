@@ -1,20 +1,19 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
 import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 import 'doctor_schedule_event.dart';
 import 'doctor_schedule_state.dart';
 
 @injectable
-class DoctorScheduleBloc extends Bloc<DoctorScheduleEvent, DoctorScheduleState> {
+class DoctorScheduleBloc
+    extends Bloc<DoctorScheduleEvent, DoctorScheduleState> {
   final AppointmentRepository _appointmentRepository;
   final UserSessionManager _userSessionManager;
 
-  DoctorScheduleBloc(
-    this._appointmentRepository,
-    this._userSessionManager,
-  ) : super(const DoctorScheduleState()) {
+  DoctorScheduleBloc(this._appointmentRepository, this._userSessionManager)
+    : super(const DoctorScheduleState()) {
     on<FetchDoctorSchedule>(_onFetchDoctorSchedule);
     on<RefreshDoctorSchedule>(_onRefreshDoctorSchedule);
     on<ChangeScheduleFilter>(_onChangeScheduleFilter);
@@ -42,7 +41,11 @@ class DoctorScheduleBloc extends Bloc<DoctorScheduleEvent, DoctorScheduleState> 
         endDate = startDate.add(const Duration(days: 1));
         break;
       case ScheduleFilter.tomorrow:
-        startDate = DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
+        startDate = DateTime(
+          now.year,
+          now.month,
+          now.day,
+        ).add(const Duration(days: 1));
         endDate = startDate.add(const Duration(days: 1));
         break;
       case ScheduleFilter.next7Days:
@@ -58,16 +61,11 @@ class DoctorScheduleBloc extends Bloc<DoctorScheduleEvent, DoctorScheduleState> 
     );
 
     result.fold(
-      (failure) => emit(state.copyWith(
-        isLoading: false,
-        errorMessage: failure.message,
-      )),
+      (failure) =>
+          emit(state.copyWith(isLoading: false, errorMessage: failure.message)),
       (appointments) {
         appointments.sort((a, b) => a.sessionTime.compareTo(b.sessionTime));
-        emit(state.copyWith(
-          isLoading: false,
-          appointments: appointments,
-        ));
+        emit(state.copyWith(isLoading: false, appointments: appointments));
       },
     );
   }

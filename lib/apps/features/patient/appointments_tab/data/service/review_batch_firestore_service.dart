@@ -5,8 +5,8 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/constants/firestore_constants.dart';
-import '../../../../common/auth/data/dto/user/doctor_dto.dart';
 import '../../../../../core/exceptions/app_exceptions.dart';
+import '../../../../common/auth/data/dto/user/doctor_dto.dart';
 import '../models/appointment_dto/appointment_dto.dart';
 
 @injectable

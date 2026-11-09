@@ -2,10 +2,7 @@ import 'package:doctor_hunt/apps/core/data/models/doctor/doctor_availability_dto
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 
 abstract class DoctorRemoteDataSource {
-  Future<void> addDoctor({
-    required DoctorDto doctor,
-    required String password,
-  });
+  Future<void> addDoctor({required DoctorDto doctor, required String password});
 
   Future<DoctorDto> getDoctorById(String doctorId);
 
@@ -16,6 +13,11 @@ abstract class DoctorRemoteDataSource {
   Future<void> updateDoctorActiveStatus({
     required String doctorId,
     required bool active,
+  });
+
+  Future<void> updateDoctorDisabledStatus({
+    required String doctorId,
+    required bool disabled,
   });
 
   Future<void> updateDoctorDetails(DoctorDto doctor);

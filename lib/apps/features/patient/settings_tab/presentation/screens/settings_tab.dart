@@ -1,8 +1,8 @@
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
-import 'package:doctor_hunt/apps/core/widgets/custom_negative_button.dart';
 import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
+import 'package:doctor_hunt/apps/core/widgets/custom_negative_button.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,6 @@ import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
 
 part '../widget/account_settings_widget.dart';
-
 part '../widget/more_option_widget.dart';
 
 class SettingsTab extends StatelessWidget {
@@ -25,7 +24,9 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>(
+      (bloc) => bloc.currentUser,
+    );
     return BlocListener<AuthBloc, AuthState>(
       listenWhen: (previous, current) =>
           current is LogoutLoadingState || current is LogoutErrorState,

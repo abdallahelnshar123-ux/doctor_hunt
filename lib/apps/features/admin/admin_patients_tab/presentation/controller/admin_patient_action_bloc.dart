@@ -14,7 +14,29 @@ class AdminPatientActionBloc
 
   AdminPatientActionBloc(this._patientsRepository)
     : super(AdminPatientActionInitial()) {
-    on<TogglePatientActiveStatusRequested>(_onTogglePatientActiveStatusRequested);
+    on<TogglePatientDisabledStatusRequested>(
+      _onTogglePatientDisabledStatusRequested,
+    );
+    on<TogglePatientActiveStatusRequested>(
+      _onTogglePatientActiveStatusRequested,
+    );
+  }
+
+  Future<void> _onTogglePatientDisabledStatusRequested(
+    TogglePatientDisabledStatusRequested event,
+    Emitter<AdminPatientActionState> emit,
+  ) async {
+    emit(TogglePatientActiveStatusLoading());
+
+    final result = await _patientsRepository.updatePatientDisabledStatus(
+      patientId: event.patientId,
+      disabled: event.disabled,
+    );
+
+    result.fold(
+      (failure) => emit(TogglePatientActiveStatusError(failure.message)),
+      (_) => emit(TogglePatientActiveStatusSuccess()),
+    );
   }
 
   Future<void> _onTogglePatientActiveStatusRequested(
@@ -23,9 +45,9 @@ class AdminPatientActionBloc
   ) async {
     emit(TogglePatientActiveStatusLoading());
 
-    final result = await _patientsRepository.updatePatientActiveStatus(
+    final result = await _patientsRepository.updatePatientDisabledStatus(
       patientId: event.patientId,
-      active: event.active,
+      disabled: !event.active,
     );
 
     result.fold(

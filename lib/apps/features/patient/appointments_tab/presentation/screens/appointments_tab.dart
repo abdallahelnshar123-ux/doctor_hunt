@@ -13,7 +13,6 @@ import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/data/models/doctor/review.dart';
 import '../../../../../core/di/di.dart';
 import '../../../../../core/theme/app_colors.dart';
-
 import '../controller/appointments_bloc.dart';
 
 part '../widget/appointments_list_widget.dart';

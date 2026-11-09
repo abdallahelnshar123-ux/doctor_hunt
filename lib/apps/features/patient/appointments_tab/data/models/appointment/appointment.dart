@@ -1,6 +1,5 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
-
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../../common/auth/domain/entity/user/app_user.dart';

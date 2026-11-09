@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
+import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';

@@ -13,7 +13,7 @@ class _PatientDetailsBottomSheetContent extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isActive = useValueNotifier(patient.active);
+    final isActive = useValueNotifier(!patient.disabled);
 
     return BlocListener<AdminPatientActionBloc, AdminPatientActionState>(
       bloc: actionBloc,
@@ -23,7 +23,7 @@ class _PatientDetailsBottomSheetContent extends HookWidget {
           patientsBloc.add(
             AdminUpdatePatientStatusLocally(
               patientId: patient.id,
-              active: isActive.value,
+              disabled: !isActive.value,
             ),
           );
           SnackBarUtils.showErrorSnackBar(
@@ -56,10 +56,7 @@ class _PatientDetailsBottomSheetContent extends HookWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Text(
-              patient.email,
-              style: context.regular14.textSecondary.rubik,
-            ),
+            Text(patient.email, style: context.regular14.textSecondary.rubik),
             const SizedBox(height: 30),
             Align(
               alignment: AlignmentDirectional.centerStart,
@@ -82,15 +79,15 @@ class _PatientDetailsBottomSheetContent extends HookWidget {
               onChanged: (newValue) {
                 isActive.value = newValue;
                 actionBloc.add(
-                  TogglePatientActiveStatusRequested(
+                  TogglePatientDisabledStatusRequested(
                     patientId: patient.id,
-                    active: newValue,
+                    disabled: !newValue,
                   ),
                 );
                 patientsBloc.add(
                   AdminUpdatePatientStatusLocally(
                     patientId: patient.id,
-                    active: newValue,
+                    disabled: !newValue,
                   ),
                 );
               },

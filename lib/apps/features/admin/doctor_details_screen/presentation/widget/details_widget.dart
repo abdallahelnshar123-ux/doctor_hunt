@@ -45,9 +45,9 @@ class DetailsWidget extends StatelessWidget {
             isActive: isActive,
             onChanged: (value) {
               context.read<AdminDoctorActionBloc>().add(
-                ToggleDoctorActiveStatusRequested(
+                ToggleDoctorDisabledStatusRequested(
                   doctorId: doctor.id,
-                  active: value,
+                  disabled: !value,
                 ),
               );
             },

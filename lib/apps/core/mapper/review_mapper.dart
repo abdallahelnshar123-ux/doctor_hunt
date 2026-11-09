@@ -5,7 +5,7 @@ import '../data/models/doctor/review_dto.dart';
 extension ReviewMapper on ReviewDto {
   Review toDomain() {
     return Review(
-      reviewer: reviewer.toEntity() ,
+      reviewer: reviewer.toEntity(),
       rating: rating,
       comment: comment,
     );

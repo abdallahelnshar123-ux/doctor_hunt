@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../generated/style_atoms.dart';

@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/review_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/app_user_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:equatable/equatable.dart';
-
 
 import '../../../../../common/auth/data/dto/user/patient_dto.dart';
 
@@ -57,6 +56,7 @@ class AppointmentDto extends Equatable {
               provider: UserAuthProvider.emailPassword,
               specialty: SpecialtyModel(id: "id", en: "", ar: ""),
               active: false,
+              disabled: false,
               consultationFee: 0.0,
               rating: Rating(rating: 0.0, reviews: []),
             ),

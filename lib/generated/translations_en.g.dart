@@ -14,7 +14,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   ///
   /// Usage:
   /// final t = Translations.of(context);
-  static Translations of(BuildContext context) => InheritedLocaleData.of<AppLocale, Translations>(context).translations;
+  static Translations of(BuildContext context) =>
+      InheritedLocaleData.of<AppLocale, Translations>(context).translations;
 
   /// You can call this constructor and build your own translation instance of this locale.
   /// Constructing via the enum [AppLocale.build] is preferred.
@@ -23,8 +24,11 @@ class Translations with BaseTranslations<AppLocale, Translations> {
     PluralResolver? cardinalResolver,
     PluralResolver? ordinalResolver,
     TranslationMetadata<AppLocale, Translations>? meta,
-  }) : assert(overrides == null, 'Set "translation_overrides: true" in order to enable this feature.'),
-       $meta =
+  }) : assert(
+         overrides == null,
+         'Set "translation_overrides: true" in order to enable this feature.',
+       ),
+       _meta =
            meta ??
            TranslationMetadata(
              locale: AppLocale.en,
@@ -34,36 +38,67 @@ class Translations with BaseTranslations<AppLocale, Translations> {
            );
 
   /// Metadata for the translations of <en>.
+  final TranslationMetadata<AppLocale, Translations> _meta;
+
   @override
-  final TranslationMetadata<AppLocale, Translations> $meta;
+  TranslationMetadata<AppLocale, Translations> get $meta => _meta;
 
   late final Translations _root = this; // ignore: unused_field
 
-  Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
+  Translations $copyWith({
+    TranslationMetadata<AppLocale, Translations>? meta,
+  }) => Translations(meta: meta ?? this.$meta);
 
   // Translations
   late final Translations$auth$en auth = Translations$auth$en.internal(_root);
-  late final Translations$forgotPassword$en forgotPassword = Translations$forgotPassword$en.internal(_root);
-  late final Translations$onboarding$en onboarding = Translations$onboarding$en.internal(_root);
-  late final Translations$chooseRole$en chooseRole = Translations$chooseRole$en.internal(_root);
-  late final Translations$patientMain$en patientMain = Translations$patientMain$en.internal(_root);
-  late final Translations$patientAppointments$en patientAppointments = Translations$patientAppointments$en.internal(_root);
-  late final Translations$selectTime$en selectTime = Translations$selectTime$en.internal(_root);
+  late final Translations$forgotPassword$en forgotPassword =
+      Translations$forgotPassword$en.internal(_root);
+  late final Translations$onboarding$en onboarding =
+      Translations$onboarding$en.internal(_root);
+  late final Translations$chooseRole$en chooseRole =
+      Translations$chooseRole$en.internal(_root);
+  late final Translations$patientMain$en patientMain =
+      Translations$patientMain$en.internal(_root);
+  late final Translations$patientAppointments$en patientAppointments =
+      Translations$patientAppointments$en.internal(_root);
+  late final Translations$selectTime$en selectTime =
+      Translations$selectTime$en.internal(_root);
   late final Translations$home$en home = Translations$home$en.internal(_root);
-  late final Translations$favouriteDoctors$en favouriteDoctors = Translations$favouriteDoctors$en.internal(_root);
-  late final Translations$settings$en settings = Translations$settings$en.internal(_root);
-  late final Translations$profile$en profile = Translations$profile$en.internal(_root);
-  late final Translations$privacyPolicy$en privacyPolicy = Translations$privacyPolicy$en.internal(_root);
-  late final Translations$doctorDetails$en doctorDetails = Translations$doctorDetails$en.internal(_root);
-  late final Translations$appointment$en appointment = Translations$appointment$en.internal(_root);
-  late final Translations$createDoctor$en createDoctor = Translations$createDoctor$en.internal(_root);
-  late final Translations$common$en common = Translations$common$en.internal(_root);
-  late final Translations$dialog$en dialog = Translations$dialog$en.internal(_root);
-  late final Translations$admin$en admin = Translations$admin$en.internal(_root);
-  late final Translations$errors$en errors = Translations$errors$en.internal(_root);
-  late final Translations$validators$en validators = Translations$validators$en.internal(_root);
-  late final Translations$eCodes$en eCodes = Translations$eCodes$en.internal(_root);
-  late final Translations$doctor$en doctor = Translations$doctor$en.internal(_root);
+  late final Translations$favouriteDoctors$en favouriteDoctors =
+      Translations$favouriteDoctors$en.internal(_root);
+  late final Translations$settings$en settings =
+      Translations$settings$en.internal(_root);
+  late final Translations$profile$en profile = Translations$profile$en.internal(
+    _root,
+  );
+  late final Translations$privacyPolicy$en privacyPolicy =
+      Translations$privacyPolicy$en.internal(_root);
+  late final Translations$doctorDetails$en doctorDetails =
+      Translations$doctorDetails$en.internal(_root);
+  late final Translations$appointment$en appointment =
+      Translations$appointment$en.internal(_root);
+  late final Translations$createDoctor$en createDoctor =
+      Translations$createDoctor$en.internal(_root);
+  late final Translations$common$en common = Translations$common$en.internal(
+    _root,
+  );
+  late final Translations$dialog$en dialog = Translations$dialog$en.internal(
+    _root,
+  );
+  late final Translations$admin$en admin = Translations$admin$en.internal(
+    _root,
+  );
+  late final Translations$errors$en errors = Translations$errors$en.internal(
+    _root,
+  );
+  late final Translations$validators$en validators =
+      Translations$validators$en.internal(_root);
+  late final Translations$eCodes$en eCodes = Translations$eCodes$en.internal(
+    _root,
+  );
+  late final Translations$doctor$en doctor = Translations$doctor$en.internal(
+    _root,
+  );
 }
 
 // Path: auth
@@ -78,7 +113,8 @@ class Translations$auth$en {
   String get welcomeBack => 'Welcome back';
 
   /// en: 'You can search course, apply course and find scholarship for abroad studies'
-  String get authSubtitle => 'You can search course, apply course and find scholarship for abroad studies';
+  String get authSubtitle =>
+      'You can search course, apply course and find scholarship for abroad studies';
 
   /// en: 'Login to your admin account'
   String get adminSubtitle => 'Login to your admin account';
@@ -114,7 +150,8 @@ class Translations$auth$en {
   String get google => 'Google';
 
   /// en: 'you must agree with the Terms of Service & Privacy Policy'
-  String get youMustAgreeToTerms => 'you must agree with the Terms of Service & Privacy Policy';
+  String get youMustAgreeToTerms =>
+      'you must agree with the Terms of Service & Privacy Policy';
 
   /// en: 'email'
   String get email => 'email';
@@ -138,13 +175,15 @@ class Translations$forgotPassword$en {
   String get email => 'Email';
 
   /// en: 'Enter your email address and we'll send you a link to reset your password.'
-  String get description => 'Enter your email address and we\'ll send you a link to reset your password.';
+  String get description =>
+      'Enter your email address and we\'ll send you a link to reset your password.';
 
   /// en: 'Send Link'
   String get sendLink => 'Send Link';
 
   /// en: 'We've sent you an email to reset your password. Please check your inbox or spam folder.'
-  String get successDialogMessage => 'We\'ve sent you an email to reset your password. Please check your inbox or spam folder.';
+  String get successDialogMessage =>
+      'We\'ve sent you an email to reset your password. Please check your inbox or spam folder.';
 }
 
 // Path: onboarding
@@ -185,9 +224,12 @@ class Translations$chooseRole$en {
   /// en: 'Choose your role'
   String get roleSelection => 'Choose your role';
 
-  late final Translations$chooseRole$patient$en patient = Translations$chooseRole$patient$en.internal(_root);
-  late final Translations$chooseRole$admin$en admin = Translations$chooseRole$admin$en.internal(_root);
-  late final Translations$chooseRole$doctor$en doctor = Translations$chooseRole$doctor$en.internal(_root);
+  late final Translations$chooseRole$patient$en patient =
+      Translations$chooseRole$patient$en.internal(_root);
+  late final Translations$chooseRole$admin$en admin =
+      Translations$chooseRole$admin$en.internal(_root);
+  late final Translations$chooseRole$doctor$en doctor =
+      Translations$chooseRole$doctor$en.internal(_root);
 }
 
 // Path: patientMain
@@ -283,7 +325,8 @@ class Translations$selectTime$en {
   String morningSlots({required Object Number}) => 'Morning ${Number} Slots';
 
   /// en: 'Afternoon ${number} Slots'
-  String afternoonSlots({required Object Number}) => 'Afternoon ${Number} Slots';
+  String afternoonSlots({required Object Number}) =>
+      'Afternoon ${Number} Slots';
 
   /// en: 'Evening ${number} Slots'
   String eveningSlots({required Object Number}) => 'Evening ${Number} Slots';
@@ -334,10 +377,12 @@ class Translations$favouriteDoctors$en {
   // Translations
 
   /// en: 'No Favourite Doctors Match Search '
-  String get noFavouriteDoctorsMatchSearch => 'No Favourite Doctors Match Search ';
+  String get noFavouriteDoctorsMatchSearch =>
+      'No Favourite Doctors Match Search ';
 
   /// en: 'You haven't added any doctors to your favourites yet.'
-  String get noFavouriteDoctorsDescription => 'You haven\'t added any doctors to your favourites yet.';
+  String get noFavouriteDoctorsDescription =>
+      'You haven\'t added any doctors to your favourites yet.';
 }
 
 // Path: settings
@@ -430,7 +475,8 @@ class Translations$privacyPolicy$en {
   String get introduction =>
       'Doctor Hunt respects your privacy and is committed to protecting your personal and medical data. This Privacy Policy outlines how we collect, use, and protect your information when using our app.';
 
-  late final Translations$privacyPolicy$sections$en sections = Translations$privacyPolicy$sections$en.internal(_root);
+  late final Translations$privacyPolicy$sections$en sections =
+      Translations$privacyPolicy$sections$en.internal(_root);
 }
 
 // Path: doctorDetails
@@ -505,8 +551,11 @@ class Translations$appointment$en {
   String get success => 'Your Appointment Successful';
 
   /// en: 'You booked an appointment with ${doctor} on ${date}, at ${time}'
-  String bookingDetails({required Object Doctor, required Object Date, required Object Time}) =>
-      'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
+  String bookingDetails({
+    required Object Doctor,
+    required Object Date,
+    required Object Time,
+  }) => 'You booked an appointment with ${Doctor} on ${Date}, at ${Time}';
 
   /// en: 'Done'
   String get done => 'Done';
@@ -585,16 +634,26 @@ class Translations$admin$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$admin$main$en main = Translations$admin$main$en.internal(_root);
-  late final Translations$admin$patientsTab$en patientsTab = Translations$admin$patientsTab$en.internal(_root);
-  late final Translations$admin$appointmentDetails$en appointmentDetails = Translations$admin$appointmentDetails$en.internal(_root);
-  late final Translations$admin$doctorsTab$en doctorsTab = Translations$admin$doctorsTab$en.internal(_root);
-  late final Translations$admin$appointmentsTab$en appointmentsTab = Translations$admin$appointmentsTab$en.internal(_root);
-  late final Translations$admin$settings$en settings = Translations$admin$settings$en.internal(_root);
-  late final Translations$admin$addDoctorScreen$en addDoctorScreen = Translations$admin$addDoctorScreen$en.internal(_root);
-  late final Translations$admin$doctorDetailsScreen$en doctorDetailsScreen = Translations$admin$doctorDetailsScreen$en.internal(_root);
-  late final Translations$admin$updateDoctorDetails$en updateDoctorDetails = Translations$admin$updateDoctorDetails$en.internal(_root);
-  late final Translations$admin$profileScreen$en profileScreen = Translations$admin$profileScreen$en.internal(_root);
+  late final Translations$admin$main$en main =
+      Translations$admin$main$en.internal(_root);
+  late final Translations$admin$patientsTab$en patientsTab =
+      Translations$admin$patientsTab$en.internal(_root);
+  late final Translations$admin$appointmentDetails$en appointmentDetails =
+      Translations$admin$appointmentDetails$en.internal(_root);
+  late final Translations$admin$doctorsTab$en doctorsTab =
+      Translations$admin$doctorsTab$en.internal(_root);
+  late final Translations$admin$appointmentsTab$en appointmentsTab =
+      Translations$admin$appointmentsTab$en.internal(_root);
+  late final Translations$admin$settings$en settings =
+      Translations$admin$settings$en.internal(_root);
+  late final Translations$admin$addDoctorScreen$en addDoctorScreen =
+      Translations$admin$addDoctorScreen$en.internal(_root);
+  late final Translations$admin$doctorDetailsScreen$en doctorDetailsScreen =
+      Translations$admin$doctorDetailsScreen$en.internal(_root);
+  late final Translations$admin$updateDoctorDetails$en updateDoctorDetails =
+      Translations$admin$updateDoctorDetails$en.internal(_root);
+  late final Translations$admin$profileScreen$en profileScreen =
+      Translations$admin$profileScreen$en.internal(_root);
 }
 
 // Path: errors
@@ -609,7 +668,8 @@ class Translations$errors$en {
   String get noAccountAssociated => 'No account associated with this email';
 
   /// en: 'Account is disabled. Please contact the administrator.'
-  String get accountDisabled => 'Account is disabled. Please contact the administrator.';
+  String get accountDisabled =>
+      'Account is disabled. Please contact the administrator.';
 
   /// en: 'Some thing went wrong'
   String get someThingWentWrong => 'Some thing went wrong';
@@ -624,28 +684,34 @@ class Translations$errors$en {
   String get emailOrPasswordIsIncorrect => 'The email or password is incorrect';
 
   /// en: 'The email address is already in use by another account'
-  String get emailAddressAlreadyInUseByAnotherAccount => 'The email address is already in use by another account';
+  String get emailAddressAlreadyInUseByAnotherAccount =>
+      'The email address is already in use by another account';
 
   /// en: 'User isn't Authenticated'
   String get userNotAuthenticated => 'User isn\'t Authenticated';
 
   /// en: 'Error while adding doctor please try again later'
-  String get errorWhileAddingDoctorPleaseTryAgainLater => 'Error while adding doctor please try again later';
+  String get errorWhileAddingDoctorPleaseTryAgainLater =>
+      'Error while adding doctor please try again later';
 
   /// en: 'Error while updating doctor please try again later'
-  String get errorWhileUpdatingDoctorPleaseTryAgainLater => 'Error while updating doctor please try again later';
+  String get errorWhileUpdatingDoctorPleaseTryAgainLater =>
+      'Error while updating doctor please try again later';
 
   /// en: 'Failed to fetch appointments ${E}'
-  String failedToFetchAppointments({required Object E}) => 'Failed to fetch appointments ${E}';
+  String failedToFetchAppointments({required Object E}) =>
+      'Failed to fetch appointments ${E}';
 
   /// en: 'Failed to book appointment ${E}'
-  String failedToBookAppointment({required Object E}) => 'Failed to book appointment ${E}';
+  String failedToBookAppointment({required Object E}) =>
+      'Failed to book appointment ${E}';
 
   /// en: 'User not logged in'
   String get userNotLoggedIn => 'User not logged in';
 
   /// en: 'Failed to update appointment status ${E}'
-  String failedToUpdateAppointmentStatus({required Object E}) => 'Failed to update appointment status ${E}';
+  String failedToUpdateAppointmentStatus({required Object E}) =>
+      'Failed to update appointment status ${E}';
 
   /// en: 'Cancelled by user'
   String get cancelledByUser => 'Cancelled by user';
@@ -684,7 +750,8 @@ class Translations$validators$en {
   String get invalidPhoneNumber => 'Invalid phone number';
 
   /// en: 'Password must be at least 6 characters'
-  String get passwordMustBeAtLeast6Characters => 'Password must be at least 6 characters';
+  String get passwordMustBeAtLeast6Characters =>
+      'Password must be at least 6 characters';
 }
 
 // Path: eCodes
@@ -715,14 +782,19 @@ class Translations$doctor$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$doctor$main$en main = Translations$doctor$main$en.internal(_root);
-  late final Translations$doctor$settings$en settings = Translations$doctor$settings$en.internal(_root);
-  late final Translations$doctor$onboarding$en onboarding = Translations$doctor$onboarding$en.internal(_root);
-  late final Translations$doctor$doctorAvailabilityScreen$en doctorAvailabilityScreen = Translations$doctor$doctorAvailabilityScreen$en.internal(
-    _root,
-  );
-  late final Translations$doctor$doctorProfileScreen$en doctorProfileScreen = Translations$doctor$doctorProfileScreen$en.internal(_root);
-  late final Translations$doctor$schedule$en schedule = Translations$doctor$schedule$en.internal(_root);
+  late final Translations$doctor$main$en main =
+      Translations$doctor$main$en.internal(_root);
+  late final Translations$doctor$settings$en settings =
+      Translations$doctor$settings$en.internal(_root);
+  late final Translations$doctor$onboarding$en onboarding =
+      Translations$doctor$onboarding$en.internal(_root);
+  late final Translations$doctor$doctorAvailabilityScreen$en
+  doctorAvailabilityScreen =
+      Translations$doctor$doctorAvailabilityScreen$en.internal(_root);
+  late final Translations$doctor$doctorProfileScreen$en doctorProfileScreen =
+      Translations$doctor$doctorProfileScreen$en.internal(_root);
+  late final Translations$doctor$schedule$en schedule =
+      Translations$doctor$schedule$en.internal(_root);
 }
 
 // Path: onboarding.pages.0
@@ -737,7 +809,8 @@ class Translations$onboarding$pages$0$en with PageData {
   String get title => 'Find Trusted Doctors';
 
   @override
-  String get subtitle => 'Find trusted doctors near you. Get the care you need from experienced professionals.';
+  String get subtitle =>
+      'Find trusted doctors near you. Get the care you need from experienced professionals.';
 
   @override
   String get imagePath => 'assets/images/on_boarding1.png';
@@ -755,7 +828,8 @@ class Translations$onboarding$pages$1$en with PageData {
   String get title => 'Choose Best Doctors';
 
   @override
-  String get subtitle => 'Explore doctors based on your needs. Choose the one that’s right for you.';
+  String get subtitle =>
+      'Explore doctors based on your needs. Choose the one that’s right for you.';
 
   @override
   String get imagePath => 'assets/images/on_boarding2.png';
@@ -773,7 +847,8 @@ class Translations$onboarding$pages$2$en with PageData {
   String get title => 'Easy Appointments';
 
   @override
-  String get subtitle => 'Book your appointment in just a few taps. Choose a time that works best for you.';
+  String get subtitle =>
+      'Book your appointment in just a few taps. Choose a time that works best for you.';
 
   @override
   String get imagePath => 'assets/images/on_boarding3.png';
@@ -831,15 +906,25 @@ class Translations$privacyPolicy$sections$en {
   final Translations _root; // ignore: unused_field
 
   // Translations
-  late final Translations$privacyPolicy$sections$informationWeCollect$en informationWeCollect =
-      Translations$privacyPolicy$sections$informationWeCollect$en.internal(_root);
-  late final Translations$privacyPolicy$sections$howWeUseInformation$en howWeUseInformation =
-      Translations$privacyPolicy$sections$howWeUseInformation$en.internal(_root);
-  late final Translations$privacyPolicy$sections$dataSecurity$en dataSecurity = Translations$privacyPolicy$sections$dataSecurity$en.internal(_root);
-  late final Translations$privacyPolicy$sections$thirdPartyServices$en thirdPartyServices =
+  late final Translations$privacyPolicy$sections$informationWeCollect$en
+  informationWeCollect =
+      Translations$privacyPolicy$sections$informationWeCollect$en.internal(
+        _root,
+      );
+  late final Translations$privacyPolicy$sections$howWeUseInformation$en
+  howWeUseInformation =
+      Translations$privacyPolicy$sections$howWeUseInformation$en.internal(
+        _root,
+      );
+  late final Translations$privacyPolicy$sections$dataSecurity$en dataSecurity =
+      Translations$privacyPolicy$sections$dataSecurity$en.internal(_root);
+  late final Translations$privacyPolicy$sections$thirdPartyServices$en
+  thirdPartyServices =
       Translations$privacyPolicy$sections$thirdPartyServices$en.internal(_root);
-  late final Translations$privacyPolicy$sections$yourRights$en yourRights = Translations$privacyPolicy$sections$yourRights$en.internal(_root);
-  late final Translations$privacyPolicy$sections$contactUs$en contactUs = Translations$privacyPolicy$sections$contactUs$en.internal(_root);
+  late final Translations$privacyPolicy$sections$yourRights$en yourRights =
+      Translations$privacyPolicy$sections$yourRights$en.internal(_root);
+  late final Translations$privacyPolicy$sections$contactUs$en contactUs =
+      Translations$privacyPolicy$sections$contactUs$en.internal(_root);
 }
 
 // Path: admin.main
@@ -884,7 +969,8 @@ class Translations$admin$patientsTab$en {
   String get deletePatientConfirmationTitle => 'Delete Patient';
 
   /// en: 'Are you sure you want to delete this patient? This action cannot be undone.'
-  String get deletePatientConfirmationMessage => 'Are you sure you want to delete this patient? This action cannot be undone.';
+  String get deletePatientConfirmationMessage =>
+      'Are you sure you want to delete this patient? This action cannot be undone.';
 
   /// en: 'Patient was deleted successfully'
   String get patientDeletedSuccessfully => 'Patient was deleted successfully';
@@ -929,16 +1015,17 @@ class Translations$admin$doctorsTab$en {
   String get noDoctorsFound => 'No Doctors Found';
 
   /// en: 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.'
-  String get noDoctorsDescription => 'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
+  String get noDoctorsDescription =>
+      'There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.';
 
   /// en: 'Total doctors'
   String get totalDoctors => 'Total doctors';
 
-  /// en: 'Active'
-  String get active => 'Active';
+  /// en: 'Enabled'
+  String get active => 'Enabled';
 
-  /// en: 'Inactive'
-  String get inactive => 'Inactive';
+  /// en: 'Disabled'
+  String get inactive => 'Disabled';
 
   /// en: 'All'
   String get all => 'All';
@@ -947,7 +1034,8 @@ class Translations$admin$doctorsTab$en {
   String get dash => '-';
 
   /// en: 'No doctor name or specialty match search'
-  String get noDoctorNameOrSpecialtyMatchSearch => 'No doctor name or specialty match search';
+  String get noDoctorNameOrSpecialtyMatchSearch =>
+      'No doctor name or specialty match search';
 
   /// en: 'No doctors'
   String get noDoctors => 'No doctors';
@@ -998,10 +1086,12 @@ class Translations$admin$settings$en {
   String get appInformation => 'App Information';
 
   /// en: 'Edit super admin details & permissions'
-  String get editSuperAdminDetailsPermissions => 'Edit super admin details & permissions';
+  String get editSuperAdminDetailsPermissions =>
+      'Edit super admin details & permissions';
 
   /// en: 'Update master security credentials'
-  String get updateMasterSecurityCredentials => 'Update master security credentials';
+  String get updateMasterSecurityCredentials =>
+      'Update master security credentials';
 
   /// en: 'v1.0.0'
   String get v100 => 'v1.0.0';
@@ -1088,7 +1178,8 @@ class Translations$admin$doctorDetailsScreen$en {
   String get deleteDoctorConfirmationTitle => 'Delete Doctor';
 
   /// en: 'Are you sure you want to delete this doctor? This action cannot be undone.'
-  String get deleteDoctorConfirmationMessage => 'Are you sure you want to delete this doctor? This action cannot be undone.';
+  String get deleteDoctorConfirmationMessage =>
+      'Are you sure you want to delete this doctor? This action cannot be undone.';
 
   /// en: 'Rating'
   String get rating => 'Rating';
@@ -1217,7 +1308,8 @@ class Translations$doctor$onboarding$en {
   String get welcomeTitle => 'Welcome to Doctor Hunt!';
 
   /// en: 'Let's complete your profile and set up your working schedule so patients can find and book appointments with you.'
-  String get welcomeSubtitle => 'Let\'s complete your profile and set up your working schedule so patients can find and book appointments with you.';
+  String get welcomeSubtitle =>
+      'Let\'s complete your profile and set up your working schedule so patients can find and book appointments with you.';
 
   /// en: 'Continue'
   String get continueBtn => 'Continue';
@@ -1226,7 +1318,8 @@ class Translations$doctor$onboarding$en {
   String get stepProfileTitle => 'Profile Details';
 
   /// en: 'Please provide your contact information and consultation fee'
-  String get stepProfileSubtitle => 'Please provide your contact information and consultation fee';
+  String get stepProfileSubtitle =>
+      'Please provide your contact information and consultation fee';
 
   /// en: 'Phone Number'
   String get phoneNumber => 'Phone Number';
@@ -1253,7 +1346,8 @@ class Translations$doctor$onboarding$en {
   String get stepAvailabilityTitle => 'Working Schedule';
 
   /// en: 'Set your working days and consultation hours'
-  String get stepAvailabilitySubtitle => 'Set your working days and consultation hours';
+  String get stepAvailabilitySubtitle =>
+      'Set your working days and consultation hours';
 
   /// en: 'Please select at least one working day'
   String get selectAtLeastOneDay => 'Please select at least one working day';
@@ -1265,7 +1359,8 @@ class Translations$doctor$onboarding$en {
   String get successTitle => 'All Set!';
 
   /// en: 'Your profile and availability have been successfully updated. You are now ready to start receiving appointments.'
-  String get successSubtitle => 'Your profile and availability have been successfully updated. You are now ready to start receiving appointments.';
+  String get successSubtitle =>
+      'Your profile and availability have been successfully updated. You are now ready to start receiving appointments.';
 
   /// en: 'Finish'
   String get finish => 'Finish';
@@ -1304,7 +1399,8 @@ class Translations$doctor$doctorAvailabilityScreen$en {
   String get inactive => 'Inactive';
 
   /// en: 'Start time and end time must be different'
-  String get startTimeAndEndtimeMustBeDifferent => 'Start time and end time must be different';
+  String get startTimeAndEndtimeMustBeDifferent =>
+      'Start time and end time must be different';
 
   /// en: 'Data was updated successfully'
   String get dataWasUpdatedSuccessfully => 'Data was updated successfully';
@@ -1378,7 +1474,9 @@ class Translations$doctor$schedule$en {
 
 // Path: privacyPolicy.sections.informationWeCollect
 class Translations$privacyPolicy$sections$informationWeCollect$en {
-  Translations$privacyPolicy$sections$informationWeCollect$en.internal(this._root);
+  Translations$privacyPolicy$sections$informationWeCollect$en.internal(
+    this._root,
+  );
 
   final Translations _root; // ignore: unused_field
 
@@ -1388,7 +1486,8 @@ class Translations$privacyPolicy$sections$informationWeCollect$en {
   String get title => '1. Information We Collect';
 
   /// en: 'We collect information required to provide doctor booking and healthcare management services:'
-  String get description => 'We collect information required to provide doctor booking and healthcare management services:';
+  String get description =>
+      'We collect information required to provide doctor booking and healthcare management services:';
 
   List<String> get bullets => [
     'Personal Identification: Name, email address, and phone number.',
@@ -1400,7 +1499,9 @@ class Translations$privacyPolicy$sections$informationWeCollect$en {
 
 // Path: privacyPolicy.sections.howWeUseInformation
 class Translations$privacyPolicy$sections$howWeUseInformation$en {
-  Translations$privacyPolicy$sections$howWeUseInformation$en.internal(this._root);
+  Translations$privacyPolicy$sections$howWeUseInformation$en.internal(
+    this._root,
+  );
 
   final Translations _root; // ignore: unused_field
 
@@ -1410,7 +1511,8 @@ class Translations$privacyPolicy$sections$howWeUseInformation$en {
   String get title => '2. How We Use Your Information';
 
   /// en: 'Your information is used strictly to deliver and improve our healthcare services:'
-  String get description => 'Your information is used strictly to deliver and improve our healthcare services:';
+  String get description =>
+      'Your information is used strictly to deliver and improve our healthcare services:';
 
   List<String> get bullets => [
     'Facilitating doctor searches, appointment scheduling, and management.',
@@ -1432,7 +1534,8 @@ class Translations$privacyPolicy$sections$dataSecurity$en {
   String get title => '3. Data Security & Storage';
 
   /// en: 'We take the security of your health and personal data seriously:'
-  String get description => 'We take the security of your health and personal data seriously:';
+  String get description =>
+      'We take the security of your health and personal data seriously:';
 
   List<String> get bullets => [
     'Data is stored securely using encrypted cloud database infrastructure.',
@@ -1443,7 +1546,9 @@ class Translations$privacyPolicy$sections$dataSecurity$en {
 
 // Path: privacyPolicy.sections.thirdPartyServices
 class Translations$privacyPolicy$sections$thirdPartyServices$en {
-  Translations$privacyPolicy$sections$thirdPartyServices$en.internal(this._root);
+  Translations$privacyPolicy$sections$thirdPartyServices$en.internal(
+    this._root,
+  );
 
   final Translations _root; // ignore: unused_field
 
@@ -1453,7 +1558,8 @@ class Translations$privacyPolicy$sections$thirdPartyServices$en {
   String get title => '4. Third-Party Services';
 
   /// en: 'We integrate trusted third-party services to ensure optimal performance:'
-  String get description => 'We integrate trusted third-party services to ensure optimal performance:';
+  String get description =>
+      'We integrate trusted third-party services to ensure optimal performance:';
 
   List<String> get bullets => [
     'Firebase: Used for secure user authentication and cloud database management.',
@@ -1474,7 +1580,8 @@ class Translations$privacyPolicy$sections$yourRights$en {
   String get title => '5. Your Rights & Control';
 
   /// en: 'You have full control over your personal data within Doctor Hunt:'
-  String get description => 'You have full control over your personal data within Doctor Hunt:';
+  String get description =>
+      'You have full control over your personal data within Doctor Hunt:';
 
   List<String> get bullets => [
     'View and update your personal profile information at any time.',

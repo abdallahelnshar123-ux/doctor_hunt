@@ -9,37 +9,36 @@ class DoctorOnboardingWelcomeTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      ListView(
-        padding: EdgeInsets.symmetric(horizontal: 25),
-        children: [
-          const SizedBox(height: 50,),
-          Container(
-            padding: EdgeInsets.all(30),
-            decoration: BoxDecoration(
-              color: AppColors.brandPrimary8,
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              Icons.medical_services_outlined,
-              size: context.width / 4,
-              color: AppColors.brandPrimary,
-            ),
+    return ListView(
+      padding: EdgeInsets.symmetric(horizontal: 25),
+      children: [
+        const SizedBox(height: 50),
+        Container(
+          padding: EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            color: AppColors.brandPrimary8,
+            shape: BoxShape.circle,
           ),
-          const SizedBox(height: 50,),
+          child: Icon(
+            Icons.medical_services_outlined,
+            size: context.width / 4,
+            color: AppColors.brandPrimary,
+          ),
+        ),
+        const SizedBox(height: 50),
 
-          Text(
-            t.doctor.onboarding.welcomeTitle,
-            style: context.semiBold24.textPrimary.rubik,
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          Text(
-            t.doctor.onboarding.welcomeSubtitle,
-            textAlign: TextAlign.center,
-            style: context.regular16.textSecondary.rubik.copyWith(height: 1.5),
-          ),
-        ],
-      );
+        Text(
+          t.doctor.onboarding.welcomeTitle,
+          style: context.semiBold24.textPrimary.rubik,
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 20),
+        Text(
+          t.doctor.onboarding.welcomeSubtitle,
+          textAlign: TextAlign.center,
+          style: context.regular16.textSecondary.rubik.copyWith(height: 1.5),
+        ),
+      ],
+    );
   }
 }

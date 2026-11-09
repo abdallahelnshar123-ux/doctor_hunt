@@ -12,7 +12,7 @@ class DoctorDetailsWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isActive = useValueNotifier(doctor.active);
+    final isActive = useValueNotifier(!doctor.disabled);
 
     return BlocListener<AdminDoctorActionBloc, AdminDoctorActionState>(
       listener: (context, state) {
@@ -78,9 +78,9 @@ class DoctorDetailsWidget extends HookWidget {
                 isActive.value = newValue;
                 isActiveChip(newValue);
                 context.read<AdminDoctorActionBloc>().add(
-                  ToggleDoctorActiveStatusRequested(
+                  ToggleDoctorDisabledStatusRequested(
                     doctorId: doctor.id,
-                    active: newValue,
+                    disabled: !newValue,
                   ),
                 );
               },

@@ -14,6 +14,7 @@ import 'app_user_dto.dart';
 class DoctorDto extends AppUserDto {
   final SpecialtyModel specialty;
   final bool active;
+  final bool disabled;
   final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
@@ -27,6 +28,7 @@ class DoctorDto extends AppUserDto {
     super.phone,
     required this.specialty,
     required this.active,
+    this.disabled = false,
     this.consultationFee,
     required this.rating,
     this.availability,
@@ -44,16 +46,17 @@ class DoctorDto extends AppUserDto {
       image: json[FirestoreConstants.image]?.toString(),
       phone: json[FirestoreConstants.phone]?.toString(),
       specialty: SpecialtyModel.fromMap(
-        Map<String, dynamic>.from(json[FirestoreConstants.specialty] as Map? ?? {}),
+        Map<String, dynamic>.from(
+          json[FirestoreConstants.specialty] as Map? ?? {},
+        ),
       ),
       active: json[FirestoreConstants.active] as bool? ?? false,
-      consultationFee:
-          (json[FirestoreConstants.consultationFee] as num?)?.toDouble(),
+      disabled: json[FirestoreConstants.disabled] as bool? ?? false,
+      consultationFee: (json[FirestoreConstants.consultationFee] as num?)
+          ?.toDouble(),
       rating: json[FirestoreConstants.rating] != null
           ? _ratingFromJson(
-              Map<String, dynamic>.from(
-                json[FirestoreConstants.rating] as Map,
-              ),
+              Map<String, dynamic>.from(json[FirestoreConstants.rating] as Map),
             )
           : const Rating(rating: 0.0, reviews: []),
       availability: json[FirestoreConstants.availability] != null
@@ -96,6 +99,7 @@ class DoctorDto extends AppUserDto {
       FirestoreConstants.phone: phone,
       FirestoreConstants.specialty: specialty.toJson(),
       FirestoreConstants.active: active,
+      FirestoreConstants.disabled: disabled,
       FirestoreConstants.consultationFee: consultationFee,
       FirestoreConstants.rating: _ratingToJson(rating),
       if (availability != null)
@@ -124,6 +128,7 @@ class DoctorDto extends AppUserDto {
     ...super.props,
     specialty,
     active,
+    disabled,
     consultationFee,
     rating,
     availability,

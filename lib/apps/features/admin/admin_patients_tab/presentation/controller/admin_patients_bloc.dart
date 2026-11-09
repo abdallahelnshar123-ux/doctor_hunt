@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'admin_patients_event.dart';
-
 part 'admin_patients_state.dart';
 
 EventTransformer<T> debounce<T>(Duration duration) {
@@ -34,14 +33,14 @@ class AdminPatientsBloc extends Bloc<AdminPatientsEvent, AdminPatientsState> {
     if (currentState is AdminPatientsSuccess) {
       final updatedAll = currentState.allPatients.map((patient) {
         if (patient.id == event.patientId) {
-          return patient.copyWith(active: event.active);
+          return patient.copyWith(disabled: event.disabled);
         }
         return patient;
       }).toList();
 
       final updatedSearch = currentState.searchPatients?.map((patient) {
         if (patient.id == event.patientId) {
-          return patient.copyWith(active: event.active);
+          return patient.copyWith(disabled: event.disabled);
         }
         return patient;
       }).toList();

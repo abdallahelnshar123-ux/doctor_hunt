@@ -5,12 +5,12 @@ class AddSpecialtyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     return IconButton(
       onPressed: () {
-
-        showRawDialog(context: context, builder: (context) =>const  AddSpecialtyDialog(),);
+        showRawDialog(
+          context: context,
+          builder: (context) => const AddSpecialtyDialog(),
+        );
         // _buildSuccessDialog(
         //   arabicController: arabicController,
         //   context: context,
@@ -150,6 +150,4 @@ class AddSpecialtyButton extends StatelessWidget {
   //     ),
   //   );
   // }
-
-
 }

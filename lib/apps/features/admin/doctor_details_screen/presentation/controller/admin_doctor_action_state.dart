@@ -14,5 +14,3 @@ final class ToggleDoctorActiveStatusError extends AdminDoctorActionState {
 
   ToggleDoctorActiveStatusError(this.message);
 }
-
-

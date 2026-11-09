@@ -5,7 +5,7 @@ import 'app_user_dto.dart';
 
 class PatientDto extends AppUserDto {
   final List<String> favDoctors;
-  final bool active;
+  final bool disabled;
 
   const PatientDto({
     required super.id,
@@ -15,13 +15,19 @@ class PatientDto extends AppUserDto {
     super.image,
     super.phone,
     this.favDoctors = const [],
-    this.active = true,
+    this.disabled = false,
   }) : super(role: UserRoles.patient);
 
   factory PatientDto.fromJson(Map<String, dynamic> json) {
     final patientInfo =
         json[FirestoreConstants.patientInfo] as Map<String, dynamic>?;
     final favDoctorsList = patientInfo?[FirestoreConstants.favDoctors] as List?;
+
+    final disabledVal =
+        json[FirestoreConstants.disabled] as bool? ??
+        (json[FirestoreConstants.active] != null
+            ? !(json[FirestoreConstants.active] as bool)
+            : false);
 
     return PatientDto(
       id: json[FirestoreConstants.id]?.toString() ?? '',
@@ -34,7 +40,7 @@ class PatientDto extends AppUserDto {
       image: json[FirestoreConstants.image]?.toString(),
       phone: json[FirestoreConstants.phone]?.toString(),
       favDoctors: favDoctorsList?.map((e) => e.toString()).toList() ?? const [],
-      active: json[FirestoreConstants.active] ?? true,
+      disabled: disabledVal,
     );
   }
 
@@ -48,7 +54,7 @@ class PatientDto extends AppUserDto {
       FirestoreConstants.image: image,
       FirestoreConstants.role: role.name,
       FirestoreConstants.phone: phone,
-      FirestoreConstants.active: active,
+      FirestoreConstants.disabled: disabled,
       FirestoreConstants.patientInfo: {
         FirestoreConstants.favDoctors: favDoctors,
       },
@@ -56,5 +62,5 @@ class PatientDto extends AppUserDto {
   }
 
   @override
-  List<Object?> get props => [...super.props, favDoctors, active];
+  List<Object?> get props => [...super.props, favDoctors, disabled];
 }

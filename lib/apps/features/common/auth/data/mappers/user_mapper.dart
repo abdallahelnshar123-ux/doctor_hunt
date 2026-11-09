@@ -29,7 +29,7 @@ extension AppUserDtoMapper on AppUserDto {
         image: dto.image,
         phone: dto.phone,
         favDoctors: dto.favDoctors,
-        active: dto.active,
+        disabled: dto.disabled,
       );
     } else if (this is DoctorDto) {
       final dto = this as DoctorDto;
@@ -42,6 +42,7 @@ extension AppUserDtoMapper on AppUserDto {
         phone: dto.phone,
         specialty: dto.specialty,
         active: dto.active,
+        disabled: dto.disabled,
         consultationFee: dto.consultationFee,
         rating: dto.rating,
         availability: dto.availability,
@@ -73,7 +74,7 @@ extension AppUserEntityMapper on AppUserEntity {
         image: entity.image,
         phone: entity.phone,
         favDoctors: entity.favDoctors,
-        active: entity.active,
+        disabled: entity.disabled,
       );
     } else if (this is DoctorEntity) {
       final entity = this as DoctorEntity;
@@ -86,6 +87,7 @@ extension AppUserEntityMapper on AppUserEntity {
         phone: entity.phone,
         specialty: entity.specialty,
         active: entity.active,
+        disabled: entity.disabled,
         consultationFee: entity.consultationFee,
         rating: entity.rating,
         availability: entity.availability,

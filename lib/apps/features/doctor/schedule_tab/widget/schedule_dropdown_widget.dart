@@ -43,7 +43,10 @@ class ScheduleDropdownWidget extends StatelessWidget {
       ],
       width: double.infinity,
       requestFocusOnTap: false,
-      trailingIcon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.textSecondary),
+      trailingIcon: const Icon(
+        Icons.keyboard_arrow_down_rounded,
+        color: AppColors.textSecondary,
+      ),
       decorationBuilder: (context, controller) => InputDecoration(
         filled: true,
         fillColor: AppColors.white,
@@ -86,50 +89,54 @@ class DropdownMenuFormField<T> extends FormField<T> {
     Widget? selectedTrailingIcon,
     double? width,
     bool requestFocusOnTap = false,
-    InputDecoration Function(BuildContext context, TextEditingController controller)? decorationBuilder,
+    InputDecoration Function(
+      BuildContext context,
+      TextEditingController controller,
+    )?
+    decorationBuilder,
   }) : super(
-          initialValue: initialSelection,
-          builder: (FormFieldState<T> state) {
-            return DropdownMenu<T>(
-              initialSelection: initialSelection,
-              onSelected: (value) {
-                state.didChange(value);
-                onSelected(value);
-              },
-              textStyle: textStyle,
-              menuStyle: menuStyle,
-              trailingIcon: trailingIcon,
-              selectedTrailingIcon: selectedTrailingIcon,
-              dropdownMenuEntries: dropdownMenuEntries,
-              width: width,
-              requestFocusOnTap: requestFocusOnTap,
-              inputDecorationTheme: InputDecorationTheme(
-                filled: true,
-                fillColor: AppColors.white,
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: AppColors.borderDefault,
-                    width: 1,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: AppColors.borderDefault,
-                    width: 1,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: const BorderSide(
-                    color: AppColors.borderDefault,
-                    width: 1,
-                  ),
-                ),
-              ),
-            );
-          },
-        );
+         initialValue: initialSelection,
+         builder: (FormFieldState<T> state) {
+           return DropdownMenu<T>(
+             initialSelection: initialSelection,
+             onSelected: (value) {
+               state.didChange(value);
+               onSelected(value);
+             },
+             textStyle: textStyle,
+             menuStyle: menuStyle,
+             trailingIcon: trailingIcon,
+             selectedTrailingIcon: selectedTrailingIcon,
+             dropdownMenuEntries: dropdownMenuEntries,
+             width: width,
+             requestFocusOnTap: requestFocusOnTap,
+             inputDecorationTheme: InputDecorationTheme(
+               filled: true,
+               fillColor: AppColors.white,
+               contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+               enabledBorder: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(8),
+                 borderSide: const BorderSide(
+                   color: AppColors.borderDefault,
+                   width: 1,
+                 ),
+               ),
+               focusedBorder: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(8),
+                 borderSide: const BorderSide(
+                   color: AppColors.borderDefault,
+                   width: 1,
+                 ),
+               ),
+               border: OutlineInputBorder(
+                 borderRadius: BorderRadius.circular(8),
+                 borderSide: const BorderSide(
+                   color: AppColors.borderDefault,
+                   width: 1,
+                 ),
+               ),
+             ),
+           );
+         },
+       );
 }

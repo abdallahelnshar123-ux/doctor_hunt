@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
@@ -10,7 +11,6 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/extensions/context_extensions.dart';
 
 class DoctorDetailsCard extends StatelessWidget {

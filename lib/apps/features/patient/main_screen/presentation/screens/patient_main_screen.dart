@@ -27,7 +27,9 @@ class PatientMainScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>(
+      (bloc) => bloc.currentUser,
+    );
 
     final selectedIndex = useValueNotifier<int>(0);
     final isDrawerOpen = useValueNotifier<bool>(false);
@@ -151,7 +153,10 @@ class PatientMainScreen extends HookWidget {
     );
   }
 
-  Widget _buildHeader({required BuildContext context, required AppUserEntity? user}) {
+  Widget _buildHeader({
+    required BuildContext context,
+    required AppUserEntity? user,
+  }) {
     return ListTile(
       contentPadding: EdgeInsets.all(16),
       leading: CircleAvatar(

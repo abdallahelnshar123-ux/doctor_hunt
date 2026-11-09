@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
+import 'package:doctor_hunt/apps/features/admin/admin_patients_tab/data/service/admin_patients_remote_data_source.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/patient.dart';
-import 'package:doctor_hunt/apps/features/admin/admin_patients_tab/data/service/admin_patients_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -27,14 +27,14 @@ class AdminPatientsRepository {
     }
   }
 
-  Future<Either<Failure, void>> updatePatientActiveStatus({
+  Future<Either<Failure, void>> updatePatientDisabledStatus({
     required String patientId,
-    required bool active,
+    required bool disabled,
   }) async {
     try {
-      await _remoteDataSource.updatePatientActiveStatus(
+      await _remoteDataSource.updatePatientDisabledStatus(
         patientId: patientId,
-        active: active,
+        disabled: disabled,
       );
       return const Right(null);
     } on AppException catch (e) {

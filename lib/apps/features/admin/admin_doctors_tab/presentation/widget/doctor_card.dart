@@ -16,16 +16,11 @@ class DoctorCard extends StatelessWidget {
       child: Row(
         spacing: 15,
         children: [
-          Container(
+          CustomCachedNetworkImage(
+            imgUrl: doctor.image,
             width: context.width * 0.18,
             height: context.width * 0.18,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              image: DecorationImage(
-                fit: .cover,
-                image: CustomCachedNetworkImage.getProvider(doctor.image),
-              ),
-            ),
+            borderRadius: BorderRadius.circular(12),
           ),
           Expanded(
             child: Column(
@@ -56,22 +51,22 @@ class DoctorCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(30),
             ),
             side: BorderSide(width: 0, color: AppColors.transparent),
-            backgroundColor: doctor.active
+            backgroundColor: !doctor.disabled
                 ? AppColors.brandPrimary20
                 : AppColors.statusErrorSurface,
             avatarBoxConstraints: .tightFor(width: 15),
             avatar: Icon(
               Icons.circle,
               size: 10,
-              color: doctor.active
+              color: !doctor.disabled
                   ? AppColors.brandPrimaryDark
                   : AppColors.statusError,
             ),
             label: Text(
-              doctor.active
+              !doctor.disabled
                   ? t.admin.doctorsTab.active
                   : t.admin.doctorsTab.inactive,
-              style: doctor.active
+              style: !doctor.disabled
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,
             ),

@@ -121,8 +121,7 @@ class AdminMainRoute extends GoRouteData with $AdminMainRoute {
   Widget build(BuildContext context, GoRouterState state) {
     return BlocProvider(
       create: (context) =>
-      getIt<AdminDoctorsBloc>()
-        ..add(AdminGetDoctorsRequested()),
+          getIt<AdminDoctorsBloc>()..add(AdminGetDoctorsRequested()),
       child: const AdminMainScreen(),
     );
   }
@@ -351,8 +350,7 @@ class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
   Widget build(BuildContext context, GoRouterState state) {
     final DoctorEntity doctor = state.extra as DoctorEntity;
     return BlocProvider(
-      create: (context) =>
-      getIt<SelectTimeBloc>()
+      create: (context) => getIt<SelectTimeBloc>()
         ..add(
           GetDoctorSlotsEvent(
             availability: doctor.availability ?? DoctorAvailability.initial(),

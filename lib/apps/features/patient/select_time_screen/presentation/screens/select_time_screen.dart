@@ -1,5 +1,4 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/data/models/doctor/time_slot.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
@@ -7,6 +6,7 @@ import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_empty_list_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/patient/main_screen/widget/doctor_card_wide.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';

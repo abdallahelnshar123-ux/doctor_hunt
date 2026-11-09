@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import 'doctor_schedule_state.dart';
 
 abstract class DoctorScheduleEvent extends Equatable {

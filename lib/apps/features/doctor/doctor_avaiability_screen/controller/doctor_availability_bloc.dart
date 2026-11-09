@@ -15,10 +15,8 @@ class DoctorAvailabilityBloc
   final DoctorRepository _doctorRepository;
   final UserSessionManager _userSessionManager;
 
-  DoctorAvailabilityBloc(
-    this._doctorRepository,
-    this._userSessionManager,
-  ) : super(DoctorAvailabilityInitial()) {
+  DoctorAvailabilityBloc(this._doctorRepository, this._userSessionManager)
+    : super(DoctorAvailabilityInitial()) {
     on<UpdateAvailabilityConfigEvent>(_onUpdateAvailabilityConfig);
   }
 
@@ -41,21 +39,18 @@ class DoctorAvailabilityBloc
       slotDuration: event.slotDuration,
     );
 
-    final updatedDoctor = currentUser.copyWith(
-      availability: availability,
-    );
+    final updatedDoctor = currentUser.copyWith(availability: availability);
 
     final result = await _doctorRepository.updateAvailability(
       doctorId: currentUser.id,
       availability: availability,
     );
 
-    result.fold(
-      (failure) => emit(DoctorAvailabilityError(failure.message)),
-      (_) {
-        _userSessionManager.updateUser(updatedDoctor);
-        emit(DoctorAvailabilitySuccess());
-      },
-    );
+    result.fold((failure) => emit(DoctorAvailabilityError(failure.message)), (
+      _,
+    ) {
+      _userSessionManager.updateUser(updatedDoctor);
+      emit(DoctorAvailabilitySuccess());
+    });
   }
 }

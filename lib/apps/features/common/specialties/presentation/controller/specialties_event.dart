@@ -16,10 +16,7 @@ class AddSpecialtyEvent extends SpecialtiesEvent {
   final String en;
   final String ar;
 
-  const AddSpecialtyEvent({
-    required this.en,
-    required this.ar,
-  });
+  const AddSpecialtyEvent({required this.en, required this.ar});
 
   @override
   List<Object?> get props => [en, ar];

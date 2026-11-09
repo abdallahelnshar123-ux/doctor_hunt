@@ -10,13 +10,7 @@ abstract class AdminPatientsState extends Equatable {
 class AdminPatientsInitial extends AdminPatientsState {}
 
 class AdminPatientsLoading extends AdminPatientsState {
-
-
-  const AdminPatientsLoading(
-
-  );
-
-
+  const AdminPatientsLoading();
 }
 
 class AdminPatientsSuccess extends AdminPatientsState {
@@ -43,14 +37,21 @@ class AdminPatientsSuccess extends AdminPatientsState {
   }) {
     return AdminPatientsSuccess(
       allPatients: allPatients ?? this.allPatients,
-      searchPatients: clearSearch ? null : (searchPatients ?? this.searchPatients),
+      searchPatients: clearSearch
+          ? null
+          : (searchPatients ?? this.searchPatients),
       searchQuery: clearSearch ? '' : (searchQuery ?? this.searchQuery),
       errorMessage: errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [allPatients, searchPatients, searchQuery, errorMessage];
+  List<Object?> get props => [
+    allPatients,
+    searchPatients,
+    searchQuery,
+    errorMessage,
+  ];
 }
 
 class AdminPatientsError extends AdminPatientsState {

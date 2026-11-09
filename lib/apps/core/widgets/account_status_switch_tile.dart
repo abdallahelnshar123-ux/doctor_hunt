@@ -51,9 +51,7 @@ class AccountStatusSwitchTile extends StatelessWidget {
             ),
             titleTextStyle: context.regular12.textSecondary.rubik,
             subtitle: Text(
-              value
-                  ? t.admin.doctorsTab.active
-                  : t.admin.doctorsTab.inactive,
+              value ? t.admin.doctorsTab.active : t.admin.doctorsTab.inactive,
               style: context.semiBold14.textTertiary.rubik,
             ),
             trailing: Switch(

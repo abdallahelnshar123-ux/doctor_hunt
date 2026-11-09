@@ -8,17 +8,15 @@ import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
-import 'package:flutter/material.dart';
-import '../../../../common/auth/domain/entity/user/admin.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../../../generated/app_assets.dart';
 import '../../../../../../generated/style_atoms.dart';
+import '../../../../common/auth/domain/entity/user/admin.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
-import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
-import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../controller/admin_profile_bloc.dart';
 
@@ -78,7 +76,6 @@ class AdminProfileScreen extends HookWidget {
             context: context,
             message: t.profile.dataWasUpdatedSuccessfully,
           );
-          context.read<AuthBloc>().add(CheckAuthStatusRequested());
           const AdminMainRoute().go(context);
         }
       },

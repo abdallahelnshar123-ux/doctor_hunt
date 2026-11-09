@@ -75,6 +75,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       image: currentUser.image,
       phone: currentUser.phone,
       favDoctors: updatedFavs,
+      disabled: currentUser.disabled,
     );
 
     // Emit optimistic state immediately

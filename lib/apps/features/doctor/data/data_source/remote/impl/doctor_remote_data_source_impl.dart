@@ -74,6 +74,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         phone: doctor.phone,
         specialty: doctor.specialty,
         active: doctor.active,
+        disabled: doctor.disabled,
         consultationFee: doctor.consultationFee,
         rating: doctor.rating,
         availability: doctor.availability,
@@ -152,7 +153,12 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         .where(FirestoreConstants.role, isEqualTo: UserRoles.doctor.name)
         .where(FirestoreConstants.active, isEqualTo: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList())
+        .map(
+          (snapshot) => snapshot.docs
+              .map((doc) => doc.data())
+              .where((doctor) => doctor.disabled == false)
+              .toList(),
+        )
         .handleError((error) {
           switch (error) {
             case FirebaseException _:
@@ -177,6 +183,25 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           .collection(FirestoreConstants.usersCollection)
           .doc(doctorId)
           .update({FirestoreConstants.active: active});
+    } on FirebaseException catch (e) {
+      throw ServerException(message: e.message ?? t.errors.serverError);
+    } on SocketException {
+      throw NetworkException(message: t.errors.noInternet);
+    } catch (e) {
+      throw UnexpectedException(message: e.toString());
+    }
+  }
+
+  @override
+  Future<void> updateDoctorDisabledStatus({
+    required String doctorId,
+    required bool disabled,
+  }) async {
+    try {
+      await _firebaseFirestore
+          .collection(FirestoreConstants.usersCollection)
+          .doc(doctorId)
+          .update({FirestoreConstants.disabled: disabled});
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? t.errors.serverError);
     } on SocketException {

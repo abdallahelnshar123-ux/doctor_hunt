@@ -38,17 +38,17 @@ class LoginUseCase {
     return _useCaseLogic(role: role, result: result);
   }
 
-
-  Future<Either<Failure, AppUserEntity>> _useCaseLogic(
-      {required UserRoles role, required Either<Failure,
-          AppUserEntity> result })async {
+  Future<Either<Failure, AppUserEntity>> _useCaseLogic({
+    required UserRoles role,
+    required Either<Failure, AppUserEntity> result,
+  }) async {
     return await result.fold((l) => Left(l), (r) {
       if (r.role.name != UserRoles.admin.name) {
-        if (r is PatientEntity && !r.active) {
+        if (r is PatientEntity && r.disabled) {
           // Also sign out ideally so no lingering invalid session exists.
           _repository.logout();
           return Left(UnauthorizedFailure(t.errors.accountDisabled));
-        } else if (r is DoctorEntity && !r.active) {
+        } else if (r is DoctorEntity && r.disabled) {
           _repository.logout();
           return Left(UnauthorizedFailure(t.errors.accountDisabled));
         }

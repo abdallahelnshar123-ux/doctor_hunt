@@ -8,6 +8,19 @@ sealed class AdminPatientActionEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class TogglePatientDisabledStatusRequested extends AdminPatientActionEvent {
+  final String patientId;
+  final bool disabled;
+
+  const TogglePatientDisabledStatusRequested({
+    required this.patientId,
+    required this.disabled,
+  });
+
+  @override
+  List<Object?> get props => [patientId, disabled];
+}
+
 class TogglePatientActiveStatusRequested extends AdminPatientActionEvent {
   final String patientId;
   final bool active;

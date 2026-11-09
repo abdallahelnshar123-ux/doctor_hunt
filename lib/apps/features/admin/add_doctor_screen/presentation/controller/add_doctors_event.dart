@@ -11,8 +11,10 @@ class AddDoctorRequested extends AddDoctorsEvent {
   final String email;
   final String password;
   final SpecialtyModel specialty;
+
   // final File image;
   final bool active;
+
   // final double consultationFee;
 
   AddDoctorRequested({

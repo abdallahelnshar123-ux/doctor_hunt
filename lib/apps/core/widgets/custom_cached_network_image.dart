@@ -21,11 +21,17 @@ class CustomCachedNetworkImage extends StatelessWidget {
   final BoxFit fit;
   final BorderRadiusGeometry? borderRadius;
 
-  static ImageProvider getProvider(String? imgUrl) {
+  static ImageProvider getProvider(
+    String? imgUrl, {
+    void Function(Object)? errorListener,
+  }) {
     if (imgUrl?.trim().isEmpty ?? true) {
       return AppAssets.images.fallbackUserImage.provider();
     }
-    return CachedNetworkImageProvider(imgUrl!);
+    return CachedNetworkImageProvider(
+      imgUrl!,
+      errorListener: errorListener ?? (_) {},
+    );
   }
 
   @override

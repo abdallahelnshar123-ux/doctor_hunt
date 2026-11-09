@@ -41,7 +41,9 @@ class SpecialtyService {
   }) async {
     try {
       final id = en.trim().toLowerCase();
-      final querySnapshot = await _collection.where(FirestoreConstants.id, isEqualTo: id).get();
+      final querySnapshot = await _collection
+          .where(FirestoreConstants.id, isEqualTo: id)
+          .get();
 
       if (querySnapshot.docs.isNotEmpty) {
         throw const ServerException(message: 'Specialty already exists');
@@ -61,9 +63,7 @@ class SpecialtyService {
     } on AppException {
       rethrow;
     } on FirebaseException catch (e) {
-      throw ServerException(
-        message: e.message ?? 'Failed to add specialty',
-      );
+      throw ServerException(message: e.message ?? 'Failed to add specialty');
     } catch (e) {
       throw ServerException(message: e.toString());
     }
@@ -84,9 +84,7 @@ class SpecialtyService {
 
       return updated;
     } on FirebaseException catch (e) {
-      throw ServerException(
-        message: e.message ?? 'Failed to update specialty',
-      );
+      throw ServerException(message: e.message ?? 'Failed to update specialty');
     } catch (e) {
       throw ServerException(message: e.toString());
     }

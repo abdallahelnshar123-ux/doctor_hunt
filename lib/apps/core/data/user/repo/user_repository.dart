@@ -80,6 +80,7 @@ class UserRepository {
           phone: user.phone,
           image: imageUrl ?? user.image,
           favDoctors: user.favDoctors,
+          disabled: user.disabled,
         );
       } else if (user is DoctorEntity) {
         updatedUser = DoctorEntity(
@@ -91,6 +92,7 @@ class UserRepository {
           image: imageUrl ?? user.image,
           specialty: user.specialty,
           active: user.active,
+          disabled: user.disabled,
           consultationFee: user.consultationFee,
           rating: user.rating,
           availability: user.availability,

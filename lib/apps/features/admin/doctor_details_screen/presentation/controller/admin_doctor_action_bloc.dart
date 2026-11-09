@@ -14,6 +14,26 @@ class AdminDoctorActionBloc
   AdminDoctorActionBloc(this._doctorRepository)
     : super(AdminDoctorActionInitial()) {
     on<ToggleDoctorActiveStatusRequested>(_onToggleDoctorActiveStatusRequested);
+    on<ToggleDoctorDisabledStatusRequested>(
+      _onToggleDoctorDisabledStatusRequested,
+    );
+  }
+
+  Future<void> _onToggleDoctorDisabledStatusRequested(
+    ToggleDoctorDisabledStatusRequested event,
+    Emitter<AdminDoctorActionState> emit,
+  ) async {
+    emit(ToggleDoctorActiveStatusLoading());
+
+    final result = await _doctorRepository.updateDoctorDisabledStatus(
+      doctorId: event.doctorId,
+      disabled: event.disabled,
+    );
+
+    result.fold(
+      (failure) => emit(ToggleDoctorActiveStatusError(failure.message)),
+      (_) => emit(ToggleDoctorActiveStatusSuccess()),
+    );
   }
 
   Future<void> _onToggleDoctorActiveStatusRequested(

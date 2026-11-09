@@ -1,7 +1,6 @@
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/app_user_dto.dart';
 import 'package:equatable/equatable.dart';
 
-
 import '../../../constants/firestore_constants.dart';
 
 class ReviewDto extends Equatable {

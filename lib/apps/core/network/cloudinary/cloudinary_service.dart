@@ -55,26 +55,26 @@ class CloudinaryService {
     try {
       final uri = Uri.parse(secureUrl);
       final pathSegments = uri.pathSegments;
-      
+
       final uploadIndex = pathSegments.indexOf('upload');
       if (uploadIndex == -1 || uploadIndex + 2 >= pathSegments.length) return;
-      
+
       final publicIdWithExt = pathSegments.sublist(uploadIndex + 2).join('/');
-      final publicId = publicIdWithExt.substring(0, publicIdWithExt.lastIndexOf('.'));
-      
+      final publicId = publicIdWithExt.substring(
+        0,
+        publicIdWithExt.lastIndexOf('.'),
+      );
+
       final deleteUri = Uri.parse(
         'https://api.cloudinary.com/v1_1/$cloudName/resources/image/upload',
-      ).replace(queryParameters: {
-        'public_ids[]': publicId,
-      });
+      ).replace(queryParameters: {'public_ids[]': publicId});
 
-      final basicAuth = 'Basic ${base64Encode(utf8.encode('$apiKey:$apiSecret'))}';
+      final basicAuth =
+          'Basic ${base64Encode(utf8.encode('$apiKey:$apiSecret'))}';
 
       final response = await http.delete(
         deleteUri,
-        headers: {
-          'Authorization': basicAuth,
-        },
+        headers: {'Authorization': basicAuth},
       );
 
       if (response.statusCode != 200) {
@@ -86,4 +86,3 @@ class CloudinaryService {
     }
   }
 }
-

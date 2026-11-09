@@ -34,7 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
         final user = newUser.toEntity();
         return Right(user);
       }
-      
+
       final user = databaseUser.toEntity();
       return Right(user);
     } on AppException catch (e) {
@@ -62,7 +62,7 @@ class AuthRepositoryImpl implements AuthRepository {
         name: name,
         provider: UserAuthProvider.emailPassword,
       );
-      
+
       await _remoteDataSource.addUser(newUser);
       return Right(newUser.toEntity());
     } on AppException catch (e) {
@@ -82,9 +82,9 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-      
+
       final databaseUser = await _remoteDataSource.getUser(authUserDto.id);
-      
+
       if (databaseUser == null) {
         return const Left(UnauthorizedFailure('Something went wrong'));
       }
@@ -117,11 +117,11 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       final currentDto = current.toDto();
-      
+
       if (currentDto is PatientDto) {
         final currentFavs = currentDto.favDoctors;
         final updatedFavs = List<String>.from(currentFavs);
-        
+
         if (updatedFavs.contains(doctorId)) {
           updatedFavs.remove(doctorId);
         } else {
@@ -136,12 +136,13 @@ class AuthRepositoryImpl implements AuthRepository {
           image: currentDto.image,
           phone: currentDto.phone,
           favDoctors: updatedFavs,
+          disabled: currentDto.disabled,
         );
 
         await _remoteDataSource.updateUser(updatedPatient);
         return Right(updatedPatient.toEntity());
       }
-      
+
       return Right(current);
     } on AppException catch (e) {
       return Left(e.toFailure());
@@ -167,7 +168,9 @@ class AuthRepositoryImpl implements AuthRepository {
     String password,
   ) async {
     try {
-      final authUserDto = await _remoteDataSource.reAuthenticate(password: password);
+      final authUserDto = await _remoteDataSource.reAuthenticate(
+        password: password,
+      );
       return Right(authUserDto.id);
     } on AppException catch (e) {
       return Left(e.toFailure());

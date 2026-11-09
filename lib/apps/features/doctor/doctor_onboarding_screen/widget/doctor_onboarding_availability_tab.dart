@@ -42,7 +42,11 @@ class DoctorOnboardingAvailabilityTab extends StatelessWidget {
           // ),
           // _buildWorkingDaysWidget(context),
           WorkingDaysWidget(workingDays: workingDays),
-          WorkingHoursWidget(startTime: startTime, endTime: endTime, slotDuration: slotDuration),
+          WorkingHoursWidget(
+            startTime: startTime,
+            endTime: endTime,
+            slotDuration: slotDuration,
+          ),
           // Text(
           //   t.doctor.doctorAvailabilityScreen.workingHours,
           //   style: context.bold14.textTertiary.rubik,
@@ -51,7 +55,6 @@ class DoctorOnboardingAvailabilityTab extends StatelessWidget {
         ],
       ),
     );
-
 
     //   CupertinoOnboardingPage(
     //   title: Text(

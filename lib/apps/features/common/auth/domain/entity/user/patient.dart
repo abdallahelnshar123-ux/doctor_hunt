@@ -4,7 +4,7 @@ import 'user_roles.dart';
 
 class PatientEntity extends AppUserEntity {
   final List<String> favDoctors;
-  final bool active;
+  final bool disabled;
 
   const PatientEntity({
     required super.id,
@@ -14,7 +14,7 @@ class PatientEntity extends AppUserEntity {
     super.image,
     super.phone,
     this.favDoctors = const [],
-    this.active = true,
+    this.disabled = false,
   }) : super(role: UserRoles.patient);
 
   PatientEntity copyWith({
@@ -25,7 +25,7 @@ class PatientEntity extends AppUserEntity {
     String? image,
     String? phone,
     List<String>? favDoctors,
-    bool? active,
+    bool? disabled,
   }) {
     return PatientEntity(
       id: id ?? this.id,
@@ -35,10 +35,10 @@ class PatientEntity extends AppUserEntity {
       image: image ?? this.image,
       phone: phone ?? this.phone,
       favDoctors: favDoctors ?? this.favDoctors,
-      active: active ?? this.active,
+      disabled: disabled ?? this.disabled,
     );
   }
 
   @override
-  List<Object?> get props => [...super.props, favDoctors, active];
+  List<Object?> get props => [...super.props, favDoctors, disabled];
 }

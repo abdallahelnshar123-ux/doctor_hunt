@@ -4,8 +4,8 @@ import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../features/common/auth/domain/entity/user/doctor.dart';
 import '../../../../../core/widgets/custom_cached_network_image.dart';
+import '../../../../../features/common/auth/domain/entity/user/doctor.dart';
 
 class FavouriteDoctorCard extends StatelessWidget {
   const FavouriteDoctorCard({super.key, required this.doctor});

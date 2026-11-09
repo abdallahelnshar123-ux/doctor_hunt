@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/service/appointment_firestore_service.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/mappers/user_mapper.dart';
 import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
 import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/mappers/user_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/mappers/appointment_mapper.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/service/review_batch_firestore_service.dart';
@@ -88,7 +88,8 @@ class AppointmentRepository {
     }
   }
 
-  Stream<Either<Failure, List<Appointment>>> getAdminAppointmentsStream() async* {
+  Stream<Either<Failure, List<Appointment>>>
+  getAdminAppointmentsStream() async* {
     try {
       await for (final dtos in _firestoreService.getAdminAppointmentsStream()) {
         final appointments = dtos.map((dto) => dto.toAppointment()).toList();

@@ -2,10 +2,10 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 extension AppointmentStatusExt on AppointmentStatus {
   String get localizedName {
@@ -75,11 +75,9 @@ class ScheduleAppointmentCard extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
-                side: const BorderSide(
-                  width: 0,
-                  color: AppColors.transparent,
-                ),
-                backgroundColor: appointment.status != AppointmentStatus.cancelled
+                side: const BorderSide(width: 0, color: AppColors.transparent),
+                backgroundColor:
+                    appointment.status != AppointmentStatus.cancelled
                     ? AppColors.brandPrimary20
                     : AppColors.statusErrorSurface,
                 avatarBoxConstraints: const BoxConstraints.tightFor(width: 15),

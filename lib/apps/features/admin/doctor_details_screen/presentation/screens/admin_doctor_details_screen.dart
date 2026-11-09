@@ -17,7 +17,6 @@ import '../../../../../core/extensions/context_extensions.dart';
 import '../../../../../core/utils/snack_bar_utils.dart';
 
 part '../widget/details_widget.dart';
-
 part '../widget/doctor_details_widget.dart';
 
 class AdminDoctorDetailsScreen extends HookWidget {
@@ -27,7 +26,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isActive = useValueNotifier(doctor.active);
+    final isActive = useValueNotifier(!doctor.disabled);
     return Scaffold(
       appBar: AppBar(
         title: Text(t.admin.doctorDetailsScreen.doctorDetails),

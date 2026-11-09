@@ -19,7 +19,7 @@ class AdminPatientsRemoteDataSource {
           .collection(FirestoreConstants.usersCollection)
           .where(FirestoreConstants.role, isEqualTo: UserRoles.patient.name)
           .get();
-          
+
       return snapshot.docs.map((doc) {
         final data = doc.data();
         data[FirestoreConstants.id] = doc.id;
@@ -34,17 +34,15 @@ class AdminPatientsRemoteDataSource {
     }
   }
 
-  Future<void> updatePatientActiveStatus({
+  Future<void> updatePatientDisabledStatus({
     required String patientId,
-    required bool active,
+    required bool disabled,
   }) async {
     try {
       await _firestore
           .collection(FirestoreConstants.usersCollection)
           .doc(patientId)
-          .update({
-            FirestoreConstants.active: active,
-          });
+          .update({FirestoreConstants.disabled: disabled});
     } on FirebaseException catch (e) {
       throw ServerException(message: e.message ?? 'server_error');
     } on SocketException {

@@ -7,7 +7,6 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/controller/auth/auth_bloc.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,6 @@ import '../../../../../core/widgets/main_app_bar.dart';
 import '../../../../../core/widgets/profile_text_form_widget.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/domain/entity/user/patient.dart';
-import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../controller/patient_profile_bloc.dart';
 
@@ -84,7 +82,7 @@ class PatientProfileScreen extends HookWidget {
             context: context,
             message: t.profile.dataWasUpdatedSuccessfully,
           );
-          context.read<AuthBloc>().add(CheckAuthStatusRequested());
+          // context.read<AuthBloc>().add(CheckAuthStatusRequested());
           const PatientMainRoute().go(context);
         }
       },
@@ -243,6 +241,7 @@ class PatientProfileScreen extends HookWidget {
                           provider: user.provider,
                           image: user.image,
                           favDoctors: (user as PatientEntity).favDoctors,
+                          disabled: (user as PatientEntity).disabled,
                         );
                         context.read<PatientProfileBloc>().add(
                           PatientProfileUpdateRequested(

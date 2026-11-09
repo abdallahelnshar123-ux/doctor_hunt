@@ -27,6 +27,7 @@ class FirestoreConstants {
   static const String adminInfo = 'admin_info';
   static const String favDoctors = 'fav_doctors';
   static const String active = 'active';
+  static const String disabled = 'disabled';
 
   // Appointment Fields
   static const String patient = 'patient';

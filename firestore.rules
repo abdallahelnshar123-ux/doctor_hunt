@@ -13,19 +13,18 @@ service cloud.firestore {
     }
 
     match /users/{userId} {
-      // السماح للمستخدم بقراءة وتعديل بياناته الخاصة، وللأدمن بقراءة وتعديل بيانات أي مستخدم
-      allow read, write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+      // السماح بقراءة بيانات المستخدمين لأي مستخدم مسجل الدخول (لعرض الدكاترة)، والتعديل لصاحب الحساب أو الأدمن
+      allow read: if isSignedIn();
+      allow write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
 
       match /{document=**} {
-        allow read, write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+        allow read: if isSignedIn();
+        allow write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
       }
     }
 
     match /doctors/{doctorId} {
       allow read: if isSignedIn();
-
-      // السماح للأدمن بأي تعديل/إضافة/حذف
-      // والسماح لأي مستخدم مسجل الدخول (المريض) إنه يعمل update بس (عشان يقدر يضيف ريفيو وريتنج)
       allow create, delete: if isAdmin();
       allow update: if isSignedIn();
     }
@@ -33,6 +32,12 @@ service cloud.firestore {
     match /appointments/{appointmentId} {
       allow read: if isSignedIn();
       allow write: if isSignedIn();
+    }
+
+    // التخصصات (specialties)
+    match /specialties/{specialtyId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
     }
   }
 }

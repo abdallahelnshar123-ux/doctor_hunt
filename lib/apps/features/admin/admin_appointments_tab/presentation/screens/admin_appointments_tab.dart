@@ -34,7 +34,7 @@ class AdminAppointmentsTab extends StatelessWidget {
         create: (context) =>
             getIt<AdminAppointmentsBloc>()
               ..add(FetchAdminAppointmentsRequested()),
-        child:DefaultTabController(
+        child: DefaultTabController(
           initialIndex: 0,
           length: 3,
           child: Column(
@@ -61,44 +61,41 @@ class AdminAppointmentsTab extends StatelessWidget {
               ),
               Expanded(
                 child:
-                BlocBuilder<
-                    AdminAppointmentsBloc,
-                    AdminAppointmentsState
-                >(
-                  buildWhen: (previous, current) =>
-                  current is AdminAppointmentsLoadedState ||
-                      current is AdminAppointmentsErrorState ||
-                      current is AdminAppointmentsLoadingState,
-                  builder: (context, state) {
-                    if (state is AdminAppointmentsLoadedState) {
-                      return TabBarView(
-                        children: [
-                          AppointmentsListWidget(
-                            allAppointmentsList: state.appointments,
-                            index: 0,
-                          ),
-                          AppointmentsListWidget(
-                            allAppointmentsList: state.appointments,
-                            index: 1,
-                          ),
-                          AppointmentsListWidget(
-                            allAppointmentsList: state.appointments,
-                            index: 2,
-                          ),
-                        ],
-                      );
-                    }
-                    if (state is AdminAppointmentsErrorState) {
-                      return Center(
-                        child: Text(
-                          state.message,
-                          style: context.medium16.textSecondary.rubik,
-                        ),
-                      );
-                    }
-                    return const AppointmentsListShimmerWidget();
-                  },
-                ),
+                    BlocBuilder<AdminAppointmentsBloc, AdminAppointmentsState>(
+                      buildWhen: (previous, current) =>
+                          current is AdminAppointmentsLoadedState ||
+                          current is AdminAppointmentsErrorState ||
+                          current is AdminAppointmentsLoadingState,
+                      builder: (context, state) {
+                        if (state is AdminAppointmentsLoadedState) {
+                          return TabBarView(
+                            children: [
+                              AppointmentsListWidget(
+                                allAppointmentsList: state.appointments,
+                                index: 0,
+                              ),
+                              AppointmentsListWidget(
+                                allAppointmentsList: state.appointments,
+                                index: 1,
+                              ),
+                              AppointmentsListWidget(
+                                allAppointmentsList: state.appointments,
+                                index: 2,
+                              ),
+                            ],
+                          );
+                        }
+                        if (state is AdminAppointmentsErrorState) {
+                          return Center(
+                            child: Text(
+                              state.message,
+                              style: context.medium16.textSecondary.rubik,
+                            ),
+                          );
+                        }
+                        return const AppointmentsListShimmerWidget();
+                      },
+                    ),
               ),
             ],
           ),

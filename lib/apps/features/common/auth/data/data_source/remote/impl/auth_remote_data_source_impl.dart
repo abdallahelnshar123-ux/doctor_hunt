@@ -35,8 +35,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final GoogleSignInAccount googleAccount = await _googleSignIn
         .authenticate();
 
-    final GoogleSignInAuthentication googleAuth =
-        googleAccount.authentication;
+    final GoogleSignInAuthentication googleAuth = googleAccount.authentication;
 
     return GoogleAuthProvider.credential(idToken: googleAuth.idToken);
   }

@@ -14,10 +14,8 @@ class DoctorOnboardingBloc
   final DoctorRepository _doctorRepository;
   final UserSessionManager _userSessionManager;
 
-  DoctorOnboardingBloc(
-    this._doctorRepository,
-    this._userSessionManager,
-  ) : super(DoctorOnboardingInitial()) {
+  DoctorOnboardingBloc(this._doctorRepository, this._userSessionManager)
+    : super(DoctorOnboardingInitial()) {
     on<PickDoctorOnboardingImageRequested>(_onPickImageRequested);
     on<SaveDoctorOnboardingRequested>(_onSaveDoctorOnboardingRequested);
   }
@@ -57,13 +55,10 @@ class DoctorOnboardingBloc
       image: event.image,
     );
 
-    final profileFailed = profileResult.fold(
-      (failure) {
-        emit(DoctorOnboardingError(failure.message));
-        return true;
-      },
-      (_) => false,
-    );
+    final profileFailed = profileResult.fold((failure) {
+      emit(DoctorOnboardingError(failure.message));
+      return true;
+    }, (_) => false);
 
     if (profileFailed) return;
 

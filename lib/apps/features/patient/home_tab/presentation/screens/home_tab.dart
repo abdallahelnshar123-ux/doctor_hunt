@@ -90,7 +90,9 @@ class HomeTab extends StatelessWidget {
   }
 
   PreferredSizeWidget _customAppBar({required BuildContext context}) {
-    final user = context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user = context.select<UserBloc, AppUserEntity?>(
+      (bloc) => bloc.currentUser,
+    );
     return AppBar(
       toolbarHeight: 90,
       backgroundColor: AppColors.brandPrimary,

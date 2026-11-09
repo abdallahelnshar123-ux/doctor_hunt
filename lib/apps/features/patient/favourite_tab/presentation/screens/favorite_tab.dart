@@ -1,6 +1,6 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
 import 'package:doctor_hunt/apps/core/widgets/search_text_field_widget.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctor_card.dart';
 import 'package:doctor_hunt/apps/features/patient/favourite_tab/presentation/widget/favourite_doctors_shimmer.dart';
 import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';

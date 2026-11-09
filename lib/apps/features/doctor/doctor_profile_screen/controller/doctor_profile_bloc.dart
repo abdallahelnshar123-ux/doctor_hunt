@@ -9,15 +9,12 @@ import 'doctor_profile_event.dart';
 import 'doctor_profile_state.dart';
 
 @injectable
-class DoctorProfileBloc
-    extends Bloc<DoctorProfileEvent, DoctorProfileState> {
+class DoctorProfileBloc extends Bloc<DoctorProfileEvent, DoctorProfileState> {
   final DoctorRepository _doctorRepository;
   final UserSessionManager _userSessionManager;
 
-  DoctorProfileBloc(
-    this._doctorRepository,
-    this._userSessionManager,
-  ) : super(UpdateDoctorDetailsInitial()) {
+  DoctorProfileBloc(this._doctorRepository, this._userSessionManager)
+    : super(UpdateDoctorDetailsInitial()) {
     on<UpdateDoctorDetailsRequested>(_onUpdateDoctorDetailsRequested);
     on<PickDoctorUpdateImageRequested>(_onPickDoctorImageRequested);
   }

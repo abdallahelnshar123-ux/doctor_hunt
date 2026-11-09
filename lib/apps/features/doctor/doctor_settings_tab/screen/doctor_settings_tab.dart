@@ -10,9 +10,7 @@ import '../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../widget/doctor_account_settings_widget.dart';
 
 class DoctorSettingsTab extends StatelessWidget {
-  const DoctorSettingsTab({
-    super.key,
-  });
+  const DoctorSettingsTab({super.key});
 
   @override
   Widget build(BuildContext context) {

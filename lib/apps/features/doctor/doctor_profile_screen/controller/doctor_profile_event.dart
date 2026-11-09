@@ -25,7 +25,7 @@ class UpdateDoctorDetailsRequested extends DoctorProfileEvent {
     // this.consultationFee,
     // this.phone,
     // this.active,
-   required  this.updatedDoctor ,
+    required this.updatedDoctor,
     this.image,
   });
 

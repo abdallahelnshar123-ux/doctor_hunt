@@ -1,6 +1,6 @@
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -32,16 +32,16 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
   ) async {
     emit(AdminDoctorsLoading());
     await emit.forEach(
-      _doctorRepository.getDoctors(),
+      _doctorRepository.getDoctorsForAdmin(),
       onData: (result) => result.fold(
         (failure) => AdminDoctorsError(failure.message),
         (doctorsList) {
-          int activeCount = 0;
+          int enabledCount = 0;
           final Map<SpecialtyModel, int> counts = {};
 
           for (var doctor in doctorsList) {
-            if (doctor.active) {
-              activeCount++;
+            if (!doctor.disabled) {
+              enabledCount++;
             }
             final specialtyName = doctor.specialty;
             counts[specialtyName] = (counts[specialtyName] ?? 0) + 1;
@@ -61,7 +61,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
             return currentState.copyWith(
               allDoctors: doctorsList,
               specialtyCounts: specialtyCounts,
-              activeDoctorsCount: activeCount,
+              activeDoctorsCount: enabledCount,
               filteredDoctors: updatedFilteredDoctors,
             );
           }
@@ -69,7 +69,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
           return AdminDoctorsSuccess(
             allDoctors: doctorsList,
             specialtyCounts: specialtyCounts,
-            activeDoctorsCount: activeCount,
+            activeDoctorsCount: enabledCount,
           );
         },
       ),

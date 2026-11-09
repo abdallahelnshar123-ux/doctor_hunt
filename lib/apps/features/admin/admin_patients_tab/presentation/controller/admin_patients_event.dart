@@ -20,13 +20,13 @@ class AdminSearchPatientsRequested extends AdminPatientsEvent {
 
 class AdminUpdatePatientStatusLocally extends AdminPatientsEvent {
   final String patientId;
-  final bool active;
+  final bool disabled;
 
   const AdminUpdatePatientStatusLocally({
     required this.patientId,
-    required this.active,
+    required this.disabled,
   });
 
   @override
-  List<Object> get props => [patientId, active];
+  List<Object> get props => [patientId, disabled];
 }

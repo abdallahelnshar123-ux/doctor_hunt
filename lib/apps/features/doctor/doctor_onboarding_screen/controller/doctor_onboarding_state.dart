@@ -24,7 +24,8 @@ final class DoctorOnboardingError extends DoctorOnboardingState {
   List<Object?> get props => [message];
 }
 
-final class PickDoctorOnboardingImageSuccessState extends DoctorOnboardingState {
+final class PickDoctorOnboardingImageSuccessState
+    extends DoctorOnboardingState {
   final File image;
 
   const PickDoctorOnboardingImageSuccessState(this.image);

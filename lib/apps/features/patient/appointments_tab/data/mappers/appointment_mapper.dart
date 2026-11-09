@@ -1,7 +1,7 @@
-import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/core/mapper/review_dto_mapper.dart';
 import 'package:doctor_hunt/apps/core/mapper/review_mapper.dart';
+import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
 

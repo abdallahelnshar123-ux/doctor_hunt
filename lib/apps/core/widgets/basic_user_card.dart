@@ -17,7 +17,9 @@ class BasicUserCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = outerUser ??  context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
+    final user =
+        outerUser ??
+        context.select<UserBloc, AppUserEntity?>((bloc) => bloc.currentUser);
     return AppContainerWithShadow(
       clipBehavior: .antiAlias,
       decoration: BoxDecoration(
