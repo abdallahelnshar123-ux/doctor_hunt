@@ -32,13 +32,13 @@ class ProfileStatusWidget extends StatelessWidget {
           ),
           child: ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
-            subtitleTextStyle: context.regular16.textSecondary.rubik.copyWith(
+            subtitleTextStyle: context.regular16.textTertiary.rubik.copyWith(
               height: 2,
             ),
-            title: Text(t.doctor.doctorProfileScreen.status),
+            title: Text(t.doctor.profile.status),
             titleTextStyle: context.medium10.brandPrimary.rubik,
             subtitle: Text(
-              value ? t.admin.doctorsTab.active : t.admin.doctorsTab.inactive,
+              value ? t.doctor.profile.active : t.doctor.profile.inactive,
             ),
             trailing: Switch(
               value: value,

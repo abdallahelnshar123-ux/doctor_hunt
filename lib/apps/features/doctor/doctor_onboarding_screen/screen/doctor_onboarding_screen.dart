@@ -121,7 +121,7 @@ class DoctorOnboardingScreen extends HookWidget {
             context: context,
             message: t
                 .doctor
-                .doctorAvailabilityScreen
+                .availability
                 .startTimeAndEndtimeMustBeDifferent,
           );
           return;

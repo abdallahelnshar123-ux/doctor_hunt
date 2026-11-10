@@ -123,7 +123,7 @@ class AdminPatientsTab extends HookWidget {
         color: isActive ? AppColors.brandPrimaryDark : AppColors.statusError,
       ),
       label: Text(
-        isActive ? t.admin.doctorsTab.active : t.admin.doctorsTab.inactive,
+        isActive ? t.admin.doctorsTab.enabled : t.admin.doctorsTab.disabled,
         style: isActive
             ? context.medium10.brandPrimaryDark.rubik
             : context.regular10.statusError.rubik,

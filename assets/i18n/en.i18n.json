@@ -293,8 +293,8 @@
       "no_doctors_found": "No Doctors Found",
       "no_doctors_description": "There are currently no doctors registered on Doctor Hunt. Add your first doctor to get started.",
       "total_doctors": "Total doctors",
-      "active": "Enabled",
-      "inactive": "Disabled",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
       "all": "All",
       "dash": "-",
       "no_doctor_name_or_specialty_match_search": "No doctor name or specialty match search",
@@ -449,7 +449,7 @@
       "success_subtitle": "Your profile and availability have been successfully updated. You are now ready to start receiving appointments.",
       "finish": "Finish"
     },
-    "doctor_availability_screen": {
+    "availability": {
       "doctor_availability": "Doctor Availability",
       "working_days": "Working Days",
       "working_hours": "Working Hours",
@@ -462,7 +462,7 @@
       "start_time_and_endtime_must_be_different": "Start time and end time must be different",
       "data_was_updated_successfully": "Data was updated successfully"
     },
-    "doctor_profile_screen": {
+    "profile": {
       "title": "Doctor Profile",
       "personal_information": "Personal information",
       "name": "Name",

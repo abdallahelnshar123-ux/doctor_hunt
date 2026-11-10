@@ -32,7 +32,7 @@ class WorkingHoursWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Text(
-            t.doctor.doctorAvailabilityScreen.workingHours,
+            t.doctor.availability.workingHours,
             style: context.bold14.textTertiary.rubik,
           ),
         ),
@@ -60,7 +60,7 @@ class WorkingHoursWidget extends StatelessWidget {
                   initialSelection: startTime.value,
                   onSelected: (value) => startTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
-                  title: t.doctor.doctorAvailabilityScreen.startTime,
+                  title: t.doctor.availability.startTime,
                 ),
               ),
               Expanded(
@@ -68,7 +68,7 @@ class WorkingHoursWidget extends StatelessWidget {
                   initialSelection: endTime.value,
                   onSelected: (value) => endTime.value = WorkingHour.values
                       .firstWhere((element) => element.name == value),
-                  title: t.doctor.doctorAvailabilityScreen.endTime,
+                  title: t.doctor.availability.endTime,
                 ),
               ),
             ],
@@ -77,7 +77,7 @@ class WorkingHoursWidget extends StatelessWidget {
             initialSelection: slotDuration.value,
             onSelected: (value) => slotDuration.value = SlotDuration.values
                 .firstWhere((element) => element.name == value),
-            title: t.doctor.doctorAvailabilityScreen.slotDuration,
+            title: t.doctor.availability.slotDuration,
           ),
         ],
       ),

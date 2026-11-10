@@ -65,7 +65,7 @@ class DoctorAvailabilityScreen extends HookWidget {
           SnackBarUtils.showSuccessSnackBar(
             context: context,
             message:
-                t.doctor.doctorAvailabilityScreen.dataWasUpdatedSuccessfully,
+                t.doctor.availability.dataWasUpdatedSuccessfully,
           );
         }
         if (state is DoctorAvailabilityLoading) {
@@ -76,7 +76,7 @@ class DoctorAvailabilityScreen extends HookWidget {
         appBar: showAppBar
             ? AppBar(
                 title: Text(
-                  t.doctor.doctorAvailabilityScreen.doctorAvailability,
+                  t.doctor.availability.doctorAvailability,
                 ),
                 automaticallyImplyLeading: automaticallyImplyLeading,
                 centerTitle: true,
@@ -117,7 +117,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                     context: context,
                     message: t
                         .doctor
-                        .doctorAvailabilityScreen
+                        .availability
                         .startTimeAndEndtimeMustBeDifferent,
                   );
                   return;
@@ -326,8 +326,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             ),
             label: Text(
               doctor.active
-                  ? t.doctor.doctorAvailabilityScreen.active
-                  : t.doctor.doctorAvailabilityScreen.inactive,
+                  ? t.doctor.availability.active
+                  : t.doctor.availability.inactive,
               style: doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,

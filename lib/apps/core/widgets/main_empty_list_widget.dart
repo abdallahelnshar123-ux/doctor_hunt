@@ -12,16 +12,18 @@ class MainEmptyListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Lottie.asset(
+    return Column(
+      children: [
+        SizedBox(
+          width: context.width - 100,
+          height: context.width - 100,
+          child: Lottie.asset(
             AppAssets.lottie.emptyState.path,
-            width: context.width - 100,
+            frameRate: .max,
           ),
-          Text(title ?? '', style: context.regular14.textSecondary.rubik),
-        ],
-      ),
+        ),
+        Text(title ?? '', style: context.regular16.textSecondary.rubik),
+      ],
     );
   }
 }

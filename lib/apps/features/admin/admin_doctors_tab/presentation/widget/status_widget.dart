@@ -43,7 +43,7 @@ class StatusWidget extends StatelessWidget {
                     current is AdminDoctorsLoading,
                 builder: (context, state) {
                   return buildListTile(
-                    title: t.admin.doctorsTab.active,
+                    title: t.admin.doctorsTab.enabled,
                     number: state is AdminDoctorsSuccess
                         ? state.activeDoctorsCount.toString()
                         : '-',

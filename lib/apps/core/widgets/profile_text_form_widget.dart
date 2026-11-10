@@ -58,7 +58,7 @@ class _ProfileTextFormWidgetState extends State<ProfileTextFormWidget> {
           controller: widget.controller,
           validator: widget.validator,
           contentPadding: EdgeInsets.zero,
-          style: context.regular16.textSecondary.rubik,
+          style: context.regular16.textPrimary.rubik,
         ),
 
         trailing: IconButton(

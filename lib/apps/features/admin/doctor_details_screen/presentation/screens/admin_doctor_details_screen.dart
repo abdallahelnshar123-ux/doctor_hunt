@@ -76,7 +76,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
             color: value ? AppColors.brandPrimaryDark : AppColors.statusError,
           ),
           label: Text(
-            value ? t.admin.doctorsTab.active : t.admin.doctorsTab.inactive,
+            value ? t.admin.doctorsTab.enabled : t.admin.doctorsTab.disabled,
             style: value
                 ? context.medium10.brandPrimaryDark.rubik
                 : context.regular10.statusError.rubik,

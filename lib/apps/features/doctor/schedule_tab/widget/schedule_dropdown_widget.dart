@@ -3,6 +3,7 @@ import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/extensions/context_extensions.dart';
 import '../presentation/controller/doctor_schedule_state.dart';
 
 class ScheduleDropdownWidget extends StatelessWidget {
@@ -24,6 +25,8 @@ class ScheduleDropdownWidget extends StatelessWidget {
       },
       initialSelection: selectedFilter,
       menuStyle: MenuStyle(
+        maximumSize: WidgetStatePropertyAll(Size.fromWidth(context.width - 40)),
+
         backgroundColor: const WidgetStatePropertyAll(AppColors.bgPrimary),
       ),
       selectedTrailingIcon: const Icon(Icons.keyboard_arrow_up_rounded),
@@ -77,66 +80,66 @@ class ScheduleDropdownWidget extends StatelessWidget {
   }
 }
 
-class DropdownMenuFormField<T> extends FormField<T> {
-  DropdownMenuFormField({
-    super.key,
-    required T initialSelection,
-    required List<DropdownMenuEntry<T>> dropdownMenuEntries,
-    required ValueChanged<T?> onSelected,
-    TextStyle? textStyle,
-    MenuStyle? menuStyle,
-    Widget? trailingIcon,
-    Widget? selectedTrailingIcon,
-    double? width,
-    bool requestFocusOnTap = false,
-    InputDecoration Function(
-      BuildContext context,
-      TextEditingController controller,
-    )?
-    decorationBuilder,
-  }) : super(
-         initialValue: initialSelection,
-         builder: (FormFieldState<T> state) {
-           return DropdownMenu<T>(
-             initialSelection: initialSelection,
-             onSelected: (value) {
-               state.didChange(value);
-               onSelected(value);
-             },
-             textStyle: textStyle,
-             menuStyle: menuStyle,
-             trailingIcon: trailingIcon,
-             selectedTrailingIcon: selectedTrailingIcon,
-             dropdownMenuEntries: dropdownMenuEntries,
-             width: width,
-             requestFocusOnTap: requestFocusOnTap,
-             inputDecorationTheme: InputDecorationTheme(
-               filled: true,
-               fillColor: AppColors.white,
-               contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-               enabledBorder: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(8),
-                 borderSide: const BorderSide(
-                   color: AppColors.borderDefault,
-                   width: 1,
-                 ),
-               ),
-               focusedBorder: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(8),
-                 borderSide: const BorderSide(
-                   color: AppColors.borderDefault,
-                   width: 1,
-                 ),
-               ),
-               border: OutlineInputBorder(
-                 borderRadius: BorderRadius.circular(8),
-                 borderSide: const BorderSide(
-                   color: AppColors.borderDefault,
-                   width: 1,
-                 ),
-               ),
-             ),
-           );
-         },
-       );
-}
+// class DropdownMenuFormField<T> extends FormField<T> {
+//   DropdownMenuFormField({
+//     super.key,
+//     required T initialSelection,
+//     required List<DropdownMenuEntry<T>> dropdownMenuEntries,
+//     required ValueChanged<T?> onSelected,
+//     TextStyle? textStyle,
+//     MenuStyle? menuStyle,
+//     Widget? trailingIcon,
+//     Widget? selectedTrailingIcon,
+//     double? width,
+//     bool requestFocusOnTap = false,
+//     InputDecoration Function(
+//       BuildContext context,
+//       TextEditingController controller,
+//     )?
+//     decorationBuilder,
+//   }) : super(
+//          initialValue: initialSelection,
+//          builder: (FormFieldState<T> state) {
+//            return DropdownMenu<T>(
+//              initialSelection: initialSelection,
+//              onSelected: (value) {
+//                state.didChange(value);
+//                onSelected(value);
+//              },
+//              textStyle: textStyle,
+//              menuStyle: menuStyle,
+//              trailingIcon: trailingIcon,
+//              selectedTrailingIcon: selectedTrailingIcon,
+//              dropdownMenuEntries: dropdownMenuEntries,
+//              width: width,
+//              requestFocusOnTap: requestFocusOnTap,
+//              inputDecorationTheme: InputDecorationTheme(
+//                filled: true,
+//                fillColor: AppColors.white,
+//                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+//                enabledBorder: OutlineInputBorder(
+//                  borderRadius: BorderRadius.circular(8),
+//                  borderSide: const BorderSide(
+//                    color: AppColors.borderDefault,
+//                    width: 1,
+//                  ),
+//                ),
+//                focusedBorder: OutlineInputBorder(
+//                  borderRadius: BorderRadius.circular(8),
+//                  borderSide: const BorderSide(
+//                    color: AppColors.borderDefault,
+//                    width: 1,
+//                  ),
+//                ),
+//                border: OutlineInputBorder(
+//                  borderRadius: BorderRadius.circular(8),
+//                  borderSide: const BorderSide(
+//                    color: AppColors.borderDefault,
+//                    width: 1,
+//                  ),
+//                ),
+//              ),
+//            );
+//          },
+//        );
+// }

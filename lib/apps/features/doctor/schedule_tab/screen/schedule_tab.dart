@@ -45,30 +45,38 @@ class ScheduleTab extends StatelessWidget {
                     );
                   },
                 ),
-                InkWell(
-                  onTap: () {
+                IconButton(
+                  icon: const Icon(Icons.refresh),
+                  onPressed: () {
                     context.read<DoctorScheduleBloc>().add(
                       const RefreshDoctorSchedule(),
                     );
                   },
-                  borderRadius: BorderRadius.circular(8),
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.borderDefault),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.refresh,
-                          size: 20,
-                          color: AppColors.textSecondary,
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
+                // InkWell(
+                //   onTap: () {
+                //     context.read<DoctorScheduleBloc>().add(
+                //       const RefreshDoctorSchedule(),
+                //     );
+                //   },
+                //   borderRadius: BorderRadius.circular(8),
+                //   child: Container(
+                //     padding: const EdgeInsets.all(10),
+                //     decoration: BoxDecoration(
+                //       border: Border.all(color: AppColors.borderDefault),
+                //       borderRadius: BorderRadius.circular(8),
+                //     ),
+                //     child: Row(
+                //       children: [
+                //         const Icon(
+                //           Icons.refresh,
+                //           size: 20,
+                //           color: AppColors.textSecondary,
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

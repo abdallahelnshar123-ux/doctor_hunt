@@ -29,80 +29,91 @@ class SpecialtyDropdownWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var specialities = context.watch<SpecialtiesBloc>().state.specialties;
-    return DropdownMenuFormField(
-      textStyle: context.medium16.textSecondary.rubik,
-      onSelected: (value) => selectedSpecialty(
-        specialities.firstWhere((element) => element.id == value),
+    return Theme(
+      data: Theme.of(context).copyWith(
+        dropdownMenuTheme: DropdownMenuThemeData(
+          disabledColor: AppColors.textPrimary,
+        ),
       ),
-      enabled: !readOnly,
-      initialSelection: initialSelection,
-      validator: (value) => Validators.required(value.toString()),
-      menuStyle: MenuStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.bgPrimary),
-        maximumSize: WidgetStatePropertyAll(Size.fromWidth(context.width - 40)),
-      ),
-      showTrailingIcon: isProfile ?? true ? !readOnly : true,
-      selectedTrailingIcon: Icon(Icons.keyboard_arrow_up_rounded),
-      dropdownMenuEntries: specialities
-          .map(
-            (specialty) => DropdownMenuEntry(
-              value: specialty.id,
-              label: specialty.localizedName(),
+      child: DropdownMenuFormField(
+        textStyle: context.regular16.textPrimary.rubik,
+        onSelected: (value) => selectedSpecialty(
+          specialities.firstWhere((element) => element.id == value),
+        ),
+        enabled: !readOnly,
+        initialSelection: initialSelection,
+        validator: (value) => Validators.required(value.toString()),
+        menuStyle: MenuStyle(
+          backgroundColor: WidgetStatePropertyAll(AppColors.bgPrimary),
+          maximumSize: WidgetStatePropertyAll(
+            Size.fromWidth(context.width - 40),
+          ),
+        ),
+        showTrailingIcon: isProfile ?? true ? !readOnly : true,
+        selectedTrailingIcon: Icon(Icons.keyboard_arrow_up_rounded),
+        dropdownMenuEntries: specialities
+            .map(
+              (specialty) => DropdownMenuEntry(
+                value: specialty.id,
+                label: specialty.localizedName(),
+              ),
+            )
+            .toList(),
+        width: double.infinity,
+        requestFocusOnTap: false,
+
+        focusNode: focusNode,
+        trailingIcon: Icon(Icons.keyboard_arrow_down_rounded),
+        enableSearch: true,
+        enableFilter: !readOnly,
+        filterCallback: readOnly
+            ? null
+            : (entries, query) {
+                if (query.isEmpty) return entries;
+                return entries
+                    .where(
+                      (entry) => entry.label.toLowerCase().contains(
+                        query.toLowerCase(),
+                      ),
+                    )
+                    .toList();
+              },
+        decorationBuilder: (context, controller) => InputDecoration(
+          filled: true,
+          contentPadding: EdgeInsets.zero,
+          hintStyle: context.light14.textSecondary.rubik,
+          hintText: t.admin.addDoctorScreen.selectSpecialty,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: isProfile ?? false
+                  ? AppColors.transparent
+                  : AppColors.borderDefault,
+              width: 2,
             ),
-          )
-          .toList(),
-      width: double.infinity,
-      requestFocusOnTap: false,
-      focusNode: focusNode,
-      trailingIcon: Icon(Icons.keyboard_arrow_down_rounded),
-      enableSearch: true,
-      enableFilter: !readOnly,
-      filterCallback: readOnly
-          ? null
-          : (entries, query) {
-              if (query.isEmpty) return entries;
-              return entries
-                  .where(
-                    (entry) =>
-                        entry.label.toLowerCase().contains(query.toLowerCase()),
-                  )
-                  .toList();
-            },
-      decorationBuilder: (context, controller) => InputDecoration(
-        filled: true,
-        hintStyle: context.light14.textSecondary.rubik,
-        hintText: t.admin.addDoctorScreen.selectSpecialty,
-        enabled: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: isProfile ?? false
-                ? AppColors.transparent
-                : AppColors.borderDefault,
-            width: 2,
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: isProfile ?? false
-                ? AppColors.transparent
-                : AppColors.borderDefault,
-            width: 2,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: isProfile ?? false
+                  ? AppColors.transparent
+                  : AppColors.borderDefault,
+              width: 2,
+            ),
           ),
-        ),
-        fillColor: AppColors.bgPrimary,
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: AppColors.transparent, width: 2),
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(
-            color: isProfile ?? false
-                ? AppColors.transparent
-                : AppColors.borderDefault,
-            width: 2,
+          fillColor: AppColors.bgPrimary,
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.transparent, width: 2),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(
+              color: isProfile ?? false
+                  ? AppColors.transparent
+                  : AppColors.borderDefault,
+              width: 2,
+            ),
           ),
         ),
       ),
