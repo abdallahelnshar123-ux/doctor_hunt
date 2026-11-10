@@ -1,5 +1,10 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/data/user/repo/user_repository.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
@@ -8,9 +13,6 @@ import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_profile_avatar_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_event.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_state.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/widget/doctor_profile_form_widget.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -27,41 +29,27 @@ class DoctorProfileScreen extends HookWidget {
   Widget build(BuildContext context) {
     final selectedImageNotifier = useValueNotifier<File?>(null);
 
-    return BlocListener<DoctorProfileBloc, DoctorProfileState>(
+    return BlocListener<UserBloc, UserState>(
       listenWhen: (previous, current) =>
-          current is UpdateDoctorDetailsLoading ||
-          current is UpdateDoctorDetailsSuccess ||
-          current is UpdateDoctorDetailsError ||
-          current is PickDoctorUpdateImageErrorState ||
-          current is PickDoctorUpdateImageSuccessState,
+          current is UserLoadingState ||
+          (previous is UserLoadingState &&
+              (current is UserDataState || current is UserErrorState)),
       listener: (context, state) {
-        if (state is UpdateDoctorDetailsLoading) {
+        if (state is UserLoadingState) {
           DialogUtils.showLoading(context: context);
-        }
-        if (state is UpdateDoctorDetailsError) {
+        } else if (state is UserErrorState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showErrorSnackBar(
             context: context,
             message: state.message,
           );
-        }
-        if (state is PickDoctorUpdateImageErrorState) {
-          SnackBarUtils.showErrorSnackBar(
-            context: context,
-            message: state.message,
-          );
-        }
-        if (state is PickDoctorUpdateImageSuccessState) {
-          selectedImageNotifier.value = state.image;
-        }
-        if (state is UpdateDoctorDetailsSuccess) {
+        } else if (state is UserDataState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
             message: t.profile.dataWasUpdatedSuccessfully,
           );
-          // context.read<AuthBloc>().add(CheckAuthStatusRequested());
-          const PatientMainRoute().go(context);
+          const DoctorMainRoute().go(context);
         }
       },
       child: AppScaffold(
@@ -76,9 +64,20 @@ class DoctorProfileScreen extends HookWidget {
             MainProfileAvatarWidget(
               user: user,
               selectedImageNotifier: selectedImageNotifier,
-              onCameraTap: () {
-                context.read<DoctorProfileBloc>().add(
-                  const PickDoctorUpdateImageRequested(),
+              onCameraTap: () async {
+                final result = await getIt<UserRepository>().pickUserImage();
+                result.fold(
+                  (failure) {
+                    if (failure is! CancelledByUserFailure) {
+                      SnackBarUtils.showErrorSnackBar(
+                        context: context,
+                        message: failure.message,
+                      );
+                    }
+                  },
+                  (image) {
+                    selectedImageNotifier.value = image;
+                  },
                 );
               },
             ),

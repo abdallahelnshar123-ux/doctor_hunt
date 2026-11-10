@@ -1,26 +1,21 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctor_hunt/apps/core/extensions/context_extensions.dart';
+import 'package:doctor_hunt/apps/core/data/user/repo/user_repository.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
-import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
-import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
-import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../../../../generated/app_assets.dart';
-import '../../../../../../generated/style_atoms.dart';
-import '../../../../common/auth/domain/entity/user/admin.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
-import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
-import '../controller/admin_profile_bloc.dart';
-
-part '../widget/text_form_widget.dart';
+import '../widget/admin_profile_avatar_widget.dart';
+import '../widget/admin_profile_form_widget.dart';
 
 class AdminProfileScreen extends HookWidget {
   const AdminProfileScreen({super.key, required this.user});
@@ -29,48 +24,23 @@ class AdminProfileScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = useTextEditingController(text: user.name);
-    final formKey = useMemoized(() => GlobalKey<FormState>());
-    final selectedImage = useRef<File?>(null);
-    final hasChanges = useValueNotifier<bool>(false);
+    final selectedImageNotifier = useValueNotifier<File?>(null);
 
-    useEffect(() {
-      void checkForChanges() {
-        final isNameChanged = nameController.text.trim() != user.name;
-        final isImageChanged = selectedImage.value != null;
-        hasChanges.value = isNameChanged || isImageChanged;
-      }
-
-      nameController.addListener(checkForChanges);
-      return () {
-        nameController.removeListener(checkForChanges);
-      };
-    }, [user]);
-
-    return BlocListener<AdminProfileBloc, AdminProfileState>(
+    return BlocListener<UserBloc, UserState>(
       listenWhen: (previous, current) =>
-          current is AdminProfileLoading ||
-          current is AdminProfileUpdateSuccess ||
-          current is AdminProfileUpdateError ||
-          current is PickAdminImageErrorState,
+          current is UserLoadingState ||
+          (previous is UserLoadingState &&
+              (current is UserDataState || current is UserErrorState)),
       listener: (context, state) {
-        if (state is AdminProfileLoading) {
+        if (state is UserLoadingState) {
           DialogUtils.showLoading(context: context);
-        }
-        if (state is AdminProfileUpdateError) {
+        } else if (state is UserErrorState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showErrorSnackBar(
             context: context,
             message: state.message,
           );
-        }
-        if (state is PickAdminImageErrorState) {
-          SnackBarUtils.showErrorSnackBar(
-            context: context,
-            message: state.message,
-          );
-        }
-        if (state is AdminProfileUpdateSuccess) {
+        } else if (state is UserDataState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
@@ -85,180 +55,33 @@ class AdminProfileScreen extends HookWidget {
           centerTitle: true,
         ),
         body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 40),
-            _buildImageWidget(selectedImage, hasChanges),
-            _buildProfileForm(
-              context: context,
-              formKey: formKey,
-              nameController: nameController,
-              hasChanges: hasChanges,
-              selectedImage: selectedImage,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildImageWidget(
-    ObjectRef<File?> selectedImage,
-    ValueNotifier<bool> hasChanges,
-  ) {
-    return BlocConsumer<AdminProfileBloc, AdminProfileState>(
-      listenWhen: (previous, current) => current is PickAdminImageSuccessState,
-      listener: (context, state) {
-        if (state is PickAdminImageSuccessState) {
-          selectedImage.value = state.image;
-          hasChanges.value = true;
-        }
-      },
-      builder: (context, state) {
-        final imageFile = selectedImage.value;
-        ImageProvider avatarImage;
-        if (imageFile != null) {
-          avatarImage = FileImage(imageFile);
-        } else if (user.image != null && user.image!.isNotEmpty) {
-          avatarImage = CachedNetworkImageProvider(user.image!);
-        } else {
-          avatarImage = AssetImage(AppAssets.images.fallbackUserImage.path);
-        }
-
-        return GestureDetector(
-          onTap: () {
-            context.read<AdminProfileBloc>().add(
-              const PickAdminProfileImageRequested(),
-            );
-          },
-          child: Center(
-            child: Stack(
-              alignment: Alignment.bottomRight,
-              children: [
-                Container(
-                  width: context.width * 0.35,
-                  height: context.width * 0.35,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.brandPrimary20,
-                    border: Border.all(color: AppColors.brandPrimary, width: 2),
-                    image: DecorationImage(
-                      image: avatarImage,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Container(
-                  // margin: const EdgeInsets.only(bottom: 0),
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: AppColors.white, width: 2),
-
-                    color: AppColors.brandPrimary,
-                  ),
-                  child: const Icon(
-                    Icons.camera_alt_rounded,
-                    color: AppColors.white,
-                    size: 20,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildProfileForm({
-    required BuildContext context,
-    required GlobalKey<FormState> formKey,
-    required TextEditingController nameController,
-    required ValueNotifier<bool> hasChanges,
-    required ObjectRef<File?> selectedImage,
-  }) {
-    return Expanded(
-      child: Form(
-        key: formKey,
-        child: ListView(
-          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
-          children: [
-            Text(
-              t.admin.profileScreen.fullName,
-              style: context.semiBold12.textPrimary.rubik,
-            ),
-            const SizedBox(height: 10),
-            CustomTextFormField(
-              controller: nameController,
-              prefixIcon: Icon(
-                Icons.person_2_outlined,
-                color: AppColors.textSecondary,
-              ),
-              hintText: t.admin.profileScreen.fullName,
-              hintStyle: context.regular12.textSecondary.rubik,
-            ),
-            const SizedBox(height: 10),
-            Text(
-              t.admin.profileScreen.emailAddress,
-              style: context.semiBold12.textPrimary.rubik,
-            ),
-            const SizedBox(height: 10),
-            CustomTextFormField(
-              initialValue: user.email,
-              prefixIcon: Icon(
-                Icons.email_outlined,
-                color: AppColors.textSecondary,
-              ),
-              readOnly: true,
-              style: context.regular16.textSecondary.rubik,
-              filled: true,
-              fillColor: AppColors.borderMuted,
-            ),
-            const SizedBox(height: 50),
-            ValueListenableBuilder<bool>(
-              valueListenable: hasChanges,
-              builder: (context, showButton, child) {
-                return Visibility(
-                  visible: showButton,
-                  child: CustomElevatedButton(
-                    backgroundColor: AppColors.brandPrimary,
-                    onPressed: () {
-                      FocusManager.instance.primaryFocus?.unfocus();
-                      if (formKey.currentState?.validate() ?? false) {
-                        final updatedUser = AdminEntity(
-                          name: nameController.text.trim(),
-                          email: user.email,
-                          id: user.id,
-                          provider: user.provider,
-                          image: user.image,
-                        );
-                        context.read<AdminProfileBloc>().add(
-                          AdminProfileUpdateRequested(
-                            user: updatedUser,
-                            image: selectedImage.value,
-                          ),
-                        );
-                      }
-                    },
-                    child: Row(
-                      spacing: 8,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.check_rounded,
-                          color: AppColors.white,
-                          size: 20,
-                        ),
-                        Text(
-                          t.admin.updateDoctorDetails.saveChanges,
-                          style: context.semiBold16.white.rubik,
-                        ),
-                      ],
-                    ),
-                  ),
+            const SizedBox(height: 40),
+            AdminProfileAvatarWidget(
+              user: user,
+              selectedImageNotifier: selectedImageNotifier,
+              onCameraTap: () async {
+                final result = await getIt<UserRepository>().pickUserImage();
+                result.fold(
+                  (failure) {
+                    if (failure is! CancelledByUserFailure) {
+                      SnackBarUtils.showErrorSnackBar(
+                        context: context,
+                        message: failure.message,
+                      );
+                    }
+                  },
+                  (image) {
+                    selectedImageNotifier.value = image;
+                  },
                 );
               },
+            ),
+            Expanded(
+              child: AdminProfileFormWidget(
+                user: user,
+                selectedImageNotifier: selectedImageNotifier,
+              ),
             ),
           ],
         ),

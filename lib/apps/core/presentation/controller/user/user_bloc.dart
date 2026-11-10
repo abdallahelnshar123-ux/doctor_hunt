@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/data/user/repo/user_repository.dart';
 import '../../../../features/common/auth/domain/entity/user/app_user.dart';
 import '../../../../features/common/auth/domain/entity/user/patient.dart';
 import '../../../../features/common/auth/domain/repository/auth_repository.dart';
@@ -14,12 +15,17 @@ import 'user_state.dart';
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthRepository _authRepository;
   final UserSessionManager _userSessionManager;
+  final UserRepository _userRepository;
   StreamSubscription<AppUserEntity?>? _userSubscription;
 
-  UserBloc(this._authRepository, this._userSessionManager)
-    : super(UserState(user: _userSessionManager.currentUser)) {
+  UserBloc(
+    this._authRepository,
+    this._userSessionManager,
+    this._userRepository,
+  ) : super(UserDataState(user: _userSessionManager.currentUser)) {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
+    on<UpdateUserProfileEvent>(_onUpdateUserProfile);
 
     _listenToUserSession();
   }
@@ -38,13 +44,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     UserStreamUpdatedEvent event,
     Emitter<UserState> emit,
   ) {
-    emit(
-      state.copyWith(
-        user: event.user,
-        clearUser: event.user == null,
-        clearError: true,
-      ),
-    );
+    emit(UserDataState(user: event.user));
   }
 
   Future<void> _onToggleFavoriteDoctor(
@@ -79,8 +79,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
 
     // Emit optimistic state immediately
-    emit(state.copyWith(user: optimisticUser, clearError: true));
-    // also update session manager for optimistic update
+    emit(UserDataState(user: optimisticUser));
     _userSessionManager.updateUser(optimisticUser);
 
     // Call repository to sync with Firestore
@@ -93,13 +92,34 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       (failure) {
         // Rollback state and set error on failure
         emit(
-          state.copyWith(user: previousUser, favoriteError: failure.message),
+          UserDataState(user: previousUser, favoriteError: failure.message),
         );
         _userSessionManager.updateUser(previousUser);
       },
       (serverUser) {
-        // Updated state already handled via repository stream/emit
         _userSessionManager.updateUser(serverUser);
+      },
+    );
+  }
+
+  Future<void> _onUpdateUserProfile(
+    UpdateUserProfileEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    emit(UserLoadingState(user: state.user));
+
+    final result = await _userRepository.updateUserProfile(
+      user: event.user,
+      image: event.image,
+    );
+
+    result.fold(
+      (failure) {
+        emit(UserErrorState(user: state.user, message: failure.message));
+      },
+      (updatedUser) {
+        _userSessionManager.updateUser(updatedUser);
+        emit(UserDataState(user: updatedUser));
       },
     );
   }

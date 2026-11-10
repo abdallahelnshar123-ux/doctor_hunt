@@ -19,7 +19,6 @@ import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/screen/do
 import 'package:doctor_hunt/apps/features/patient/doctor_details_screen/presentation/screens/doctor_details_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/find_doctors_screen/presentation/screens/find_doctors_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart';
-import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart';
 import 'package:doctor_hunt/apps/features/patient/patient_profile_screen/presentation/screens/patient_profile_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/popular_doctor_screen/presentation/screens/popular_doctor_screen.dart';
 import 'package:doctor_hunt/apps/features/patient/privacy_policy_screen/presentation/screens/privacy_policy_screen.dart';
@@ -27,7 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart';
 import '../../features/admin/appointment_details_screen/presentation/screens/admin_appointment_details_screen.dart';
 import '../../features/admin/doctor_details_screen/presentation/screens/admin_doctor_details_screen.dart';
 import '../../features/common/auth/domain/entity/user/app_user.dart';
@@ -39,7 +37,6 @@ import '../../features/doctor/doctor_avaiability_screen/screen/doctor_availabili
 import '../../features/doctor/doctor_main_screen/screen/doctor_main_screen.dart';
 import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
 import '../../features/doctor/doctor_onboarding_screen/screen/doctor_onboarding_screen.dart';
-import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
 import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
 import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
@@ -133,11 +130,8 @@ class DoctorMainRoute extends GoRouteData with $DoctorMainRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getIt<DoctorAvailabilityBloc>()),
-        BlocProvider(create: (context) => getIt<DoctorProfileBloc>()),
-      ],
+    return BlocProvider(
+      create: (context) => getIt<DoctorAvailabilityBloc>(),
       child: const DoctorMainScreen(),
     );
   }
@@ -251,10 +245,7 @@ class PatientProfileRoute extends GoRouteData with $PatientProfileRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider(
-      create: (context) => getIt<PatientProfileBloc>(),
-      child: PatientProfileScreen(user: $extra),
-    );
+    return PatientProfileScreen(user: $extra);
   }
 }
 
@@ -266,10 +257,7 @@ class AdminProfileRoute extends GoRouteData with $AdminProfileRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return BlocProvider(
-      create: (context) => getIt<AdminProfileBloc>(),
-      child: AdminProfileScreen(user: $extra),
-    );
+    return AdminProfileScreen(user: $extra);
   }
 }
 
@@ -306,10 +294,7 @@ class DoctorProfileRoute extends GoRouteData with $DoctorProfileRoute {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     var user = getIt<UserSessionManager>().currentUser;
-    return BlocProvider(
-      create: (context) => getIt<DoctorProfileBloc>(),
-      child: DoctorProfileScreen(user: user as DoctorEntity),
-    );
+    return DoctorProfileScreen(user: user as DoctorEntity);
   }
 }
 

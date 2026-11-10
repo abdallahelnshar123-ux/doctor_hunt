@@ -10,7 +10,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/domain/entity/user/patient.dart';
-import '../controller/patient_profile_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
 
 class PatientProfileFormWidget extends HookWidget {
   const PatientProfileFormWidget({
@@ -138,8 +139,8 @@ class PatientProfileFormWidget extends HookWidget {
         favDoctors: (user as PatientEntity).favDoctors,
         disabled: (user as PatientEntity).disabled,
       );
-      context.read<PatientProfileBloc>().add(
-        PatientProfileUpdateRequested(
+      context.read<UserBloc>().add(
+        UpdateUserProfileEvent(
           user: updatedUser,
           image: selectedImageNotifier.value,
         ),

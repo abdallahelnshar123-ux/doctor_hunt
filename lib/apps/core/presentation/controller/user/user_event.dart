@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 import '../../../../features/common/auth/domain/entity/user/app_user.dart';
@@ -25,4 +27,17 @@ class ToggleFavoriteDoctorEvent extends UserEvent {
 
   @override
   List<Object?> get props => [doctorId];
+}
+
+class UpdateUserProfileEvent extends UserEvent {
+  final AppUserEntity user;
+  final File? image;
+
+  const UpdateUserProfileEvent({
+    required this.user,
+    this.image,
+  });
+
+  @override
+  List<Object?> get props => [user, image];
 }

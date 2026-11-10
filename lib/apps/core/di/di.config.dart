@@ -31,8 +31,6 @@ import '../../features/admin/admin_patients_tab/presentation/controller/admin_pa
     as _i710;
 import '../../features/admin/admin_patients_tab/presentation/controller/admin_patients_bloc.dart'
     as _i101;
-import '../../features/admin/admin_profile_screen/presentation/controller/admin_profile_bloc.dart'
-    as _i90;
 import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
     as _i879;
 import '../../features/common/auth/data/data_source/remote/auth_remote_data_source.dart'
@@ -68,8 +66,6 @@ import '../../features/doctor/doctor_avaiability_screen/controller/doctor_availa
     as _i1037;
 import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart'
     as _i601;
-import '../../features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart'
-    as _i922;
 import '../../features/doctor/domain/repository/doctor_repository.dart'
     as _i849;
 import '../../features/doctor/schedule_tab/presentation/controller/doctor_schedule_bloc.dart'
@@ -82,8 +78,6 @@ import '../../features/patient/favourite_tab/presentation/controller/favourite_d
     as _i670;
 import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
     as _i486;
-import '../../features/patient/patient_profile_screen/presentation/controller/patient_profile_bloc.dart'
-    as _i495;
 import '../../features/patient/select_time_screen/data/use_case/generate_doctor_slots_use_case.dart'
     as _i485;
 import '../../features/patient/select_time_screen/data/use_case/get_available_slots_use_case.dart'
@@ -214,12 +208,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i181.ImageService>(),
       ),
     );
-    gh.lazySingleton<_i985.UserBloc>(
-      () => _i985.UserBloc(
-        gh<_i747.AuthRepository>(),
-        gh<_i583.UserSessionManager>(),
-      ),
-    );
     gh.factory<_i1046.UserRepository>(
       () => _i1046.UserRepository(
         gh<_i749.UserFirestoreService>(),
@@ -273,18 +261,6 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i583.UserSessionManager>(),
       ),
     );
-    gh.factory<_i90.AdminProfileBloc>(
-      () => _i90.AdminProfileBloc(
-        gh<_i1046.UserRepository>(),
-        gh<_i583.UserSessionManager>(),
-      ),
-    );
-    gh.factory<_i495.PatientProfileBloc>(
-      () => _i495.PatientProfileBloc(
-        gh<_i1046.UserRepository>(),
-        gh<_i583.UserSessionManager>(),
-      ),
-    );
     gh.factory<_i86.DoctorScheduleBloc>(
       () => _i86.DoctorScheduleBloc(
         gh<_i148.AppointmentRepository>(),
@@ -306,10 +282,11 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i583.UserSessionManager>(),
       ),
     );
-    gh.factory<_i922.DoctorProfileBloc>(
-      () => _i922.DoctorProfileBloc(
-        gh<_i849.DoctorRepository>(),
+    gh.lazySingleton<_i985.UserBloc>(
+      () => _i985.UserBloc(
+        gh<_i747.AuthRepository>(),
         gh<_i583.UserSessionManager>(),
+        gh<_i1046.UserRepository>(),
       ),
     );
     gh.factory<_i137.SelectTimeBloc>(

@@ -5,8 +5,8 @@ import 'package:doctor_hunt/apps/core/widgets/profile_save_button.dart';
 import 'package:doctor_hunt/apps/core/widgets/profile_text_form_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_bloc.dart';
-import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/controller/doctor_profile_event.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_event.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/widget/profile_dropdown_widget.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/widget/profile_status_widget.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
@@ -153,9 +153,9 @@ class DoctorProfileFormWidget extends HookWidget {
         ),
         active: isActive.value,
       );
-      context.read<DoctorProfileBloc>().add(
-        UpdateDoctorDetailsRequested(
-          updatedDoctor: updatedUser,
+      context.read<UserBloc>().add(
+        UpdateUserProfileEvent(
+          user: updatedUser,
           image: selectedImageNotifier.value,
         ),
       );

@@ -1,5 +1,10 @@
 import 'dart:io';
 
+import 'package:doctor_hunt/apps/core/data/user/repo/user_repository.dart';
+import 'package:doctor_hunt/apps/core/di/di.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_bloc.dart';
+import 'package:doctor_hunt/apps/core/presentation/controller/user/user_state.dart';
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
@@ -14,7 +19,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import '../../../../../core/widgets/main_app_bar.dart';
 import '../../../../../core/widgets/main_profile_avatar_widget.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
-import '../controller/patient_profile_bloc.dart';
 import '../widget/patient_profile_form_widget.dart';
 
 class PatientProfileScreen extends HookWidget {
@@ -26,34 +30,21 @@ class PatientProfileScreen extends HookWidget {
   Widget build(BuildContext context) {
     final selectedImageNotifier = useValueNotifier<File?>(null);
 
-    return BlocListener<PatientProfileBloc, PatientProfileState>(
+    return BlocListener<UserBloc, UserState>(
       listenWhen: (previous, current) =>
-          current is PatientProfileLoading ||
-          current is PatientProfileUpdateSuccess ||
-          current is PatientProfileUpdateError ||
-          current is PickPatientImageErrorState ||
-          current is PickPatientImageSuccessState,
+          current is UserLoadingState ||
+          (previous is UserLoadingState &&
+              (current is UserDataState || current is UserErrorState)),
       listener: (context, state) {
-        if (state is PatientProfileLoading) {
+        if (state is UserLoadingState) {
           DialogUtils.showLoading(context: context);
-        }
-        if (state is PatientProfileUpdateError) {
+        } else if (state is UserErrorState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showErrorSnackBar(
             context: context,
             message: state.message,
           );
-        }
-        if (state is PickPatientImageErrorState) {
-          SnackBarUtils.showErrorSnackBar(
-            context: context,
-            message: state.message,
-          );
-        }
-        if (state is PickPatientImageSuccessState) {
-          selectedImageNotifier.value = state.image;
-        }
-        if (state is PatientProfileUpdateSuccess) {
+        } else if (state is UserDataState) {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
@@ -74,9 +65,20 @@ class PatientProfileScreen extends HookWidget {
             MainProfileAvatarWidget(
               user: user,
               selectedImageNotifier: selectedImageNotifier,
-              onCameraTap: () {
-                context.read<PatientProfileBloc>().add(
-                  const PickPatientProfileImageRequested(),
+              onCameraTap: () async {
+                final result = await getIt<UserRepository>().pickUserImage();
+                result.fold(
+                  (failure) {
+                    if (failure is! CancelledByUserFailure) {
+                      SnackBarUtils.showErrorSnackBar(
+                        context: context,
+                        message: failure.message,
+                      );
+                    }
+                  },
+                  (image) {
+                    selectedImageNotifier.value = image;
+                  },
                 );
               },
             ),
