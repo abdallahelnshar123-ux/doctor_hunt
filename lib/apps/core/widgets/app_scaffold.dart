@@ -2,6 +2,8 @@ import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+/// this scaffold only used for ( patient , doctor )
+
 class AppScaffold extends StatelessWidget {
   final Key? scaffoldKey;
   final PreferredSizeWidget? appBar;

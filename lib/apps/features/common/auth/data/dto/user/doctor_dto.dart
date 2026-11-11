@@ -73,6 +73,8 @@ class DoctorDto extends AppUserDto {
     final dto = RatingDto.fromFireStore(json);
     return Rating(
       rating: dto.rating,
+      reviewsCount: dto.reviewsCount,
+      totalRatingSum: dto.totalRatingSum,
       reviews: dto.reviews.map((r) => r.toDomain()).toList(),
     );
   }
@@ -110,6 +112,8 @@ class DoctorDto extends AppUserDto {
   Map<String, dynamic> _ratingToJson(Rating rating) {
     return RatingDto(
       rating: rating.rating,
+      reviewsCount: rating.reviewsCount,
+      totalRatingSum: rating.totalRatingSum,
       reviews: rating.reviews.map((r) => r.toDto()).toList(),
     ).toFireStore();
   }

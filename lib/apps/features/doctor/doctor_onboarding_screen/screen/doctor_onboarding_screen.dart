@@ -119,10 +119,7 @@ class DoctorOnboardingScreen extends HookWidget {
         if (startTime.value == endTime.value) {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t
-                .doctor
-                .availability
-                .startTimeAndEndtimeMustBeDifferent,
+            message: t.doctor.availability.startTimeAndEndtimeMustBeDifferent,
           );
           return;
         }

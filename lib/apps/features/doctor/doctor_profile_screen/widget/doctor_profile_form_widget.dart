@@ -148,9 +148,7 @@ class DoctorProfileFormWidget extends HookWidget {
         name: nameController.text.trim(),
         phone: phoneController.text.trim(),
         specialty: selectedSpecialty.value,
-        consultationFee: double.tryParse(
-          feeController.text.trim(),
-        ),
+        consultationFee: double.tryParse(feeController.text.trim()),
         active: isActive.value,
       );
       context.read<UserBloc>().add(

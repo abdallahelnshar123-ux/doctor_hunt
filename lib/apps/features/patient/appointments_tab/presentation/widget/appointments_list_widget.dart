@@ -27,7 +27,7 @@ class AppointmentsListWidget extends StatelessWidget {
       child: ListView.separated(
         itemBuilder: (context, index) {
           final appointment = filteredAppointments[index];
-          return PatientAppointmentCard(
+          return AppointmentCard(
             key: ValueKey(appointment.id),
             appointment: appointment,
           );

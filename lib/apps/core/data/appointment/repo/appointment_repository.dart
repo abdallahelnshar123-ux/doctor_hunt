@@ -6,9 +6,9 @@ import 'package:doctor_hunt/apps/core/mapper/exception_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/mappers/user_mapper.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/mappers/appointment_mapper.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/service/review_batch_firestore_service.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/mappers/appointment_mapper.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/service/review_batch_firestore_service.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -49,6 +49,23 @@ class AppointmentRepository {
     try {
       await for (final dtos in _firestoreService.getPatientAppointmentsStream(
         patientId,
+      )) {
+        final appointments = dtos.map((dto) => dto.toAppointment()).toList();
+        yield Right(appointments);
+      }
+    } on AppException catch (e) {
+      yield Left(e.toFailure());
+    } catch (e) {
+      yield Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Stream<Either<Failure, List<Appointment>>> getDoctorAppointmentsStream(
+    String doctorId,
+  ) async* {
+    try {
+      await for (final dtos in _firestoreService.getDoctorAppointmentsStream(
+        doctorId,
       )) {
         final appointments = dtos.map((dto) => dto.toAppointment()).toList();
         yield Right(appointments);

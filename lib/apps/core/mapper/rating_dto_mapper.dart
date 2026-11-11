@@ -6,6 +6,8 @@ extension RatingDtoMapper on Rating {
   RatingDto toDto() {
     return RatingDto(
       rating: rating,
+      reviewsCount: reviewsCount,
+      totalRatingSum: totalRatingSum,
       reviews: reviews.map((e) => e.toDto()).toList(),
     );
   }

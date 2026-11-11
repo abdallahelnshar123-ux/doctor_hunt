@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_hunt/apps/core/constants/firestore_constants.dart';
 import 'package:doctor_hunt/apps/core/exceptions/app_exceptions.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment_dto/appointment_dto.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment_dto.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
@@ -58,6 +58,28 @@ class AppointmentFirestoreService {
         .where(
           '${FirestoreConstants.patient}.${FirestoreConstants.id}',
           isEqualTo: patientId,
+        )
+        .snapshots()
+        .map((snapshot) {
+          final appointments = snapshot.docs
+              .map((doc) => AppointmentDto.fromJson(doc.data()))
+              .toList();
+          appointments.sort((a, b) => b.sessionTime.compareTo(a.sessionTime));
+          return appointments;
+        })
+        .handleError((e) {
+          throw ServerException(
+            message: t.errors.failedToFetchAppointments(E: e.toString()),
+          );
+        });
+  }
+
+  Stream<List<AppointmentDto>> getDoctorAppointmentsStream(String doctorId) {
+    return _firestore
+        .collection(FirestoreConstants.appointmentsCollection)
+        .where(
+          '${FirestoreConstants.doctor}.${FirestoreConstants.id}',
+          isEqualTo: doctorId,
         )
         .snapshots()
         .map((snapshot) {

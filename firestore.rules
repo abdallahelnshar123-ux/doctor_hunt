@@ -12,21 +12,33 @@ service cloud.firestore {
         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
-    match /users/{userId} {
-      // السماح بقراءة بيانات المستخدمين لأي مستخدم مسجل الدخول (لعرض الدكاترة)، والتعديل لصاحب الحساب أو الأدمن
-      allow read: if isSignedIn();
-      allow write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+    function isRatingOnlyUpdate() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(['rating', 'updated_at'])
+          || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['rating']);
+    }
 
-      match /{document=**} {
-        allow read: if isSignedIn();
-        allow write: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create, delete: if (isSignedIn() && request.auth.uid == userId) || isAdmin();
+      allow update: if (isSignedIn() && request.auth.uid == userId)
+                    || isAdmin()
+                    || (isSignedIn() && isRatingOnlyUpdate());
+
+      // ساب كولكشن الريفيوهات تحت الدكتور
+      match /reviews/{reviewId} {
+        allow read, write: if isSignedIn();
       }
     }
 
     match /doctors/{doctorId} {
       allow read: if isSignedIn();
       allow create, delete: if isAdmin();
-      allow update: if isSignedIn();
+      allow update: if isAdmin() || (isSignedIn() && isRatingOnlyUpdate());
+
+      // ساب كولكشن الريفيوهات تحت الدكاترة
+      match /reviews/{reviewId} {
+        allow read, write: if isSignedIn();
+      }
     }
 
     match /appointments/{appointmentId} {

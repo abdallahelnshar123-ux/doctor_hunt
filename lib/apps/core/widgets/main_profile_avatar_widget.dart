@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/common/auth/domain/entity/user/app_user.dart';
 
+/// this widget is only used for ( patient , doctor ) profile
 class MainProfileAvatarWidget extends StatelessWidget {
   const MainProfileAvatarWidget({
     super.key,

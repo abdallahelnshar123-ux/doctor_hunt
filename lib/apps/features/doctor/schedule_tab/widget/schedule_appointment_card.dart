@@ -1,7 +1,7 @@
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_cached_network_image.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';

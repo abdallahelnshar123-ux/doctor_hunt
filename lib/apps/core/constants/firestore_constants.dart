@@ -41,6 +41,8 @@ class FirestoreConstants {
   static const String consultationFee = 'consultation_fee';
   static const String rating = 'rating';
   static const String reviews = 'reviews';
+  static const String reviewsCount = 'reviews_count';
+  static const String totalRatingSum = 'total_rating_sum';
   static const String reviewer = 'reviewer';
   static const String comment = 'comment';
   static const String availability = 'availability';

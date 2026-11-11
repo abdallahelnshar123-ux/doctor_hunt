@@ -5,6 +5,7 @@ import '../theme/app_colors.dart';
 import 'app_container_with_shadow.dart';
 import 'custom_text_form_field.dart';
 
+/// this widget is only used for ( doctor , patient ) profile
 class ProfileTextFormWidget extends StatefulWidget {
   const ProfileTextFormWidget({
     super.key,

@@ -64,8 +64,7 @@ class DoctorAvailabilityScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message:
-                t.doctor.availability.dataWasUpdatedSuccessfully,
+            message: t.doctor.availability.dataWasUpdatedSuccessfully,
           );
         }
         if (state is DoctorAvailabilityLoading) {
@@ -75,9 +74,7 @@ class DoctorAvailabilityScreen extends HookWidget {
       child: Scaffold(
         appBar: showAppBar
             ? AppBar(
-                title: Text(
-                  t.doctor.availability.doctorAvailability,
-                ),
+                title: Text(t.doctor.availability.doctorAvailability),
                 automaticallyImplyLeading: automaticallyImplyLeading,
                 centerTitle: true,
               )

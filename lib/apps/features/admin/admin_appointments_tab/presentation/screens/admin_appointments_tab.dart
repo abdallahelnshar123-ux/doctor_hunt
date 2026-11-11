@@ -1,26 +1,15 @@
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
 import 'package:doctor_hunt/apps/core/di/di.dart';
-import 'package:doctor_hunt/apps/core/router/app_routes.dart';
+import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
+import 'package:doctor_hunt/apps/core/widgets/appointment/appointment_card.dart';
 import 'package:doctor_hunt/apps/core/widgets/appointments_list_shimmer_widget.dart';
-import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/controller/admin_appointments_event.dart';
+import 'package:doctor_hunt/apps/core/widgets/main_empty_list_widget.dart';
+import 'package:doctor_hunt/apps/features/common/appointments_management/presentation/controller/appointments_bloc.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:intl/intl.dart';
 
-import '../../../../../../generated/style_atoms.dart';
-import '../../../../../core/theme/app_colors.dart';
-import '../../../../../core/utils/snack_bar_utils.dart';
-import '../../../../../core/widgets/app_container_with_shadow.dart';
-import '../../../../../core/widgets/appointment_review_read_only_widget.dart';
-import '../../../../../core/widgets/custom_cached_network_image.dart';
-import '../../../../../core/widgets/main_empty_list_widget.dart';
-import '../../../../common/auth/presentation/widgets/custom_elevated_button.dart';
-import '../../../../patient/appointments_tab/data/models/appointment/appointment.dart';
-import '../controller/admin_appointments_bloc.dart';
-import '../controller/admin_appointments_state.dart';
-
-part '../widget/admin_appointment_card.dart';
 part '../widget/appointments_list_widget.dart';
 
 class AdminAppointmentsTab extends StatelessWidget {
@@ -31,9 +20,7 @@ class AdminAppointmentsTab extends StatelessWidget {
     return SafeArea(
       top: false,
       child: BlocProvider(
-        create: (context) =>
-            getIt<AdminAppointmentsBloc>()
-              ..add(FetchAdminAppointmentsRequested()),
+        create: (context) => getIt<AppointmentsBloc>(),
         child: DefaultTabController(
           initialIndex: 0,
           length: 3,
@@ -60,42 +47,41 @@ class AdminAppointmentsTab extends StatelessWidget {
                 ],
               ),
               Expanded(
-                child:
-                    BlocBuilder<AdminAppointmentsBloc, AdminAppointmentsState>(
-                      buildWhen: (previous, current) =>
-                          current is AdminAppointmentsLoadedState ||
-                          current is AdminAppointmentsErrorState ||
-                          current is AdminAppointmentsLoadingState,
-                      builder: (context, state) {
-                        if (state is AdminAppointmentsLoadedState) {
-                          return TabBarView(
-                            children: [
-                              AppointmentsListWidget(
-                                allAppointmentsList: state.appointments,
-                                index: 0,
-                              ),
-                              AppointmentsListWidget(
-                                allAppointmentsList: state.appointments,
-                                index: 1,
-                              ),
-                              AppointmentsListWidget(
-                                allAppointmentsList: state.appointments,
-                                index: 2,
-                              ),
-                            ],
-                          );
-                        }
-                        if (state is AdminAppointmentsErrorState) {
-                          return Center(
-                            child: Text(
-                              state.message,
-                              style: context.medium16.textSecondary.rubik,
-                            ),
-                          );
-                        }
-                        return const AppointmentsListShimmerWidget();
-                      },
-                    ),
+                child: BlocBuilder<AppointmentsBloc, AppointmentsState>(
+                  buildWhen: (previous, current) =>
+                      current is AppointmentsSuccess ||
+                      current is AppointmentsError ||
+                      current is AppointmentsLoading,
+                  builder: (context, state) {
+                    if (state is AppointmentsSuccess) {
+                      return TabBarView(
+                        children: [
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 0,
+                          ),
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 1,
+                          ),
+                          AppointmentsListWidget(
+                            allAppointmentsList: state.appointments,
+                            index: 2,
+                          ),
+                        ],
+                      );
+                    }
+                    if (state is AppointmentsError) {
+                      return Center(
+                        child: Text(
+                          state.message,
+                          style: context.medium16.textSecondary.rubik,
+                        ),
+                      );
+                    }
+                    return const AppointmentsListShimmerWidget();
+                  },
+                ),
               ),
             ],
           ),

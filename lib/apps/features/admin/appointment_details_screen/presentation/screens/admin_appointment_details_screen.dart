@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
-import 'package:doctor_hunt/apps/features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

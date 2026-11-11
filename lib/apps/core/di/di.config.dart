@@ -19,8 +19,6 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import '../../features/admin/add_doctor_screen/presentation/controller/add_doctors_bloc.dart'
     as _i233;
-import '../../features/admin/admin_appointments_tab/presentation/controller/admin_appointments_bloc.dart'
-    as _i995;
 import '../../features/admin/admin_doctors_tab/presentation/controller/admin_doctors_bloc.dart'
     as _i900;
 import '../../features/admin/admin_patients_tab/data/repo/admin_patients_repository.dart'
@@ -33,6 +31,10 @@ import '../../features/admin/admin_patients_tab/presentation/controller/admin_pa
     as _i101;
 import '../../features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart'
     as _i879;
+import '../../features/common/appointments_management/presentation/controller/appointment_action_bloc.dart'
+    as _i734;
+import '../../features/common/appointments_management/presentation/controller/appointments_bloc.dart'
+    as _i778;
 import '../../features/common/auth/data/data_source/remote/auth_remote_data_source.dart'
     as _i377;
 import '../../features/common/auth/data/data_source/remote/impl/auth_remote_data_source_impl.dart'
@@ -54,8 +56,6 @@ import '../../features/common/specialties/data/service/specialty_service.dart'
     as _i596;
 import '../../features/common/specialties/presentation/controller/specialties_bloc.dart'
     as _i642;
-import '../../features/doctor/appointments_tab/presentation/controller/appointments_bloc.dart'
-    as _i487;
 import '../../features/doctor/data/data_source/remote/doctor_remote_data_source.dart'
     as _i1021;
 import '../../features/doctor/data/data_source/remote/impl/doctor_remote_data_source_impl.dart'
@@ -70,10 +70,6 @@ import '../../features/doctor/domain/repository/doctor_repository.dart'
     as _i849;
 import '../../features/doctor/schedule_tab/presentation/controller/doctor_schedule_bloc.dart'
     as _i86;
-import '../../features/patient/appointments_tab/data/service/review_batch_firestore_service.dart'
-    as _i129;
-import '../../features/patient/appointments_tab/presentation/controller/appointments_bloc.dart'
-    as _i365;
 import '../../features/patient/favourite_tab/presentation/controller/favourite_doctors_bloc.dart'
     as _i670;
 import '../../features/patient/home_tab/presentation/controller/patient_doctors_bloc.dart'
@@ -87,6 +83,8 @@ import '../../features/patient/select_time_screen/presentation/controller/select
 import '../data/appointment/repo/appointment_repository.dart' as _i148;
 import '../data/appointment/service/appointment_firestore_service.dart'
     as _i550;
+import '../data/appointment/service/review_batch_firestore_service.dart'
+    as _i625;
 import '../data/image_service/image_service.dart' as _i181;
 import '../data/session/user_session_manager.dart' as _i583;
 import '../data/shared_prefs/local_storage_module.dart' as _i63;
@@ -158,8 +156,8 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i550.AppointmentFirestoreService>(
       () => _i550.AppointmentFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
-    gh.factory<_i129.ReviewBatchFirestoreService>(
-      () => _i129.ReviewBatchFirestoreService(gh<_i974.FirebaseFirestore>()),
+    gh.factory<_i625.ReviewBatchFirestoreService>(
+      () => _i625.ReviewBatchFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
     gh.lazySingleton<_i43.AdminPatientsRemoteDataSource>(
       () => _i43.AdminPatientsRemoteDataSource(gh<_i974.FirebaseFirestore>()),
@@ -175,12 +173,6 @@ extension GetItInjectableX on _i174.GetIt {
         apiSecret: gh<String>(instanceName: 'api_secret'),
       ),
     );
-    gh.factory<_i148.AppointmentRepository>(
-      () => _i148.AppointmentRepository(
-        gh<_i550.AppointmentFirestoreService>(),
-        gh<_i129.ReviewBatchFirestoreService>(),
-      ),
-    );
     gh.lazySingleton<_i218.AdminPatientsRepository>(
       () => _i218.AdminPatientsRepository(
         gh<_i43.AdminPatientsRemoteDataSource>(),
@@ -194,6 +186,12 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i594.LoginUseCase>(
       () => _i594.LoginUseCase(gh<_i747.AuthRepository>()),
+    );
+    gh.factory<_i148.AppointmentRepository>(
+      () => _i148.AppointmentRepository(
+        gh<_i550.AppointmentFirestoreService>(),
+        gh<_i625.ReviewBatchFirestoreService>(),
+      ),
     );
     gh.factory<_i710.AdminPatientActionBloc>(
       () => _i710.AdminPatientActionBloc(gh<_i218.AdminPatientsRepository>()),
@@ -228,36 +226,28 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i486.PatientDoctorsBloc>(
       () => _i486.PatientDoctorsBloc(gh<_i849.DoctorRepository>()),
     );
+    gh.lazySingleton<_i734.AppointmentActionBloc>(
+      () => _i734.AppointmentActionBloc(
+        gh<_i148.AppointmentRepository>(),
+        gh<_i849.DoctorRepository>(),
+      ),
+    );
     gh.factory<_i921.GetAvailableSlotsUseCase>(
       () => _i921.GetAvailableSlotsUseCase(
         gh<_i148.AppointmentRepository>(),
         gh<_i485.GenerateDoctorSlotsUseCase>(),
       ),
     );
-    gh.factory<_i487.AppointmentsBloc>(
-      () => _i487.AppointmentsBloc(
-        gh<_i148.AppointmentRepository>(),
-        gh<_i583.UserSessionManager>(),
-        gh<_i849.DoctorRepository>(),
-      ),
-    );
-    gh.factory<_i365.AppointmentsBloc>(
-      () => _i365.AppointmentsBloc(
-        gh<_i148.AppointmentRepository>(),
-        gh<_i583.UserSessionManager>(),
-        gh<_i849.DoctorRepository>(),
-      ),
-    );
-    gh.factory<_i995.AdminAppointmentsBloc>(
-      () => _i995.AdminAppointmentsBloc(
-        gh<_i148.AppointmentRepository>(),
-        gh<_i583.UserSessionManager>(),
-      ),
-    );
     gh.lazySingleton<_i613.AuthBloc>(
       () => _i613.AuthBloc(
         gh<_i747.AuthRepository>(),
         gh<_i594.LoginUseCase>(),
+        gh<_i583.UserSessionManager>(),
+      ),
+    );
+    gh.factory<_i778.AppointmentsBloc>(
+      () => _i778.AppointmentsBloc(
+        gh<_i148.AppointmentRepository>(),
         gh<_i583.UserSessionManager>(),
       ),
     );

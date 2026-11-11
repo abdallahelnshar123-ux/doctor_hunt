@@ -10,6 +10,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import 'apps/core/di/di.dart';
 import 'apps/core/router/app_routes.dart';
+import 'apps/features/common/appointments_management/presentation/controller/appointment_action_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,6 +27,7 @@ void main() async {
           BlocProvider(create: (context) => getIt<AuthBloc>()),
           BlocProvider(create: (context) => getIt<UserBloc>()),
           BlocProvider(create: (context) => getIt<SpecialtiesBloc>()),
+          BlocProvider(create: (context) => getIt<AppointmentActionBloc>()),
         ],
         child: const MyApp(),
       ),

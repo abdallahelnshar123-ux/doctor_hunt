@@ -38,7 +38,7 @@ import '../../features/doctor/doctor_main_screen/screen/doctor_main_screen.dart'
 import '../../features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
 import '../../features/doctor/doctor_onboarding_screen/screen/doctor_onboarding_screen.dart';
 import '../../features/patient/appointment_details_screen/presentation/screens/patient_appointment_details_screen.dart';
-import '../../features/patient/appointments_tab/data/models/appointment/appointment.dart';
+import '../data/appointment/models/appointment.dart';
 import '../../features/patient/main_screen/presentation/screens/patient_main_screen.dart';
 import '../../features/patient/select_time_screen/presentation/controller/select_time_bloc.dart';
 import '../../features/patient/select_time_screen/presentation/controller/select_time_event.dart';

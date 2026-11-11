@@ -1,4 +1,11 @@
-part of '../screens/doctor_appointments_tab.dart';
+import 'package:doctor_hunt/generated/style_atoms.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../generated/translations.g.dart';
+import '../../../features/common/auth/domain/entity/user/app_user.dart';
+import '../../data/models/doctor/review.dart';
+import '../../theme/app_colors.dart';
+import '../custom_text_form_field.dart';
 
 class ReviewInputWidget extends StatefulWidget {
   const ReviewInputWidget({
@@ -42,7 +49,7 @@ class _ReviewInputWidgetState extends State<ReviewInputWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: AppColors.brandPrimary8,
         borderRadius: BorderRadius.circular(10),
@@ -50,8 +57,8 @@ class _ReviewInputWidgetState extends State<ReviewInputWidget> {
       child: Column(
         children: [
           Row(
-            mainAxisSize: .min,
-            mainAxisAlignment: .end,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: List.generate(
               5,
               (index) => GestureDetector(
@@ -79,7 +86,7 @@ class _ReviewInputWidgetState extends State<ReviewInputWidget> {
             filled: false,
             style: context.regular10.textPrimary.rubik,
             borderSideColor: AppColors.transparent,
-            contentPadding: EdgeInsets.all(10),
+            contentPadding: const EdgeInsets.all(10),
             hintText: t.patientAppointments.tabToWriteReview,
             hintStyle: context.regular10.textSecondary.rubik,
           ),

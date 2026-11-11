@@ -11,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/router/app_routes.dart';
 import '../../../../common/auth/domain/entity/user/app_user.dart';
-import '../widget/categories_widget.dart';
 import '../widget/popular_doctors_widget.dart';
 import '../widget/top_rated_doctors_widget.dart';
 
@@ -47,7 +46,7 @@ class HomeTab extends StatelessWidget {
                 child: Column(
                   spacing: 20,
                   children: [
-                    const CategoriesWidget(),
+                    // const CategoriesWidget(),
                     const PopularDoctorsWidget(),
                     const TopRatedDoctorsWidget(),
                   ],

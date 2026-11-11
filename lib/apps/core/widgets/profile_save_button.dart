@@ -25,7 +25,7 @@ class ProfileSaveButton extends StatelessWidget {
           visible: showButton,
           child: CustomElevatedButton(
             backgroundColor: AppColors.brandPrimary,
-            onPressed:  onPressed,
+            onPressed: onPressed,
             child: Row(
               spacing: 8,
               mainAxisAlignment: MainAxisAlignment.center,

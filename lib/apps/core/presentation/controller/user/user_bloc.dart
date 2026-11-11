@@ -18,11 +18,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
   StreamSubscription<AppUserEntity?>? _userSubscription;
 
-  UserBloc(
-    this._authRepository,
-    this._userSessionManager,
-    this._userRepository,
-  ) : super(UserDataState(user: _userSessionManager.currentUser)) {
+  UserBloc(this._authRepository, this._userSessionManager, this._userRepository)
+    : super(UserDataState(user: _userSessionManager.currentUser)) {
     on<UserStreamUpdatedEvent>(_onUserStreamUpdated);
     on<ToggleFavoriteDoctorEvent>(_onToggleFavoriteDoctor);
     on<UpdateUserProfileEvent>(_onUpdateUserProfile);
@@ -67,16 +64,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       updatedFavs.add(event.doctorId);
     }
 
-    final optimisticUser = PatientEntity(
-      id: currentUser.id,
-      email: currentUser.email,
-      name: currentUser.name,
-      provider: currentUser.provider,
-      image: currentUser.image,
-      phone: currentUser.phone,
-      favDoctors: updatedFavs,
-      disabled: currentUser.disabled,
-    );
+    final optimisticUser = currentUser.copyWith(favDoctors: updatedFavs);
 
     // Emit optimistic state immediately
     emit(UserDataState(user: optimisticUser));
@@ -91,9 +79,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     result.fold(
       (failure) {
         // Rollback state and set error on failure
-        emit(
-          UserDataState(user: previousUser, favoriteError: failure.message),
-        );
+        emit(UserDataState(user: previousUser, favoriteError: failure.message));
         _userSessionManager.updateUser(previousUser);
       },
       (serverUser) {
