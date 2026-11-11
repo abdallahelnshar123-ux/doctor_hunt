@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
-import 'package:doctor_hunt/apps/core/widgets/appointment_review_read_only_widget.dart';
+import 'package:doctor_hunt/apps/core/widgets/appointment/appointment_review_read_only_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/main_app_bar.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';

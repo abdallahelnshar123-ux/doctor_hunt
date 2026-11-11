@@ -12,7 +12,7 @@ import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentati
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/forgot_password_screen.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_login_screen.dart';
-import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/register_screen.dart';
+import 'package:doctor_hunt/apps/features/common/auth/presentation/screens/patient_register_screen.dart';
 import 'package:doctor_hunt/apps/features/common/choose_role/presentation/screens/choose_role_screen.dart';
 import 'package:doctor_hunt/apps/features/common/onboarding/presentation/screens/onboarding_screen.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_profile_screen/screen/doctor_profile_screen.dart';
@@ -77,13 +77,13 @@ class DoctorLoginRoute extends GoRouteData with $DoctorLoginRoute {
   }
 }
 
-@TypedGoRoute<RegisterRoute>(path: '/register')
-class RegisterRoute extends GoRouteData with $RegisterRoute {
-  const RegisterRoute();
+@TypedGoRoute<PatientRegisterRoute>(path: '/register')
+class PatientRegisterRoute extends GoRouteData with $PatientRegisterRoute {
+  const PatientRegisterRoute();
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const RegisterScreen();
+    return const PatientRegisterScreen();
   }
 }
 

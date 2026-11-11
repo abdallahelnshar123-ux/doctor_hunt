@@ -1,6 +1,6 @@
 import 'package:doctor_hunt/apps/core/di/di.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
-import 'package:doctor_hunt/apps/features/doctor/appointments_tab/presentation/screens/doctor_appointments_tab.dart';
+import 'package:doctor_hunt/apps/features/common/appointments_management/presentation/screens/appointments_tab.dart';
 import 'package:doctor_hunt/apps/features/doctor/schedule_tab/presentation/controller/doctor_schedule_bloc.dart';
 import 'package:doctor_hunt/apps/features/doctor/schedule_tab/presentation/controller/doctor_schedule_event.dart';
 import 'package:doctor_hunt/apps/features/doctor/schedule_tab/screen/schedule_tab.dart';
@@ -37,7 +37,7 @@ class _DoctorMainScreenContent extends HookWidget {
 
     final tabsList = [
       const ScheduleTab(),
-      const DoctorAppointmentsTab(),
+      const AppointmentsTab(),
       const DoctorSettingsTab(),
     ];
 

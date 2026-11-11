@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../generated/style_atoms.dart';
-import '../data/models/doctor/review.dart';
-import '../theme/app_colors.dart';
+import '../../../../generated/style_atoms.dart';
+import '../../data/models/doctor/review.dart';
+import '../../theme/app_colors.dart';
 
 class AppointmentReviewReadOnlyWidget extends StatelessWidget {
   const AppointmentReviewReadOnlyWidget({super.key, required this.review});

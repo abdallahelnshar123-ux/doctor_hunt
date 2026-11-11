@@ -19,7 +19,7 @@ class EmailTextFieldWidget extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       validator: (value) => Validators.email(value),
       controller: controller,
-      hintText: Translations.of(context).auth.email,
+      hintText: t.auth.email,
       filled: true,
       fillColor: fillColor,
     );

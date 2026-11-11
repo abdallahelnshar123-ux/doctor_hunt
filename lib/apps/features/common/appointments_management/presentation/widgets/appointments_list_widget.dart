@@ -1,4 +1,9 @@
-part of '../screens/appointments_tab.dart';
+import 'package:flutter/material.dart';
+
+import '../../../../../../generated/translations.g.dart';
+import '../../../../../core/data/appointment/models/appointment.dart';
+import '../../../../../core/widgets/appointment/appointment_card.dart';
+import '../../../../../core/widgets/main_empty_list_widget.dart';
 
 class AppointmentsListWidget extends StatelessWidget {
   const AppointmentsListWidget({

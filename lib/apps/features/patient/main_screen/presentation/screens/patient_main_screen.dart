@@ -17,7 +17,7 @@ import '../../../../common/auth/domain/entity/user/app_user.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_bloc.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_event.dart';
 import '../../../../common/auth/presentation/controller/auth/auth_state.dart';
-import '../../../appointments_tab/presentation/screens/appointments_tab.dart';
+import '../../../../common/appointments_management/presentation/screens/appointments_tab.dart';
 import '../../../favourite_tab/presentation/controller/favourite_doctors_bloc.dart';
 import '../../../favourite_tab/presentation/screens/favorite_tab.dart';
 import '../../../home_tab/presentation/screens/home_tab.dart';
@@ -40,7 +40,7 @@ class PatientMainScreen extends HookWidget {
         create: (context) => getIt<FavouriteDoctorsBloc>(),
         child: FavoriteTab(),
       ),
-      PatientAppointmentsTab(),
+      const AppointmentsTab(),
       SettingsTab(),
     ]);
 

@@ -1,4 +1,4 @@
-import 'package:doctor_hunt/apps/features/admin/admin_appointments_tab/presentation/screens/admin_appointments_tab.dart';
+import 'package:doctor_hunt/apps/features/common/appointments_management/presentation/widgets/appointments_view.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_doctors_tab/presentation/screens/admin_doctors_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_patients_tab/presentation/screens/admin_patients_tab.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_settings_tab/presentation/screens/admin_settings_tab.dart';
@@ -25,7 +25,7 @@ class AdminMainScreen extends HookWidget {
 
       child: AdminPatientsTab(),
     ),
-    AdminAppointmentsTab(),
+    const SafeArea(top: false, child: AppointmentsView()),
     AdminSettingsTab(),
   ];
 

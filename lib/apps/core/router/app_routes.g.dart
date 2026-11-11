@@ -10,7 +10,7 @@ List<RouteBase> get $appRoutes => [
   $adminLoginRoute,
   $patientLoginRoute,
   $doctorLoginRoute,
-  $registerRoute,
+  $patientRegisterRoute,
   $forgotPasswordRoute,
   $patientMainRoute,
   $adminMainRoute,
@@ -114,14 +114,15 @@ mixin $DoctorLoginRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $registerRoute => GoRouteData.$route(
+RouteBase get $patientRegisterRoute => GoRouteData.$route(
   path: '/register',
   hasOverriddenOnExit: false,
-  factory: $RegisterRoute._fromState,
+  factory: $PatientRegisterRoute._fromState,
 );
 
-mixin $RegisterRoute on GoRouteData {
-  static RegisterRoute _fromState(GoRouterState state) => const RegisterRoute();
+mixin $PatientRegisterRoute on GoRouteData {
+  static PatientRegisterRoute _fromState(GoRouterState state) =>
+      const PatientRegisterRoute();
 
   @override
   String get location => GoRouteData.$location('/register');
