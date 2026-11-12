@@ -1,5 +1,5 @@
 import '../../dto/user/app_user_dto.dart';
-import '../../models/user_dto/auth_user_dto.dart';
+import '../../dto/user/auth_user_dto.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthUserDto> continueWithGoogle();

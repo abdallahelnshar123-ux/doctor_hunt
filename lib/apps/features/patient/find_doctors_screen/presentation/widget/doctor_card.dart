@@ -1,3 +1,4 @@
+
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/favorite_button_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/presentation/widgets/custom_elevated_button.dart';
@@ -7,6 +8,7 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../features/common/auth/domain/entity/user/doctor.dart';
+@Deprecated("remove this file")
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({super.key, this.doctor});

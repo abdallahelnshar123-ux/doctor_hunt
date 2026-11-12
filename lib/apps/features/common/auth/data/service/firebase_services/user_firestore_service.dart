@@ -6,7 +6,6 @@ import 'package:injectable/injectable.dart';
 import '../../../../../../core/constants/firestore_constants.dart';
 import '../../../../../../core/exceptions/app_exceptions.dart';
 import '../../dto/user/app_user_dto.dart';
-import '../../models/user_dto/my_user_dto.dart';
 
 @lazySingleton
 class UserFirestoreService {
@@ -15,17 +14,17 @@ class UserFirestoreService {
   UserFirestoreService(this._firebaseFirestore);
 
   /// ==========================   users     ==============================
-  CollectionReference<MyUserDto> _getUsersCollection() {
+  CollectionReference<AppUserDto> _getUsersCollection() {
     return _firebaseFirestore
         .collection(FirestoreConstants.usersCollection)
-        .withConverter<MyUserDto>(
+        .withConverter<AppUserDto>(
           fromFirestore: (snapshot, options) =>
-              MyUserDto.fromFireStore(snapshot.data()!),
-          toFirestore: (user, options) => user.toFireStore(),
+              AppUserDto.fromJson(snapshot.data()!),
+          toFirestore: (user, options) => user.toJson(),
         );
   }
 
-  Future<void> addUser(MyUserDto myUser) {
+  Future<void> addUser(AppUserDto myUser) {
     try {
       return _getUsersCollection().doc(myUser.id).set(myUser);
     } on FirebaseException catch (e) {
@@ -37,7 +36,7 @@ class UserFirestoreService {
     }
   }
 
-  Future<MyUserDto?> getUser(String uId) async {
+  Future<AppUserDto?> getUser(String uId) async {
     try {
       var documentSnapshot = await _getUsersCollection().doc(uId).get();
       return documentSnapshot.data();

@@ -8,7 +8,7 @@ import '../../../../../../core/data/models/doctor/rating_dto.dart';
 import '../../../../../../core/mapper/review_dto_mapper.dart';
 import '../../../../../../core/mapper/review_mapper.dart';
 import '../../../domain/entity/user/user_roles.dart';
-import '../../models/user/auth_providers.dart';
+import '../../../domain/entity/user/auth_providers.dart';
 import 'app_user_dto.dart';
 
 class DoctorDto extends AppUserDto {

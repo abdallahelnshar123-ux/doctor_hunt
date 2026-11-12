@@ -52,7 +52,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.obscureText = false,
-    this.obscuringCharacter = '•',
+    this.obscuringCharacter = '\u2022',
     this.keyboardType,
     this.errorStyle,
     this.onFieldSubmitted,

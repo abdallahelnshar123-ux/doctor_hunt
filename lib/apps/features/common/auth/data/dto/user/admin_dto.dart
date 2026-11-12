@@ -1,6 +1,6 @@
 import '../../../../../../core/constants/firestore_constants.dart';
 import '../../../domain/entity/user/user_roles.dart';
-import '../../models/user/auth_providers.dart';
+import '../../../domain/entity/user/auth_providers.dart';
 import 'app_user_dto.dart';
 
 class AdminDto extends AppUserDto {

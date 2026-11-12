@@ -1,6 +1,6 @@
 import 'package:doctor_hunt/generated/app_assets.dart';
 import 'package:flutter/material.dart';
-
+@Deprecated("delete this file")
 class CategoriesWidget extends StatelessWidget {
   const CategoriesWidget({super.key});
 

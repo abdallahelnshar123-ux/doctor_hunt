@@ -9,7 +9,7 @@ import '../../domain/repository/auth_repository.dart';
 import '../data_source/remote/auth_remote_data_source.dart';
 import '../dto/user/patient_dto.dart';
 import '../mappers/user_mapper.dart';
-import '../models/user/auth_providers.dart';
+import '../../domain/entity/user/auth_providers.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {

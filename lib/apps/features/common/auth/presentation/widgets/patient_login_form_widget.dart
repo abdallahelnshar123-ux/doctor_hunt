@@ -6,7 +6,7 @@ import '../../../../../../generated/translations.g.dart';
 import '../../../../../core/router/app_routes.dart';
 import '../../../../../core/theme/app_colors.dart';
 import '../../../../../core/utils/validators.dart';
-import '../../data/models/user/my_user.dart';
+import '../../domain/entity/user/user_roles.dart';
 import '../controller/auth/auth_bloc.dart';
 import '../controller/auth/auth_event.dart';
 import 'auth_header_widget.dart';

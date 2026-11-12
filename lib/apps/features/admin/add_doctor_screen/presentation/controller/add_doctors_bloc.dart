@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/apps/core/data/models/doctor/rating.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';

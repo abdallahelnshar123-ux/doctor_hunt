@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../data/models/user/auth_providers.dart';
+import 'auth_providers.dart';
 import 'user_roles.dart';
 
 abstract class AppUserEntity extends Equatable {

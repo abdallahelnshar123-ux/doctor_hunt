@@ -1,4 +1,4 @@
-import '../../../data/models/user/auth_providers.dart';
+import 'auth_providers.dart';
 import 'app_user.dart';
 import 'user_roles.dart';
 

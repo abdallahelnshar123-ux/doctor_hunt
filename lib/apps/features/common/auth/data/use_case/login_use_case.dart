@@ -9,7 +9,7 @@ import 'package:doctor_hunt/apps/features/common/auth/domain/repository/auth_rep
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:injectable/injectable.dart';
 
-import '../models/user/my_user.dart';
+import '../../domain/entity/user/user_roles.dart';
 
 @injectable
 class LoginUseCase {

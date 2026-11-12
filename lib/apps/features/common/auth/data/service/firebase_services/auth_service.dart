@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../../../../core/exceptions/app_exceptions.dart';
 import '../../mappers/auth_user_dto_mapper.dart';
-import '../../models/user_dto/auth_user_dto.dart';
+import '../../dto/user/auth_user_dto.dart';
 
 @lazySingleton
 class AuthService {

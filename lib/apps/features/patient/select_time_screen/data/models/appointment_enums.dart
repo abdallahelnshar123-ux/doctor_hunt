@@ -1,5 +1,5 @@
 import 'package:doctor_hunt/generated/translations.g.dart';
-
+@Deprecated("delete this File")
 enum TimeSlot {
   tenAm(time: '10:00', isAm: true),
   twelvePm(time: '12:00', isAm: false),

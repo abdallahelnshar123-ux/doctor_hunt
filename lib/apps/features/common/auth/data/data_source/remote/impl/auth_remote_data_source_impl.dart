@@ -11,7 +11,7 @@ import '../../../../../../../core/constants/firestore_constants.dart';
 import '../../../../../../../core/exceptions/app_exceptions.dart';
 import '../../../dto/user/app_user_dto.dart';
 import '../../../mappers/auth_user_dto_mapper.dart';
-import '../../../models/user_dto/auth_user_dto.dart';
+import '../../../dto/user/auth_user_dto.dart';
 import '../auth_remote_data_source.dart';
 
 @LazySingleton(as: AuthRemoteDataSource)

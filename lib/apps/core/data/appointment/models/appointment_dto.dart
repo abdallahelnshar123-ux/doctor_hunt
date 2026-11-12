@@ -6,7 +6,7 @@ import 'package:doctor_hunt/apps/core/data/models/doctor/review_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/app_user_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/doctor_dto.dart';
 import 'package:doctor_hunt/apps/features/common/auth/data/dto/user/patient_dto.dart';
-import 'package:doctor_hunt/apps/features/common/auth/data/models/user/auth_providers.dart';
+import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:equatable/equatable.dart';
 
