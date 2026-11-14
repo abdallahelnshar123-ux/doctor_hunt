@@ -1,6 +1,7 @@
 import 'package:doctor_hunt/apps/core/router/app_routes.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/language_picker_popup_menu.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +63,20 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
             onTap: () {
               const ForgotPasswordRoute().push(context);
             },
+          ),
+          _buildDivider(),
+          LanguagePickerPopupMenu(
+            child: _buildSettingsCard(
+              context,
+              title: t.settings.language,
+              subtitle: LanguagePickerPopupMenu.getCurrentLanguageName(),
+              icon: Icons.language_outlined,
+              trailing: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.textSecondary,
+                size: 16,
+              ),
+            ),
           ),
           _buildDivider(),
           _buildSettingsCard(

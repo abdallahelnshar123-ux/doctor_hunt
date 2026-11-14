@@ -134,6 +134,7 @@
     "language": "Language",
     "build_version": "Build Version",
     "english": "English",
+    "arabic": "Arabic",
     "v1.0.0": "v1.0.0",
     "logout_confirmation": "Are you sure you want to logout?"
   },
@@ -244,6 +245,8 @@
     "you_must_pick_doctor_image": "You must pick doctor image"
   },
   "common": {
+    "today": "Today",
+    "tomorrow": "Tomorrow",
     "am": "AM",
     "pm": "PM",
     "min": "Min.",

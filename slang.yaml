@@ -55,4 +55,5 @@ autodoc:
   enabled: true
   locales:
     - en
+    - ar
 generate_enum: false

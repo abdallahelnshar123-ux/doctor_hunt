@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/arabic_search_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/validators.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/presentation/controller/specialties_bloc.dart';
@@ -61,7 +62,6 @@ class SpecialtyDropdownWidget extends StatelessWidget {
             .toList(),
         width: double.infinity,
         requestFocusOnTap: false,
-
         focusNode: focusNode,
         trailingIcon: Icon(Icons.keyboard_arrow_down_rounded),
         enableSearch: true,
@@ -69,12 +69,10 @@ class SpecialtyDropdownWidget extends StatelessWidget {
         filterCallback: readOnly
             ? null
             : (entries, query) {
-                if (query.isEmpty) return entries;
+                if (query.trim().isEmpty) return entries;
                 return entries
                     .where(
-                      (entry) => entry.label.toLowerCase().contains(
-                        query.toLowerCase(),
-                      ),
+                      (entry) => SearchUtils.matches(entry.label, query),
                     )
                     .toList();
               },

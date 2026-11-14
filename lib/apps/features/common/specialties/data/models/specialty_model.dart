@@ -18,12 +18,13 @@ class SpecialtyModel extends Equatable {
     this.updatedAt,
   });
 
-  /// Returns the localized name based on the current app language code ('ar' or 'en').
+  /// Returns the localized name based on the current app language code ('ar' or 'en')
+  /// with safe fallback if one of the languages is empty.
   String localizedName() {
     if (LocaleSettings.currentLocale.languageCode == 'ar') {
-      return ar;
+      return ar.trim().isNotEmpty ? ar : en;
     }
-    return en;
+    return en.trim().isNotEmpty ? en : ar;
   }
 
   static DateTime? _parseDateTime(dynamic value) {

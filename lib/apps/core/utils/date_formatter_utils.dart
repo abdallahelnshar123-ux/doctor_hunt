@@ -1,5 +1,7 @@
 import 'package:intl/intl.dart';
 
+import '../../../../generated/translations.g.dart';
+
 class DateFormatterUtils {
   /// Formats a DateTime object to a String with format: YYYY-MM-DD
   static String formatToDateString(DateTime date) {
@@ -7,22 +9,35 @@ class DateFormatterUtils {
   }
 
   /// Formats a DateTime to a relative day and date string.
-  /// Output examples: "Today, 23 Feb", "Tomorrow, 24 Feb", "Friday, 25 Feb"
+  /// Output examples: "Today, 23 Feb" / "اليوم، 23 فبراير"
   static String formatToRelativeDayAndDate(DateTime date) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final tomorrow = today.add(const Duration(days: 1));
     final targetDate = DateTime(date.year, date.month, date.day);
 
-    final formattedDate = DateFormat('d MMM').format(date);
+    final locale = LocaleSettings.currentLocale.languageCode;
+    final formattedDate = DateFormat('d MMM', locale).format(date);
 
     if (targetDate == today) {
-      return 'Today, $formattedDate';
+      return '${t.common.today}, $formattedDate';
     } else if (targetDate == tomorrow) {
-      return 'Tomorrow, $formattedDate';
+      return '${t.common.tomorrow}, $formattedDate';
     } else {
-      final dayName = DateFormat('EEEE').format(date);
+      final dayName = DateFormat('EEEE', locale).format(date);
       return '$dayName, $formattedDate';
     }
+  }
+
+  /// Formats a DateTime to a localized Date string (e.g. 23 Feb 2026 / 23 فبراير 2026)
+  static String formatLocalizedDate(DateTime date, {String pattern = 'dd MMM yyyy'}) {
+    final locale = LocaleSettings.currentLocale.languageCode;
+    return DateFormat(pattern, locale).format(date);
+  }
+
+  /// Formats a DateTime to a localized Time string (e.g. 09:30 AM / 09:30 ص)
+  static String formatLocalizedTime(DateTime date, {String pattern = 'hh:mm a'}) {
+    final locale = LocaleSettings.currentLocale.languageCode;
+    return DateFormat(pattern, locale).format(date);
   }
 }

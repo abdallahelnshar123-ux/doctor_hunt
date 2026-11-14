@@ -54,6 +54,7 @@ void main() {
   sink.writeln('// Last updated: ${DateTime.now()}');
   sink.writeln('// Run `dart run generate_styles.dart` to update this file.');
   sink.writeln("import 'package:flutter/material.dart';");
+  sink.writeln("import 'translations.g.dart';");
   // sink.writeln("import 'package:google_fonts/google_fonts.dart';");
   sink.writeln(importColorsClass);
 
@@ -132,14 +133,26 @@ void generateWeightAndPxMixes(IOSink sink, List<int> fontSizes, List<String> fon
 
 void generateFontFamilies(IOSink sink, List<String> fontFamilies) {
   sink.writeln('extension FontFamilyAtoms on TextStyle {');
-
-  // for (final String fontFamily in fontFamilies) {
-  //   sink.writeln(
-  //     '  TextStyle get $fontFamily => GoogleFonts.$fontFamily(textStyle: this);',
-  //   );
-  // }
-  sink.writeln("  TextStyle get plusJakartaSans => copyWith(fontFamily: 'PlusJakartaSans');");
-  sink.writeln("  TextStyle get rubik => copyWith(fontFamily: 'Rubik');");
+  sink.writeln('  /// Primary font: dynamically resolves to Cairo for Arabic and Rubik for other languages.');
+  sink.writeln('  TextStyle get fontPrimary {');
+  sink.writeln('    final isArabic = LocaleSettings.currentLocale == AppLocale.ar;');
+  sink.writeln('    return copyWith(');
+  sink.writeln("      fontFamily: isArabic ? 'Cairo' : 'Rubik',");
+  sink.writeln("      fontFamilyFallback: const ['Cairo', 'Rubik'],");
+  sink.writeln('    );');
+  sink.writeln('  }\n');
+  sink.writeln('  /// Secondary font: dynamically resolves to Cairo for Arabic and PlusJakartaSans for other languages.');
+  sink.writeln('  TextStyle get fontSecondary {');
+  sink.writeln('    final isArabic = LocaleSettings.currentLocale == AppLocale.ar;');
+  sink.writeln('    return copyWith(');
+  sink.writeln("      fontFamily: isArabic ? 'Cairo' : 'PlusJakartaSans',");
+  sink.writeln("      fontFamilyFallback: const ['Cairo', 'PlusJakartaSans'],");
+  sink.writeln('    );');
+  sink.writeln('  }\n');
+  sink.writeln('  // Aliases for backward compatibility');
+  sink.writeln('  TextStyle get rubik => fontPrimary;');
+  sink.writeln('  TextStyle get plusJakartaSans => fontSecondary;');
+  sink.writeln("  TextStyle get cairo => copyWith(fontFamily: 'Cairo');");
   sink.writeln('}');
 }
 

@@ -50,3 +50,22 @@ A checklist of common architectural, network, and rendering bottlenecks that del
 **🔴 Problem:** Evaluating or debugging startup performance in Debug mode.
 **✅ Solution:**
 - Always test and measure startup speed using `flutter run --release` or `--profile`. Debug mode uses JIT (Just-In-Time) compilation and includes heavy debugging tools, making it fundamentally unrepresentative of real-world app startup speed (AOT).
+
+### 8. Initialization Ordering: Firebase vs Dependency Injection (`configureDependencies`)
+**🔴 Problem:** Attempting to place `configureDependencies()` inside a parallel `Future.wait` alongside `Firebase.initializeApp()` can cause fatal startup crashes:
+- If any registered service, repository, or bloc uses `@singleton` (eager) or `@preResolve` instead of `@lazySingleton`, its constructor will immediately attempt to access `FirebaseAuth.instance` or `FirebaseFirestore.instance` while `Firebase.initializeApp()` is still executing.
+- This results in the fatal crash: `[core/no-app] No Firebase App '[DEFAULT]' has been created - call Firebase.initializeApp() first.`
+
+**✅ Solution:** Follow the strict sequential safety pattern while parallelizing independent tasks:
+- **Parallelize non-dependent tasks:** Run `Firebase.initializeApp()` alongside independent startup tasks (such as `initializeDateFormatting()`) using `Future.wait`:
+  ```dart
+  await Future.wait([
+    Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform),
+    initializeDateFormatting(),
+  ]);
+  ```
+- **Run DI sequentially after Firebase:** Await `configureDependencies()` *after* Firebase finishes initialization:
+  ```dart
+  await configureDependencies();
+  ```
+- **Keep Firebase bindings lazy:** Always annotate Firebase modules and services (`FirebaseAuth`, `FirebaseFirestore`, `GoogleSignIn`) with `@lazySingleton` so they are never instantiated during DI registration.

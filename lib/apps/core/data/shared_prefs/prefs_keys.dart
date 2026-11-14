@@ -9,4 +9,6 @@ class PrefsKeys {
 
   static const String useBiometricKey = 'use_biometric';
   static const String biometricRejectedKey = 'reject_biometric';
+
+  static const String languageKey = 'app_language_code';
 }

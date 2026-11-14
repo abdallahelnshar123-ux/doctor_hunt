@@ -13,24 +13,27 @@ class MoreOptionWidget extends StatelessWidget {
           style: context.medium16.textSecondary.rubik,
         ),
         SizedBox(height: 5),
-        _buildSettingsCard(
-          context,
-          title: t.settings.language,
-          trailing: Row(
-            mainAxisSize: .min,
-            children: [
-              Text(
-                t.settings.english,
-                style: context.light12.textSecondary.rubik,
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: AppColors.textSecondary,
-                weight: 0.01,
-              ),
-            ],
+        LanguagePickerPopupMenu(
+          child: _buildSettingsCard(
+            context,
+            title: t.settings.language,
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  LanguagePickerPopupMenu.getCurrentLanguageName(),
+                  style: context.light12.textSecondary.rubik,
+                ),
+                const SizedBox(width: 4),
+                const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: AppColors.textSecondary,
+                  size: 14,
+                ),
+              ],
+            ),
+            backgroundColor: AppColors.settingsRed,
           ),
-          backgroundColor: AppColors.settingsRed,
         ),
         _buildDivider(),
         _buildSettingsCard(

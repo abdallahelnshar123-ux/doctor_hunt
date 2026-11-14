@@ -49,6 +49,20 @@ class AccountSettingsWidget extends StatelessWidget {
             ),
           ),
           _buildDivider(),
+          LanguagePickerPopupMenu(
+            child: _buildSettingsCard(
+              context,
+              title: t.settings.language,
+              subtitle: LanguagePickerPopupMenu.getCurrentLanguageName(),
+              icon: Icons.language_outlined,
+              trailing: const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: AppColors.textSecondary,
+                size: 16,
+              ),
+            ),
+          ),
+          _buildDivider(),
           _buildSettingsCard(
             context,
             title: t.admin.settings.appInformation,

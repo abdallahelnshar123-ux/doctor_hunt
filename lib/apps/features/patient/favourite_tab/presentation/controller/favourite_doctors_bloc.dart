@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/arabic_search_utils.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -92,11 +93,14 @@ class FavouriteDoctorsBloc
         filtered = currentState.allFavouriteDoctors;
       } else {
         filtered = currentState.allFavouriteDoctors.where((doctor) {
-          final nameMatches = doctor.name.toLowerCase().contains(trimmedQuery);
-          final specialtyMatches = doctor.specialty
-              .localizedName()
-              .toLowerCase()
-              .contains(trimmedQuery);
+          final nameMatches =
+              SearchUtils.matches(doctor.name, trimmedQuery);
+          final specialtyMatches = SearchUtils.matches(
+                doctor.specialty.localizedName(),
+                trimmedQuery,
+              ) ||
+              SearchUtils.matches(doctor.specialty.en, trimmedQuery) ||
+              SearchUtils.matches(doctor.specialty.ar, trimmedQuery);
           return nameMatches || specialtyMatches;
         }).toList();
       }

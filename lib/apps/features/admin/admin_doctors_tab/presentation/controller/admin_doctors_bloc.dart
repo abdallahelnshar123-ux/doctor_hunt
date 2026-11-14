@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/arabic_search_utils.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
 import 'package:doctor_hunt/apps/features/common/specialties/data/models/specialty_model.dart';
 import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_repository.dart';
@@ -149,10 +150,12 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
     List<DoctorEntity> doctors,
     String query,
   ) {
-    final lowerQuery = query.toLowerCase();
+    if (query.trim().isEmpty) return doctors;
     return doctors.where((doctor) {
-      return doctor.name.toLowerCase().contains(lowerQuery) ||
-          doctor.specialty.localizedName().toLowerCase().contains(lowerQuery);
+      return SearchUtils.matches(doctor.name, query) ||
+          SearchUtils.matches(doctor.specialty.localizedName(), query) ||
+          SearchUtils.matches(doctor.specialty.en, query) ||
+          SearchUtils.matches(doctor.specialty.ar, query);
     }).toList();
   }
 }

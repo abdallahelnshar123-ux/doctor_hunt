@@ -78,10 +78,12 @@ class UserPrefs {
   Future<void> setOnboardingDone() async {
     await _preferences.setBool(PrefsKeys.onBoardingKey, true);
   }
-  // UserTypeEnum getUserType() {
-  //   final userTypeString = _preferences.getString('userType') ?? '';
-  //   return UserTypeEnum.fromString(userTypeString);
-  // }
 
-  // bool get isSuperVisor => getCurrentUser()?.type == UserTypeEnum.supervisor;
+  Future<void> setLanguage(String languageCode) async {
+    await _preferences.setString(PrefsKeys.languageKey, languageCode);
+  }
+
+  String getSavedLanguage() {
+    return _preferences.getString(PrefsKeys.languageKey) ?? 'en';
+  }
 }

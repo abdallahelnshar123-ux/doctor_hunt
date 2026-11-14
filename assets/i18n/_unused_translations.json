@@ -1,0 +1,123 @@
+{
+  "@@info": [
+    "Here are translations that exist in secondary locales but not in <en>.",
+    "[--full enabled] Furthermore, translations not used in 'lib/' according to the 't.<path>' pattern are written into <en>."
+  ],
+  "en": {
+    "profile": {
+      "personal_information": "Personal information"
+    },
+    "privacy_policy": {
+      "sections": {
+        "information_we_collect": {
+          "title": "1. Information We Collect",
+          "description": "We collect information required to provide doctor booking and healthcare management services:",
+          "bullets": [
+            "Personal Identification: Name, email address, and phone number.",
+            "Appointment Data: Selected doctors, appointment dates, times, and booking status.",
+            "Medical Details: Basic consultation preferences and patient notes shared for appointments.",
+            "Account & Technical Data: User role (Patient, Doctor, Admin) and system log data."
+          ]
+        },
+        "how_we_use_information": {
+          "title": "2. How We Use Your Information",
+          "description": "Your information is used strictly to deliver and improve our healthcare services:",
+          "bullets": [
+            "Facilitating doctor searches, appointment scheduling, and management.",
+            "Sending appointment reminders and account updates.",
+            "Ensuring secure login and authentication.",
+            "Enhancing app performance and customer support experience."
+          ]
+        },
+        "data_security": {
+          "title": "3. Data Security & Storage",
+          "description": "We take the security of your health and personal data seriously:",
+          "bullets": [
+            "Data is stored securely using encrypted cloud database infrastructure.",
+            "Access controls restrict administrative and medical data to authorized users only.",
+            "We regularly update our security practices to protect against unauthorized access."
+          ]
+        },
+        "third_party_services": {
+          "title": "4. Third-Party Services",
+          "description": "We integrate trusted third-party services to ensure optimal performance:",
+          "bullets": [
+            "Firebase: Used for secure user authentication and cloud database management.",
+            "Cloudinary: Used for secure storage and delivery of profile and doctor images.",
+            "We never sell, trade, or rent your personal data to third parties for marketing purposes."
+          ]
+        },
+        "your_rights": {
+          "title": "5. Your Rights & Control",
+          "description": "You have full control over your personal data within Doctor Hunt:",
+          "bullets": [
+            "View and update your personal profile information at any time.",
+            "Manage notification settings and reminders.",
+            "Request account deletion or data erasure by contacting support."
+          ]
+        },
+        "contact_us": {
+          "title": "6. Contact Us",
+          "description": "If you have any questions or concerns regarding this Privacy Policy or your data protection, please contact us at support@doctorhunt.com."
+        }
+      }
+    },
+    "create_doctor": {
+      "add_photo": "Add photo",
+      "you_must_pick_doctor_image": "You must pick doctor image"
+    },
+    "admin": {
+      "patientsTab": {
+        "delete_patient": "Delete Patient",
+        "delete_patient_confirmation_title": "Delete Patient",
+        "delete_patient_confirmation_message": "Are you sure you want to delete this patient? This action cannot be undone.",
+        "patient_deleted_successfully": "Patient was deleted successfully"
+      },
+      "add_doctor_screen": {
+        "consultation_fee": "Consultation fee",
+        "fee_example": "e.g. $ 28.00"
+      },
+      "doctor_details_screen": {
+        "heart_care": "Heart Care",
+        "deleteDoctor": "Delete Doctor",
+        "doctor_deleted_successfully": "Doctor was deleted successfully",
+        "delete_doctor_confirmation_title": "Delete Doctor",
+        "delete_doctor_confirmation_message": "Are you sure you want to delete this doctor? This action cannot be undone."
+      },
+      "update_doctor_details": {
+        "doctor_was_updated_successfully": "Doctor was Updated Successfully",
+        "edit_doctor": "Edit doctor",
+        "change_photo": "Change photo",
+        "doctor_statues": "Doctor Statues",
+        "active_and_available": "Active & Available",
+        "inactive": "Inactive",
+        "delete_doctor": "Delete Doctor"
+      }
+    },
+    "errors": {
+      "error_while_adding_doctor_please_try_again_later": "Error while adding doctor please try again later"
+    },
+    "doctor": {
+      "onboarding": {
+        "step_profile_title": "Profile Details",
+        "step_profile_subtitle": "Please provide your contact information and consultation fee",
+        "step_availability_title": "Working Schedule",
+        "success_subtitle": "Your profile and availability have been successfully updated. You are now ready to start receiving appointments."
+      },
+      "availability": {
+        "start_time_and_endtime_must_be_different": "Start time and end time must be different"
+      },
+      "profile": {
+        "title": "Doctor Profile",
+        "personal_information": "Personal information",
+        "name": "Name",
+        "phone": "Phone",
+        "data_was_updated_successfully": "Data was updated successfully"
+      },
+      "schedule": {
+        "refresh": "Refresh"
+      }
+    }
+  },
+  "ar": {}
+}

@@ -4,17 +4,19 @@ import 'app_colors.dart';
 
 class AppTheme {
   static ThemeData lightTheme = ThemeData(
-    popupMenuTheme: PopupMenuThemeData(color: AppColors.white),
-    dialogTheme: DialogThemeData(backgroundColor: AppColors.white),
-    progressIndicatorTheme: ProgressIndicatorThemeData(
+    fontFamily: 'Rubik',
+    fontFamilyFallback: const ['Cairo'],
+    popupMenuTheme: const PopupMenuThemeData(color: AppColors.white),
+    dialogTheme: const DialogThemeData(backgroundColor: AppColors.white),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
       circularTrackColor: AppColors.brandPrimary,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparent,
       type: BottomNavigationBarType.shifting,
     ),
     scaffoldBackgroundColor: AppColors.bgPrimary,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       leadingWidth: 70,
       backgroundColor: AppColors.transparent,
       elevation: 0,
@@ -25,6 +27,7 @@ class AppTheme {
         fontSize: 18,
         fontWeight: FontWeight.w400,
         fontFamily: 'Rubik',
+        fontFamilyFallback: ['Cairo'],
       ),
     ),
   );

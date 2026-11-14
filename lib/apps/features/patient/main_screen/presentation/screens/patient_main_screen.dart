@@ -25,6 +25,11 @@ import '../../../home_tab/presentation/screens/home_tab.dart';
 class PatientMainScreen extends HookWidget {
   const PatientMainScreen({super.key});
 
+  static const String _homeAlias = 'home';
+  static const String _favouriteAlias = 'favourite';
+  static const String _appointmentsAlias = 'appointments';
+  static const String _settingsAlias = 'settings';
+
   @override
   Widget build(BuildContext context) {
     final user = context.select<UserBloc, AppUserEntity?>(
@@ -52,7 +57,7 @@ class PatientMainScreen extends HookWidget {
               if (selectedIndex.value == 0) return;
               selectedIndex.value = 0;
             },
-            alias: t.patientMain.home,
+            alias: _homeAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.homeIcon.path),
             text: Text(
               t.patientMain.home,
@@ -66,7 +71,7 @@ class PatientMainScreen extends HookWidget {
 
               selectedIndex.value = 1;
             },
-            alias: t.patientMain.favourite,
+            alias: _favouriteAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.favouriteIcon.path),
             text: Text(
               t.patientMain.favourite,
@@ -81,7 +86,7 @@ class PatientMainScreen extends HookWidget {
 
               selectedIndex.value = 2;
             },
-            alias: t.patientMain.appointments,
+            alias: _appointmentsAlias,
             icon: buildDrawerIcon(
               iconName: AppAssets.icons.appointmentsIcon.path,
             ),
@@ -96,7 +101,7 @@ class PatientMainScreen extends HookWidget {
               if (selectedIndex.value == 3) return;
               selectedIndex.value = 3;
             },
-            alias: t.patientMain.settings,
+            alias: _settingsAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.settingsIcon.path),
             text: Text(
               t.patientMain.settings,
@@ -105,8 +110,9 @@ class PatientMainScreen extends HookWidget {
             page: tabsList.value[3],
           ),
         ],
-        initialPage: tabsList.value[0],
+        initialPage: tabsList.value[selectedIndex.value],
       ),
+      [LocaleSettings.currentLocale],
     );
     useEffect(() {
       return () => drawerController.dispose();
@@ -221,26 +227,24 @@ class PatientMainScreen extends HookWidget {
 
                       switch (index) {
                         case 0:
-                          drawerController.selectItem(t.patientMain.home);
+                          drawerController.selectItem(_homeAlias);
                           selectedIndex.value = 0;
                           break;
                         case 1:
-                          drawerController.selectItem(t.patientMain.favourite);
+                          drawerController.selectItem(_favouriteAlias);
                           selectedIndex.value = 1;
                           break;
                         case 2:
-                          drawerController.selectItem(
-                            t.patientMain.appointments,
-                          );
+                          drawerController.selectItem(_appointmentsAlias);
                           selectedIndex.value = 2;
 
                           break;
                         case 3:
-                          drawerController.selectItem(t.patientMain.settings);
+                          drawerController.selectItem(_settingsAlias);
                           selectedIndex.value = 3;
                           break;
                         default:
-                          drawerController.selectItem(t.patientMain.home);
+                          drawerController.selectItem(_homeAlias);
                           selectedIndex.value = 0;
                       }
                     },

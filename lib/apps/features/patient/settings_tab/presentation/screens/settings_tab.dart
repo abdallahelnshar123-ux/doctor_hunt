@@ -3,6 +3,7 @@ import 'package:doctor_hunt/apps/core/utils/dialog_utils.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_scaffold.dart';
 import 'package:doctor_hunt/apps/core/widgets/basic_user_card.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_negative_button.dart';
+import 'package:doctor_hunt/apps/core/widgets/language_picker_popup_menu.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/auth_providers.dart';
 import 'package:doctor_hunt/generated/style_atoms.dart';
 import 'package:flutter/material.dart';

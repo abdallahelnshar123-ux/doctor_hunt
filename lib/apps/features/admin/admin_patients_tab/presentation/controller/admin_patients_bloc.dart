@@ -1,3 +1,4 @@
+import 'package:doctor_hunt/apps/core/utils/arabic_search_utils.dart';
 import 'package:doctor_hunt/apps/features/admin/admin_patients_tab/data/repo/admin_patients_repository.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/patient.dart';
 import 'package:equatable/equatable.dart';
@@ -103,9 +104,10 @@ class AdminPatientsBloc extends Bloc<AdminPatientsEvent, AdminPatientsState> {
       }
 
       final searchPatients = allPatients.where((patient) {
-        final lowerQuery = event.query.toLowerCase();
-        return patient.name.toLowerCase().contains(lowerQuery) ||
-            patient.email.toLowerCase().contains(lowerQuery);
+        return SearchUtils.matches(patient.name, event.query) ||
+            patient.email
+                .toLowerCase()
+                .contains(event.query.trim().toLowerCase());
       }).toList();
 
       emit(
