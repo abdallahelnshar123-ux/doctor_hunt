@@ -20,6 +20,8 @@ extension ExceptionMapper on AppException {
         return CacheFailure(message);
       case BiometricException():
         return BiometricFailure(message);
+      case SlotAlreadyBookedException():
+        return SlotAlreadyBookedFailure(message);
 
       default:
         return UnexpectedFailure(message);

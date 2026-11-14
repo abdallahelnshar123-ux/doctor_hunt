@@ -94,7 +94,11 @@ class AppointmentActionButtons extends StatelessWidget {
       borderSideColor: AppColors.statusError,
       onPressed: () {
         context.read<AppointmentActionBloc>().add(
-          CancelAppointmentEvent(appointment.id),
+          CancelAppointmentEvent(
+            appointmentId: appointment.id,
+            doctorId: appointment.doctor.id,
+            sessionTime: appointment.sessionTime,
+          ),
         );
       },
       child: FittedBox(

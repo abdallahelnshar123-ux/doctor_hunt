@@ -35,6 +35,7 @@ class AppScaffold extends StatelessWidget {
   final bool isOnboarding;
   final int? index;
   final bool bottomSafeArea;
+  final bool isLoading;
 
   const AppScaffold({
     super.key,
@@ -68,6 +69,7 @@ class AppScaffold extends StatelessWidget {
     this.isOnboarding = false,
     this.index,
     this.bottomSafeArea = true,
+    this.isLoading = false,
   });
 
   @override
@@ -84,6 +86,15 @@ class AppScaffold extends StatelessWidget {
                 ? _OnboardingBackground(index!)
                 : const _MainBackground(),
             if (body != null) Positioned.fill(child: body!),
+            if (isLoading) ...[
+              const ModalBarrier(
+                dismissible: false,
+                color: Colors.black26,
+              ),
+              const Center(
+                child: CircularProgressIndicator(color: AppColors.brandPrimary),
+              ),
+            ],
           ],
         ),
         floatingActionButton: floatingActionButton,

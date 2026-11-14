@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
+import 'package:doctor_hunt/apps/core/widgets/appointment/appointment_status_chip.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -51,7 +52,7 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
                   context: context,
                   text: t.admin.appointmentDetails.appointment,
                 ),
-                _buildStatusChip(context: context),
+                AppointmentStatusChip(status: appointment.status),
               ],
             ),
             AppContainerWithShadow(
@@ -173,40 +174,10 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
                   style: context.regular12.textCaption.rubik,
                   overflow: .ellipsis,
                 ),
-                Text(
-                  appointment.doctor.specialty.localizedName(),
-                  style: context.light10.textSecondary.rubik,
-                  overflow: .ellipsis,
-                ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildStatusChip({required BuildContext context}) {
-    return Chip(
-      padding: EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      side: BorderSide(width: 0, color: AppColors.transparent),
-      backgroundColor: appointment.status != AppointmentStatus.cancelled
-          ? AppColors.brandPrimary20
-          : AppColors.statusErrorSurface,
-      avatarBoxConstraints: .tightFor(width: 15),
-      avatar: Icon(
-        Icons.circle,
-        size: 10,
-        color: appointment.status != AppointmentStatus.cancelled
-            ? AppColors.brandPrimaryDark
-            : AppColors.statusError,
-      ),
-      label: Text(
-        appointment.status.name,
-        style: appointment.status != AppointmentStatus.cancelled
-            ? context.medium9.brandPrimaryDark.rubik
-            : context.regular9.statusError.rubik,
       ),
     );
   }

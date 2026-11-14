@@ -3,14 +3,14 @@ import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 part 'patient_doctors_event.dart';
 
 part 'patient_doctors_state.dart';
 
 EventTransformer<T> _debounce<T>(Duration duration) {
-  return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
+  return (events, mapper) => events.debounce(duration).switchMap(mapper);
 }
 
 @injectable

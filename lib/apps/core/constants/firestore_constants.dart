@@ -5,6 +5,7 @@ class FirestoreConstants {
   static const String adminsCollection = 'admins';
   static const String appointmentsCollection = 'appointments';
   static const String specialtiesCollection = 'specialties';
+  static const String doctorSlotsCollection = 'doctor_slots';
 
   // Common Fields
   static const String id = 'id';
@@ -36,6 +37,10 @@ class FirestoreConstants {
   static const String fee = 'fee';
   static const String status = 'status';
   static const String review = 'review';
+
+  // Slot Lock Fields
+  static const String isBooked = 'isBooked';
+  static const String appointmentId = 'appointmentId';
 
   // Doctor Fields
   static const String consultationFee = 'consultation_fee';

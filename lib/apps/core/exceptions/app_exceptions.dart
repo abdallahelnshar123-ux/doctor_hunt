@@ -1,3 +1,5 @@
+import 'package:doctor_hunt/generated/translations.g.dart';
+
 abstract class AppException implements Exception {
   final String message;
 
@@ -33,4 +35,12 @@ class BiometricException extends AppException {
 
 class UnexpectedException extends AppException {
   const UnexpectedException({required super.message, super.statusCode});
+}
+
+class SlotAlreadyBookedException extends AppException {
+  SlotAlreadyBookedException([String? message])
+    : super(
+        message: message ?? t.errors.slotAlreadyBooked,
+        statusCode: 409,
+      );
 }

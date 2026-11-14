@@ -15,11 +15,10 @@ class PatientLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);
-          DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             posActionText: t.dialog.ok,
             title: t.dialog.error,
@@ -28,7 +27,6 @@ class PatientLoginScreen extends StatelessWidget {
           );
         }
         if (state is ContinueWithGoogleErrorState) {
-          DialogUtils.hideLoading(context: context);
           if (!state.message.contains(t.errors.cancelledByUser)) {
             DialogUtils.showMessage(
               posActionText: t.dialog.ok,
@@ -38,32 +36,31 @@ class PatientLoginScreen extends StatelessWidget {
             );
           }
         }
-        if (state is LoginWithEmailPasswordLoadingState ||
-            state is ContinueWithGoogleLoadingState) {
-          DialogUtils.showLoading(context: context);
-        }
-        if (state is UserAuthenticatedState) {
-          DialogUtils.hideLoading(context: context);
-        }
       },
-      child: AppScaffold(
-        resizeToAvoidBottomInset: true,
-        body: Column(
-          children: [
-            MainAppBar(
-              onPressed: () {
-                const ChooseRoleRoute().go(context);
-              },
-            ),
-            const Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: PatientLoginFormWidget(),
+      builder: (context, state) {
+        final isLoading = state is LoginWithEmailPasswordLoadingState ||
+            state is ContinueWithGoogleLoadingState;
+
+        return AppScaffold(
+          isLoading: isLoading,
+          resizeToAvoidBottomInset: true,
+          body: Column(
+            children: [
+              MainAppBar(
+                onPressed: () {
+                  const ChooseRoleRoute().go(context);
+                },
               ),
-            ),
-          ],
-        ),
-      ),
+              const Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: PatientLoginFormWidget(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

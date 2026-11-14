@@ -116,10 +116,10 @@ class DoctorOnboardingScreen extends HookWidget {
           return;
         }
 
-        if (startTime.value == endTime.value) {
+        if (startTime.value.hour24 >= endTime.value.hour24) {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t.doctor.availability.startTimeAndEndtimeMustBeDifferent,
+            message: t.doctor.availability.startTimeMustBeBeforeEndTime,
           );
           return;
         }

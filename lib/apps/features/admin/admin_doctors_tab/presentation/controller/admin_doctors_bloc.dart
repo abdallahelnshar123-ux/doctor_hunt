@@ -4,13 +4,13 @@ import 'package:doctor_hunt/apps/features/doctor/domain/repository/doctor_reposi
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:rxdart/rxdart.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 part 'admin_doctors_event.dart';
 part 'admin_doctors_state.dart';
 
 EventTransformer<T> debounce<T>(Duration duration) {
-  return (events, mapper) => events.debounceTime(duration).flatMap(mapper);
+  return (events, mapper) => events.debounce(duration).switchMap(mapper);
 }
 
 @injectable
@@ -58,11 +58,15 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
               doctorsList,
               currentState.selectedSpecialty,
             );
+            final updatedSearchDoctors = currentState.searchQuery.trim().isEmpty
+                ? doctorsList
+                : _filterBySearchQuery(doctorsList, currentState.searchQuery);
             return currentState.copyWith(
               allDoctors: doctorsList,
               specialtyCounts: specialtyCounts,
               activeDoctorsCount: enabledCount,
               filteredDoctors: updatedFilteredDoctors,
+              searchDoctors: updatedSearchDoctors,
             );
           }
 
@@ -119,11 +123,7 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
         return;
       }
 
-      final searchDoctors = allDoctors.where((doctor) {
-        final lowerQuery = event.query.toLowerCase();
-        return doctor.name.toLowerCase().contains(lowerQuery) ||
-            doctor.specialty.localizedName().toLowerCase().contains(lowerQuery);
-      }).toList();
+      final searchDoctors = _filterBySearchQuery(allDoctors, event.query);
 
       emit(
         currentState.copyWith(
@@ -134,17 +134,25 @@ class AdminDoctorsBloc extends Bloc<AdminDoctorsEvent, AdminDoctorsState> {
     }
   }
 
-  List<DoctorEntity>? _applyFilterAndSearch(
+  List<DoctorEntity> _applyFilterAndSearch(
     List<DoctorEntity> allDoctors,
     SpecialtyModel? specialty,
   ) {
-    if (specialty == null) return null;
+    if (specialty == null) return const [];
 
     return allDoctors.where((doctor) {
-      bool matchesSpecialty = true;
-      matchesSpecialty = doctor.specialty == specialty;
+      return doctor.specialty == specialty;
+    }).toList();
+  }
 
-      return matchesSpecialty;
+  List<DoctorEntity> _filterBySearchQuery(
+    List<DoctorEntity> doctors,
+    String query,
+  ) {
+    final lowerQuery = query.toLowerCase();
+    return doctors.where((doctor) {
+      return doctor.name.toLowerCase().contains(lowerQuery) ||
+          doctor.specialty.localizedName().toLowerCase().contains(lowerQuery);
     }).toList();
   }
 }

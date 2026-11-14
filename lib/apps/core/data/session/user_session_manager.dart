@@ -78,6 +78,7 @@ class UserSessionManager {
     updateUser(null);
   }
 
+  @disposeMethod
   void dispose() {
     _userStreamController.close();
     _authStateController.close();

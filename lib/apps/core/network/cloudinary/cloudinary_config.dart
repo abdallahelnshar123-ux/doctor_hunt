@@ -1,16 +1,17 @@
-import 'package:injectable/injectable.dart';
-
-@module
 abstract class CloudinaryConfig {
-  @Named('cloud_name')
-  String get cloudName => 'der5mc1es';
+  static const String cloudName = String.fromEnvironment(
+    'CLOUDINARY_CLOUD_NAME',
+  );
 
-  @Named('upload_preset')
-  String get uploadPreset => 'doctor_hunt';
+  static const String uploadPreset = String.fromEnvironment(
+    'CLOUDINARY_UPLOAD_PRESET',
+  );
 
-  @Named('api_key')
-  String get apiKey => '729666688939527';
+  static const String apiKey = String.fromEnvironment(
+    'CLOUDINARY_API_KEY',
+  );
 
-  @Named('api_secret')
-  String get apiSecret => 'I-yhlYVZ1iqXmnPhS_9NuwtEBbA';
+  static const String apiSecret = String.fromEnvironment(
+    'CLOUDINARY_API_SECRET',
+  );
 }

@@ -1,5 +1,6 @@
 import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
 import 'package:doctor_hunt/apps/core/data/session/user_session_manager.dart';
+import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -23,11 +24,16 @@ class DoctorScheduleBloc
     FetchDoctorSchedule event,
     Emitter<DoctorScheduleState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, errorMessage: null));
+    emit(state.copyWith(isLoading: true, clearError: true));
 
     final user = _userSessionManager.currentUser;
     if (user == null) {
-      emit(state.copyWith(isLoading: false, errorMessage: 'User not found'));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: t.errors.userNotLoggedIn,
+        ),
+      );
       return;
     }
 

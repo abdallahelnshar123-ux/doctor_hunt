@@ -12,11 +12,17 @@ abstract class AppointmentActionEvent extends Equatable {
 
 class CancelAppointmentEvent extends AppointmentActionEvent {
   final String appointmentId;
+  final String doctorId;
+  final DateTime sessionTime;
 
-  const CancelAppointmentEvent(this.appointmentId);
+  const CancelAppointmentEvent({
+    required this.appointmentId,
+    required this.doctorId,
+    required this.sessionTime,
+  });
 
   @override
-  List<Object> get props => [appointmentId];
+  List<Object> get props => [appointmentId, doctorId, sessionTime];
 }
 
 class CompleteAppointmentEvent extends AppointmentActionEvent {

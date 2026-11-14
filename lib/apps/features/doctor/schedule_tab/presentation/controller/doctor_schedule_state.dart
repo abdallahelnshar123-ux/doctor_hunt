@@ -21,12 +21,13 @@ class DoctorScheduleState extends Equatable {
     bool? isLoading,
     List<Appointment>? appointments,
     String? errorMessage,
+    bool clearError = false,
   }) {
     return DoctorScheduleState(
       filter: filter ?? this.filter,
       isLoading: isLoading ?? this.isLoading,
       appointments: appointments ?? this.appointments,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: clearError ? null : (errorMessage ?? this.errorMessage),
     );
   }
 

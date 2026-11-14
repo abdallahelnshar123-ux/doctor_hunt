@@ -41,6 +41,11 @@ class SpecialtyService {
   }) async {
     try {
       final id = en.trim().toLowerCase();
+      final docSnapshot = await _collection.doc(id).get();
+      if (docSnapshot.exists) {
+        throw const ServerException(message: 'Specialty already exists');
+      }
+
       final querySnapshot = await _collection
           .where(FirestoreConstants.id, isEqualTo: id)
           .get();
@@ -58,8 +63,8 @@ class SpecialtyService {
         updatedAt: now,
       );
 
-      final docRef = await _collection.add(specialty.toMap());
-      return specialty.copyWith(id: docRef.id);
+      await _collection.doc(id).set(specialty.toMap());
+      return specialty;
     } on AppException {
       rethrow;
     } on FirebaseException catch (e) {

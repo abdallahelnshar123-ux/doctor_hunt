@@ -50,6 +50,9 @@ android/app/*.keystore
 android/local.properties
 .env
 .env.*
+!.env.example
+env.json
+*.env.json
 
 # --- FIREBASE ---
 # android/app/google-services.json

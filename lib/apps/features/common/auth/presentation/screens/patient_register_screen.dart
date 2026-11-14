@@ -15,10 +15,9 @@ class PatientRegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is RegisterWithEmailPasswordErrorState) {
-          DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             posActionText: t.dialog.ok,
             title: t.dialog.error,
@@ -27,7 +26,6 @@ class PatientRegisterScreen extends StatelessWidget {
           );
         }
         if (state is RegisterWithEmailPasswordSuccessState) {
-          DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             title: t.dialog.success,
             context: context,
@@ -39,7 +37,6 @@ class PatientRegisterScreen extends StatelessWidget {
           );
         }
         if (state is ContinueWithGoogleErrorState) {
-          DialogUtils.hideLoading(context: context);
           if (state.message != t.errors.cancelledByUser) {
             DialogUtils.showMessage(
               posActionText: t.dialog.ok,
@@ -49,29 +46,31 @@ class PatientRegisterScreen extends StatelessWidget {
             );
           }
         }
-        if (state is RegisterWithEmailPasswordLoadingState ||
-            state is ContinueWithGoogleLoadingState) {
-          DialogUtils.showLoading(context: context);
-        }
       },
-      child: AppScaffold(
-        resizeToAvoidBottomInset: true,
-        body: Column(
-          children: [
-            MainAppBar(
-              onPressed: () {
-                const ChooseRoleRoute().go(context);
-              },
-            ),
-            const Expanded(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: PatientRegisterFormWidget(),
+      builder: (context, state) {
+        final isLoading = state is RegisterWithEmailPasswordLoadingState ||
+            state is ContinueWithGoogleLoadingState;
+
+        return AppScaffold(
+          isLoading: isLoading,
+          resizeToAvoidBottomInset: true,
+          body: Column(
+            children: [
+              MainAppBar(
+                onPressed: () {
+                  const ChooseRoleRoute().go(context);
+                },
               ),
-            ),
-          ],
-        ),
-      ),
+              const Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: PatientRegisterFormWidget(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

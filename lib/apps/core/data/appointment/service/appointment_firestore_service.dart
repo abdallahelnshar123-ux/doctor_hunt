@@ -98,19 +98,85 @@ class AppointmentFirestoreService {
 
   Future<void> bookAppointment(AppointmentDto appointmentDto) async {
     try {
-      final collectionRef = _firestore.collection(
-        FirestoreConstants.appointmentsCollection,
-      );
-      var doc = collectionRef.doc();
+      final slotLockId =
+          '${appointmentDto.doctor.id}_${appointmentDto.sessionTime.millisecondsSinceEpoch}';
+      final slotRef = _firestore
+          .collection(FirestoreConstants.doctorSlotsCollection)
+          .doc(slotLockId);
+      final appointmentRef = _firestore
+          .collection(FirestoreConstants.appointmentsCollection)
+          .doc();
 
-      appointmentDto = appointmentDto.copyWith(id: doc.id);
+      await _firestore.runTransaction((transaction) async {
+        // 1. Atomic Read
+        final slotSnapshot = await transaction.get(slotRef);
 
-      await collectionRef
-          .doc(appointmentDto.id)
-          .set(appointmentDto.toFireStore());
+        // 2. Atomic Check
+        if (slotSnapshot.exists) {
+          final isBooked =
+              slotSnapshot.data()?[FirestoreConstants.isBooked] as bool? ??
+              false;
+          if (isBooked) {
+            throw SlotAlreadyBookedException();
+          }
+        }
+
+        // 3. Atomic Dual Write
+        final newAppointment = appointmentDto.copyWith(id: appointmentRef.id);
+
+        // a. Lock the slot
+        transaction.set(slotRef, {
+          FirestoreConstants.isBooked: true,
+          FirestoreConstants.appointmentId: appointmentRef.id,
+          FirestoreConstants.updatedAt: FieldValue.serverTimestamp(),
+        });
+
+        // b. Create appointment record
+        transaction.set(appointmentRef, newAppointment.toFireStore());
+      });
+    } on SlotAlreadyBookedException {
+      rethrow;
     } catch (e) {
       throw ServerException(
         message: t.errors.failedToBookAppointment(E: e.toString()),
+      );
+    }
+  }
+
+  Future<void> cancelAppointment({
+    required String appointmentId,
+    required String doctorId,
+    required DateTime sessionTime,
+  }) async {
+    try {
+      final appointmentRef = _firestore
+          .collection(FirestoreConstants.appointmentsCollection)
+          .doc(appointmentId);
+      final slotLockId = '${doctorId}_${sessionTime.millisecondsSinceEpoch}';
+      final slotRef = _firestore
+          .collection(FirestoreConstants.doctorSlotsCollection)
+          .doc(slotLockId);
+
+      await _firestore.runTransaction((transaction) async {
+        // 1. Update appointment status to cancelled
+        transaction.update(appointmentRef, {
+          FirestoreConstants.status: AppointmentStatus.cancelled.name,
+        });
+
+        // 2. Release slot lock to make it available for booking
+        transaction.set(
+          slotRef,
+          {
+            FirestoreConstants.isBooked: false,
+            FirestoreConstants.appointmentId: null,
+            FirestoreConstants.updatedAt: FieldValue.serverTimestamp(),
+          },
+          SetOptions(merge: true),
+        );
+      });
+    } catch (e) {
+      throw ServerException(
+        message: t.errors.failedToUpdateAppointmentStatus(E: e.toString()),
       );
     }
   }

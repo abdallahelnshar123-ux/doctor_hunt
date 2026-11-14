@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../generated/translations.g.dart';
+import '../../features/common/auth/presentation/widgets/custom_text_password.dart';
 import '../theme/app_colors.dart';
+import 'validators.dart';
 
 class DialogUtils {
   /// Shared helper method to present non-dismissible dialogs wrapped in [PopScope].
@@ -141,6 +143,10 @@ class _PasswordDialogContent extends HookWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(message, style: context.regular14.brandPrimary.rubik),
+            CustomTextPassword(
+              controller: passwordController,
+              validator: Validators.password,
+            ),
           ],
         ),
       ),

@@ -80,7 +80,14 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         availability: doctor.availability,
       );
 
-      await _getUsersCollection().doc(uid).set(newDoctor);
+      try {
+        await _getUsersCollection().doc(uid).set(newDoctor);
+      } catch (firestoreError) {
+        try {
+          await userCredential.user?.delete();
+        } catch (_) {}
+        rethrow;
+      }
 
       try {
         await auth.signOut();

@@ -1,10 +1,12 @@
 import 'package:doctor_hunt/apps/core/data/appointment/repo/appointment_repository.dart';
+import 'package:doctor_hunt/apps/core/failure/failure.dart';
 import 'package:doctor_hunt/generated/translations.g.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/data/session/user_session_manager.dart';
 import 'package:doctor_hunt/apps/core/data/appointment/models/appointment.dart';
+import '../../data/models/daily_availability.dart';
 import '../../data/use_case/get_available_slots_use_case.dart';
 import 'select_time_event.dart';
 import 'select_time_state.dart';
@@ -53,6 +55,8 @@ class SelectTimeBloc extends Bloc<SelectTimeEvent, SelectTimeState> {
 
     final userOption = _userSessionManager.getCurrentUser();
 
+    var shouldRemoveSlot = false;
+
     await userOption.fold(
       () async => emit(BookAppointmentError(t.errors.userNotLoggedIn)),
       (user) async {
@@ -72,14 +76,44 @@ class SelectTimeBloc extends Bloc<SelectTimeEvent, SelectTimeState> {
         );
 
         result.fold(
-          (failure) => emit(BookAppointmentError(failure.message)),
-          (_) => emit(BookAppointmentSuccess(event.selectedTime)),
+          (failure) {
+            if (failure is SlotAlreadyBookedFailure) {
+              shouldRemoveSlot = true;
+            }
+            emit(BookAppointmentError(failure.message));
+          },
+          (_) {
+            shouldRemoveSlot = true;
+            emit(BookAppointmentSuccess(event.selectedTime));
+          },
         );
       },
     );
 
-    // Re-emit loaded state so the UI goes back to the slots view
-    // if booking failed or succeeded (dialog will handle success)
-    emit(currentState);
+    if (shouldRemoveSlot) {
+      final updatedAvailability = _removeSlotFromAvailability(
+        currentState.weeklyAvailability,
+        event.selectedTime,
+      );
+      emit(SelectTimeLoaded(updatedAvailability));
+    } else {
+      emit(currentState);
+    }
+  }
+
+  List<DailyAvailability> _removeSlotFromAvailability(
+    List<DailyAvailability> weeklyAvailability,
+    DateTime selectedTime,
+  ) {
+    return weeklyAvailability.map((daily) {
+      final updatedSlots = daily.availableSlots.where((slot) {
+        return !slot.time.isAtSameMomentAs(selectedTime);
+      }).toList();
+
+      return DailyAvailability(
+        date: daily.date,
+        availableSlots: updatedSlots,
+      );
+    }).toList();
   }
 }

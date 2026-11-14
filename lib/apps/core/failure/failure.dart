@@ -40,3 +40,7 @@ class UnexpectedFailure extends Failure {
 class CancelledByUserFailure extends Failure {
   const CancelledByUserFailure() : super('cancelled_by_user');
 }
+
+class SlotAlreadyBookedFailure extends Failure {
+  const SlotAlreadyBookedFailure([super.message = '']);
+}

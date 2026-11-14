@@ -16,11 +16,10 @@ class DoctorLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
+    return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);
-          DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             posActionText: t.dialog.ok,
             title: t.dialog.error,
@@ -28,34 +27,33 @@ class DoctorLoginScreen extends StatelessWidget {
             message: state.message,
           );
         }
-        if (state is LoginWithEmailPasswordLoadingState) {
-          DialogUtils.showLoading(context: context);
-        }
-        if (state is UserAuthenticatedState) {
-          DialogUtils.hideLoading(context: context);
-        }
       },
-      child: AppScaffold(
-        resizeToAvoidBottomInset: true,
-        body: Column(
-          children: [
-            MainAppBar(
-              onPressed: () {
-                const ChooseRoleRoute().go(context);
-              },
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: RoleLoginFormWidget(
-                  role: UserRoles.doctor,
-                  subtitle: t.auth.doctorSubtitle,
+      builder: (context, state) {
+        final isLoading = state is LoginWithEmailPasswordLoadingState;
+
+        return AppScaffold(
+          isLoading: isLoading,
+          resizeToAvoidBottomInset: true,
+          body: Column(
+            children: [
+              MainAppBar(
+                onPressed: () {
+                  const ChooseRoleRoute().go(context);
+                },
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: RoleLoginFormWidget(
+                    role: UserRoles.doctor,
+                    subtitle: t.auth.doctorSubtitle,
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

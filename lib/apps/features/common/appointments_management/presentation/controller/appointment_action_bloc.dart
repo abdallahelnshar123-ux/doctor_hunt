@@ -29,9 +29,10 @@ class AppointmentActionBloc
   ) async {
     emit(AppointmentActionLoading(event.appointmentId));
 
-    final result = await _appointmentRepository.updateAppointmentStatus(
-      event.appointmentId,
-      AppointmentStatus.cancelled,
+    final result = await _appointmentRepository.cancelAppointment(
+      appointmentId: event.appointmentId,
+      doctorId: event.doctorId,
+      sessionTime: event.sessionTime,
     );
 
     result.fold(
@@ -128,7 +129,7 @@ class AppointmentActionBloc
       rating: newAverage,
       reviewsCount: newCount,
       totalRatingSum: newTotalRating,
-      reviews: const [],
+      reviews: [...freshDoctor.rating.reviews, review],
     );
     final updatedDoctor = freshDoctor.copyWith(rating: updatedRating);
     final updatedAppointment = appointment.copyWith(

@@ -16,9 +16,13 @@ class RatingDto extends Equatable {
     this.reviews = const [],
   });
 
-  factory RatingDto.fromFireStore(Map<String, dynamic> data) {
-    final reviewsList =
-        (data[FirestoreConstants.reviews] as List<dynamic>?)
+  factory RatingDto.fromFireStore(
+    Map<String, dynamic> data, {
+    List<ReviewDto> subcollectionReviews = const [],
+  }) {
+    final reviewsList = subcollectionReviews.isNotEmpty
+        ? subcollectionReviews
+        : (data[FirestoreConstants.reviews] as List<dynamic>?)
             ?.map(
               (e) =>
                   ReviewDto.fromFireStore(Map<String, dynamic>.from(e as Map)),

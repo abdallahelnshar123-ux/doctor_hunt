@@ -132,4 +132,23 @@ class AppointmentRepository {
       return Left(UnexpectedFailure(e.toString()));
     }
   }
+
+  Future<Either<Failure, Unit>> cancelAppointment({
+    required String appointmentId,
+    required String doctorId,
+    required DateTime sessionTime,
+  }) async {
+    try {
+      await _firestoreService.cancelAppointment(
+        appointmentId: appointmentId,
+        doctorId: doctorId,
+        sessionTime: sessionTime,
+      );
+      return const Right(unit);
+    } on AppException catch (e) {
+      return Left(e.toFailure());
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
 }
