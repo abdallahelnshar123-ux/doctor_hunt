@@ -79,9 +79,10 @@ class DoctorDetailsCard extends StatelessWidget {
                                 width: 9,
                               ),
                               Text(
-                                t.doctorDetails.pricePerHour(
-                                  Price: doctor.consultationFee.toString(),
-                                ),
+                                t.features.patient.doctorDetailsScreen
+                                    .pricePerHour(
+                                      Price: doctor.consultationFee.toString(),
+                                    ),
                                 style: context.light10.textSecondary.rubik,
                               ),
                             ],
@@ -110,7 +111,7 @@ class DoctorDetailsCard extends StatelessWidget {
         SelectTimeRoute(doctor).push(context);
       },
       child: Text(
-        t.doctorDetails.bookNow,
+        t.features.patient.doctorDetailsScreen.bookNow,
         style: context.medium11.bgPrimary.rubik,
       ),
     );

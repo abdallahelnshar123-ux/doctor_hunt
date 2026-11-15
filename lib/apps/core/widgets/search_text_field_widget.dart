@@ -45,7 +45,7 @@ class SearchTextFieldWidget extends StatelessWidget {
           color: AppColors.textSecondary,
           size: 30,
         ),
-        hintText: hintText ?? t.home.search,
+        hintText: hintText ?? t.core.common.search,
         hintStyle: context.regular14.textSecondary.rubik,
         filled: true,
         fillColor: AppColors.bgPrimary,

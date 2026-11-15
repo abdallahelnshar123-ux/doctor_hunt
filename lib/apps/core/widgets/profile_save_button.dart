@@ -36,7 +36,7 @@ class ProfileSaveButton extends StatelessWidget {
                   size: 20,
                 ),
                 Text(
-                  t.admin.updateDoctorDetails.saveChanges,
+                  t.core.common.saveChanges,
                   style: context.semiBold16.white.rubik,
                 ),
               ],

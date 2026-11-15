@@ -9,11 +9,11 @@ extension AppointmentStatusExt on AppointmentStatus {
   String get localizedName {
     switch (this) {
       case AppointmentStatus.upcoming:
-        return t.patientAppointments.upcoming;
+        return t.core.widgets.appointment.upcoming;
       case AppointmentStatus.completed:
-        return t.patientAppointments.completed;
+        return t.core.widgets.appointment.completed;
       case AppointmentStatus.cancelled:
-        return t.patientAppointments.canceled;
+        return t.core.widgets.appointment.canceled;
     }
   }
 }
@@ -25,42 +25,36 @@ class AppointmentStatusChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final (Color backgroundColor, Color dotColor, TextStyle labelStyle) =
-        switch (status) {
-          AppointmentStatus.upcoming => (
-            AppColors.brandPrimary20,
-            AppColors.brandPrimaryDark,
-            context.medium9.brandPrimaryDark.rubik,
-          ),
-          AppointmentStatus.completed => (
-            AppColors.statusSuccessSurface,
-            AppColors.brandPrimaryDark,
-            context.medium9.brandPrimaryDark.rubik,
-          ),
-          AppointmentStatus.cancelled => (
-            AppColors.statusErrorSurface,
-            AppColors.statusError,
-            context.regular9.statusError.rubik,
-          ),
-        };
+    final (
+      Color backgroundColor,
+      Color dotColor,
+      TextStyle labelStyle,
+    ) = switch (status) {
+      AppointmentStatus.upcoming => (
+        AppColors.brandPrimary20,
+        AppColors.brandPrimaryDark,
+        context.medium9.brandPrimaryDark.rubik,
+      ),
+      AppointmentStatus.completed => (
+        AppColors.statusSuccessSurface,
+        AppColors.brandPrimaryDark,
+        context.medium9.brandPrimaryDark.rubik,
+      ),
+      AppointmentStatus.cancelled => (
+        AppColors.statusErrorSurface,
+        AppColors.statusError,
+        context.regular9.statusError.rubik,
+      ),
+    };
 
     return Chip(
       padding: const EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       side: const BorderSide(width: 0, color: AppColors.transparent),
       backgroundColor: backgroundColor,
       avatarBoxConstraints: const BoxConstraints.tightFor(width: 15),
-      avatar: Icon(
-        Icons.circle,
-        size: 10,
-        color: dotColor,
-      ),
-      label: Text(
-        status.localizedName,
-        style: labelStyle,
-      ),
+      avatar: Icon(Icons.circle, size: 10, color: dotColor),
+      label: Text(status.localizedName, style: labelStyle),
     );
   }
 }

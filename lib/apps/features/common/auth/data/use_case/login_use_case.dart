@@ -47,10 +47,10 @@ class LoginUseCase {
         if (r is PatientEntity && r.disabled) {
           // Also sign out ideally so no lingering invalid session exists.
           _repository.logout();
-          return Left(UnauthorizedFailure(t.errors.accountDisabled));
+          return Left(UnauthorizedFailure(t.core.errors.accountDisabled));
         } else if (r is DoctorEntity && r.disabled) {
           _repository.logout();
-          return Left(UnauthorizedFailure(t.errors.accountDisabled));
+          return Left(UnauthorizedFailure(t.core.errors.accountDisabled));
         }
       }
 
@@ -58,7 +58,7 @@ class LoginUseCase {
         return Right(r);
       } else {
         _repository.logout();
-        return Left(UnauthorizedFailure(t.errors.noAccountAssociated));
+        return Left(UnauthorizedFailure(t.core.errors.noAccountAssociated));
       }
     });
   }

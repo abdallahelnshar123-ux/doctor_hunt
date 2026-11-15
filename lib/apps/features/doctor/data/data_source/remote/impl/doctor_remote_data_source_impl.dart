@@ -25,7 +25,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           fromFirestore: (snapshot, options) {
             final data = snapshot.data();
             if (data == null) {
-              throw ServerException(message: t.errors.someThingWentWrong);
+              throw ServerException(message: t.core.errors.someThingWentWrong);
             }
             final map = Map<String, dynamic>.from(data);
             if (!map.containsKey(FirestoreConstants.id) ||
@@ -62,7 +62,7 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
 
       final uid = userCredential.user?.uid;
       if (uid == null) {
-        throw ServerException(message: t.errors.serverError);
+        throw ServerException(message: t.core.errors.serverError);
       }
 
       final newDoctor = DoctorDto(
@@ -93,16 +93,16 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         await auth.signOut();
       } catch (_) {}
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.eCodes.emailAlreadyInUse) {
+      if (e.code == t.core.eCodes.emailAlreadyInUse) {
         throw ServerException(
-          message: t.errors.emailAddressAlreadyInUseByAnotherAccount,
+          message: t.core.errors.emailAddressAlreadyInUseByAnotherAccount,
         );
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       if (e is AppException) rethrow;
       throw UnexpectedException(message: e.toString());
@@ -124,11 +124,11 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         return data;
       }
 
-      throw ServerException(message: t.errors.someThingWentWrong);
+      throw ServerException(message: t.core.errors.someThingWentWrong);
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -144,10 +144,10 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           switch (error) {
             case FirebaseException _:
               throw ServerException(
-                message: error.message ?? t.errors.serverError,
+                message: error.message ?? t.core.errors.serverError,
               );
             case SocketException _:
-              throw NetworkException(message: t.errors.noInternet);
+              throw NetworkException(message: t.core.errors.noInternet);
             default:
               throw UnexpectedException(message: error.toString());
           }
@@ -170,10 +170,10 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           switch (error) {
             case FirebaseException _:
               throw ServerException(
-                message: error.message ?? t.errors.serverError,
+                message: error.message ?? t.core.errors.serverError,
               );
             case SocketException _:
-              throw NetworkException(message: t.errors.noInternet);
+              throw NetworkException(message: t.core.errors.noInternet);
             default:
               throw UnexpectedException(message: error.toString());
           }
@@ -191,9 +191,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           .doc(doctorId)
           .update({FirestoreConstants.active: active});
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -210,9 +210,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
           .doc(doctorId)
           .update({FirestoreConstants.disabled: disabled});
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -223,9 +223,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
     try {
       await _getUsersCollection().doc(doctor.id).set(doctor);
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -244,9 +244,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
             FirestoreConstants.availability: availability.toFireStore(),
           });
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -257,9 +257,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
     try {
       await _getUsersCollection().doc(doctorId).delete();
     } on FirebaseException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }

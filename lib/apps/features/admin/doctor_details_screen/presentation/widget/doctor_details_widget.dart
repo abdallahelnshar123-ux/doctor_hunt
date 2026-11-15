@@ -42,7 +42,7 @@ class DoctorDetailsWidget extends HookWidget {
           children: [
             _buildSettingsCard(
               context,
-              title: t.admin.doctorDetailsScreen.specialty,
+              title: t.features.admin.doctorDetailsScreen.specialty,
               icon: AppAssets.icons.medicalIcon.path,
               subtitleWidget: Text(
                 doctor.specialty.localizedName(),
@@ -52,7 +52,7 @@ class DoctorDetailsWidget extends HookWidget {
             _buildDivider(),
             _buildSettingsCard(
               context,
-              title: t.admin.doctorDetailsScreen.rating,
+              title: t.features.admin.doctorDetailsScreen.rating,
               subtitleWidget: RatingWidget(
                 rating: doctor.rating.rating,
                 starSize: 17,
@@ -62,11 +62,11 @@ class DoctorDetailsWidget extends HookWidget {
             _buildDivider(),
             _buildSettingsCard(
               context,
-              title: t.admin.doctorDetailsScreen.consultationFee,
+              title: t.features.admin.doctorDetailsScreen.consultationFee,
               icon: AppAssets.icons.feeIcon.path,
               subtitleWidget: Text(
-                t.admin.doctorDetailsScreen.fee(
-                  Price: doctor.consultationFee.toString(),
+                t.features.admin.doctorDetailsScreen.fee(
+                  Fee: doctor.consultationFee.toString(),
                 ),
                 style: context.semiBold14.textTertiary.rubik,
               ),

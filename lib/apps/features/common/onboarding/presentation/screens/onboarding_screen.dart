@@ -23,16 +23,16 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final onboardingPages = t.onboarding.pages;
+    final onboardingPages = t.features.common.onboarding.pages;
 
     final currentPage = onboardingPages[currentIndex];
     final isLastPage = currentIndex == onboardingPages.length - 1;
 
     final firstButtonText = isLastPage
-        ? t.onboarding.getStarted
-        : t.onboarding.next;
+        ? t.features.common.onboarding.getStarted
+        : t.features.common.onboarding.next;
 
-    final secondButtonText = t.onboarding.skip;
+    final secondButtonText = t.features.common.onboarding.skip;
     return AppScaffold(
       isOnboarding: true,
       index: currentIndex,

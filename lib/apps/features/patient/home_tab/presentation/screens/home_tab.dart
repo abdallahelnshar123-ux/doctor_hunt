@@ -82,7 +82,7 @@ class HomeTab extends StatelessWidget {
           onPressed: () {
             const FindDoctorsRoute().push(context);
           },
-          label: Text(t.home.search),
+          label: Text(t.features.patient.homeTab.search),
         ),
       ),
     );
@@ -97,11 +97,11 @@ class HomeTab extends StatelessWidget {
       backgroundColor: AppColors.brandPrimary,
       title: Text.rich(
         TextSpan(
-          text: t.home.welcome(Name: user?.name ?? ''),
+          text: t.features.patient.homeTab.welcome(Name: user?.name ?? ''),
           style: context.light20.bgPrimary.rubik,
           children: [
             TextSpan(
-              text: '\n${t.home.findDoctor}',
+              text: '\n${t.features.patient.homeTab.findDoctor}',
               style: context.bold24.bgPrimary.rubik,
             ),
           ],

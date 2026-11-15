@@ -82,7 +82,7 @@ class DoctorCard extends StatelessWidget {
       backgroundColor: AppColors.brandPrimary,
       onPressed: () {},
       child: Text(
-        t.doctorDetails.bookNow,
+        t.features.patient.doctorDetailsScreen.bookNow,
         style: context.medium11.bgPrimary.rubik,
       ),
     ),
@@ -93,7 +93,7 @@ class DoctorCard extends StatelessWidget {
       flex: 3,
       child: Text.rich(
         TextSpan(
-          text: '${t.doctorDetails.nextAvailable}\n',
+          text: '${t.features.patient.doctorDetailsScreen.nextAvailable}\n',
           style: context.medium12.brandPrimary.rubik,
           children: [
             TextSpan(
@@ -101,7 +101,8 @@ class DoctorCard extends StatelessWidget {
               style: context.medium12.textSecondary.rubik,
             ),
             TextSpan(
-              text: ' ${t.common.am} ${t.doctorDetails.tomorrow}',
+              text:
+                  ' ${t.core.common.am} ${t.features.patient.doctorDetailsScreen.tomorrow}',
               style: context.light12.textSecondary.rubik,
             ),
           ],
@@ -120,16 +121,18 @@ class DoctorCard extends StatelessWidget {
           FittedBox(
             fit: .scaleDown,
             child: Text(
-              doctor?.name ?? t.doctorDetails.doctorName,
+              doctor?.name ??
+                  t.features.patient.doctorDetailsScreen.doctorName,
               style: context.medium16.textTertiary.rubik,
             ),
           ),
           Text(
-            doctor?.specialty.localizedName() ?? t.doctorDetails.toothDentist,
+            doctor?.specialty.localizedName() ??
+                t.features.patient.doctorDetailsScreen.toothDentist,
             style: context.regular11.brandPrimary.rubik,
           ),
           Text(
-            t.doctorDetails.experience(Years: '7'),
+            t.features.patient.doctorDetailsScreen.experience(Years: '7'),
             style: context.light11.textSecondary.rubik,
           ),
           SizedBox(height: 5),
@@ -141,7 +144,9 @@ class DoctorCard extends StatelessWidget {
             children: [
               _patientStoriesWidget(text: '87%', context: context),
               _patientStoriesWidget(
-                text: t.doctorDetails.patientStories(Count: '69'),
+                text: t.features.patient.doctorDetailsScreen.patientStories(
+                  Count: '69',
+                ),
                 context: context,
               ),
             ],

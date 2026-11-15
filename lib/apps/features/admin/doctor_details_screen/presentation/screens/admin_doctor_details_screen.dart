@@ -28,7 +28,7 @@ class AdminDoctorDetailsScreen extends HookWidget {
     final isActive = useValueNotifier(!doctor.disabled);
     return Scaffold(
       appBar: AppBar(
-        title: Text(t.admin.doctorDetailsScreen.doctorDetails),
+        title: Text(t.features.admin.doctorDetailsScreen.title),
         centerTitle: true,
       ),
       body: ListView(
@@ -75,7 +75,9 @@ class AdminDoctorDetailsScreen extends HookWidget {
             color: value ? AppColors.brandPrimaryDark : AppColors.statusError,
           ),
           label: Text(
-            value ? t.admin.doctorsTab.enabled : t.admin.doctorsTab.disabled,
+            value
+                ? t.features.admin.adminDoctorsTab.enabled
+                : t.features.admin.adminDoctorsTab.disabled,
             style: value
                 ? context.medium10.brandPrimaryDark.rubik
                 : context.regular10.statusError.rubik,

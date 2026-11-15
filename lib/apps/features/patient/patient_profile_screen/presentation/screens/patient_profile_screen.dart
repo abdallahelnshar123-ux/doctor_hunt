@@ -48,7 +48,8 @@ class PatientProfileScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.profile.dataWasUpdatedSuccessfully,
+            message:
+                t.features.patient.patientProfileScreen.dataUpdatedSuccessfully,
           );
           const PatientMainRoute().go(context);
         }
@@ -59,7 +60,7 @@ class PatientProfileScreen extends HookWidget {
           children: [
             MainAppBar(
               backgroundColor: AppColors.brandPrimary,
-              title: t.profile.title,
+              title: t.features.patient.patientProfileScreen.title,
               titleStyle: context.bold18.white.rubik,
             ),
             MainProfileAvatarWidget(

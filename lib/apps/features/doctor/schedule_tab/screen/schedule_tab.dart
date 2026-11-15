@@ -19,7 +19,7 @@ class ScheduleTab extends StatelessWidget {
       backgroundColor: AppColors.transparent,
       body: Column(
         children: [
-          AppBar(title: Text(t.doctor.schedule.title)),
+          AppBar(title: Text(t.features.doctor.scheduleTab.title)),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 20.0,
@@ -100,7 +100,7 @@ class ScheduleTab extends StatelessWidget {
                 if (appointments == null || appointments.isEmpty) {
                   return Center(
                     child: Text(
-                      t.doctor.schedule.noAppointments,
+                      t.features.doctor.scheduleTab.noAppointments,
                       style: context.medium16.textTertiary.rubik,
                     ),
                   );

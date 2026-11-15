@@ -39,7 +39,7 @@ class SelectTimeScreen extends HookWidget {
         child: Column(
           spacing: 15,
           children: [
-            MainAppBar(title: t.selectTime.title),
+            MainAppBar(title: t.features.patient.selectTimeScreen.title),
             DoctorCardWide(
               doctor: doctor,
               margin: EdgeInsets.symmetric(horizontal: 20),
@@ -92,13 +92,15 @@ class SelectTimeScreen extends HookWidget {
                                       .weeklyAvailability[index]
                                       .availableSlots
                                       .isEmpty
-                                  ? t.selectTime.noSlotsAvailable
-                                  : t.selectTime.slotAvailable(
-                                      Number: state
-                                          .weeklyAvailability[index]
-                                          .availableSlots
-                                          .length,
-                                    ),
+                                  ? t.features.patient.selectTimeScreen
+                                        .noSlotsAvailable
+                                  : t.features.patient.selectTimeScreen
+                                        .slotAvailable(
+                                          Number: state
+                                              .weeklyAvailability[index]
+                                              .availableSlots
+                                              .length,
+                                        ),
                               text: tabText,
                             );
                           }),
@@ -112,7 +114,8 @@ class SelectTimeScreen extends HookWidget {
                                   .availableSlots
                                   .isEmpty) {
                                 return MainEmptyListWidget(
-                                  title: t.selectTime.noSlotsAvailable,
+                                  title: t.features.patient.selectTimeScreen
+                                      .noSlotsAvailable,
                                 );
                               }
                               return SlotsTab(
@@ -184,21 +187,21 @@ class SelectTimeScreen extends HookWidget {
                 ),
               ),
               Text(
-                t.appointment.thankYou,
+                t.features.patient.appointmentSuccessDialog.thankYou,
                 style: context.medium38.black.rubik,
                 textAlign: .center,
               ),
               FittedBox(
                 fit: .scaleDown,
                 child: Text(
-                  t.appointment.success,
+                  t.features.patient.appointmentSuccessDialog.success,
                   style: context.regular20.textSecondary.rubik,
                   textAlign: .center,
                 ),
               ),
               SizedBox(height: 30),
               Text(
-                t.appointment.bookingDetails(
+                t.features.patient.appointmentSuccessDialog.bookingDetails(
                   Doctor: doctor.name,
                   Date: DateFormat('MMMM d').format(selectedTime),
                   Time: DateFormat('hh:mm a').format(selectedTime),
@@ -215,7 +218,7 @@ class SelectTimeScreen extends HookWidget {
                   const PatientMainRoute().go(context);
                 },
                 child: Text(
-                  t.appointment.done,
+                  t.features.patient.appointmentSuccessDialog.done,
                   style: context.medium18.white.rubik,
                 ),
               ),

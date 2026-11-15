@@ -57,7 +57,7 @@ class AdminProfileFormWidget extends HookWidget {
             spacing: 10,
             children: [
               Text(
-                t.admin.profileScreen.fullName,
+                t.features.admin.adminProfileScreen.fullName,
                 style: context.semiBold12.textPrimary.rubik,
               ),
               CustomTextFormField(
@@ -66,7 +66,7 @@ class AdminProfileFormWidget extends HookWidget {
                   Icons.person_2_outlined,
                   color: AppColors.textSecondary,
                 ),
-                hintText: t.admin.profileScreen.fullName,
+                hintText: t.features.admin.adminProfileScreen.fullName,
                 hintStyle: context.regular12.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
               ),
@@ -78,7 +78,7 @@ class AdminProfileFormWidget extends HookWidget {
             spacing: 10,
             children: [
               Text(
-                t.admin.profileScreen.emailAddress,
+                t.features.admin.adminProfileScreen.emailAddress,
                 style: context.semiBold12.textPrimary.rubik,
               ),
               CustomTextFormField(
@@ -117,7 +117,7 @@ class AdminProfileFormWidget extends HookWidget {
                         size: 20,
                       ),
                       Text(
-                        t.admin.updateDoctorDetails.saveChanges,
+                        t.core.common.saveChanges,
                         style: context.semiBold16.white.rubik,
                       ),
                     ],

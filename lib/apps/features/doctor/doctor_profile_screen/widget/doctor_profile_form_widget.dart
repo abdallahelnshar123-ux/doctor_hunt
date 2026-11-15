@@ -81,14 +81,14 @@ class DoctorProfileFormWidget extends HookWidget {
         children: [
           const SizedBox(height: 20),
           ProfileTextFormWidget(
-            label: t.profile.name,
+            label: t.features.doctor.doctorProfileScreen.name,
             controller: nameController,
             validator: (value) => Validators.required(value),
           ),
           const SizedBox(height: 20),
           ProfileTextFormWidget(
-            hintText: t.profile.addPhoneNumber,
-            label: t.profile.phone,
+            hintText: t.features.doctor.doctorProfileScreen.addPhoneNumber,
+            label: t.features.doctor.doctorProfileScreen.phone,
             controller: phoneController,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -99,14 +99,14 @@ class DoctorProfileFormWidget extends HookWidget {
           ),
           const SizedBox(height: 20),
           ProfileDropdownWidget(
-            label: t.doctor.profile.speciality,
+            label: t.features.doctor.doctorProfileScreen.speciality,
             initialSpeciality: selectedSpecialty.value.id,
             selectedSpeciality: selectedSpecialty,
           ),
           const SizedBox(height: 20),
           ProfileTextFormWidget(
-            hintText: t.doctor.profile.fee,
-            label: t.doctor.profile.fee,
+            hintText: t.features.doctor.doctorProfileScreen.fee,
+            label: t.features.doctor.doctorProfileScreen.fee,
             controller: feeController,
             validator: (value) => Validators.required(value),
           ),

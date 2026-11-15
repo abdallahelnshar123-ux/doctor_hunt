@@ -38,9 +38,21 @@ class AppointmentsView extends StatelessWidget {
               indicatorSize: TabBarIndicatorSize.tab,
               indicatorAnimation: TabIndicatorAnimation.elastic,
               tabs: [
-                Tab(child: Text(t.patientAppointments.upcoming)),
-                Tab(child: Text(t.patientAppointments.completed)),
-                Tab(child: Text(t.patientAppointments.canceled)),
+                Tab(
+                  child: Text(
+                    t.features.common.appointmentsManagement.upcoming,
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    t.features.common.appointmentsManagement.completed,
+                  ),
+                ),
+                Tab(
+                  child: Text(
+                    t.features.common.appointmentsManagement.canceled,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 10),

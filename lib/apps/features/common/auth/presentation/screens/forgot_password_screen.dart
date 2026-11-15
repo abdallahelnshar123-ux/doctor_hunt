@@ -34,8 +34,8 @@ class ForgotPasswordScreen extends HookWidget {
         if (state is ResetUSerPasswordErrorState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
@@ -44,9 +44,9 @@ class ForgotPasswordScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
             context: context,
-            message: t.forgotPassword.successDialogMessage,
-            posActionText: t.dialog.ok,
-            title: t.dialog.success,
+            message: t.features.common.auth.forgotPasswordScreen.successDialogMessage,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.success,
             posAction: () {
               Navigator.pop(context);
             },
@@ -54,7 +54,9 @@ class ForgotPasswordScreen extends HookWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(t.forgotPassword.title)),
+        appBar: AppBar(
+          title: Text(t.features.common.auth.forgotPasswordScreen.title),
+        ),
         body: Form(
           key: formKey,
           child: ListView(
@@ -69,13 +71,13 @@ class ForgotPasswordScreen extends HookWidget {
               ),
               SizedBox(height: 20),
               Text(
-                t.forgotPassword.description,
+                t.features.common.auth.forgotPasswordScreen.description,
                 style: context.regular14.textSecondary.rubik,
                 textAlign: .center,
               ),
               SizedBox(height: 60),
               CustomTextFormField(
-                hintText: t.forgotPassword.email,
+                hintText: t.features.common.auth.forgotPasswordScreen.email,
                 controller: emailController,
                 validator: (value) => Validators.email(value),
               ),
@@ -103,7 +105,7 @@ class ForgotPasswordScreen extends HookWidget {
       },
       backgroundColor: AppColors.brandPrimary,
       child: Text(
-        t.forgotPassword.sendLink,
+        t.features.common.auth.forgotPasswordScreen.sendLink,
         style: context.medium18.white.rubik,
       ),
     );

@@ -45,21 +45,21 @@ class AddSpecialtyDialog extends HookWidget {
                 children: [
                   _buildText(
                     context: context,
-                    text: t.admin.addDoctorScreen.englishName,
+                    text: t.features.admin.addDoctorScreen.englishName,
                   ),
                   CustomTextFormField(
                     controller: englishController,
                     validator: (value) => Validators.required(value),
-                    hintText: t.admin.addDoctorScreen.englishName,
+                    hintText: t.features.admin.addDoctorScreen.englishName,
                   ),
                   _buildText(
                     context: context,
-                    text: t.admin.addDoctorScreen.arabicName,
+                    text: t.features.admin.addDoctorScreen.arabicName,
                   ),
                   CustomTextFormField(
                     controller: arabicController,
                     validator: (value) => Validators.required(value),
-                    hintText: t.admin.addDoctorScreen.arabicName,
+                    hintText: t.features.admin.addDoctorScreen.arabicName,
                   ),
                   SizedBox(height: 30),
                   _buildCreateDoctorButton(
@@ -163,7 +163,7 @@ class AddSpecialtyDialog extends HookWidget {
         }
       },
       child: Text(
-        t.admin.addDoctorScreen.addSpecialty,
+        t.features.admin.addDoctorScreen.addSpecialty,
         style: context.medium18.white.rubik,
       ),
     );

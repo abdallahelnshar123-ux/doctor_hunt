@@ -19,9 +19,10 @@ class AccountSettingsWidget extends StatelessWidget {
         crossAxisAlignment: .start,
         children: [
           _buildSettingsCard(
-            subtitle: t.admin.settings.editSuperAdminDetailsPermissions,
+            subtitle:
+                t.features.admin.adminSettingsTab.editSuperAdminDetailsPermissions,
             context,
-            title: t.admin.settings.adminProfile,
+            title: t.features.admin.adminSettingsTab.adminProfile,
             icon: Icons.person_2_outlined,
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
@@ -39,8 +40,9 @@ class AccountSettingsWidget extends StatelessWidget {
               const ForgotPasswordRoute().push(context);
             },
             context,
-            title: t.admin.settings.changePassword,
-            subtitle: t.admin.settings.updateMasterSecurityCredentials,
+            title: t.features.admin.adminSettingsTab.changePassword,
+            subtitle:
+                t.features.admin.adminSettingsTab.updateMasterSecurityCredentials,
             icon: Icons.lock_reset_outlined,
             trailing: Icon(
               Icons.arrow_forward_ios_rounded,
@@ -52,7 +54,7 @@ class AccountSettingsWidget extends StatelessWidget {
           LanguagePickerPopupMenu(
             child: _buildSettingsCard(
               context,
-              title: t.settings.language,
+              title: t.core.widgets.languagePicker.language,
               subtitle: LanguagePickerPopupMenu.getCurrentLanguageName(),
               icon: Icons.language_outlined,
               trailing: const Icon(
@@ -65,11 +67,11 @@ class AccountSettingsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.admin.settings.appInformation,
-            subtitle: t.admin.settings.v100,
+            title: t.features.admin.adminSettingsTab.appInformation,
+            subtitle: t.features.admin.adminSettingsTab.v100,
             icon: Icons.info_outline,
             trailing: Text(
-              t.settings.v100,
+              t.core.common.appVersionVal,
               style: context.light12.textSecondary.rubik,
             ),
           ),

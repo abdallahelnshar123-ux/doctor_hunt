@@ -49,7 +49,7 @@ class _CustomTextPasswordState extends State<CustomTextPassword> {
       onFieldSubmitted: widget.onFieldSubmitted,
       validator: widget.validator,
       style: widget.style,
-      hintText: widget.hintText ?? t.auth.password,
+      hintText: widget.hintText ?? t.features.common.auth.password,
       hintStyle: widget.hintStyle,
       fillColor: widget.fillColor,
       filled: widget.filled,

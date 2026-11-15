@@ -13,7 +13,7 @@ class AccountSettingsWidget extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Text(
-          t.settings.accountSettings,
+          t.features.patient.settingsTab.accountSettings,
           style: context.medium16.textSecondary.rubik,
         ),
         SizedBox(height: 5),
@@ -23,7 +23,7 @@ class AccountSettingsWidget extends StatelessWidget {
                   const ForgotPasswordRoute().push(context);
                 },
                 context,
-                title: t.settings.changePassword,
+                title: t.features.patient.settingsTab.changePassword,
                 icon: Icons.lock,
                 trailing: Icon(
                   Icons.arrow_forward_ios_rounded,
@@ -39,7 +39,7 @@ class AccountSettingsWidget extends StatelessWidget {
 
         _buildSettingsCard(
           context,
-          title: t.settings.notifications,
+          title: t.features.patient.settingsTab.notifications,
           icon: Icons.notifications_active,
           trailing: Switch(
             value: true,
@@ -51,7 +51,7 @@ class AccountSettingsWidget extends StatelessWidget {
         _buildDivider(),
         _buildSettingsCard(
           context,
-          title: t.settings.privacyPolicy,
+          title: t.features.patient.settingsTab.privacyPolicy,
           icon: Icons.supervisor_account_rounded,
           trailing: Icon(
             Icons.arrow_forward_ios_rounded,

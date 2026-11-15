@@ -3,20 +3,20 @@ import 'package:doctor_hunt/generated/translations.g.dart';
 class Validators {
   static String? required(String? value, {String? message}) {
     if (value == null || value.trim().isEmpty) {
-      return message ?? t.validators.thisFieldIsRequired;
+      return message ?? t.core.validators.thisFieldIsRequired;
     }
     return null;
   }
 
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return t.validators.emailIsRequired;
+      return t.core.validators.emailIsRequired;
     }
 
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
 
     if (!emailRegex.hasMatch(value)) {
-      return t.validators.invalidEmailFormat;
+      return t.core.validators.invalidEmailFormat;
     }
 
     return null;
@@ -24,11 +24,11 @@ class Validators {
 
   static String? password(String? value) {
     if (value == null || value.isEmpty) {
-      return t.validators.passwordIsRequired;
+      return t.core.validators.passwordIsRequired;
     }
 
     if (value.length < 6) {
-      return t.validators.passwordMustBeAtLeast6Characters;
+      return t.core.validators.passwordMustBeAtLeast6Characters;
     }
 
     return null;
@@ -36,11 +36,11 @@ class Validators {
 
   static String? confirmPassword(String? value, String password) {
     if (value == null || value.isEmpty) {
-      return t.validators.confirmPasswordIsRequired;
+      return t.core.validators.confirmPasswordIsRequired;
     }
 
     if (value != password) {
-      return t.validators.passwordsDoNotMatch;
+      return t.core.validators.passwordsDoNotMatch;
     }
 
     return null;
@@ -48,13 +48,13 @@ class Validators {
 
   static String? phone(String? value) {
     if (value == null || value.isEmpty) {
-      return t.validators.phoneIsRequired;
+      return t.core.validators.phoneIsRequired;
     }
 
     final phoneRegex = RegExp(r'^[0-9]{10,15}$');
 
     if (!phoneRegex.hasMatch(value)) {
-      return t.validators.invalidPhoneNumber;
+      return t.core.validators.invalidPhoneNumber;
     }
 
     return null;

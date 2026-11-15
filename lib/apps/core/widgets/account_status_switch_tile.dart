@@ -46,12 +46,14 @@ class AccountStatusSwitchTile extends StatelessWidget {
               ),
             ),
             title: Text(
-              title ?? t.admin.doctorDetailsScreen.accountStatus,
+              title ?? t.core.widgets.statusSwitchTile.accountStatus,
               overflow: TextOverflow.ellipsis,
             ),
             titleTextStyle: context.regular12.textSecondary.rubik,
             subtitle: Text(
-              value ? t.admin.doctorsTab.enabled : t.admin.doctorsTab.disabled,
+              value
+                  ? t.core.widgets.statusSwitchTile.enabled
+                  : t.core.widgets.statusSwitchTile.disabled,
               style: context.semiBold14.textTertiary.rubik,
             ),
             trailing: Switch(

@@ -9,14 +9,14 @@ class MoreOptionWidget extends StatelessWidget {
       crossAxisAlignment: .start,
       children: [
         Text(
-          t.settings.moreOptions,
+          t.features.patient.settingsTab.moreOptions,
           style: context.medium16.textSecondary.rubik,
         ),
         SizedBox(height: 5),
         LanguagePickerPopupMenu(
           child: _buildSettingsCard(
             context,
-            title: t.settings.language,
+            title: t.features.patient.settingsTab.language,
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -38,9 +38,9 @@ class MoreOptionWidget extends StatelessWidget {
         _buildDivider(),
         _buildSettingsCard(
           context,
-          title: t.settings.buildVersion,
+          title: t.features.patient.settingsTab.buildVersion,
           trailing: Text(
-            t.settings.v100,
+            t.features.patient.settingsTab.v100,
             style: context.light12.textSecondary.rubik,
           ),
           backgroundColor: AppColors.settingsOrange,

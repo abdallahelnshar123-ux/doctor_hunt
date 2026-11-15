@@ -33,17 +33,17 @@ class AdminSettingsTab extends StatelessWidget {
           SizedBox(height: 40),
           CustomNegativeButton(
             icon: Icon(Icons.logout),
-            text: t.settings.logout,
+            text: t.core.common.logout,
             onPressed: () {
               DialogUtils.showMessage(
                 context: context,
-                message: t.settings.logoutConfirmation,
-                title: t.settings.logout,
-                posActionText: t.dialog.ok,
+                message: t.core.common.logoutConfirmation,
+                title: t.core.common.logout,
+                posActionText: t.core.dialogs.ok,
                 posAction: () {
                   context.read<AuthBloc>().add(LogoutRequested());
                 },
-                negActionText: t.dialog.cancel,
+                negActionText: t.core.dialogs.cancel,
               );
             },
           ),

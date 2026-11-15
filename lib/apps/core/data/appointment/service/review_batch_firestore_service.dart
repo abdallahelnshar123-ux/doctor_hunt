@@ -46,7 +46,7 @@ class ReviewBatchFirestoreService {
       await batch.commit();
     } catch (e) {
       throw ServerException(
-        message: t.errors.failedToUpdateAppointmentStatus(E: e.toString()),
+        message: t.core.errors.failedToUpdateAppointmentStatus(E: e.toString()),
       );
     }
   }
@@ -63,7 +63,7 @@ class ReviewBatchFirestoreService {
           .toList();
     } catch (e) {
       throw ServerException(
-        message: t.errors.someThingWentWrong,
+        message: t.core.errors.someThingWentWrong,
       );
     }
   }

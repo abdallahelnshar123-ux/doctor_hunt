@@ -20,17 +20,17 @@ class PatientLoginScreen extends StatelessWidget {
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
         }
         if (state is ContinueWithGoogleErrorState) {
-          if (!state.message.contains(t.errors.cancelledByUser)) {
+          if (!state.message.contains(t.core.errors.cancelledByUser)) {
             DialogUtils.showMessage(
-              posActionText: t.dialog.ok,
-              title: t.dialog.error,
+              posActionText: t.core.dialogs.ok,
+              title: t.core.dialogs.error,
               context: context,
               message: state.message,
             );

@@ -64,8 +64,8 @@ class DoctorCard extends StatelessWidget {
             ),
             label: Text(
               !doctor.disabled
-                  ? t.admin.doctorsTab.enabled
-                  : t.admin.doctorsTab.disabled,
+                  ? t.features.admin.adminDoctorsTab.enabled
+                  : t.features.admin.adminDoctorsTab.disabled,
               style: !doctor.disabled
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,

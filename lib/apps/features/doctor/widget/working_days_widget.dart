@@ -19,7 +19,7 @@ class WorkingDaysWidget extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Text(
-            t.doctor.availability.workingDays,
+            t.features.doctor.doctorAvailabilityScreen.workingDays,
             style: context.bold14.textTertiary.rubik,
           ),
         ),

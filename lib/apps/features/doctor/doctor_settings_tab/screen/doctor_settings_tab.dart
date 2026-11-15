@@ -18,7 +18,7 @@ class DoctorSettingsTab extends StatelessWidget {
       spacing: 20,
       children: [
         AppBar(
-          title: Text(t.doctor.settings.title),
+          title: Text(t.features.doctor.doctorSettingsTab.title),
           titleSpacing: 20,
           toolbarHeight: 60,
         ),
@@ -32,17 +32,17 @@ class DoctorSettingsTab extends StatelessWidget {
               const SizedBox(height: 40),
               CustomNegativeButton(
                 icon: Icon(Icons.logout),
-                text: t.settings.logout,
+                text: t.core.common.logout,
                 onPressed: () {
                   DialogUtils.showMessage(
                     context: context,
-                    message: t.settings.logoutConfirmation,
-                    title: t.settings.logout,
-                    posActionText: t.dialog.ok,
+                    message: t.core.common.logoutConfirmation,
+                    title: t.core.common.logout,
+                    posActionText: t.core.dialogs.ok,
                     posAction: () {
                       context.read<AuthBloc>().add(LogoutRequested());
                     },
-                    negActionText: t.dialog.cancel,
+                    negActionText: t.core.dialogs.cancel,
                   );
                 },
               ),

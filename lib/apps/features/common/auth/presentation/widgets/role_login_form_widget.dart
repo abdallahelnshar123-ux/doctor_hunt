@@ -50,7 +50,7 @@ class RoleLoginFormWidget extends HookWidget {
         children: [
           const SizedBox(height: 100),
           AuthHeaderWidget(
-            title: t.auth.welcomeBack,
+            title: t.features.common.auth.welcomeBack,
             subtitle: subtitle,
           ),
           const SizedBox(height: 30),
@@ -65,7 +65,7 @@ class RoleLoginFormWidget extends HookWidget {
           ),
           const SizedBox(height: 24),
           AuthSubmitButton(
-            text: t.auth.login,
+            text: t.features.common.auth.login,
             onPressed: onLogin,
           ),
           const SizedBox(height: 8),

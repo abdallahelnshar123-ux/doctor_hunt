@@ -25,7 +25,7 @@ class PopularDoctorScreen extends StatelessWidget {
     return AppScaffold(
       body: Column(
         children: [
-          MainAppBar(title: t.home.popularDoctors),
+          MainAppBar(title: t.features.patient.homeTab.popularDoctors),
           Expanded(
             child: BlocBuilder<PatientDoctorsBloc, PatientDoctorsState>(
               buildWhen: (previous, current) =>
@@ -39,7 +39,7 @@ class PopularDoctorScreen extends StatelessWidget {
                       height: 330,
                       width: double.infinity,
                       child: Text(
-                        t.admin.doctorsTab.noDoctorsFound,
+                        t.features.admin.adminDoctorsTab.noDoctorsFound,
                         style: context.medium10.black.rubik,
                       ),
                     );

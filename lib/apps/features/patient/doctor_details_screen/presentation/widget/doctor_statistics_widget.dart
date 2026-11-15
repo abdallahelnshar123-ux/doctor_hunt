@@ -29,17 +29,17 @@ class DoctorStatisticsWidget extends StatelessWidget {
         children: [
           _statisticsWidget(
             context: context,
-            title: t.doctorDetails.running,
+            title: t.features.patient.doctorDetailsScreen.running,
             number: '100',
           ),
           _statisticsWidget(
             context: context,
-            title: t.doctorDetails.ongoing,
+            title: t.features.patient.doctorDetailsScreen.ongoing,
             number: '500',
           ),
           _statisticsWidget(
             context: context,
-            title: t.doctorDetails.patient,
+            title: t.features.patient.doctorDetailsScreen.patient,
             number: '700',
           ),
         ],

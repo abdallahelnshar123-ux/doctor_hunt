@@ -38,8 +38,8 @@ class SettingsTab extends StatelessWidget {
         } else if (state is LogoutErrorState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
@@ -49,7 +49,7 @@ class SettingsTab extends StatelessWidget {
         bottomSafeArea: false,
         body: Column(
           children: [
-            AppBar(title: Text(t.settings.title)),
+            AppBar(title: Text(t.features.patient.settingsTab.title)),
             Expanded(
               child: ListView(
                 padding: EdgeInsets.all(20),
@@ -67,17 +67,18 @@ class SettingsTab extends StatelessWidget {
                   SizedBox(height: 40),
                   CustomNegativeButton(
                     icon: Icon(Icons.logout),
-                    text: t.settings.logout,
+                    text: t.features.patient.settingsTab.logout,
                     onPressed: () {
                       DialogUtils.showMessage(
                         context: context,
-                        message: t.settings.logoutConfirmation,
-                        title: t.settings.logout,
-                        posActionText: t.dialog.ok,
+                        message:
+                            t.features.patient.settingsTab.logoutConfirmation,
+                        title: t.features.patient.settingsTab.logout,
+                        posActionText: t.core.dialogs.ok,
                         posAction: () {
                           context.read<AuthBloc>().add(LogoutRequested());
                         },
-                        negActionText: t.dialog.cancel,
+                        negActionText: t.core.dialogs.cancel,
                       );
                     },
                   ),

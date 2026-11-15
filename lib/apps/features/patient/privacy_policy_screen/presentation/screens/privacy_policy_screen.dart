@@ -11,13 +11,13 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sections = t.privacyPolicy.sections;
+    final sections = t.features.patient.privacyPolicyScreen.sections;
 
     return AppScaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MainAppBar(title: t.privacyPolicy.title),
+          MainAppBar(title: t.features.patient.privacyPolicyScreen.title),
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -113,12 +113,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      t.privacyPolicy.title,
+                      t.features.patient.privacyPolicyScreen.title,
                       style: context.bold18.textPrimary.rubik,
                     ),
                     // const SizedBox(height: 2),
                     Text(
-                      t.privacyPolicy.lastUpdated,
+                      t.features.patient.privacyPolicyScreen.lastUpdated,
                       style: context.regular12.textMuted.rubik,
                     ),
                   ],
@@ -128,7 +128,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           ),
           // const SizedBox(height: 16),
           Text(
-            t.privacyPolicy.introduction,
+            t.features.patient.privacyPolicyScreen.introduction,
             style: context.regular14.textSecondary.rubik.copyWith(height: 1.5),
           ),
         ],

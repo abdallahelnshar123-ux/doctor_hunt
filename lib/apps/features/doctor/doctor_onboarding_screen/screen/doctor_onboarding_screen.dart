@@ -100,7 +100,7 @@ class DoctorOnboardingScreen extends HookWidget {
         if (!hasImage) {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t.doctor.onboarding.photoRequired,
+            message: t.features.doctor.doctorOnboardingScreen.photoRequired,
           );
           return;
         }
@@ -111,7 +111,7 @@ class DoctorOnboardingScreen extends HookWidget {
         if (workingDays.value.isEmpty) {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t.doctor.onboarding.selectAtLeastOneDay,
+            message: t.features.doctor.doctorOnboardingScreen.selectAtLeastOneDay,
           );
           return;
         }
@@ -119,7 +119,7 @@ class DoctorOnboardingScreen extends HookWidget {
         if (startTime.value.hour24 >= endTime.value.hour24) {
           SnackBarUtils.showInfoSnackBar(
             context: context,
-            message: t.doctor.availability.startTimeMustBeBeforeEndTime,
+            message: t.features.doctor.doctorAvailabilityScreen.startTimeMustBeBeforeEndTime,
           );
           return;
         }
@@ -166,10 +166,10 @@ class DoctorOnboardingScreen extends HookWidget {
           bottomButtonColor: AppColors.brandPrimary,
           bottomButtonChild: Text(
             currentPage.value < 2
-                ? t.doctor.onboarding.continueBtn
+                ? t.features.doctor.doctorOnboardingScreen.continueBtn
                 : (currentPage.value == 2
-                      ? t.doctor.onboarding.saveAndContinue
-                      : t.doctor.onboarding.finish),
+                      ? t.features.doctor.doctorOnboardingScreen.saveAndContinue
+                      : t.features.doctor.doctorOnboardingScreen.finish),
             style: context.semiBold16.white.rubik,
           ),
           onPressed: handleContinue,

@@ -31,7 +31,7 @@ class DoctorScheduleBloc
       emit(
         state.copyWith(
           isLoading: false,
-          errorMessage: t.errors.userNotLoggedIn,
+          errorMessage: t.core.errors.userNotLoggedIn,
         ),
       );
       return;

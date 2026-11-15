@@ -22,7 +22,7 @@ class DoctorOnboardingSuccessTab extends StatelessWidget {
           ),
         ),
         Text(
-          t.doctor.onboarding.successTitle,
+          t.features.doctor.doctorOnboardingScreen.successTitle,
           style: context.semiBold24.textPrimary.rubik,
           textAlign: TextAlign.center,
         ),

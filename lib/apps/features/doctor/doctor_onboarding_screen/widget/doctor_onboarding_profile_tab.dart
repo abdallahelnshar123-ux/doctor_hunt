@@ -53,8 +53,8 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
               child: Text(
                 selectedImage.value != null ||
                         (initialImageUrl != null && initialImageUrl!.isNotEmpty)
-                    ? t.doctor.onboarding.changePhoto
-                    : t.doctor.onboarding.choosePhoto,
+                    ? t.features.doctor.doctorOnboardingScreen.changePhoto
+                    : t.features.doctor.doctorOnboardingScreen.choosePhoto,
                 style: context.medium14.brandPrimary.rubik,
               ),
             ),
@@ -62,7 +62,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                t.doctor.onboarding.phoneNumber,
+                t.features.doctor.doctorOnboardingScreen.phoneNumber,
                 style: context.bold14.textTertiary.rubik,
               ),
             ),
@@ -72,7 +72,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
               fillColor: AppColors.bgPrimary,
               filled: true,
               keyboardType: TextInputType.phone,
-              hintText: t.doctor.onboarding.phoneHint,
+              hintText: t.features.doctor.doctorOnboardingScreen.phoneHint,
               hintStyle: context.light16.textSecondary.rubik,
               style: context.medium16.textTertiary.rubik,
               validator: (value) => Validators.phone(value),
@@ -81,7 +81,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                t.doctor.onboarding.consultationFee,
+                t.features.doctor.doctorOnboardingScreen.consultationFee,
                 style: context.bold14.textTertiary.rubik,
               ),
             ),
@@ -93,7 +93,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              hintText: t.doctor.onboarding.feeHint,
+              hintText: t.features.doctor.doctorOnboardingScreen.feeHint,
               hintStyle: context.light16.textSecondary.rubik,
               style: context.medium16.textTertiary.rubik,
               validator: (value) => Validators.required(value),

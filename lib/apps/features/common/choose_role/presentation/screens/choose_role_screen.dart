@@ -28,13 +28,13 @@ class ChooseRoleScreen extends StatelessWidget {
                   children: [
                     SvgPicture.asset(AppAssets.icons.appLogo.path, width: 70),
                     Text(
-                      t.chooseRole.title,
+                      t.features.common.chooseRole.title,
                       style: context.bold24.textPrimary.rubik,
                       textAlign: .center,
                     ),
                     SizedBox(height: 25),
                     Text(
-                      t.chooseRole.roleSelection,
+                      t.features.common.chooseRole.roleSelection,
                       style: context.extraLight28.textDark.plusJakartaSans,
                       textAlign: .center,
                     ),
@@ -43,8 +43,9 @@ class ChooseRoleScreen extends StatelessWidget {
                         const PatientLoginRoute().push(context);
                       },
                       child: RoleWidget(
-                        roleTitle: t.chooseRole.patient.title,
-                        roleDescription: t.chooseRole.patient.description,
+                        roleTitle: t.features.common.chooseRole.patient.title,
+                        roleDescription:
+                            t.features.common.chooseRole.patient.description,
                         roleIcon: AppAssets.icons.patientIcon.path,
                         role: UserRoles.patient,
                       ),
@@ -54,8 +55,9 @@ class ChooseRoleScreen extends StatelessWidget {
                         const DoctorLoginRoute().push(context);
                       },
                       child: RoleWidget(
-                        roleTitle: t.chooseRole.doctor.title,
-                        roleDescription: t.chooseRole.doctor.description,
+                        roleTitle: t.features.common.chooseRole.doctor.title,
+                        roleDescription:
+                            t.features.common.chooseRole.doctor.description,
                         roleIcon: AppAssets.icons.medicalIcon.path,
                         role: UserRoles.doctor,
                       ),
@@ -65,8 +67,9 @@ class ChooseRoleScreen extends StatelessWidget {
                         const AdminLoginRoute().push(context);
                       },
                       child: RoleWidget(
-                        roleTitle: t.chooseRole.admin.title,
-                        roleDescription: t.chooseRole.admin.description,
+                        roleTitle: t.features.common.chooseRole.admin.title,
+                        roleDescription:
+                            t.features.common.chooseRole.admin.description,
                         roleIcon: AppAssets.icons.adminIcon.path,
                         role: UserRoles.admin,
                       ),

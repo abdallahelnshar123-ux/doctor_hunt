@@ -28,13 +28,13 @@ class DoctorOnboardingWelcomeTab extends StatelessWidget {
         const SizedBox(height: 50),
 
         Text(
-          t.doctor.onboarding.welcomeTitle,
+          t.features.doctor.doctorOnboardingScreen.welcomeTitle,
           style: context.semiBold24.textPrimary.rubik,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
         Text(
-          t.doctor.onboarding.welcomeSubtitle,
+          t.features.doctor.doctorOnboardingScreen.welcomeSubtitle,
           textAlign: TextAlign.center,
           style: context.regular16.textSecondary.rubik.copyWith(height: 1.5),
         ),

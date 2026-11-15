@@ -46,8 +46,8 @@ class PatientLoginFormWidget extends HookWidget {
         children: [
           const SizedBox(height: 100),
           AuthHeaderWidget(
-            title: t.auth.welcomeBack,
-            subtitle: t.auth.authSubtitle,
+            title: t.features.common.auth.welcomeBack,
+            subtitle: t.features.common.auth.authSubtitle,
           ),
           const SizedBox(height: 60),
           ContinueWithGoogleButton(
@@ -69,14 +69,14 @@ class PatientLoginFormWidget extends HookWidget {
           ),
           const SizedBox(height: 24),
           AuthSubmitButton(
-            text: t.auth.login,
+            text: t.features.common.auth.login,
             onPressed: onLogin,
           ),
           const SizedBox(height: 8),
           const ForgotPasswordButton(),
           const SizedBox(height: 8),
           AuthTextButton(
-            text: t.auth.noAccount,
+            text: t.features.common.auth.noAccount,
             onPressed: () {
               const PatientRegisterRoute().go(context);
             },

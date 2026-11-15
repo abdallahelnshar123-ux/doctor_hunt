@@ -19,13 +19,13 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
     return SafeArea(
       top: false,
       child: Scaffold(
-        appBar: AppBar(title: Text(t.admin.appointmentDetails.title)),
+        appBar: AppBar(title: Text(t.features.admin.appointmentDetailsScreen.title)),
         body: ListView(
           padding: EdgeInsets.all(20),
           children: [
             _buildText(
               context: context,
-              text: t.admin.appointmentDetails.patient,
+              text: t.features.admin.appointmentDetailsScreen.patient,
             ),
             _buildPatientCard(
               title: appointment.patient.name,
@@ -35,7 +35,7 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
             ),
             _buildText(
               context: context,
-              text: t.admin.appointmentDetails.doctor,
+              text: t.features.admin.appointmentDetailsScreen.doctor,
             ),
             _buildPatientCard(
               title: appointment.doctor.name,
@@ -50,7 +50,7 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
               children: [
                 _buildText(
                   context: context,
-                  text: t.admin.appointmentDetails.appointment,
+                  text: t.features.admin.appointmentDetailsScreen.appointment,
                 ),
                 AppointmentStatusChip(status: appointment.status),
               ],
@@ -67,7 +67,7 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
                 children: [
                   _buildDetailsListTile(
                     icon: Icons.calendar_month_outlined,
-                    title: t.admin.appointmentsTab.date,
+                    title: t.features.admin.appointmentDetailsScreen.date,
                     subtitle: DateFormat(
                       'dd MMM yyyy',
                     ).format(appointment.sessionTime),
@@ -75,7 +75,7 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
                   ),
                   _buildDetailsListTile(
                     icon: Icons.access_time,
-                    title: t.admin.appointmentsTab.time,
+                    title: t.features.admin.appointmentDetailsScreen.time,
                     subtitle: DateFormat(
                       'hh:mm a',
                     ).format(appointment.sessionTime),
@@ -83,8 +83,8 @@ class AdminAppointmentDetailsScreen extends StatelessWidget {
                   ),
                   _buildDetailsListTile(
                     icon: Icons.payments_outlined,
-                    title: t.admin.appointmentsTab.fee,
-                    subtitle: t.patientAppointments.feeValue(
+                    title: t.features.admin.appointmentDetailsScreen.fee,
+                    subtitle: t.core.widgets.appointment.feeValue(
                       Fee: appointment.fee.toString(),
                     ),
                     context: context,

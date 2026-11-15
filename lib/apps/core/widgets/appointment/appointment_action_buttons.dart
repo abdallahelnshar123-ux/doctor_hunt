@@ -43,9 +43,7 @@ class AppointmentActionButtons extends StatelessWidget {
           );
         }
         return Row(
-          children: [
-            Expanded(child: _buildViewDetailsButton(context)),
-          ],
+          children: [Expanded(child: _buildViewDetailsButton(context))],
         );
 
       case UserRoles.patient:
@@ -71,17 +69,13 @@ class AppointmentActionButtons extends StatelessWidget {
                 );
               }
               return Row(
-                children: [
-                  Expanded(child: _buildViewDetailsButton(context)),
-                ],
+                children: [Expanded(child: _buildViewDetailsButton(context))],
               );
             },
           );
         }
         return Row(
-          children: [
-            Expanded(child: _buildViewDetailsButton(context)),
-          ],
+          children: [Expanded(child: _buildViewDetailsButton(context))],
         );
     }
   }
@@ -104,7 +98,7 @@ class AppointmentActionButtons extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          t.patientAppointments.cancelAppointment,
+          t.core.widgets.appointment.cancelAppointment,
           style: context.medium11.statusError.rubik,
         ),
       ),
@@ -125,7 +119,7 @@ class AppointmentActionButtons extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          t.admin.appointmentsTab.markAsCompleted,
+          t.core.widgets.appointment.markAsCompleted,
           style: context.medium11.white.rubik,
         ),
       ),
@@ -148,7 +142,7 @@ class AppointmentActionButtons extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          t.patientAppointments.viewDetails,
+          t.core.widgets.appointment.viewDetails,
           style: context.medium11.brandPrimary.rubik,
         ),
       ),
@@ -167,7 +161,7 @@ class AppointmentActionButtons extends StatelessWidget {
               (tempReview.value?.rating ?? 0) == 0) {
             SnackBarUtils.showInfoSnackBar(
               context: context,
-              message: t.patientAppointments.youMustSelectAtLeastOneStar,
+              message: t.core.widgets.appointment.youMustSelectAtLeastOneStar,
             );
             return;
           }
@@ -179,7 +173,7 @@ class AppointmentActionButtons extends StatelessWidget {
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: Text(
-          t.patientAppointments.rateDoctor,
+          t.core.widgets.appointment.rateDoctor,
           style: context.medium11.white.rubik,
         ),
       ),

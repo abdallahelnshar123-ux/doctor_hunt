@@ -32,7 +32,7 @@ class DoctorOnboardingAvailabilityTab extends StatelessWidget {
         children: [
           const SizedBox(height: 30),
           Text(
-            t.doctor.onboarding.stepAvailabilitySubtitle,
+            t.features.doctor.doctorOnboardingScreen.stepAvailabilitySubtitle,
             style: context.medium16.textPrimary.rubik,
             textAlign: .center,
           ),

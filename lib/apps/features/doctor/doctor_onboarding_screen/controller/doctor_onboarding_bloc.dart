@@ -39,7 +39,7 @@ class DoctorOnboardingBloc
 
     final currentUser = _userSessionManager.currentUser;
     if (currentUser == null || currentUser is! DoctorEntity) {
-      emit(DoctorOnboardingError(t.errors.userNotAuthenticated));
+      emit(DoctorOnboardingError(t.core.errors.userNotAuthenticated));
       return;
     }
 

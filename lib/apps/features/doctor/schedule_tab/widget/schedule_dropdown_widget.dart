@@ -33,15 +33,15 @@ class ScheduleDropdownWidget extends StatelessWidget {
       dropdownMenuEntries: [
         DropdownMenuEntry(
           value: ScheduleFilter.today,
-          label: t.doctor.schedule.today,
+          label: t.features.doctor.scheduleTab.today,
         ),
         DropdownMenuEntry(
           value: ScheduleFilter.tomorrow,
-          label: t.doctor.schedule.tomorrow,
+          label: t.features.doctor.scheduleTab.tomorrow,
         ),
         DropdownMenuEntry(
           value: ScheduleFilter.next7Days,
-          label: t.doctor.schedule.next7Days,
+          label: t.features.doctor.scheduleTab.next7Days,
         ),
       ],
       width: double.infinity,

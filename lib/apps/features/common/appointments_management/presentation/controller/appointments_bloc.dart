@@ -31,7 +31,7 @@ class AppointmentsBloc extends Bloc<AppointmentsEvent, AppointmentsState> {
 
     final userOption = _userSessionManager.getCurrentUser();
     if (userOption.isNone()) {
-      emit(AppointmentsError(t.errors.userNotAuthenticated));
+      emit(AppointmentsError(t.core.errors.userNotAuthenticated));
       return;
     }
 

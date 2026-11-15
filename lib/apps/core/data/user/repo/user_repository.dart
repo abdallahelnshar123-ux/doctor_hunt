@@ -56,7 +56,7 @@ class UserRepository {
             await _cloudinaryService.deleteImage(user.image!);
           }
         } catch (e) {
-          return Left(ServerFailure(t.errors.someThingWentWrong));
+          return Left(ServerFailure(t.core.errors.someThingWentWrong));
         }
       }
 

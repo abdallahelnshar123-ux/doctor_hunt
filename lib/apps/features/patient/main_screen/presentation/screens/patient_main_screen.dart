@@ -60,7 +60,7 @@ class PatientMainScreen extends HookWidget {
             alias: _homeAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.homeIcon.path),
             text: Text(
-              t.patientMain.home,
+              t.features.patient.mainScreen.home,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[0],
@@ -74,7 +74,7 @@ class PatientMainScreen extends HookWidget {
             alias: _favouriteAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.favouriteIcon.path),
             text: Text(
-              t.patientMain.favourite,
+              t.features.patient.mainScreen.favourite,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[1],
@@ -91,7 +91,7 @@ class PatientMainScreen extends HookWidget {
               iconName: AppAssets.icons.appointmentsIcon.path,
             ),
             text: Text(
-              t.patientMain.appointments,
+              t.features.patient.mainScreen.appointments,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[2],
@@ -104,7 +104,7 @@ class PatientMainScreen extends HookWidget {
             alias: _settingsAlias,
             icon: buildDrawerIcon(iconName: AppAssets.icons.settingsIcon.path),
             text: Text(
-              t.patientMain.settings,
+              t.features.patient.mainScreen.settings,
               style: context.regular16.white.rubik,
             ),
             page: tabsList.value[3],
@@ -125,8 +125,8 @@ class PatientMainScreen extends HookWidget {
         } else if (state is LogoutErrorState) {
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
@@ -302,16 +302,16 @@ class PatientMainScreen extends HookWidget {
       onPressed: () {
         DialogUtils.showMessage(
           context: context,
-          message: t.settings.logoutConfirmation,
-          title: t.settings.logout,
-          posActionText: t.dialog.ok,
+          message: t.features.patient.settingsTab.logoutConfirmation,
+          title: t.features.patient.settingsTab.logout,
+          posActionText: t.core.dialogs.ok,
           posAction: () {
             context.read<AuthBloc>().add(LogoutRequested());
           },
-          negActionText: t.dialog.cancel,
+          negActionText: t.core.dialogs.cancel,
         );
       },
-      label: Text(t.settings.logout),
+      label: Text(t.features.patient.settingsTab.logout),
     );
   }
 

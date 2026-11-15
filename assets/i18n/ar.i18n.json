@@ -1,491 +1,513 @@
 {
-  "auth": {
-    "welcome_back": "مرحباً بعودتك",
-    "auth_subtitle": "يمكنك البحث عن دورات، التقديم عليها وإيجاد منح للدراسة بالخارج",
-    "admin_subtitle": "تسجيل الدخول إلى حساب المسؤول",
-    "forgot_password": "نسيت كلمة المرور",
-    "no_account": "ليس لديك حساب؟ انضم إلينا",
-    "login": "تسجيل الدخول",
-    "join_us": "انضم إلينا للبدء في البحث",
-    "have_account": "لديك حساب بالفعل؟ سجل دخولك",
-    "agree_terms": "أوافق على شروط الخدمة وسياسة الخصوصية",
-    "sign_up": "إنشاء حساب",
-    "username": "اسم المستخدم",
-    "password": "كلمة المرور",
-    "google": "جوجل",
-    "you_must_agree_to_terms": "يجب أن توافق على شروط الخدمة وسياسة الخصوصية",
-    "email": "البريد الإلكتروني",
-    "doctor_subtitle": "تسجيل الدخول إلى حساب الطبيب"
-  },
-  "forgot_password": {
-    "title": "نسيت كلمة المرور",
-    "email": "البريد الإلكتروني",
-    "description": "أدخل بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور.",
-    "send_link": "إرسال الرابط",
-    "@back_to_login": "العودة لتسجيل الدخول",
-    "success_dialog_message": "لقد أرسلنا بريداً إلكترونياً لإعادة تعيين كلمة المرور الخاصة بك. يرجى مراجعة صندوق الوارد أو البريد العشوائي (Spam)."
-  },
-  "onboarding": {
-    "next": "التالي",
-    "skip": "تخطي",
-    "get_started": "ابدأ الآن",
-    "pages(interface=PageData)": [
-      {
-        "title": "ابحث عن أطباء موثوقين",
-        "subtitle": "اعثر على أطباء موثوقين بالقرب منك. احصل على الرعاية التي تحتاجها من متخصصين ذوي خبرة.",
-        "imagePath": "assets/images/on_boarding1.png"
-      },
-      {
-        "title": "اختر أفضل الأطباء",
-        "subtitle": "استكشف الأطباء وفقاً لاحتياجاتك، واختر الطبيب الأنسب لك.",
-        "imagePath": "assets/images/on_boarding2.png"
-      },
-      {
-        "title": "حجز مواعيد بسهولة",
-        "subtitle": "احجز موعدك بلمسات بسيطة، وحدد الوقت الأنسب لجدولك.",
-        "imagePath": "assets/images/on_boarding3.png"
-      }
-    ],
-    "@page1": {
-      "title": "ابحث عن أطباء موثوقين",
-      "subtitle": "اعثر على أطباء موثوقين بالقرب منك. احصل على الرعاية التي تحتاجها من متخصصين ذوي خبرة."
-    },
-    "@page2": {
-      "title": "اختر أفضل الأطباء",
-      "subtitle": "استكشف الأطباء وفقاً لاحتياجاتك، واختر الطبيب الأنسب لك."
-    },
-    "@page3": {
-      "title": "حجز مواعيد بسهولة",
-      "subtitle": "احجز موعدك بلمسات بسيطة، وحدد الوقت الأنسب لجدولك."
-    }
-  },
-  "choose_role": {
-    "title": "دكتور هانت",
-    "role_selection": "اختر دورك",
-    "patient": {
-      "title": "مريض",
-      "description": "حجز المواعيد واستشارة الأطباء."
-    },
-    "admin": {
-      "title": "مسؤول",
-      "description": "إدارة الأطباء وإعدادات التطبيق."
-    },
-    "doctor": {
-      "title": "طبيب",
-      "description": "إدارة المواعيد واستشارة المرضى."
-    }
-  },
-  "patient_main": {
-    "home": "الرئيسية",
-    "settings": "الإعدادات",
-    "appointments": "المواعيد",
-    "favourite": "المفضلة"
-  },
-  "patient_appointments": {
-    "title": "المواعيد",
-    "upcoming": "القادمة",
-    "completed": "المكتملة",
-    "canceled": "الملغاة",
-    "view_details": "عرض التفاصيل",
-    "cancel_appointment": "إلغاء الموعد",
-    "rate_doctor": "تقييم الطبيب",
-    "appointment_date": "تاريخ الموعد",
-    "consultation_fee": "رسوم الاستشارة",
-    "appointment_time": "وقت الموعد",
-    "fee_value": "${fee} $",
-    "no_appointments_found": "لا توجد مواعيد",
-    "tab_to_write_review": "اضغط لكتابة تقييم",
-    "you_must_select_at_least_one_star": "يجب تحديد نجمة واحدة على الأقل"
-  },
-  "select_time": {
-    "title": "تحديد الوقت",
-    "no_slots_available": "لا تتوفر فترات متاحة",
-    "slot_available": "${number} موعد متاح",
-    "morning_slots": "الفترة الصباحية: ${number} مواعيد",
-    "afternoon_slots": "فترة الظهيرة: ${number} مواعيد",
-    "evening_slots": "الفترة المسائية: ${number} مواعيد",
-    "confirm": "تأكيد",
-    "you_must_select_appointment_time": "يجب اختيار وقت الموعد"
-  },
-  "home": {
-    "welcome": "أهلاً ${name}",
-    "find_doctor": "ابحث عن طبيبك",
-    "@live_doctors": "أطباء متاحون الآن",
-    "popular_doctors": "الأطباء الأكثر طلباً",
-    "favourite_doctors": "الأطباء المفضلون",
-    "top_rated_doctors": "الأعلى تقييماً",
-    "see_all": "عرض الكل",
-    "search": "بحث...",
-    "@live": "مباشر"
-  },
-  "favourite_doctors": {
-    "no_favourite_doctors_match_search": "لا يوجد أطباء مفضلون يطابقون البحث",
-    "no_favourite_doctors_description": "لم تقم بإضافة أي طبيب إلى المفضلة بعد.",
-    "@error_while_fetching_favourite_doctors": "حدث خطأ أثناء جلب الأطباء المفضلين، يرجى المحاولة لاحقاً"
-  },
-  "settings": {
-    "title": "الإعدادات",
-    "logout": "تسجيل الخروج",
-    "account_settings": "إعدادات الحساب",
-    "change_password": "تغيير كلمة المرور",
-    "notifications": "الإشعارات",
-    "privacy_policy": "سياسة الخصوصية",
-    "more_options": "خيارات إضافية",
-    "language": "اللغة",
-    "build_version": "إصدار التطبيق",
-    "english": "الإنجليزية",
-    "arabic": "العربية",
-    "v1.0.0": "v1.0.0",
-    "logout_confirmation": "هل أنت متأكد من رغبتك في تسجيل الخروج؟"
-  },
-  "profile": {
-    "title": "الملف الشخصي",
-    "personal_information": "المعلومات الشخصية",
-    "name": "الاسم",
-    "phone": "رقم الهاتف",
-    "data_was_updated_successfully": "تم تحديث البيانات بنجاح",
-    "add_phone_number": "إضافة رقم هاتف"
-  },
-  "privacy_policy": {
-    "title": "سياسة الخصوصية",
-    "last_updated": "آخر تحديث: أكتوبر 2026",
-    "introduction": "يحترم تطبيق دكتور هانت خصوصيتك ويلتزم بحماية بياناتك الشخصية والطبية. توضح سياسة الخصوصية هذه كيفية جمع معلوماتك واستخدامها وحمايتها عند استخدام تطبيقنا.",
-    "sections": {
-      "information_we_collect": {
-        "title": "١. المعلومات التي نجمعها",
-        "description": "نقوم بجمع المعلومات اللازمة لتقديم خدمات حجز الأطباء وإدارة الرعاية الصحية:",
-        "bullets": [
-          "البيانات التعريفية: الاسم، البريد الإلكتروني، ورقم الهاتف.",
-          "بيانات المواعيد: الأطباء المختارون، تواريخ المواعيد، الأوقات، وحالة الحجز.",
-          "التفاصيل الطبية: تفضيلات الاستشارة وملاحظات المريض المشاركة للمواعيد.",
-          "الحساب والبيانات التقنية: دور المستخدم (مريض، طبيب، مسؤول) وسجلات النظام."
-        ]
-      },
-      "how_we_use_information": {
-        "title": "٢. كيف نستخدم معلوماتك",
-        "description": "تُستخدم معلوماتك حصرياً لتقديم وتحسين خدمات الرعاية الصحية لدينا:",
-        "bullets": [
-          "تسهيل البحث عن الأطباء، جدولة المواعيد، وإدارتها.",
-          "إرسال تذكيرات بالمواعيد وتحديثات الحساب.",
-          "ضمان تسجيل الدخول الآمن والمصادقة.",
-          "تحسين أداء التطبيق وتجربة دعم العملاء."
-        ]
-      },
-      "data_security": {
-        "title": "٣. أمان البيانات وتخزينها",
-        "description": "نأخذ أمان بياناتك الصحية والشخصية على محمل الجد:",
-        "bullets": [
-          "يتم تخزين البيانات بأمان باستخدام بنية تحتية سحابية مشفرة لقواعد البيانات.",
-          "تقتصر صلاحيات الوصول إلى البيانات الإدارية والطبية على المستخدمين المصرح لهم فقط.",
-          "نقوم بتحديث ممارساتنا الأمنية بانتظام للحماية من الوصول غير المصرح به."
-        ]
-      },
-      "third_party_services": {
-        "title": "٤. خدمات الطرف الثالث",
-        "description": "نقوم بدمج خدمات موثوقة من أطراف ثالثة لضمان الأداء الأمثل:",
-        "bullets": [
-          "فايربيز (Firebase): تُستخدم للمصادقة الآمنة وإدارة قواعد البيانات السحابية.",
-          "كلاوديناري (Cloudinary): تُستخدم لتخزين وعرض الصور الشخصية وصور الأطباء بأمان.",
-          "نحن لا نبيع أو نتاجر أو نؤجر بياناتك الشخصية لأطراف ثالثة لأغراض تسويقية أبداً."
-        ]
-      },
-      "your_rights": {
-        "title": "٥. حقوقك وتحكمك بالبيانات",
-        "description": "لديك كامل التحكم في بياناتك الشخصية داخل تطبيق دكتور هانت:",
-        "bullets": [
-          "عرض وتحديث معلومات ملفك الشخصي في أي وقت.",
-          "إدارة إعدادات الإشعارات والتنبيهات.",
-          "طلب حذف الحساب أو مسح البيانات عبر التواصل مع الدعم."
-        ]
-      },
-      "contact_us": {
-        "title": "٦. تواصل معنا",
-        "description": "إذا كانت لديك أي أسئلة أو استفسارات حول سياسة الخصوصية هذه أو حماية بياناتك، يرجى التواصل معنا عبر support@doctorhunt.com."
-      }
-    }
-  },
-  "doctor_details": {
-    "title": "تفاصيل الطبيب",
-    "find_doctors": "البحث عن الأطباء",
-    "book_now": "احجز الآن",
-    "services": "الخدمات",
-    "services_list": [
-      "رعاية المرضى يجب أن تكون الأولوية القصوى.",
-      "إذا كنت تدير عيادتك الخاصة، فأنت تعرف حجم المسؤولية.",
-      "لهذا السبب نوفر نظام تذكير متقدم بالمواعيد."
-    ],
-    "running": "جاري",
-    "ongoing": "مستمر",
-    "patient": "مريض",
-    "experience": "خبرة ${years} سنوات",
-    "patient_stories": "${count} تقييم من المرضى",
-    "next_available": "الموعد المتاح القادم",
-    "tomorrow": "غداً",
-    "price_per_hour": "${price}/ ساعة",
-    "doctor_name": "اسم الطبيب",
-    "@specialist_cardiology": "أخصائي أمراض القلب",
-    "tooth_dentist": "طبيب أسنان"
-  },
-  "appointment": {
-    "@title": "الموعد",
-    "@pick_date": "اختر تاريخاً لعرض الأوقات المتاحة",
-    "@available_time": "الوقت المتاح",
-    "@reminder_me": "تذكيري قبل",
-    "thank_you": "شكراً لك !",
-    "success": "تم حجز موعدك بنجاح",
-    "booking_details": "لقد حجزت موعداً مع ${doctor} في ${date}، الساعة ${time}",
-    "done": "تم",
-    "@edit": "تعديل موعدك",
-    "@confirm": "تأكيد"
-  },
-  "create_doctor": {
-    "title": "إضافة طبيب",
-    "add_photo": "إضافة صورة",
-    "doctor_added_successfully": "تمت إضافة الطبيب بنجاح",
-    "you_must_pick_doctor_image": "يجب اختيار صورة للطبيب"
-  },
-  "common": {
-    "today": "اليوم",
-    "tomorrow": "غداً",
-    "am": "ص",
-    "pm": "م",
-    "min": "دقيقة",
-    "@weekdays": [
-      "الأحد",
-      "الإثنين",
-      "الثلاثاء",
-      "الأربعاء",
-      "الخميس",
-      "الجمعة",
-      "السبت"
-    ]
-  },
-  "dialog": {
-    "ok": "حسناً",
-    "success": "نجاح",
-    "error": "خطأ",
-    "@all_set_up": "كل شيء جاهز",
-    "registered_successfully": "تم التسجيل بنجاح، يرجى تسجيل الدخول.",
-    "cancel": "إلغاء",
-    "confirm": "تأكيد"
-  },
-  "admin": {
-    "main": {
-      "doctors": "الأطباء",
-      "patients": "المرضى",
-      "settings": "الإعدادات"
-    },
-    "patientsTab": {
-      "title": "المرضى",
-      "no_patients": "لا يوجد مرضى",
-      "search_hint": "البحث عن المرضى...",
-      "delete_patient": "حذف المريض",
-      "delete_patient_confirmation_title": "تأكيد حذف المريض",
-      "delete_patient_confirmation_message": "هل أنت متأكد من حذف هذا المريض؟ لا يمكن التراجع عن هذا الإجراء.",
-      "patient_deleted_successfully": "تم حذف المريض بنجاح"
-    },
-    "appointment_details": {
-      "title": "تفاصيل الموعد",
-      "patient": "المريض",
-      "doctor": "الطبيب",
-      "appointment": "الموعد"
-    },
-    "doctors_tab": {
-      "create_doctor": "إضافة طبيب",
-      "search_doctors": "البحث عن أطباء",
-      "no_doctors_found": "لم يتم العثور على أطباء",
-      "no_doctors_description": "لا يوجد أطباء مسجلون حالياً في دكتور هانت. أضف أول طبيب للبدء.",
-      "total_doctors": "إجمالي الأطباء",
+  "core": {
+    "common": {
+      "today": "اليوم",
+      "tomorrow": "غداً",
+      "am": "ص",
+      "pm": "م",
+      "min": "دقيقة",
+      "weekdays": [
+        "الأحد",
+        "الإثنين",
+        "الثلاثاء",
+        "الأربعاء",
+        "الخميس",
+        "الجمعة",
+        "السبت"
+      ],
+      "name": "الاسم",
+      "full_name": "الاسم الكامل",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "phone": "رقم الهاتف",
+      "phone_number": "رقم الهاتف",
+      "specialty": "التخصص",
+      "consultation_fee": "رسوم الاستشارة",
+      "date": "التاريخ",
+      "time": "الوقت",
+      "fee": "الرسوم",
+      "fee_value": "${fee} $",
+      "active": "نشط",
+      "inactive": "غير نشط",
       "enabled": "مفعل",
       "disabled": "معطل",
       "all": "الكل",
       "dash": "-",
-      "no_doctor_name_or_specialty_match_search": "لا يوجد اسم طبيب أو تخصص يطابق البحث",
-      "no_doctors": "لا يوجد أطباء",
-      "no_doctors_to_search_add_some": "لا يوجد أطباء للبحث، أضف بعض الأطباء"
-    },
-    "appointments_tab": {
-      "title": "المواعيد",
-      "@upcoming": "القادمة",
-      "@completed": "المكتملة",
-      "@canceled": "الملغاة",
-      "@appointment_was_cancelled_successfully": "تم إلغاء الموعد بنجاح",
-      "@appointment_was_marked_as_completed_successfully": "تم تحديد الموعد كمكتمل بنجاح",
-      "time": "الوقت",
-      "date": "التاريخ",
-      "fee": "الرسوم",
-      "mark_as_completed": "تحديد كمكتمل"
-    },
-    "settings": {
-      "admin_profile": "الملف الشخصي للمسؤول",
+      "save_changes": "حفظ التغييرات",
+      "logout": "تسجيل الخروج",
       "change_password": "تغيير كلمة المرور",
       "app_information": "معلومات التطبيق",
-      "edit_super_admin_details_permissions": "تعديل بيانات وصلاحيات المسؤول",
-      "update_master_security_credentials": "تحديث بيانات الأمان الرئيسية",
-      "@build_version": "إصدار التطبيق",
-      "v1.0.0": "v1.0.0",
-      "@logout_confirmation": "هل أنت متأكد من رغبتك في تسجيل الخروج؟",
-      "@logout": "تسجيل الخروج"
+      "build_version": "إصدار التطبيق",
+      "app_version_val": "v1.0.0",
+      "english": "الإنجليزية",
+      "arabic": "العربية",
+      "see_all": "عرض الكل",
+      "search": "بحث...",
+      "view_details": "عرض التفاصيل",
+      "data_updated_successfully": "تم تحديث البيانات بنجاح",
+      "logout_confirmation": "هل أنت متأكد من رغبتك في تسجيل الخروج؟"
     },
-    "add_doctor_screen": {
-      "@enter_name": "أدخل اسم الطبيب",
-      "@enter_fee": "أدخل رسوم الاستشارة",
-      "@upload_image": "رفع صورة الطبيب",
-      "@tap_to_pick": "اضغط لاختيار صورة",
-      "create_doctor": "إضافة طبيب",
-      "select_specialty": "اختر التخصص",
-      "doctor_name": "اسم الطبيب",
-      "email": "البريد الإلكتروني",
-      "password": "كلمة المرور",
-      "email_example": "مثال: doctor@hospital.com",
-      "password_example": "••••••••",
-      "specialty": "التخصص",
-      "consultation_fee": "رسوم الاستشارة",
-      "name_example": "مثال: د. أحمد علي",
-      "fee_example": "مثال: 28.00 $",
-      "english_name": "الاسم بالإنجليزية",
-      "arabic_name": "الاسم بالعربية",
-      "add_specialty": "إضافة تخصص"
+    "dialogs": {
+      "ok": "حسناً",
+      "cancel": "إلغاء",
+      "confirm": "تأكيد",
+      "success": "نجاح",
+      "error": "خطأ",
+      "registered_successfully": "تم التسجيل بنجاح، يرجى تسجيل الدخول."
     },
-    "doctor_details_screen": {
-      "doctor_details": "تفاصيل الطبيب",
-      "specialty": "التخصص",
-      "account_status": "حالة الحساب",
-      "heart_care": "رعاية القلب",
-      "@edit_doctor": "تعديل الطبيب",
-      "@manage_availability": "إدارة أوقات العمل",
-      "deleteDoctor": "حذف الطبيب",
-      "doctor_deleted_successfully": "تم حذف الطبيب بنجاح",
-      "delete_doctor_confirmation_title": "تأكيد حذف الطبيب",
-      "delete_doctor_confirmation_message": "هل أنت متأكد من حذف هذا الطبيب؟ لا يمكن التراجع عن هذا الإجراء.",
-      "rating": "التقييم",
-      "consultation_fee": "رسوم الاستشارة",
-      "fee": "${price} $"
+    "validators": {
+      "this_field_is_required": "هذا الحقل مطلوب",
+      "email_is_required": "البريد الإلكتروني مطلوب",
+      "invalid_email_format": "صيغة البريد الإلكتروني غير صالحة",
+      "password_is_required": "كلمة المرور مطلوبة",
+      "confirm_password_is_required": "تأكيد كلمة المرور مطلوب",
+      "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
+      "phone_is_required": "رقم الهاتف مطلوب",
+      "invalid_phone_number": "رقم الهاتف غير صالح",
+      "password_must_be_at_least_6_characters": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
     },
-    "update_doctor_details": {
-      "doctor_was_updated_successfully": "تم تحديث بيانات الطبيب بنجاح",
-      "edit_doctor": "تعديل بيانات الطبيب",
-      "change_photo": "تغيير الصورة",
-      "doctor_statues": "حالة الطبيب",
-      "active_and_available": "نشط ومتاح",
-      "inactive": "غير نشط",
-      "delete_doctor": "حذف الطبيب",
-      "save_changes": "حفظ التغييرات"
+    "errors": {
+      "no_account_associated": "لا يوجد حساب مرتبط بهذا البريد الإلكتروني",
+      "account_disabled": "الحساب معطل. يرجى التواصل مع المسؤول.",
+      "some_thing_went_wrong": "حدث خطأ ما، يرجى المحاولة لاحقاً",
+      "server_error": "خطأ في الخادم",
+      "no_internet": "لا يوجد اتصال بالإنترنت",
+      "email_or_password_is_incorrect": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+      "email_address_already_in_use_by_another_account": "البريد الإلكتروني مستخدم بالفعل بواسطة حساب آخر",
+      "user_not_authenticated": "المستخدم غير مصرح له",
+      "user_not_logged_in": "المستخدم غير مسجل الدخول",
+      "error_while_adding_doctor_please_try_again_later": "حدث خطأ أثناء إضافة الطبيب، يرجى المحاولة لاحقاً",
+      "error_while_updating_doctor_please_try_again_later": "حدث خطأ أثناء تحديث بيانات الطبيب، يرجى المحاولة لاحقاً",
+      "failed_to_fetch_appointments": "فشل جلب المواعيد: ${E}",
+      "failed_to_book_appointment": "فشل حجز الموعد: ${E}",
+      "failed_to_update_appointment_status": "فشل تحديث حالة الموعد: ${E}",
+      "slot_already_booked": "هذا الموعد محجوز بالفعل. يرجى اختيار موعد آخر.",
+      "cancelled_by_user": "تم الإلغاء بواسطة المستخدم"
     },
-    "profile_screen": {
-      "title": "الملف الشخصي",
-      "full_name": "الاسم الكامل",
-      "email_address": "البريد الإلكتروني",
-      "@data_was_updated_successfully": "تم تحديث البيانات بنجاح"
+    "e_codes": {
+      "web_user_interaction_failed": "web-user-interaction-failed",
+      "cancelled": "cancelled",
+      "invalid_credential": "invalid-credential",
+      "email_already_in_use": "email-already-in-use"
+    },
+    "widgets": {
+      "appointment": {
+        "upcoming": "القادمة",
+        "completed": "المكتملة",
+        "canceled": "الملغاة",
+        "appointment_date": "تاريخ الموعد",
+        "appointment_time": "وقت الموعد",
+        "consultation_fee": "@:core.common.consultationFee",
+        "fee_value": "@:core.common.feeValue",
+        "cancel_appointment": "إلغاء الموعد",
+        "rate_doctor": "تقييم الطبيب",
+        "mark_as_completed": "تحديد كمكتمل",
+        "view_details": "@:core.common.viewDetails",
+        "tab_to_write_review": "اضغط لكتابة تقييم",
+        "you_must_select_at_least_one_star": "يجب تحديد نجمة واحدة على الأقل",
+        "no_appointments_found": "لا توجد مواعيد"
+      },
+      "status_switch_tile": {
+        "account_status": "حالة الحساب",
+        "enabled": "@:core.common.enabled",
+        "disabled": "@:core.common.disabled"
+      },
+      "language_picker": {
+        "language": "اللغة",
+        "english": "@:core.common.english",
+        "arabic": "@:core.common.arabic"
+      }
     }
   },
-  "errors": {
-    "no_account_associated": "لا يوجد حساب مرتبط بهذا البريد الإلكتروني",
-    "account_disabled": "الحساب معطل. يرجى التواصل مع المسؤول.",
-    "some_thing_went_wrong": "حدث خطأ ما، يرجى المحاولة لاحقاً",
-    "server_error": "خطأ في الخادم",
-    "no_internet": "لا يوجد اتصال بالإنترنت",
-    "email_or_password_is_incorrect": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
-    "email_address_already_in_use_by_another_account": "البريد الإلكتروني مستخدم بالفعل بواسطة حساب آخر",
-    "user_not_authenticated": "المستخدم غير مصرح له",
-    "error_while_adding_doctor_please_try_again_later": "حدث خطأ أثناء إضافة الطبيب، يرجى المحاولة لاحقاً",
-    "error_while_updating_doctor_please_try_again_later": "حدث خطأ أثناء تحديث بيانات الطبيب، يرجى المحاولة لاحقاً",
-    "failed_to_fetch_appointments": "فشل جلب المواعيد: ${E}",
-    "failed_to_book_appointment": "فشل حجز الموعد: ${E}",
-    "slot_already_booked": "هذا الموعد محجوز بالفعل. يرجى اختيار موعد آخر.",
-    "user_not_logged_in": "المستخدم غير مسجل الدخول",
-    "failed_to_update_appointment_status": "فشل تحديث حالة الموعد: ${E}",
-    "cancelled_by_user": "تم الإلغاء بواسطة المستخدم"
-  },
-  "validators": {
-    "this_field_is_required": "هذا الحقل مطلوب",
-    "email_is_required": "البريد الإلكتروني مطلوب",
-    "invalid_email_format": "صيغة البريد الإلكتروني غير صالحة",
-    "password_is_required": "كلمة المرور مطلوبة",
-    "confirm_password_is_required": "تأكيد كلمة المرور مطلوب",
-    "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
-    "phone_is_required": "رقم الهاتف مطلوب",
-    "invalid_phone_number": "رقم الهاتف غير صالح",
-    "password_must_be_at_least_6_characters": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
-  },
-  "e_codes": {
-    "web_user_interaction_failed": "web-user-interaction-failed",
-    "cancelled": "cancelled",
-    "invalid_credential": "invalid-credential",
-    "email_already_in_use": "email-already-in-use",
-    "@cancelled_by_user": " [16] Cancelled by user."
-  },
-  "doctor": {
-    "main": {
-      "my_schedule": "جدول مواعيدي",
-      "appointments": "@:patientMain.appointments",
-      "settings": "الإعدادات"
+  "features": {
+    "common": {
+      "auth": {
+        "welcome_back": "مرحباً بعودتك",
+        "auth_subtitle": "يمكنك البحث عن دورات، التقديم عليها وإيجاد منح للدراسة بالخارج",
+        "admin_subtitle": "تسجيل الدخول إلى حساب المسؤول",
+        "doctor_subtitle": "تسجيل الدخول إلى حساب الطبيب",
+        "login": "تسجيل الدخول",
+        "sign_up": "إنشاء حساب",
+        "join_us": "انضم إلينا للبدء في البحث",
+        "have_account": "لديك حساب بالفعل؟ سجل دخولك",
+        "no_account": "ليس لديك حساب؟ انضم إلينا",
+        "forgot_password": "نسيت كلمة المرور",
+        "username": "اسم المستخدم",
+        "email": "@:core.common.email",
+        "password": "@:core.common.password",
+        "google": "جوجل",
+        "agree_terms": "أوافق على شروط الخدمة وسياسة الخصوصية",
+        "you_must_agree_to_terms": "يجب أن توافق على شروط الخدمة وسياسة الخصوصية",
+        "forgot_password_screen": {
+          "title": "نسيت كلمة المرور",
+          "email": "@:core.common.email",
+          "description": "أدخل بريدك الإلكتروني وسنرسل لك رابطاً لإعادة تعيين كلمة المرور.",
+          "send_link": "إرسال الرابط",
+          "success_dialog_message": "لقد أرسلنا بريداً إلكترونياً لإعادة تعيين كلمة المرور الخاصة بك. يرجى مراجعة صندوق الوارد أو البريد العشوائي (Spam)."
+        }
+      },
+      "onboarding": {
+        "next": "التالي",
+        "skip": "تخطي",
+        "get_started": "ابدأ الآن",
+        "pages(interface=PageData)": [
+          {
+            "title": "ابحث عن أطباء موثوقين",
+            "subtitle": "اعثر على أطباء موثوقين بالقرب منك. احصل على الرعاية التي تحتاجها من متخصصين ذوي خبرة.",
+            "imagePath": "assets/images/on_boarding1.png"
+          },
+          {
+            "title": "اختر أفضل الأطباء",
+            "subtitle": "استكشف الأطباء وفقاً لاحتياجاتك، واختر الطبيب الأنسب لك.",
+            "imagePath": "assets/images/on_boarding2.png"
+          },
+          {
+            "title": "حجز مواعيد بسهولة",
+            "subtitle": "احجز موعدك بلمسات بسيطة، وحدد الوقت الأنسب لجدولك.",
+            "imagePath": "assets/images/on_boarding3.png"
+          }
+        ]
+      },
+      "choose_role": {
+        "title": "دكتور هانت",
+        "role_selection": "اختر دورك",
+        "patient": {
+          "title": "مريض",
+          "description": "حجز المواعيد واستشارة الأطباء."
+        },
+        "admin": {
+          "title": "مسؤول",
+          "description": "إدارة الأطباء وإعدادات التطبيق."
+        },
+        "doctor": {
+          "title": "طبيب",
+          "description": "إدارة المواعيد واستشارة المرضى."
+        }
+      },
+      "appointments_management": {
+        "title": "المواعيد",
+        "upcoming": "@:core.widgets.appointment.upcoming",
+        "completed": "@:core.widgets.appointment.completed",
+        "canceled": "@:core.widgets.appointment.canceled",
+        "no_appointments_found": "@:core.widgets.appointment.noAppointmentsFound"
+      }
     },
-    "settings": {
-      "title": "إعدادات الطبيب",
-      "doctor_profile": "الملف الشخصي للطبيب",
-      "edit_profile_desc": "تعديل ملفك الشخصي ورسوم الاستشارة",
-      "availability": "إدارة أوقات العمل",
-      "availability_desc": "تحديث أيام وساعات العمل",
-      "change_password": "تغيير كلمة المرور",
-      "update_master_security_credentials": "تحديث كلمة مرور حسابك",
-      "app_information": "معلومات التطبيق",
-      "v1_0_0": "v1.0.0"
+    "patient": {
+      "main_screen": {
+        "home": "الرئيسية",
+        "settings": "الإعدادات",
+        "appointments": "@:features.common.appointmentsManagement.title",
+        "favourite": "المفضلة"
+      },
+      "home_tab": {
+        "welcome": "أهلاً ${name}",
+        "find_doctor": "ابحث عن طبيبك",
+        "popular_doctors": "الأطباء الأكثر طلباً",
+        "favourite_doctors": "الأطباء المفضلون",
+        "top_rated_doctors": "الأعلى تقييماً",
+        "see_all": "@:core.common.seeAll",
+        "search": "@:core.common.search"
+      },
+      "favourite_tab": {
+        "title": "@:features.patient.homeTab.favouriteDoctors",
+        "no_favourite_doctors_match_search": "لا يوجد أطباء مفضلون يطابقون البحث",
+        "no_favourite_doctors_description": "لم تقم بإضافة أي طبيب إلى المفضلة بعد."
+      },
+      "settings_tab": {
+        "title": "الإعدادات",
+        "account_settings": "إعدادات الحساب",
+        "change_password": "@:core.common.changePassword",
+        "notifications": "الإشعارات",
+        "privacy_policy": "سياسة الخصوصية",
+        "more_options": "خيارات إضافية",
+        "language": "@:core.widgets.languagePicker.language",
+        "build_version": "@:core.common.buildVersion",
+        "v1_0_0": "@:core.common.appVersionVal",
+        "logout": "@:core.common.logout",
+        "logout_confirmation": "@:core.common.logoutConfirmation"
+      },
+      "patient_profile_screen": {
+        "title": "الملف الشخصي",
+        "personal_information": "المعلومات الشخصية",
+        "name": "@:core.common.name",
+        "phone": "@:core.common.phone",
+        "add_phone_number": "إضافة رقم هاتف",
+        "data_updated_successfully": "@:core.common.dataUpdatedSuccessfully"
+      },
+      "privacy_policy_screen": {
+        "title": "سياسة الخصوصية",
+        "last_updated": "آخر تحديث: أكتوبر 2026",
+        "introduction": "يحترم تطبيق دكتور هانت خصوصيتك ويلتزم بحماية بياناتك الشخصية والطبية. توضح سياسة الخصوصية هذه كيفية جمع معلوماتك واستخدامها وحمايتها عند استخدام تطبيقنا.",
+        "sections": {
+          "information_we_collect": {
+            "title": "١. المعلومات التي نجمعها",
+            "description": "نقوم بجمع المعلومات اللازمة لتقديم خدمات حجز الأطباء وإدارة الرعاية الصحية:",
+            "bullets": [
+              "البيانات التعريفية: الاسم، البريد الإلكتروني، ورقم الهاتف.",
+              "بيانات المواعيد: الأطباء المختارون، تواريخ المواعيد، الأوقات، وحالة الحجز.",
+              "التفاصيل الطبية: تفضيلات الاستشارة وملاحظات المريض المشاركة للمواعيد.",
+              "الحساب والبيانات التقنية: دور المستخدم (مريض، طبيب، مسؤول) وسجلات النظام."
+            ]
+          },
+          "how_we_use_information": {
+            "title": "٢. كيف نستخدم معلوماتك",
+            "description": "تُستخدم معلوماتك حصرياً لتقديم وتحسين خدمات الرعاية الصحية لدينا:",
+            "bullets": [
+              "تسهيل البحث عن الأطباء، جدولة المواعيد، وإدارتها.",
+              "إرسال تذكيرات بالمواعيد وتحديثات الحساب.",
+              "ضمان تسجيل الدخول الآمن والمصادقة.",
+              "تحسين أداء التطبيق وتجربة دعم العملاء."
+            ]
+          },
+          "data_security": {
+            "title": "٣. أمان البيانات وتخزينها",
+            "description": "نأخذ أمان بياناتك الصحية والشخصية على محمل الجد:",
+            "bullets": [
+              "يتم تخزين البيانات بأمان باستخدام بنية تحتية سحابية مشفرة لقواعد البيانات.",
+              "تقتصر صلاحيات الوصول إلى البيانات الإدارية والطبية على المستخدمين المصرح لهم فقط.",
+              "نقوم بتحديث ممارساتنا الأمنية بانتظام للحماية من الوصول غير المصرح به."
+            ]
+          },
+          "third_party_services": {
+            "title": "٤. خدمات الطرف الثالث",
+            "description": "نقوم بدمج خدمات موثوقة من أطراف ثالثة لضمان الأداء الأمثل:",
+            "bullets": [
+              "فايربيز (Firebase): تُستخدم للمصادقة الآمنة وإدارة قواعد البيانات السحابية.",
+              "كلاوديناري (Cloudinary): تُستخدم لتخزين وعرض الصور الشخصية وصور الأطباء بأمان.",
+              "نحن لا نبيع أو نتاجر أو نؤجر بياناتك الشخصية لأطراف ثالثة لأغراض تسويقية أبداً."
+            ]
+          },
+          "your_rights": {
+            "title": "٥. حقوقك وتحكمك بالبيانات",
+            "description": "لديك كامل التحكم في بياناتك الشخصية داخل تطبيق دكتور هانت:",
+            "bullets": [
+              "عرض وتحديث معلومات ملفك الشخصي في أي وقت.",
+              "إدارة إعدادات الإشعارات والتنبيهات.",
+              "طلب حذف الحساب أو مسح البيانات عبر التواصل مع الدعم."
+            ]
+          },
+          "contact_us": {
+            "title": "٦. تواصل معنا",
+            "description": "إذا كانت لديك أي أسئلة أو استفسارات حول سياسة الخصوصية هذه أو حماية بياناتك، يرجى التواصل معنا عبر support@doctorhunt.com."
+          }
+        }
+      },
+      "doctor_details_screen": {
+        "title": "تفاصيل الطبيب",
+        "find_doctors": "البحث عن الأطباء",
+        "book_now": "احجز الآن",
+        "services": "الخدمات",
+        "services_list": [
+          "رعاية المرضى يجب أن تكون الأولوية القصوى.",
+          "إذا كنت تدير عيادتك الخاصة، فأنت تعرف حجم المسؤولية.",
+          "لهذا السبب نوفر نظام تذكير متقدم بالمواعيد."
+        ],
+        "running": "جاري",
+        "ongoing": "مستمر",
+        "patient": "مريض",
+        "experience": "خبرة ${years} سنوات",
+        "patient_stories": "${count} تقييم من المرضى",
+        "next_available": "الموعد المتاح القادم",
+        "tomorrow": "@:core.common.tomorrow",
+        "price_per_hour": "${price}/ ساعة",
+        "doctor_name": "@:core.common.name",
+        "tooth_dentist": "طبيب أسنان"
+      },
+      "select_time_screen": {
+        "title": "تحديد الوقت",
+        "no_slots_available": "لا تتوفر فترات متاحة",
+        "slot_available": "${number} موعد متاح",
+        "morning_slots": "الفترة الصباحية: ${number} مواعيد",
+        "afternoon_slots": "فترة الظهيرة: ${number} مواعيد",
+        "evening_slots": "الفترة المسائية: ${number} مواعيد",
+        "confirm": "@:core.dialogs.confirm",
+        "you_must_select_appointment_time": "يجب اختيار وقت الموعد"
+      },
+      "appointment_success_dialog": {
+        "thank_you": "شكراً لك !",
+        "success": "تم حجز موعدك بنجاح",
+        "booking_details": "لقد حجزت موعداً مع ${doctor} في ${date}، الساعة ${time}",
+        "done": "تم"
+      },
+      "appointment_details_screen": {
+        "title": "@:features.admin.appointmentDetailsScreen.title",
+        "doctor": "@:features.admin.appointmentDetailsScreen.doctor",
+        "appointment": "@:features.admin.appointmentDetailsScreen.appointment",
+        "date": "@:core.common.date",
+        "time": "@:core.common.time",
+        "fee": "@:core.common.fee"
+      }
     },
-    "onboarding": {
-      "welcome_title": "مرحباً بك في دكتور هانت!",
-      "welcome_subtitle": "دعنا نكمل ملفك الشخصي ونحدد جدول عملك ليتمكن المرضى من العثور عليك وحجز المواعيد معك.",
-      "continue_btn": "متابعة",
-      "step_profile_title": "بيانات الملف الشخصي",
-      "step_profile_subtitle": "يرجى تقديم معلومات الاتصال ورسوم الاستشارة",
-      "phone_number": "رقم الهاتف",
-      "phone_hint": "+20 100 000 0000",
-      "consultation_fee": "رسوم الاستشارة",
-      "fee_hint": "مثال: 200",
-      "photo_required": "يرجى اختيار صورة للملف الشخصي",
-      "choose_photo": "اختيار صورة",
-      "change_photo": "تغيير الصورة",
-      "step_availability_title": "جدول العمل",
-      "step_availability_subtitle": "حدد أيام عملك وساعات الاستشارة",
-      "select_at_least_one_day": "يرجى اختيار يوم عمل واحد على الأقل",
-      "save_and_continue": "حفظ وإكمال",
-      "success_title": "كل شيء جاهز!",
-      "success_subtitle": "تم تحديث ملفك الشخصي ومواعيد توفرك بنجاح. أنت الآن جاهز لبدء استقبال المواعيد.",
-      "finish": "إنهاء"
+    "doctor": {
+      "doctor_main_screen": {
+        "my_schedule": "جدول مواعيدي",
+        "appointments": "@:features.common.appointmentsManagement.title",
+        "settings": "الإعدادات"
+      },
+      "schedule_tab": {
+        "title": "جدول مواعيدي",
+        "today": "@:core.common.today",
+        "tomorrow": "@:core.common.tomorrow",
+        "next_7_days": "خلال 7 أيام",
+        "no_appointments": "@:core.widgets.appointment.noAppointmentsFound",
+        "refresh": "تحديث"
+      },
+      "doctor_settings_tab": {
+        "title": "إعدادات الطبيب",
+        "doctor_profile": "الملف الشخصي للطبيب",
+        "edit_profile_desc": "تعديل ملفك الشخصي ورسوم الاستشارة",
+        "availability": "إدارة أوقات العمل",
+        "availability_desc": "تحديث أيام وساعات العمل",
+        "change_password": "@:core.common.changePassword",
+        "update_master_security_credentials": "تحديث كلمة مرور حسابك",
+        "app_information": "@:core.common.appInformation",
+        "v1_0_0": "@:core.common.appVersionVal"
+      },
+      "doctor_profile_screen": {
+        "title": "الملف الشخصي للطبيب",
+        "personal_information": "المعلومات الشخصية",
+        "name": "@:core.common.name",
+        "phone": "@:core.common.phone",
+        "add_phone_number": "@:features.patient.patientProfileScreen.addPhoneNumber",
+        "speciality": "@:core.common.specialty",
+        "status": "الحالة",
+        "active": "@:core.common.active",
+        "inactive": "@:core.common.inactive",
+        "fee": "@:core.common.fee",
+        "data_updated_successfully": "@:core.common.dataUpdatedSuccessfully"
+      },
+      "doctor_onboarding_screen": {
+        "welcome_title": "مرحباً بك في دكتور هانت!",
+        "welcome_subtitle": "دعنا نكمل ملفك الشخصي ونحدد جدول عملك ليتمكن المرضى من العثور عليك وحجز المواعيد معك.",
+        "continue_btn": "متابعة",
+        "step_profile_title": "بيانات الملف الشخصي",
+        "step_profile_subtitle": "يرجى تقديم معلومات الاتصال ورسوم الاستشارة",
+        "phone_number": "@:core.common.phoneNumber",
+        "phone_hint": "+20 100 000 0000",
+        "consultation_fee": "@:core.common.consultationFee",
+        "fee_hint": "مثال: 200",
+        "photo_required": "يرجى اختيار صورة للملف الشخصي",
+        "choose_photo": "اختيار صورة",
+        "change_photo": "تغيير الصورة",
+        "step_availability_title": "جدول العمل",
+        "step_availability_subtitle": "حدد أيام عملك وساعات الاستشارة",
+        "select_at_least_one_day": "يرجى اختيار يوم عمل واحد على الأقل",
+        "save_and_continue": "حفظ وإكمال",
+        "success_title": "كل شيء جاهز!",
+        "success_subtitle": "تم تحديث ملفك الشخصي ومواعيد توفرك بنجاح. أنت الآن جاهز لبدء استقبال المواعيد.",
+        "finish": "إنهاء"
+      },
+      "doctor_availability_screen": {
+        "title": "أوقات توفر الطبيب",
+        "working_days": "أيام العمل",
+        "working_hours": "ساعات العمل",
+        "start_time": "وقت البدء",
+        "end_time": "وقت الانتهاء",
+        "slot_duration": "مدة الموعد",
+        "active": "@:core.common.active",
+        "inactive": "@:core.common.inactive",
+        "start_time_and_endtime_must_be_different": "يجب أن يكون وقت البدء مختلفاً عن وقت الانتهاء",
+        "start_time_must_be_before_end_time": "يجب أن يكون وقت البدء قبل وقت الانتهاء",
+        "data_updated_successfully": "@:core.common.dataUpdatedSuccessfully"
+      }
     },
-    "availability": {
-      "doctor_availability": "أوقات توفر الطبيب",
-      "working_days": "أيام العمل",
-      "working_hours": "ساعات العمل",
-      "start_time": "وقت البدء",
-      "end_time": "وقت الانتهاء",
-      "slot_duration": "مدة الموعد",
-      "@save_availability": "حفظ أوقات العمل",
-      "active": "نشط",
-      "inactive": "غير نشط",
-      "start_time_and_endtime_must_be_different": "يجب أن يكون وقت البدء مختلفاً عن وقت الانتهاء",
-      "start_time_must_be_before_end_time": "يجب أن يكون وقت البدء قبل وقت الانتهاء",
-      "data_was_updated_successfully": "تم تحديث البيانات بنجاح"
-    },
-    "profile": {
-      "title": "الملف الشخصي للطبيب",
-      "personal_information": "المعلومات الشخصية",
-      "name": "الاسم",
-      "phone": "الهاتف",
-      "data_was_updated_successfully": "تم تحديث البيانات بنجاح",
-      "speciality": "التخصص",
-      "status": "الحالة",
-      "active": "نشط",
-      "inactive": "غير نشط",
-      "fee": "الرسوم"
-    },
-    "schedule": {
-      "title": "جدول مواعيدي",
-      "today": "اليوم",
-      "tomorrow": "غداً",
-      "next_7_days": "خلال 7 أيام",
-      "no_appointments": "لا توجد مواعيد",
-      "refresh": "تحديث"
+    "admin": {
+      "admin_main_screen": {
+        "doctors": "الأطباء",
+        "patients": "المرضى",
+        "appointments": "@:features.common.appointmentsManagement.title",
+        "settings": "الإعدادات"
+      },
+      "admin_doctors_tab": {
+        "create_doctor": "إضافة طبيب",
+        "search_doctors": "البحث عن أطباء",
+        "no_doctors_found": "لم يتم العثور على أطباء",
+        "no_doctors_description": "لا يوجد أطباء مسجلون حالياً في دكتور هانت. أضف أول طبيب للبدء.",
+        "total_doctors": "إجمالي الأطباء",
+        "enabled": "@:core.common.enabled",
+        "disabled": "@:core.common.disabled",
+        "all": "@:core.common.all",
+        "dash": "@:core.common.dash",
+        "no_doctor_name_or_specialty_match_search": "لا يوجد اسم طبيب أو تخصص يطابق البحث",
+        "no_doctors": "لا يوجد أطباء",
+        "no_doctors_to_search_add_some": "لا يوجد أطباء للبحث، أضف بعض الأطباء"
+      },
+      "admin_patients_tab": {
+        "title": "المرضى",
+        "no_patients": "لا يوجد مرضى",
+        "search_hint": "البحث عن المرضى...",
+        "delete_patient": "حذف المريض",
+        "delete_patient_confirmation_title": "تأكيد حذف المريض",
+        "delete_patient_confirmation_message": "هل أنت متأكد من حذف هذا المريض؟ لا يمكن التراجع عن هذا الإجراء.",
+        "patient_deleted_successfully": "تم حذف المريض بنجاح"
+      },
+      "admin_settings_tab": {
+        "admin_profile": "الملف الشخصي للمسؤول",
+        "change_password": "@:core.common.changePassword",
+        "app_information": "@:core.common.appInformation",
+        "edit_super_admin_details_permissions": "تعديل بيانات وصلاحيات المسؤول",
+        "update_master_security_credentials": "تحديث بيانات الأمان الرئيسية",
+        "build_version": "@:core.common.buildVersion",
+        "v1_0_0": "@:core.common.appVersionVal",
+        "logout": "@:core.common.logout",
+        "logout_confirmation": "@:core.common.logoutConfirmation"
+      },
+      "admin_profile_screen": {
+        "title": "الملف الشخصي",
+        "full_name": "@:core.common.fullName",
+        "email_address": "البريد الإلكتروني",
+        "data_updated_successfully": "@:core.common.dataUpdatedSuccessfully"
+      },
+      "add_doctor_screen": {
+        "title": "إضافة طبيب",
+        "create_doctor": "إضافة طبيب",
+        "select_specialty": "اختر التخصص",
+        "doctor_name": "@:core.common.name",
+        "email": "@:core.common.email",
+        "password": "@:core.common.password",
+        "email_example": "مثال: doctor@hospital.com",
+        "password_example": "••••••••",
+        "specialty": "@:core.common.specialty",
+        "consultation_fee": "@:core.common.consultationFee",
+        "name_example": "مثال: د. أحمد علي",
+        "fee_example": "مثال: 28.00 $",
+        "english_name": "الاسم بالإنجليزية",
+        "arabic_name": "الاسم بالعربية",
+        "add_specialty": "إضافة تخصص",
+        "doctor_added_successfully": "تمت إضافة الطبيب بنجاح",
+        "you_must_pick_doctor_image": "يجب اختيار صورة للطبيب"
+      },
+      "doctor_details_screen": {
+        "title": "تفاصيل الطبيب",
+        "specialty": "@:core.common.specialty",
+        "account_status": "@:core.widgets.statusSwitchTile.accountStatus",
+        "rating": "التقييم",
+        "consultation_fee": "@:core.common.consultationFee",
+        "fee": "@:core.widgets.appointment.feeValue",
+        "delete_doctor": "حذف الطبيب",
+        "delete_doctor_confirmation_title": "تأكيد حذف الطبيب",
+        "delete_doctor_confirmation_message": "هل أنت متأكد من حذف هذا الطبيب؟ لا يمكن التراجع عن هذا الإجراء.",
+        "doctor_deleted_successfully": "تم حذف الطبيب بنجاح"
+      },
+      "update_doctor_details_screen": {
+        "title": "تعديل بيانات الطبيب",
+        "change_photo": "تغيير الصورة",
+        "doctor_status": "حالة الطبيب",
+        "active_and_available": "نشط ومتاح",
+        "inactive": "@:core.common.inactive",
+        "delete_doctor": "@:features.admin.doctorDetailsScreen.deleteDoctor",
+        "save_changes": "@:core.common.saveChanges",
+        "doctor_updated_successfully": "تم تحديث بيانات الطبيب بنجاح"
+      },
+      "appointment_details_screen": {
+        "title": "تفاصيل الموعد",
+        "patient": "المريض",
+        "doctor": "الطبيب",
+        "appointment": "الموعد",
+        "date": "@:core.common.date",
+        "time": "@:core.common.time",
+        "fee": "@:core.common.fee"
+      }
     }
   }
 }

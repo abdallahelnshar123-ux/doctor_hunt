@@ -70,21 +70,21 @@ class _DoctorMainScreenContent extends HookWidget {
           items: [
             _buildBottomNavigationBarItem(
               iconName: AppAssets.icons.scheduleIcon.path,
-              label: t.doctor.main.mySchedule,
+              label: t.features.doctor.doctorMainScreen.mySchedule,
               index: 0,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             _buildBottomNavigationBarItem(
               iconName: AppAssets.icons.appointmentsIcon.path,
-              label: t.doctor.main.appointments,
+              label: t.features.doctor.doctorMainScreen.appointments,
               index: 1,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             _buildBottomNavigationBarItem(
               iconName: AppAssets.icons.settingsIcon.path,
-              label: t.doctor.main.settings,
+              label: t.features.doctor.doctorMainScreen.settings,
               index: 2,
               selectedIndex: selectedIndex.value,
               context: context,

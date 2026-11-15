@@ -57,14 +57,15 @@ class PatientProfileFormWidget extends HookWidget {
         children: [
           const SizedBox(height: 10),
           ProfileTextFormWidget(
-            label: t.profile.name,
+            label: t.features.patient.patientProfileScreen.name,
             controller: nameController,
             validator: (value) => Validators.required(value),
           ),
           const SizedBox(height: 10),
           ProfileTextFormWidget(
-            hintText: t.profile.addPhoneNumber,
-            label: t.profile.phone,
+            hintText:
+                t.features.patient.patientProfileScreen.addPhoneNumber,
+            label: t.features.patient.patientProfileScreen.phone,
             controller: phoneController,
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
@@ -107,7 +108,7 @@ class PatientProfileFormWidget extends HookWidget {
           //               size: 20,
           //             ),
           //             Text(
-          //               t.admin.updateDoctorDetails.saveChanges,
+          //               t.core.common.saveChanges,
           //               style: context.semiBold16.white.rubik,
           //             ),
           //           ],

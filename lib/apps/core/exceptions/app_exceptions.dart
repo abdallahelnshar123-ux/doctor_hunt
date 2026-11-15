@@ -40,7 +40,7 @@ class UnexpectedException extends AppException {
 class SlotAlreadyBookedException extends AppException {
   SlotAlreadyBookedException([String? message])
     : super(
-        message: message ?? t.errors.slotAlreadyBooked,
+        message: message ?? t.core.errors.slotAlreadyBooked,
         statusCode: 409,
       );
 }

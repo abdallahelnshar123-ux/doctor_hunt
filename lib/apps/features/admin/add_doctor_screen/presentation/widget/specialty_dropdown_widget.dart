@@ -80,7 +80,7 @@ class SpecialtyDropdownWidget extends StatelessWidget {
           filled: true,
           contentPadding: EdgeInsets.zero,
           hintStyle: context.light14.textSecondary.rubik,
-          hintText: t.admin.addDoctorScreen.selectSpecialty,
+          hintText: t.features.admin.addDoctorScreen.selectSpecialty,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide(

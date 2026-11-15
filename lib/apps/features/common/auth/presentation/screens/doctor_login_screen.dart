@@ -21,8 +21,8 @@ class DoctorLoginScreen extends StatelessWidget {
         if (state is LoginWithEmailPasswordErrorState) {
           debugPrint(state.message);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
@@ -46,7 +46,7 @@ class DoctorLoginScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: RoleLoginFormWidget(
                     role: UserRoles.doctor,
-                    subtitle: t.auth.doctorSubtitle,
+                    subtitle: t.features.common.auth.doctorSubtitle,
                   ),
                 ),
               ),

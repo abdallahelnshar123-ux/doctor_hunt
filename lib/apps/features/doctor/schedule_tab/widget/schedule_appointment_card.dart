@@ -11,11 +11,11 @@ extension AppointmentStatusExt on AppointmentStatus {
   String get localizedName {
     switch (this) {
       case AppointmentStatus.upcoming:
-        return t.patientAppointments.upcoming;
+        return t.core.widgets.appointment.upcoming;
       case AppointmentStatus.completed:
-        return t.patientAppointments.completed;
+        return t.core.widgets.appointment.completed;
       case AppointmentStatus.cancelled:
-        return t.patientAppointments.canceled;
+        return t.core.widgets.appointment.canceled;
     }
   }
 }
@@ -107,7 +107,7 @@ class ScheduleAppointmentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    t.admin.appointmentsTab.date,
+                    t.core.common.date,
                     style: context.regular12.textSecondary.rubik,
                   ),
                   const SizedBox(height: 5),
@@ -121,7 +121,7 @@ class ScheduleAppointmentCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    t.admin.appointmentsTab.time,
+                    t.core.common.time,
                     style: context.regular12.textSecondary.rubik,
                   ),
                   const SizedBox(height: 5),

@@ -30,10 +30,10 @@ class AdminMainScreen extends HookWidget {
   ];
 
   static final List<String> _titlesList = [
-    t.admin.main.doctors,
-    t.admin.patientsTab.title,
-    t.admin.appointmentsTab.title,
-    t.admin.main.settings,
+    t.features.admin.adminMainScreen.doctors,
+    t.features.admin.adminPatientsTab.title,
+    t.features.common.appointmentsManagement.title,
+    t.features.admin.adminMainScreen.settings,
   ];
 
   @override
@@ -71,28 +71,28 @@ class AdminMainScreen extends HookWidget {
           items: [
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.medicalIcon.path,
-              label: t.admin.main.doctors,
+              label: t.features.admin.adminMainScreen.doctors,
               index: 0,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.patientIcon.path,
-              label: t.admin.main.patients,
+              label: t.features.admin.adminMainScreen.patients,
               index: 1,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.appointmentsIcon.path,
-              label: t.admin.appointmentsTab.title,
+              label: t.features.common.appointmentsManagement.title,
               index: 2,
               selectedIndex: selectedIndex.value,
               context: context,
             ),
             builtBottomNavigationBarItem(
               iconName: AppAssets.icons.settingsIcon.path,
-              label: t.admin.main.settings,
+              label: t.features.admin.adminMainScreen.settings,
               index: 3,
               selectedIndex: selectedIndex.value,
               context: context,

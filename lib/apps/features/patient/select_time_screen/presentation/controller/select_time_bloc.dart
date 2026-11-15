@@ -58,7 +58,7 @@ class SelectTimeBloc extends Bloc<SelectTimeEvent, SelectTimeState> {
     var shouldRemoveSlot = false;
 
     await userOption.fold(
-      () async => emit(BookAppointmentError(t.errors.userNotLoggedIn)),
+      () async => emit(BookAppointmentError(t.core.errors.userNotLoggedIn)),
       (user) async {
         final appointment = Appointment(
           id: '',

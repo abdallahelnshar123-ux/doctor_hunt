@@ -44,7 +44,7 @@ class AddDoctorScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.createDoctor.doctorAddedSuccessfully,
+            message: t.features.admin.addDoctorScreen.doctorAddedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
@@ -52,8 +52,8 @@ class AddDoctorScreen extends HookWidget {
           debugPrint(state.message);
           DialogUtils.hideLoading(context: context);
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
@@ -64,7 +64,7 @@ class AddDoctorScreen extends HookWidget {
       },
 
       child: Scaffold(
-        appBar: AppBar(title: Text(t.createDoctor.title)),
+        appBar: AppBar(title: Text(t.features.admin.addDoctorScreen.title)),
         body: Form(
           key: formKey,
           child: ListView(
@@ -73,44 +73,47 @@ class AddDoctorScreen extends HookWidget {
               SizedBox(height: 20),
               _buildText(
                 context: context,
-                text: t.admin.addDoctorScreen.doctorName,
+                text: t.features.admin.addDoctorScreen.doctorName,
               ),
               CustomTextFormField(
                 controller: nameController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.addDoctorScreen.nameExample,
+                hintText: t.features.admin.addDoctorScreen.nameExample,
                 hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.required(value),
               ),
-              _buildText(context: context, text: t.admin.addDoctorScreen.email),
+              _buildText(
+                context: context,
+                text: t.features.admin.addDoctorScreen.email,
+              ),
               CustomTextFormField(
                 controller: emailController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
                 keyboardType: TextInputType.emailAddress,
-                hintText: t.admin.addDoctorScreen.emailExample,
+                hintText: t.features.admin.addDoctorScreen.emailExample,
                 hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.email(value),
               ),
               _buildText(
                 context: context,
-                text: t.admin.addDoctorScreen.password,
+                text: t.features.admin.addDoctorScreen.password,
               ),
               CustomTextPassword(
                 controller: passwordController,
                 fillColor: AppColors.bgPrimary,
                 filled: true,
-                hintText: t.admin.addDoctorScreen.passwordExample,
+                hintText: t.features.admin.addDoctorScreen.passwordExample,
                 hintStyle: context.light14.textSecondary.rubik,
                 style: context.light16.textSecondary.rubik,
                 validator: (value) => Validators.password(value),
               ),
               _buildText(
                 context: context,
-                text: t.admin.addDoctorScreen.specialty,
+                text: t.features.admin.addDoctorScreen.specialty,
               ),
               Row(
                 spacing: 15,
@@ -166,7 +169,7 @@ class AddDoctorScreen extends HookWidget {
           if (selectedSpecialty.value == null) {
             SnackBarUtils.showInfoSnackBar(
               context: context,
-              message: t.admin.addDoctorScreen.selectSpecialty,
+              message: t.features.admin.addDoctorScreen.selectSpecialty,
             );
             return;
           }
@@ -181,7 +184,7 @@ class AddDoctorScreen extends HookWidget {
         }
       },
       child: Text(
-        t.admin.addDoctorScreen.createDoctor,
+        t.features.admin.addDoctorScreen.createDoctor,
         style: context.medium18.white.rubik,
       ),
     );

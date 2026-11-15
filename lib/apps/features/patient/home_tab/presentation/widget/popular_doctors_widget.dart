@@ -25,7 +25,7 @@ class PopularDoctorsWidget extends StatelessWidget {
             mainAxisAlignment: .spaceBetween,
             children: [
               Text(
-                t.home.popularDoctors,
+                t.features.patient.homeTab.popularDoctors,
                 style: context.medium18.textTertiary.rubik,
               ),
               Spacer(),
@@ -37,7 +37,7 @@ class PopularDoctorsWidget extends StatelessWidget {
                   spacing: 5,
                   children: [
                     Text(
-                      t.home.seeAll,
+                      t.features.patient.homeTab.seeAll,
                       style: context.light12.textSecondary.rubik,
                     ),
                     Icon(
@@ -63,7 +63,7 @@ class PopularDoctorsWidget extends StatelessWidget {
                   height: 330,
                   width: double.infinity,
                   child: Text(
-                    t.admin.doctorsTab.noDoctorsFound,
+                    t.features.admin.adminDoctorsTab.noDoctorsFound,
                     style: context.medium10.black.rubik,
                   ),
                 );

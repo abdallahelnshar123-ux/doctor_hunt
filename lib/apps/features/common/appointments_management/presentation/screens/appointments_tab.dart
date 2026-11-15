@@ -13,7 +13,9 @@ class AppointmentsTab extends StatelessWidget {
       bottomSafeArea: false,
       body: Column(
         children: [
-          AppBar(title: Text(t.patientAppointments.title)),
+          AppBar(
+            title: Text(t.features.common.appointmentsManagement.title),
+          ),
           const SizedBox(height: 10),
           const Expanded(child: AppointmentsView()),
         ],

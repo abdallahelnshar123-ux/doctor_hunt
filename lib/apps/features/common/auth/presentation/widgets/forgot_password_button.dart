@@ -18,7 +18,7 @@ class ForgotPasswordButton extends StatelessWidget {
         const ForgotPasswordRoute().push(context);
       },
       child: Text(
-        t.auth.forgotPassword,
+        t.features.common.auth.forgotPassword,
         style: context.regular14.brandPrimary.rubik,
       ),
     );

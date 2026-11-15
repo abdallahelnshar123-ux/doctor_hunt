@@ -22,8 +22,8 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
         children: [
           _buildSettingsCard(
             context,
-            title: t.doctor.settings.doctorProfile,
-            subtitle: t.doctor.settings.editProfileDesc,
+            title: t.features.doctor.doctorSettingsTab.doctorProfile,
+            subtitle: t.features.doctor.doctorSettingsTab.editProfileDesc,
             icon: Icons.person_outline,
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
@@ -37,8 +37,8 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.doctor.settings.availability,
-            subtitle: t.doctor.settings.availabilityDesc,
+            title: t.features.doctor.doctorSettingsTab.availability,
+            subtitle: t.features.doctor.doctorSettingsTab.availabilityDesc,
             icon: Icons.calendar_month_outlined,
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
@@ -52,8 +52,9 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.doctor.settings.changePassword,
-            subtitle: t.doctor.settings.updateMasterSecurityCredentials,
+            title: t.features.doctor.doctorSettingsTab.changePassword,
+            subtitle:
+                t.features.doctor.doctorSettingsTab.updateMasterSecurityCredentials,
             icon: Icons.lock_reset_outlined,
             trailing: const Icon(
               Icons.arrow_forward_ios_rounded,
@@ -68,7 +69,7 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
           LanguagePickerPopupMenu(
             child: _buildSettingsCard(
               context,
-              title: t.settings.language,
+              title: t.core.widgets.languagePicker.language,
               subtitle: LanguagePickerPopupMenu.getCurrentLanguageName(),
               icon: Icons.language_outlined,
               trailing: const Icon(
@@ -81,11 +82,11 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
           _buildDivider(),
           _buildSettingsCard(
             context,
-            title: t.doctor.settings.appInformation,
-            subtitle: t.doctor.settings.v100,
+            title: t.features.doctor.doctorSettingsTab.appInformation,
+            subtitle: t.features.doctor.doctorSettingsTab.v100,
             icon: Icons.info_outline,
             trailing: Text(
-              t.settings.v100,
+              t.core.common.appVersionVal,
               style: context.light12.textSecondary.rubik,
             ),
           ),

@@ -65,7 +65,7 @@ class FavoriteTab extends HookWidget {
         body: Column(
           spacing: 10,
           children: [
-            AppBar(title: Text(t.home.favouriteDoctors)),
+            AppBar(title: Text(t.features.patient.favouriteTab.title)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: SearchTextFieldWidget(
@@ -88,15 +88,13 @@ class FavoriteTab extends HookWidget {
                       if (state.filteredDoctors.isEmpty) {
                         if (state.searchQuery?.isNotEmpty ?? false) {
                           return _buildText(
-                            text: t
-                                .favouriteDoctors
+                            text: t.features.patient.favouriteTab
                                 .noFavouriteDoctorsMatchSearch,
                             context: context,
                           );
                         } else {
                           return _buildText(
-                            text: t
-                                .favouriteDoctors
+                            text: t.features.patient.favouriteTab
                                 .noFavouriteDoctorsDescription,
                             context: context,
                           );

@@ -47,7 +47,7 @@ class AppointmentFirestoreService {
           .toList();
     } catch (e) {
       throw ServerException(
-        message: t.errors.failedToFetchAppointments(E: e.toString()),
+        message: t.core.errors.failedToFetchAppointments(E: e.toString()),
       );
     }
   }
@@ -69,7 +69,7 @@ class AppointmentFirestoreService {
         })
         .handleError((e) {
           throw ServerException(
-            message: t.errors.failedToFetchAppointments(E: e.toString()),
+            message: t.core.errors.failedToFetchAppointments(E: e.toString()),
           );
         });
   }
@@ -91,7 +91,7 @@ class AppointmentFirestoreService {
         })
         .handleError((e) {
           throw ServerException(
-            message: t.errors.failedToFetchAppointments(E: e.toString()),
+            message: t.core.errors.failedToFetchAppointments(E: e.toString()),
           );
         });
   }
@@ -138,7 +138,7 @@ class AppointmentFirestoreService {
       rethrow;
     } catch (e) {
       throw ServerException(
-        message: t.errors.failedToBookAppointment(E: e.toString()),
+        message: t.core.errors.failedToBookAppointment(E: e.toString()),
       );
     }
   }
@@ -176,7 +176,7 @@ class AppointmentFirestoreService {
       });
     } catch (e) {
       throw ServerException(
-        message: t.errors.failedToUpdateAppointmentStatus(E: e.toString()),
+        message: t.core.errors.failedToUpdateAppointmentStatus(E: e.toString()),
       );
     }
   }
@@ -194,7 +194,7 @@ class AppointmentFirestoreService {
         })
         .handleError((e) {
           throw ServerException(
-            message: t.errors.failedToFetchAppointments(E: e.toString()),
+            message: t.core.errors.failedToFetchAppointments(E: e.toString()),
           );
         });
   }
@@ -210,7 +210,7 @@ class AppointmentFirestoreService {
           .update({FirestoreConstants.status: status.name});
     } catch (e) {
       throw ServerException(
-        message: t.errors.failedToUpdateAppointmentStatus(E: e.toString()),
+        message: t.core.errors.failedToUpdateAppointmentStatus(E: e.toString()),
       );
     }
   }

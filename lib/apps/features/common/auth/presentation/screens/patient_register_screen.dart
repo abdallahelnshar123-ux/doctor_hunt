@@ -19,28 +19,28 @@ class PatientRegisterScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is RegisterWithEmailPasswordErrorState) {
           DialogUtils.showMessage(
-            posActionText: t.dialog.ok,
-            title: t.dialog.error,
+            posActionText: t.core.dialogs.ok,
+            title: t.core.dialogs.error,
             context: context,
             message: state.message,
           );
         }
         if (state is RegisterWithEmailPasswordSuccessState) {
           DialogUtils.showMessage(
-            title: t.dialog.success,
+            title: t.core.dialogs.success,
             context: context,
-            message: t.dialog.registeredSuccessfully,
+            message: t.core.dialogs.registeredSuccessfully,
             posAction: () {
               const PatientLoginRoute().go(context);
             },
-            posActionText: t.dialog.ok,
+            posActionText: t.core.dialogs.ok,
           );
         }
         if (state is ContinueWithGoogleErrorState) {
-          if (state.message != t.errors.cancelledByUser) {
+          if (state.message != t.core.errors.cancelledByUser) {
             DialogUtils.showMessage(
-              posActionText: t.dialog.ok,
-              title: t.dialog.error,
+              posActionText: t.core.dialogs.ok,
+              title: t.core.dialogs.error,
               context: context,
               message: state.message,
             );

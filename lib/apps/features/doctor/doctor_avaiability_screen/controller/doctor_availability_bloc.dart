@@ -28,7 +28,7 @@ class DoctorAvailabilityBloc
 
     final currentUser = _userSessionManager.currentUser;
     if (currentUser == null || currentUser is! DoctorEntity) {
-      emit(DoctorAvailabilityError(t.errors.userNotAuthenticated));
+      emit(DoctorAvailabilityError(t.core.errors.userNotAuthenticated));
       return;
     }
 

@@ -14,7 +14,8 @@ enum TimeSlot {
 
   const TimeSlot({required this.time, required this.isAm});
 
-  String get localizedLabel => '$time\n${isAm ? t.common.am : t.common.pm}';
+  String get localizedLabel =>
+      '$time\n${isAm ? t.core.common.am : t.core.common.pm}';
 }
 
 enum ReminderInterval {
@@ -30,5 +31,5 @@ enum ReminderInterval {
 
   const ReminderInterval({required this.minutes});
 
-  String get localizedLabel => '$minutes\n${t.common.min}';
+  String get localizedLabel => '$minutes\n${t.core.common.min}';
 }

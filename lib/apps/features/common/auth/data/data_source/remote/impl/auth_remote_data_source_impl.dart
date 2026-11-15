@@ -48,18 +48,18 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       var userCredential = await _firebaseAuth.signInWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.eCodes.webUserInteractionFailed ||
-          e.code == t.eCodes.cancelled) {
+      if (e.code == t.core.eCodes.webUserInteractionFailed ||
+          e.code == t.core.eCodes.cancelled) {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -86,12 +86,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.eCodes.invalidCredential) {
-        throw ServerException(message: t.errors.emailOrPasswordIsIncorrect);
+      if (e.code == t.core.eCodes.invalidCredential) {
+        throw ServerException(message: t.core.errors.emailOrPasswordIsIncorrect);
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -118,14 +118,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      if (e.code == t.eCodes.emailAlreadyInUse) {
+      if (e.code == t.core.eCodes.emailAlreadyInUse) {
         throw ServerException(
-          message: t.errors.emailAddressAlreadyInUseByAnotherAccount,
+          message: t.core.errors.emailAddressAlreadyInUseByAnotherAccount,
         );
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -145,9 +145,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _firebaseAuth.signOut();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.noInternet);
+      throw NetworkException(message: t.core.errors.noInternet);
     } catch (e) {
       throw UnexpectedException(message: e.toString());
     }
@@ -166,14 +166,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -193,9 +193,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _firebaseAuth.currentUser!.delete();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -216,7 +216,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       final user = _firebaseAuth.currentUser;
 
       if (user == null) {
-        throw UnauthorizedException(message: t.errors.userNotAuthenticated);
+        throw UnauthorizedException(
+          message: t.core.errors.userNotAuthenticated,
+        );
       }
 
       final credential = await _getGoogleCredential();
@@ -224,14 +226,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       var userCredential = await user.reauthenticateWithCredential(credential);
       return userCredential.toAuthUserDto();
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on PlatformException catch (e) {
       if (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled') {
         throw const CancelledByUserException();
       }
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {
@@ -251,9 +253,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw ServerException(message: e.message ?? t.errors.serverError);
+      throw ServerException(message: e.message ?? t.core.errors.serverError);
     } on SocketException {
-      throw NetworkException(message: t.errors.serverError);
+      throw NetworkException(message: t.core.errors.serverError);
     } catch (e) {
       if (e is PlatformException &&
           (e.code == 'sign_in_canceled' || e.code == 'sign_in_cancelled')) {

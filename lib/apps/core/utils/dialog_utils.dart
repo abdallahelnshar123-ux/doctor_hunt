@@ -108,8 +108,8 @@ class DialogUtils {
       child: _PasswordDialogContent(
         title: title,
         message: message,
-        confirmText: confirmText ?? t.dialog.confirm,
-        cancelText: cancelText ?? t.dialog.cancel,
+        confirmText: confirmText ?? t.core.dialogs.confirm,
+        cancelText: cancelText ?? t.core.dialogs.cancel,
       ),
     );
   }

@@ -17,8 +17,8 @@ class LanguagePickerPopupMenu extends StatelessWidget {
 
   static String getCurrentLanguageName() {
     return LocaleSettings.currentLocale == AppLocale.ar
-        ? t.settings.arabic
-        : t.settings.english;
+        ? t.core.widgets.languagePicker.arabic
+        : t.core.widgets.languagePicker.english;
   }
 
   Future<void> _onLocaleSelected(AppLocale newLocale) async {
@@ -33,7 +33,7 @@ class LanguagePickerPopupMenu extends StatelessWidget {
     final currentLocale = LocaleSettings.currentLocale;
 
     return PopupMenuButton<AppLocale>(
-      tooltip: t.settings.language,
+      tooltip: t.core.widgets.languagePicker.language,
       offset: const Offset(0, 40),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -46,7 +46,7 @@ class LanguagePickerPopupMenu extends StatelessWidget {
           context: context,
           locale: AppLocale.en,
           title: 'English',
-          subtitle: t.settings.english,
+          subtitle: t.core.widgets.languagePicker.english,
           isSelected: currentLocale == AppLocale.en,
         ),
         const PopupMenuDivider(height: 1),
@@ -54,7 +54,7 @@ class LanguagePickerPopupMenu extends StatelessWidget {
           context: context,
           locale: AppLocale.ar,
           title: 'العربية',
-          subtitle: t.settings.arabic,
+          subtitle: t.core.widgets.languagePicker.arabic,
           isSelected: currentLocale == AppLocale.ar,
         ),
       ],

@@ -64,7 +64,7 @@ class DoctorAvailabilityScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.doctor.availability.dataWasUpdatedSuccessfully,
+            message: t.features.doctor.doctorAvailabilityScreen.dataUpdatedSuccessfully,
           );
         }
         if (state is DoctorAvailabilityLoading) {
@@ -74,7 +74,7 @@ class DoctorAvailabilityScreen extends HookWidget {
       child: Scaffold(
         appBar: showAppBar
             ? AppBar(
-                title: Text(t.doctor.availability.doctorAvailability),
+                title: Text(t.features.doctor.doctorAvailabilityScreen.title),
                 automaticallyImplyLeading: automaticallyImplyLeading,
                 centerTitle: true,
               )
@@ -113,7 +113,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   SnackBarUtils.showInfoSnackBar(
                     context: context,
                     message:
-                        t.doctor.availability.startTimeMustBeBeforeEndTime,
+                        t.features.doctor.doctorAvailabilityScreen.startTimeMustBeBeforeEndTime,
                   );
                   return;
                 }
@@ -136,7 +136,7 @@ class DoctorAvailabilityScreen extends HookWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    t.admin.updateDoctorDetails.saveChanges,
+                    t.core.common.saveChanges,
                     style: context.semiBold16.white.rubik,
                   ),
                 ],
@@ -321,8 +321,8 @@ class DoctorAvailabilityScreen extends HookWidget {
             ),
             label: Text(
               doctor.active
-                  ? t.doctor.availability.active
-                  : t.doctor.availability.inactive,
+                  ? t.features.doctor.doctorAvailabilityScreen.active
+                  : t.features.doctor.doctorAvailabilityScreen.inactive,
               style: doctor.active
                   ? context.medium10.brandPrimaryDark.rubik
                   : context.regular10.statusError.rubik,

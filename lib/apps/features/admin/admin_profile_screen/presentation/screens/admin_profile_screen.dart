@@ -44,14 +44,14 @@ class AdminProfileScreen extends HookWidget {
           DialogUtils.hideLoading(context: context);
           SnackBarUtils.showSuccessSnackBar(
             context: context,
-            message: t.profile.dataWasUpdatedSuccessfully,
+            message: t.features.admin.adminProfileScreen.dataUpdatedSuccessfully,
           );
           const AdminMainRoute().go(context);
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(t.admin.profileScreen.title),
+          title: Text(t.features.admin.adminProfileScreen.title),
           centerTitle: true,
         ),
         body: Column(

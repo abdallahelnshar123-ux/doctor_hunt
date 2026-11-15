@@ -36,7 +36,7 @@ class PatientRegisterFormWidget extends HookWidget {
         if (!isAgreedToTerms.value) {
           SnackBarUtils.showErrorSnackBar(
             context: context,
-            message: t.auth.youMustAgreeToTerms,
+            message: t.features.common.auth.youMustAgreeToTerms,
           );
           return;
         }
@@ -57,8 +57,8 @@ class PatientRegisterFormWidget extends HookWidget {
         children: [
           const SizedBox(height: 100),
           AuthHeaderWidget(
-            title: t.auth.joinUs,
-            subtitle: t.auth.authSubtitle,
+            title: t.features.common.auth.joinUs,
+            subtitle: t.features.common.auth.authSubtitle,
           ),
           const SizedBox(height: 60),
           ContinueWithGoogleButton(
@@ -73,7 +73,7 @@ class PatientRegisterFormWidget extends HookWidget {
             controller: nameController,
             fillColor: AppColors.bgPrimary,
             filled: true,
-            hintText: t.auth.username,
+            hintText: t.features.common.auth.username,
             hintStyle: context.light16.textSecondary.rubik,
             style: context.light16.textSecondary.rubik,
             validator: (value) => Validators.required(value),
@@ -92,12 +92,12 @@ class PatientRegisterFormWidget extends HookWidget {
           AuthTermsCheckboxWidget(isAgreedToTerms: isAgreedToTerms),
           const SizedBox(height: 24),
           AuthSubmitButton(
-            text: t.auth.signUp,
+            text: t.features.common.auth.signUp,
             onPressed: onRegister,
           ),
           const SizedBox(height: 20),
           AuthTextButton(
-            text: t.auth.haveAccount,
+            text: t.features.common.auth.haveAccount,
             onPressed: () {
               const PatientLoginRoute().go(context);
             },

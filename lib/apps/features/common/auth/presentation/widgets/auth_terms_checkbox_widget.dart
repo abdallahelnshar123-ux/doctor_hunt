@@ -32,7 +32,7 @@ class AuthTermsCheckboxWidget extends StatelessWidget {
           onPressed: () {
             isAgreedToTerms.value = !isAgreedToTerms.value;
           },
-          label: Text(t.auth.agreeTerms),
+          label: Text(t.features.common.auth.agreeTerms),
         );
       },
     );

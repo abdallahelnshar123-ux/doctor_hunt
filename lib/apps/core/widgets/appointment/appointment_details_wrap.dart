@@ -22,20 +22,18 @@ class AppointmentDetailsWrap extends StatelessWidget {
       children: [
         AppointmentInfoTile(
           icon: Icons.calendar_month_outlined,
-          title: t.patientAppointments.appointmentDate,
+          title: t.core.widgets.appointment.appointmentDate,
           subtitle: DateFormat('dd MMM yyyy').format(sessionTime),
         ),
         AppointmentInfoTile(
           icon: Icons.access_time,
-          title: t.patientAppointments.appointmentTime,
+          title: t.core.widgets.appointment.appointmentTime,
           subtitle: DateFormat('hh:mm a').format(sessionTime),
         ),
         AppointmentInfoTile(
           icon: Icons.payments_outlined,
-          title: t.patientAppointments.consultationFee,
-          subtitle: t.patientAppointments.feeValue(
-            Fee: fee.toString(),
-          ),
+          title: t.core.widgets.appointment.consultationFee,
+          subtitle: t.core.widgets.appointment.feeValue(Fee: fee.toString()),
         ),
       ],
     );

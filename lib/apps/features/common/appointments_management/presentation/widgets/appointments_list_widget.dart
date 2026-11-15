@@ -24,7 +24,7 @@ class AppointmentsListWidget extends StatelessWidget {
 
     if (filteredAppointments.isEmpty) {
       return MainEmptyListWidget(
-        title: t.patientAppointments.noAppointmentsFound,
+        title: t.features.common.appointmentsManagement.noAppointmentsFound,
       );
     }
     return SafeArea(

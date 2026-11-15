@@ -40,7 +40,7 @@ class DoctorRepositoryImpl implements DoctorRepository {
       //   imageUrl = await _cloudinaryService.uploadImage(file: image);
       // } catch (e) {
       //   return Left(
-      //     ServerFailure(t.errors.errorWhileAddingDoctorPleaseTryAgainLater),
+      //     ServerFailure(t.core.errors.errorWhileAddingDoctorPleaseTryAgainLater),
       //   );
       // }
 
@@ -169,7 +169,7 @@ class DoctorRepositoryImpl implements DoctorRepository {
           }
         } catch (e) {
           return Left(
-            ServerFailure(t.errors.errorWhileUpdatingDoctorPleaseTryAgainLater),
+            ServerFailure(t.core.errors.errorWhileUpdatingDoctorPleaseTryAgainLater),
           );
         }
       }

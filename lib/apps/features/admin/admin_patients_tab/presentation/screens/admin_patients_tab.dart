@@ -45,7 +45,7 @@ class AdminPatientsTab extends HookWidget {
                           padding: EdgeInsets.all(12.0),
                           child: Icon(Icons.search),
                         ),
-                        hintText: t.admin.patientsTab.searchHint,
+                        hintText: t.features.admin.adminPatientsTab.searchHint,
                         onChanged: (val) {
                           context.read<AdminPatientsBloc>().add(
                             AdminSearchPatientsRequested(val),
@@ -90,7 +90,7 @@ class AdminPatientsTab extends HookWidget {
 
                         if (patients.isEmpty) {
                           return MainEmptyListWidget(
-                            title: t.admin.patientsTab.noPatients,
+                            title: t.features.admin.adminPatientsTab.noPatients,
                           );
                         }
 
@@ -123,7 +123,9 @@ class AdminPatientsTab extends HookWidget {
         color: isActive ? AppColors.brandPrimaryDark : AppColors.statusError,
       ),
       label: Text(
-        isActive ? t.admin.doctorsTab.enabled : t.admin.doctorsTab.disabled,
+        isActive
+            ? t.features.admin.adminDoctorsTab.enabled
+            : t.features.admin.adminDoctorsTab.disabled,
         style: isActive
             ? context.medium10.brandPrimaryDark.rubik
             : context.regular10.statusError.rubik,

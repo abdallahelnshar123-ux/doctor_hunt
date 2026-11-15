@@ -20,9 +20,9 @@ class DateFormatterUtils {
     final formattedDate = DateFormat('d MMM', locale).format(date);
 
     if (targetDate == today) {
-      return '${t.common.today}, $formattedDate';
+      return '${t.core.common.today}, $formattedDate';
     } else if (targetDate == tomorrow) {
-      return '${t.common.tomorrow}, $formattedDate';
+      return '${t.core.common.tomorrow}, $formattedDate';
     } else {
       final dayName = DateFormat('EEEE', locale).format(date);
       return '$dayName, $formattedDate';
