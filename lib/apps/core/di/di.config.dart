@@ -48,6 +48,12 @@ import '../../features/common/auth/domain/repository/auth_repository.dart'
     as _i747;
 import '../../features/common/auth/presentation/controller/auth/auth_bloc.dart'
     as _i613;
+import '../../features/common/clinic_location_picker/data/repo/location_repository.dart'
+    as _i16;
+import '../../features/common/clinic_location_picker/data/service/location_service.dart'
+    as _i305;
+import '../../features/common/clinic_location_picker/presentation/controller/clinic_location_picker_bloc.dart'
+    as _i619;
 import '../../features/common/specialties/data/repo/specialty_repository.dart'
     as _i195;
 import '../../features/common/specialties/data/service/specialty_service.dart'
@@ -114,11 +120,17 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i59.FirebaseAuth>(() => firebaseModule.firebaseAuth);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => firebaseModule.firestore);
     gh.lazySingleton<_i116.GoogleSignIn>(() => firebaseModule.googleSignIn);
+    gh.lazySingleton<_i305.LocationService>(
+      () => const _i305.LocationService(),
+    );
     gh.lazySingleton<_i749.UserFirestoreService>(
       () => _i749.UserFirestoreService(gh<_i974.FirebaseFirestore>()),
     );
     gh.lazySingleton<_i708.UserPrefs>(
       () => _i708.UserPrefs(gh<_i460.SharedPreferences>()),
+    );
+    gh.lazySingleton<_i16.LocationRepository>(
+      () => _i16.LocationRepository(gh<_i305.LocationService>()),
     );
     gh.lazySingleton<_i1021.DoctorRemoteDataSource>(
       () => _i34.DoctorRemoteDataSourceImpl(gh<_i974.FirebaseFirestore>()),
@@ -129,6 +141,9 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i116.GoogleSignIn>(),
         gh<_i974.FirebaseFirestore>(),
       ),
+    );
+    gh.factory<_i619.ClinicLocationPickerBloc>(
+      () => _i619.ClinicLocationPickerBloc(gh<_i16.LocationRepository>()),
     );
     gh.lazySingleton<_i747.AuthRepository>(
       () => _i953.AuthRepositoryImpl(gh<_i377.AuthRemoteDataSource>()),

@@ -509,5 +509,24 @@
         "fee": "@:core.common.fee"
       }
     }
+  },
+  "clinic_location": {
+    "title": "Clinic Location",
+    "pick_location": "Set Clinic Location",
+    "change_location": "Change Clinic Location",
+    "remove_location": "Remove Location",
+    "remove_location_confirm": "Are you sure you want to remove the clinic location?",
+    "confirm_location": "Confirm Location",
+    "location_not_set": "Clinic location not set yet",
+    "get_directions": "Get Directions",
+    "address_loading": "Detecting address...",
+    "address_failed": "Could not detect address. You can enter it manually.",
+    "permission_denied": "Location permission is required to detect your current position.",
+    "permission_permanently_denied": "Location permission is permanently denied. Please enable it in device settings.",
+    "gps_disabled": "Device GPS is turned off. Please turn it on or drag the map manually.",
+    "offline_warning": "No internet connection. Map tiles may not load properly.",
+    "clinic_address_hint": "Clinic street or building details",
+    "open_settings": "Open Settings",
+    "clinic_location_optional": "Clinic Location (Optional)"
   }
 }

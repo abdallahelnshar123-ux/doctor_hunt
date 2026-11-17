@@ -6,14 +6,6 @@ import 'package:doctor_hunt/apps/features/common/specialties/data/models/special
 import 'app_user.dart';
 import 'user_roles.dart';
 
-// enum Specialty {
-//   allergists,
-//   anesthesiologists,
-//   cardiologists,
-//   rectalSurgeons,
-//   dermatologists,
-// }
-
 class DoctorEntity extends AppUserEntity {
   final SpecialtyModel specialty;
   final bool active;
@@ -21,6 +13,9 @@ class DoctorEntity extends AppUserEntity {
   final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
+  final double? latitude;
+  final double? longitude;
+  final String? clinicAddress;
 
   const DoctorEntity({
     required super.id,
@@ -35,6 +30,9 @@ class DoctorEntity extends AppUserEntity {
     this.consultationFee,
     required this.rating,
     this.availability,
+    this.latitude,
+    this.longitude,
+    this.clinicAddress,
   }) : super(role: UserRoles.doctor);
 
   DoctorEntity copyWith({
@@ -50,6 +48,10 @@ class DoctorEntity extends AppUserEntity {
     double? consultationFee,
     Rating? rating,
     DoctorAvailability? availability,
+    double? latitude,
+    double? longitude,
+    String? clinicAddress,
+    bool clearLocation = false,
   }) {
     return DoctorEntity(
       id: id ?? this.id,
@@ -64,6 +66,9 @@ class DoctorEntity extends AppUserEntity {
       consultationFee: consultationFee ?? this.consultationFee,
       rating: rating ?? this.rating,
       availability: availability ?? this.availability,
+      latitude: clearLocation ? null : (latitude ?? this.latitude),
+      longitude: clearLocation ? null : (longitude ?? this.longitude),
+      clinicAddress: clearLocation ? null : (clinicAddress ?? this.clinicAddress),
     );
   }
 
@@ -76,5 +81,8 @@ class DoctorEntity extends AppUserEntity {
     consultationFee,
     rating,
     availability,
+    latitude,
+    longitude,
+    clinicAddress,
   ];
 }

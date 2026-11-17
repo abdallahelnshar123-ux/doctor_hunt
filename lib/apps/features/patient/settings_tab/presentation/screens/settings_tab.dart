@@ -25,6 +25,7 @@ class SettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+   var t = context.t;
     final user = context.select<UserBloc, AppUserEntity?>(
       (bloc) => bloc.currentUser,
     );

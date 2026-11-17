@@ -55,6 +55,9 @@ class FirestoreConstants {
   static const String startTime = 'start_time';
   static const String endTime = 'end_time';
   static const String slotDuration = 'slot_duration';
+  static const String latitude = 'latitude';
+  static const String longitude = 'longitude';
+  static const String clinicAddress = 'clinic_address';
 
   // static const String password = 'password';
   static const String loginMethods = 'login_methods';

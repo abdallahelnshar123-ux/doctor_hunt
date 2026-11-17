@@ -509,5 +509,24 @@
         "fee": "@:core.common.fee"
       }
     }
+  },
+  "clinic_location": {
+    "title": "موقع العيادة",
+    "pick_location": "تحديد موقع العيادة",
+    "change_location": "تعديل موقع العيادة",
+    "remove_location": "إزالة الموقع",
+    "remove_location_confirm": "هل أنت متأكد من رغبتك في إزالة موقع العيادة؟",
+    "confirm_location": "تأكيد الموقع",
+    "location_not_set": "لم يقم الطبيب بتحديد موقع العيادة بعد",
+    "get_directions": "الاتجاهات",
+    "address_loading": "جاري تحديد العنوان...",
+    "address_failed": "تعذر تحديد العنوان تلقائياً. يمكنك كتابته يدوياً.",
+    "permission_denied": "إذن الموقع مطلوب لتحديد موقعك الحالي.",
+    "permission_permanently_denied": "تم رفض إذن الموقع بشكل دائم. يرجى تفعيله من إعدادات الهاتف.",
+    "gps_disabled": "خدمة الموقع (GPS) مغلقة. يرجى تشغيلها أو سحب الخريطة يدوياً.",
+    "offline_warning": "لا يوجد اتصال بالإنترنت. قد لا يتم تحميل تفاصيل الخريطة.",
+    "clinic_address_hint": "تفاصيل شارع أو مبنى العيادة",
+    "open_settings": "فتح الإعدادات",
+    "clinic_location_optional": "موقع العيادة (اختياري)"
   }
 }

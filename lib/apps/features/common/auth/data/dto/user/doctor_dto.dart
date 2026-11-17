@@ -18,6 +18,9 @@ class DoctorDto extends AppUserDto {
   final double? consultationFee;
   final Rating rating;
   final DoctorAvailability? availability;
+  final double? latitude;
+  final double? longitude;
+  final String? clinicAddress;
 
   const DoctorDto({
     required super.id,
@@ -32,6 +35,9 @@ class DoctorDto extends AppUserDto {
     this.consultationFee,
     required this.rating,
     this.availability,
+    this.latitude,
+    this.longitude,
+    this.clinicAddress,
   }) : super(role: UserRoles.doctor);
 
   factory DoctorDto.fromJson(Map<String, dynamic> json) {
@@ -66,6 +72,9 @@ class DoctorDto extends AppUserDto {
               ),
             )
           : null,
+      latitude: (json[FirestoreConstants.latitude] as num?)?.toDouble(),
+      longitude: (json[FirestoreConstants.longitude] as num?)?.toDouble(),
+      clinicAddress: json[FirestoreConstants.clinicAddress]?.toString(),
     );
   }
 
@@ -106,6 +115,9 @@ class DoctorDto extends AppUserDto {
       FirestoreConstants.rating: _ratingToJson(rating),
       if (availability != null)
         FirestoreConstants.availability: _availabilityToJson(availability!),
+      FirestoreConstants.latitude: latitude,
+      FirestoreConstants.longitude: longitude,
+      FirestoreConstants.clinicAddress: clinicAddress,
     };
   }
 
@@ -136,5 +148,8 @@ class DoctorDto extends AppUserDto {
     consultationFee,
     rating,
     availability,
+    latitude,
+    longitude,
+    clinicAddress,
   ];
 }

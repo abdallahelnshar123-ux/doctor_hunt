@@ -96,6 +96,9 @@ class UserRepository {
           consultationFee: user.consultationFee,
           rating: user.rating,
           availability: user.availability,
+          latitude: user.latitude,
+          longitude: user.longitude,
+          clinicAddress: user.clinicAddress,
         );
       } else {
         updatedUser = user;

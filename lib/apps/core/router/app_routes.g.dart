@@ -31,6 +31,7 @@ List<RouteBase> get $appRoutes => [
   $doctorAvailabilityRoute,
   $doctorOnboardingRoute,
   $selectTimeRoute,
+  $clinicLocationPickerRoute,
 ];
 
 RouteBase get $adminLoginRoute => GoRouteData.$route(
@@ -709,4 +710,61 @@ mixin $SelectTimeRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+RouteBase get $clinicLocationPickerRoute => GoRouteData.$route(
+  path: '/clinic_location_picker',
+  hasOverriddenOnExit: false,
+  factory: $ClinicLocationPickerRoute._fromState,
+);
+
+mixin $ClinicLocationPickerRoute on GoRouteData {
+  static ClinicLocationPickerRoute _fromState(GoRouterState state) =>
+      ClinicLocationPickerRoute(
+        initialLat: _$convertMapValue(
+          'initial-lat',
+          state.uri.queryParameters,
+          double.tryParse,
+        ),
+        initialLng: _$convertMapValue(
+          'initial-lng',
+          state.uri.queryParameters,
+          double.tryParse,
+        ),
+        initialAddress: state.uri.queryParameters['initial-address'],
+      );
+
+  ClinicLocationPickerRoute get _self => this as ClinicLocationPickerRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+    '/clinic_location_picker',
+    queryParams: {
+      if (_self.initialLat != null) 'initial-lat': _self.initialLat!.toString(),
+      if (_self.initialLng != null) 'initial-lng': _self.initialLng!.toString(),
+      if (_self.initialAddress != null) 'initial-address': _self.initialAddress,
+    },
+  );
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+T? _$convertMapValue<T>(
+  String key,
+  Map<String, String> map,
+  T? Function(String) converter,
+) {
+  final value = map[key];
+  return value == null ? null : converter(value);
 }

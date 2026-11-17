@@ -44,6 +44,8 @@ class TranslationsAr extends Translations with BaseTranslations<AppLocale, Trans
   late final _Translations$core$ar core = _Translations$core$ar._(_root);
   @override
   late final _Translations$features$ar features = _Translations$features$ar._(_root);
+  @override
+  late final _Translations$clinicLocation$ar clinicLocation = _Translations$clinicLocation$ar._(_root);
 }
 
 // Path: core
@@ -82,6 +84,49 @@ class _Translations$features$ar extends Translations$features$en {
   late final _Translations$features$doctor$ar doctor = _Translations$features$doctor$ar._(_root);
   @override
   late final _Translations$features$admin$ar admin = _Translations$features$admin$ar._(_root);
+}
+
+// Path: clinicLocation
+class _Translations$clinicLocation$ar extends Translations$clinicLocation$en {
+  _Translations$clinicLocation$ar._(TranslationsAr root) : this._root = root, super.internal(root);
+
+  final TranslationsAr _root; // ignore: unused_field
+
+  // Translations
+  @override
+  String get title => 'موقع العيادة';
+  @override
+  String get pickLocation => 'تحديد موقع العيادة';
+  @override
+  String get changeLocation => 'تعديل موقع العيادة';
+  @override
+  String get removeLocation => 'إزالة الموقع';
+  @override
+  String get removeLocationConfirm => 'هل أنت متأكد من رغبتك في إزالة موقع العيادة؟';
+  @override
+  String get confirmLocation => 'تأكيد الموقع';
+  @override
+  String get locationNotSet => 'لم يقم الطبيب بتحديد موقع العيادة بعد';
+  @override
+  String get getDirections => 'الاتجاهات';
+  @override
+  String get addressLoading => 'جاري تحديد العنوان...';
+  @override
+  String get addressFailed => 'تعذر تحديد العنوان تلقائياً. يمكنك كتابته يدوياً.';
+  @override
+  String get permissionDenied => 'إذن الموقع مطلوب لتحديد موقعك الحالي.';
+  @override
+  String get permissionPermanentlyDenied => 'تم رفض إذن الموقع بشكل دائم. يرجى تفعيله من إعدادات الهاتف.';
+  @override
+  String get gpsDisabled => 'خدمة الموقع (GPS) مغلقة. يرجى تشغيلها أو سحب الخريطة يدوياً.';
+  @override
+  String get offlineWarning => 'لا يوجد اتصال بالإنترنت. قد لا يتم تحميل تفاصيل الخريطة.';
+  @override
+  String get clinicAddressHint => 'تفاصيل شارع أو مبنى العيادة';
+  @override
+  String get openSettings => 'فتح الإعدادات';
+  @override
+  String get clinicLocationOptional => 'موقع العيادة (اختياري)';
 }
 
 // Path: core.common

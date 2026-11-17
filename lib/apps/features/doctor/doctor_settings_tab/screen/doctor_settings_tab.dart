@@ -14,6 +14,7 @@ class DoctorSettingsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.t;
     return Column(
       spacing: 20,
       children: [

@@ -17,14 +17,28 @@ class SaveDoctorOnboardingRequested extends DoctorOnboardingEvent {
   final String phone;
   final double consultationFee;
   final DoctorAvailability availability;
+  final double? latitude;
+  final double? longitude;
+  final String? clinicAddress;
 
   const SaveDoctorOnboardingRequested({
     this.image,
     required this.phone,
     required this.consultationFee,
     required this.availability,
+    this.latitude,
+    this.longitude,
+    this.clinicAddress,
   });
 
   @override
-  List<Object?> get props => [image, phone, consultationFee, availability];
+  List<Object?> get props => [
+        image,
+        phone,
+        consultationFee,
+        availability,
+        latitude,
+        longitude,
+        clinicAddress,
+      ];
 }

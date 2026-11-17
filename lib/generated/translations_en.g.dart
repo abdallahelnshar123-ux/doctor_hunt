@@ -45,6 +45,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
   // Translations
   late final Translations$core$en core = Translations$core$en.internal(_root);
   late final Translations$features$en features = Translations$features$en.internal(_root);
+  late final Translations$clinicLocation$en clinicLocation = Translations$clinicLocation$en.internal(_root);
 }
 
 // Path: core
@@ -73,6 +74,100 @@ class Translations$features$en {
   late final Translations$features$patient$en patient = Translations$features$patient$en.internal(_root);
   late final Translations$features$doctor$en doctor = Translations$features$doctor$en.internal(_root);
   late final Translations$features$admin$en admin = Translations$features$admin$en.internal(_root);
+}
+
+// Path: clinicLocation
+class Translations$clinicLocation$en {
+  Translations$clinicLocation$en.internal(this._root);
+
+  final Translations _root; // ignore: unused_field
+
+  // Translations
+
+  /// en: 'Clinic Location'
+  ///
+  /// ar: 'موقع العيادة'
+  String get title => 'Clinic Location';
+
+  /// en: 'Set Clinic Location'
+  ///
+  /// ar: 'تحديد موقع العيادة'
+  String get pickLocation => 'Set Clinic Location';
+
+  /// en: 'Change Clinic Location'
+  ///
+  /// ar: 'تعديل موقع العيادة'
+  String get changeLocation => 'Change Clinic Location';
+
+  /// en: 'Remove Location'
+  ///
+  /// ar: 'إزالة الموقع'
+  String get removeLocation => 'Remove Location';
+
+  /// en: 'Are you sure you want to remove the clinic location?'
+  ///
+  /// ar: 'هل أنت متأكد من رغبتك في إزالة موقع العيادة؟'
+  String get removeLocationConfirm => 'Are you sure you want to remove the clinic location?';
+
+  /// en: 'Confirm Location'
+  ///
+  /// ar: 'تأكيد الموقع'
+  String get confirmLocation => 'Confirm Location';
+
+  /// en: 'Clinic location not set yet'
+  ///
+  /// ar: 'لم يقم الطبيب بتحديد موقع العيادة بعد'
+  String get locationNotSet => 'Clinic location not set yet';
+
+  /// en: 'Get Directions'
+  ///
+  /// ar: 'الاتجاهات'
+  String get getDirections => 'Get Directions';
+
+  /// en: 'Detecting address...'
+  ///
+  /// ar: 'جاري تحديد العنوان...'
+  String get addressLoading => 'Detecting address...';
+
+  /// en: 'Could not detect address. You can enter it manually.'
+  ///
+  /// ar: 'تعذر تحديد العنوان تلقائياً. يمكنك كتابته يدوياً.'
+  String get addressFailed => 'Could not detect address. You can enter it manually.';
+
+  /// en: 'Location permission is required to detect your current position.'
+  ///
+  /// ar: 'إذن الموقع مطلوب لتحديد موقعك الحالي.'
+  String get permissionDenied => 'Location permission is required to detect your current position.';
+
+  /// en: 'Location permission is permanently denied. Please enable it in device settings.'
+  ///
+  /// ar: 'تم رفض إذن الموقع بشكل دائم. يرجى تفعيله من إعدادات الهاتف.'
+  String get permissionPermanentlyDenied => 'Location permission is permanently denied. Please enable it in device settings.';
+
+  /// en: 'Device GPS is turned off. Please turn it on or drag the map manually.'
+  ///
+  /// ar: 'خدمة الموقع (GPS) مغلقة. يرجى تشغيلها أو سحب الخريطة يدوياً.'
+  String get gpsDisabled => 'Device GPS is turned off. Please turn it on or drag the map manually.';
+
+  /// en: 'No internet connection. Map tiles may not load properly.'
+  ///
+  /// ar: 'لا يوجد اتصال بالإنترنت. قد لا يتم تحميل تفاصيل الخريطة.'
+  String get offlineWarning => 'No internet connection. Map tiles may not load properly.';
+
+  /// en: 'Clinic street or building details'
+  ///
+  /// ar: 'تفاصيل شارع أو مبنى العيادة'
+  String get clinicAddressHint => 'Clinic street or building details';
+
+  /// en: 'Open Settings'
+  ///
+  /// ar: 'فتح الإعدادات'
+  String get openSettings => 'Open Settings';
+
+  /// en: 'Clinic Location (Optional)'
+  ///
+  /// ar: 'موقع العيادة (اختياري)'
+  String get clinicLocationOptional => 'Clinic Location (Optional)';
 }
 
 // Path: core.common

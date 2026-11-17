@@ -61,6 +61,9 @@ class DoctorOnboardingScreen extends HookWidget {
           : '',
     );
     final selectedImage = useRef<File?>(null);
+    final clinicLat = useValueNotifier<double?>(doctor?.latitude);
+    final clinicLng = useValueNotifier<double?>(doctor?.longitude);
+    final clinicAddress = useValueNotifier<String?>(doctor?.clinicAddress);
 
     // Availability state
     final workingDays = useValueNotifier<List<WorkingDay>>(
@@ -138,6 +141,9 @@ class DoctorOnboardingScreen extends HookWidget {
             phone: phoneController.text.trim(),
             consultationFee: fee,
             availability: availability,
+            latitude: clinicLat.value,
+            longitude: clinicLng.value,
+            clinicAddress: clinicAddress.value,
           ),
         );
       }
@@ -185,6 +191,9 @@ class DoctorOnboardingScreen extends HookWidget {
               phoneController: phoneController,
               feeController: feeController,
               selectedImage: selectedImage,
+              clinicLat: clinicLat,
+              clinicLng: clinicLng,
+              clinicAddress: clinicAddress,
               initialImageUrl: doctor?.image,
             ),
             DoctorOnboardingAvailabilityTab(

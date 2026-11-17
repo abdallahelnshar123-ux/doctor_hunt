@@ -78,6 +78,9 @@ class DoctorRemoteDataSourceImpl implements DoctorRemoteDataSource {
         consultationFee: doctor.consultationFee,
         rating: doctor.rating,
         availability: doctor.availability,
+        latitude: doctor.latitude,
+        longitude: doctor.longitude,
+        clinicAddress: doctor.clinicAddress,
       );
 
       try {

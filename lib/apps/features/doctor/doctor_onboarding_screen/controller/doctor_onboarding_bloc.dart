@@ -47,6 +47,9 @@ class DoctorOnboardingBloc
       phone: event.phone,
       consultationFee: event.consultationFee,
       availability: event.availability,
+      latitude: event.latitude,
+      longitude: event.longitude,
+      clinicAddress: event.clinicAddress,
     );
 
     // 1. Update Profile (Image + Phone + Fee)

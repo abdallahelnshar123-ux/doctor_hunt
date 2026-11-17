@@ -53,7 +53,6 @@ class AdminDoctorsTab extends HookWidget {
         child: Scaffold(
           floatingActionButtonLocation:
               FloatingActionButtonLocation.endContained,
-          // appBar: AdminAppbar(title: t.admin.main.doctors),
           resizeToAvoidBottomInset: false,
           floatingActionButton: searchFocusNode.hasFocus
               ? null

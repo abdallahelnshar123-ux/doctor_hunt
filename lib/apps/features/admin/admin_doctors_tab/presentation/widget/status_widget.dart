@@ -67,7 +67,7 @@ class StatusWidget extends StatelessWidget {
       titleTextStyle: context.regular11.textSecondary.rubik,
       subtitleTextStyle: context.bold18.textPrimary.rubik.copyWith(height: 2),
       title: FittedBox(
-        alignment: .centerLeft,
+        alignment: AlignmentDirectional.centerStart,
         fit: .scaleDown,
         child: Text(title, textAlign: .start),
       ),

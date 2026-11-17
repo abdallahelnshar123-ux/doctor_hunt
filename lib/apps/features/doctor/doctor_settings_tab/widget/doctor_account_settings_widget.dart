@@ -11,6 +11,7 @@ class DoctorAccountSettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.t;
     return AppContainerWithShadow(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(

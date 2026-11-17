@@ -107,7 +107,7 @@ class HomeTab extends StatelessWidget {
           ],
         ),
       ),
-      actionsPadding: EdgeInsets.only(right: 20),
+      actionsPadding: EdgeInsetsDirectional.only(end: 20),
       actions: [
         CircleAvatar(
           foregroundImage: (user?.image?.isNotEmpty ?? false)

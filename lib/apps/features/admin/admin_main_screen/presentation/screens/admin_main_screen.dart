@@ -29,21 +29,22 @@ class AdminMainScreen extends HookWidget {
     AdminSettingsTab(),
   ];
 
-  static final List<String> _titlesList = [
-    t.features.admin.adminMainScreen.doctors,
-    t.features.admin.adminPatientsTab.title,
-    t.features.common.appointmentsManagement.title,
-    t.features.admin.adminMainScreen.settings,
-  ];
+
 
   @override
   Widget build(BuildContext context) {
     final selectedIndex = useState(0);
-
+    var t = context.t;
+     final List<String> titlesList = [
+      t.features.admin.adminMainScreen.doctors,
+      t.features.admin.adminPatientsTab.title,
+      t.features.common.appointmentsManagement.title,
+      t.features.admin.adminMainScreen.settings,
+    ];
     return Scaffold(
       resizeToAvoidBottomInset: true,
       extendBody: true,
-      appBar: AdminAppbar(title: _titlesList[selectedIndex.value]),
+      appBar: AdminAppbar(title: titlesList[selectedIndex.value]),
       body: _tabsList[selectedIndex.value],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/widgets/account_status_switch_tile.dart';
 import 'package:doctor_hunt/apps/core/widgets/app_container_with_shadow.dart';
+import 'package:doctor_hunt/apps/core/widgets/map/clinic_location_preview_card.dart';
 import 'package:doctor_hunt/apps/core/widgets/rating_widget.dart';
 import 'package:doctor_hunt/apps/features/admin/doctor_details_screen/presentation/controller/admin_doctor_action_bloc.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
@@ -46,6 +47,13 @@ class AdminDoctorDetailsScreen extends HookWidget {
           DoctorDetailsWidget(
             doctor: doctor,
             isActiveChip: (value) => isActive.value = value,
+          ),
+          SizedBox(height: 20,),
+          ClinicLocationPreviewCard(
+            latitude: doctor.latitude,
+            longitude: doctor.longitude,
+            clinicAddress: doctor.clinicAddress,
+            doctorName: doctor.name,
           ),
         ],
       ),

@@ -27,3 +27,22 @@ plugins {
 }
 
 include(":app")
+
+gradle.lifecycle.beforeProject {
+    if (name != "app") {
+        plugins.withId("com.android.library") {
+            val android = extensions.findByName("android")
+            if (android != null) {
+                try {
+                    val method = android.javaClass.methods.firstOrNull {
+                        it.name in listOf("setCompileSdk", "compileSdkVersion") && it.parameterTypes.size == 1
+                    }
+                    method?.invoke(android, 37)
+                } catch (e: Exception) {
+                    // Ignore if method not found
+                }
+            }
+        }
+    }
+}
+

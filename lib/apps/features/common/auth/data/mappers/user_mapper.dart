@@ -46,6 +46,9 @@ extension AppUserDtoMapper on AppUserDto {
         consultationFee: dto.consultationFee,
         rating: dto.rating,
         availability: dto.availability,
+        latitude: dto.latitude,
+        longitude: dto.longitude,
+        clinicAddress: dto.clinicAddress,
       );
     }
     throw Exception('Unknown AppUserDto type');
@@ -91,6 +94,9 @@ extension AppUserEntityMapper on AppUserEntity {
         consultationFee: entity.consultationFee,
         rating: entity.rating,
         availability: entity.availability,
+        latitude: entity.latitude,
+        longitude: entity.longitude,
+        clinicAddress: entity.clinicAddress,
       );
     }
     throw Exception('Unknown AppUserEntity type');

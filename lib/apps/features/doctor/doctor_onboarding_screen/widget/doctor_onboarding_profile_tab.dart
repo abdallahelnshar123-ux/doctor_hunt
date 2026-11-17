@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctor_hunt/apps/core/theme/app_colors.dart';
 import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/validators.dart';
+import 'package:doctor_hunt/apps/core/widgets/clinic_location_form_tile.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_state.dart';
@@ -23,6 +24,9 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
     required this.phoneController,
     required this.feeController,
     required this.selectedImage,
+    required this.clinicLat,
+    required this.clinicLng,
+    required this.clinicAddress,
     this.initialImageUrl,
   });
 
@@ -30,6 +34,9 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
   final TextEditingController phoneController;
   final TextEditingController feeController;
   final ObjectRef<File?> selectedImage;
+  final ValueNotifier<double?> clinicLat;
+  final ValueNotifier<double?> clinicLng;
+  final ValueNotifier<String?> clinicAddress;
   final String? initialImageUrl;
 
   @override
@@ -97,6 +104,13 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
               hintStyle: context.light16.textSecondary.rubik,
               style: context.medium16.textTertiary.rubik,
               validator: (value) => Validators.required(value),
+            ),
+            const SizedBox(height: 20),
+            ClinicLocationFormTile(
+              label: t.clinicLocation.clinicLocationOptional,
+              latitudeNotifier: clinicLat,
+              longitudeNotifier: clinicLng,
+              addressNotifier: clinicAddress,
             ),
             const SizedBox(height: 30),
           ],

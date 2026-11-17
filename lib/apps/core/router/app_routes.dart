@@ -44,6 +44,8 @@ import '../../features/patient/select_time_screen/presentation/controller/select
 import '../../features/patient/select_time_screen/presentation/controller/select_time_event.dart';
 import '../../features/patient/select_time_screen/presentation/screens/select_time_screen.dart';
 import '../data/models/doctor/doctor_availability.dart';
+import '../../features/common/clinic_location_picker/presentation/controller/clinic_location_picker_bloc.dart';
+import '../../features/common/clinic_location_picker/presentation/screens/clinic_location_picker_screen.dart';
 
 part 'app_routes.g.dart';
 
@@ -344,6 +346,32 @@ class SelectTimeRoute extends GoRouteData with $SelectTimeRoute {
           ),
         ),
       child: SelectTimeScreen(doctor: $extra),
+    );
+  }
+}
+
+@TypedGoRoute<ClinicLocationPickerRoute>(path: '/clinic_location_picker')
+class ClinicLocationPickerRoute extends GoRouteData
+    with $ClinicLocationPickerRoute {
+  const ClinicLocationPickerRoute({
+    this.initialLat,
+    this.initialLng,
+    this.initialAddress,
+  });
+
+  final double? initialLat;
+  final double? initialLng;
+  final String? initialAddress;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return BlocProvider(
+      create: (context) => getIt<ClinicLocationPickerBloc>(),
+      child: ClinicLocationPickerScreen(
+        initialLat: initialLat,
+        initialLng: initialLng,
+        initialAddress: initialAddress,
+      ),
     );
   }
 }
