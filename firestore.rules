@@ -51,5 +51,10 @@ service cloud.firestore {
       allow read: if isSignedIn();
       allow write: if isAdmin();
     }
+
+    // فترات حجز الأطباء لمنع الحجز المزدوج (doctor_slots)
+    match /doctor_slots/{slotId} {
+      allow read, write: if isSignedIn();
+    }
   }
 }

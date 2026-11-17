@@ -20,6 +20,7 @@ class SaveDoctorOnboardingRequested extends DoctorOnboardingEvent {
   final double? latitude;
   final double? longitude;
   final String? clinicAddress;
+  final String bio;
 
   const SaveDoctorOnboardingRequested({
     this.image,
@@ -29,6 +30,7 @@ class SaveDoctorOnboardingRequested extends DoctorOnboardingEvent {
     this.latitude,
     this.longitude,
     this.clinicAddress,
+    required this.bio,
   });
 
   @override
@@ -40,5 +42,6 @@ class SaveDoctorOnboardingRequested extends DoctorOnboardingEvent {
         latitude,
         longitude,
         clinicAddress,
+        bio,
       ];
 }

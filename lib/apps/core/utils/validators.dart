@@ -59,4 +59,25 @@ class Validators {
 
     return null;
   }
+
+  static int countWords(String? text) {
+    if (text == null) return 0;
+    final trimmed = text.trim();
+    if (trimmed.isEmpty) return 0;
+    return trimmed.split(RegExp(r'\s+')).where((w) => w.isNotEmpty).length;
+  }
+
+  static String? doctorBio(String? value, {int minWords = 10, int maxWords = 100}) {
+    if (value == null || value.trim().isEmpty) {
+      return t.core.validators.bioIsRequired;
+    }
+    final words = countWords(value);
+    if (words < minWords) {
+      return t.core.validators.bioTooShort(Min: minWords);
+    }
+    if (words > maxWords) {
+      return t.core.validators.bioTooLong(Max: maxWords);
+    }
+    return null;
+  }
 }

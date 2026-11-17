@@ -210,6 +210,14 @@ class _Translations$core$common$ar extends Translations$core$common$en {
   String get dataUpdatedSuccessfully => 'تم تحديث البيانات بنجاح';
   @override
   String get logoutConfirmation => 'هل أنت متأكد من رغبتك في تسجيل الخروج؟';
+  @override
+  String get doctorBio => 'نبذة عن الطبيب';
+  @override
+  String get doctorBioHint => 'اكتب نبذة مختصرة عن مؤهلاتك وخبرتك الطبية...';
+  @override
+  String wordsRemaining({required Object Count}) => 'متبقي ${Count} كلمة';
+  @override
+  String wordsCount({required Object Current, required Object Max}) => '${Current} / ${Max} كلمة';
 }
 
 // Path: core.dialogs
@@ -258,6 +266,12 @@ class _Translations$core$validators$ar extends Translations$core$validators$en {
   String get invalidPhoneNumber => 'رقم الهاتف غير صالح';
   @override
   String get passwordMustBeAtLeast6Characters => 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل';
+  @override
+  String get bioIsRequired => 'النبذة التعريفية مطلوبة';
+  @override
+  String bioTooShort({required Object Min}) => 'يجب ألا تقل النبذة عن ${Min} كلمات';
+  @override
+  String bioTooLong({required Object Max}) => 'يجب ألا تزيد النبذة عن ${Max} كلمة';
 }
 
 // Path: core.errors
@@ -747,6 +761,10 @@ class _Translations$features$patient$doctorDetailsScreen$ar extends Translations
   String get title => 'تفاصيل الطبيب';
   @override
   String get findDoctors => 'البحث عن الأطباء';
+  @override
+  String get aboutDoctor => _root.core.common.doctorBio;
+  @override
+  String get noBioAvailable => 'لا توجد نبذة تعريفية متاحة حالياً.';
   @override
   String get bookNow => 'احجز الآن';
   @override

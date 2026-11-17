@@ -6,6 +6,7 @@ import 'package:doctor_hunt/apps/core/utils/snack_bar_utils.dart';
 import 'package:doctor_hunt/apps/core/utils/validators.dart';
 import 'package:doctor_hunt/apps/core/widgets/clinic_location_form_tile.dart';
 import 'package:doctor_hunt/apps/core/widgets/custom_text_form_field.dart';
+import 'package:doctor_hunt/apps/core/widgets/doctor_bio_form_field.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_bloc.dart';
 import 'package:doctor_hunt/apps/features/doctor/doctor_onboarding_screen/controller/doctor_onboarding_state.dart';
 import 'package:doctor_hunt/generated/app_assets.dart';
@@ -23,6 +24,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
     required this.formKey,
     required this.phoneController,
     required this.feeController,
+    required this.bioController,
     required this.selectedImage,
     required this.clinicLat,
     required this.clinicLng,
@@ -33,6 +35,7 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final TextEditingController phoneController;
   final TextEditingController feeController;
+  final TextEditingController bioController;
   final ObjectRef<File?> selectedImage;
   final ValueNotifier<double?> clinicLat;
   final ValueNotifier<double?> clinicLng;
@@ -104,6 +107,10 @@ class DoctorOnboardingProfileTab extends StatelessWidget {
               hintStyle: context.light16.textSecondary.rubik,
               style: context.medium16.textTertiary.rubik,
               validator: (value) => Validators.required(value),
+            ),
+            const SizedBox(height: 20),
+            DoctorBioFormField(
+              controller: bioController,
             ),
             const SizedBox(height: 20),
             ClinicLocationFormTile(

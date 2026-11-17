@@ -16,6 +16,7 @@ class DoctorEntity extends AppUserEntity {
   final double? latitude;
   final double? longitude;
   final String? clinicAddress;
+  final String? bio;
 
   const DoctorEntity({
     required super.id,
@@ -33,6 +34,7 @@ class DoctorEntity extends AppUserEntity {
     this.latitude,
     this.longitude,
     this.clinicAddress,
+    this.bio,
   }) : super(role: UserRoles.doctor);
 
   DoctorEntity copyWith({
@@ -52,6 +54,7 @@ class DoctorEntity extends AppUserEntity {
     double? longitude,
     String? clinicAddress,
     bool clearLocation = false,
+    String? bio,
   }) {
     return DoctorEntity(
       id: id ?? this.id,
@@ -69,6 +72,7 @@ class DoctorEntity extends AppUserEntity {
       latitude: clearLocation ? null : (latitude ?? this.latitude),
       longitude: clearLocation ? null : (longitude ?? this.longitude),
       clinicAddress: clearLocation ? null : (clinicAddress ?? this.clinicAddress),
+      bio: bio ?? this.bio,
     );
   }
 
@@ -84,5 +88,6 @@ class DoctorEntity extends AppUserEntity {
     latitude,
     longitude,
     clinicAddress,
+    bio,
   ];
 }

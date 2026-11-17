@@ -45,7 +45,11 @@
       "search": "بحث...",
       "view_details": "عرض التفاصيل",
       "data_updated_successfully": "تم تحديث البيانات بنجاح",
-      "logout_confirmation": "هل أنت متأكد من رغبتك في تسجيل الخروج؟"
+      "logout_confirmation": "هل أنت متأكد من رغبتك في تسجيل الخروج؟",
+      "doctor_bio": "نبذة عن الطبيب",
+      "doctor_bio_hint": "اكتب نبذة مختصرة عن مؤهلاتك وخبرتك الطبية...",
+      "words_remaining": "متبقي ${count} كلمة",
+      "words_count": "${current} / ${max} كلمة"
     },
     "dialogs": {
       "ok": "حسناً",
@@ -64,7 +68,10 @@
       "passwords_do_not_match": "كلمتا المرور غير متطابقتين",
       "phone_is_required": "رقم الهاتف مطلوب",
       "invalid_phone_number": "رقم الهاتف غير صالح",
-      "password_must_be_at_least_6_characters": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل"
+      "password_must_be_at_least_6_characters": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "bio_is_required": "النبذة التعريفية مطلوبة",
+      "bio_too_short": "يجب ألا تقل النبذة عن ${min} كلمات",
+      "bio_too_long": "يجب ألا تزيد النبذة عن ${max} كلمة"
     },
     "errors": {
       "no_account_associated": "لا يوجد حساب مرتبط بهذا البريد الإلكتروني",
@@ -295,6 +302,8 @@
       "doctor_details_screen": {
         "title": "تفاصيل الطبيب",
         "find_doctors": "البحث عن الأطباء",
+        "about_doctor": "@:core.common.doctorBio",
+        "no_bio_available": "لا توجد نبذة تعريفية متاحة حالياً.",
         "book_now": "احجز الآن",
         "services": "الخدمات",
         "services_list": [

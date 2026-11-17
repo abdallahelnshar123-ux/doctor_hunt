@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doctor_hunt/apps/core/utils/validators.dart';
 import 'package:doctor_hunt/apps/core/widgets/clinic_location_form_tile.dart';
+import 'package:doctor_hunt/apps/core/widgets/profile_bio_form_widget.dart';
 import 'package:doctor_hunt/apps/core/widgets/profile_save_button.dart';
 import 'package:doctor_hunt/apps/core/widgets/profile_text_form_widget.dart';
 import 'package:doctor_hunt/apps/features/common/auth/domain/entity/user/doctor.dart';
@@ -32,6 +33,7 @@ class DoctorProfileFormWidget extends HookWidget {
       text: user.consultationFee.toString(),
     );
     final phoneController = useTextEditingController(text: user.phone ?? '');
+    final bioController = useTextEditingController(text: user.bio ?? '');
     final formKey = useMemoized(() => GlobalKey<FormState>());
     final hasChanges = useValueNotifier<bool>(false);
     final selectedSpecialty = useValueNotifier<SpecialtyModel>(user.specialty);
@@ -49,6 +51,7 @@ class DoctorProfileFormWidget extends HookWidget {
             feeController.text.trim() != user.consultationFee.toString();
         final isSpecialtyChanged =
             selectedSpecialty.value.id != user.specialty.id;
+        final isBioChanged = bioController.text.trim() != (user.bio ?? '');
         final isImageChanged = selectedImageNotifier.value != null;
         final isStatusChanged = isActive.value != user.active;
         final isLocationChanged = clinicLat.value != user.latitude ||
@@ -60,6 +63,7 @@ class DoctorProfileFormWidget extends HookWidget {
             isPhoneChanged ||
             isFeeChanged ||
             isSpecialtyChanged ||
+            isBioChanged ||
             isImageChanged ||
             isStatusChanged ||
             isLocationChanged;
@@ -68,6 +72,7 @@ class DoctorProfileFormWidget extends HookWidget {
       nameController.addListener(checkForChanges);
       phoneController.addListener(checkForChanges);
       feeController.addListener(checkForChanges);
+      bioController.addListener(checkForChanges);
       selectedSpecialty.addListener(checkForChanges);
       isActive.addListener(checkForChanges);
       selectedImageNotifier.addListener(checkForChanges);
@@ -79,6 +84,7 @@ class DoctorProfileFormWidget extends HookWidget {
         nameController.removeListener(checkForChanges);
         phoneController.removeListener(checkForChanges);
         feeController.removeListener(checkForChanges);
+        bioController.removeListener(checkForChanges);
         selectedSpecialty.removeListener(checkForChanges);
         isActive.removeListener(checkForChanges);
         selectedImageNotifier.removeListener(checkForChanges);
@@ -125,6 +131,11 @@ class DoctorProfileFormWidget extends HookWidget {
             validator: (value) => Validators.required(value),
           ),
           const SizedBox(height: 20),
+          ProfileBioFormWidget(
+            label: t.core.common.doctorBio,
+            controller: bioController,
+          ),
+          const SizedBox(height: 20),
           ClinicLocationFormTile(
             label: t.clinicLocation.title,
             latitudeNotifier: clinicLat,
@@ -144,6 +155,7 @@ class DoctorProfileFormWidget extends HookWidget {
               nameController: nameController,
               phoneController: phoneController,
               feeController: feeController,
+              bioController: bioController,
               selectedSpecialty: selectedSpecialty,
               isActive: isActive,
               clinicLat: clinicLat,
@@ -163,6 +175,7 @@ class DoctorProfileFormWidget extends HookWidget {
     required TextEditingController nameController,
     required TextEditingController phoneController,
     required TextEditingController feeController,
+    required TextEditingController bioController,
     required ValueNotifier<SpecialtyModel> selectedSpecialty,
     required ValueNotifier<bool> isActive,
     required ValueNotifier<double?> clinicLat,
@@ -176,6 +189,7 @@ class DoctorProfileFormWidget extends HookWidget {
         phone: phoneController.text.trim(),
         specialty: selectedSpecialty.value,
         consultationFee: double.tryParse(feeController.text.trim()),
+        bio: bioController.text.trim(),
         active: isActive.value,
         latitude: clinicLat.value,
         longitude: clinicLng.value,

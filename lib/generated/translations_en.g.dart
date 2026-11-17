@@ -359,6 +359,26 @@ class Translations$core$common$en {
   ///
   /// ar: 'هل أنت متأكد من رغبتك في تسجيل الخروج؟'
   String get logoutConfirmation => 'Are you sure you want to logout?';
+
+  /// en: 'About Doctor'
+  ///
+  /// ar: 'نبذة عن الطبيب'
+  String get doctorBio => 'About Doctor';
+
+  /// en: 'Write a brief summary of your qualifications and medical experience...'
+  ///
+  /// ar: 'اكتب نبذة مختصرة عن مؤهلاتك وخبرتك الطبية...'
+  String get doctorBioHint => 'Write a brief summary of your qualifications and medical experience...';
+
+  /// en: '${count} words remaining'
+  ///
+  /// ar: 'متبقي ${count} كلمة'
+  String wordsRemaining({required Object Count}) => '${Count} words remaining';
+
+  /// en: '${current} / ${max} words'
+  ///
+  /// ar: '${current} / ${max} كلمة'
+  String wordsCount({required Object Current, required Object Max}) => '${Current} / ${Max} words';
 }
 
 // Path: core.dialogs
@@ -452,6 +472,21 @@ class Translations$core$validators$en {
   ///
   /// ar: 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل'
   String get passwordMustBeAtLeast6Characters => 'Password must be at least 6 characters';
+
+  /// en: 'Bio is required'
+  ///
+  /// ar: 'النبذة التعريفية مطلوبة'
+  String get bioIsRequired => 'Bio is required';
+
+  /// en: 'Bio must be at least ${min} words'
+  ///
+  /// ar: 'يجب ألا تقل النبذة عن ${min} كلمات'
+  String bioTooShort({required Object Min}) => 'Bio must be at least ${Min} words';
+
+  /// en: 'Bio cannot exceed ${max} words'
+  ///
+  /// ar: 'يجب ألا تزيد النبذة عن ${max} كلمة'
+  String bioTooLong({required Object Max}) => 'Bio cannot exceed ${Max} words';
 }
 
 // Path: core.errors
@@ -1216,6 +1251,16 @@ class Translations$features$patient$doctorDetailsScreen$en {
   ///
   /// ar: 'البحث عن الأطباء'
   String get findDoctors => 'Find Doctors';
+
+  /// en: 'About Doctor'
+  ///
+  /// ar: 'نبذة عن الطبيب'
+  String get aboutDoctor => _root.core.common.doctorBio;
+
+  /// en: 'No biography provided yet.'
+  ///
+  /// ar: 'لا توجد نبذة تعريفية متاحة حالياً.'
+  String get noBioAvailable => 'No biography provided yet.';
 
   /// en: 'Book now'
   ///

@@ -7,6 +7,7 @@ import '../../../../generated/translations.g.dart';
 import '../../../features/common/auth/presentation/widgets/custom_elevated_button.dart';
 import '../../theme/app_colors.dart';
 import '../../utils/map_launcher_utils.dart';
+import '../app_container_with_shadow.dart';
 
 class ClinicLocationPreviewCard extends StatelessWidget {
   const ClinicLocationPreviewCard({
@@ -26,17 +27,11 @@ class ClinicLocationPreviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final hasLocation = latitude != null && longitude != null;
 
-    return Container(
+    return AppContainerWithShadow(
+      width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.bgPrimary,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withValues(alpha: 0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       clipBehavior: Clip.antiAlias,
       child: hasLocation

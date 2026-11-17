@@ -99,6 +99,7 @@ class UserRepository {
           latitude: user.latitude,
           longitude: user.longitude,
           clinicAddress: user.clinicAddress,
+          bio: user.bio,
         );
       } else {
         updatedUser = user;

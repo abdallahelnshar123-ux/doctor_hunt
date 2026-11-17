@@ -50,6 +50,7 @@ class DoctorOnboardingBloc
       latitude: event.latitude,
       longitude: event.longitude,
       clinicAddress: event.clinicAddress,
+      bio: event.bio,
     );
 
     // 1. Update Profile (Image + Phone + Fee)

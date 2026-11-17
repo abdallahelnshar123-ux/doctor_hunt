@@ -72,6 +72,8 @@ class DoctorDetailsWidget extends HookWidget {
               ),
             ),
             _buildDivider(),
+            _buildBioTile(context),
+            _buildDivider(),
             AccountStatusSwitchTile(
               isActive: isActive,
               onChanged: (newValue) {
@@ -116,6 +118,44 @@ class DoctorDetailsWidget extends HookWidget {
         title: Text(title, overflow: .ellipsis),
         subtitle: subtitleWidget,
         trailing: trailing,
+        titleTextStyle: context.regular12.textSecondary.rubik,
+        contentPadding: EdgeInsets.zero,
+      ),
+    );
+  }
+
+  Widget _buildBioTile(BuildContext context) {
+    final hasBio = doctor.bio != null && doctor.bio!.trim().isNotEmpty;
+    return Material(
+      color: AppColors.transparent,
+      child: ListTile(
+        isThreeLine: hasBio,
+        leading: Container(
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: AppColors.brandPrimary8,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: const Icon(
+            Icons.description_outlined,
+            color: AppColors.brandPrimary,
+            size: 25,
+          ),
+        ),
+        title: Text(t.core.common.doctorBio, overflow: TextOverflow.ellipsis),
+        subtitle: Padding(
+          padding: const EdgeInsets.only(top: 4),
+          child: Text(
+            hasBio
+                ? doctor.bio!.trim()
+                : t.features.patient.doctorDetailsScreen.noBioAvailable,
+            style: hasBio
+                ? context.semiBold14.textTertiary.rubik.copyWith(height: 1.4)
+                : context.light12.textSecondary.rubik.copyWith(
+                    fontStyle: FontStyle.italic,
+                  ),
+          ),
+        ),
         titleTextStyle: context.regular12.textSecondary.rubik,
         contentPadding: EdgeInsets.zero,
       ),

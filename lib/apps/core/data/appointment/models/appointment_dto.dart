@@ -58,6 +58,7 @@ class AppointmentDto extends Equatable {
               disabled: false,
               consultationFee: 0.0,
               rating: Rating(rating: 0.0, reviews: []),
+              bio: '',
             ),
       sessionTime: data[FirestoreConstants.sessionTime] is Timestamp
           ? (data[FirestoreConstants.sessionTime] as Timestamp).toDate()

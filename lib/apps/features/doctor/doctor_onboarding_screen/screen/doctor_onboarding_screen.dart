@@ -60,6 +60,7 @@ class DoctorOnboardingScreen extends HookWidget {
           ? doctor!.consultationFee.toString()
           : '',
     );
+    final bioController = useTextEditingController(text: doctor?.bio ?? '');
     final selectedImage = useRef<File?>(null);
     final clinicLat = useValueNotifier<double?>(doctor?.latitude);
     final clinicLng = useValueNotifier<double?>(doctor?.longitude);
@@ -144,6 +145,7 @@ class DoctorOnboardingScreen extends HookWidget {
             latitude: clinicLat.value,
             longitude: clinicLng.value,
             clinicAddress: clinicAddress.value,
+            bio: bioController.text.trim(),
           ),
         );
       }
@@ -167,6 +169,7 @@ class DoctorOnboardingScreen extends HookWidget {
       child: AppScaffold(
         resizeToAvoidBottomInset: false,
         body: CupertinoOnboarding(
+          scrollPhysics: NeverScrollableScrollPhysics(),
           backgroundColor: AppColors.transparent,
           controller: pageController,
           bottomButtonColor: AppColors.brandPrimary,
@@ -190,6 +193,7 @@ class DoctorOnboardingScreen extends HookWidget {
               formKey: profileFormKey,
               phoneController: phoneController,
               feeController: feeController,
+              bioController: bioController,
               selectedImage: selectedImage,
               clinicLat: clinicLat,
               clinicLng: clinicLng,

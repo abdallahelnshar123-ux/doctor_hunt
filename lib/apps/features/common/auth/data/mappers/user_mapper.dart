@@ -49,6 +49,7 @@ extension AppUserDtoMapper on AppUserDto {
         latitude: dto.latitude,
         longitude: dto.longitude,
         clinicAddress: dto.clinicAddress,
+        bio: dto.bio,
       );
     }
     throw Exception('Unknown AppUserDto type');
@@ -97,6 +98,7 @@ extension AppUserEntityMapper on AppUserEntity {
         latitude: entity.latitude,
         longitude: entity.longitude,
         clinicAddress: entity.clinicAddress,
+        bio: entity.bio,
       );
     }
     throw Exception('Unknown AppUserEntity type');

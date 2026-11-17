@@ -45,7 +45,11 @@
       "search": "search....",
       "view_details": "View Details",
       "data_updated_successfully": "Data was updated successfully",
-      "logout_confirmation": "Are you sure you want to logout?"
+      "logout_confirmation": "Are you sure you want to logout?",
+      "doctor_bio": "About Doctor",
+      "doctor_bio_hint": "Write a brief summary of your qualifications and medical experience...",
+      "words_remaining": "${count} words remaining",
+      "words_count": "${current} / ${max} words"
     },
     "dialogs": {
       "ok": "Ok",
@@ -64,7 +68,10 @@
       "passwords_do_not_match": "Passwords do not match",
       "phone_is_required": "Phone number is required",
       "invalid_phone_number": "Invalid phone number",
-      "password_must_be_at_least_6_characters": "Password must be at least 6 characters"
+      "password_must_be_at_least_6_characters": "Password must be at least 6 characters",
+      "bio_is_required": "Bio is required",
+      "bio_too_short": "Bio must be at least ${min} words",
+      "bio_too_long": "Bio cannot exceed ${max} words"
     },
     "errors": {
       "no_account_associated": "No account associated with this email",
@@ -295,6 +302,8 @@
       "doctor_details_screen": {
         "title": "Doctor Details",
         "find_doctors": "Find Doctors",
+        "about_doctor": "@:core.common.doctorBio",
+        "no_bio_available": "No biography provided yet.",
         "book_now": "Book now",
         "services": "Services",
         "services_list": [

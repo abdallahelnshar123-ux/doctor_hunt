@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class DoctorStatisticsWidget extends StatelessWidget {
   const DoctorStatisticsWidget({super.key});
-
+/// this widget is disabled for now
   @override
   Widget build(BuildContext context) {
     return Container(

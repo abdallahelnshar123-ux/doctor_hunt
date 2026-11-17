@@ -20,6 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int? maxLines;
+  final int? minLines;
   final OnChanged onChanged;
   final OnFieldSubmitted onFieldSubmitted;
   final TextEditingController? controller;
@@ -34,6 +35,10 @@ class CustomTextFormField extends StatelessWidget {
   final bool readOnly;
   final String? initialValue;
   final void Function(PointerDownEvent)? onTapOutside;
+  final Widget? counter;
+  final InputCounterWidgetBuilder? buildCounter;
+  final String? helperText;
+  final TextStyle? helperStyle;
 
   const CustomTextFormField({
     super.key,
@@ -48,6 +53,7 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.maxLines,
+    this.minLines,
     this.controller,
     this.onChanged,
     this.validator,
@@ -63,6 +69,10 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.initialValue,
     this.onTapOutside,
+    this.counter,
+    this.buildCounter,
+    this.helperText,
+    this.helperStyle,
   });
 
   @override
@@ -75,6 +85,8 @@ class CustomTextFormField extends StatelessWidget {
       focusNode: focusNode,
       onFieldSubmitted: onFieldSubmitted,
       maxLines: maxLines ?? 1,
+      minLines: minLines,
+      buildCounter: buildCounter,
       controller: controller,
       onChanged: onChanged,
       validator: validator,
@@ -108,6 +120,9 @@ class CustomTextFormField extends StatelessWidget {
         labelStyle: labelStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
+        counter: counter,
+        helperText: helperText,
+        helperStyle: helperStyle,
       ),
     );
   }

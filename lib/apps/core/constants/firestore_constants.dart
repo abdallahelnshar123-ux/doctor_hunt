@@ -43,6 +43,7 @@ class FirestoreConstants {
   static const String appointmentId = 'appointmentId';
 
   // Doctor Fields
+  static const String bio = 'bio';
   static const String consultationFee = 'consultation_fee';
   static const String rating = 'rating';
   static const String reviews = 'reviews';
